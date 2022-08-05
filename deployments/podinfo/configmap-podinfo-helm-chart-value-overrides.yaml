@@ -126,3 +126,9 @@ data:
     tolerations: []
     affinity: {}
     podAnnotations: {}
+    persistence:
+      config:
+        enabled: true
+        storageClass: "local-path"
+        accessMode: ReadWriteOnce
+        size: "1Gi"
