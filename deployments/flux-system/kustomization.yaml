@@ -4,3 +4,4 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - ./helmrepositories/k8s-at-home.yaml
+- ./hhelmrepositories/helm-stable.yaml
