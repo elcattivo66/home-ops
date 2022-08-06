@@ -7,3 +7,4 @@ resources:
 - helmrepositories/helm-stable.yaml
 - helmrepositories/k8s-at-home.yaml
 - helmrepositories/naps.yaml
+- helmrepositories/containeroo.yaml
