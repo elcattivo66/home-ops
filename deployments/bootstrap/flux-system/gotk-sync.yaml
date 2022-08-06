@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: https://gitea.elcattivo.de/philipp/k3s-gitops.git
+  url: ssh://philipp@gitea.elcattivo.de/philipp/k3s-gitops
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
