@@ -19,4 +19,4 @@ spec:
     nodePathMap:
       - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
         paths:
-          - "/home/pi/tmp"
+          - "/home/tonibrix/claim"
