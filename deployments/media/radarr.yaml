@@ -39,5 +39,5 @@ spec:
         size: "1Gi"
       media:
         enabled: true
-        existingClaim: local-path-pvc
+        existingClaim: local-path-media
         mountPath: "/mnt/media"
