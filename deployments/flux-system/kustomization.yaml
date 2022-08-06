@@ -6,3 +6,4 @@ resources:
 - helmrepositories/bitnami.yaml
 - helmrepositories/helm-stable.yaml
 - helmrepositories/k8s-at-home.yaml
+- helmrepositories/naps.yaml
