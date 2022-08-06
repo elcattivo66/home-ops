@@ -132,3 +132,7 @@ data:
         storageClass: "local-path"
         accessMode: ReadWriteOnce
         size: "1Gi"
+      tmp:
+        enabled: true
+        existingClaim: local-path-pvc
+        mountPath: "/tmp"
