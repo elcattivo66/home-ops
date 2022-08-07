@@ -146,7 +146,7 @@ data:
         allowEmptyServices: false
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
-        namespaces: []
+        namespaces:
           - "default"
           - "system"
           - "media"
@@ -157,7 +157,7 @@ data:
         allowEmptyServices: false
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
-        namespaces: []
+        namespaces:
           - "default"
           - "system"
           - "media"
