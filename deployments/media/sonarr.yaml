@@ -34,10 +34,6 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: "local-path-config"
+        storageClass: "local-path"
         accessMode: ReadWriteOnce
         size: "1Gi"
-      media:
-        enabled: true
-        existingClaim: local-path-media
-        mountPath: "/mnt/media"
