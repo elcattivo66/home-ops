@@ -31,9 +31,9 @@ spec:
       tls:
       - hosts:
         - "radarr.kube.com"
-    persistence:
-      config:
-        enabled: true
-        storageClass: "local-path"
-        accessMode: ReadWriteOnce  
-        size: "1Gi"
+#    persistence:
+#      config:
+#        enabled: true
+#        storageClass: "local-path"
+#        accessMode: ReadWriteOnce  
+#        size: "1Gi"
