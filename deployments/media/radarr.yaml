@@ -24,13 +24,13 @@ spec:
     ingress:
       enabled: true
       hosts:
-      - host: radarr.kube.com
+      - host: radarr.local
         paths:
         - path: /
           pathType: Prefix
-      tls:
-      - hosts:
-        - "radarr.kube.com"
+#      tls:
+#      - hosts:
+#        - "radarr.kube.com"
 #    persistence:
 #      config:
 #        enabled: true

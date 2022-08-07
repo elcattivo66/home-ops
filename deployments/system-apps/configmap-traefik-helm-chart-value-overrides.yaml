@@ -147,7 +147,9 @@ data:
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
         namespaces: []
-          # - "default"
+          - "default"
+          - "system"
+          - "media"
 
       kubernetesIngress:
         enabled: true
@@ -156,7 +158,9 @@ data:
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
         namespaces: []
-          # - "default"
+          - "default"
+          - "system"
+          - "media"
         # IP used for Kubernetes Ingress endpoints
         publishedService:
           enabled: false

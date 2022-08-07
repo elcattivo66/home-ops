@@ -20,17 +20,17 @@ spec:
     env:
       TZ: "Europe/Berlin"
       PUID: "1000"
-      PGID: "1002"
+      PGID: "1000"
     ingress:
       enabled: true
       hosts:
-      - host: sonarr.kube.com
+      - host: sonarr.local
         paths:
         - path: /
           pathType: Prefix
-      tls:
-      - hosts:
-        - "sonarr.kube.com"
+      #tls:
+      #- hosts:
+      #  - "sonarr.kube.com"
 #    persistence:
 #      config:
 #        enabled: true
