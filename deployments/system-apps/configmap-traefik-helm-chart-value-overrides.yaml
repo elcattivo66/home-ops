@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: traefik-helm-chart-value-overrides
-  namespace: traefik
+  namespace: system
 data:
   values.yaml: |-
     # Default values for Traefik
