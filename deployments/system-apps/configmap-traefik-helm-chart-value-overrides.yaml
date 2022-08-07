@@ -152,7 +152,7 @@ data:
         #  - "media"
 
       kubernetesIngress:
-        enabled: true
+        enabled: false
         allowExternalNameServices: false
         allowEmptyServices: false
         # ingressClass: traefik-internal
