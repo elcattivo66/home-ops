@@ -140,16 +140,16 @@ data:
     #
     providers:
       kubernetesCRD:
-        enabled: true
+        enabled: false
         allowCrossNamespace: false
         allowExternalNameServices: false
         allowEmptyServices: false
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
-        namespaces:
-          - "default"
-          - "system"
-          - "media"
+        namespaces: []
+        #  - "default"
+        #  - "system"
+        #  - "media"
 
       kubernetesIngress:
         enabled: true
@@ -157,10 +157,10 @@ data:
         allowEmptyServices: false
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
-        namespaces:
-          - "default"
-          - "system"
-          - "media"
+        namespaces: []
+        #  - "default"
+        #  - "system"
+        #  - "media"
         # IP used for Kubernetes Ingress endpoints
         publishedService:
           enabled: false
