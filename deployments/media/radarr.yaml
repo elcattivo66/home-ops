@@ -21,10 +21,10 @@ spec:
       TZ: "Europe/Berlin"
       PUID: "1000"
       PGID: "1000"
-    service:
-      main:
-        type: LoadBalancer
-        loadBalancerIP: 7878
+#    service:
+#      main:
+#        type: LoadBalancer
+#        loadBalancerIP: 7878
     ingress:
       enabled: true
       hosts:
