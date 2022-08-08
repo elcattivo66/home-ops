@@ -1,17 +1,44 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: traefik
   namespace: system
 spec:
+  interval: 5m
   chart:
     spec:
       chart: traefik
-      version: 9.x
+      version: "9.10.x"
       sourceRef:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-  interval: 15m
-  timeout: 5m
-  releaseName: traefik
+      interval: 1m
+  values:
+    additionalArguments:     
+      - "--log.level=INFO"
+      - "--accesslog=false"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--serversTransport.insecureSkipVerify=true"  # for k8s dash
+      - "--entryPoints.web.forwardedHeaders.insecure"
+      #- "--certificatesResolvers.le.acme.dnsChallenge=true"
+      #- "--certificatesResolvers.le.acme.dnsChallenge.provider=cloudflare"
+      #- "--certificatesresolvers.le.acme.email=mow4cash@gmail.com"
+      #- "--certificatesresolvers.le.acme.storage=acme.json"
+      # Please note that this is the staging Let's Encrypt server.
+      # Once you get things working, you should remove that whole line altogether.
+      #- "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      
+    service:
+      spec:
+        externalTrafficPolicy: Local # https://github.com/rancher/k3s/issues/1652 need this for X-Real-Ip?
+   # env:
+    #  - name: CF_API_EMAIL
+     #   value: mow4cash@gmail.com
+     # - name: CF_API_KEY
+      #  valueFrom:
+       #   secretKeyRef:
+        #   name: cloudflare-api-key
+         #  key: api-key
