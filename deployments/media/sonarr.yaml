@@ -24,8 +24,9 @@ spec:
 
     service:
       main:
-        type: LoadBalancer
-        loadBalancerIP: 8989
+        ports: 
+          http: 
+            port: 8989
 
     ingress:
       main:

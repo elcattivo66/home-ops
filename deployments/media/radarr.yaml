@@ -24,8 +24,9 @@ spec:
 
     service:
       main:
-        type: LoadBalancer
-        loadBalancerIP: 7878
+        ports: 
+          http: 
+            port: 7878
 
     ingress:
       main:
