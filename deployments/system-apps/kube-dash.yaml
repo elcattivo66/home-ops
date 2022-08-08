@@ -16,10 +16,10 @@ spec:
         namespace: flux-system
       interval: 1m
   values:
-    ingress:
-      enabled: true
-      hosts:
-        - dashboard.kube.com
+    #ingress:
+    #  enabled: true
+    #  hosts:
+    #    - dashboard.kube.com
     # protocolHttp: true
     extraArgs:
       - --enable-skip-login
