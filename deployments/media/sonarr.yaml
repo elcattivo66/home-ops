@@ -21,20 +21,16 @@ spec:
       TZ: "Europe/Berlin"
       PUID: "1000"
       PGID: "1000"
+
     service:
       main:
         type: LoadBalancer
         loadBalancerIP: 8989
+
     ingress:
-      enabled: false
-      hosts:
-      - host: sonarr.local
-        paths:
-        - path: /
-          pathType: Prefix
-      #tls:
-      #- hosts:
-      #  - "sonarr.kube.com"
+      main:
+        enabled: false
+
     persistence:
       config:
         enabled: true
