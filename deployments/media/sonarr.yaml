@@ -21,12 +21,12 @@ spec:
       TZ: "Europe/Berlin"
       PUID: "1000"
       PGID: "1000"
-#    service:
-#      main:
-#        type: LoadBalancer
-#        loadBalancerIP: 8989
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: 8989
     ingress:
-      enabled: true
+      enabled: false
       hosts:
       - host: sonarr.local
         paths:
