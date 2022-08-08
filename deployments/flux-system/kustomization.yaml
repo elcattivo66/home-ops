@@ -9,3 +9,4 @@ resources:
 - helmrepositories/naps.yaml
 - helmrepositories/containeroo.yaml
 - helmrepositories/traefik.yaml
+- helmrepositories/kubernetes-dashboard.yaml
