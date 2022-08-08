@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: radarr
-      version: 9.0.0
+      version: 16.3.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home
@@ -21,6 +21,12 @@ spec:
       TZ: "Europe/Berlin"
       PUID: "1000"
       PGID: "1000"
+
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "7878"  
+
     ingress:
       enabled: true
       hosts:
