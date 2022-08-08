@@ -21,12 +21,10 @@ spec:
       TZ: "Europe/Berlin"
       PUID: "1000"
       PGID: "1000"
-
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: "8989"  
-    
+        loadBalancerIP: 8989
     ingress:
       enabled: true
       hosts:
@@ -37,9 +35,9 @@ spec:
       #tls:
       #- hosts:
       #  - "sonarr.kube.com"
-#    persistence:
-#      config:
-#        enabled: true
-#        storageClass: "local-path"
-#        accessMode: ReadWriteOnce
-#        size: "1Gi"
+    persistence:
+      config:
+        enabled: true
+        storageClass: "local-path-provisioner"
+        accessMode: ReadWriteOnce
+        size: "1Gi"
