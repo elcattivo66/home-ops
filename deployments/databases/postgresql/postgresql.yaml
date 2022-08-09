@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: postgresql
-      version: 11.5.0
+      version: 11.6.26
       sourceRef:
         kind: HelmRepository
         name: bitnami-charts
@@ -33,7 +33,7 @@ spec:
     image:
       registry: docker.io # FIXME #1014
       repository: bitnami/postgresql
-      tag: 14.3.0-debian-10-r0
+      tag: 14.4
       pullPolicy: IfNotPresent
 
     auth:
