@@ -26,6 +26,7 @@ spec:
     cleanupOnFail: true
   # values yaml: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
   values:
+    controllerType: deployment
     global:
       postgresql:
         auth:
