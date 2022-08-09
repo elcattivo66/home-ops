@@ -17,3 +17,4 @@ resources:
 - kustomizations/kustomization-traefik.yaml
 - kustomizations/kustomization-kubernetes-dashboard.yaml
 - kustomizations/kustomization-postgresql.yaml
+- kustomizations/kustomization-bazarr.yaml
