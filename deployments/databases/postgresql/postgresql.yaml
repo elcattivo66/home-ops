@@ -62,10 +62,13 @@ spec:
         enabled: true
         existingClaim: postgresql-config-v1
 
-      service:
+    service:
+      main:
         type: LoadBalancer
-        loadBalancerIP: 5432
-
+        ports: 
+          http: 
+            port: 5432
+            
       #resources:
       #  requests:
       #    cpu: 22m
