@@ -32,7 +32,7 @@ spec:
       main:
         enabled: false
 
-    persistence:
-      config:
-        enabled: false
-        existingClaim: sonarr-config-v1
+#    persistence:
+#      config:
+#        enabled: false
+#        existingClaim: sonarr-config-v1
