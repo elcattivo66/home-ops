@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prowlarr
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: prowlarr
+      version: 4.5.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+      interval: 5m
+  values:
+    controllerType: deployment
+    env:
+      TZ: "Europe/Berlin"
+      PUID: "1000"
+      PGID: "1000"
+
+    service:
+      main:
+        ports: 
+          http: 
+            port: 9696
+
+    ingress:
+      main:
+        enabled: false
+
+    persistence:
+      config:
+        enabled: false
+        existingClaim: prowlarr-config-v1

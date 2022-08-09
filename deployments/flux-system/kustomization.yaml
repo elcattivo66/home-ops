@@ -12,5 +12,6 @@ resources:
 - helmrepositories/kubernetes-dashboard.yaml
 - kustomizations/kustomization-radarr.yaml
 - kustomizations/kustomization-sonarr.yaml
+- kustomizations/kustomization-prowlarr.yaml
 - kustomizations/kustomization-traefik.yaml
 - kustomizations/kustomization-kubernetes-dashboard.yaml
