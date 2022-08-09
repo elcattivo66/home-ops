@@ -12,4 +12,14 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: local-path-storage  
+  name: local-path-storage
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: home-automation
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: databases  

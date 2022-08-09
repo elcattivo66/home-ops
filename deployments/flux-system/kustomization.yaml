@@ -13,5 +13,7 @@ resources:
 - kustomizations/kustomization-radarr.yaml
 - kustomizations/kustomization-sonarr.yaml
 - kustomizations/kustomization-prowlarr.yaml
+- kustomizations/kustomization-overseerr.yaml
 - kustomizations/kustomization-traefik.yaml
 - kustomizations/kustomization-kubernetes-dashboard.yaml
+- kustomizations/kustomization-postgresql.yaml
