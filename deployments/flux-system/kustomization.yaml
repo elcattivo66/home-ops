@@ -11,5 +11,5 @@ resources:
 - helmrepositories/traefik.yaml
 - helmrepositories/kubernetes-dashboard.yaml
 - kustomizations/kustomization-radarr.yaml
-- Kustomizations/kustomization-traefik.yaml
-- Kustomizations/kustomization-kubernetes-dashboard.yaml
+- kustomizations/kustomization-traefik.yaml
+- kustomizations/kustomization-kubernetes-dashboard.yaml
