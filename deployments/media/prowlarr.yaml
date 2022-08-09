@@ -23,10 +23,10 @@ spec:
       PGID: "1000"
 
     service:
-      main:
-        ports: 
-          http: 
-            port: 9696
+      type: LoadBalancer
+      ports: 
+        http: 
+          port: 9696
 
     ingress:
       main:
