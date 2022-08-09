@@ -10,3 +10,6 @@ resources:
 - helmrepositories/containeroo.yaml
 - helmrepositories/traefik.yaml
 - helmrepositories/kubernetes-dashboard.yaml
+- kustomizations/kustomization-radarr.yaml
+- Kustomizations/kustomization-traefik.yaml
+- Kustomizations/kustomization-kubernetes-dashboard.yaml
