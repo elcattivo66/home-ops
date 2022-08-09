@@ -19,4 +19,5 @@ spec:
     nodePathMap:
       - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
         paths:
-          - /opt/local-path-provisioner
+          #- /opt/local-path-provisioner
+          - $HOME/claim
