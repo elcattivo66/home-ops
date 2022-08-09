@@ -34,5 +34,5 @@ spec:
 
     persistence:
       config:
-        enabled: false
+        enabled: true
         existingClaim: prowlarr-config-v1
