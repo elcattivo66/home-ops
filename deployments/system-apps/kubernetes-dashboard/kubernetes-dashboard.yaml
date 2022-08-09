@@ -22,7 +22,7 @@ spec:
         type: LoadBalancer
         ports: 
           http: 
-            port: 9001
+            port: 8001
     #ingress:
     #  enabled: true
     #  hosts:
