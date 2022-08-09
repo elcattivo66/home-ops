@@ -34,7 +34,7 @@ spec:
     image:
       registry: docker.io # FIXME #1014
       repository: bitnami/postgresql
-      tag: 14.4
+      tag: 14
       pullPolicy: IfNotPresent
 
     auth:
@@ -68,7 +68,7 @@ spec:
         ports: 
           http: 
             port: 5432
-            
+
       #resources:
       #  requests:
       #    cpu: 22m
