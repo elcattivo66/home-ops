@@ -32,9 +32,10 @@ spec:
       #- "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
     service:
       main:
+        type: LoadBalancer
         ports: 
           http: 
-            port: 8080      
+            port: 8080  
     #service:
     #  spec:
     #    externalTrafficPolicy: Local # https://github.com/rancher/k3s/issues/1652 need this for X-Real-Ip?
