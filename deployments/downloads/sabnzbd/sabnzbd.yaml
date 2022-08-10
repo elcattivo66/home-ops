@@ -32,6 +32,7 @@ spec:
 
     service:
       main:
+        enabled: false
         type: LoadBalancer
         ports: 
           http: 
@@ -39,7 +40,12 @@ spec:
 
     ingress:
       main:
-        enabled: false
+        enabled: true
+        hosts:
+          - host: sabnzbd.local
+            paths:
+              - path: /
+                pathType: Prefix
 
     persistence:
       config:
