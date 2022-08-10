@@ -51,7 +51,7 @@ spec:
         volumeSpec:
           nfs:
             server: 192.168.178.21
-            path: /mnt/data
+            path: /mnt/data/media
         mountPath: /media
         readOnly: false
 
