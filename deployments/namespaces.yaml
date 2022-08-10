@@ -22,4 +22,9 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: databases  
+  name: databases
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: downloads  

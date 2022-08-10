@@ -18,3 +18,4 @@ resources:
 - kustomizations/kustomization-kubernetes-dashboard.yaml
 - kustomizations/kustomization-postgresql.yaml
 - kustomizations/kustomization-bazarr.yaml
+- kustomizations/kustomization-sabnzbd.yaml
