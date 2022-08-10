@@ -32,6 +32,8 @@ spec:
     ingress:
       main:
         enabled: true
+        annotations:
+          kubernetes.io/ingress.class: traefik
         hosts:
           - host: sonarr.local
             paths:
