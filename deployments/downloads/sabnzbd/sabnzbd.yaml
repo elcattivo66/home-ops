@@ -31,6 +31,7 @@ spec:
       HOST_WHITELIST_ENTRIES: "sabnzbd"
     
     image:
+      repository: ghcr.io/k8s-at-home/sabnzbd
       tag: 3.3.6
 
     service:
