@@ -23,11 +23,16 @@ spec:
         ports: 
           http: 
             port: 8001
-    #ingress:
-    #  enabled: true
-    #  hosts:
-    #    - dashboard.kube.com
-    # protocolHttp: true
+
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: kube-dash.local
+            paths:
+              - path: /
+                pathType: Prefix
+
     extraArgs:
       - --enable-skip-login
       - --disable-settings-authorizer

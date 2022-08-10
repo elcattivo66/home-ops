@@ -35,7 +35,18 @@ spec:
         type: LoadBalancer
         ports: 
           http: 
-            port: 8080  
+            port: 8080
+
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: traefik.local
+            paths:
+              - path: /
+                pathType: Prefix
+
+
     #service:
     #  spec:
     #    externalTrafficPolicy: Local # https://github.com/rancher/k3s/issues/1652 need this for X-Real-Ip?
