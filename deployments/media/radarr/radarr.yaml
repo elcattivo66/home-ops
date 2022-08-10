@@ -50,7 +50,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: tonibrix
+            server: 192.168.178.21
             path: /mnt/data
         mountPath: /media
         readOnly: false
