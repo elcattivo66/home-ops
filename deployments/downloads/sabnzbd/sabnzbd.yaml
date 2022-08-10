@@ -29,6 +29,9 @@ spec:
     env:
       TZ: "Europe/Berlin"
       HOST_WHITELIST_ENTRIES: "sabnzbd"
+    
+    image:
+      tag: 3.3.6
 
     service:
       main:
@@ -42,9 +45,9 @@ spec:
       main:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: traefik
+          kubernetes.io/ingress.class: "traefik"
         hosts:
-          - host: sabnzbd.local
+          - host: "sabnzbd.local"
             paths:
               - path: /
                 pathType: Prefix
@@ -53,7 +56,6 @@ spec:
       config:
         enabled: true
         existingClaim: sabnzbd-config-v1
-
 
     podSecurityContext:
       runAsUser: 1000
