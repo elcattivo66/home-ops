@@ -45,6 +45,16 @@ spec:
         enabled: true
         existingClaim: radarr-config-v1
 
+      nfs-media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: tonibrix
+            path: /mnt/data/media
+        mountPath: /media
+        readOnly: false
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
