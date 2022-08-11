@@ -26,6 +26,7 @@ spec:
     cleanupOnFail: true
   # values yaml: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
   values:
+    controllerType: deployment
     global:
       postgresql:
         auth:
@@ -57,26 +58,27 @@ spec:
         shared_buffers = 256MB
         max_wal_size = 2048
         min_wal_size = 160
+        
       persistence:
         enabled: true
         existingClaim: postgresql-config-v1
 
-    service:
-      main:
-        enabled: false
-        type: LoadBalancer
-        ports: 
-          http: 
-            port: 5432
+      service:
+        main:
+          enabled: false
+          type: LoadBalancer
+          ports: 
+            http: 
+              port: 5432
 
-    volumePermissions:
-      enabled: true
-
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
+      volumePermissions:
+        enabled: true
+      
+      podSecurityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       #supplementalGroups:
       #  - 5600
 
