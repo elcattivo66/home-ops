@@ -9,3 +9,4 @@ resources:
 - ./traefik.yaml
 - ./kubernetes-dashboard.yaml
 - ./metallb.yaml
+- ./longhorn.yaml

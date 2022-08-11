@@ -28,3 +28,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: downloads  
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system  
