@@ -38,7 +38,11 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-
+                backend:
+                  service:
+                    name: sonarr
+                    port:
+                      number: 80
     persistence:
       config:
         enabled: true
