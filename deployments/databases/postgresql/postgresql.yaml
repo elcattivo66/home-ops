@@ -70,6 +70,14 @@ spec:
           http: 
             port: 5432
 
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
+      #supplementalGroups:
+      #  - 5600
+
       #resources:
       #  requests:
       #    cpu: 22m
