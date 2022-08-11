@@ -26,7 +26,6 @@ spec:
     cleanupOnFail: true
   # values yaml: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
   values:
-    controllerType: deployment
     global:
       postgresql:
         auth:
@@ -72,7 +71,7 @@ spec:
 
     volumePermissions:
       enabled: true
-      
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
