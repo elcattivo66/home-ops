@@ -38,16 +38,16 @@ spec:
           http: 
             port: 8090
 
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          kubernetes.io/ingress.class: "traefik"
-        hosts:
-          - host: "sabnzbd.local"
-            paths:
-              - path: /
-                pathType: Prefix
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     annotations:
+    #       kubernetes.io/ingress.class: "traefik"
+    #     hosts:
+    #       - host: "sabnzbd.local"
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
 
     persistence:
       config:
