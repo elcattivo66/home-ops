@@ -50,7 +50,10 @@ spec:
               - path: /
                 pathType: Prefix
 
-
+    ingressRoute:
+      dashboard:
+        enabled: true
+        
     #service:
     #  spec:
     #    externalTrafficPolicy: Local # https://github.com/rancher/k3s/issues/1652 need this for X-Real-Ip?
