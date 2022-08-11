@@ -32,7 +32,7 @@ spec:
 
     service:
       main:
-        enabled: false
+        enabled: true
         type: LoadBalancer
         ports: 
           http: 
