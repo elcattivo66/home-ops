@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: media
+  namespace: system
   name: traefik-dashboard
 spec:
   routes:
