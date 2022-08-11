@@ -27,8 +27,8 @@ spec:
   values:
     controllerType: deployment
 
-    image:
-      tag: 3.6.0
+#    image:
+#      tag: 3.6.0
 
     env:
       TZ: "Europe/Berlin"
