@@ -31,7 +31,8 @@ spec:
       main:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: "traefik"
+          #kubernetes.io/ingress.class: "traefik"
+          traefik.ingress.kubernetes.io/router.entrypoints: web
         hosts:
           - host: "sonarr.local"
             paths:
@@ -42,6 +43,16 @@ spec:
       config:
         enabled: true
         existingClaim: sonarr-config-v1
+
+      nfs-media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: 192.168.178.21
+            path: /mnt/data/media
+        mountPath: /media
+        readOnly: false
 
     podSecurityContext:
       runAsUser: 1000
