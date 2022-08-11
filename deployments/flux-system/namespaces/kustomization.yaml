@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ./databases.yaml
+- ./downloads.yaml
+- ./home-automation.yaml
+- ./local-path-storage.yaml
+- ./longhorn-system.yaml
+- ./media.yaml
+- ./system.yaml
