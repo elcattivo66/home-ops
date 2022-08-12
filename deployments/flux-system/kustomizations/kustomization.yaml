@@ -10,5 +10,5 @@ resources:
 - ./kustomization-postgresql.yaml
 - ./kustomization-bazarr.yaml
 - ./kustomization-sabnzbd.yaml
-- deployments/system/apps/metallb
-- deployments/system/apps/longhorn
+- deployments/system/metallb
+- deployments/system/longhorn
