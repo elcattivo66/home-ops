@@ -6,8 +6,9 @@ resources:
 - ./kustomization-sonarr.yaml
 - ./kustomization-prowlarr.yaml
 - ./kustomization-overseerr.yaml
-- ./kustomization-traefik.yaml
 - ./kustomization-kubernetes-dashboard.yaml
 - ./kustomization-postgresql.yaml
 - ./kustomization-bazarr.yaml
 - ./kustomization-sabnzbd.yaml
+- deployments/system/apps/metallb
+- deployments/system/apps/longhorn
