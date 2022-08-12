@@ -19,9 +19,8 @@ spec:
     controllerType: deployment
 
     image:
-      repository: linuxserver/prowlarr
+      repository: ghcr.io/k8s-at-home/prowlarr
       pullPolicy: IfNotPresent
-      tag: develop
 
     env:
       TZ: "Europe/Berlin"
