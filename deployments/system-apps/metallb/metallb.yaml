@@ -29,9 +29,9 @@ spec:
       prometheusRule:
         enabled: false
 
-    configInline:
-      address-pools:
-        - name: default
-          protocol: layer2
-          addresses:
-            - "192.168.180.1-192.168.180.254"
+    # configInline:
+    #   address-pools:
+    #     - name: default
+    #       protocol: layer2
+    #       addresses:
+    #         - "192.168.180.1-192.168.180.254"
