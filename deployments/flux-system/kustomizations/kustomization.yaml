@@ -11,3 +11,4 @@ resources:
 - ./kustomization-bazarr.yaml
 - ./kustomization-sabnzbd.yaml
 - ./kustomization-longhorn.yaml
+- ./kustomization-sops.yaml
