@@ -27,7 +27,7 @@ spec:
         type: LoadBalancer
         ports: 
           http: 
-            port: 8786
+            port: 8787
 
     ingress:
       main:
