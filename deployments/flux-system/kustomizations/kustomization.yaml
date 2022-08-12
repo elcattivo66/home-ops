@@ -10,5 +10,4 @@ resources:
 - ./kustomization-postgresql.yaml
 - ./kustomization-bazarr.yaml
 - ./kustomization-sabnzbd.yaml
-- ./kustomization-metallb.yaml
 - ./kustomization-longhorn.yaml

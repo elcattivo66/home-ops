@@ -22,16 +22,12 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
-    # service:
-    #   main:
-    #     type: LoadBalancer
-    #     ports: 
-    #       http: 
-    #         port: 7878
-
-      service:
-        type: LoadBalancer
-        loadBalancerIP: 7878
+    service:
+      main:
+       type: LoadBalancer
+       ports: 
+         http: 
+           port: 7878
 
     ingress:
       main:
