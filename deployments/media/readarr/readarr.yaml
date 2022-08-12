@@ -45,15 +45,15 @@ spec:
         enabled: true
         existingClaim: readarr-config-v1
 
-      nfs-media:
-        enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: 192.168.178.21
-            path: /mnt/data/media
-        mountPath: /media
-        readOnly: false
+      # nfs-media:
+      #   enabled: true
+      #   type: custom
+      #   volumeSpec:
+      #     nfs:
+      #       server: 192.168.178.21
+      #       path: /mnt/data/media
+      #   mountPath: /media
+      #   readOnly: false
 
     podSecurityContext:
       runAsUser: 1000
