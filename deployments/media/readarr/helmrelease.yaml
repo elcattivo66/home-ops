@@ -21,7 +21,7 @@ spec:
     image:
       repository: linuxserver/readarr
       pullPolicy: IfNotPresent
-      tag: latest
+      tag: develop
 
     env:
       TZ: "Europe/Berlin"
