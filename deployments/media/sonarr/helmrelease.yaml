@@ -16,6 +16,11 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      repository: linuxserver/sonarr
+      pullPolicy: IfNotPresent
+      tag: latest
+
     controllerType: deployment
     env:
       TZ: "Europe/Berlin"

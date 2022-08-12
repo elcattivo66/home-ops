@@ -17,6 +17,12 @@ spec:
       interval: 5m
   values:
     controllerType: deployment
+
+    image:
+      repository: linuxserver/prowlarr
+      pullPolicy: IfNotPresent
+      tag: latest
+
     env:
       TZ: "Europe/Berlin"
       PUID: "1000"
