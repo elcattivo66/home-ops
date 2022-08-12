@@ -5,7 +5,12 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  path: deployments/flux-system/secrets
   prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: server
   decryption:
     provider: sops
     secretRef:
