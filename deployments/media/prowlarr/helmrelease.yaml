@@ -21,7 +21,7 @@ spec:
     image:
       repository: linuxserver/prowlarr
       pullPolicy: IfNotPresent
-      tag: latest
+      tag: develop
 
     env:
       TZ: "Europe/Berlin"

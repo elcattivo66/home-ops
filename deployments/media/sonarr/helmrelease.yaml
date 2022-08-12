@@ -24,7 +24,9 @@ spec:
     controllerType: deployment
     env:
       TZ: "Europe/Berlin"
-
+      PUID: "1000"
+      PGID: "1000"
+      
     service:
       main:
         type: LoadBalancer
