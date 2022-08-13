@@ -8,3 +8,4 @@ resources:
 - ./longhorn-system.yaml
 - ./media.yaml
 - ./system.yaml
+- ./cert-manager.yaml

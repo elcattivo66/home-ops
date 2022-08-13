@@ -10,3 +10,4 @@ resources:
 - ./kubernetes-dashboard.yaml
 - ./metallb.yaml
 - ./longhorn.yaml
+- ./jetstack.yaml
