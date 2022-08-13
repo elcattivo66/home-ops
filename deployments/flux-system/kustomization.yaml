@@ -6,3 +6,4 @@ resources:
 - ./kustomizations
 - ./helmrepositories
 - ./namespaces
+- ./secrets
