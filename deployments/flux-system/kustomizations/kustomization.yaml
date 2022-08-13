@@ -13,3 +13,4 @@ resources:
 - ./kustomization-longhorn.yaml
 - ./kustomization-sops.yaml
 - ./kustomization-mosquitto.yaml
+- ./kustomization-tautulli.yaml
