@@ -37,6 +37,12 @@ spec:
       config:
         enabled: true
         existingClaim: tautulli-config-v1
+        
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
 
     resources:
       requests:
