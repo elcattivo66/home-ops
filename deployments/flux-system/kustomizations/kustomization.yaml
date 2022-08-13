@@ -12,3 +12,4 @@ resources:
 - ./kustomization-sabnzbd.yaml
 - ./kustomization-longhorn.yaml
 - ./kustomization-sops.yaml
+- ./kustomization-mosquitto.yaml
