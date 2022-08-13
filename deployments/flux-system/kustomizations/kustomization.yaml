@@ -14,3 +14,4 @@ resources:
 - ./kustomization-sops.yaml
 - ./kustomization-mosquitto.yaml
 - ./kustomization-tautulli.yaml
+- ./kustomization-certmanager.yaml
