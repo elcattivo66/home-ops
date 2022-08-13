@@ -26,6 +26,9 @@ spec:
     cleanupOnFail: true
 
   values:
+
+    controllerType: deployment
+    
     image:
       repository: eclipse-mosquitto
       tag: 2.0.14
