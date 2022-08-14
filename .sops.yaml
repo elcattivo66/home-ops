@@ -1,6 +1,5 @@
 ---
 creation_rules:
-  - path_regex: .*.yaml
-    encrypted_regex: "((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))"
+  - encrypted_regex: "^(data|stringData)$"
     age: >-
       age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
