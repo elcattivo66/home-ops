@@ -6,3 +6,4 @@ metadata:
   namespace: flux-system
 data:
   NFS_ADDR: 192.168.178.21
+  TZ: "Europe/Berlin"
