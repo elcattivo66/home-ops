@@ -13,7 +13,7 @@ spec:
       - dns01:
           cloudflare:
             email: "${SECRET_LETSENCRYPT_EMAIL}"
-            apiKeySecretRef:
+            apiTokenSecretRef:
               name: cloudflare-token-secret
               key: api-token
         selector:
