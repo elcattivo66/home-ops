@@ -37,13 +37,21 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: "traefik"
         annotations:
-          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          #traefik.ingress.kubernetes.io/router.middlewares: "networking-traefik-forward-auth@kubernetescrd"
         hosts:
-          - host: "radarr.local"
+          - host: "radarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
+        tls:
+          - hosts:
+              - "radarr.${SECRET_DOMAIN}"
+            secretName: "radarr-tls"
 
     persistence:
       config:
