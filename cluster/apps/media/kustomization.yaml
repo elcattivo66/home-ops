@@ -9,3 +9,4 @@ resources:
   - readarr
   - sonarr
   - tautulli
+  - plex
