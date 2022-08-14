@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - traefik
   - kubernetes-dashboard
+  - intel-gpu-plugin
