@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: https://tonibrix:8687/philipp/k3s-gitops
+  url: https://gitea.elcattivo.de/philipp/k3s-gitops
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
