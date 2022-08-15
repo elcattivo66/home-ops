@@ -7,3 +7,4 @@ metadata:
 data:
   NFS_ADDR: 192.168.178.21
   TZ: "Europe/Berlin"
+  METALLB_LB_RANGE: "192.168.178.201-192.168.178.254"
