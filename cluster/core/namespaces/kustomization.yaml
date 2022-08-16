@@ -9,3 +9,4 @@ resources:
 - ./media.yaml
 - ./system.yaml
 - ./cert-manager.yaml
+- ./metallb-system.yaml
