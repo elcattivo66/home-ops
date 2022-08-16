@@ -22,12 +22,12 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
-    service:
-      main:
-        type: LoadBalancer
-        ports: 
-          http: 
-            port: 5055
+    # service:
+    #   main:
+    #     type: LoadBalancer
+    #     ports: 
+    #       http: 
+    #         port: 5055
 
     ingress:
       main:

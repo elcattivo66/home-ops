@@ -34,13 +34,13 @@ spec:
       TZ: "Europe/Berlin"
       HOST_WHITELIST_ENTRIES: "sabnzbd"
 
-    service:
-      main:
-        enabled: true
-        type: LoadBalancer
-        ports: 
-          http: 
-            port: 8080
+    # service:
+    #   main:
+    #     enabled: true
+    #     type: LoadBalancer
+    #     ports: 
+    #       http: 
+    #         port: 8080
 
     # ingress:
     #   main:

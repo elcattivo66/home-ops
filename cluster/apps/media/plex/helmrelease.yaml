@@ -22,12 +22,12 @@ spec:
       tag: v1.28.0.5999-97678ded3
     env:
       TZ: "${TZ}"
-    service:
-      main:
-       type: LoadBalancer
-       ports: 
-         http: 
-           port: 32400
+    # service:
+    #   main:
+    #    type: LoadBalancer
+    #    ports: 
+    #      http: 
+    #        port: 32400
 
     persistence:
       config:
