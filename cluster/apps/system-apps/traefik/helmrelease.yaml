@@ -25,12 +25,12 @@ spec:
     deployment:
       kind: Deployment
       replicas: 1
-    # service:
-    #   enabled: true
-    #   type: LoadBalancer
-    #   spec:
-    #     loadBalancerIP: "${SVC_TRAEFIK_ADDR}"
-    #     externalTrafficPolicy: Local
+    service:
+      enabled: true
+      type: LoadBalancer
+      spec:
+        loadBalancerIP: "${SVC_TRAEFIK_ADDR}"
+        externalTrafficPolicy: Local
     logs:
       general:
         format: json
@@ -56,7 +56,7 @@ spec:
       - "--metrics.prometheus=true"
       - "--metrics.prometheus.entryPoint=metrics"
     additionalArguments:
-      #- "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
+      - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
     ports:
