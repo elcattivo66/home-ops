@@ -11,3 +11,4 @@ resources:
 - ./metallb.yaml
 - ./longhorn.yaml
 - ./jetstack.yaml
+- ./k8s-gateway.yaml
