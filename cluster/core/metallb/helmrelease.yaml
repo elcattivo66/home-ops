@@ -27,3 +27,5 @@ spec:
       remediateLastFailure: true
   values:
     fullnameOverride: metallb
+    crds:
+      enabled: true    
