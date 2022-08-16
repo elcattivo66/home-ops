@@ -29,19 +29,18 @@ spec:
 
     controllerType: deployment
 
-    # image:
-    #   repository: eclipse-mosquitto
-    #   tag: 2.0.14
+    image:
+      repository: eclipse-mosquitto
+      tag: 2.0.14
 
-    podAnnotations:
-      secret.reloader.stakater.com/reload: mosquitto-config
+    #podAnnotations:
+    #  secret.reloader.stakater.com/reload: mosquitto-config
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "${SVC_MQTT_ADDR}"
+        externalTrafficPolicy: Local
 
-    # service:
-    #   main:
-    #     type: LoadBalancer
-    #     ports: 
-    #       http: 
-    #         port: 1883
     auth:
       enabled: true
 
