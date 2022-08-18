@@ -12,3 +12,4 @@ resources:
 - ./longhorn.yaml
 - ./jetstack.yaml
 - ./k8s-gateway.yaml
+- ./bjw-s-charts.yaml

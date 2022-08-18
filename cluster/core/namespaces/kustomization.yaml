@@ -10,3 +10,4 @@ resources:
 - ./system.yaml
 - ./cert-manager.yaml
 - ./networking.yaml
+- ./security.yaml
