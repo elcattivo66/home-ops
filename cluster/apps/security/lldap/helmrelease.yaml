@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app lldap
+  name: lldap
   namespace: security
 spec:
   interval: 15m
@@ -31,7 +31,7 @@ spec:
       LLDAP_LDAP_BASE_DN: "dc=elcattivo,dc=de"
     envFrom:
       - secretRef:
-          name: *app
+          name: lldap-secret
     # service:
     #   main:
     #     ports:
@@ -57,11 +57,11 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     existingClaim: lldap-config-v1
-        #mountPath: /data
+    persistence:
+      config:
+        enabled: true
+        existingClaim: lldap-config-v1
+        mountPath: /data
     resources:
       requests:
         cpu: 10m
