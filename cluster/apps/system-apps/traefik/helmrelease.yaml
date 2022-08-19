@@ -34,14 +34,17 @@ spec:
     logs:
       general:
         format: json
-        level: DEBUG
+        level: ERROR
       access:
         enabled: true
         format: json
     providers:
       kubernetesCRD:
         enabled: true
-        allowCrossNamespace: false
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        enabled: true
     ingressClass:
       enabled: true
       isDefaultClass: true
@@ -50,6 +53,7 @@ spec:
       dashboard:
         enabled: false
     globalArguments:
+      - "--global.sendanonymoususage=false"
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
       - "--providers.kubernetesingress.ingressclass=traefik"
@@ -72,11 +76,6 @@ spec:
         port: 8082
         expose: true
         exposedPort: 8082
-    tlsOptions:
-      default:
-        minVersion: VersionTLS12
-        maxVersion: VersionTLS13
-        sniStrict: true
     pilot:
       enabled: false
     experimental:
