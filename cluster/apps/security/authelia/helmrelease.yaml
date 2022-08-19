@@ -151,6 +151,7 @@ spec:
       #     identifier: ${EXTERNAL_DOMAIN}
 
     secret:
+      existingSecret: "authelia-secrets"
       jwt:
         key: JWT_TOKEN
         value: "${AUTHELIA_JWT_SECRET}"
