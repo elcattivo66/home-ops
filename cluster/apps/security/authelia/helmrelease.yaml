@@ -1,0 +1,157 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: security
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: authelia
+      version: 2022.6.3
+      sourceRef:
+        kind: HelmRepository
+        name: authelia-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation: # perform remediation when helm install fails
+      retries: 3
+  upgrade:
+    remediation: # perform remediation when helm upgrade fails
+      retries: 3
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+  values:
+    domain: ${SECRET_DOMAIN}
+    jwt_secret: ${AUTHELIA_JWT_SECRET}
+    # service:
+    #   annotations:
+    #     prometheus.io/probe: "true"
+    #     prometheus.io/protocol: "http"
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          #traefik.ingress.kubernetes.io/router.middlewares: "networking-traefik-forward-auth@kubernetescrd"
+        hosts:
+          - host: "authelia.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "authelia.${SECRET_DOMAIN}"
+            secretName: "authelia-tls"
+
+    pod:
+      # Must be Deployment, DaemonSet, or StatefulSet.
+      kind: Deployment
+
+      env:
+        - name: TZ
+          value: ${TZ}
+
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1500Mi
+        limits: {}
+
+    ##
+    ## Authelia Config Map Generator
+    ##
+    configMap:
+      enabled: true
+      server:
+        read_buffer_size: 8192
+        write_buffer_size: 8192
+      theme: auto
+      authentication_backend:
+        disable_reset_password: false
+        ldap:
+          enabled: true
+          implementation: custom
+          url: ldap://tonibrix:3890
+          timeout: 5s
+          start_tls: false
+          base_dn: dc=elcattivo,dc=de
+          username_attribute: uid
+          additional_users_dn: ou=people
+          users_filter: (&({username_attribute}={input})(objectClass=person))
+          additional_groups_dn: ou=groups
+          groups_filter: (member={dn})
+          group_name_attribute: cn
+          mail_attribute: mail
+          display_name_attribute: displayName
+          user: uid=admin,ou=people,dc=elcattivo,dc=de
+          password: ${AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD}
+          # Password can also be set using a secret: https://www.authelia.com/docs/configuration/secrets.html
+        file:
+          enabled: false
+          password:
+            algorithm: argon2id
+
+      access_control:
+        default_policy: deny
+        rules:
+          # Rules applied to everyone
+          - domain: authelia.elcattivo.de
+            policy: bypass
+          - domain: gitea.elcattivo.de
+            policy: bypass
+            resources:
+            - "^/philipp([/?].*)?$"
+          - domain: gotify.elcattivo.de
+            policy: bypass
+            resources:
+            - "^/message([/?].*)?$"
+            - "^/current/.*$"  
+            - "^/stream([/?].*)?$"  
+            - "^/version"
+            - "^/application"     
+            - "^/static/.*$"  
+            - "^/image/.*$"  
+            methods:
+            - GET
+            - POST
+            - DELETE
+          - domain: 
+            - "elcattivo.de"
+            - "*.elcattivo.de"
+            policy: two_factor
+          - domain: "*"
+            policy: bypass
+            networks:
+              - 192.168.178.0/24
+
+      session:
+        secret: ${AUTHELIA_SESSION_SECRET}
+        redis:
+          enabled: true 
+
+      storage:
+        postgres:
+          enabled: true
+          host: postgresql.databases.svc.cluster.local
+          username: ${AUTHELIA_STORAGE_POSTGRES_USERNAME}
+          password: ${AUTHELIA_STORAGE_POSTGRES_PASSWORD}
+
+
+      # notifier:
+      #   smtp:
+      #     enabled: true
+      #     enabledSecret: true
+      #     host: smtp.fastmail.com
+      #     port: 587
+      #     username: ${SECRET_AUTHELIA_SMTP_EMAIL}
+      #     sender: ${SECRET_AUTHELIA_SMTP_EMAIL}
+      #     identifier: ${EXTERNAL_DOMAIN}
+
