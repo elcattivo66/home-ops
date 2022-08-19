@@ -132,7 +132,8 @@ spec:
 
       session:
         redis:
-          enabled: true 
+          enabled: true
+          host: redis-master.databases.svc.cluster.local
 
       storage:
         postgres:
