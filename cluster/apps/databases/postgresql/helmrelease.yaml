@@ -30,7 +30,7 @@ spec:
     global:
       postgresql:
         auth:
-          postgresPassword: "postgres"
+          postgresPassword: "${SECRET_POSTGRES_PASSWORD}"
     image:
       registry: docker.io # FIXME #1014
       repository: bitnami/postgresql
@@ -44,14 +44,6 @@ spec:
     #   enabled: true
     #   serviceMonitor:
     #     enabled: true
-
-    #   resources:
-    #     requests:
-    #       cpu: 11m
-    #       memory: 32M
-    #     limits:
-    #       cpu: 11m
-    #       memory: 32M
 
     primary:
       extendedConfiguration: |
