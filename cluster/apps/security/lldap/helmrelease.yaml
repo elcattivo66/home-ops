@@ -57,10 +57,10 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
-    persistence:
-      config:
-        enabled: true
-        existingClaim: lldap-config-v1
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     existingClaim: lldap-config-v1
         #mountPath: /data
     resources:
       requests:
