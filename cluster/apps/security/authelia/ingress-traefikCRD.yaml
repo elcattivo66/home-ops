@@ -16,7 +16,7 @@ spec:
           port: 9091
           namespace: security
   tls:
-    secretName: authelia-tls
+    secretName: ${SECRET_CERT_NAME}-prod-tls
 
 ---
 
