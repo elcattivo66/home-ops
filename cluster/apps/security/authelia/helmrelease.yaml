@@ -141,15 +141,15 @@ spec:
           host: postgresql.databases.svc.cluster.local
           username: authelia
 
-      # notifier:
-      #   smtp:
-      #     enabled: true
-      #     enabledSecret: true
-      #     host: smtp.fastmail.com
-      #     port: 587
-      #     username: ${SECRET_AUTHELIA_SMTP_EMAIL}
-      #     sender: ${SECRET_AUTHELIA_SMTP_EMAIL}
-      #     identifier: ${EXTERNAL_DOMAIN}
+      notifier:
+        smtp:
+          enabled: true
+          enabledSecret: true
+          host: smtp.mailbox.org
+          port: 587
+          username: ${SECRET_SMTP_USERNAME}
+          sender: ${SECRET_SMTP_SENDER}
+          #identifier: ${EXTERNAL_DOMAIN}
 
     secret:
       existingSecret: authelia
