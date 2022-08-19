@@ -61,7 +61,7 @@ spec:
       config:
         enabled: true
         existingClaim: lldap-config-v1
-        mountPath: /data
+        #mountPath: /data
     resources:
       requests:
         cpu: 10m
