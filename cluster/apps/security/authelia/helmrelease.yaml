@@ -26,7 +26,6 @@ spec:
     cleanupOnFail: true
   values:
     domain: ${SECRET_DOMAIN}
-    jwt_secret: ${AUTHELIA_JWT_SECRET}
     # service:
     #   annotations:
     #     prometheus.io/probe: "true"
@@ -92,7 +91,6 @@ spec:
           mail_attribute: mail
           display_name_attribute: displayName
           user: uid=admin,ou=people,dc=elcattivo,dc=de
-          password: ${AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD}
           # Password can also be set using a secret: https://www.authelia.com/docs/configuration/secrets.html
         file:
           enabled: false
@@ -133,7 +131,6 @@ spec:
               - 192.168.178.0/24
 
       session:
-        secret: ${AUTHELIA_SESSION_SECRET}
         redis:
           enabled: true 
 
@@ -141,9 +138,7 @@ spec:
         postgres:
           enabled: true
           host: postgresql.databases.svc.cluster.local
-          username: ${AUTHELIA_STORAGE_POSTGRES_USERNAME}
-          password: ${AUTHELIA_STORAGE_POSTGRES_PASSWORD}
-
+          username: authelia
 
       # notifier:
       #   smtp:
@@ -154,4 +149,46 @@ spec:
       #     username: ${SECRET_AUTHELIA_SMTP_EMAIL}
       #     sender: ${SECRET_AUTHELIA_SMTP_EMAIL}
       #     identifier: ${EXTERNAL_DOMAIN}
+
+    secret:
+      jwt:
+        key: JWT_TOKEN
+        value: "${AUTHELIA_JWT_SECRET}"
+        filename: JWT_TOKEN
+      ldap:
+        key: LDAP_PASSWORD
+        value: "${AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD}"
+        filename: LDAP_PASSWORD
+      storage:
+        key: STORAGE_PASSWORD
+        value: "${AUTHELIA_STORAGE_POSTGRES_PASSWORD}"
+        filename: STORAGE_PASSWORD
+      storageEncryptionKey:
+        key: STORAGE_ENCRYPTION_KEY
+        value: "${SECRET_AUTHELIA_STORAGE_ENCRYPTION_KEY}"
+        filename: STORAGE_ENCRYPTION_KEY
+      session:
+        key: SESSION_ENCRYPTION_KEY
+        value: "${AUTHELIA_SESSION_SECRET}"
+        filename: SESSION_ENCRYPTION_KEY
+      # duo:
+      #   key: DUO_API_KEY
+      #   value: ""
+      #   filename: DUO_API_KEY
+      redis:
+        key: REDIS_PASSWORD
+        value: "{AUTHELIA_SESSION_REDIS_PASSWORD}"
+        filename: REDIS_PASSWORD
+      # smtp:
+      #   key: SMTP_PASSWORD
+      #   value: "${SECRET_AUTHELIA_SMTP_PASSWORD}"
+      #   filename: SMTP_PASSWORD
+      oidcPrivateKey:
+        key: OIDC_PRIVATE_KEY
+        value: "${AUTHELIA_IDENTITY_PROVIDERS_OIDC_ISSUER_PRIVATE_KEY}"
+        filename: OIDC_PRIVATE_KEY
+      oidcHMACSecret:
+        key: OIDC_HMAC_SECRET
+        value: "${AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET}"
+        filename: OIDC_HMAC_SECRET
 
