@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - authelia
+  - bazarr
+  - mosquitto
+  - overseerr
+  - plex
+  - prowlarr
+  - radarr
+  - readarr
+  - sabnzbd
+  - sonarr
+  - tautulli

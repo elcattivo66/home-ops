@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "${SECRET_CERT_NAME}"
-  namespace: cert-manager
+  namespace: default
 spec:
   secretName: "${SECRET_CERT_NAME}-prod-tls"
   issuerRef:

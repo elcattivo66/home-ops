@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: sonarr
+      version: 16.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/sonarr
+      pullPolicy: IfNotPresent
+      tag: latest
+
+    controllerType: deployment
+    env:
+      TZ: "Europe/Berlin"
+      PUID: "1000"
+      PGID: "1000"
+
+    # service:
+    #   main:
+    #     type: LoadBalancer
+    #     ports: 
+    #       http: 
+    #         port: 8989
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: "security-authelia@kubernetescrd"
+        hosts:
+          - host: "sonarr.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "sonarr.${SECRET_DOMAIN}"
+            #secretName: "sonarr-tls"
+            secretName: "${SECRET_CERT_NAME}-prod-tls"
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: sonarr-config-v1
+
+      nfs-media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: 192.168.178.21
+            path: /mnt/data/media
+        mountPath: /media
+        readOnly: false
+
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
