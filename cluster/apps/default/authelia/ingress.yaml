@@ -9,7 +9,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
 spec: 
-  ingressClassName: "authelia"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - "authelia.${SECRET_DOMAIN}"
