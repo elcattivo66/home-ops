@@ -34,25 +34,25 @@ spec:
     #       http: 
     #         port: 8989
 
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
-        hosts:
-          - host: "sonarr.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - "sonarr.${SECRET_DOMAIN}"
-            #secretName: "sonarr-tls"
-            secretName: "${SECRET_CERT_NAME}-prod-tls"
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     ingressClassName: "traefik"
+    #     annotations:
+    #       cert-manager.io/cluster-issuer: "letsencrypt-production"
+    #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #       traefik.ingress.kubernetes.io/router.tls: "true"
+    #       traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
+    #     hosts:
+    #       - host: "sonarr.${SECRET_DOMAIN}"
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #     tls:
+    #       - hosts:
+    #           - "sonarr.${SECRET_DOMAIN}"
+    #         #secretName: "sonarr-tls"
+    #         secretName: "${SECRET_CERT_NAME}-prod-tls"
 
     persistence:
       config:
