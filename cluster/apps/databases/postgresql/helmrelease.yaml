@@ -38,8 +38,6 @@ spec:
       pullPolicy: IfNotPresent
 
     auth:
-      # enablePostgresUser: true
-      # postgresPassword: "${SECRET_POSTGRES_PASSWORD}"
       database: "postgres"
 
     # metrics:
@@ -56,14 +54,6 @@ spec:
       persistence:
         enabled: true
         existingClaim: postgresql-config-v1
-
-      # service:
-      #   main:
-      #     enabled: false
-      #     type: LoadBalancer
-      #     ports: 
-      #       http: 
-      #         port: 5432
 
       volumePermissions:
         enabled: true
