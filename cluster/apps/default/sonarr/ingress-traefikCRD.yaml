@@ -2,8 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: &name sonarr
-  labels:
-    app.kubernetes.io/name: *name
+  namespace: default
 spec:
   entryPoints:
     - websecure
