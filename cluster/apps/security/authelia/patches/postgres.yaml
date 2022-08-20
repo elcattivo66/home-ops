@@ -10,7 +10,7 @@ spec:
       init-db:
         env:
           - name: POSTGRES_HOST
-            value: postgres-rw.databases.svc.cluster.local
+            value: postgres-rw
           - name: POSTGRES_DB
             value: authelia
           - name: POSTGRES_SUPER_PASS
