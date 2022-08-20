@@ -14,3 +14,4 @@ resources:
 - ./k8s-gateway.yaml
 - ./bjw-s-charts.yaml
 - ./authelia-charts.yaml
+- ./cloudnative-pg-charts
