@@ -1,22 +1,22 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: &name authelia
-  namespace: default
-  labels:
-    app.kubernetes.io/name: *name
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`authelia.${SECRET_DOMAIN}`)
-      services:
-        - name: *name
-          port: 9091
-          namespace: default
-  tls:
-    secretName: ${SECRET_CERT_NAME}-prod-tls
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: &name authelia
+#   namespace: default
+#   labels:
+#     app.kubernetes.io/name: *name
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`authelia.${SECRET_DOMAIN}`)
+#       services:
+#         - name: *name
+#           port: 9091
+#           namespace: default
+#   tls:
+#     secretName: ${SECRET_CERT_NAME}-prod-tls
 
 ---
 

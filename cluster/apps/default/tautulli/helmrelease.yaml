@@ -41,7 +41,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.tls: "true"
-          traefik.ingress.kubernetes.io/router.middlewares: "security-authelia@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
         hosts:
           - host: "tautulli.${SECRET_DOMAIN}"
             paths:
