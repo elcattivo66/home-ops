@@ -135,11 +135,11 @@ spec:
           enabled: true
           host: redis-master.databases.svc.cluster.local
 
-      storage:
-        postgres:
-          enabled: true
-          host: postgresql.databases.svc.cluster.local
-          username: authelia
+      # storage:
+      #   postgres:
+      #     enabled: true
+      #     host: postgresql.databases.svc.cluster.local
+      #     username: authelia
 
       notifier:
         smtp:
