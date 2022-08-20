@@ -31,30 +31,6 @@ spec:
     #     prometheus.io/probe: "true"
     #     prometheus.io/protocol: "http"
 
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          #traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
-        hosts:
-          - host: "authelia.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-            backend:
-              service:
-                name:  authelia
-                port:
-                  number: 9091
-        tls:
-          - hosts:
-              - "authelia.${SECRET_DOMAIN}"
-            secretName: "${SECRET_CERT_NAME}-prod-tls"
-
     pod:
       # Must be Deployment, DaemonSet, or StatefulSet.
       kind: Deployment

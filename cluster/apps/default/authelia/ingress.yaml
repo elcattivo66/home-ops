@@ -2,26 +2,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: traefik-dashboard
+  name: authelia
   namespace: default
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
 spec: 
-  ingressClassName: "traefik"
+  ingressClassName: "authelia"
   tls:
     - hosts:
-        - "traefik.${SECRET_DOMAIN}"
+        - "authelia.${SECRET_DOMAIN}"
       secretName: "${SECRET_CERT_NAME}-prod-tls"
   rules:
-    - host: "traefik.${SECRET_DOMAIN}"
+    - host: "authelia.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: traefik
+                name: authelia
                 port:
-                  number: 9000
+                  number: 9091
