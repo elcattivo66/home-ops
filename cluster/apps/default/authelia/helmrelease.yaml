@@ -27,10 +27,7 @@ spec:
   values:
     domain: ${SECRET_DOMAIN}
     service:
-      main:
-        ports:
-          http:
-            port: 9091
+      port: 9091
     pod:
       # Must be Deployment, DaemonSet, or StatefulSet.
       kind: Deployment
