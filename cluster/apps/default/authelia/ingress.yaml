@@ -23,4 +23,4 @@ spec:
               service:
                 name: authelia
                 port:
-                  number: 9091
+                  number: 80
