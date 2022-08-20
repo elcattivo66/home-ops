@@ -31,6 +31,12 @@ spec:
       resizerReplicaCount: 1
       snapshotterReplicaCount: 1
 
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "${SVC_LONGHORN_ADDR}"
+        externalTrafficPolicy: Local
+
     enablePSP: true
 
     defaultSettings:
