@@ -5,3 +5,4 @@ resources:
   - helmrelease.yaml
   - dashboard
   - tlsoptions.yaml
+  - configmap.yaml

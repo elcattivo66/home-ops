@@ -45,6 +45,10 @@ spec:
         allowExternalNameServices: true
       kubernetesIngress:
         enabled: true
+    volumes:
+      - name: traefik-config
+        mountPath: /etc/traefik
+        type: configMap
     ingressClass:
       enabled: true
       isDefaultClass: true
