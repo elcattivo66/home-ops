@@ -7,6 +7,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    subdomain: authelia
 spec: 
   ingressClassName: "traefik"
   tls:
