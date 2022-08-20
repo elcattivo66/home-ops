@@ -11,8 +11,8 @@ metadata:
 spec: 
   ingressClassName: "traefik"
   tls:
-    - hosts:
-        - "authelia.${SECRET_DOMAIN}"
+    # - hosts:
+    #     - "authelia.${SECRET_DOMAIN}"
       secretName: "${SECRET_CERT_NAME}-prod-tls"
   rules:
     - host: "authelia.${SECRET_DOMAIN}"

@@ -42,8 +42,8 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-          - hosts:
-              - "bazarr.${SECRET_DOMAIN}"
+          # - hosts:
+          #     - "bazarr.${SECRET_DOMAIN}"
             secretName: "${SECRET_CERT_NAME}-prod-tls"
 
     persistence:
