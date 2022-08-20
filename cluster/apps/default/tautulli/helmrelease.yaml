@@ -50,7 +50,7 @@ spec:
         tls:
           - hosts:
               - "tautulli.${SECRET_DOMAIN}"
-            secretName: "tautulli-tls"
+            secretName: "${SECRET_CERT_NAME}-prod-tls"
 
     persistence:
       config:

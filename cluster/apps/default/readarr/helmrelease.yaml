@@ -51,7 +51,7 @@ spec:
         tls:
           - hosts:
               - "readarr.${SECRET_DOMAIN}"
-            secretName: "readarr-tls"
+            secretName: "${SECRET_CERT_NAME}-prod-tls"
     persistence:
       config:
         enabled: true

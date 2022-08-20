@@ -39,7 +39,7 @@ spec:
         tls:
           - hosts:
               - "overseerr.${SECRET_DOMAIN}"
-            secretName: "overseerr-tls"
+            secretName: "${SECRET_CERT_NAME}-prod-tls"
 
     persistence:
       config:
