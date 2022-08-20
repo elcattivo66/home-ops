@@ -22,13 +22,6 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
-    # service:
-    #   main:
-    #     type: LoadBalancer
-    #     ports: 
-    #       http: 
-    #         port: 5055
-
     ingress:
       main:
         enabled: true
@@ -37,7 +30,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.tls: "true"
-          #traefik.ingress.kubernetes.io/router.middlewares: "networking-traefik-forward-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "security-authelia@kubernetescrd"
         hosts:
           - host: "overseerr.${SECRET_DOMAIN}"
             paths:
