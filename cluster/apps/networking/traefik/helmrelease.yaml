@@ -64,6 +64,7 @@ spec:
       - "--metrics.prometheus=true"
       - "--metrics.prometheus.entryPoint=metrics"
     additionalArguments:
+      - "--providers.file.directory=/etc/traefik"
       - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
