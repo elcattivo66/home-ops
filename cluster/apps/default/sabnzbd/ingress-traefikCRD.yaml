@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name sabnzbd
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`sab.${SECRET_DOMAIN}`)
+      middlewares:
+#        - name: headers@file
+        - name: authelia
+          namespace: default
+      services:
+        - name: *name
+          port: 8080
+          namespace: default
+  tls:
+    secretName: ${SECRET_CERT_NAME}-prod-tls

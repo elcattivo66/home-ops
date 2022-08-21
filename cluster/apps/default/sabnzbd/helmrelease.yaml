@@ -34,25 +34,6 @@ spec:
       TZ: "Europe/Berlin"
       HOST_WHITELIST_ENTRIES: "sabnzbd"
 
-    # service:
-    #   main:
-    #     enabled: true
-    #     type: LoadBalancer
-    #     ports: 
-    #       http: 
-    #         port: 8080
-
-    # ingress:
-    #   main:
-    #     enabled: true
-    #     annotations:
-    #       kubernetes.io/ingress.class: "traefik"
-    #     hosts:
-    #       - host: "sabnzbd.local"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-
     persistence:
       config:
         enabled: true
@@ -63,9 +44,19 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: 192.168.178.21
-            path: /mnt/data/media
+            server: ${NFS_ADDR}
+            path: ${MEDIADIR}
         mountPath: /media
+        readOnly: false
+
+      downloads: 
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NFS_ADDR}
+            path: ${DOWNLOADDIR}/usenet
+        mountPath: /downloads
         readOnly: false
 
     podSecurityContext:
