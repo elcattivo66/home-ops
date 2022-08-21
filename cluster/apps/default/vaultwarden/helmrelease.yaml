@@ -20,15 +20,15 @@ spec:
     replicaCount: 1
 
     env:
-      SIGNUPS_ALLOWED: true
+      SIGNUPS_ALLOWED: false
       DOMAIN: "https://bitwarden.${SECRET_DOMAIN}"
       WEBSOCKET_ENABLED: true
       WEBSOCKET_PORT: 3012
       SENDS_ALLOWED: true
       DISABLE_ADMIN_TOKEN: false
-      SMTP_HOST: "smtp.mailbox.org"
+      SMTP_HOST: "${SECRET_SMTP_HOST}" 
       SMTP_FROM: "${SECRET_SMTP_SENDER}"
-      SMTP_FROM_NAME: "Bitwarden"
+      SMTP_FROM_NAME: "Philipps Bitwarden"
       SMTP_SECURITY: starttls
       SMTP_PORT: 587
       SMTP_USERNAME: ${SECRET_SMTP_USERNAME}
