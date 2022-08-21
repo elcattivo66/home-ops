@@ -19,7 +19,8 @@ spec:
     controllerType: deployment
 
     image:
-      repository: ghcr.io/k8s-at-home/gotify
+      #repository: ghcr.io/k8s-at-home/gotify
+      repository: docker.io/gotify/server
       pullPolicy: IfNotPresent
       tag: latest
 
