@@ -10,7 +10,7 @@ spec:
     - kind: Rule
       match: Host(`sonarr.${SECRET_DOMAIN}`)
       middlewares:
-        - name: headers@file
+        - name: headers
         - name: authelia
           namespace: default
       services:
