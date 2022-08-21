@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - authelia
   - bazarr
+  - gotify
   - lldap
   - mosquitto
   - overseerr
