@@ -21,6 +21,7 @@ spec:
     image:
       repository: ghcr.io/k8s-at-home/gotify
       pullPolicy: IfNotPresent
+      tag: latest
 
     env:
       TZ: "${TZ}"
