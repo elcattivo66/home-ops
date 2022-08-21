@@ -40,4 +40,4 @@ spec:
     enablePSP: true
 
     defaultSettings:
-      backupTarget: nfs://tonibrix:/
+      backupTarget: nfs://pihole:/mnt/backup/longhorn_backup
