@@ -58,7 +58,7 @@ spec:
         ldap:
           enabled: true
           implementation: custom
-          url: ldap://tonibrix:3890
+          url: ldap://lldap:3890
           timeout: 5s
           start_tls: false
           base_dn: dc=elcattivo,dc=de
