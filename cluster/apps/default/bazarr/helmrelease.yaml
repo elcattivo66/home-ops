@@ -27,25 +27,6 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          traefik.ingress.kubernetes.io/router.middlewares: "default-authelia@kubernetescrd"
-        hosts:
-          - host: "bazarr.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          # - hosts:
-          #     - "bazarr.${SECRET_DOMAIN}"
-            secretName: "${SECRET_CERT_NAME}-prod-tls"
-
     persistence:
       config:
         enabled: true
