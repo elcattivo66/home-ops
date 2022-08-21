@@ -31,8 +31,13 @@ spec:
       tag: latest
 
     env:
-      TZ: "Europe/Berlin"
-      HOST_WHITELIST_ENTRIES: "sabnzbd"
+      TZ: ${TZ}
+      SABNZBD__HOST_WHITELIST_ENTRIES: >-
+        sabnzbd,
+        sabnzbd.default.svc,
+        sabnzbd.default.svc.cluster,
+        sabnzbd.default.svc.cluster.local,
+        sab.${SECRET_DOMAIN}
 
     persistence:
       config:
