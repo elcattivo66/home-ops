@@ -15,7 +15,7 @@ spec:
           namespace: default
       services:
         - name: longhorn-frontend
-          port: 8000
+          port: 80
           namespace: longhorn-system
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
