@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name longhorn
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`longhorn.${SECRET_DOMAIN}`)
+      middlewares:
+#        - name: headers@file
+        - name: authelia
+          namespace: default
+      services:
+        - name: *name
+          port: 8000
+          namespace: longhorn-system
+  tls:
+    secretName: ${SECRET_CERT_NAME}-prod-tls
