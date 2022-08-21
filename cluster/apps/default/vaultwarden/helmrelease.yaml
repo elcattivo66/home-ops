@@ -20,6 +20,7 @@ spec:
     replicaCount: 1
 
     env:
+      TIMEZONE: ${TZ}
       SIGNUPS_ALLOWED: false
       DOMAIN: "https://bitwarden.${SECRET_DOMAIN}"
       WEBSOCKET_ENABLED: true
