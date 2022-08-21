@@ -32,14 +32,14 @@ spec:
     envFrom:
       - secretRef:
           name: lldap-secret
-    # service:
-    #   main:
-    #     ports:
-    #       http:
-    #         port: 17170
-    #       ldap:
-    #         enabled: true
-    #         port: 3890
+    service:
+      main:
+        ports:
+          http:
+            port: 17170
+          ldap:
+            enabled: true
+            port: 3890
     # ingress:
     #   main:
     #     enabled: true
