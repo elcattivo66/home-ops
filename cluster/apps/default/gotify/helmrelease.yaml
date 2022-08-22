@@ -31,9 +31,9 @@ spec:
 
     env:
       TZ: "${TZ}"
-      GOTIFY_DATABASE_CONNECTION: config/gotify.db
-      GOTIFY_PLUGINSDIR: config/plugins
-      GOTIFY_UPLOADEDIMAGESDIR: config/images
+      GOTIFY_DATABASE_CONNECTION: data/gotify.db
+      GOTIFY_PLUGINSDIR: data/plugins
+      GOTIFY_UPLOADEDIMAGESDIR: data/images
 
     service:
       main:
@@ -41,11 +41,11 @@ spec:
           http:
             port: 80
 
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     existingClaim: gotify-config-v1
-    #     mountPath: /config
+    persistence:
+      config:
+        enabled: true
+        existingClaim: gotify-config-v1
+        mountPath: /app/data
 
     podSecurityContext:
       runAsUser: 1000
