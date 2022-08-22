@@ -33,6 +33,12 @@ spec:
       TZ: "${TZ}"
       GOTIFY_DATABASE_CONNECTION: data/gotify.db
 
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+            
     persistence:
       config:
         enabled: true
