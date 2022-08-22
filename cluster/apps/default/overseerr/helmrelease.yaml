@@ -19,7 +19,7 @@ spec:
     controllerType: deployment
     image:
       repository: ghcr.io/sct/overseerr
-      tag: 1.29.1
+      tag: latest
     env:
       TZ: "Europe/Berlin"
       PUID: "1000"
