@@ -64,3 +64,13 @@ spec:
               matchOn:
                 - usbId:
                     vendor: ["1a6e", "18d1"]
+
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: "node-role.kubernetes.io/master"
+                    operator: In
+                    values: [""]
