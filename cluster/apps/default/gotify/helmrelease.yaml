@@ -40,10 +40,10 @@ spec:
             port: 80
 
     persistence:
-      config:
+      data:
         enabled: true
         existingClaim: gotify-config-v1
-        mountPath: config/data
+#        mountPath: config/data
 
     podSecurityContext:
       runAsUser: 1000
