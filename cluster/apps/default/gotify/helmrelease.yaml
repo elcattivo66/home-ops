@@ -41,11 +41,11 @@ spec:
           http:
             port: 80
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: gotify-config-v1
-        mountPath: /config
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     existingClaim: gotify-config-v1
+    #     mountPath: /config
 
     podSecurityContext:
       runAsUser: 1000
