@@ -41,3 +41,13 @@ spec:
 
     defaultSettings:
       backupTarget: nfs://pihole:/mnt/backup/longhorn_backup
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
