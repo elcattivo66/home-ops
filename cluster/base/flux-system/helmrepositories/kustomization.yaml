@@ -16,4 +16,4 @@ resources:
 - ./authelia-charts.yaml
 - ./cloudnative-pg-charts.yaml
 - ./sampisolutions.yaml
-- ./node-feature-discovery-charts
+- ./node-feature-discovery-charts.yaml
