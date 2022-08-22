@@ -31,7 +31,9 @@ spec:
 
     env:
       TZ: "${TZ}"
-      GOTIFY_DATABASE_CONNECTION: data/gotify.db
+      GOTIFY_DATABASE_CONNECTION: config/gotify.db
+      GOTIFY_PLUGINSDIR: config/plugins
+      GOTIFY_UPLOADEDIMAGESDIR: config/images
 
     service:
       main:
@@ -40,13 +42,13 @@ spec:
             port: 80
 
     persistence:
-      data:
+      config:
         enabled: true
         existingClaim: gotify-config-v1
-#        mountPath: config/data
+        mountPath: /config
 
-    # podSecurityContext:
-    #   runAsUser: 1000
-    #   runAsGroup: 1000
-    #   fsGroup: 1000
-    #   fsGroupChangePolicy: OnRootMismatch
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
