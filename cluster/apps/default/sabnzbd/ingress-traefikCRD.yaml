@@ -9,9 +9,21 @@ spec:
   routes:
     - kind: Rule
       match: Host(`sab.${SECRET_DOMAIN}`)
+      priority: 99
       middlewares:
-#        - name: headers@file
+        - name: headers
+          namespace: default
         - name: authelia
+          namespace: default
+      services:
+        - name: *name
+          port: 8080
+          namespace: default
+    - kind: Rule
+      match: Host(`sab.${SECRET_DOMAIN}`) && (Headers(`X-Api-Key`, `${SABNZBD_API_KEY}`) || Query(`apikey`, `${SABNZBD_API_KEY}`))
+      priority: 100      
+      middlewares:
+        - name: headers
           namespace: default
       services:
         - name: *name

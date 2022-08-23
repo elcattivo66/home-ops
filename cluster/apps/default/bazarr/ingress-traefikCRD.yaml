@@ -9,10 +9,21 @@ spec:
   routes:
     - kind: Rule
       match: Host(`bazarr.${SECRET_DOMAIN}`)
+      priority: 99
       middlewares:
         - name: headers
           namespace: default
         - name: authelia
+          namespace: default
+      services:
+        - name: *name
+          port: 6767
+          namespace: default
+    - kind: Rule
+      match: Host(`bazarr.${SECRET_DOMAIN}`) && (Headers(`X-Api-Key`, `${BAZARR_API_KEY}`) || Query(`apikey`, `${BAZARR_API_KEY}`))
+      priority: 100      
+      middlewares:
+        - name: headers
           namespace: default
       services:
         - name: *name

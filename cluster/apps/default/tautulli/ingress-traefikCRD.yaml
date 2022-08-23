@@ -9,9 +9,21 @@ spec:
   routes:
     - kind: Rule
       match: Host(`tautulli.${SECRET_DOMAIN}`)
+      priority: 99
       middlewares:
-#        - name: headers@file
+        - name: headers
+          namespace: default
         - name: authelia
+          namespace: default
+      services:
+        - name: *name
+          port: 8181
+          namespace: default
+    - kind: Rule
+      match: Host(`tautulli.${SECRET_DOMAIN}`) && (Headers(`X-Api-Key`, `${TAUTULLI_DEVICE_TOKEN}`) || Query(`apikey`, `${TAUTULLI_DEVICE_TOKEN}`))
+      priority: 100      
+      middlewares:
+        - name: headers
           namespace: default
       services:
         - name: *name
