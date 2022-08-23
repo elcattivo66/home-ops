@@ -17,6 +17,6 @@ spec:
       services:
         - name: *name
           port: 9000
-          namespace: kube-system
+          namespace: networking
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
