@@ -9,6 +9,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`radarr.${SECRET_DOMAIN}`)
+      priority: 99
       middlewares:
         - name: headers
           namespace: default
@@ -20,6 +21,7 @@ spec:
           namespace: default
     - kind: Rule
       match: Host(`sonarr.$DOMAINNAME`) && (Headers(`X-Api-Key`, `$RADARR_API_KEY`) || Query(`apikey`, `$RADARR_API_KEY`))
+      priority: 100      
       middlewares:
         - name: headers
           namespace: default
