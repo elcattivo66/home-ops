@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - ingress-traefikCRD.yaml
+  - backup-definition.yaml
