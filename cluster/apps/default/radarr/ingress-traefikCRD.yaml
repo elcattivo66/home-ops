@@ -18,5 +18,14 @@ spec:
         - name: *name
           port: 7878
           namespace: default
+    - kind: Rule
+      match: Host(`sonarr.$DOMAINNAME`) && (Headers(`X-Api-Key`, `$RADARR_API_KEY`) || Query(`apikey`, `$RADARR_API_KEY`))
+      middlewares:
+        - name: headers
+          namespace: default
+      services:
+        - name: *name
+          port: 7878
+          namespace: default
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
