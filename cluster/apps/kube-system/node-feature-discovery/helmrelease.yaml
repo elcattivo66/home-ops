@@ -74,7 +74,3 @@ spec:
                   - key: "node-role.kubernetes.io/master"
                     operator: In
                     values: [""]
-                  - key: beta.kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64    
