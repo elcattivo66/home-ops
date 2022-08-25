@@ -27,21 +27,14 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
-    # service:
-    #   main:
-    #     type: LoadBalancer
-    #     ports: 
-    #       http: 
-    #         port: 8787
-
-      nfs-media:
+      books: 
         enabled: true
         type: custom
         volumeSpec:
           nfs:
             server: ${NFS_ADDR}
-            path: ${MEDIADIR}
-        mountPath: /media
+            path: /mnt/extern120/calibre_library
+        mountPath: /books
         readOnly: false
 
       downloads: 
