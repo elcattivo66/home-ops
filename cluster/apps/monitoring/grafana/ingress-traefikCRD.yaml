@@ -16,7 +16,7 @@ spec:
           namespace: default
       services:
         - name: *name
-          port: 3000
+          port: 80
           namespace: monitoring
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
