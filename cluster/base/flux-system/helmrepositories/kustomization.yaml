@@ -17,3 +17,4 @@ resources:
 - ./cloudnative-pg-charts.yaml
 - ./sampisolutions.yaml
 - ./node-feature-discovery-charts.yaml
+- ./prometheus-community-charts.yaml
