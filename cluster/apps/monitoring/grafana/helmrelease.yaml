@@ -28,8 +28,8 @@ spec:
     replicas: 2
     admin:
       existingSecret: grafana-admin
-    envFromSecrets:
-      - name: grafana
+    # envFromSecrets:
+    #   - name: grafana
     grafana.ini:
       auth:
         signout_redirect_url: "https://authelia.${SECRET_DOMAIN}/logout"
