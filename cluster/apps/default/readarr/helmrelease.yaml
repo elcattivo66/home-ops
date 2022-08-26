@@ -27,6 +27,11 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
+    persistence:
+      config:
+        enabled: true
+        existingClaim: readarr-config-v1
+        
       books: 
         enabled: true
         type: custom
