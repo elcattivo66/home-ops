@@ -18,3 +18,4 @@ resources:
 - ./sampisolutions.yaml
 - ./node-feature-discovery-charts.yaml
 - ./prometheus-community-charts.yaml
+- ./grafana-charts.yaml
