@@ -35,15 +35,15 @@ spec:
         enabled: true
         existingClaim: audiobookshelf-config-v1
         mountPath: /metadata
-      media:
-        enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: ${MEDIADIR}/audiobooks
-        mountPath: /audiobooks
-        readOnly: false
+      # media:
+      #   enabled: true
+      #   type: custom
+      #   volumeSpec:
+      #     nfs:
+      #       server: ${NFS_ADDR}
+      #       path: ${MEDIADIR}/audiobooks
+      #   mountPath: /audiobooks
+      #   readOnly: false
 
     podSecurityContext:
       runAsUser: 1000
