@@ -5,6 +5,7 @@ resources:
   - audiobookshelf
   - authelia
   - bazarr
+  - calibre
   - calibre-web
   - gotify
   - lldap
