@@ -1,35 +1,4 @@
 ---
-server:
-  port: 9091
-  buffers:
-    - read: 8192
-    - write: 8192
-# theme: auto
-# authentication_backend:
-#   password_reset: 
-#     disable: false
-#   ldap:
-#     enabled: true
-#     implementation: custom
-#     url: ldap://lldap:3890
-#     timeout: 5s
-#     start_tls: false
-#     base_dn: dc=elcattivo,dc=de
-#     username_attribute: uid
-#     additional_users_dn: ou=people
-#     users_filter: (&({username_attribute}={input})(objectClass=person))
-#     additional_groups_dn: ou=groups
-#     groups_filter: (member={dn})
-#     group_name_attribute: cn
-#     mail_attribute: mail
-#     display_name_attribute: displayName
-#     user: uid=admin,ou=people,dc=elcattivo,dc=de
-    # Password can also be set using a secret: https://www.authelia.com/docs/configuration/secrets.html
-  # file:
-  #   enabled: false
-  #   password:
-  #     algorithm: argon2id
-
 access_control:
   default_policy: deny
   rules:
@@ -67,16 +36,6 @@ access_control:
       networks:
         - 192.168.178.0/24
 
-# session:
-#   redis:
-#     enabled: true
-#     host: redis-master.databases.svc.cluster.local
-
-# storage:
-#   postgres:
-#     enabled: true
-#     host: postgres-rw.databases.svc.cluster.local
-
 identity_providers:
   oidc:
     access_token_lifespan: 1h
@@ -109,6 +68,46 @@ identity_providers:
           - query
           - fragment
         userinfo_signing_algorithm: none
+        
+# theme: auto
+# authentication_backend:
+#   password_reset: 
+#     disable: false
+#   ldap:
+#     enabled: true
+#     implementation: custom
+#     url: ldap://lldap:3890
+#     timeout: 5s
+#     start_tls: false
+#     base_dn: dc=elcattivo,dc=de
+#     username_attribute: uid
+#     additional_users_dn: ou=people
+#     users_filter: (&({username_attribute}={input})(objectClass=person))
+#     additional_groups_dn: ou=groups
+#     groups_filter: (member={dn})
+#     group_name_attribute: cn
+#     mail_attribute: mail
+#     display_name_attribute: displayName
+#     user: uid=admin,ou=people,dc=elcattivo,dc=de
+    # Password can also be set using a secret: https://www.authelia.com/docs/configuration/secrets.html
+  # file:
+  #   enabled: false
+  #   password:
+  #     algorithm: argon2id
+
+
+
+# session:
+#   redis:
+#     enabled: true
+#     host: redis-master.databases.svc.cluster.local
+
+# storage:
+#   postgres:
+#     enabled: true
+#     host: postgres-rw.databases.svc.cluster.local
+
+
 
 # notifier:
 #   smtp:
