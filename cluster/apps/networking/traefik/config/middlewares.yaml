@@ -16,4 +16,4 @@ spec:
     referrerPolicy: "same-origin"
     contentTypeNosniff: true
     browserXssFilter: true
-    hostsProxyHeaders: "X-Forwarded-Host"
+    hostsProxyHeaders: X-Forwarded-Host
