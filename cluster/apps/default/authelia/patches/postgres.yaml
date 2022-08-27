@@ -18,6 +18,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: postgres-superuser
+                namespace: default
                 key: password
           - name: POSTGRES_USER
             valueFrom:
