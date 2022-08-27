@@ -39,7 +39,6 @@ spec:
     envFrom:
       - secretRef:
           name: authelia
-          namespace: default
     enableServiceLinks: false
 
     service:
@@ -64,7 +63,7 @@ spec:
         subPath: configuration.yml
         mountPath: /config/configuration.yml
         readOnly: false
-        
+
     resources:
       requests:
         cpu: 5m
