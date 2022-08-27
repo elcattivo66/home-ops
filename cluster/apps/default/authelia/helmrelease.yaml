@@ -37,7 +37,7 @@ spec:
       tag: 4.36.5
     envFrom:
       - secretRef:
-          name: *app
+          name: authelia
     enableServiceLinks: false
     service:
       main:
