@@ -5,18 +5,17 @@ metadata:
   name: audiobookshelf
   namespace: default
 spec:
-  interval: 5m
   chart:
     spec:
-      chart: audiobookshelf
-      version: 1.2.2
+      chart: app-template
+      version: 0.1.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  interval: 15m
   values:
-
     image:
       repository: ghcr.io/advplyr/audiobookshelf
       pullPolicy: IfNotPresent
@@ -26,15 +25,21 @@ spec:
       AUDIOBOOKSHELF_UID: 1000
       AUDIOBOOKSHELF_GID: 1000
 
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+
     persistence:
       config:
         enabled: true
         existingClaim: audiobookshelf-config-v1
         mountPath: /config
-      # metadata:
-      #   enabled: true
-      #   existingClaim: audiobookshelf-config-v1
-      #   mountPath: /metadata
+      metadata:
+        enabled: true
+        existingClaim: audiobookshelf-config-v1
+        mountPath: /metadata
       media:
         enabled: true
         type: custom
@@ -50,3 +55,10 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: OnRootMismatch
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 249M
+      limits:
+        memory: 299M
