@@ -5,6 +5,5 @@ resources:
   - helmrelease.yaml
   - secret.sops.yaml
   - ingress-traefikCRD.yaml
-  # - ingress.yaml
 patchesStrategicMerge:
   - patches/postgres.yaml
