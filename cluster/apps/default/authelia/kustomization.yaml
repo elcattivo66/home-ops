@@ -7,3 +7,9 @@ resources:
   - ingress-traefikCRD.yaml
 patchesStrategicMerge:
   - patches/postgres.yaml
+configMapGenerator:
+  - name: authelia
+    files:
+      - /config/configuration.yml
+generatorOptions:
+  disableNameSuffixHash: true
