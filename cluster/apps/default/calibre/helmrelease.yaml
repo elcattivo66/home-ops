@@ -24,7 +24,8 @@ spec:
       PGID: "1000"
       PUID: "1000"
       UMASK_SET: "022"
-
+      TZ: ${TZ}
+      
     service:
       main:
         ports:
