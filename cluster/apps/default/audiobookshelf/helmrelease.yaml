@@ -33,13 +33,12 @@ spec:
             port: 80
 
     persistence:
-      config:
+      data:
         enabled: true
         existingClaim: audiobookshelf-config-v1
         mountPath: /config
       metadata:
         enabled: true
-        existingClaim: audiobookshelf-config-v1
         mountPath: /metadata
       media:
         enabled: true
