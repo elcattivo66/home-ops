@@ -12,7 +12,7 @@ spec:
     stsPreload: true
     forceSTSHeader: true
     frameDeny: true
-    customFrameOptionsValue: SAMEORIGIN
+    customFrameOptionsValue: "allow-from https:elcattivo.de"
     referrerPolicy: "same-origin"
     contentTypeNosniff: true
     browserXssFilter: true
