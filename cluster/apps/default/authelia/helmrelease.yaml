@@ -22,12 +22,12 @@ spec:
     remediation:
       retries: 5
   dependsOn:
-    - name: postgres.databases
-      namespace: default
+    - name: postgres
+      namespace: databases
     - name: lldap
       namespace: default
-    - name: redis.databases
-      namespace: default
+    - name: redis
+      namespace: databases
   values:
     controller:
       replicas: 3
