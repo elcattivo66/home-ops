@@ -1,4 +1,9 @@
 ---
+session:
+  redis:
+    enabled: true
+    host: redis-master.databases.svc.cluster.local
+
 access_control:
   default_policy: deny
   rules:
@@ -68,7 +73,7 @@ identity_providers:
           - query
           - fragment
         userinfo_signing_algorithm: none
-        
+
 # theme: auto
 # authentication_backend:
 #   password_reset: 
