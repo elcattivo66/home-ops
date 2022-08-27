@@ -44,9 +44,9 @@ spec:
         ports:
           http:
             port: 9091
-          metrics:
-            enabled: true
-            port: 8080
+          # metrics:
+          #   enabled: true
+          #   port: 8080
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
