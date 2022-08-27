@@ -32,3 +32,4 @@ spec:
     authResponseHeaders:
       - Remote-User
       - Remote-Groups
+      - Remote-Email
