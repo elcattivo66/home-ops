@@ -35,10 +35,13 @@ spec:
     image:
       repository: ghcr.io/authelia/authelia
       tag: 4.36.5
+
     envFrom:
       - secretRef:
           name: authelia
+          namespace: default
     enableServiceLinks: false
+
     service:
       main:
         ports:
@@ -52,6 +55,7 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
+
     persistence:
       config:
         enabled: true
@@ -60,6 +64,7 @@ spec:
         subPath: configuration.yml
         mountPath: /config/configuration.yml
         readOnly: false
+        
     resources:
       requests:
         cpu: 5m
