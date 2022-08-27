@@ -28,4 +28,4 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: authelia
-                key: STORAGE_PASSWORD
+                key: AUTHELIA_STORAGE_POSTGRES_PASSWORD
