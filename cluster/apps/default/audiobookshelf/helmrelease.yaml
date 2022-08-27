@@ -22,9 +22,9 @@ spec:
       pullPolicy: IfNotPresent
 
     env:
-      TZ: "Europe/Berlin"
-      PUID: "1000"
-      PGID: "1000"
+      TZ: ${TZ}
+      AUDIOBOOKSHELF_UID: 1000
+      AUDIOBOOKSHELF_GID: 1000
 
     persistence:
       config:
