@@ -39,6 +39,7 @@ spec:
         mountPath: /config
       metadata:
         enabled: true
+        existingClaim: audiobookshelf-metadata-v1
         mountPath: /metadata
       media:
         enabled: true
