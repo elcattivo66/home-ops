@@ -12,6 +12,8 @@ spec:
     stsPreload: true
     forceSTSHeader: true
     frameDeny: true
-    customFrameOptionsValue: SAMEORIGIN
+    # customFrameOptionsValue: SAMEORIGIN
+    referrerPolicy: "same-origin"
     contentTypeNosniff: true
     browserXssFilter: true
+    hostsProxyHeaders: "X-Forwarded-Host"
