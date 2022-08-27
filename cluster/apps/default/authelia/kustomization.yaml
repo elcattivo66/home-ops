@@ -5,6 +5,9 @@ resources:
   - helmrelease.yaml
   - secret.sops.yaml
   - ingress-traefikCRD.yaml
+commonLabels:
+  app.kubernetes.io/name: authelia
+  app.kubernetes.io/instance: authelia
 patchesStrategicMerge:
   - patches/postgres.yaml
 configMapGenerator:
