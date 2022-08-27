@@ -1,9 +1,4 @@
 ---
-session:
-  redis:
-    enabled: true
-    host: redis-master.databases.svc.cluster.local
-
 access_control:
   default_policy: deny
   rules:
