@@ -37,11 +37,12 @@ spec:
         - name: TZ
           value: ${TZ}
 
-      resources:
-        requests:
-          cpu: 500m
-          memory: 1500Mi
-        limits: {}
+    resources:
+      requests:
+        cpu: 5m
+        memory: 10Mi
+      limits:
+        memory: 100Mi
 
     ##
     ## Authelia Config Map Generator
@@ -123,23 +124,9 @@ spec:
         postgres:
           enabled: true
           host: postgres-rw.databases.svc.cluster.local
-
-      notifier:
-        smtp:
-          enabled: true
-          enabledSecret: true
-          host: smtp.mailbox.org
-          port: 587
-          username: ${SECRET_SMTP_USERNAME}
-          sender: ${SECRET_SMTP_SENDER}
-          #identifier: ${EXTERNAL_DOMAIN}
-
+          
       identity_providers:
         oidc:
-          #hmac_secret: this_is_a_secret_abc123abc123abc # Use docker secret
-          #issuer_private_key: |
-          #  --- KEY START
-          #  --- KEY END
           access_token_lifespan: 1h
           authorize_code_lifespan: 1m
           id_token_lifespan: 1h
@@ -170,6 +157,16 @@ spec:
                 - query
                 - fragment
               userinfo_signing_algorithm: none
+
+      notifier:
+        smtp:
+          enabled: true
+          enabledSecret: true
+          host: smtp.mailbox.org
+          port: 587
+          username: ${SECRET_SMTP_USERNAME}
+          sender: ${SECRET_SMTP_SENDER}
+          #identifier: ${EXTERNAL_DOMAIN}
 
     secret:
       existingSecret: authelia
