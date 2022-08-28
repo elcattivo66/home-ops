@@ -5,13 +5,13 @@ metadata:
   namespace: default
 spec:
   headers:
-    sslRedirect: true
+    # sslRedirect: true #Deprecated
     sslHost: "${SECRET_DOMAIN}"
     stsSeconds: 315360000
     stsIncludeSubdomains: true
     stsPreload: true
     forceSTSHeader: true
-    frameDeny: true
+    #frameDeny: true
     customFrameOptionsValue: "allow-from https:elcattivo.de"
     referrerPolicy: "same-origin"
     contentTypeNosniff: true
