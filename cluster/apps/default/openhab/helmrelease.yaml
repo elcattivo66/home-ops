@@ -32,10 +32,10 @@ spec:
                 - "${SVC_OPENHAB_ADDR}"
                 externalTrafficPolicy: Local
                 ports:
-                http:
-                    port: 8282
-                https:
-                    port: 8443
+                    http:
+                        port: 8282
+                    https:
+                        port: 8443
         persistence:
             conf:
                 enabled: true
