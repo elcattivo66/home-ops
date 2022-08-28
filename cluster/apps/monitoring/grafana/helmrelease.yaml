@@ -25,7 +25,7 @@ spec:
   #   - name: postgres
   #     namespace: default
   values:
-    replicas: 2
+    replicas: 1
     admin:
       existingSecret: grafana-admin
     # envFromSecrets:
@@ -35,6 +35,7 @@ spec:
       GF_PANELS_DISABLE_SANITIZE_HTML: true
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
+      GF_SERVER_DOMAIN: grafana.${SECRET_DOMAIN}
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"      
     grafana.ini:
       auth:
@@ -53,6 +54,7 @@ spec:
         login_attribute_path: preferred_username
         groups_attribute_path: groups
         name_attribute_path: name
+        email_attribute_path: email
         use_pkce: true
       # auth.generic_oauth.group_mapping:
       #   role_attribute_path: |
