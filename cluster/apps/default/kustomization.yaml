@@ -9,6 +9,7 @@ resources:
     - gotify
     - lldap
     - mosquitto
+    - openhab
     - overseerr
     - paperless
     - plex

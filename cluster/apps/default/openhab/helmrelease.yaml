@@ -1,0 +1,56 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+    name: openhab
+    namespace: default
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 0.1.1
+            interval: 15m
+            sourceRef:
+                kind: HelmRepository
+                name: bjw-s-charts
+                namespace: flux-system
+    values:
+        image:
+            repository: docker.io/openhab/openhab
+            tag: 3.3.0
+        env:
+            USER_ID: 1000
+            GROUP_ID: 1000
+            OPENHAB_HTTP_PORT: "8282"
+            OPENHAB_HTTPS_PORT: "8443"
+            EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Berlin -Dlog4j2.formatMsgNoLookups=true"
+
+        service:
+            main:
+                ports:
+                    http:
+                        port: 8282
+        persistence:
+            openhab_conf:
+                enabled: true
+                mountPath: /openhab_conf
+                type: custom
+                volumeSpec:
+                    nfs:
+                        server: ${NFS_ADDR}
+                        path: /home/tonibrix/openhab/openhab_conf
+            openhab_userdata:
+                enabled: true
+                mountPath: /openhab_userdata
+                type: custom
+                volumeSpec:
+                    nfs:
+                        server: ${NFS_ADDR}
+                        path: /home/tonibrix/openhab/openhab_userdata
+
+# resources:
+#   requests:
+#     cpu: 23m
+#     memory: 2975M
+#   limits:
+#     memory: 6572M
