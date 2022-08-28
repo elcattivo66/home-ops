@@ -68,6 +68,30 @@ identity_providers:
           - query
           - fragment
         userinfo_signing_algorithm: none
+      - id: nextcloud
+        description: Nextcloud
+        secret: ${SECRET_NEXTCLOUD_OAUTH_CLIENT_SECRET}
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1M
+        audience: []
+        scopes:
+          - openid
+          - groups
+          - email
+          - profile
+        redirect_uris:
+          - https://nextcloud.elcattivo.de:443/apps/oidc_login/oidc
+        grant_types:
+          - refresh_token
+          - authorization_code
+        response_types:
+          - code
+        response_modes:
+          - form_post
+          - query
+          - fragment
+        userinfo_signing_algorithm: none
 
 # theme: auto
 # authentication_backend:
