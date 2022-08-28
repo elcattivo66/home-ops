@@ -31,22 +31,22 @@ spec:
                     http:
                         port: 8282
         persistence:
-            openhab_conf:
+            conf:
                 enabled: true
-                mountPath: /openhab_conf
+                mountPath: /conf
                 type: custom
                 volumeSpec:
                     nfs:
                         server: ${NFS_ADDR}
-                        path: /home/tonibrix/openhab/openhab_conf
-            openhab_userdata:
+                        path: /home/tonibrix/openhab/conf
+            userdata:
                 enabled: true
-                mountPath: /openhab_userdata
+                mountPath: /userdata
                 type: custom
                 volumeSpec:
                     nfs:
                         server: ${NFS_ADDR}
-                        path: /home/tonibrix/openhab/openhab_userdata
+                        path: /home/tonibrix/openhab/userdata
 
 # resources:
 #   requests:
