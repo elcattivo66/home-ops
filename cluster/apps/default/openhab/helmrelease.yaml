@@ -33,7 +33,7 @@ spec:
         persistence:
             conf:
                 enabled: true
-                mountPath: /conf
+                mountPath: /openhab/conf
                 type: custom
                 volumeSpec:
                     nfs:
@@ -41,7 +41,7 @@ spec:
                         path: /home/tonibrix/openhab/conf
             userdata:
                 enabled: true
-                mountPath: /userdata
+                mountPath: /openhab/userdata
                 type: custom
                 volumeSpec:
                     nfs:
