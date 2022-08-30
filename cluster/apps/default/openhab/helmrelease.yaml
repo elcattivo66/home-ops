@@ -28,8 +28,7 @@ spec:
         service:
             main:
                 type: LoadBalancer
-                externalIPs:
-                    - "${SVC_OPENHAB_ADDR}"
+                externalIP: "${SVC_OPENHAB_ADDR}"
                 externalTrafficPolicy: Local
                 ports:
                     http:
