@@ -36,6 +36,17 @@ spec:
                         port: 8282
                     https:
                         port: 8443
+                    upnp:
+                        port: 1900
+                    karaf:
+                        port: 8101
+                    mdns:
+                        port: 5353
+                    chromecast1:
+                        port: 8008
+                    chromecast2:
+                        port: 8009
+                    
         persistence:
             conf:
                 enabled: true
