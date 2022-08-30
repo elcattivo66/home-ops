@@ -47,6 +47,7 @@ spec:
           upnp:
             enabled: true
             port: 1900
+            protocol: UDP
           karaf:
             enabled: true
             port: 8101
