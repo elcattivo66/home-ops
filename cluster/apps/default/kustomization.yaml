@@ -8,6 +8,7 @@ resources:
     - calibre-web
     - gotify
     - lldap
+    - nextcloud
     - mosquitto
     - openhab
     - overseerr
