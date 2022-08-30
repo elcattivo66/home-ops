@@ -23,9 +23,9 @@ spec:
       prometheusRule:
         enabled: true
 
-    speaker:
-      tolerateMaster: true
+    # speaker:
+    #   tolerateMaster: true
 
-    existingConfigMap: "metallb-config"
+    # existingConfigMap: "metallb-config"
     crds:
       enabled: true

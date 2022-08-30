@@ -3,10 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helmrelease.yaml
-generatorOptions:
-  disableNameSuffixHash: true
-configMapGenerator:
-  - name: metallb-config
-    namespace: networking
-    files:
-      - config=metallb-config.yaml
+  - custom-resources
+# generatorOptions:
+#   disableNameSuffixHash: true
+# configMapGenerator:
+#   - name: metallb-config
+#     namespace: networking
+#     files:
+#       - config=metallb-config.yaml
