@@ -36,7 +36,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIP: "${SVC_OPENHAB_ADDR}"
+        loadBalancerIP: "${SVC_OPENHAB_ADDR}"
         externalTrafficPolicy: Local
         ports:
           http:
