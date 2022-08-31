@@ -26,7 +26,7 @@ spec:
 
     image:
       repository: ghcr.io/k8s-at-home/tautulli
-      tag: latest
+      tag: 2.10.3
 
     env:
       TZ: "Europe/Berlin"

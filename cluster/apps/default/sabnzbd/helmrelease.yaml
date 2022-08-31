@@ -26,7 +26,7 @@ spec:
 
     image:
       repository: ghcr.io/k8s-at-home/sabznbd
-      tag: latest
+      tag: 3.6.1
 
     env:
       TZ: ${TZ}

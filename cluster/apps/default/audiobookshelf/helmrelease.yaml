@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/advplyr/audiobookshelf
-      tag: latest
+      tag: 2.1.4
       pullPolicy: IfNotPresent
 
     env:

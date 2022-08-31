@@ -24,10 +24,10 @@ spec:
 
   values:
     image:
-      # repository: ghcr.io/k8s-at-home/radarr
+      #repository: ghcr.io/k8s-at-home/radarr
       repository: ghcr.io/onedr0p/radarr-develop
       pullPolicy: IfNotPresent
-      tag: rolling
+      tag: 4.2.2.6503
 
     env:
       TZ: "Europe/Berlin"
