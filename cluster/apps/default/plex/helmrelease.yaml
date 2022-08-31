@@ -5,21 +5,21 @@ metadata:
   name: plex
   namespace: default
 spec:
-  interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: plex
-      version: 6.4.3
+      chart: app-template
+      version: 0.1.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  interval: 15m
   values:
     image:
       repository: ghcr.io/k8s-at-home/plex
-      tag: latest
+      tag: v1.28.2.6151-914ddd2b3@sha256:0ee8a1a30f2f4dc1c5b2d7277dd409cd8cb1891c3a35df3f627c289a8cf4f236
+
     env:
       TZ: "${TZ}"
       
