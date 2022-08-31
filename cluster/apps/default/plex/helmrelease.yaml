@@ -28,7 +28,10 @@ spec:
         type: LoadBalancer
         loadBalancerIP: "${SVC_PLEX_ADDR}"
         externalTrafficPolicy: Local
-
+        ports:
+          http:
+            port: 32400
+            
     persistence:
       config:
         enabled: true
