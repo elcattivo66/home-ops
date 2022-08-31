@@ -5,16 +5,23 @@ metadata:
   name: overseerr
   namespace: default
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: overseerr
-      version: 5.4.2
+      chart: app-template
+      version: 0.1.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
     controllerType: deployment
     image:
@@ -35,3 +42,10 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: OnRootMismatch
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        memory: 400Mi

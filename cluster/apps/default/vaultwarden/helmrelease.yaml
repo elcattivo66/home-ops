@@ -48,13 +48,12 @@ spec:
         existingClaim: "vaultwarden-config-v1"
 
     resources:
-      limits:
-        cpu: 500m
-        memory: 512Mi
       requests:
         cpu: 100m
         memory: 128Mi
-
+      limits:
+        cpu: 500m
+        memory: 512Mi
     # affinity:
     #   nodeAffinity:
     #     requiredDuringSchedulingIgnoredDuringExecution:
