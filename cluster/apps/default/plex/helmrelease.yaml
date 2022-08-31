@@ -58,8 +58,8 @@ spec:
       # video:x:44:
       # render:x:109:
       supplementalGroups:
-      - 91
-      - 988
+      - 985
+      - 989
     resources:
       requests:
         # Hardware acceleration using an Intel iGPU w/ QuickSync and
