@@ -4,12 +4,12 @@ kind: Kustomization
 resources:
   - cron-job.yaml
   - secret.sops.yaml
-configMapGenerator:
-  - name: cron-job.yaml
-    namespace: system-upgrade
-    files:
-      - configmap.yaml
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
+# configMapGenerator:
+#   - name: cron-job.yaml
+#     namespace: system-upgrade
+#     files:
+#       - configmap.yaml
+# generatorOptions:
+#   disableNameSuffixHash: true
+#   annotations:
+#     kustomize.toolkit.fluxcd.io/substitute: disabled
