@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: renovate
 spec:
-  schedule: '@hourly'
+  schedule: '@daily'
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -24,3 +24,7 @@ spec:
                 - secretRef:
                     name: renovate-env
           restartPolicy: Never
+          volumes:
+            - name: config-volume
+              configMap:
+                name: renovate-config
