@@ -54,13 +54,18 @@ spec:
         ports:
           http:
             port: 80
-
+          websocket:
+            enabled: true
+            port: 3012
+            protocol: TCP
+            
     persistence:
       config:
         enabled: true
         accessMode: ReadWriteOnce
         ## Use existing Persistent Volume Claim
         existingClaim: "vaultwarden-config-v1"
+        mountPath: /data
 
     resources:
       requests:
