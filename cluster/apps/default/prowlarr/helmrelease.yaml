@@ -25,21 +25,20 @@ spec:
   values:
 
     image:
-      repository: ghcr.io/k8s-at-home/prowlarr
+      repository: ghcr.io/onedr0p/prowlarr
       tag: v0.4.0.1802
       pullPolicy: IfNotPresent
 
     env:
-      TZ: "Europe/Berlin"
+      TZ: "${TZ}"
       PUID: "1000"
       PGID: "1000"
 
-    # service:
-    #   main:
-    #     type: LoadBalancer
-    #     ports: 
-    #       http: 
-    #         port: 9696
+    service:
+      main:
+        ports: 
+          http: 
+            port: 9696
 
     persistence:
       config:

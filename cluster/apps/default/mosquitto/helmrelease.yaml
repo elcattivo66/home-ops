@@ -35,7 +35,10 @@ spec:
         type: LoadBalancer
         loadBalancerIP: "${SVC_MQTT_ADDR}"
         externalTrafficPolicy: Local
-
+        ports:
+          http:
+            port: 1883
+            
     auth:
       enabled: true
 

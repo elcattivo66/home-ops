@@ -43,11 +43,9 @@ spec:
         mountPath: /metadata
       media:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: ${MEDIADIR}/audiobooks
+        type: nfs
+        server: ${NFS_ADDR}
+        path: ${MEDIADIR}/audiobooks
         mountPath: /audiobooks
         readOnly: false
 

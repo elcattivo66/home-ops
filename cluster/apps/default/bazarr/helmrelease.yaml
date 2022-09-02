@@ -24,7 +24,7 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/k8s-at-home/bazarr
+      repository: ghcr.io/onedr0p/bazarr
       tag: 1.1.1
       pullPolicy: IfNotPresent
 
@@ -33,6 +33,12 @@ spec:
       PUID: "1000"
       PGID: "1000"
 
+    service:
+      main:
+        ports:
+          http:
+            port: 6767
+
     persistence:
       config:
         enabled: true
@@ -40,11 +46,9 @@ spec:
 
       nfs-media:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: ${MEDIADIR}
+        type: nfs
+        server: ${NFS_ADDR}
+        path: ${MEDIADIR}
         mountPath: /media
         readOnly: false
 
