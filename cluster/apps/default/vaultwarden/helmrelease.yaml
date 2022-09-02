@@ -49,6 +49,12 @@ spec:
     - secretRef:
         name: vaultwarden-secret
 
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+
     persistence:
       config:
         enabled: true

@@ -9,10 +9,9 @@ spec:
   routes:
     - kind: Rule
       match: Host(`bitwarden.${SECRET_DOMAIN}`)
-#      middlewares:
-#        - name: headers@file
-#        - name: authelia
-#          namespace: default
+      middlewares:
+        - name: headers
+          namespace: default
       services:
         - name: *name
           port: 80
