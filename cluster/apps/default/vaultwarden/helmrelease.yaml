@@ -24,8 +24,8 @@ spec:
 
   values:
     image:
-      repository: ghcr.io/onedr0p/vaultwarden
-      tag: 1.25.2
+        repository: docker.io/vaultwarden/server
+        tag: 1.25.2
     replicaCount: 1
 
     env:
