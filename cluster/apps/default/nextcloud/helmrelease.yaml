@@ -99,11 +99,9 @@ spec:
         existingClaim: nextcloud-config-v1
       data:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NFS_ADDR}"
-            path: /mnt/data/nextcloud_data
+        type: nfs
+        server: "${NFS_ADDR}"
+        path: /mnt/data/nextcloud_data
         mountPath: /var/www/data
         readOnly: false
     resources:

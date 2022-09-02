@@ -47,21 +47,17 @@ spec:
         
       books: 
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: /mnt/extern120/calibre_library
+        type: nfs
+        server: ${NFS_ADDR}
+        path: /mnt/extern120/calibre_library
         mountPath: /books
         readOnly: false
 
       downloads: 
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: ${DOWNLOADDIR}/usenet
+        type: nfs
+        server: ${NFS_ADDR}
+        path: ${DOWNLOADDIR}/usenet
         mountPath: /downloads
         readOnly: false
 

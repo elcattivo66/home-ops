@@ -47,11 +47,9 @@ spec:
         existingClaim: calibre-config-v1
       books: 
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: /mnt/extern120/calibre_library
+        type: nfs
+        server: ${NFS_ADDR}
+        path: /mnt/extern120/calibre_library
         mountPath: /books
         readOnly: false
 

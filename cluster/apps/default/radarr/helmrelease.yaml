@@ -52,16 +52,6 @@ spec:
         path: ${MEDIADIR}
         mountPath: /media
 
-      # nfs-media:
-      #   enabled: true
-      #   type: custom
-      #   volumeSpec:
-      #     nfs:
-      #       server: ${NFS_ADDR}
-      #       path: ${MEDIADIR}
-      #   mountPath: /media
-      #   readOnly: false
-
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000

@@ -62,19 +62,15 @@ spec:
       conf:
         enabled: true
         mountPath: /openhab/conf
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: /home/tonibrix/openhab/conf
+        type: nfs
+        server: ${NFS_ADDR}
+        path: /home/tonibrix/openhab/conf
       userdata:
         enabled: true
         mountPath: /openhab/userdata
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: /home/tonibrix/openhab/userdata
+        type: nfs
+        server: ${NFS_ADDR}
+        path: /home/tonibrix/openhab/userdata
     # podSecurityContext:
     #     runAsUser: 1000
     #     runAsGroup: 1000
