@@ -53,15 +53,6 @@
   ],
   "packageRules": [
     {
-      "description": "Auto merge container digests",
-      "matchDatasources": ["docker"],
-      "automerge": true,
-      "automergeType": "branch",
-      "requiredStatusChecks": null,
-      "matchUpdateTypes": ["digest"],
-      "matchPackagePattern": ["ghcr.io/k8s-at-home","ghcr.io/onedr0p"]
-    },
-    {
       "matchDatasources": ["helm"],
       "separateMinorPatch": true,
       "ignoreDeprecated": true
@@ -107,7 +98,7 @@
       "matchDatasources": ["docker"],
       "versioning": "loose",
       "matchPackageNames": [
-        "ghcr.io/k8s-at-home/plex"
+        "ghcr.io/onedr0p/plex"
       ]
     }
   ]
