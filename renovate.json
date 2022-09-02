@@ -53,6 +53,15 @@
   ],
   "packageRules": [
     {
+      "description": "Auto merge container digests",
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": ["digest"],
+      "matchPackagePattern": ["ghcr.io/k8s-at-home","ghcr.io/onedr0p"]
+    },
+    {
       "matchDatasources": ["helm"],
       "separateMinorPatch": true,
       "ignoreDeprecated": true
