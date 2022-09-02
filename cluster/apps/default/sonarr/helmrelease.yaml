@@ -29,11 +29,16 @@ spec:
       pullPolicy: IfNotPresent
       tag: v3.0.9.1549
 
-    controllerType: deployment
     env:
-      TZ: "Europe/Berlin"
+      TZ: ${TZ}
       PUID: "1000"
       PGID: "1000"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8989
 
     persistence:
       config:

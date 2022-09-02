@@ -37,6 +37,12 @@ spec:
         sabnzbd.default.svc.cluster.local,
         sab.${SECRET_DOMAIN}
 
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+
     persistence:
       config:
         enabled: true

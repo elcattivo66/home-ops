@@ -30,9 +30,16 @@ spec:
       tag: 4.2.2.6503
 
     env:
-      TZ: "Europe/Berlin"
+      TZ: "${TZ}"
       PUID: "1000"
       PGID: "1000"
+      RADARR__LOG_LEVEL: info
+      
+    service:
+      main:
+        ports:
+          http:
+            port: 7878
 
     persistence:
       config:
