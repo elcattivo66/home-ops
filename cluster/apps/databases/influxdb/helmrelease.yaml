@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app influxdb
+  namespace: databases
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: redis
+      version: 5.4.1
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: bitnami/influxdb
+      tag: 2.4.0
+
+    persistence:
+      enabled: true
+      existingClaim: influxdb-config-v1
