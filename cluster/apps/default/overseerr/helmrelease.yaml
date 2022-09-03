@@ -43,7 +43,8 @@ spec:
       config:
         enabled: true
         existingClaim: overseerr-config-v1
-
+        mountPath: /app/config
+        
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
