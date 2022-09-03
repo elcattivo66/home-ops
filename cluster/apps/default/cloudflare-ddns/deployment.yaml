@@ -25,7 +25,7 @@ spec:
               value: ${SECRET_DOMAIN}
             - name: CF_ZONES
               value: ${SECRET_DOMAIN}
-            - name: CF_APITOKEN
+            - name: CF_APIKEY
               valueFrom:
                 secretKeyRef:
                   name: cloudflare-ddns
