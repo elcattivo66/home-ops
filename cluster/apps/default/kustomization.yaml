@@ -17,6 +17,7 @@ resources:
     - plex
     - prowlarr
     - radarr
+    - radicale
     - readarr
     - sabnzbd
     - sonarr
