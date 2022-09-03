@@ -25,6 +25,11 @@ spec:
               value: ${SECRET_DOMAIN}
             - name: CF_ZONES
               value: ${SECRET_DOMAIN}
+            - name: CF_USER
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-ddns
+                  key: CLOUDFLARE_EMAIL
             - name: CF_APIKEY
               valueFrom:
                 secretKeyRef:
