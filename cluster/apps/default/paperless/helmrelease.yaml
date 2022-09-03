@@ -70,8 +70,8 @@ spec:
         path: /mnt/data/paperless/export
 
     resources:
-    requests:
-        cpu: 23m
-        memory: 300M
-    limits:
-        memory: 3572M
+        requests:
+            cpu: 23m
+            memory: 300M
+        limits:
+            memory: 3572M
