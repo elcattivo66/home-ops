@@ -78,7 +78,6 @@ spec:
 
     nodeExporter:
       enabled: true
-
       service:
         enabled: true
         port: 2381
