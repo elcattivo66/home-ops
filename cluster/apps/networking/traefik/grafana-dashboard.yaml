@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-dashboard-traefik
-  namespace: ingress-system
+  namespace: networking
   labels:
     grafana_dashboard: "1"
 data:
