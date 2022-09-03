@@ -22,7 +22,7 @@ spec:
           image: hotio/cloudflareddns:latest
           env:
             - name: CF_HOSTS
-              value: ipv4.${SECRET_DOMAIN}
+              value: ${SECRET_DOMAIN}
             - name: CF_ZONES
               value: ${SECRET_DOMAIN}
             - name: CF_APITOKEN
