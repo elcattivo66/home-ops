@@ -6,3 +6,11 @@ resources:
   - pvc.yaml
   - ingress-traefikCRD.yaml
   - secret.sops.yaml
+configMapGenerator:
+  - name: radicale-config
+    files:
+      - config/config.cfg
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
