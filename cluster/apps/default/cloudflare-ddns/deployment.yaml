@@ -19,7 +19,7 @@ spec:
       # values-ish: https://hotio.dev/containers/cloudflareddns/
       containers:
         - name: cloudflare-ddns
-          image: hotio/cloudflareddns:latest
+          image: hotio/cloudflareddns:release-20220813050914
           env:
             - name: TZ
               value: ${TZ}
