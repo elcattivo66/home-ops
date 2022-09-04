@@ -21,6 +21,8 @@ spec:
         - name: cloudflare-ddns
           image: hotio/cloudflareddns:latest
           env:
+            - name: TZ
+              value: ${TZ}
             - name: CF_HOSTS
               value: ${SECRET_DOMAIN}
             - name: CF_ZONES
@@ -44,7 +46,7 @@ spec:
             - name: LOG_LEVEL
               value: "2"
             - name: INTERVAL
-              value: "300"
+              value: "600"
           resources:
             requests:
               cpu: 20m
