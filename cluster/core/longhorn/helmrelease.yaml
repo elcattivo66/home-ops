@@ -40,7 +40,7 @@ spec:
     enablePSP: true
 
     defaultSettings:
-      backupTarget: nfs://pihole:/mnt/backup/longhorn_backup
+      backupTarget: nfs://pihole:/
 
     affinity:
       nodeAffinity:
