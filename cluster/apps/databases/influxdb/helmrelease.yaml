@@ -26,6 +26,9 @@ spec:
       repository: bitnami/influxdb
       tag: 2.4.0
 
+    auth:
+      existingSecret: influxdb-secret
+
     persistence:
       enabled: true
       existingClaim: influxdb-config-v1
