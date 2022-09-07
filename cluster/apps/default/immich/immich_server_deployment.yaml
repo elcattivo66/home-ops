@@ -98,7 +98,7 @@ spec:
         volumeMounts:
         - mountPath: /usr/src/app/upload
           name: immich-data
-          subPath: data
+          # subPath: data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
