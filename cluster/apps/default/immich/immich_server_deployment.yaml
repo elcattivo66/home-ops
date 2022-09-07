@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: immich-server
+  name: immich-server
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: immich-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: immich-server
+    spec:
+      containers:
+      - args:
+        - /usr/src/app/start-server.sh
+        command:
+        - /bin/sh
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: REDIS_HOSTNAME
+          value: redis-master.databases.svc.cluster.local
+        - name: REDIS_DBINDEX
+          value: "2"
+        - name: DB_HOSTNAME
+          value: postgres-rw.databases.svc.cluster.local
+        - name: DB_DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: dbname
+              name: immich-secret
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: dbuser
+              name: immich-secret
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: dbpass
+              name: immich-secret
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: secret_key
+              name: immich
+        - name: ENABLE_MAPBOX
+          value: "false"
+        # - name: MAPBOX_KEY
+        #   valueFrom:
+        #     secretKeyRef:
+        #       key: mapbox_key
+        #       name: immich
+        image: altran1502/immich-server:v1.27.0_37-dev
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /server-info/ping
+            port: immich-server
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: immich-server
+        ports:
+        - containerPort: 3001
+          name: immich-server
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /server-info/ping
+            port: immich-server
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: 200m
+          requests:
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /usr/src/app/upload
+          name: immich-data
+          subPath: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: immich-data
+        nfs:
+          path: /mnt/data/media/pictures/immich_upload
+          server: ${NFS_ADDR}
+status:
+  replicas: 1

@@ -8,6 +8,7 @@ resources:
     - calibre-web
     - cloudflare-ddns
     - gotify
+    - immich
     - lldap
     - nextcloud
     - mosquitto
