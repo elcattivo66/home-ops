@@ -136,7 +136,7 @@ spec:
         volumeMounts:
         - mountPath: /usr/src/app/upload
           name: immich-data
-          subPath: data
+          # subPath: data
       - args:
         - /usr/src/app/start-microservices.sh
         command:
