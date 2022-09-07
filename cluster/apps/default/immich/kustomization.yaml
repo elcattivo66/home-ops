@@ -5,3 +5,5 @@ resources:
   - immich_deployment.yaml
   - immich_server_deployment.yaml
   - secret.sops.yaml
+  - immich_service.yml
+  - immich_server_service.yml
