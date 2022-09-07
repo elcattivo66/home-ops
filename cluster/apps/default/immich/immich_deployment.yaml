@@ -36,7 +36,7 @@ spec:
           value: postgres-rw.databases.svc.cluster.local
         - name: DB_DATABASE_NAME
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: dbname
               name: immich-secret
         - name: DB_USERNAME
@@ -71,7 +71,7 @@ spec:
         resources:
           limits:
             memory: 2Gi
-            cpu: 200m
+            # cpu: 200m
           requests:
             memory: 512Mi
         terminationMessagePath: /dev/termination-log
@@ -91,7 +91,7 @@ spec:
           value: postgres-rw.databases.svc.cluster.local
         - name: DB_DATABASE_NAME
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: dbname
               name: immich-secret
         - name: DB_USERNAME
@@ -126,7 +126,7 @@ spec:
         resources:
           limits:
             memory: 2Gi
-            cpu: 200m
+            # cpu: 200m
           requests:
             memory: 512Mi
         terminationMessagePath: /dev/termination-log
@@ -150,7 +150,7 @@ spec:
           value: postgres-rw.databases.svc.cluster.local
         - name: DB_DATABASE_NAME
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: dbname
               name: immich-secret
         - name: DB_USERNAME
