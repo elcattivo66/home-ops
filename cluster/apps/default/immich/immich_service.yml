@@ -15,7 +15,7 @@ spec:
   - name: immich-redis
     port: 6379
     protocol: TCP
-    targetPort: redis-master.databases.svc.cluster.local
+    targetPort: redis
   selector:
     app: immich
   sessionAffinity: None
