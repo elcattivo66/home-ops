@@ -109,7 +109,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: secret_key
-              name: immich
+              name: immich-secret
         - name: ENABLE_MAPBOX
           value: "false"
         # - name: MAPBOX_KEY
