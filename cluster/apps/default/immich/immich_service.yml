@@ -19,6 +19,7 @@ spec:
   selector:
     app: immich
   sessionAffinity: None
-  type: ClusterIP
+  type: LoadBalancer
+  loadBalancerIP: "192.168.178.227"  
 status:
   loadBalancer: {}
