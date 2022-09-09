@@ -23,9 +23,21 @@ spec:
       middlewares:
         - name: headers
           namespace: default
+        - name: add-api-prefix
+          namespace: default        
       services:
         - name: immich-server
           port: 8000
           namespace: default
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: add-api-prefix
+  namespace: default
+spec:
+  addPrefix:
+    prefix: /api
