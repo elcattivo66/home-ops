@@ -21,8 +21,8 @@ spec:
   ports:
     - protocol: TCP
       name: immich-server
-      port: 8000
-      targetPort: immich-server
+      port: 3001
+      targetPort: 3001
   selector:
     app: immich-server
 
