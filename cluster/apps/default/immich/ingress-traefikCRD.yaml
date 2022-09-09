@@ -19,7 +19,7 @@ spec:
           port: 80
           namespace: default
     - kind: Rule
-      match: Host(`immich.${SECRET_DOMAIN}`) && Path(`/api/`)
+      match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/api`)
       middlewares:
         - name: headers
           namespace: default
