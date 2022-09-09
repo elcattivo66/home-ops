@@ -8,7 +8,7 @@ spec:
   ipFamilies:
   - IPv4
   ports:
-  - name: immich-http
+  - name: immich-http 
     port: 80
     protocol: TCP
     targetPort: immich-http
