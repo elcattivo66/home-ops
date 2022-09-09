@@ -5,3 +5,4 @@ resources:
   - helmrelease.yaml
   - ingress-traefikCRD.yaml
   - backup-definition.yaml
+  - storage-class-definition.yaml
