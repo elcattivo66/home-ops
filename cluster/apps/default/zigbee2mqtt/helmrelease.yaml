@@ -32,7 +32,7 @@ spec:
     #   - secretRef:
     #       name: *app
     env:
-      TZ: "${TIMEZONE}"
+      TZ: "${TZ}"
       ZIGBEE2MQTT_DATA: /data
     service:
       main:
