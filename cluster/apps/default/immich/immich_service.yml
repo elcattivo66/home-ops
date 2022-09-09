@@ -4,22 +4,25 @@ metadata:
   name: immich
   namespace: default
 spec:
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
   ports:
-  - name: immich-http 
-    port: 80
-    protocol: TCP
-    targetPort: immich-http
-  - name: immich-redis
-    port: 6379
-    protocol: TCP
-    targetPort: redis
+    - protocol: TCP
+      name: immich-http
+      port: 80
+      targetPort: immich-http
   selector:
     app: immich
-  sessionAffinity: None
-  type: LoadBalancer
-  loadBalancerIP: "192.168.178.227"  
-status:
-  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: immich-server
+  namespace: default
+spec:
+  ports:
+    - protocol: TCP
+      name: immich-server
+      port: 8000
+      targetPort: immich-server
+  selector:
+    app: immich-server
+

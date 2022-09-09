@@ -6,5 +6,5 @@ resources:
   - immich_server_deployment.yaml
   - secret.sops.yaml
   - immich_service.yml
-  - immich_server_service.yml
+  #- immich_server_service.yml
   - ingress-traefikCRD.yaml
