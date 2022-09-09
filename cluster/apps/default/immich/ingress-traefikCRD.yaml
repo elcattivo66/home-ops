@@ -24,7 +24,7 @@ spec:
         - name: headers
           namespace: default
       services:
-        - name: *name
+        - name: immich-server
           port: 8000
           namespace: default
   tls:
