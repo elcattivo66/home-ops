@@ -1,0 +1,31 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name immich
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`immich.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: default
+        # - name: authelia
+        #   namespace: default
+      services:
+        - name: *name
+          port: 80
+          namespace: default
+    - kind: Rule
+      match: Host(`bitwarden.${SECRET_DOMAIN}`) && Path(`/api/`)
+      middlewares:
+        - name: headers
+          namespace: default
+      services:
+        - name: *name
+          port: 8000
+          namespace: default
+  tls:
+    secretName: ${SECRET_CERT_NAME}-prod-tls
