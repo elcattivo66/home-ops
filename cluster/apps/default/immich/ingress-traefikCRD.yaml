@@ -23,7 +23,7 @@ spec:
       middlewares:
         - name: headers
           namespace: default
-        - name: add-api-prefix
+        - name: strip-api-prefix
           namespace: default        
       services:
         - name: immich-server
@@ -36,8 +36,8 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: add-api-prefix
+  name: strip-api-prefix
   namespace: default
 spec:
-  addPrefix:
+  stripPrefix:
     prefix: /api
