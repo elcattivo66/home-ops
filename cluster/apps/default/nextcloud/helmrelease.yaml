@@ -94,12 +94,11 @@ spec:
         usernameKey: user
         passwordKey: password
     persistence:
-      config:
         enabled: true
         existingClaim: nextcloud-config-v1
-      nextclouddata:
-        enabled: true
-        existingClaim: nextcloud-data
+        nextcloudData:
+          enabled: true
+          existingClaim: nextcloud-data
     resources:
       requests:
         cpu: 100m
