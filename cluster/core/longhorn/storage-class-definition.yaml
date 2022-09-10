@@ -3,7 +3,9 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: longhorn-hdd
 provisioner: driver.longhorn.io
+allowVolumeExpansion: true
 parameters:
   numberOfReplicas: "1"
-  staleReplicaTimeout: "480" # 8 hours in minutes
+  staleReplicaTimeout: "30" # 8 hours in minutes
+  fsType: "ext4"
   diskSelector: "hdd"
