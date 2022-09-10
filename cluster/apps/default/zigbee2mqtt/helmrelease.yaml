@@ -41,7 +41,7 @@ spec:
         externalTrafficPolicy: Local
         ports:
           http:
-            port: 8080
+            port: 8183
     securityContext:
       privileged: true
     persistence:
