@@ -53,6 +53,7 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /dev/ttyUSB0
+        mountPath: /dev/ttyUSB0
     resources:
       requests:
         cpu: 10m
