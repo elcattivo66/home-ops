@@ -60,7 +60,7 @@ spec:
         #     secretKeyRef:
         #       key: mapbox_key
         #       name: immich
-        image: altran1502/immich-server:v1.28.0_38-dev
+        image: altran1502/immich-server:v1.28.1_39-dev
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -90,8 +90,9 @@ spec:
         resources:
           limits:
             memory: 2Gi
-            # cpu: 200m
+            cpu: 200m
           requests:
+            cpu: 20m
             memory: 512Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
