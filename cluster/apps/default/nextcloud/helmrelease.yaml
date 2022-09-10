@@ -34,7 +34,7 @@ spec:
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
-      datadir: /var/www/data
+      # datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
           value: redis-master.databases.svc.cluster.local
@@ -95,10 +95,10 @@ spec:
         passwordKey: password
     persistence:
         enabled: true
-        existingClaim: nextcloud-config-v1
-        nextcloudData:
-          enabled: true
-          existingClaim: nextcloud-data
+        existingClaim: nextcloud-data
+        # nextcloudData:
+        #   enabled: true
+        #   existingClaim: nextcloud-data
     resources:
       requests:
         cpu: 100m
