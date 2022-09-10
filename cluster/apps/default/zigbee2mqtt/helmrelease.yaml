@@ -36,6 +36,9 @@ spec:
       ZIGBEE2MQTT_DATA: /data
     service:
       main:
+        type: LoadBalancer
+        loadBalancerIP: "${SVC_Z2M_ADDR}"
+        externalTrafficPolicy: Local
         ports:
           http:
             port: 8080
