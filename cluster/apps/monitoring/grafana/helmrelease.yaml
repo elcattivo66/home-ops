@@ -39,7 +39,7 @@ spec:
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"      
     grafana.ini:
       auth:
-        signout_redirect_url: "https://authelia.${SECRET_DOMAIN}/logout"
+        signout_redirect_url: "https://grafana.${SECRET_DOMAIN}/"
         oauth_auto_login: false
       auth.generic_oauth:
         enabled: true
@@ -89,10 +89,10 @@ spec:
             access: proxy
             url: http://prometheus-operated:9090/
             isDefault: true
-          # - name: Loki
-          #   type: loki
-          #   access: proxy
-          #   url: http://loki-gateway:80
+          - name: influxdb
+            type: influxdb
+            access: proxy
+            url: http://influxdb.databases.svc.cluster.local:8086
     # dashboards:
     #   default:
     #     # Ref: https://grafana.com/grafana/dashboards/7845
