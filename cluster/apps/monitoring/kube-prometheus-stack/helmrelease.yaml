@@ -85,7 +85,7 @@ spec:
     prometheus:
       prometheusSpec:
         scrapeInterval: 60s
-        replicas: 1
+        replicas: 2
         replicaExternalLabelName: __replica__
         externalLabels:
           cluster: home-ops
