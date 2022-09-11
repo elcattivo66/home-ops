@@ -84,7 +84,8 @@ spec:
         targetPort: 2381
     prometheus:
       prometheusSpec:
-        replicas: 2
+        scrapeInterval: 60s
+        replicas: 1
         replicaExternalLabelName: __replica__
         externalLabels:
           cluster: home-ops
