@@ -5,10 +5,6 @@ access_control:
     # Rules applied to everyone
     - domain: authelia.elcattivo.de
       policy: bypass
-    - domain: radarr.elcattivo.de
-      policy: bypass
-      resources:
-        - "^/philipp([/?].*)?$"
     - domain: gitea.elcattivo.de
       policy: bypass
       resources:

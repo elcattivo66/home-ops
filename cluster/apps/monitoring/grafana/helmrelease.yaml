@@ -56,10 +56,10 @@ spec:
         name_attribute_path: name
         email_attribute_path: email
         use_pkce: true
-      # auth.generic_oauth.group_mapping:
-      #   role_attribute_path: |
-      #     contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
-      #   org_id: 1
+      auth.generic_oauth.group_mapping:
+        role_attribute_path: |
+          contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
+        org_id: 1
       auth.basic:
         enabled: false
         # disable_login_form: false
@@ -92,12 +92,12 @@ spec:
           - name: influxdb
             type: influxdb
             access: proxy
-            url: http://influxdb.databases.svc.cluster.local:8086
+            url: http://influxdb.databases.svc.cluster.local:8086/
             database: openhab
             jsonData:
               httpMode: GET
               httpHeaderName1: Authorization
-              httpHeaderValue1: "Token _8KRY-1OXaP_OLxcF-HbZMgI38I9s1rm_eTxPHInlnlsFhoEojmFbBAtpguWRFF59xRqNjhAxlQRdPaU4lay_A=="
+              httpHeaderValue1: 'Token _8KRY-1OXaP_OLxcF-HbZMgI38I9s1rm_eTxPHInlnlsFhoEojmFbBAtpguWRFF59xRqNjhAxlQRdPaU4lay_A=='
     # dashboards:
     #   default:
     #     # Ref: https://grafana.com/grafana/dashboards/7845
