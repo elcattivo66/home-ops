@@ -48,5 +48,5 @@ spec:
           volumes:
             - name: nas-backups
               nfs:
-                server: "${NAS_ADDR}"
+                server: "${NFS_ADDR}"
                 path: /mnt/data/backup/kubernetes/postgres
