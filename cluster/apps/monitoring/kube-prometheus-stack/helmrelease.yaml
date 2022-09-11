@@ -111,3 +111,11 @@ spec:
             memory: 500Mi
           limits:
             memory: 2500Mi
+        additionalScrapeConfigs:
+          - job_name: 'openhab'
+            scrape_interval: 1m
+            scheme: http
+            metrics_path: /rest/metrics/prometheus
+            static_configs:
+            - targets:
+              - 'openhab.default.svc.cluster.local:8282'
