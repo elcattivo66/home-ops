@@ -4,7 +4,7 @@ metadata:
   name: postgres
   namespace: databases
 spec:
-  instances: 3
+  instances: 2
   primaryUpdateStrategy: unsupervised
   storage:
     size: 15Gi
