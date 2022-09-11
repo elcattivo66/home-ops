@@ -80,6 +80,15 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
+          - name: "openhab"
+            orgId: 1
+            folder: "Openhab"
+            type: file
+            updateIntervalSeconds: 10
+            disableDeletion: false
+            allowUiUpdates: true
+            options:
+              path: /var/lib/grafana/dashboards/openhab
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -98,7 +107,11 @@ spec:
               httpMode: GET
               httpHeaderName1: Authorization
               httpHeaderValue1: 'Token _8KRY-1OXaP_OLxcF-HbZMgI38I9s1rm_eTxPHInlnlsFhoEojmFbBAtpguWRFF59xRqNjhAxlQRdPaU4lay_A=='
-    # dashboards:
+    dashboards:
+      openhab:
+        metrics:
+          url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
+          datasource: Prometheus  
     #   default:
     #     # Ref: https://grafana.com/grafana/dashboards/7845
     #     zfs:
