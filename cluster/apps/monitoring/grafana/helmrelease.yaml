@@ -107,7 +107,7 @@ spec:
               httpMode: GET
               httpHeaderName1: Authorization
             secureJsonData:
-              httpHeaderValue1: ${influxdb-auth}
+              httpHeaderValue1: "${influxdb-auth}"
     dashboards:
       openhab:
         metrics:
