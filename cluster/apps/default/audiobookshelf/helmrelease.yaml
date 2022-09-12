@@ -25,6 +25,8 @@ spec:
       TZ: ${TZ}
       AUDIOBOOKSHELF_UID: 1000
       AUDIOBOOKSHELF_GID: 1000
+      METADATA_PATH: /data/config
+      CONFIG_PATH: /data/metadata
 
     service:
       main:
@@ -36,11 +38,11 @@ spec:
       data:
         enabled: true
         existingClaim: audiobookshelf-config-v1
-        mountPath: /config
-      metadata:
-        enabled: true
-        existingClaim: audiobookshelf-metadata-v1
-        mountPath: /metadata
+        mountPath: /data
+      # metadata:
+      #   enabled: true
+      #   existingClaim: audiobookshelf-metadata-v1
+      #   mountPath: /metadata
       media:
         enabled: true
         type: nfs
