@@ -39,10 +39,6 @@ spec:
         enabled: true
         existingClaim: audiobookshelf-config-v1
         mountPath: /data
-      # metadata:
-      #   enabled: true
-      #   existingClaim: audiobookshelf-metadata-v1
-      #   mountPath: /metadata
       media:
         enabled: true
         type: nfs
@@ -60,6 +56,6 @@ spec:
     resources:
       requests:
         cpu: 15m
-        memory: 249M
+        memory: 100M
       limits:
-        memory: 299M
+        memory: 300M
