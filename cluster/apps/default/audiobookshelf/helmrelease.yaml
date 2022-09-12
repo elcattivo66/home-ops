@@ -25,8 +25,8 @@ spec:
       TZ: ${TZ}
       AUDIOBOOKSHELF_UID: 1000
       AUDIOBOOKSHELF_GID: 1000
-      METADATA_PATH: /data/config
-      CONFIG_PATH: /data/metadata
+      METADATA_PATH: /data/metadata
+      CONFIG_PATH: /data/config
 
     service:
       main:
