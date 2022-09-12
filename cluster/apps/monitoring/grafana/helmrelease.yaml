@@ -106,7 +106,8 @@ spec:
             jsonData:
               httpMode: GET
               httpHeaderName1: Authorization
-              httpHeaderValue1: 'Token _8KRY-1OXaP_OLxcF-HbZMgI38I9s1rm_eTxPHInlnlsFhoEojmFbBAtpguWRFF59xRqNjhAxlQRdPaU4lay_A=='
+            secureJsonData:
+              httpHeaderValue1: ${influxdb-auth}
     dashboards:
       openhab:
         metrics:
