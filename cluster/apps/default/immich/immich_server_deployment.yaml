@@ -60,7 +60,7 @@ spec:
         #     secretKeyRef:
         #       key: mapbox_key
         #       name: immich
-        image: altran1502/immich-server:v1.28.2_40-dev
+        image: altran1502/immich-server:v1.28.3_41-dev
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
