@@ -122,7 +122,7 @@ spec:
         name: immich-machine-learning
         ports:
         - containerPort: 3003
-          name: immich-machine-learning
+          name: immich-ml
           protocol: TCP
         resources:
           limits:
@@ -182,7 +182,7 @@ spec:
         name: immich-microservices
         ports:
         - containerPort: 3002
-          name: immich-microservices
+          name: immich-ms
           protocol: TCP
         resources:
           limits:
