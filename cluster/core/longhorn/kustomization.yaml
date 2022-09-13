@@ -6,3 +6,4 @@ resources:
   - ingress-traefikCRD.yaml
   - backup-definition.yaml
   - storage-class-definition.yaml
+  - prometheus.yaml
