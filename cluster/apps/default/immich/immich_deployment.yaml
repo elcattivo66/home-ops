@@ -32,6 +32,8 @@ spec:
           value: redis-master.databases.svc.cluster.local
         - name: REDIS_DBINDEX
           value: "2"
+        - name: VITE_SERVER_ENDPOINT
+          value: https://immich.${SECRET_DOMAIN}/api
         - name: DB_HOSTNAME
           value: postgres-rw.databases.svc.cluster.local
         - name: DB_DATABASE_NAME
