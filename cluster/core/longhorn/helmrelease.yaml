@@ -42,6 +42,14 @@ spec:
     defaultSettings:
       backupTarget: nfs://pihole:/
 
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 500Mi
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
