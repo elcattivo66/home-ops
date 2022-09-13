@@ -119,10 +119,10 @@ spec:
         #       name: immich
         image: altran1502/immich-machine-learning:v1.28.3_41-dev
         imagePullPolicy: Always
-        name: immich-ml
+        name: immich-machine-learning
         ports:
         - containerPort: 3003
-          name: immich-ml
+          name: immich-machine-learning
           protocol: TCP
         resources:
           limits:
@@ -182,7 +182,7 @@ spec:
         name: immich-microservices
         ports:
         - containerPort: 3002
-          name: immich-ms
+          name: immich-microservices
           protocol: TCP
         resources:
           limits:
