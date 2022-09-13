@@ -37,7 +37,7 @@ spec:
         loadBalancerIP: "${SVC_LONGHORN_ADDR}"
         externalTrafficPolicy: Local
 
-    enablePSP: true
+    enablePSP: false
 
     defaultSettings:
       backupTarget: nfs://pihole:/
