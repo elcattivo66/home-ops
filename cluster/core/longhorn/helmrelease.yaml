@@ -37,18 +37,18 @@ spec:
         loadBalancerIP: "${SVC_LONGHORN_ADDR}"
         externalTrafficPolicy: Local
 
-    enablePSP: false
+    enablePSP: true
 
     defaultSettings:
       backupTarget: nfs://pihole:/
 
-    # resources:
-    #   requests:
-    #     cpu: 50m
-    #     memory: 100Mi
-    #   limits:
-    #     cpu: 200m
-    #     memory: 500Mi
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 600m
+        memory: 1500Mi
 
     affinity:
       nodeAffinity:
