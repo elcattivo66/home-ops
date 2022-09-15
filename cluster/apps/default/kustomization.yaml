@@ -9,6 +9,7 @@ resources:
     - cloudflare-ddns
     - gotify
     - immich
+    - jellyfin
     - lldap
     - nextcloud
     - mosquitto
