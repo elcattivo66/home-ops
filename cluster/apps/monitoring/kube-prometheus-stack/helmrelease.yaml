@@ -84,7 +84,7 @@ spec:
         targetPort: 2381
     prometheus:
       prometheusSpec:
-        scrapeInterval: 60s
+        scrapeInterval: 30s
         replicas: 2
         replicaExternalLabelName: __replica__
         externalLabels:
@@ -94,7 +94,7 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        retention: 7d
+        retention: 5d
         retentionSize: 9GB
         enableAdminAPI: true
         walCompression: true
