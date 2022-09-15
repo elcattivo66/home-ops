@@ -1,33 +1,14 @@
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: longhorn-prometheus-servicemonitor
-  namespace: longhorn-system
-  labels:
-    name: longhorn-prometheus-servicemonitor
+  name: longhorn
 spec:
   selector:
     matchLabels:
       app: longhorn-manager
   namespaceSelector:
     matchNames:
-    - longhorn-system
+      - longhorn-system
   endpoints:
-    - port: http
-      scheme: http
-      path: /metrics
-      interval: 1m
-      scrapeTimeout: 10s
----
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
-metadata:
-  name: longhorn
-  namespace: longhorn-system
-spec:
-  replicas: 2
-  serviceAccountName: prometheus
-  serviceMonitorSelector:
-    matchLabels:
-      name: longhorn-prometheus-servicemonitor
-
+    - port: manager
