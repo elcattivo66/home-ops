@@ -8,4 +8,9 @@ spec:
   interval: 15m
   url: https://github.com/PixelJonas/immich-charts.git
   ref:
-    branch: feature/immich-chart
+    branch: "feature/immich-chart"
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/charts/
