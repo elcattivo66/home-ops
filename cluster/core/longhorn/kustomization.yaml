@@ -7,4 +7,4 @@ resources:
   - backup-definition.yaml
   - storage-class-definition.yaml
   - prometheus.yaml
-  - grafana-dashboard.yaml
+  # - grafana-dashboard.yaml
