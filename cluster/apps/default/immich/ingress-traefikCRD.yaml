@@ -15,8 +15,8 @@ spec:
         # - name: authelia
         #   namespace: default
       services:
-        - name: *name
-          port: 80
+        - name: immich-proxy
+          port: 8080
           namespace: default
     - kind: Rule
       match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/api`)

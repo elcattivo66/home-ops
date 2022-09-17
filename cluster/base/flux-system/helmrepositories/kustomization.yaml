@@ -20,3 +20,4 @@ resources:
 - ./prometheus-community-charts.yaml
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
+- ./immich-charts.yaml
