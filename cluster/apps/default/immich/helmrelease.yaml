@@ -11,7 +11,7 @@ spec:
       version: 0.0.1
       sourceRef:
         kind: GitRepository
-        name: immich-charts
+        name: immich
         namespace: flux-system
       interval: 15m
   install:
