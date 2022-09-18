@@ -52,6 +52,136 @@ spec:
             name: immich-secret
       ENABLE_MAPBOX: false
 
+    server:
+      enabled: true
+      env:
+        NODE_ENV: "production"
+      service:
+        main:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          ports:
+            http:
+              enabled: true
+              primary: true
+              port: 3001
+              protocol: HTTP
+      image:
+        # -- image repository
+        repository: altran1502/immich-server
+        # -- image tag
+        tag: v1.29.0_42-dev
+        # -- image pull policy
+        pullPolicy: IfNotPresent
+      command: "/bin/sh"
+      args:
+        - "./start-server.sh"
+
+    microservice:
+      enabled: true
+      env:
+        NODE_ENV: "production"
+      service:
+        main:
+          enabled: false
+          primary: true
+          type: ClusterIP
+          ports:
+            http:
+              enabled: true
+              primary: true
+              port: 3001
+              protocol: HTTP
+      image:
+        # -- image repository
+        repository: altran1502/immich-server
+        # -- image tag
+        tag: v1.29.0_42-dev
+        # -- image pull policy
+        pullPolicy: IfNotPresent
+      command: "/bin/sh"
+      args:
+        - "./start-microservices.sh"
+
+    machine_learning:
+      enabled: true
+      image:
+        # -- image repository
+        repository: altran1502/immich-machine-learning
+        # -- image tag
+        tag: v1.29.0_42-dev
+        # -- image pull policy
+        pullPolicy: IfNotPresent
+
+      service:
+        main:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          ports:
+            http:
+              enabled: true
+              primary: true
+              port: 3003
+              protocol: HTTP
+
+      command: "/bin/sh"
+      args:
+        - "./entrypoint.sh"
+      env:
+        NODE_ENV: "production"
+
+    web:
+      enabled: true
+      image:
+        # -- image repository
+        repository: altran1502/immich-web
+        # -- image tag
+        tag: v1.29.0_42-dev
+        # -- image pull policy
+        pullPolicy: IfNotPresent
+      env:
+        NODE_ENV: "production"
+
+      service:
+        main:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          ports:
+            http:
+              enabled: true
+              primary: true
+              port: 3000
+              protocol: HTTP
+
+      command: "/bin/sh"
+      args:
+        - "./entrypoint.sh"
+
+    proxy:
+      enabled: true
+      image:
+        # -- image repository
+        repository: altran1502/immich-proxy
+        # -- image tag
+        tag: v1.29.0_42-dev
+        # -- image pull policy
+        pullPolicy: IfNotPresent
+
+      service:
+        main:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          ports:
+            http:
+              enabled: true
+              primary: true
+              port: 8080
+              protocol: HTTP
+
     persistence:
       config:
         enabled: true
