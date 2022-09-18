@@ -7,7 +7,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      # chart: ./cluster/base/flux-system/gitrepositories
+      chart: /flux-system/gitrepositories/immich
       # version: 0.0.1
       sourceRef:
         kind: GitRepository
