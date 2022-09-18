@@ -4,16 +4,21 @@ metadata:
   name: &app immich
   namespace: default
 spec:
-  interval: 15m
+  # interval: 15m
+  # chart:
+  #   spec:
+  #     chart: ./gitrepositories/immich
+  #     # version: 0.0.1
+  #     sourceRef:
+  #       kind: GitRepository
+  #       name: immich
+  #       namespace: flux-system
+  #     interval: 15m
+  releaseName: immich
   chart:
-    spec:
-      chart: ./gitrepositories/immich
-      # version: 0.0.1
-      sourceRef:
-        kind: GitRepository
-        name: immich
-        namespace: flux-system
-      interval: 15m
+    url: https://github.com/PixelJonas/immich-charts.git
+    path: /charts/apps/immich
+    ref: feature/immich-chart
   install:
     createNamespace: true
     remediation:
