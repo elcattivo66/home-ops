@@ -18,3 +18,4 @@ resources:
 - ./prometheus-community-charts.yaml
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
+- ./gitea-registry-charts.yaml
