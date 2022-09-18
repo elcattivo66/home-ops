@@ -4,7 +4,6 @@ resources:
 - ./bitnami.yaml
 - ./helm-stable.yaml
 - ./k8s-at-home.yaml
-- ./naps.yaml
 - ./containeroo.yaml
 - ./traefik.yaml
 - ./kubernetes-dashboard.yaml
@@ -15,9 +14,7 @@ resources:
 - ./bjw-s-charts.yaml
 - ./authelia-charts.yaml
 - ./cloudnative-pg-charts.yaml
-- ./sampisolutions.yaml
 - ./node-feature-discovery-charts.yaml
 - ./prometheus-community-charts.yaml
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
-- ./immich-charts.yaml
