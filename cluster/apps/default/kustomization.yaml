@@ -10,6 +10,7 @@ resources:
     - gotify
     - immich
     - jellyfin
+    - lidarr
     - lldap
     - nextcloud
     - mosquitto
