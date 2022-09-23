@@ -17,7 +17,7 @@ spec:
           namespace: default
       services:
         - name: *name
-          port: 8989
+          port: 80
           namespace: default
     - kind: Rule
       match: Host(`lidarr.${SECRET_DOMAIN}`) && (Headers(`X-Api-Key`, `${LIDARR_API_KEY}`) || Query(`apikey`, `${LIDARR_API_KEY}`))
