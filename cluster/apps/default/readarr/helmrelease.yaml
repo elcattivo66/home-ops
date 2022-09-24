@@ -49,7 +49,7 @@ spec:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
-        path: /mnt/extern120/calibre_library
+        path: ${MEDIADIR}/ebooks/calibre_library
         mountPath: /books
         readOnly: false
 
