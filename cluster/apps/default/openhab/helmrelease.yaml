@@ -65,13 +65,13 @@ spec:
         enabled: true
         mountPath: /openhab/conf
         type: nfs
-        server: ${NFS_ADDR}
+        server: 192.168.178.21
         path: /home/tonibrix/openhab/conf
       userdata:
         enabled: true
         mountPath: /openhab/userdata
         type: nfs
-        server: ${NFS_ADDR}
+        server: 192.168.178.21
         path: /home/tonibrix/openhab/userdata
     # podSecurityContext:
     #     runAsUser: 1000
