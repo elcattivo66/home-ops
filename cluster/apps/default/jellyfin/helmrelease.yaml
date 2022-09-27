@@ -57,7 +57,7 @@ spec:
         enabled: true
         type: nfs
         server: "${NFS_ADDR}"
-        path: /mnt/data/media
+        path: "${MEDIADIR}"
         mountPath: /media
         readOnly: true
       transcode:

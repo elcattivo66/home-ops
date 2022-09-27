@@ -49,4 +49,4 @@ spec:
             - name: nas-backups
               nfs:
                 server: "${NFS_ADDR}"
-                path: /mnt/data/backup/kubernetes/postgres
+                path: "${NFS_ADDR}/backup/kubernetes/postgres"
