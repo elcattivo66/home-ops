@@ -5,9 +5,9 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  NFS_ADDR: 192.168.178.21
-  MEDIADIR: /mnt/data/media
-  DOWNLOADDIR: /mnt/data/media/downloads
+  NFS_ADDR: 192.168.178.84
+  MEDIADIR: /media
+  DOWNLOADDIR: /media/downloads
   TZ: "Europe/Berlin"
 
   #Metallb
