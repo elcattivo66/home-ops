@@ -22,11 +22,16 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  dependsOn:
+    - name: intel-gpu-plugin
+      namespace: kube-system
+    - name: node-feature-discovery
+      namespace: kube-system
   values:
     image:
       repository: ghcr.io/onedr0p/plex-beta
-      tag: 1.29.1.6260-420892357@sha256:55e5f2d23ab54fbe1f293d12229921d1e78391227bad743a4a6ecbb7420a6778
-
+      tag: 1.29.1.6260-420892357@sha256:07ddfa256be584c006127e5e450f48cd5e41b87c1d1f22f92cb2e696ec1c210b
+      
     env:
       TZ: "${TZ}"
       
@@ -54,6 +59,7 @@ spec:
       transcode:
         enabled: true
         type: emptyDir
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
