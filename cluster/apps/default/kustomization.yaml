@@ -24,6 +24,7 @@ resources:
     - readarr
     - sabnzbd
     - sonarr
+    - syncthing
     - tautulli
     - vaultwarden
     - zigbee2mqtt
