@@ -47,7 +47,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: syncthing-config
+        existingClaim: syncthing-config-v1
         mountPath: /var/syncthing
       backup:
         enabled: true
