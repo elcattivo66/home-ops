@@ -11,16 +11,3 @@ spec:
     requests:
       storage: 128Mi
   storageClassName: longhorn
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: default
-  name: audiobookshelf-metadata-v1
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 128Mi
-  storageClassName: longhorn
