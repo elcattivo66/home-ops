@@ -56,14 +56,6 @@ spec:
         mountPath: /media
         readOnly: false
 
-      downloads: 
-        enabled: true
-        type: nfs
-        server: ${NFS_ADDR}
-        path: ${DOWNLOADDIR}/usenet
-        mountPath: /downloads
-        readOnly: false
-
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
