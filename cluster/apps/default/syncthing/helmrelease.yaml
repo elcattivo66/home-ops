@@ -65,6 +65,7 @@ spec:
     env:
       PUID: "1000"
       PGID: "1000"
+      TZ: ${TZ}
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
