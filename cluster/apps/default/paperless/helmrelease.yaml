@@ -49,25 +49,25 @@ spec:
         mountPath: /usr/src/paperless/data
         type: nfs
         server: ${NFS_ADDR}
-        path: ${MEDIADIR}/paperless/data
+        path: /home/paperless/data
       media:
         enabled: true
         mountPath: /usr/src/paperless/media
         type: nfs
         server: ${NFS_ADDR}
-        path: ${MEDIADIR}/paperless/media
+        path: /home/paperless/media
       consume:
         enabled: true
         mountPath: /usr/src/paperless/consume
         type: nfs
         server: ${NFS_ADDR}
-        path: ${MEDIADIR}/paperless/consume
+        path: /home/paperless/consume
       export:
         enabled: true
         mountPath: /usr/src/paperless/export
         type: nfs
         server: ${NFS_ADDR}
-        path: ${MEDIADIR}/paperless/export
+        path: /home/paperless/export
 
     resources:
         requests:
