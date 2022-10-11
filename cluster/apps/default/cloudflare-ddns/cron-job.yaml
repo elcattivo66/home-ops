@@ -18,7 +18,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: *app
-              image: ghcr.io/onedr0p/kubernetes-kubectl:1.25.0@sha256:94ef8af361238220e5858fae7a55e9d3dfa6006f3fc74167cf5790ec921d3661
+              image: ghcr.io/onedr0p/kubernetes-kubectl:1.25.2@sha256:9d7a9880d59feb6d32c3d29cd5e14b9e76dfb1f086d63929db0ca295a98e5b2e
               envFrom:
                 - secretRef:
                     name: cloudflare-ddns
