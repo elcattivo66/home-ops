@@ -5,7 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  NFS_ADDR: 192.168.178.84
+  NFS_ADDR: 192.168.178.83
   MEDIADIR: /media
   BACKUPDIR: /backup
   DOWNLOADDIR: /media/downloads
