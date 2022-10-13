@@ -9,22 +9,22 @@ resources:
     - cloudflare-ddns
     - gotify
     - immich
-    - jellyfin
-    - lidarr
+    #- jellyfin
+    #- lidarr
     - lldap
     - nextcloud
     - mosquitto
     - openhab
     - overseerr
     - paperless
-    - plex
+    #- plex
     - prowlarr
     - radarr
     - radicale
     - readarr
     - sabnzbd
     - sonarr
-    - syncthing
+   #- syncthing
     - tautulli
     - vaultwarden
     - zigbee2mqtt
