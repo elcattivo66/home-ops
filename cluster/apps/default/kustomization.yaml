@@ -9,8 +9,8 @@ resources:
     - cloudflare-ddns
     - gotify
     - immich
-    #- jellyfin
-    #- lidarr
+    - jellyfin
+    - lidarr
     - lldap
     - nextcloud
     - mosquitto
@@ -24,7 +24,7 @@ resources:
     - readarr
     - sabnzbd
     - sonarr
-   #- syncthing
+    - syncthing
     - tautulli
     - vaultwarden
     - zigbee2mqtt
