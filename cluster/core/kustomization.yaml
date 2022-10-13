@@ -6,3 +6,4 @@ resources:
   - longhorn
   - namespaces
   - renovate
+  - metallb
