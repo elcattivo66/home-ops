@@ -6,4 +6,4 @@ resources:
   - dashboard
   - config
   - grafana-dashboard.yaml
-  - servicemonitor-prometheusCRD.yaml
+  #- servicemonitor-prometheusCRD.yaml
