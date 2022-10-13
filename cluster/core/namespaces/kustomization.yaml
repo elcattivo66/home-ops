@@ -8,3 +8,4 @@ resources:
 - cert-manager.yaml
 - networking.yaml
 - monitoring.yaml
+- system-upgrade.yaml
