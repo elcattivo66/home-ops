@@ -5,5 +5,5 @@ resources:
   - helmrelease.yaml
   - cronjob.yaml
   - ingress-traefikCRD.yaml
-  - pvc.yaml
+  #- pvc.yaml
   - secret.sops.yaml
