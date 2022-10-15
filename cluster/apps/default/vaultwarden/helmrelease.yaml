@@ -25,7 +25,7 @@ spec:
   values:
     image:
         repository: docker.io/vaultwarden/server
-        tag: 1.25.2
+        tag: 1.26.0
     replicaCount: 1
 
     env:
