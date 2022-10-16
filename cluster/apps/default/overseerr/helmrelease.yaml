@@ -44,7 +44,11 @@ spec:
         enabled: true
         existingClaim: overseerr-config-v1
         mountPath: /app/config
-        
+      cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /app/.next/cache
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
