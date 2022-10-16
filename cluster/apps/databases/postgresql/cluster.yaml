@@ -20,7 +20,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: http://nas.local:9100
+      endpointURL: http://nas:9100
       serverName: postgres-v1
       s3Credentials:
         accessKeyId:
