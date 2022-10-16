@@ -5,3 +5,4 @@ resources:
   - helmrelease.yaml
   - cluster.yaml
   - secret.sops.yaml
+  - scheduled-backup.yaml
