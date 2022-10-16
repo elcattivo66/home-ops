@@ -121,7 +121,7 @@ spec:
           datasource: Prometheus
         longhorn:
           gnetId: 16888
-          revision: 2
+          revision: 5
           datasource: Prometheus
     #     # Ref: https://grafana.com/grafana/dashboards/13502
     #     minio:
