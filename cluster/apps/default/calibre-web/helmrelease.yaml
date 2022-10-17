@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/calibre-web
-      tag: version-0.6.19
+      tag: 0.6.19-ls178@sha256:9a21e834059de2f0b730e6368e21119c6fc720f0d912a8522a96f6e041118444
 
     env:
       DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
