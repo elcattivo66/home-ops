@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
-      version: 17.0.3
+      version: 16.2.0
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -21,7 +21,7 @@ spec:
       namespace: cert-manager
   values:
     deployment:
-      replicas: 3
+      replicas: 1
     service:
       enabled: true
       type: LoadBalancer
