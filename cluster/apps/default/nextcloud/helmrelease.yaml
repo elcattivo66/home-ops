@@ -34,7 +34,7 @@ spec:
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
-        datadir: /var/www/data
+      datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
           value: redis-master.databases.svc.cluster.local
@@ -93,12 +93,17 @@ spec:
         secretName: nextcloud-pg-secret
         usernameKey: user
         passwordKey: password
+    service:
+      type: ClusterIP
+      port: 8080
+      loadBalancerIP: 192.168.178.130
+
     persistence:
-        enabled: true
-        existingClaim: nextcloud-data
-        # nextcloudData:
-        #   enabled: true
-        #   existingClaim: nextcloud-data
+      enabled: true
+      existingClaim: nextcloud-config
+      # nextcloudData:
+      #   enabled: true
+      #   existingClaim: nextcloud-data
     resources:
       requests:
         cpu: 100m
