@@ -62,8 +62,7 @@ spec:
       config:
         enabled: true
         type: custom
-        mountPath: /mosquitto/config/mosquitto.conf
-        subPath: mosquitto.conf
+        mountPath: /mosquitto/config/
         volumeSpec:
           configMap:
             name: mosquitto-config
