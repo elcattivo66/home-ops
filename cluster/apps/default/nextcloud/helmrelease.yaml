@@ -30,6 +30,22 @@ spec:
     ingress:
       enabled: false
     nextcloud:
+      configs:
+        custom.config.php: |-
+          <?php
+          $CONFIG = array (
+            'overwriteprotocol' => 'https',
+            'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
+            'filelocking.enabled' => 'true',
+            'loglevel' => '2',
+            'enable_previews' => true,
+            'trusted_domains' =>
+              [
+                'nextcloud',
+                'nextcloud.elcattivo.de',
+                'localhost'
+              ]
+          );
       host: nextcloud.${SECRET_DOMAIN}
       existingSecret:
         enabled: true
@@ -45,37 +61,37 @@ spec:
             secretKeyRef:
               name: nextcloud-secret
               key: redis-password
-      extraInitContainers:
-        - name: wait-database
-          image: alpine:3.16.2
-          imagePullPolicy: IfNotPresent
-          command:
-            - sh
-          args:
-            - -c
-            - >-
-              until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
-              do echo "Waiting for database";
-              done
-          env:
-            - name: POSTGRES_HOST
-              value: postgres-rw.databases.svc.cluster.local
-        - name: wait-redis
-          image: alpine:3.16.2
-          imagePullPolicy: IfNotPresent
-          command:
-            - sh
-          args:
-            - -c
-            - >-
-              until nc -w 1 -v $REDIS_HOST:$REDIS_HOST_PORT;
-              do echo "Waiting for Redis";
-              done
-          env:
-            - name: REDIS_HOST
-              value: redis-master.databases.svc.cluster.local
-            - name: REDIS_HOST_PORT
-              value: "6379"
+      # extraInitContainers:
+      #   - name: wait-database
+      #     image: alpine:3.16.2
+      #     imagePullPolicy: IfNotPresent
+      #     command:
+      #       - sh
+      #     args:
+      #       - -c
+      #       - >-
+      #         until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
+      #         do echo "Waiting for database";
+      #         done
+      #     env:
+      #       - name: POSTGRES_HOST
+      #         value: postgres-rw.databases.svc.cluster.local
+      #   - name: wait-redis
+      #     image: alpine:3.16.2
+      #     imagePullPolicy: IfNotPresent
+      #     command:
+      #       - sh
+      #     args:
+      #       - -c
+      #       - >-
+      #         until nc -w 1 -v $REDIS_HOST:$REDIS_HOST_PORT;
+      #         do echo "Waiting for Redis";
+      #         done
+      #     env:
+      #       - name: REDIS_HOST
+      #         value: redis-master.databases.svc.cluster.local
+      #       - name: REDIS_HOST_PORT
+      #         value: "6379"
     nginx:
       enabled: false
       # image:
@@ -94,6 +110,14 @@ spec:
         usernameKey: user
         passwordKey: password
 
+    defaultConfigs:
+      .htaccess: true
+      apache-pretty-urls.config.php: true
+      apcu.config.php: true
+      apps.config.php: true
+      autoconfig.php: false
+      redis.config.php: true
+      smtp.config.php: true
     persistence:
       enabled: true
       existingClaim: nextcloud-config
