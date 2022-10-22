@@ -48,10 +48,11 @@ spec:
         data:
           mosquitto.conf: |
             listener 1883
-            allow_anonymous true
             persistence true
             persistence_location /mosquitto/data
             connection_messages false
+            password_file /mosquitto/config/mosquitto_pwd
+            autosave_interval 60
           mosquitto_pwd: ${SECRET_MOSQUITTO_PASS_HASH}
 
     persistence:
