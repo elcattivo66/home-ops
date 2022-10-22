@@ -49,6 +49,8 @@ spec:
       supplementalGroups:
         - 985
         - 989
+        - 44
+        - 109
     persistence:
       config:
         enabled: true
