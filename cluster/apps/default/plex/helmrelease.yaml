@@ -73,7 +73,7 @@ spec:
       - 985
       - 989
       - 44
-      - 109
+      - 106
     resources:
       requests:
         # Hardware acceleration using an Intel iGPU w/ QuickSync and
