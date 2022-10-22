@@ -36,7 +36,7 @@ spec:
           $CONFIG = array (
             'overwriteprotocol' => 'https',
             'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
-            ‘overewritehost’ => 'nextcloud.elcattivo.de',
+            'overewritehost' => 'nextcloud.elcattivo.de',
             'filelocking.enabled' => 'true',
             'loglevel' => '2',
             'enable_previews' => true,
