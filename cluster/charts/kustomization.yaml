@@ -3,14 +3,11 @@ kind: Kustomization
 resources:
 - ./bitnami.yaml
 - ./helm-stable.yaml
-- ./k8s-at-home.yaml
-- ./containeroo.yaml
 - ./traefik.yaml
 - ./kubernetes-dashboard.yaml
 - ./metallb.yaml
 - ./longhorn.yaml
 - ./jetstack.yaml
-- ./k8s-gateway.yaml
 - ./bjw-s-charts.yaml
 - ./authelia-charts.yaml
 - ./cloudnative-pg-charts.yaml
