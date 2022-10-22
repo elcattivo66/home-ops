@@ -36,6 +36,7 @@ spec:
           $CONFIG = array (
             'overwriteprotocol' => 'https',
             'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
+            ‘overewritehost’ => 'nextcloud.elcattivo.de',
             'filelocking.enabled' => 'true',
             'loglevel' => '2',
             'enable_previews' => true,
@@ -61,37 +62,6 @@ spec:
             secretKeyRef:
               name: nextcloud-secret
               key: redis-password
-      # extraInitContainers:
-      #   - name: wait-database
-      #     image: alpine:3.16.2
-      #     imagePullPolicy: IfNotPresent
-      #     command:
-      #       - sh
-      #     args:
-      #       - -c
-      #       - >-
-      #         until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
-      #         do echo "Waiting for database";
-      #         done
-      #     env:
-      #       - name: POSTGRES_HOST
-      #         value: postgres-rw.databases.svc.cluster.local
-      #   - name: wait-redis
-      #     image: alpine:3.16.2
-      #     imagePullPolicy: IfNotPresent
-      #     command:
-      #       - sh
-      #     args:
-      #       - -c
-      #       - >-
-      #         until nc -w 1 -v $REDIS_HOST:$REDIS_HOST_PORT;
-      #         do echo "Waiting for Redis";
-      #         done
-      #     env:
-      #       - name: REDIS_HOST
-      #         value: redis-master.databases.svc.cluster.local
-      #       - name: REDIS_HOST_PORT
-      #         value: "6379"
     nginx:
       enabled: false
       # image:
@@ -129,10 +99,11 @@ spec:
       annotations: {}
       curlInsecure: false
       enabled: true
-      failedJobsHistoryLimit: 5
+      failedJobsHistoryLimit: 3
       image: {}
       schedule: '*/5 * * * *'
       successfulJobsHistoryLimit: 2
+
     hpa:
       enabled: false
 
