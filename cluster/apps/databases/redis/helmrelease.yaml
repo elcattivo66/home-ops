@@ -22,13 +22,13 @@ spec:
     remediation:
       retries: 5
   values:
-    architecture: replication
+    architecture: standalone
     auth:
       enabled: false
       sentinel: false
       #existingSecret: *app
     sentinel:
-      enabled: true
+      enabled: false
       masterSet: redis-master
       getMasterTimeout: 10
       startupProbe:
