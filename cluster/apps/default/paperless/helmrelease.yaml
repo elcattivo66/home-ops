@@ -26,7 +26,7 @@ spec:
       PAPERLESS_OCR_LANGUAGES: deu
       PAPERLESS_OCR_LANGUAGE: deu
       PAPERLESS_PORT: 8000
-      PAPERLESS_REDIS: redis://redis.databases.svc.cluster.local:6379
+      PAPERLESS_REDIS: redis://redis-headless.databases.svc.cluster.local:6379
       PAPERLESS_TASK_WORKERS: 2
       PAPERLESS_TIME_ZONE: ${TZ}
       PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
