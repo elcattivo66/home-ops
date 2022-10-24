@@ -5,4 +5,4 @@ resources:
 # - gotk-sync.yaml
   - flux-cluster.yaml
   - flux-installation.yaml
-  - secret.sops.yaml
+  # - secret.sops.yaml
