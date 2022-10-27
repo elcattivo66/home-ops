@@ -16,23 +16,8 @@ spec:
 
   bootstrap:
     recovery:
-      source: clusterBackup
-
-  externalCluster:
-    - name: clusterBackup
-      barmanObjectStore:
-        wal:
-          maxParallel: 8
-        destinationPath: s3://postgresql/
-        endpointURL: http://nas:9102
-        serverName: postgres-v1
-        s3Credentials:
-          accessKeyId:
-            name: postgres-minio
-            key: MINIO_ACCESS_KEY
-          secretAccessKey:
-            name: postgres-minio
-            key: MINIO_SECRET_KEY
+      backup:
+        name: postgres-v1
 
   backup:
     retentionPolicy: 30d
