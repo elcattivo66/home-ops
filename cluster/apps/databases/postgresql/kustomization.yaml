@@ -6,3 +6,4 @@ resources:
   - cluster.yaml
   - secret.sops.yaml
   - scheduled-backup.yaml
+  - service.yaml
