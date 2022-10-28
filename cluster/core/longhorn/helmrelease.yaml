@@ -40,7 +40,9 @@ spec:
     enablePSP: true
 
     defaultSettings:
-      backupTarget: nfs://pihole:/
+      backupTarget: nfs://nas:/backup/kubernetes/longhorn_backup
+      storageMinimalAvailablePercentage: 10
+      defaultLonghornStaticStorageClass: longhorn
 
     resources:
       requests:

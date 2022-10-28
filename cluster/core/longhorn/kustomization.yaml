@@ -4,7 +4,8 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - ingress-traefikCRD.yaml
-  #- backup-definition.yaml
   #- storage-class-definition.yaml
-  #- prometheus.yaml
-  # - grafana-dashboard.yaml
+patchesStrategicMerge:
+  - patches/backup-definition.yaml
+  #- patches/prometheus.yaml
+  #- patches/grafana-dashboard.yaml
