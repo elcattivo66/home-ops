@@ -32,3 +32,10 @@ spec:
     persistence:
       enabled: true
       existingClaim: influxdb-config-v1
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 300M
+      limits:
+        memory: 600M
