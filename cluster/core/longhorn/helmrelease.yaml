@@ -41,7 +41,7 @@ spec:
 
     defaultSettings:
       # backupTarget: nfs://nas:/backup/kubernetes/longhorn_backup
-      backupTarget: s3://longhorn-backup
+      backupTarget: s3://longhorn-backup@eu-central-1/
       backupTargetCredentialSecret: longhorn-minio
       storageMinimalAvailablePercentage: 10
       defaultLonghornStaticStorageClass: longhorn
