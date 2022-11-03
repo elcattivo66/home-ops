@@ -42,7 +42,7 @@ spec:
     auth:
       enabled: true
 
-    configmap:
+    configMaps:
       config:
         enabled: true
         data:
