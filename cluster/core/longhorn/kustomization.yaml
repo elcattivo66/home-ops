@@ -6,7 +6,7 @@ resources:
   - ingress-traefikCRD.yaml
   - backup-definition.yaml
   - backup.secret.sops.yaml
-  #- prometheus.yaml
+  - prometheus.yaml
   #- grafana-dashboard.yaml
   #- storage-class-definition.yaml
 
