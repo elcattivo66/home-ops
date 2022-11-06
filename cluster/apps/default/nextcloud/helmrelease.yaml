@@ -75,7 +75,7 @@ spec:
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
-      datadir: /var/www/data
+      # datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
           value: redis-master.databases.svc.cluster.local
