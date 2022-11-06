@@ -76,16 +76,16 @@ spec:
         enabled: true
         secretName: nextcloud-secret
       # datadir: /var/www/data
-      extraEnv:
-        - name: REDIS_HOST
-          value: redis-master.databases.svc.cluster.local
-        - name: REDIS_HOST_PORT
-          value: "6379"
-        - name: REDIS_HOST_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: nextcloud-secret
-              key: redis-password
+      # extraEnv:
+      #   - name: REDIS_HOST
+      #     value: redis-master.databases.svc.cluster.local
+      #   - name: REDIS_HOST_PORT
+      #     value: "6379"
+      #   - name: REDIS_HOST_PASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: nextcloud-secret
+      #         key: redis-password
     nginx:
       enabled: true
       image:
@@ -128,7 +128,11 @@ spec:
       autoconfig.php: false
       redis.config.php: true
       smtp.config.php: false
-      
+
+    redis:
+      enabled: true
+      usePassword: false
+
     hpa:
       enabled: false
     startupProbe:
