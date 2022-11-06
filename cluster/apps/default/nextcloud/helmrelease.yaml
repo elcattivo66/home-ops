@@ -107,7 +107,7 @@ spec:
         passwordKey: password
 
     service:
-      type: ClusterIP
+      type: LoadBalancer
       port: 8080
       loadBalancerIP: 192.168.178.231
 
