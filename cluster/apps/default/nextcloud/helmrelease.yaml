@@ -25,7 +25,7 @@ spec:
     fullnameOverride: *app
     image:
       repository: nextcloud
-      tag: 25.0.0-fpm
+      tag: 25.0.0-apache
       # flavor: fpm-alpine
     ingress:
       enabled: false
@@ -80,11 +80,11 @@ spec:
             secretKeyRef:
               name: nextcloud-secret
               key: redis-password
-    nginx:
-      enabled: true
-      image:
-        repository: nginx
-        tag: 1.23-alpine
+    # nginx:
+    #   enabled: true
+    #   image:
+    #     repository: nginx
+    #     tag: 1.23-alpine
     internalDatabase:
       enabled: false      
     externalDatabase:
