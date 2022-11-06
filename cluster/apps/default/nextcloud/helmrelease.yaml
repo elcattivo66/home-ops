@@ -25,7 +25,7 @@ spec:
     fullnameOverride: *app
     image:
       repository: nextcloud
-      tag: 25.0.0-fpm-alpine
+      tag: 25.0.0-apache
       # flavor: fpm-alpine
     ingress:
       enabled: false
@@ -75,6 +75,8 @@ spec:
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
+        usernameKey: nextcloud-username
+        passwordKey: nextcloud-password
       # datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
@@ -86,11 +88,11 @@ spec:
             secretKeyRef:
               name: nextcloud-secret
               key: redis-password
-    nginx:
-      enabled: true
-      image:
-        repository: nginx
-        tag: 1.23-alpine
+    # nginx:
+    #   enabled: true
+    #   image:
+    #     repository: nginx
+    #     tag: 1.23-alpine
     internalDatabase:
       enabled: false      
     externalDatabase:
@@ -131,8 +133,10 @@ spec:
 
     hpa:
       enabled: false
+
     startupProbe:
       enabled: false
+
     resources:
       requests:
         cpu: 100m
