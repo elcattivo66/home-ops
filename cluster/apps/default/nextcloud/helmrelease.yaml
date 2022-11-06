@@ -98,14 +98,6 @@ spec:
         usernameKey: user
         passwordKey: password
 
-    defaultConfigs:
-      .htaccess: true
-      apache-pretty-urls.config.php: true
-      apcu.config.php: true
-      apps.config.php: true
-      autoconfig.php: false
-      redis.config.php: true
-      smtp.config.php: true
     persistence:
       enabled: true
       existingClaim: nextcloud-config-v1
