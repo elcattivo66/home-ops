@@ -44,8 +44,14 @@ spec:
               [
                 'nextcloud',
                 'nextcloud.elcattivo.de',
-                'localhost'
-              ]
+                'localhost',
+                '10.42.3.*',
+                '192.168.178.*',
+              ],
+            'trusted_proxies' =>
+            array (
+              0 => '10.42.3.0/16',
+            ),
           );
         s3.config.php: |-
           <?php
@@ -116,7 +122,8 @@ spec:
 
     hpa:
       enabled: false
-
+    startupProbe:
+      enabled: false
     resources:
       requests:
         cpu: 100m
