@@ -21,7 +21,6 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  replicas: 1
   values:
     image:
       repository: bitnami/influxdb
