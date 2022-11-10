@@ -58,20 +58,21 @@ spec:
         s3.config.php: |-
           <?php
           $CONFIG = array (
-            'objectstore' => array(
-              'class' => '\\OC\\Files\\ObjectStore\\S3',
-              'arguments' => array(
-                'bucket'     => 'nextcloud-data',
-                'autocreate' => true,
-                'key'        => '${MINIO_SECRET_KEY}',
-                'secret'     => '${MINIO_ACCESS_KEY}',
-                'region'     => 'eu-central-1',
-                'hostname'   => '192.168.178.83:9102',
-                'use_ssl'    => false,
-                'use_path_style' => true
-              )
-            )
+            'objectstore' => [
+                    'class' => '\\OC\\Files\\ObjectStore\\S3',
+                    'arguments' => [
+                            'bucket' => 'nextcloud-data',
+                            'autocreate' => true,
+                            'key'    => '${MINIO_SECRET_KEY}',
+                            'secret' => '${MINIO_ACCESS_KEY}',
+                            'hostname' => '192.168.178.83',
+                            'port' => 9102,
+                            'use_ssl' => false,
+                            'use_path_style'=>true
+                    ],
+            ],
           );
+
 
       host: nextcloud.${SECRET_DOMAIN}
       existingSecret:
