@@ -39,6 +39,8 @@ spec:
             'overewritehost' => 'nextcloud.elcattivo.de',
             'filelocking.enabled' => 'true',
             'loglevel' => '2',
+            'log_type' => 'file',
+            'logfile' => '/var/www/html/nextcloud.log',
             'enable_previews' => true,
             'trusted_domains' =>
               [
