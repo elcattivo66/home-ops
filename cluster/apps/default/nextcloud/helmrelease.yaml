@@ -31,28 +31,28 @@ spec:
       enabled: false
     nextcloud:
       configs:
-        # custom.config.php: |-
-        #   <?php
-        #   $CONFIG = array (
-        #     'overwriteprotocol' => 'https',
-        #     'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
-        #     'overewritehost' => 'nextcloud.elcattivo.de',
-        #     'filelocking.enabled' => 'true',
-        #     'loglevel' => '2',
-        #     'enable_previews' => true,
-        #     'trusted_domains' =>
-        #       [
-        #         'nextcloud',
-        #         'nextcloud.elcattivo.de',
-        #         'localhost',
-        #         '10.42.3.*',
-        #         '192.168.178.*',
-        #       ],
-        #     'trusted_proxies' =>
-        #     array (
-        #       0 => '10.42.3.0/16',
-        #     ),
-        #   );
+        custom.config.php: |-
+          <?php
+          $CONFIG = array (
+            'overwriteprotocol' => 'https',
+            'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
+            'overewritehost' => 'nextcloud.elcattivo.de',
+            'filelocking.enabled' => 'true',
+            'loglevel' => '2',
+            'enable_previews' => true,
+            'trusted_domains' =>
+              [
+                'nextcloud',
+                'nextcloud.elcattivo.de',
+                'localhost',
+                '10.42.3.*',
+                '192.168.178.*',
+              ],
+            'trusted_proxies' =>
+            array (
+              0 => '10.42.3.0/16',
+            ),
+          );
         s3.config.php: |-
           <?php
           $CONFIG = array (
