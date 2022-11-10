@@ -141,6 +141,10 @@ spec:
 
     startupProbe:
       enabled: false
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
 
     resources:
       requests:
