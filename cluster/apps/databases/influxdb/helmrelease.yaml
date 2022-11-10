@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-      replicas: 1
   install:
     createNamespace: true
     remediation:
@@ -22,6 +21,7 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  replicas: 1
   values:
     image:
       repository: bitnami/influxdb
