@@ -25,7 +25,7 @@ spec:
     fullnameOverride: *app
     image:
       repository: nextcloud
-      tag: 25.0.1-apache
+      tag: 25.0.1-fpm-alpine
       # flavor: fpm-alpine
     ingress:
       enabled: false
@@ -43,14 +43,14 @@ spec:
             'logfile' => '/var/www/html/nextcloud.log',
             'enable_previews' => true,
             'trusted_domains' =>
-              [
-                'nextcloud',
-                'nextcloud.elcattivo.de',
-                'localhost',
-                '10.42.3.*',
-                '192.168.178.*',
-                '192.168.178.231',
-              ],
+              array (
+                0 => 'nextcloud',
+                1 => 'nextcloud.elcattivo.de',
+                2 => 'localhost',
+                3 => '10.42.3.*',
+                4 => '192.168.178.*',
+                5 => '192.168.178.231',
+              ),
             'trusted_proxies' =>
             array (
               0 => '10.42.3.0/16',
@@ -76,7 +76,6 @@ spec:
             ],
           );
 
-
       host: nextcloud.${SECRET_DOMAIN}
       existingSecret:
         enabled: true
@@ -94,11 +93,11 @@ spec:
             secretKeyRef:
               name: nextcloud-secret
               key: redis-password
-    # nginx:
-    #   enabled: true
-    #   image:
-    #     repository: nginx
-    #     tag: 1.23-alpine
+    nginx:
+      enabled: true
+      image:
+        repository: nginx
+        tag: 1.23-alpine
     internalDatabase:
       enabled: false      
     externalDatabase:
