@@ -26,7 +26,7 @@ spec:
 
     image:
       repository: ghcr.io/onedr0p/prowlarr-develop
-      tag: 0.4.8.2072
+      tag: 0.4.9.2083
       pullPolicy: IfNotPresent
 
     env:
