@@ -2,10 +2,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  #- helmrelease.yaml
-  # - immich_deployment.yaml
-  # - immich_server_deployment.yaml
-  - secret.sops.yaml
-  # - immich_service.yml
-  #- immich_server_service.yml
+  - server
+  - microservices
+  - machine-learning
+  - web
+  - proxy
   - ingress-traefikCRD.yaml
+  - config-map.yaml
+  - secret.sops.yaml
