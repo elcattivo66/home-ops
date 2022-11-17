@@ -37,7 +37,7 @@ spec:
             'overwriteprotocol' => 'https',
             'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
             'overewritehost' => 'nextcloud.elcattivo.de',
-            'filelocking.enabled' => 'true',
+            'filelocking.enabled' => 'false',
             'loglevel' => '2',
             'log_type' => 'file',
             'logfile' => '/var/www/html/nextcloud.log',
@@ -71,7 +71,7 @@ spec:
                             'port' => 9102,
                             'region' => 'eu-central-1',
                             'use_ssl' => false,
-                            'use_path_style'=>true
+                            'use_path_style' => true
                     ],
             ],
           );
