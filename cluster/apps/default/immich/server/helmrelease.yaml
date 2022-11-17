@@ -49,7 +49,7 @@ spec:
         type: nfs
         server: ${NAS_ADDR}
         path: /media/pictures/immich_upload
-        mountPath: /usr/src/app/upload 
+        mountPath: /usr/src/app/upload
         readOnly: false
     resources:
       requests:
