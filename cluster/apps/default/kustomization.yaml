@@ -18,6 +18,7 @@ resources:
     - overseerr
     - paperless
     - plex
+    - plex-trakt-sync
     - prowlarr
     - radarr
     - radicale
