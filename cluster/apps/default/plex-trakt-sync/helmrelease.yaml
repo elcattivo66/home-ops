@@ -34,7 +34,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: plex-trakt-sync-config
+        existingClaim: plex-trakt-sync-config-v1
         mountPath: /app/config
       config-yaml:
         enabled: true
