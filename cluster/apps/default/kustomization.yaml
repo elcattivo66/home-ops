@@ -28,4 +28,5 @@ resources:
     - syncthing
     - tautulli
     - vaultwarden
+    - watchstate
     - zigbee2mqtt
