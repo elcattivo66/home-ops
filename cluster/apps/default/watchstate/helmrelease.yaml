@@ -19,7 +19,7 @@ spec:
     image:
       repository: ghcr.io/arabcoders/watchstate
       tag: sha-f752acf
-      
+
     env:
       WS_TZ: ${TZ}
 
@@ -37,6 +37,11 @@ spec:
         existingClaim: watchstate-config-v1
         mountPath: /config
 
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      
     probes:
       liveness:
         enabled: false
