@@ -19,6 +19,9 @@ spec:
     image:
       repository: ghcr.io/arabcoders/watchstate
       tag: sha-f752acf
+      
+    env:
+      WS_TZ: ${TZ}
 
     service:
       main:
