@@ -123,6 +123,7 @@ identity_providers:
           - email
         redirect_uris: 
           - https://immich.${SECRET_DOMAIN}/auth/login
+          - app.immich:/
         userinfo_signing_algorithm: none
 # theme: auto
 # authentication_backend:
