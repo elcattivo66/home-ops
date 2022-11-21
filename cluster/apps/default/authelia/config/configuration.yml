@@ -113,12 +113,16 @@ identity_providers:
         userinfo_signing_algorithm: none
       - id: immich
         description: Immich
-        secret: "${SECRET_IMMICH_OAUTH_CLIENT_SECRET}"
+        secret: ${SECRET_IMMICH_OAUTH_CLIENT_SECRET}
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
-        scopes: ["openid", "profile", "email"]
-        redirect_uris: ["https://immich.${SECRET_DOMAIN}/auth/login"]
+        scopes:
+          - openid
+          - profile
+          - email
+        redirect_uris: 
+          - https://immich.${SECRET_DOMAIN}/auth/login
         userinfo_signing_algorithm: none
 # theme: auto
 # authentication_backend:
