@@ -25,6 +25,6 @@ spec:
       prometheusRule:
         enabled: true
     crds:
-      enabled: false
+      enabled: true
     psp:
       create: false
