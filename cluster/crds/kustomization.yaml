@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - cert-manager
   - traefik
-  - cloudnative-pg
+  #- cloudnative-pg
   - metallb
