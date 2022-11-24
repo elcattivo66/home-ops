@@ -30,8 +30,8 @@ spec:
       namespace: default
   values:
     image:
-      repository: docker.io/altran1502/immich-server
-      tag: v1.36.1_55-dev
+      repository: ghcr.io/immich-app/immich-server
+      tag: v1.36.2_56-dev
     command: /bin/sh
     args:
       - ./start-microservices.sh

@@ -26,8 +26,8 @@ spec:
       namespace: default
   values:
     image:
-      repository: docker.io/altran1502/immich-machine-learning
-      tag: v1.36.1_55-dev
+      repository: ghcr.io/immich-app/immich-machine-learning
+      tag: v1.36.2_56-dev
     command: /bin/sh
     args:
       - ./entrypoint.sh
