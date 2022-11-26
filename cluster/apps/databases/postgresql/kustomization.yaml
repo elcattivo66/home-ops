@@ -9,6 +9,7 @@ resources:
   - service.yaml
 configMapGenerator:
   - name: cloudnative-pg-dashboard
+    namespace: default
     files:
       - cloudnative-pg-dashboard.json=https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
 generatorOptions:
