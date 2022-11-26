@@ -22,6 +22,7 @@ resources:
     - radarr
     - radicale
     - readarr
+    - recyclarr
     - sabnzbd
     - sonarr
     - syncthing
