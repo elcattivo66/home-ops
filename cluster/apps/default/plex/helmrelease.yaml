@@ -95,3 +95,9 @@ spec:
                   operator: In
                   values:
                     - "true"
+                    
+    probes:
+        startup:
+          spec:
+            initialDelaySeconds: 60
+            failureThreshold: 160
