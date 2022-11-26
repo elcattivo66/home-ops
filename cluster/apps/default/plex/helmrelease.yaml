@@ -47,7 +47,6 @@ spec:
       config:
         enabled: true
         existingClaim: plex-config-v1
-        subPath: data
       media:
         enabled: true
         type: nfs
@@ -76,15 +75,12 @@ spec:
       - 106
     resources:
       requests:
-        # Hardware acceleration using an Intel iGPU w/ QuickSync and
-        # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
         gpu.intel.com/i915: 1
-        cpu: 200m
-        memory: 256Mi
+        cpu: 100m
+        memory: 512Mi
       limits:
-        # Hardware acceleration using an Intel iGPU w/ QuickSync and
-        # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
         gpu.intel.com/i915: 1
+        memory: 5000Mi
 
     affinity:
       nodeAffinity:
@@ -95,7 +91,7 @@ spec:
                   operator: In
                   values:
                     - "true"
-                    
+
     probes:
         startup:
           spec:
