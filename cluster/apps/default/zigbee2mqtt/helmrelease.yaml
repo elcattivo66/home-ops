@@ -60,12 +60,21 @@ spec:
         memory: 100Mi
       limits:
         memory: 300Mi
+    # affinity:
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #       - matchExpressions:
+    #         - key: app
+    #           operator: In
+    #           values:
+    #           - zigbee-controller
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - zigbee-controller
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/usb-ff_10c4_ea60.present
+                  operator: In
+                  values:
+                    - "true"
