@@ -38,6 +38,7 @@ spec:
         sources:
           usb:
             deviceClassWhitelist:
+              - "00"
               - "02"
               - "03"
               - "0e"
@@ -60,11 +61,11 @@ spec:
                 - pciId:
                     class: ["0300"]
                     vendor: ["8086"]
-            - name: coral-tpu
+            - name: zigbee
               matchOn:
-                - usbId:
-                    vendor: ["1a6e", "18d1"]
-
+                 - usbId:
+                    class: ["00"]
+                    vendor: ["10c4"]
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
