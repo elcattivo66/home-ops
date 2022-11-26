@@ -31,7 +31,7 @@ spec:
       #   node-role.kubernetes.io/worker: "true"
       config:
         core:
-          sources:
+          labelSources:
             - custom
             - pci
             - usb
