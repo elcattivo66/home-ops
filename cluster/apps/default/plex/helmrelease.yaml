@@ -97,4 +97,10 @@ spec:
         startup:
           spec:
             initialDelaySeconds: 60
+            periodSeconds: 3
+            failureThreshold: 160
+        readiness:
+          spec:
+            initialDelaySeconds: 60
+            periodSeconds: 3
             failureThreshold: 160
