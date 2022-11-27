@@ -48,6 +48,7 @@ spec:
         enabled: true
         existingClaim: plex-config-v1
         mountPath: /config
+        subPath: data
       media:
         enabled: true
         type: nfs
