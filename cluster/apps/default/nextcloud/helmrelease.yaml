@@ -120,7 +120,7 @@ spec:
               done
           env:
             - name: REDIS_HOST
-              value: redis
+              value: redis-master.databases.svc.cluster.local
             - name: REDIS_HOST_PORT
               value: "6379"
     nginx:
