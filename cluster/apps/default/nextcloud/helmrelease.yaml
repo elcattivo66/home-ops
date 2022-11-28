@@ -84,14 +84,14 @@ spec:
           );
       extraEnv:
         - name: REDIS_HOST
-          value: redis
+          value: redis-master.databases.svc.cluster.local
         - name: REDIS_HOST_PORT
           value: "6379"
-        - name: REDIS_HOST_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: nextcloud-secret
-              key: redis-password
+        # - name: REDIS_HOST_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: nextcloud-secret
+        #       key: redis-password
       extraInitContainers:
         - name: wait-database
           image: alpine:3.17.0
@@ -128,11 +128,6 @@ spec:
       image:
         repository: nginx
         tag: 1.23-alpine
-    redis:
-      enabled: true
-      auth: 
-        enabled: true
-        password: REDIS_HOST_PASSWORD
     internalDatabase:
       enabled: false      
     externalDatabase:
