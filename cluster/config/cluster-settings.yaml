@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 data:
   NFS_ADDR: 192.168.178.83
+  NAS_ADDR: 192.168.178.83
   MEDIADIR: /media
   BACKUPDIR: /backup
   DOWNLOADDIR: /media/downloads

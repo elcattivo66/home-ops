@@ -74,7 +74,7 @@ spec:
                             'autocreate' => true,
                             'key'    => '${MINIO_SECRET_KEY}',
                             'secret' => '${MINIO_ACCESS_KEY}',
-                            'hostname' => '192.168.178.83',
+                            'hostname' => '${NAS_ADDR}',
                             'port' => 9102,
                             'region' => 'eu-central-1',
                             'use_ssl' => false,
@@ -87,11 +87,11 @@ spec:
           value: redis-master.databases.svc.cluster.local
         - name: REDIS_HOST_PORT
           value: "6379"
-        - name: REDIS_HOST_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: nextcloud-secret
-              key: redis-password
+        # - name: REDIS_HOST_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: nextcloud-secret
+        #       key: redis-password
     nginx:
       enabled: true
       image:
