@@ -26,10 +26,17 @@ spec:
     image:
       repository: nextcloud
       tag: 25.0.1-fpm-alpine
-      # flavor: fpm-alpine
+      flavor: fpm-alpine
     ingress:
       enabled: false
     nextcloud:
+      host: nextcloud.${SECRET_DOMAIN}
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-secret
+        usernameKey: nextcloud-username
+        passwordKey: nextcloud-password
+      # datadir: /var/www/data
       configs:
         custom.config.php: |-
           <?php
@@ -52,10 +59,10 @@ spec:
                 5 => '192.168.178.231',
               ),
             'trusted_proxies' =>
-            array (
-              0 => '10.42.3.0/16',
-              1 => '192.168.178.0/16',      
-            ),
+              array (
+                0 => '10.42.3.0/16',
+                1 => '192.168.178.0/16',      
+              ),
           );
         s3.config.php: |-
           <?php
@@ -75,14 +82,6 @@ spec:
                     ],
             ],
           );
-
-      host: nextcloud.${SECRET_DOMAIN}
-      existingSecret:
-        enabled: true
-        secretName: nextcloud-secret
-        usernameKey: nextcloud-username
-        passwordKey: nextcloud-password
-      # datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
           value: redis-master.databases.svc.cluster.local
@@ -131,15 +130,6 @@ spec:
       image: {}
       schedule: '*/5 * * * *'
       successfulJobsHistoryLimit: 2
-
-    # defaultConfigs:
-    #   .htaccess: true
-    #   apache-pretty-urls.config.php: true
-    #   apcu.config.php: true
-    #   apps.config.php: true
-    #   autoconfig.php: false
-    #   redis.config.php: true
-    #   smtp.config.php: false
 
     hpa:
       enabled: false
