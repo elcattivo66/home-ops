@@ -30,7 +30,7 @@ spec:
     ingress:
       enabled: false
     nextcloud:
-      host: nextcloud.${SECRET_DOMAIN}
+      host: cloud.${SECRET_DOMAIN}
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
@@ -42,9 +42,13 @@ spec:
           <?php
           $CONFIG = array (
             'overwriteprotocol' => 'https',
-            'overwrite.cli.url' => 'https://nextcloud.elcattivo.de',
-            'overewritehost' => 'nextcloud.elcattivo.de',
+            'overwrite.cli.url' => 'https://cloud.elcattivo.de',
+            'overewritehost' => 'cloud.elcattivo.de',
             'filelocking.enabled' => 'false',
+            'redis' =>                                              
+              array (                                                                          
+                'dbindex' => 3,                                       
+              ),     
             'loglevel' => '2',
             'log_type' => 'file',
             'logfile' => '/var/www/html/nextcloud.log',
@@ -52,7 +56,7 @@ spec:
             'trusted_domains' =>
               array (
                 0 => 'nextcloud',
-                1 => 'nextcloud.elcattivo.de',
+                1 => 'cloud.elcattivo.de',
                 2 => 'localhost',
                 3 => '10.42.3.*',
                 4 => '192.168.178.*',
