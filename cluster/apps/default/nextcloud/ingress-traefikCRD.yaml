@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`nextcloud.${SECRET_DOMAIN}`)
+      match: Host(`cloud.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
           namespace: default
