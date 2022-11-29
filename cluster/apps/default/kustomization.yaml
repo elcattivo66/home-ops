@@ -23,6 +23,7 @@ resources:
     - radicale
     - readarr
     - recyclarr
+    - rsync-server
     - sabnzbd
     - sonarr
     - syncthing
