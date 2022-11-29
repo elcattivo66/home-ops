@@ -43,7 +43,7 @@ spec:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
-        path: /home/audiobooks
+        path: ${SSDMEDIADIR}/audiobooks
         mountPath: /audiobooks
         readOnly: false
 

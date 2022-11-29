@@ -8,6 +8,7 @@ data:
   NFS_ADDR: 192.168.178.83
   NAS_ADDR: 192.168.178.83
   MEDIADIR: /media
+  SSDMEDIADIR: /media_ssd
   BACKUPDIR: /backup
   DOWNLOADDIR: /media/downloads
   TZ: "Europe/Berlin"
