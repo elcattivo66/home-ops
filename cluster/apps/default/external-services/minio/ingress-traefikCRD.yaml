@@ -1,0 +1,31 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name minio
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`minio-admin.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: default
+        - name: authelia
+          namespace: default
+      services:
+        - name: *name
+          port: 9101
+          namespace: default
+    - kind: Rule
+      match: Host(`minio.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: default
+      services:
+        - name: *name
+          port: 9102
+          namespace: default
+  tls:
+    secretName: ${SECRET_CERT_NAME}-prod-tls
