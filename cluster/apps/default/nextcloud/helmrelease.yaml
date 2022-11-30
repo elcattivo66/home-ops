@@ -36,7 +36,7 @@ spec:
         secretName: nextcloud-secret
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
-      datadir: /var/www/data
+      # datadir: /var/www/data
       configs:
         custom.config.php: |-
           <?php
@@ -64,6 +64,19 @@ spec:
                 1 => '192.168.178.0/16',      
               ),
           );
+        redis.config.php: |-
+          <?php
+          $CONFIG = array (
+            'memcache.local' => '\\OC\\Memcache\\Redis',
+            'memcache.distributed' => '\OC\Memcache\Redis',
+            'memcache.locking' => '\OC\Memcache\Redis',
+            'redis' => array(
+              'host' => getenv('redis-master.databases.svc.cluster.local'),
+              'port' => getenv('REDIS_HOST_PORT') ?: 6379,
+              'password' => (string) getenv('REDIS_HOST_PASSWORD'),
+              'dbindex' => 3,
+            )
+          );
         s3.config.php: |-
           <?php
           $CONFIG = array (
@@ -81,19 +94,6 @@ spec:
                             'use_path_style' => true
                     ],
             ],
-          );
-        redis.config.php: |-
-          <?php
-          $CONFIG = array (
-            'memcache.local' => '\\OC\\Memcache\\Redis',
-            'memcache.distributed' => '\OC\Memcache\Redis',
-            'memcache.locking' => '\OC\Memcache\Redis',
-            'redis' => array(
-              'host' => getenv('redis-master.databases.svc.cluster.local'),
-              'port' => getenv('REDIS_HOST_PORT') ?: 6379,
-              'password' => (string) getenv('REDIS_HOST_PASSWORD'),
-              'dbindex' => 3,
-            )
           );
       # extraEnv:
       #   - name: REDIS_HOST
