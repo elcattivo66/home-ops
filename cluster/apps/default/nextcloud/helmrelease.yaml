@@ -64,19 +64,19 @@ spec:
                 1 => '192.168.178.0/16',      
               ),
           );
-        redis.config.php: |-
-          <?php
-          $CONFIG = array (
-            'memcache.local' => '\\OC\\Memcache\\Redis',
-            'memcache.distributed' => '\OC\Memcache\Redis',
-            'memcache.locking' => '\OC\Memcache\Redis',
-            'redis' => array(
-              'host' => getenv('redis-master.databases.svc.cluster.local'),
-              'port' => getenv('REDIS_HOST_PORT') ?: 6379,
-              'password' => (string) getenv('REDIS_HOST_PASSWORD'),
-              'dbindex' => 3,
-            )
-          );
+        # redis.config.php: |-
+        #   <?php
+        #   $CONFIG = array (
+        #     'memcache.local' => '\\OC\\Memcache\\Redis',
+        #     'memcache.distributed' => '\OC\Memcache\Redis',
+        #     'memcache.locking' => '\OC\Memcache\Redis',
+        #     'redis' => array(
+        #       'host' => getenv('redis-master.databases.svc.cluster.local'),
+        #       'port' => getenv('REDIS_HOST_PORT') ?: 6379,
+        #       'password' => (string) getenv('REDIS_HOST_PASSWORD'),
+        #       'dbindex' => 3,
+        #     )
+        #   );
         s3.config.php: |-
           <?php
           $CONFIG = array (
@@ -95,16 +95,16 @@ spec:
                     ],
             ],
           );
-      # extraEnv:
-      #   - name: REDIS_HOST
-      #     value: redis-master.databases.svc.cluster.local
-      #   - name: REDIS_HOST_PORT
-      #     value: "6379"
-        # - name: REDIS_HOST_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: nextcloud-secret
-        #       key: redis-password
+      extraEnv:
+        - name: REDIS_HOST
+          value: redis-master.databases.svc.cluster.local
+        - name: REDIS_HOST_PORT
+          value: "6379"
+        - name: REDIS_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-secret
+              key: redis-password
       extraInitContainers:
         - name: wait-database
           image: alpine:3.17.0
