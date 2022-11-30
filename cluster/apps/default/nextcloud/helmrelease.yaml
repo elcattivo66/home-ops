@@ -68,24 +68,35 @@ spec:
                 1 => '192.168.178.0/16',      
               ),
           );
-        # s3.config.php: |-
-        #   <?php
-        #   $CONFIG = array (
-        #     'objectstore' => [
-        #             'class' => '\\OC\\Files\\ObjectStore\\S3',
-        #             'arguments' => [
-        #                     'bucket' => 'nextcloud-data',
-        #                     'autocreate' => true,
-        #                     'key'    => '${MINIO_SECRET_KEY}',
-        #                     'secret' => '${MINIO_ACCESS_KEY}',
-        #                     'hostname' => '${NAS_ADDR}',
-        #                     'port' => 9102,
-        #                     'region' => 'eu-central-1',
-        #                     'use_ssl' => false,
-        #                     'use_path_style' => true
-        #             ],
-        #     ],
-        #   );
+        s3.config.php: |-
+          <?php
+          $CONFIG = array (
+            'objectstore' => [
+                    'class' => '\\OC\\Files\\ObjectStore\\S3',
+                    'arguments' => [
+                            'bucket' => 'nextcloud-data',
+                            'autocreate' => true,
+                            'key'    => '${MINIO_SECRET_KEY}',
+                            'secret' => '${MINIO_ACCESS_KEY}',
+                            'hostname' => '${NAS_ADDR}',
+                            'port' => 9102,
+                            'region' => 'eu-central-1',
+                            'use_ssl' => false,
+                            'use_path_style' => true
+                    ],
+            ],
+          );
+        redis.config.php: |-
+          <?php
+          $CONFIG = array (
+            'memcache.local' => '\\OC\\Memcache\\Redis',
+            'memcache.distributed' => '\OC\Memcache\Redis',
+            'memcache.locking' => '\OC\Memcache\Redis',
+            'redis' => array(
+              'host' => getenv('REDIS_HOST'),
+              'port' => getenv('REDIS_HOST_PORT') ?: 6379,
+            )
+          );
       extraEnv:
         - name: REDIS_HOST
           value: redis-master.databases.svc.cluster.local
@@ -156,6 +167,15 @@ spec:
       # nextcloudData:
       #   enabled: true
       #   existingClaim: nextcloud-data
+
+    defaultConfigs:
+      .htaccess: true
+      apache-pretty-urls.config.php: true
+      apcu.config.php: true
+      apps.config.php: true
+      autoconfig.php: false
+      redis.config.php: false
+      smtp.config.php: true
 
     cronjob:
       annotations: {}
