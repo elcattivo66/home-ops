@@ -36,7 +36,7 @@ spec:
         secretName: nextcloud-secret
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
-      # datadir: /var/www/data
+      datadir: /var/www/data
       configs:
         custom.config.php: |-
           <?php
@@ -68,24 +68,24 @@ spec:
                 1 => '192.168.178.0/16',      
               ),
           );
-        s3.config.php: |-
-          <?php
-          $CONFIG = array (
-            'objectstore' => [
-                    'class' => '\\OC\\Files\\ObjectStore\\S3',
-                    'arguments' => [
-                            'bucket' => 'nextcloud-data',
-                            'autocreate' => true,
-                            'key'    => '${MINIO_SECRET_KEY}',
-                            'secret' => '${MINIO_ACCESS_KEY}',
-                            'hostname' => '${NAS_ADDR}',
-                            'port' => 9102,
-                            'region' => 'eu-central-1',
-                            'use_ssl' => false,
-                            'use_path_style' => true
-                    ],
-            ],
-          );
+        # s3.config.php: |-
+        #   <?php
+        #   $CONFIG = array (
+        #     'objectstore' => [
+        #             'class' => '\\OC\\Files\\ObjectStore\\S3',
+        #             'arguments' => [
+        #                     'bucket' => 'nextcloud-data',
+        #                     'autocreate' => true,
+        #                     'key'    => '${MINIO_SECRET_KEY}',
+        #                     'secret' => '${MINIO_ACCESS_KEY}',
+        #                     'hostname' => '${NAS_ADDR}',
+        #                     'port' => 9102,
+        #                     'region' => 'eu-central-1',
+        #                     'use_ssl' => false,
+        #                     'use_path_style' => true
+        #             ],
+        #     ],
+        #   );
       extraEnv:
         - name: REDIS_HOST
           value: redis-master.databases.svc.cluster.local
