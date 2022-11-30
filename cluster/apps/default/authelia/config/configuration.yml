@@ -125,6 +125,15 @@ identity_providers:
           - https://immich.${SECRET_DOMAIN}/auth/login
           # - app.immich:/
         userinfo_signing_algorithm: none
+      - id: minio
+        description: Minio
+        secret: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://minio-admin.${SECRET_DOMAIN}/oauth_callback"]
+        userinfo_signing_algorithm: none
 # theme: auto
 # authentication_backend:
 #   password_reset: 
