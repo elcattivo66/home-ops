@@ -44,7 +44,7 @@ spec:
             'overwriteprotocol' => 'https',
             'overwrite.cli.url' => 'https://cloud.elcattivo.de',
             'overewritehost' => 'cloud.elcattivo.de',
-            'filelocking.enabled' => 'false',
+            'filelocking.enabled' => 'true',
             'loglevel' => '2',
             'log_type' => 'file',
             'logfile' => '/var/www/html/nextcloud.log',
@@ -91,6 +91,7 @@ spec:
             'redis' => array(
               'host' => getenv('REDIS_HOST'),
               'port' => getenv('REDIS_HOST_PORT') ?: 6379,
+              'password' => (string) getenv('REDIS_HOST_PASSWORD'),
               'dbindex' => 3,
             )
           );
