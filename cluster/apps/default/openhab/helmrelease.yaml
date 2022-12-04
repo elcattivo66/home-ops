@@ -65,22 +65,22 @@ spec:
         enabled: true
         mountPath: /openhab/conf
         type: nfs
-        server: 192.168.178.21
-        path: /home/tonibrix/openhab/conf
+        server: ${NAS_ADDR}
+        path: /openhab/conf
       userdata:
         enabled: true
         mountPath: /openhab/userdata
         type: nfs
-        server: 192.168.178.21
-        path: /home/tonibrix/openhab/userdata
+        server: ${NAS_ADDR}
+        path: /openhab/userdata
     # podSecurityContext:
     #     runAsUser: 1000
     #     runAsGroup: 1000
     #     fsGroup: 1000
     #     fsGroupChangePolicy: OnRootMismatch
-# resources:
-#   requests:
-#     cpu: 23m
-#     memory: 2975M
-#   limits:
-#     memory: 6572M
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512M
+      limits:
+        memory: 4Gi
