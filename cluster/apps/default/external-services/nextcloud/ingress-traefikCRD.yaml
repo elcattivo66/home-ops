@@ -12,6 +12,10 @@ spec:
       middlewares:
         - name: headers
           namespace: default
+        - name: nextcloud-redirect-1
+          namespace: default
+        - name: nextcloud-redirect-2
+          namespace: default
       services:
         - name: *name
           port: 8888
