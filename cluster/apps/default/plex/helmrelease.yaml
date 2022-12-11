@@ -48,11 +48,11 @@ spec:
         enabled: true
         existingClaim: plex-config-v1
         mountPath: /config
-        subPath: data
+        # subPath: data
       media:
         enabled: true
         type: nfs
-        server: ${NFS_ADDR}
+        server: ${NAS_ADDR}
         path: ${MEDIADIR}
         mountPath: /media
         readOnly: true
@@ -96,12 +96,16 @@ spec:
 
     probes:
         startup:
-          spec:
-            initialDelaySeconds: 60
-            periodSeconds: 3
-            failureThreshold: 160
+          enabled: false
+          # spec:
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 3
+          #   failureThreshold: 160
         readiness:
-          spec:
-            initialDelaySeconds: 60
-            periodSeconds: 3
-            failureThreshold: 160
+          enabled: false
+        liveness: 
+          enabled: false
+          # spec:
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 3
+          #   failureThreshold: 160
