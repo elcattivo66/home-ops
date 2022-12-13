@@ -4,7 +4,7 @@ metadata:
   name: postgres
   namespace: databases
 spec:
-  instances: 1
+  instances: 3
   primaryUpdateStrategy: unsupervised
   imageName: ghcr.io/cloudnative-pg/postgresql:14.5
   storage:
