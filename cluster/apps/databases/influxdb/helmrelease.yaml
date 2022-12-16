@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: bitnami/influxdb
-      tag: 2.5.1
+      tag: 2.6.0
 
     auth:
       existingSecret: influxdb-secret
