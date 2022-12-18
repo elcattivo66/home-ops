@@ -77,8 +77,8 @@ identity_providers:
           - email
           - profile
         redirect_uris:
-          - https://nextcloud.${SECRET_DOMAIN}:443/apps/oidc_login/oidc
-          - https://cloud.${SECRET_DOMAIN}:443/apps/oidc_login/oidc
+          - https://nextcloud.${SECRET_DOMAIN}/apps/oidc_login/oidc
+          - https://cloud.${SECRET_DOMAIN}/apps/oidc_login/oidc
         grant_types:
           - refresh_token
           - authorization_code
