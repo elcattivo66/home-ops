@@ -54,9 +54,6 @@ spec:
                 0 => 'nextcloud',
                 1 => 'cloud.elcattivo.de',
                 2 => 'localhost',
-                3 => '10.42.3.*',
-                4 => '192.168.178.*',
-                5 => '192.168.178.231',
               ),
             'trusted_proxies' =>
               array (
@@ -107,6 +104,17 @@ spec:
                     ],
             ],
           );
+      mail:
+        enabled: true
+        fromAddress: elcattivo
+        domain: ${SECRET_SMTP_DOMAIN}
+        smtp:
+          host: ${SECRET_SMTP_HOST}
+          secure: tls
+          port: 587
+          authtype: LOGIN
+          name: ${SECRET_SMTP_USERNAME}
+          password: ${SECRET_SMTP_PASSWORD}
 
     redis:
       enabled: true
