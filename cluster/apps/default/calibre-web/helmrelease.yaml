@@ -37,11 +37,9 @@ spec:
         existingClaim: calibre-web-config-v1
       books: 
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NFS_ADDR}
-            path: ${MEDIADIR}/ebooks/calibre_library
+        type: nfs
+        server: ${NAS_ADDR}
+        path: ${MEDIADIR}/ebooks/calibre_library
         mountPath: /books
         readOnly: false
 
