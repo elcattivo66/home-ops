@@ -64,19 +64,19 @@ spec:
                 1 => '192.168.178.0/16',      
               ),
           );
-        redis.config.php: |-
-          <?php
-          $CONFIG = array (
-            'memcache.local' => '\\OC\\Memcache\\Redis',
-            'memcache.distributed' => '\OC\Memcache\Redis',
-            'memcache.locking' => '\OC\Memcache\Redis',
-            'redis' => array(
-              'host' => getenv('REDIS_HOST'),
-              'port' => getenv('REDIS_HOST_PORT') ?: 6379,
-              'password' => (string) getenv('REDIS_HOST_PASSWORD'),
-              'dbindex' => 3,
-            )
-          );
+        # redis.config.php: |-
+        #   <?php
+        #   $CONFIG = array (
+        #     'memcache.local' => '\\OC\\Memcache\\Redis',
+        #     'memcache.distributed' => '\OC\Memcache\Redis',
+        #     'memcache.locking' => '\OC\Memcache\Redis',
+        #     'redis' => array(
+        #       'host' => getenv('REDIS_HOST'),
+        #       'port' => getenv('REDIS_HOST_PORT') ?: 6379,
+        #       'password' => (string) getenv('REDIS_HOST_PASSWORD'),
+        #       'dbindex' => 3,
+        #     )
+        #   );
         s3.config.php: |-
           <?php
           $CONFIG = array (
