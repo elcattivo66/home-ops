@@ -95,30 +95,28 @@ spec:
                     ],
             ],
           );
-      extraEnv:
-        - name: REDIS_HOST
-          value: redis
-        - name: REDIS_HOST_PORT
-          value: "6379"
-        - name: REDIS_HOST_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: nextcloud-secret
-              key: redis-password
+
     redis:
       enabled: true
-      # password: set in secret
+      architecture: standalone
+      auth:
+        enabled: true
       master:
         persistence:
           enabled: false
-      replica:
-        persistence:
-          enabled: false
+
     nginx:
       enabled: true
-      image:
-        repository: nginx
-        tag: 1.23-alpine
+      config:
+        default: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 20Mi
+        limits:
+          cpu: 100m
+          memory: 100Mi
+
     internalDatabase:
       enabled: false      
     externalDatabase:
@@ -144,15 +142,6 @@ spec:
       #   enabled: true
       #   existingClaim: nextcloud-data
 
-    defaultConfigs:
-      .htaccess: true
-      apache-pretty-urls.config.php: true
-      apcu.config.php: true
-      apps.config.php: true
-      autoconfig.php: false
-      redis.config.php: false
-      smtp.config.php: true
-
     cronjob:
       annotations: {}
       curlInsecure: false
@@ -176,3 +165,9 @@ spec:
       requests:
         cpu: 100m
         memory: 150Mi
+
+  valuesFrom:
+    - kind: Secret
+      name: nextcloud-secrets
+      valuesKey: redis-password
+      targetPath: redis.auth.password
