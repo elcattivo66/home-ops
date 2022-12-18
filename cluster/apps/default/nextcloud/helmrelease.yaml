@@ -37,6 +37,11 @@ spec:
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
       # datadir: /var/www/data
+      extraEnv:
+        - name: REDIS_HOST
+          value: nextcloud-redis-master
+        - name: REDIS_HOST_PORT
+          value: "6379"
       configs:
         custom.config.php: |-
           <?php
@@ -74,18 +79,7 @@ spec:
             'oidc_login_disable_registration' => false,
             'oidc_login_password_authentication' => true,
           );
-        redis.config.php: |-
-          <?php
-          $CONFIG = array (
-            'memcache.local' => '\\OC\\Memcache\\Redis',
-            'memcache.distributed' => '\OC\Memcache\Redis',
-            'memcache.locking' => '\OC\Memcache\Redis',
-            'redis' => array(
-              'host' => nextcloud-redis-master,
-              'port' => 6379,
-              'password' => ${SECRET_REDIS_PASSWORD},
-            )
-          );
+
         s3.config.php: |-
           <?php
           $CONFIG = array (
@@ -171,14 +165,6 @@ spec:
       schedule: '*/5 * * * *'
       successfulJobsHistoryLimit: 2
 
-      defaultConfigs:
-        .htaccess: true
-        redis.config.php: false
-        apcu.config.php: true
-        apps.config.php: true
-        autoconfig.php: false
-        smtp.config.php: false
-
     hpa:
       enabled: false
 
@@ -194,8 +180,8 @@ spec:
         cpu: 100m
         memory: 150Mi
 
-  # valuesFrom:
-  #   - kind: Secret
-  #     name: nextcloud-secret
-  #     valuesKey: redis-password
-  #     targetPath: redis.auth.password
+  valuesFrom:
+    - kind: Secret
+      name: nextcloud-secret
+      valuesKey: redis-password
+      targetPath: redis.auth.password
