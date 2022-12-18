@@ -22,6 +22,8 @@ spec:
 
     env:
       WS_TZ: ${TZ}
+      WS_CRON_EXPORT: 1
+      WS_CRON_IMPORT: 1
 
     service:
       main:
