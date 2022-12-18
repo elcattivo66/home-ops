@@ -3,13 +3,13 @@ access_control:
   default_policy: deny
   rules:
     # Rules applied to everyone
-    - domain: authelia.elcattivo.de
+    - domain: authelia.${SECRET_DOMAIN}
       policy: bypass
-    - domain: gitea.elcattivo.de
+    - domain: gitea.${SECRET_DOMAIN}
       policy: bypass
       resources:
         - "^/philipp([/?].*)?$"
-    - domain: gotify.elcattivo.de
+    - domain: gotify.${SECRET_DOMAIN}
       policy: bypass
       resources:
         - "^/message([/?].*)?$"
@@ -24,8 +24,8 @@ access_control:
         - POST
         - DELETE
     - domain:
-        - "elcattivo.de"
-        - "*.elcattivo.de"
+        - "${SECRET_DOMAIN}"
+        - "*.${SECRET_DOMAIN}"
       policy: two_factor
     - domain: "*"
       policy: bypass
@@ -53,7 +53,7 @@ identity_providers:
           - email
           - profile
         redirect_uris:
-          - https://grafana.elcattivo.de/login/generic_oauth
+          - https://grafana.${SECRET_DOMAIN}/login/generic_oauth
         grant_types:
           - refresh_token
           - authorization_code
@@ -77,7 +77,8 @@ identity_providers:
           - email
           - profile
         redirect_uris:
-          - https://nextcloud.elcattivo.de:443/apps/oidc_login/oidc
+          - https://nextcloud.${SECRET_DOMAIN}:443/apps/oidc_login/oidc
+          - https://cloud.${SECRET_DOMAIN}:443/apps/oidc_login/oidc
         grant_types:
           - refresh_token
           - authorization_code
@@ -100,7 +101,7 @@ identity_providers:
           - email
           - profile
         redirect_uris:
-          - https://gitea.elcattivo.de/user/oauth2/authelia/callback
+          - https://gitea.${SECRET_DOMAIN}/user/oauth2/authelia/callback
         grant_types:
           - refresh_token
           - authorization_code
