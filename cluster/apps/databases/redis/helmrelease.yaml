@@ -24,10 +24,10 @@ spec:
   values:
     architecture: standalone
     auth:
-      enabled: true
+      enabled: false
       sentinel: false
-      existingSecret: redis-secret
-      existingSecretPasswordKey: redis-password
+      # existingSecret: redis-secret
+      # existingSecretPasswordKey: redis-password
     sentinel:
       enabled: false
       masterSet: redis-master
