@@ -33,6 +33,7 @@ spec:
       PUID: "1000"
       PGID: "1000"
       RADARR__LOG_LEVEL: info
+      RADARR__API_KEY: ${RADARR__API_KEY}
 
     service:
       main:
