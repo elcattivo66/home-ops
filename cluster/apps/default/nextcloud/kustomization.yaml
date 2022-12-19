@@ -7,4 +7,4 @@ resources:
   - pvc.yaml
   - secret.sops.yaml
   - ingress-traefikCRD.yaml
-  - middleware-traefikCRD.yaml
+  #- middleware-traefikCRD.yaml
