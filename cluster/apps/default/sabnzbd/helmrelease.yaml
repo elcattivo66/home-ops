@@ -55,6 +55,10 @@ spec:
         path: ${MEDIADIR}
         mountPath: /media
         readOnly: false
+        
+      incomplete:
+        enabled: true
+        type: emptyDir
 
     podSecurityContext:
       runAsUser: 1000
