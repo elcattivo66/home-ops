@@ -64,7 +64,7 @@ spec:
         memory: 300Mi
     env:
       PUID: "1000"
-      PGID: "1000"
+      PGID: "100"
       TZ: ${TZ}
     podSecurityContext:
       runAsUser: 1000
