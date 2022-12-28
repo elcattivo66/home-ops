@@ -9,7 +9,6 @@
     ":enablePreCommit",
     ":automergeDigest",
     ":automergeBranchPush",
-    "gitea>philipp/k3s-gitops//renovate/allowedVersions.json5",
     "gitea>philipp/k3s-gitops//renovate/autoMerge.json5",
     "gitea>philipp/k3s-gitops//renovate/commitMessage.json5",
     "gitea>philipp/k3s-gitops//renovate/groups.json5",
