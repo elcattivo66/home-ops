@@ -30,8 +30,10 @@ spec:
       namespace: databases
   values:
     controller:
-      replicas: 1
+      replicas: 3
       strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/authelia/authelia
       tag: 4.37.5

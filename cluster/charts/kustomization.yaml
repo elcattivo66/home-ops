@@ -16,3 +16,4 @@ resources:
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
 - ./gitea-registry-charts.yaml
+- ./stakater.yaml
