@@ -11,6 +11,7 @@ resources:
     - gotify
     - immich
     - jellyfin
+    - kopia
     - lidarr
     - lldap
     - nextcloud
