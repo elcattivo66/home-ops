@@ -97,7 +97,7 @@ spec:
         type: nfs
         mountPath: /snapshots
         server: ${NAS_ADDR}
-        path: ${BACKUPDIR}/kopia-backups
+        path: ${BACKUPDIR}/kubernetes/kopia-backups
     resources:
       requests:
         cpu: 15m
