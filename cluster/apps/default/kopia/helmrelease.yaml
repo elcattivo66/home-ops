@@ -44,21 +44,7 @@ spec:
       - --metrics-listen-addr
       - 0.0.0.0:8080
       - --without-password
-    initContainers:
-      wait-for-repo:
-        image: ghcr.io/onedr0p/kopia:0.12.1@sha256:01ed9b934fa40216f17ffc8a906cf7a7e21c8d41a93f5ed571f2e5efa43844a7
-        imagePullPolicy: IfNotPresent
-        command:
-          - /bin/bash
-          - -c
-          - |-
-            until [ -f /snapshots/kopia.repository.f ]; do
-              printf "\e[1;32m%-6s\e[m\n" "Awaiting for the Kopia repo to become ready ..."
-              sleep 1
-            done
-        volumeMounts:
-          - name: snapshots
-            mountPath: /snapshots
+
     configMaps:
       config:
         enabled: true
@@ -68,7 +54,7 @@ spec:
               "storage": {
                 "type": "filesystem",
                 "config": {
-                  "path": "/snapshots",
+                  "path": "/backups",
                   "dirShards": null
                 }
               },
@@ -92,12 +78,14 @@ spec:
         mountPath: /config/repository.config
         subPath: repository.config
         readOnly: true
+
       snapshots:
         enabled: true
         type: nfs
-        mountPath: /snapshots
+        mountPath: /backups
         server: ${NAS_ADDR}
         path: ${BACKUPDIR}/kubernetes/kopia-backups
+        
     resources:
       requests:
         cpu: 15m
