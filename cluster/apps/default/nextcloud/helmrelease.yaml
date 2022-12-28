@@ -47,8 +47,8 @@ spec:
           <?php
           $CONFIG = array (
             'overwriteprotocol' => 'https',
-            'overwrite.cli.url' => 'https://cloud.elcattivo.de',
-            'overewritehost' => 'cloud.elcattivo.de',
+            'overwrite.cli.url' => 'https://cloud.${SECRET_DOMAIN}',
+            'overewritehost' => 'cloud.${SECRET_DOMAIN}',
             'filelocking.enabled' => 'true',
             'loglevel' => '2',
             'log_type' => 'file',
@@ -57,7 +57,7 @@ spec:
             'trusted_domains' =>
               array (
                 0 => 'nextcloud',
-                1 => 'cloud.elcattivo.de',
+                1 => 'cloud.${SECRET_DOMAIN}',
                 2 => 'localhost',
               ),
             'trusted_proxies' =>
