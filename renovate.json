@@ -9,11 +9,11 @@
     ":enablePreCommit",
     ":automergeDigest",
     ":automergeBranchPush", 
-    "gitea>philipp/k3s-gitops/renovate:autoMerge.json5",
-    "gitea>philipp/k3s-gitops/renovate:commitMessage.json5",
-    "gitea>philipp/k3s-gitops/renovate:groups.json5",
-    "gitea>philipp/k3s-gitops/renovate:labels.json5",
-    "gitea>philipp/k3s-gitops/renovate:semanticCommits.json5"
+    "gitea>philipp/k3s-gitops//renovate:autoMerge.json5",
+    "gitea>philipp/k3s-gitops//renovate:commitMessage.json5",
+    "gitea>philipp/k3s-gitops//renovate:groups.json5",
+    "gitea>philipp/k3s-gitops//renovate:labels.json5",
+    "gitea>philipp/k3s-gitops//renovate:semanticCommits.json5"
   ],
   "ignorePaths": ["archive/**"], 
   "flux": {
