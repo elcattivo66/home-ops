@@ -106,7 +106,7 @@
       "matchDatasources": ["docker"],
       "versioning": "loose",
       "matchPackagePatterns": ["immich", "plex"]
-    },
+    }
   ]
 }
 
