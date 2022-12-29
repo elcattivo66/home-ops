@@ -5,6 +5,7 @@ resources:
   - databases
   - default
   - kube-system
+  - kyverno
   - networking
   - monitoring
   - system-upgrade

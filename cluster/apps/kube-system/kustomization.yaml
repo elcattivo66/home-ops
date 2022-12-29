@@ -5,4 +5,3 @@ resources:
   - intel-gpu-plugin
   - node-feature-discovery
   - reloader
-  - kyverno 
