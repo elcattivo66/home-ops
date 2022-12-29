@@ -17,3 +17,4 @@ resources:
 - ./nextcloud-charts.yaml
 - ./gitea-registry-charts.yaml
 - ./stakater.yaml
+- ./kyverno-charts.yaml
