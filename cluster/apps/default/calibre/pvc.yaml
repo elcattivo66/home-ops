@@ -4,6 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: default
   name: calibre-config-v1
+  labels:
+    app.kubernetes.io/name: calibre
+    snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce

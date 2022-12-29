@@ -4,6 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: default
   name: gotify-config-v1
+  labels:
+    app.kubernetes.io/name: gotify
+    snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce

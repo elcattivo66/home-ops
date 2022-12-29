@@ -4,6 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: default
   name: bazarr-config-v1
+  labels:
+    app.kubernetes.io/name: bazarr
+    snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce
