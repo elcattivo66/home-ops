@@ -33,13 +33,13 @@ metadata:
   name: flux-installation
   namespace: flux-system
 spec:
-  interval: 30m
-  path: ./manifests/install
+  interval: 10m
+  path: ./
   prune: true
   wait: true
   sourceRef:
-    kind: GitRepository
-    name: flux-installation
+    kind: OCIRepository
+    name: flux-manifests
   images:
     - name: fluxcd/helm-controller
       newName: ghcr.io/fluxcd/helm-controller
