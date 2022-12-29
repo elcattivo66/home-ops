@@ -5,3 +5,5 @@ namespace: monitoring
 resources:
   - kube-prometheus-stack
   - grafana
+  # Pre Flux-Kustomizations
+  - ./namespace.yaml

@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # Pre Flux-Kustomizations
+  - ./namespace.yaml
+  - ./helmrelease.yaml
+  - ./ingress-traefikCRD.yaml
+  - ./backup-definition.yaml
+  - ./backup.secret.sops.yaml
+  - ./prometheus.yaml
+  #- grafana-dashboard.yaml
+  #- storage-class-definition.yaml
+
