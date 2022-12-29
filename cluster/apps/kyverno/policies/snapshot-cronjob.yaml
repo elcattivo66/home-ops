@@ -71,12 +71,12 @@ spec:
                     initContainers:
                       # Stagger jobs to run randomly within X seconds to avoid bringing down all apps at once
                       - name: wait-for
-                        image: ghcr.io/onedr0p/alpine:3.16.1@sha256:ed7edf90c1e7df516ff37267841a17d0bedf7ef873f8f81bb3ddf06b3a464d06
+                        image: ghcr.io/onedr0p/alpine:3.17.0@sha256:23ca8ffcdfbe16492f0d638b71691985b15b3aa7cc373f366a14ec17275bc584
                         command: ["/scripts/sleep.sh"]
                         args: ["1", "900"]
                     containers:
                       - name: snapshot
-                        image: ghcr.io/onedr0p/kopia:0.11.3@sha256:72406602c99357951cb7284abbf88699081d60f6cffd22baddd8a6a2afe919f5
+                        image: ghcr.io/onedr0p/kopia:0.12.1@sha256:01ed9b934fa40216f17ffc8a906cf7a7e21c8d41a93f5ed571f2e5efa43844a7 
                         env:
                           - name: KOPIA_CACHE_DIRECTORY
                             value: /data/backups/{{ namespace }}/{{ claimName }}/cache
