@@ -5,7 +5,7 @@ metadata:
   name: longhorn
   namespace: longhorn-system
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://charts.longhorn.io
@@ -15,7 +15,7 @@ spec:
         kind: HelmRepository
         name: longhorn
         namespace: flux-system
-      interval: 5m
+      interval: 30m
   values:
     controllerType: deployment
     persistence:
@@ -37,15 +37,14 @@ spec:
         loadBalancerIP: "${SVC_LONGHORN_ADDR}"
         externalTrafficPolicy: Local
 
-    enablePSP: true
-
     defaultSettings:
       # backupTarget: nfs://nas:/backup/kubernetes/longhorn_backup
       backupTarget: s3://longhorn-backup@eu-central-1/
       backupTargetCredentialSecret: longhorn-minio
-      storageMinimalAvailablePercentage: 10
+      storageMinimalAvailablePercentage: 20
       defaultLonghornStaticStorageClass: longhorn
-
+      defaultReplicaCount: 3
+      orphanAutoDeletion: true
     resources:
       requests:
         cpu: 50m
@@ -53,13 +52,3 @@ spec:
       limits:
         cpu: 600m
         memory: 1500Mi
-
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: NotIn
-                values:
-                  - arm
