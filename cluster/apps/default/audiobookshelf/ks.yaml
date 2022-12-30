@@ -7,7 +7,7 @@ spec:
   path: ./cluster/apps/default/audiobookshelf/app
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: home-ops-kubernetes
   interval: 30m
   prune: false
   wait: true
