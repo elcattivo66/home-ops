@@ -1,11 +1,11 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: longhorn-hdd
+  name: longhorn-strict-local
 provisioner: driver.longhorn.io
 allowVolumeExpansion: true
 parameters:
   numberOfReplicas: "1"
-  staleReplicaTimeout: "30" # 8 hours in minutes
+  staleReplicaTimeout: "30"
   fsType: "ext4"
-  diskSelector: "hdd"
+  dataLocality: "strict-local"
