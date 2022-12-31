@@ -6,5 +6,6 @@ resources:
   # renovate: datasource=docker image=rancher/system-upgrade-controller
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.10.0/crd.yaml
   - system-upgrade-controller
+  - renovate
   # Pre Flux-Kustomizations
   - ./namespace.yaml
