@@ -6,11 +6,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://gitea.elcattivo.de/philipp/k3s-gitops
+  url: ssh://git@tonibrix:222/philipp/k3s-gitops.git #https://gitea.elcattivo.de/philipp/k3s-gitops
   ref:
     branch: main
   secretRef:
-    name: gitea-credentials
+    name: gitea-ssh-key #gitea-credentials
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
