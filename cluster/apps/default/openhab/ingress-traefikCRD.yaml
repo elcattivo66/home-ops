@@ -13,8 +13,8 @@ spec:
             - name: headers
               namespace: default
           services:
-            - name: paperless
-              port: 80
+            - name: openhab
+              port: 8282
               namespace: default
     tls:
         secretName: ${SECRET_CERT_NAME}-prod-tls
