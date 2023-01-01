@@ -54,7 +54,7 @@ spec:
       media:
         enabled: true
         type: nfs
-        server: ${NFS_ADDR}
+        server: nas
         path: /media_ssd/audiobooks
         mountPath: /audiobooks
         readOnly: false
