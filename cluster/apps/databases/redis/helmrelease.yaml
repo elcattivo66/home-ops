@@ -22,6 +22,8 @@ spec:
     remediation:
       retries: 5
   values:
+    global:
+      storageClass: longhorn-strict-local
     architecture: standalone
     auth:
       enabled: false
