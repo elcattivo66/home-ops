@@ -29,7 +29,7 @@ spec:
     env:
       USER_ID: 1000
       GROUP_ID: 1000
-      OPENHAB_HTTP_PORT: "80"
+      OPENHAB_HTTP_PORT: "8282"
       OPENHAB_HTTPS_PORT: "8443"
       EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Berlin -Dlog4j2.formatMsgNoLookups=true"
 
@@ -42,7 +42,7 @@ spec:
         externalTrafficPolicy: Local
         ports:
           http:
-            port: 80
+            port: 8282
           https:
             enabled: true
             port: 8443
@@ -59,6 +59,8 @@ spec:
             port: 8008
           chromecast2:
             port: 8009
+          hueemulation:
+            port: 80
 
     persistence:
       conf:
