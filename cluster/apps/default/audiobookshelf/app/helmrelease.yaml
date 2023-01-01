@@ -15,6 +15,18 @@ spec:
         name: bjw-s-charts
         namespace: flux-system
   interval: 15m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
   values:
     image:
       repository: ghcr.io/advplyr/audiobookshelf
@@ -43,9 +55,13 @@ spec:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
-        path: ${SSDMEDIADIR}/audiobooks
+        path: /media_ssd/audiobooks
         mountPath: /audiobooks
         readOnly: false
+      cache:
+        enabled: true
+        mountPath: /.npm
+        type: emptyDir
 
     podSecurityContext:
       runAsUser: 1000
