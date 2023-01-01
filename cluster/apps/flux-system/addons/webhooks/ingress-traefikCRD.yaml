@@ -1,8 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: &name flux-webhook
-  namespace: flux-system
+  name: flux-webhook
 spec:
   entryPoints:
     - websecure
@@ -11,7 +10,6 @@ spec:
       match: Host(`flux-webhook.${SECRET_DOMAIN}`)
       middlewares:
         - name: flux-webhook
-          namespace: flux-system
       services:
         - name: webhook-receiver
           port: 80
