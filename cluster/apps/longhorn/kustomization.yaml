@@ -9,4 +9,3 @@ resources:
   - ./ingress-traefikCRD.yaml
   - ./config
   - ./monitoring
-
