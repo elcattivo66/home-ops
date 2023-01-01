@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: flux-webhook
-  namespace: default
+  namespace: flux-system
 spec:
   rateLimit:
     average: 100
