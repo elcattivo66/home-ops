@@ -4,5 +4,5 @@ resources:
     - helmrelease.yaml
     - grafana-energy-dashboard.yaml
     - grafana-smarthome-dashboard.yaml
-    # - ingress-traefikCRD.yaml
+    - ingress-traefikCRD.yaml
     # - secret.sops.yaml
