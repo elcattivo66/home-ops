@@ -1,10 +1,13 @@
 ---
 access_control:
   default_policy: deny
+  networks:
+  - name: internal
+    networks:
+    - '10.0.0.0/8'
+    - '192.168.178.0/24'
   rules:
     # Rules applied to everyone
-    - domain: authelia.${SECRET_DOMAIN}
-      policy: bypass
     - domain: gitea.${SECRET_DOMAIN}
       policy: bypass
       resources:
@@ -28,7 +31,7 @@ access_control:
         - "*.${SECRET_DOMAIN}"
       policy: bypass
       networks:
-        - 192.168.178.0/24
+        - internal
     - domain:
         - "${SECRET_DOMAIN}"
         - "*.${SECRET_DOMAIN}"
