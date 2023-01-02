@@ -22,6 +22,13 @@ spec:
   values:
     deployment:
       replicas: 3
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        enabled: true
     service:
       enabled: true
       type: LoadBalancer
@@ -35,17 +42,28 @@ spec:
       access:
         enabled: true
         format: json
-    providers:
-      kubernetesCRD:
-        enabled: true
-        allowCrossNamespace: true
-        allowExternalNameServices: true
-      kubernetesIngress:
-        enabled: true
-    # volumes:
-    #   - name: traefik-config
-    #     mountPath: /etc/traefik
-    #     type: configMap
+        filters:
+          statuscodes: 200,300-302
+          retryattempts: true
+          minduration: 450000ns
+        fields:
+          general:
+            names:
+              defaultmode: drop
+              ClientAddr: keep
+              RequestAddr: keep
+              RequestMethod: keep
+              RequestPath: keep
+              RequestCount: keep
+              RequestProtocol: keep
+              RequestScheme: keep
+              RetryAttempts: keep
+              RouterName: keep
+              Duration: keep
+          headers:
+            defaultmode: keep
+            names:
+              Authorization: drop
     ingressClass:
       enabled: true
       isDefaultClass: true
@@ -55,11 +73,10 @@ spec:
         enabled: false
     globalArguments:
       - "--global.sendanonymoususage=false"
-      - "--api.insecure=true"
+      - "--global.checknewversion=true"
+      - "--api.insecure=false"
       - "--serverstransport.insecureskipverify=true"
       - "--providers.kubernetesingress.ingressclass=traefik"
-      - "--metrics.prometheus=true"
-      - "--metrics.prometheus.entryPoint=metrics"
     additionalArguments:
       - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
@@ -77,10 +94,9 @@ spec:
         tls:
           enabled: true
           options: "default"
-      metrics:
-        port: 8082
-        expose: true
-        exposedPort: 8082
+    metrics:
+      prometheus:
+        entryPoint: metrics
     pilot:
       enabled: false
     experimental:
