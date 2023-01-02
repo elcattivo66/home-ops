@@ -26,11 +26,14 @@ access_control:
     - domain:
         - "${SECRET_DOMAIN}"
         - "*.${SECRET_DOMAIN}"
-      policy: two_factor
-    - domain: "*"
       policy: bypass
       networks:
         - 192.168.178.0/24
+    - domain:
+        - "${SECRET_DOMAIN}"
+        - "*.${SECRET_DOMAIN}"
+      policy: two_factor
+
 
 identity_providers:
   oidc:
