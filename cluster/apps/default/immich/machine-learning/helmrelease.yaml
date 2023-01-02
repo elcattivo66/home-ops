@@ -25,6 +25,9 @@ spec:
     - name: immich-server
       namespace: default
   values:
+    controller:
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
       tag: v1.40.1_63-dev
