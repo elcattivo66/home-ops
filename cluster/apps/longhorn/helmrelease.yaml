@@ -30,6 +30,9 @@ spec:
       provisionerReplicaCount: 1
       resizerReplicaCount: 1
       snapshotterReplicaCount: 1
+    
+    longhornUI:
+      replicas: 1
 
     service:
       main:
