@@ -12,6 +12,7 @@ spec:
     copyMethod: Snapshot
     pruneIntervalDays: 10
     repository: bazarr-restic-secret
+    cacheCapacity: 2Gi
     retain:
       daily: 10
       within: 3d
