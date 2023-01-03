@@ -30,14 +30,12 @@ spec:
   values:
     replicaCount: 3
     volumeSnapshotClasses:
-      - name: csi-longhorn-snapshot
+      - name: longhorn-snapshot-vsc
         driver: driver.longhorn.io
         annotations:
           snapshot.storage.kubernetes.io/is-default-class: "true"
         parameters:
-          clusterID: longhorn
-          # csi.storage.k8s.io/snapshotter-secret-name: rook-csi-rbd-provisioner
-          # csi.storage.k8s.io/snapshotter-secret-namespace: longhorn-system
+          type: snap
         deletionPolicy: Delete
     serviceMonitor:
       create: true

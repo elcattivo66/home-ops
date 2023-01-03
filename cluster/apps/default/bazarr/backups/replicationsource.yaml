@@ -13,7 +13,7 @@ spec:
     pruneIntervalDays: 10
     repository: bazarr-restic-secret
     cacheCapacity: 2Gi
-    volumeSnapshotClassName: csi-longhorn-snapshot
+    volumeSnapshotClassName: longhorn-snapshot-vsc
     storageClassName: longhorn
     retain:
       daily: 10
