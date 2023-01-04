@@ -6,7 +6,6 @@ resources:
     - bazarr
     - calibre
     - calibre-web
-    - cloudflare-ddns
     - external-services
     - gotify
     - immich
