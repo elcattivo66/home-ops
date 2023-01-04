@@ -6,4 +6,4 @@ resources:
   - ./pvc.yaml
   - ./secret.sops.yaml
   - ./ingress-traefikCRD.yaml
-  # - ./backups
+  - ./backups
