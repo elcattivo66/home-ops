@@ -4,7 +4,6 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.25.5+k3s1 K3S_TOKEN=<TOKEN
 
 curl -sfL https://get.k3s.io | K3S_TOKEN=<TOKEN> sh -s - --write-kubeconfig-mode 644 --disable=traefik --disable=local-storage --disable=servicelb --node-taint 'node-role.kubernetes.io/master=true:NoSchedule' --server https://192.168.178.21:6443
 
-flux bootstrap git --url=https://gitea.elcattivo.de/philipp/k3s-gitops --password=himbeertoni --path=./cluster/flux --username=philipp --token-auth --token 9fa392acd4596e4f687ad66c039c813f6e5c3400
 
 Uninstall k3s:
 /usr/local/bin/k3s-uninstall.sh
