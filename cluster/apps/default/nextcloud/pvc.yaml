@@ -4,6 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: default
   name: nextcloud-config-v1
+  labels:
+    app.kubernetes.io/name: nextcloud
+    snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce

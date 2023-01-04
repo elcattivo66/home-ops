@@ -4,10 +4,13 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: default
   name: readarr-config-v1
+  labels:
+    app.kubernetes.io/name: readarr
+    snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce
-  resources:  
+  resources:
     requests:
       storage: 5Gi
   storageClassName: longhorn
