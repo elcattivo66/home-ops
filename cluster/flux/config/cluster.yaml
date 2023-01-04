@@ -5,7 +5,7 @@ metadata:
   name: home-ops-kubernetes
   namespace: flux-system
 spec:
-  interval: 1m
+  interval: 30m
   url: ssh://git@tonibrix:222/philipp/k3s-gitops.git #https://gitea.elcattivo.de/philipp/k3s-gitops
   ref:
     branch: main
@@ -18,7 +18,7 @@ metadata:
   name: cluster
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 30m
   path: ./cluster/flux
   prune: true
   wait: false
