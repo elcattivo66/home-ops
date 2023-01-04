@@ -4,7 +4,7 @@ metadata:
   name: cluster-apps-authelia-app
   namespace: flux-system
 spec:
-  path: ./cluster/apps/default/authelia/app
+  path: ./kubernetes/apps/default/authelia/app
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes

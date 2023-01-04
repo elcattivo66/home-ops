@@ -7,7 +7,7 @@ metadata:
 spec:
   timeout: 5m0s
   interval: 10m0s
-  path: ./cluster/apps
+  path: ./kubernetes/apps
   prune: true
   sourceRef:
     kind: GitRepository

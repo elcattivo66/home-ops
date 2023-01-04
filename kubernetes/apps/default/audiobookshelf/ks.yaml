@@ -4,7 +4,7 @@ metadata:
   name: cluster-apps-audiobookshelf-app
   namespace: flux-system
 spec:
-  path: ./cluster/apps/default/audiobookshelf/app
+  path: ./kubernetes/apps/default/audiobookshelf/app
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
