@@ -28,14 +28,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    image:
+      tag: v5.0.1
     replicaCount: 3
     volumeSnapshotClasses:
       - name: longhorn-snapshot-vsc
         driver: driver.longhorn.io
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "true"
-        parameters:
-          type: snap
         deletionPolicy: Delete
     serviceMonitor:
       create: true
@@ -62,3 +60,6 @@ spec:
     crds: Skip
   dependsOn:
     - name: snapshot-controller
+  values:
+    image:
+      tag: v5.0.1
