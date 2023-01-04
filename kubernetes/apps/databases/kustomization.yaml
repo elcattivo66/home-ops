@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
-  - ./postgresql
-  - ./postgres-backup
+  # - ./postgresql
+  # - ./postgres-backup
   - ./redis
   - ./influxdb
