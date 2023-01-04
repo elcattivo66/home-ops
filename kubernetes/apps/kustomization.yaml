@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./cert-manager
   - ./databases
-  # - ./default
+  - ./default
   - ./flux-system
   - ./kube-system
   - ./kyverno
