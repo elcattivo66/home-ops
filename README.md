@@ -14,7 +14,7 @@ https://fluxcd.io/docs/guides/mozilla-sops/
 https://devopstales.github.io/kubernetes/gitops-flux2-sops/
 
 ### Apply flux2
-kubectl apply --kustomize k3s-gitops/cluster/bootstrap/
+kubectl apply --kustomize k3s-gitops/kubernetes/bootstrap/
 
 ### Add sops key to cluster
 cat age.agekey |
@@ -23,8 +23,8 @@ kubectl create secret generic sops-age \
 --from-file=age.agekey=/dev/stdin
 
 ### Apply gitea secrets and flux-system
-sops -d k3s-gitops/cluster/flux/flux-system/secret.sops.yaml | kubectl apply -f -
-kubectl apply --kustomize k3s-gitops/cluster/flux/flux-system/
+sops -d k3s-gitops/kubernetes/flux/flux-system/secret.sops.yaml | kubectl apply -f -
+kubectl apply --kustomize k3s-gitops/kubernetes/flux/flux-system/
 
 ### Reconcile
       - flux reconcile -n flux-system source git flux-cluster
