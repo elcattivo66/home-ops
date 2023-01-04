@@ -1,3 +1,31 @@
+# Bootstrap
+
+## Flux
+
+### Install Flux
+
+```sh
+kubectl apply --server-side --kustomize ./kubernetes/bootstrap/flux
+```
+
+### Apply Cluster Configuration
+
+_These cannot be applied with `kubectl` in the regular fashion due to be encrypted with sops_
+
+```sh
+sops --decrypt kubernetes/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
+sops --decrypt kubernetes/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
+sops --decrypt kubernetes/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
+kubectl apply -f kubernetes/flux/vars/cluster-settings.yaml
+```
+
+### Kick off Flux applying this repository
+
+```sh
+kubectl apply --server-side --kustomize ./kubernetes/flux/config
+```
+
+
 # Install k3s:
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.25.5+k3s1 K3S_TOKEN=<TOKEN> sh -s - --write-kubeconfig-mode 644 --disable=traefik --disable=local-storage --disable=servicelb --cluster-init
 
