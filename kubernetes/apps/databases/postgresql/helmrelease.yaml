@@ -24,3 +24,6 @@ spec:
   values:
     crds:
       create: true
+    config:
+      data:
+        INHERITED_ANNOTATIONS: kyverno.io/ignore
