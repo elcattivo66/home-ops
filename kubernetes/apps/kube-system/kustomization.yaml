@@ -6,3 +6,4 @@ resources:
   - ./node-feature-discovery
   - ./reloader
   # - ./snapshot-controller
+  - ./smarter-device-manager/ks.yaml
