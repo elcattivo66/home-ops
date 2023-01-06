@@ -5,12 +5,12 @@ resources:
 - ./backube.yaml
 - ./bitnami.yaml
 - ./bjw-s-charts.yaml
+- ./cloudnative-pg-charts.yaml
 - ./helm-stable.yaml
 - ./traefik.yaml
 - ./metallb.yaml
 - ./longhorn.yaml
 - ./jetstack.yaml
-- ./cloudnative-pg-charts.yaml
 - ./node-feature-discovery-charts.yaml
 - ./prometheus-community-charts.yaml
 - ./grafana-charts.yaml
@@ -20,3 +20,4 @@ resources:
 - ./kyverno-charts.yaml
 - ./piraeus.yaml
 - ./weave-gitops.yaml
+- ./k8s-gateway.yaml
