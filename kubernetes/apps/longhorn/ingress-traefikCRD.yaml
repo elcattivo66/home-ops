@@ -10,7 +10,7 @@ spec:
       match: Host(`longhorn.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
         - name: authelia
           namespace: default
       services:

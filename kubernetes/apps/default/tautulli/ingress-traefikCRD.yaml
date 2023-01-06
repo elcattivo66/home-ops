@@ -12,7 +12,7 @@ spec:
       priority: 99
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
         - name: authelia
           namespace: default
       services:
@@ -21,10 +21,10 @@ spec:
           namespace: default
     - kind: Rule
       match: Host(`tautulli.${SECRET_DOMAIN}`) && (Headers(`X-Api-Key`, `${TAUTULLI_DEVICE_TOKEN}`) || Query(`apikey`, `${TAUTULLI_DEVICE_TOKEN}`))
-      priority: 100      
+      priority: 100
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
       services:
         - name: *name
           port: 8181

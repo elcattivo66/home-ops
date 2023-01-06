@@ -11,34 +11,10 @@ spec:
       match: Host(`immich.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
         # - name: authelia
         #   namespace: default
       services:
         - name: immich-proxy
           port: 8080
           namespace: default
-  #   - kind: Rule
-  #     match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/api`)
-  #     middlewares:
-  #       - name: headers
-  #         namespace: default
-  #       - name: strip-api-prefix
-  #         namespace: default        
-  #     services:
-  #       - name: immich-server
-  #         port: 3001
-  #         namespace: default
-  # tls:
-  #   secretName: ${SECRET_CERT_NAME}-prod-tls
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: strip-api-prefix
-  namespace: default
-spec:
-  stripPrefix:
-    prefixes: 
-      - /api

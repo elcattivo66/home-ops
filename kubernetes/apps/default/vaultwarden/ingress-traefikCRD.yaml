@@ -11,7 +11,7 @@ spec:
       match: Host(`bitwarden.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
       services:
         - name: *name
           port: 80
@@ -20,7 +20,7 @@ spec:
       match: Host(`bitwarden.${SECRET_DOMAIN}`) && Path(`/notifications/hub`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
       services:
         - name: *name
           port: 3012

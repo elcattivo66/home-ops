@@ -11,7 +11,7 @@ spec:
       match: Host(`cloud.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
         - name: nextcloud-redirect-1
           namespace: default
         - name: nextcloud-redirect-2

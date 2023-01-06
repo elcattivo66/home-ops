@@ -12,7 +12,7 @@ spec:
       priority: 99
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
         - name: authelia
           namespace: default
       services:
@@ -21,10 +21,10 @@ spec:
           namespace: default
     - kind: Rule
       match: Host(`sonarr.${SECRET_DOMAIN}`) && (Headers(`X-Api-Key`, `${SONARR_API_KEY}`) || Query(`apikey`, `${SONARR_API_KEY}`))
-      priority: 100      
+      priority: 100
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
       services:
         - name: *name
           port: 8989

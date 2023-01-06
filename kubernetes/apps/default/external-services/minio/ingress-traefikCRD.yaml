@@ -11,7 +11,7 @@ spec:
       match: Host(`minio-admin.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
         - name: authelia
           namespace: default
       services:
@@ -22,7 +22,7 @@ spec:
       match: Host(`minio.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: default
+          namespace: networking
       services:
         - name: *name
           port: 9102
