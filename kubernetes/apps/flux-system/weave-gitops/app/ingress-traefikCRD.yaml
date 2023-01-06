@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: weave-gitop
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`gitops.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: networking
+      services:
+        - name: weave-gitops
+          port: 9001
+          namespace: flux-system
+  tls:
+    secretName: ${SECRET_CERT_NAME}-prod-tls
