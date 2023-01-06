@@ -11,7 +11,7 @@ spec:
           match: Host(`paperless.${SECRET_DOMAIN}`)
           middlewares:
             - name: headers
-              namespace: default
+              namespace: networking
             - name: authelia
               namespace: default
           services:
