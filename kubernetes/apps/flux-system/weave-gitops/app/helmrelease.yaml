@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     adminUser:
-      create: true
+      create: false
       username: admin
     oidcSecret:
       create: true
