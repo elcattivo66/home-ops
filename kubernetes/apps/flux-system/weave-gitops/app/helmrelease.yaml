@@ -61,4 +61,4 @@ spec:
     # - kind: Secret
     #   name: weave-gitops-secret
     #   valuesKey: redirectURL
-      targetPath: oidcSecret.redirectURL
+      # targetPath: oidcSecret.redirectURL
