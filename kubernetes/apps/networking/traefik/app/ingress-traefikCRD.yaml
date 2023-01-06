@@ -15,8 +15,8 @@ spec:
         - name: authelia
           namespace: default
       services:
-        - name: *name
-          port: 9000
+        - name: api@internal
+          kind: TraefikService
           namespace: networking
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
