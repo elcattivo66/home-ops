@@ -5,7 +5,7 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   - ./cloudflare-ddns
-  - ./traefik
   # Flux-Kustomization
   - ./metallb/ks.yaml
-  - ./k8s-gateway/ks.yaml
+  - ./traefik/ks.yaml
+
