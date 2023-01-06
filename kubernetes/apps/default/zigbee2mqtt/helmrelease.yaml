@@ -49,32 +49,24 @@ spec:
         enabled: true
         existingClaim: zigbee2mqtt-config-v1
         mountPath: "/data"
-      usb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/ttyUSB0
-        mountPath: /dev/ttyUSB0
+      # usb:
+      #   enabled: true
+      #   type: hostPath
+      #   hostPath: /dev/ttyUSB0
+      #   mountPath: /dev/ttyUSB0
     resources:
       requests:
         cpu: 10m
         memory: 100Mi
       limits:
         memory: 300Mi
+        smarter-devices/ttyUSB0: 1
     # affinity:
     #   nodeAffinity:
     #     requiredDuringSchedulingIgnoredDuringExecution:
     #       nodeSelectorTerms:
-    #       - matchExpressions:
-    #         - key: app
-    #           operator: In
-    #           values:
-    #           - zigbee-controller
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/usb-ff_10c4_ea60.present
-                  operator: In
-                  values:
-                    - "true"
+    #         - matchExpressions:
+    #             - key: feature.node.kubernetes.io/usb-ff_10c4_ea60.present
+    #               operator: In
+    #               values:
+    #                 - "true"
