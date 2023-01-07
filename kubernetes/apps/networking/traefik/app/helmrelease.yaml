@@ -81,7 +81,7 @@ spec:
       # - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
-      - "--entrypints.metrics.address=:9100"
+      - "--entrypoints.metrics.address=:9100"
       - "--metrics.prometheus.entryPoint=metrics"
       - "--entrypoints.web.proxyprotocol.trustedips=127.0.0.1"
       - "--entrypoints.web.forwardedheaders.trustedips=127.0.0.1/32"
