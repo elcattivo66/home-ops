@@ -89,11 +89,11 @@ spec:
         replicaExternalLabelName: __replica__
         externalLabels:
           cluster: home-ops
-        # podAntiAffinity: hard
-        # ruleSelectorNilUsesHelmValues: false
-        # serviceMonitorSelectorNilUsesHelmValues: false
-        # podMonitorSelectorNilUsesHelmValues: false
-        # probeSelectorNilUsesHelmValues: false
+        podAntiAffinity: hard
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         retention: 2d
         retentionSize: 6GB
         enableAdminAPI: true
@@ -101,7 +101,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "longhorn-strict-local"
+              storageClassName: "longhorn"
               resources:
                 requests:
                   storage: 10Gi
