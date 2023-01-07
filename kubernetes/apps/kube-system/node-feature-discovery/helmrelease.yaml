@@ -31,10 +31,8 @@ spec:
             - ["custom", "pci", "usb"]
         sources:
           usb:
-            deviceClassWhitelist:
-              - ["00", "02", "03", "0e", "ef", "fe", "ff"]
-            deviceLabelFields:
-              - ["class", "vendor", "device"]
+            deviceClassWhitelist: ["00", "02", "03", "0e", "ef", "fe", "ff"]
+            deviceLabelFields: ["class", "vendor", "device"]
           cpu:
             cpuid:
               attributeWhitelist: ["AVX", "AVX2"]
