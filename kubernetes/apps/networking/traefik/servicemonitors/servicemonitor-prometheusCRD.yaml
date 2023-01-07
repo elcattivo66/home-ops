@@ -1,13 +1,13 @@
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: &name traefik
+  name: traefik
   namespace: networking
-  labels: &labels
-    app.kubernetes.io/name: *name
 spec:
   selector:
-    matchLabels: *labels
+    matchLabels:
+      app: traefik
   namespaceSelector:
     matchNames:
       - networking
