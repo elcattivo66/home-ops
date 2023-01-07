@@ -41,7 +41,13 @@ spec:
         ports:
           http:
             port: 9787
-
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
     resources:
       requests:
         cpu: 5m
