@@ -1,0 +1,37 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: fritzbox-exporter
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  interval: 15m
+  values:
+    image:
+      repository: docker.io/pdreker/fritz_exporter
+      tag: 2.2.1
+    envFrom:
+      - secretRef:
+          name: fritzbox-exporter-secret
+
+    service:
+      main:
+        ports:
+          http:
+            port: 9787
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 2ßM
+      limits:
+        memory: 200M
