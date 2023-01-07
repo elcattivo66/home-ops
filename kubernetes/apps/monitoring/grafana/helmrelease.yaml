@@ -38,7 +38,7 @@ spec:
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_DOMAIN: grafana.${SECRET_DOMAIN}
-      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"      
+      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
     grafana.ini:
       auth:
         signout_redirect_url: "https://grafana.${SECRET_DOMAIN}/"
@@ -114,7 +114,7 @@ spec:
       openhab:
         metrics:
           url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
-          datasource: Prometheus  
+          datasource: Prometheus
       default:
         # Ref: https://grafana.com/grafana/dashboards/12250
         traefik:
@@ -124,6 +124,10 @@ spec:
         longhorn:
           gnetId: 17626
           revision: 1
+          datasource: Prometheus
+        Fritz!Exporter:
+          gnetId: 13983
+          revision: 10
           datasource: Prometheus
     #     # Ref: https://grafana.com/grafana/dashboards/13502
     #     minio:
