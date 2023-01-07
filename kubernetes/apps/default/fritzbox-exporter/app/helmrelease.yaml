@@ -48,6 +48,11 @@ spec:
           - port: http
             scheme: http
             path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
+            relabelings:
+              - sourceLabels: [__meta_kubernetes_pod_node_name]
+                targetLabel: node
     resources:
       requests:
         cpu: 5m
