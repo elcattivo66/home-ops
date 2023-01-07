@@ -59,7 +59,7 @@ spec:
               matchFeatures:
                 - feature: cpu.cpuid
                   matchExpressions:
-                    AVX2: {op: Exists}
+                    AVX2: true
             # - name: zigbee
             #   matchOn:
             #      - usbId:
