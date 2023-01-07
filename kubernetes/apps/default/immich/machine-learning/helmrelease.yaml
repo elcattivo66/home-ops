@@ -72,7 +72,7 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-avx2
+                - key: feature.node.kubernetes.io/cpu-cpuid.AVX2
                   operator: In
                   values:
                     - "true"
