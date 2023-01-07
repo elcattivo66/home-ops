@@ -15,10 +15,23 @@ spec:
         name: bjw-s-charts
         namespace: flux-system
   interval: 15m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
   values:
     image:
       repository: docker.io/pdreker/fritz_exporter
       tag: 2.2.1
+
     envFrom:
       - secretRef:
           name: fritzbox-exporter-secret
