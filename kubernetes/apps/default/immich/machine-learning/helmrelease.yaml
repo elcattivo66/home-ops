@@ -58,12 +58,21 @@ spec:
         memory: 250Mi
       limits:
         memory: 2000Mi
+    # affinity:
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #       - matchExpressions:
+    #         - key: app
+    #           operator: In
+    #           values:
+    #           - zigbee-controller
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - zigbee-controller
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/custom-avx2
+                  operator: In
+                  values:
+                    - "true"

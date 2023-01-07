@@ -55,6 +55,11 @@ spec:
                 - pciId:
                     class: ["0300"]
                     vendor: ["8086"]
+            - name: avx2
+              matchFeatures:
+                - feature: cpu.cpuid
+                  matchExpressions:
+                    AVX2: {op: Exists}
             # - name: zigbee
             #   matchOn:
             #      - usbId:
