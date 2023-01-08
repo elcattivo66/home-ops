@@ -6,7 +6,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   annotations:
-    grafana_folder: "Openhab"  
+    grafana_folder: "Openhab"
 data:
   grafana-energy-dashboard.json: |-
     {
@@ -35,7 +35,6 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 2,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -85,7 +84,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.1",
+          "pluginVersion": "9.3.1",
           "targets": [
             {
               "datasource": {
@@ -177,7 +176,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.1",
+          "pluginVersion": "9.3.1",
           "targets": [
             {
               "datasource": {
@@ -272,7 +271,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.1",
+          "pluginVersion": "9.3.1",
           "targets": [
             {
               "datasource": {
@@ -367,7 +366,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.1",
+          "pluginVersion": "9.3.1",
           "targets": [
             {
               "datasource": {
@@ -434,7 +433,7 @@ data:
                   }
                 ]
               },
-              "unit": "watth"
+              "unit": "watt"
             },
             "overrides": []
           },
@@ -442,6 +441,98 @@ data:
             "h": 4,
             "w": 6,
             "x": 6,
+            "y": 4
+          },
+          "id": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P3C6603E967DC8568"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "Smartplug2_Powerusage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "distinct"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Stromverbrauch NAS",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P3C6603E967DC8568"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
             "y": 4
           },
           "id": 5,
@@ -459,7 +550,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.1",
+          "pluginVersion": "9.3.1",
           "targets": [
             {
               "datasource": {
@@ -549,7 +640,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "9.1.1",
+          "pluginVersion": "9.3.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -697,13 +788,13 @@ data:
           },
           "yaxes": [
             {
-              "$$hashKey": "object:137",
+              "$hashKey": "object:137",
               "format": "watth",
               "logBase": 1,
               "show": true
             },
             {
-              "$$hashKey": "object:138",
+              "$hashKey": "object:138",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -712,6 +803,168 @@ data:
           "yaxis": {
             "align": false
           }
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P3C6603E967DC8568"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 8
+          },
+          "id": 12,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P3C6603E967DC8568"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "Smartplug1_Powerusage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P3C6603E967DC8568"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "Smartplug2_Powerusage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Stromverbrauch",
+          "type": "timeseries"
         }
       ],
       "refresh": false,
@@ -722,13 +975,13 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Energy consumption",
       "uid": "hnUSSwcMk",
-      "version": 19,
+      "version": 1,
       "weekStart": ""
     }
