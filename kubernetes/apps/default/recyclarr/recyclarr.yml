@@ -76,9 +76,7 @@ radarr:
       - trash_ids:
           - ff5bc9e8ce91d46c997ca3ac6994d6f8 # UHD FraMeSToR (set to 0, 1 or 3200)
         quality_profiles:
-          - name: HD
-            score: 1
-          - name: SD
+          - name: HD-1080p
             score: 1
       - trash_ids:
           - 496f355514737f7d83bf7aa4d24f8169 # TrueHD Atmos
@@ -112,8 +110,11 @@ radarr:
           - 957d0f44b592285f26449575e8b1167e # Special Edition
           - eecf3a857724171f968a66cb5719e152 # IMAX
           - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
-          - 403f3f6266b90439cacc1e07cae4dc2d # HQ-Remux
-          - 26fa26253af4001701fedb56cec376dc # HQ-Webdl
+          - 3a3ff47579026e76d6504ebea39390de # HQ-Remux Tier 01
+          - 9f98181fe5a3fbeb0cc29340da2a468a # HQ-Remux Tier 02
+          - c20f169ef63c5f40c2def54abaf4438e # WEB Tier 01
+          - 403816d65392c79236dcb6dd591aeda4 # WEB Tier 02
+          - af94e0fe497124d1f9ce732069ec8c3b # WEB Tier 03
           - 4d74ac4c4db0b64bff6ce0cffef99bf0 # UHD Bluray Tier 01
           - a58f517a70193f8e578056642178419d # UHD Bluray Tier 02
           - e71939fae578037e7aed3ee219bbe7c1 # UHD Bluray Tier 03
@@ -124,24 +125,17 @@ radarr:
           - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D -10000
           - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
           - ae9b7c9ebde1f3bd336a8cbd1ec4c5e5 # No-RlsGroup removed do avoid multiple downloads
+          - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
+          - 9c38ebb7384dada637be8899efa68e6f # SDR (Prevent grab of 4K without HDR)
           # - dc98083864ea246d05a42df0d05f81cc # x265 (720/1080p)
         quality_profiles:
           - name: HD-1080p
             reset_unmatched_scores: true
-          - name: SD
+          - name: Ultra-HD
             reset_unmatched_scores: true
-      - trash_ids:
-          - 1c7d7b04b15cc53ea61204bebbcc1ee2 # HQ
-        quality_profiles:
-          - name: HD-1080p
-            score: 0
-          - name: SD
-            score: 0
       - trash_ids:
           - 4b900e171accbfb172729b63323ea8ca # Optional: Multi
           - 923b6abef9b17f937fab56cfcf89e1f1 # Optional: DV (WEBDL) without fallback to HDR, set to manual score 0 or -10000
         quality_profiles:
           - name: HD-1080p
-            score: 0
-          - name: SD
             score: 0
