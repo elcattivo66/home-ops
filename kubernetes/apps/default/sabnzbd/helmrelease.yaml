@@ -55,7 +55,7 @@ spec:
         path: ${MEDIADIR}
         mountPath: /media
         readOnly: false
-        
+
       incomplete:
         enabled: true
         type: emptyDir
@@ -71,4 +71,4 @@ spec:
         cpu: 50m
         memory: 250Mi
       limits:
-        memory: 3000Mi
+        memory: 2000Mi

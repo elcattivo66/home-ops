@@ -28,7 +28,7 @@ spec:
       repository: ghcr.io/onedr0p/sonarr-develop
       pullPolicy: IfNotPresent
       tag: 4.0.0.344@sha256:4526203586c606530ec90e24b845c02b031b1b9807e91347c30ea28483f7458a
-      
+
     env:
       TZ: ${TZ}
       PUID: "1000"
@@ -68,5 +68,5 @@ spec:
         cpu: 50m
         memory: 250Mi
       limits:
-        cpu: 300m
-        memory: 500Mi
+        cpu: 500m
+        memory: 1000Mi
