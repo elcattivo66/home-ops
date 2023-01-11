@@ -31,6 +31,8 @@ sonarr:
           - e6258996055b9fbab7e9cb2f75819294 # WEB Tier 01
           - 58790d4e2fdcd9733aa7ae68ba2bb503 # WEB Tier 02
           - d84935abd3f8556dcd51d4f27e22d0a6 # WEB Tier 03
+          - d6819cba26b1a6508138d25fb5e32293 # HD BluRay Tier 01
+          - c2216b7b8aa545dc1ce8388c618f8d57 # HD BluRay Tier 01
           # Repacks / Propers
           - ec8fa7296b64e8cd390a1600981f3923 # Repack/Proper
           - eb3d5cc0a2be0db205fb823640db6a3c # Repack v2
@@ -64,6 +66,13 @@ sonarr:
             reset_unmatched_scores: true
           - name: Ultra-HD
             reset_unmatched_scores: true
+
+      - trash_ids:
+        - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
+        - 9b27ab6498ec0f31a3353992e19434ca # DV (WEBDL)
+        quality_profiles:
+          - name: HD-1080p
+          - name: Ultra-HD
 
 radarr:
   standard:
