@@ -138,4 +138,6 @@ radarr:
           - 923b6abef9b17f937fab56cfcf89e1f1 # Optional: DV (WEBDL) without fallback to HDR, set to manual score 0 or -10000
         quality_profiles:
           - name: HD-1080p
-            score: 0
+            score: -10000
+          - name: Ultra-HD
+            score: -10000
