@@ -6,4 +6,4 @@ resources:
   - ./helmrelease.yaml
   - ./grafana-dashboard.yaml
   # - ./ingress-traefikCRD.yaml
-  - ./config
+  # - ./config
