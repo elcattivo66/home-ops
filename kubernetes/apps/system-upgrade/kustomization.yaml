@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
-  - ./renovate
   # Flux-Kustomizations
+  - ./renovate/ks.yaml
   - ./system-upgrade-controller/ks.yaml
