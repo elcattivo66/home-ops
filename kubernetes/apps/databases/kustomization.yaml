@@ -7,4 +7,4 @@ resources:
   - ./postgresql
   - ./postgres-backup
   - ./redis
-  - ./influxdb
+  # - ./influxdb

@@ -23,7 +23,7 @@ spec:
       retries: 5
   values:
     global:
-      storageClass: longhorn
+      storageClass: local-path
     architecture: standalone
     auth:
       enabled: false
