@@ -41,6 +41,10 @@ spec:
       - secretRef:
           name: cloudflare-ddns-secret
 
+    service:
+      main:
+        enabled: false
+
     resources:
       requests:
         cpu: 15m
