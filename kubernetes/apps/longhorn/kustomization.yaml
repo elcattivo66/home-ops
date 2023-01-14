@@ -6,6 +6,6 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   - ./helmrelease.yaml
-  - ./ingress-traefikCRD.yaml
+  # - ./ingress-traefikCRD.yaml
   # - ./config
   # - ./monitoring
