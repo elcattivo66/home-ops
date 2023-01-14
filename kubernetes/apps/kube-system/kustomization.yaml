@@ -7,3 +7,4 @@ resources:
   - ./reloader
   # - ./snapshot-controller
   - ./smarter-device-manager/ks.yaml
+  - ./local-path-provisioner/ks.yaml
