@@ -7,9 +7,9 @@ resources:
   # - ./default
   # - ./flux-system
   - ./kube-system
-  - ./kyverno
+  # - ./kyverno
   - ./longhorn
-  - ./networking
+  # - ./networking
   # - ./monitoring
   - ./system-upgrade
   # - ./volsync
