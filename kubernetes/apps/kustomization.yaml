@@ -5,7 +5,7 @@ resources:
   - ./cert-manager
   # - ./databases
   - ./default
-  # - ./flux-system
+  - ./flux-system
   - ./kube-system
   - ./kyverno
   - ./longhorn
