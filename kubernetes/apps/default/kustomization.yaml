@@ -2,23 +2,23 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
     - audiobookshelf/app #ks.yaml
-    # - authelia/app #/ks.yaml
+    - authelia/app #/ks.yaml
     - bazarr
     - calibre
     - calibre-web
     - external-services
     - fritzbox-exporter/ks.yaml
     - gotify
-    # - immich
+    - immich
     - jellyfin
     - kopia
     - lidarr
     - lldap
-    # - nextcloud
+    - nextcloud
     - mosquitto
     - openhab
     - overseerr
-    # - paperless
+    - paperless
     - plex
     - prowlarr
     - radarr
