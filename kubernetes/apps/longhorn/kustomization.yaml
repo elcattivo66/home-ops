@@ -6,6 +6,6 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # - ./longhorn/ks.yaml
-  - ./app
-  - ./config
-  - ./monitoring
+  - ./longhorn/app
+  - ./longhorn/config
+  - ./longhorn/monitoring
