@@ -5,7 +5,7 @@ resources:
   - helmrelease.yaml
   # - cluster.yaml
   - secret.sops.yaml
-  - scheduled-backup.yaml
+  # - scheduled-backup.yaml
   - service.yaml
 configMapGenerator:
   - name: cloudnative-pg-dashboard
