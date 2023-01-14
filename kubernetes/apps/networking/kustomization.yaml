@@ -8,4 +8,5 @@ resources:
   # Flux-Kustomization
   - ./metallb/ks.yaml
   - ./traefik/ks.yaml
+  - ./multus/ks.yaml
 
