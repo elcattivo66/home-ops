@@ -5,4 +5,7 @@ namespace: longhorn-system
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
-  - ./longhorn/ks.yaml
+  # - ./longhorn/ks.yaml
+  - ./app
+  - ./config
+  - ./monitoring
