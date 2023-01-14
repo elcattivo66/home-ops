@@ -9,7 +9,7 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:14.6
   storage:
     size: 15Gi
-    storageClass: local-path
+    storageClass: longhorn
   superuserSecret:
     name: postgres-superuser
   bootstrap:
