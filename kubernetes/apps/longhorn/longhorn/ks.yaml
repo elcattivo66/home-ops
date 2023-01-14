@@ -1,0 +1,45 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-longhorn
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/longhorn/longhorn/app
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  prune: false
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-longhorn-config
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-longhorn
+  path: ./kubernetes/apps/longhorn/longhorn/config
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  prune: false
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-longhorn-monitoring
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-longhorn
+  path: ./kubernetes/apps/longhorn/longhorn/monitoring
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  prune: false
+  wait: true
