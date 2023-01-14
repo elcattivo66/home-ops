@@ -8,4 +8,4 @@ resources:
   - ./helmrelease.yaml
   - ./ingress-traefikCRD.yaml
   # - ./config
-  - ./monitoring
+  # - ./monitoring
