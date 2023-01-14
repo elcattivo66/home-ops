@@ -7,8 +7,8 @@ resources:
   - ./default
   - ./flux-system
   - ./kube-system
-  - ./kyverno
+  # - ./kyverno
   - ./longhorn
-  - ./networking
-  - ./monitoring
-  - ./system-upgrade
+  # - ./monitoring
+  # - ./networking
+  # - ./system-upgrade
