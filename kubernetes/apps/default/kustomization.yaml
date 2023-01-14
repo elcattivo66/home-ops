@@ -19,7 +19,7 @@ resources:
     - openhab
     - overseerr
     # - paperless
-    # - plex
+    - plex
     - prowlarr
     - radarr
     - radicale
