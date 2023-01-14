@@ -12,4 +12,3 @@ resources:
   - ./networking
   - ./monitoring
   - ./system-upgrade
-  # - ./volsync
