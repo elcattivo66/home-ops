@@ -25,8 +25,8 @@ spec:
         repository: ghcr.io/angelnu/cni-plugins
         tag: v1.1.1
 
-      paths:
-        config: /etc/cni/net.d
-        bin: /opt/cni/bin
+      # paths:
+      #   config: /etc/cni/net.d
+      #   bin: /opt/cni/bin
 
       version: "0.3.1"
