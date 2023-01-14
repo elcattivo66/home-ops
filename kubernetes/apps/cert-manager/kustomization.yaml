@@ -6,8 +6,8 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   - ./helmrelease.yaml
-  # - ./dashboard
-  # - ./letsencrypt-production.yaml
+  - ./dashboard
+  - ./letsencrypt-production.yaml
   # - ./letsencrypt-staging.yaml
-  # - ./secret.sops.yaml
-  # - ./certificate.yaml
+  - ./secret.sops.yaml
+  - ./certificate.yaml
