@@ -26,6 +26,6 @@ spec:
       services:
         - name: *name
           port: 9102
-          namespace: default
+          namespace: networking
   tls:
     secretName: ${SECRET_CERT_NAME}-prod-tls
