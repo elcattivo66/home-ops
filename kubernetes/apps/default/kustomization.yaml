@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
     - audiobookshelf/ks.yaml
     - authelia/ks.yaml
-    - bazarr
+    - bazarr/ks.yaml
     - calibre
     - calibre-web
     - fritzbox-exporter/ks.yaml
@@ -14,7 +14,7 @@ resources:
     - lidarr
     - lldap/ks.yaml
     - nextcloud
-    - mosquitto
+    - mosquitto/ks.yaml
     - openhab
     - overseerr
     - paperless
