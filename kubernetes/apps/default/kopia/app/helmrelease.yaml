@@ -65,7 +65,7 @@ spec:
         mountPath: /backups
         server: ${NAS_ADDR}
         path: ${BACKUPDIR}/kubernetes/kopia-backups
-        
+
     resources:
       requests:
         cpu: 15m
