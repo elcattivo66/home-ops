@@ -8,6 +8,7 @@ resources:
     - ./calibre-web
     - ./external-services
     - ./gotify
+    - ./grafana
     - ./immich
     - ./kopia
     - ./lidarr

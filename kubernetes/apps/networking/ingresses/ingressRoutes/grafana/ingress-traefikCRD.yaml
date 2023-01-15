@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: &name grafana
-  namespace: default
+  namespace: networking
 spec:
   entryPoints:
     - websecure
@@ -13,7 +13,7 @@ spec:
         - name: headers
           namespace: networking
         - name: authelia
-          namespace: default
+          namespace: networking
       services:
         - name: *name
           port: 80
