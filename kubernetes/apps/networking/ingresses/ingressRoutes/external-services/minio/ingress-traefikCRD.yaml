@@ -17,7 +17,7 @@ spec:
       services:
         - name: *name
           port: 9101
-          namespace: default
+          namespace: networking
     - kind: Rule
       match: Host(`minio.${SECRET_DOMAIN}`)
       middlewares:
