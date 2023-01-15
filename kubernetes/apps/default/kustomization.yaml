@@ -6,7 +6,6 @@ resources:
     - bazarr
     - calibre
     - calibre-web
-    - external-services
     - fritzbox-exporter/ks.yaml
     - gotify
     - immich
