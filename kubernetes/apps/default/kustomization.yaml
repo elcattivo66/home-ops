@@ -12,7 +12,7 @@ resources:
     - jellyfin
     - kopia
     - lidarr
-    - lldap
+    - lldap/ks.yaml
     - nextcloud
     - mosquitto
     - openhab
