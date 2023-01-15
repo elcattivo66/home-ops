@@ -13,9 +13,9 @@ spec:
         - name: headers
           namespace: networking
         - name: nextcloud-redirect-1
-          namespace: default
+          namespace: networking
         - name: nextcloud-redirect-2
-          namespace: default
+          namespace: networking
         # - name: authelia
         #   namespace: default
       services:
