@@ -8,12 +8,18 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   path: ./kubernetes/apps/longhorn/longhorn/app
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: longhorn
+      namespace: longhorn-system
   interval: 30m
-  prune: false
-  wait: true
+  retryInterval: 1m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -26,12 +32,14 @@ spec:
   dependsOn:
     - name: cluster-apps-longhorn
   path: ./kubernetes/apps/longhorn/longhorn/config
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  interval: 30m
-  prune: false
   wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -45,9 +53,11 @@ spec:
     - name: cluster-apps-longhorn
     - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/longhorn/longhorn/monitoring
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  interval: 30m
-  prune: false
   wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
