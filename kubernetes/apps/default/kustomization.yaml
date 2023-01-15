@@ -4,10 +4,10 @@ resources:
     - audiobookshelf/ks.yaml
     - authelia/ks.yaml
     - bazarr/ks.yaml
-    - calibre
-    - calibre-web
+    - calibre/ks.yaml
+    - calibre-web/ks.yaml
     - fritzbox-exporter/ks.yaml
-    - gotify
+    - gotify/ks.yaml
     - immich
     - jellyfin
     - kopia
