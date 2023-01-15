@@ -22,7 +22,7 @@ spec:
     remediation:
       retries: 5
   dependsOn:
-    - name: postgres
+    - name: cloudnative-pg
       namespace: databases
     - name: lldap
       namespace: default
@@ -60,7 +60,7 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
-    
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
