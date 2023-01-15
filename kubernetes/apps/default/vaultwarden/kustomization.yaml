@@ -5,5 +5,4 @@ resources:
   - ./helmrelease.yaml
   - ./pvc.yaml
   - ./secret.sops.yaml
-  - ./ingress-traefikCRD.yaml
   # - ./backups

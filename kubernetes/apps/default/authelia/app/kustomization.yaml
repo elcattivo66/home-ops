@@ -5,7 +5,6 @@ resources:
   - ./secret.sops.yaml
   - ./secret.pg.sops.yaml
   - ./helmrelease.yaml
-  - ./ingress-traefikCRD.yaml
 commonLabels:
   app.kubernetes.io/name: authelia
   app.kubernetes.io/instance: authelia

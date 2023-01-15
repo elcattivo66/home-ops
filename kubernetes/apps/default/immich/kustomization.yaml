@@ -7,6 +7,5 @@ resources:
   - machine-learning
   - web
   - proxy
-  - ingress-traefikCRD.yaml
   - config-map.yaml
   - secret.sops.yaml

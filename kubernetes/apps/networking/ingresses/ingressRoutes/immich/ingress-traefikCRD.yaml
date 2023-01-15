@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name immich
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`immich.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: networking
+        # - name: authelia
+        #   namespace: networking
+      services:
+        - name: immich-proxy
+          port: 8080
+          namespace: default

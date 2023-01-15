@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./servicemonitor-prometheusCRD.yaml
+  - ./grafana-dashboard.yaml
