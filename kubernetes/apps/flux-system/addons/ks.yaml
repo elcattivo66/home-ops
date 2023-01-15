@@ -7,6 +7,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/flux-system/addons/monitoring
   prune: true
   sourceRef:
@@ -25,6 +27,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-traefik
   path: ./kubernetes/apps/flux-system/addons/webhooks
   prune: true
   sourceRef:
