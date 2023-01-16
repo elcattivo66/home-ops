@@ -18,16 +18,13 @@
       "automergeType": "branch",
       "ignoreTests": true,
       "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["ghcr.io/onedr0p/prowlarr-nightly"]
-    },
-    {
-      "description": "Auto merge GitHub Actions",
-      "matchManagers": ["github-actions"],
-      "matchDatasources": ["github-tags"],
-      "automerge": true,
-      "ignoreTests": true,
-      "automergeType": "branch",
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchPackageNames": [
+        "ghcr.io/onedr0p/prowlarr-nightly",
+        "ghcr.io/onedr0p/sonarr-develop",
+        "ghcr.io/onedr0p/plex",
+        "ghcr.io/onedr0p/radarr-develop",
+        "renovate/renovate:34.102.7-slim"
+        ]
     }
   ]
 }
