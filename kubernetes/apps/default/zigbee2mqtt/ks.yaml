@@ -2,14 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-radarr
+  name: cluster-apps-zigbee2mqtt
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
-  path: ./kubernetes/apps/default/radarr/app
+    - name: cluster-apps-smarter-device-manager
+  path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -17,7 +18,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: radarr
+      name: zigbee2mqtt
       namespace: default
   interval: 30m
   retryInterval: 1m
