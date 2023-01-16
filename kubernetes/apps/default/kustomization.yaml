@@ -21,13 +21,13 @@ resources:
     - plex/ks.yaml
     - prowlarr/ks.yaml
     - radarr/ks.yaml
-    - radicale
-    - readarr
-    - recyclarr
-    - sabnzbd
-    - sonarr
-    - syncthing
-    - tautulli
-    - vaultwarden
-    - watchstate
-    - zigbee2mqtt
+    - radicale/ks.yaml
+    - readarr/ks.yaml
+    - recyclarr/ks.yaml
+    - sabnzbd/ks.yaml
+    - sonarr/ks.yaml
+    - syncthing/ks.yaml
+    - tautulli/ks.yaml
+    - vaultwarden/ks.yaml
+    - watchstate/ks.yaml
+    - zigbee2mqtt/ks.yaml
