@@ -15,12 +15,12 @@ resources:
     - lldap/ks.yaml
     - nextcloud/ks.yaml
     - mosquitto/ks.yaml
-    - openhab
-    - overseerr
-    - paperless
-    - plex
-    - prowlarr
-    - radarr
+    - openhab/ks.yaml
+    - overseerr/ks.yaml
+    - paperless/ks.yaml
+    - plex/ks.yaml
+    - prowlarr/ks.yaml
+    - radarr/ks.yaml
     - radicale
     - readarr
     - recyclarr
