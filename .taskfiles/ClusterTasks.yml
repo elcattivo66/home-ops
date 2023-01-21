@@ -26,7 +26,7 @@ tasks:
   reconcile:
     desc: Force update Flux to pull in changes from your Git repository
     cmds:
-      - flux reconcile -n flux-system source git home-kubernetes
+      - flux reconcile -n flux-system source git home-ops-kubernetes
       - flux reconcile -n flux-system kustomization cluster
 
   hr-restart:
@@ -87,3 +87,28 @@ tasks:
       - task: certificates
       - task: ingresses
       - task: pods
+
+  longhorn-deps-pause:
+    desc: Pause all Helm Releases that rely on longhorn storage
+    cmds:
+      - flux suspend hr -n default --all
+      - flux suspend hr -n databases influxdb
+
+  longhorn-deps-resume:
+    desc: Resume all Helm Releases that rely on longhorn storage
+    cmds:
+      - flux resume hr -n default --all
+      - flux resume hr -n databases influxdb
+
+  longhorn-deps-scale-down:
+    desc: Pause all Helm Releases that rely on longhorn storage
+    cmds:
+      - kubectl scale deployment -n default – replicas 0 – all
+      # - kubectl scale -n default deploy/radarr --replicas 0
+      - kubectl scale -n databases deploy/influxdb --replicas 0
+
+  longhorn-deps-scale-up:
+    desc: Pause all Helm Releases that rely on longhorn storage
+    cmds:
+      - kubectl scale deployment -n default – replicas 0 – all
+      - kubectl scale -n databases deploy/influxdb --replicas 1

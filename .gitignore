@@ -10,6 +10,7 @@ xanmanning.k3s*
 *.tfvars
 # sops
 .decrypted~*
+.config.env
 *.agekey
 *.pub
 *.key
