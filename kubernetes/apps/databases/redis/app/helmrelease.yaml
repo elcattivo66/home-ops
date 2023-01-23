@@ -22,8 +22,8 @@ spec:
     remediation:
       retries: 5
   values:
-    # global:
-    #   storageClass: local-path
+    global:
+      storageClass: local-path
     architecture: standalone
     auth:
       enabled: false
