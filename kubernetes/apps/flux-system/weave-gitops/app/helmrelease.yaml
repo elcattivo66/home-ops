@@ -29,9 +29,9 @@ spec:
     adminUser:
       create: true
       username: admin
-    # oidcSecret:
-    #   create: false
-    #   clientID: weave-gitops
+    oidcSecret:
+      create: true
+      clientID: weave-gitops
     networkPolicy:
       create: false
     metrics:
