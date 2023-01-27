@@ -45,12 +45,21 @@ spec:
         enabled: true
         existingClaim: readarr-config-v1
 
-      media:
+      books:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
-        path: ${MEDIADIR}
-        mountPath: /media
+        path: ${MEDIADIR}/ebooks/calibre_library
+        mountPath: /books
+        readOnly: false
+
+      downloads:
+        enabled: true
+        type: nfs
+        server: ${NFS_ADDR}
+        path: ${MEDIADIR}/downloads
+        mountPath: /downloads
+        readOnly: false
 
     podSecurityContext:
       runAsUser: 1000
