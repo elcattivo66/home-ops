@@ -17,8 +17,8 @@ spec:
   interval: 15m
   values:
     image:
-      repository: ghcr.io/linuxserver/calibre-web
-      tag: 0.6.19-ls178@sha256:9a21e834059de2f0b730e6368e21119c6fc720f0d912a8522a96f6e041118444
+      repository: ghcr.io/bjw-s/calibre-web
+      tag: 0.6.19@sha256:b73d4d93ba19da08cc24a9326e92d9a771ff5133e354318f985f77acc78c527d
 
     env:
       DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
