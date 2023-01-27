@@ -35,13 +35,19 @@ spec:
       config:
         enabled: true
         existingClaim: calibre-web-config-v1
-      books: 
+      books:
         enabled: true
         type: nfs
         server: ${NAS_ADDR}
         path: ${MEDIADIR}/ebooks/calibre_library
         mountPath: /books
         readOnly: false
+
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
 
     resources:
       requests:
