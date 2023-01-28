@@ -49,7 +49,7 @@ spec:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
-        path: /media/pictures/immich_upload
+        path: /media_ssd/pictures/immich_upload/
         mountPath: /usr/src/app/upload
         readOnly: false
     resources:
@@ -58,15 +58,6 @@ spec:
         memory: 250Mi
       limits:
         memory: 2000Mi
-    # affinity:
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #       - matchExpressions:
-    #         - key: app
-    #           operator: In
-    #           values:
-    #           - zigbee-controller
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
