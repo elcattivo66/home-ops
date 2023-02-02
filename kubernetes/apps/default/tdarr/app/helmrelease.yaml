@@ -82,7 +82,7 @@ spec:
             mountPath: /app/configs
           - path: tdarr/data
             mountPath: /app/server
-      nfs-media:
+      media:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
