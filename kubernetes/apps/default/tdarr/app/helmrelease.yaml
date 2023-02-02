@@ -50,7 +50,17 @@ spec:
             value: localhost
           - name: serverPort
             value: *server-port
-
+          - name: PUID
+            value: 1000
+          - name: PGID
+            value: 1000
+        volumeMounts:
+          - name: config
+            mountPath: /app/configs
+          - name: media
+            mountPath: /media
+          - name: shared
+            mountPath: /shared
     podSecurityContext:
       supplementalGroups:
         - 985
