@@ -61,6 +61,11 @@ spec:
             mountPath: /media
           - name: shared
             mountPath: /shared
+        resources:
+          requests:
+            gpu.intel.com/i915: 1
+          limits:
+            gpu.intel.com/i915: 1
     podSecurityContext:
       supplementalGroups:
         - 985
