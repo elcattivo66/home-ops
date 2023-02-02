@@ -28,6 +28,7 @@ resources:
     - sonarr/ks.yaml
     - syncthing/ks.yaml
     - tautulli/ks.yaml
+    - tdarr/ks.yaml
     - vaultwarden/ks.yaml
     - watchstate/ks.yaml
     - zigbee2mqtt/ks.yaml
