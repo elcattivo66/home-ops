@@ -33,7 +33,8 @@ spec:
       serverPort: &server-port 8266
       TZ: ${TZ}
       ffmpegPath: /usr/bin/ffmpeg
-      # PGID: 65537
+      PGID: 1000
+      PUID: 1000
 
     additionalContainers:
       node:
@@ -51,10 +52,6 @@ spec:
             value: *server-port
 
     podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 985
         - 989
