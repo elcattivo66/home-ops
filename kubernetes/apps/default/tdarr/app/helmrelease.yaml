@@ -55,6 +55,7 @@ spec:
       supplementalGroups:
         - 985
         - 989
+        - 1000
 
     resources:
       requests:
