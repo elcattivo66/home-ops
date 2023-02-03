@@ -35,23 +35,3 @@ spec:
           cpu:
             cpuid:
               attributeWhitelist: ["AVX", "AVX2"]
-          custom:
-            - name: intel-gpu
-              matchOn:
-                - pciId:
-                    class: ["0300"]
-                    vendor: ["8086"]
-            # - name: zigbee
-            #   matchOn:
-            #      - usbId:
-            #         class: ["00"]
-            #         vendor: ["10c4"]
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: "node-role.kubernetes.io/master"
-                    operator: In
-                    values: [""]
