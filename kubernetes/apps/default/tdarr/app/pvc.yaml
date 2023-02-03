@@ -4,9 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: default
   name: tdarr-config-v1
-  labels:
-    app.kubernetes.io/name: tdarr
-    snapshot.home.cluster/enabled: "true"
+  # labels:
+  #   app.kubernetes.io/name: tdarr
+  #   snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce
