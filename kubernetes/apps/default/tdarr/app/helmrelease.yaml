@@ -66,6 +66,10 @@ spec:
             gpu.intel.com/i915: 1
           limits:
             gpu.intel.com/i915: 1
+        podSecurityContext:
+          supplementalGroups:
+            - 985
+            - 989
     podSecurityContext:
       supplementalGroups:
         - 985
