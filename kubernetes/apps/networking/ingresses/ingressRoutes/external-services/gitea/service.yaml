@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: *app
 spec:
   type: ExternalName
-  externalName: tonibrix
+  externalName: nas
   ports:
     - name: webui
       port: 8687
