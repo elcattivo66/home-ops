@@ -21,7 +21,7 @@ spec:
       namespace: cert-manager
   values:
     deployment:
-      replicas: 3
+      replicas: 2
     providers:
       kubernetesCRD:
         enabled: true

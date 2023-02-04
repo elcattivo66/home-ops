@@ -20,7 +20,7 @@ spec:
     controllerType: deployment
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 3
+      defaultClassReplicaCount: 2
       reclaimPolicy: Retain
       recurringJobs:
         enable: false
@@ -30,7 +30,7 @@ spec:
       provisionerReplicaCount: 1
       resizerReplicaCount: 1
       snapshotterReplicaCount: 1
-    
+
     longhornUI:
       replicas: 1
 
