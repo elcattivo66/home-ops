@@ -79,15 +79,8 @@ spec:
         gpu.intel.com/i915: 1
         memory: 7000Mi
 
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-intel-gpu
-                  operator: In
-                  values:
-                    - "true"
+    nodeSelector:
+      intel.feature.node.kubernetes.io/gpu: "true"
 
     probes:
         startup:
