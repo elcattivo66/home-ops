@@ -34,7 +34,7 @@ spec:
       PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
       PAPERLESS_ENABLE_HTTP_REMOTE_USER: true
       PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
-      PAPERLESS_REDIS: redis://redis-master.databases.svc.cluster.local:6379
+      PAPERLESS_REDIS: redis://redis-lb.databases.svc.cluster.local:6379
     envFrom:
       - secretRef:
           name: paperless-secrets
