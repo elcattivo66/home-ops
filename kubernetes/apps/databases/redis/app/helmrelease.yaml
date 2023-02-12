@@ -30,11 +30,11 @@ spec:
       sentinel: false
       # existingSecret: redis-secret
       # existingSecretPasswordKey: redis-password
-    master:
-      persistence:
-        enabled: false
+    # master:
+    #   persistence:
+    #     enabled: false
     sentinel:
-      enabled: false
+      enabled: true
       masterSet: redis-master
       getMasterTimeout: 10
       startupProbe:
