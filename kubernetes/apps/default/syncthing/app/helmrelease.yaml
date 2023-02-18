@@ -35,6 +35,7 @@ spec:
       listdisc:
         enabled: true
         type: LoadBalancer
+        loadBalancerIP: 192.168.178.232
         ports:
           discovery:
             enabled: true
@@ -55,7 +56,7 @@ spec:
         server: ${NFS_ADDR}
         path: ${BACKUPDIR}
         mountPath: /backup
-        readOnly: false     
+        readOnly: false
     resources:
       requests:
         cpu: 10m
