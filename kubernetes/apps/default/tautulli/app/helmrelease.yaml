@@ -26,7 +26,7 @@ spec:
 
     image:
       repository: ghcr.io/onedr0p/tautulli
-      tag: 2.11.1
+      tag: 2.11.1@sha256:dc452f7d9070458e20dbebd895e7a5b56053fc5b597598e526234e7abc53e8cd
 
     env:
       TZ: "${TZ}"
@@ -41,7 +41,7 @@ spec:
       config:
         enabled: true
         existingClaim: tautulli-config-v1
-        
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000

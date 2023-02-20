@@ -26,7 +26,7 @@ spec:
 
     image:
       repository: ghcr.io/onedr0p/prowlarr-develop
-      tag: 1.1.3.2521
+      tag: 1.2.2.2699@sha256:ca4c37bea3d74270f1dc8ba86a8913b6dfff19743cf52cb39eecfbee9cea0e18
       pullPolicy: IfNotPresent
 
     env:
@@ -37,8 +37,8 @@ spec:
 
     service:
       main:
-        ports: 
-          http: 
+        ports:
+          http:
             port: 9696
 
     persistence:
