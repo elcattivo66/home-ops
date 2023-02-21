@@ -52,6 +52,11 @@ spec:
         path: /media_ssd/pictures/immich_upload/
         mountPath: /usr/src/app/upload
         readOnly: false
+      model-cache:
+        enabled: true
+        mountPath: /cache
+        type: emptyDir
+
     resources:
       requests:
         cpu: 100m
