@@ -31,9 +31,9 @@ spec:
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
       tag: v1.48.0
-    command: python
-    args:
-      - src/main.py
+    command: "python src/main.py"
+    # args:
+    #   - src/main.py
     envFrom:
       - secretRef:
           name: immich
