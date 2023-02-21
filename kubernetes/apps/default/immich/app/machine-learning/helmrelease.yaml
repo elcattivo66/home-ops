@@ -31,9 +31,9 @@ spec:
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
       tag: v1.47.3
-    command: /bin/sh
+    command: python
     args:
-      - ./entrypoint.sh
+      - src/main.py
     envFrom:
       - secretRef:
           name: immich
