@@ -12,8 +12,6 @@ spec:
       middlewares:
         - name: headers
           namespace: networking
-        - name: base-path
-          namespace: networking
       services:
         - name: immich-web
           port: 3000
