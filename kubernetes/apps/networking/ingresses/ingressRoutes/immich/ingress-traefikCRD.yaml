@@ -22,6 +22,8 @@ spec:
       middlewares:
         - name: headers
           namespace: networking
+        - name: api-path
+          namespace: networking
       priority: 2
       services:
         - name: immich-server
