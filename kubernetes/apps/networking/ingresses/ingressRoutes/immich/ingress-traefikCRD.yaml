@@ -8,13 +8,24 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`immich.${SECRET_DOMAIN}`)
+      match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/`)
       middlewares:
         - name: headers
           namespace: networking
         # - name: authelia
         #   namespace: networking
       services:
-        - name: immich-proxy
-          port: 8080
+        - name: immich-server
+          port: 3001
+          namespace: default
+    - kind: Rule
+      match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/api`)
+      middlewares:
+        - name: headers
+          namespace: networking
+        # - name: authelia
+        #   namespace: networking
+      services:
+        - name: immich-server
+          port: 3001
           namespace: default
