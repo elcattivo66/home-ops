@@ -12,15 +12,17 @@ spec:
       middlewares:
         - name: headers
           namespace: networking
+      priority: 1
       services:
         - name: immich-web
           port: 3000
           namespace: default
     - kind: Rule
-      match: Host(`immich.${SECRET_DOMAIN}`) && Path(`/api`)
+      match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/api`)
       middlewares:
         - name: headers
           namespace: networking
+      priority: 2
       services:
         - name: immich-server
           port: 3001
