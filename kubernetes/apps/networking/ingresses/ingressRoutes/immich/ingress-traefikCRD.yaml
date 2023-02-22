@@ -17,7 +17,7 @@ spec:
           port: 3000
           namespace: default
     - kind: Rule
-      match: Host(`immich.${SECRET_DOMAIN}`) && PathPrefix(`/api`)
+      match: Host(`immich.${SECRET_DOMAIN}`) && Path(`/api`)
       middlewares:
         - name: headers
           namespace: networking
