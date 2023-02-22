@@ -6,6 +6,5 @@ resources:
   - ./microservices
   - ./machine-learning
   - ./web
-  - ./proxy
   - ./config-map.yaml
   - ./secret.sops.yaml
