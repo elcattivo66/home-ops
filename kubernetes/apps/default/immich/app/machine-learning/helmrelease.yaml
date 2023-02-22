@@ -31,7 +31,7 @@ spec:
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
       tag: v1.48.0
-    command: "python src/main.py"
+    command: ["python", "src/main.py"]
     # args:
     #   - src/main.py
     envFrom:
@@ -52,9 +52,8 @@ spec:
         path: /media_ssd/pictures/immich_upload/
         mountPath: /usr/src/app/upload
         readOnly: false
-      model-cache:
+      cache:
         enabled: true
-        mountPath: /cache
         type: emptyDir
 
     resources:
