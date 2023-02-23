@@ -51,7 +51,7 @@ spec:
         enabled: true
         type: nfs
         server: ${NFS_ADDR}
-        path: /media_ssd/pictures/immich_upload/
+        path: /photos/immich_upload/
         mountPath: /usr/src/app/upload
         readOnly: false
     resources:
