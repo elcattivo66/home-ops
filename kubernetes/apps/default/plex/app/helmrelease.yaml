@@ -51,6 +51,13 @@ spec:
         path: ${MEDIADIR}
         mountPath: /media
         readOnly: true
+      photos:
+        enabled: true
+        type: nfs
+        server: ${NAS_ADDR}
+        path: /photos
+        mountPath: /media/pictures
+        readOnly: true
       transcode:
         enabled: true
         type: emptyDir
