@@ -50,9 +50,6 @@ spec:
             'overwrite.cli.url' => 'https://cloud.${SECRET_DOMAIN}',
             'overewritehost' => 'cloud.${SECRET_DOMAIN}',
             'filelocking.enabled' => 'true',
-            'loglevel' => '2',
-            'log_type' => 'file',
-            'logfile' => '/var/www/html/nextcloud.log',
             'enable_previews' => true,
             'trusted_domains' =>
               array (
@@ -63,7 +60,7 @@ spec:
             'trusted_proxies' =>
               array (
                 0 => '10.42.3.0/16',
-                1 => '192.168.178.0/16',      
+                1 => '192.168.178.0/16',
               ),
             'oidc_login_provider_url' => 'https://authelia.${SECRET_DOMAIN}',
             'oidc_login_client_id' => 'nextcloud',
@@ -132,7 +129,7 @@ spec:
           memory: 100Mi
 
     internalDatabase:
-      enabled: false      
+      enabled: false
     externalDatabase:
       enabled: true
       type: postgresql
