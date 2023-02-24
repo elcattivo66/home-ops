@@ -36,12 +36,23 @@ spec:
         secretName: nextcloud-secret
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
+        smtpUsernameKey: smtp-username
+        smtpPasswordKey: smtp-password
       # datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
           value: nextcloud-redis-master
         - name: REDIS_HOST_PORT
           value: "6379"
+      mail:
+        enabled: true
+        fromAddress: philipps-nextcloud
+        domain: ${SECRET_SMTP_DOMAIN}
+        smtp:
+          host: ${SECRET_SMTP_HOST}
+          secure: tls
+          port: 587
+          authtype: LOGIN
       configs:
         custom.config.php: |-
           <?php
@@ -95,17 +106,6 @@ spec:
                     ],
             ],
           );
-      mail:
-        enabled: true
-        fromAddress: elcattivo
-        domain: ${SECRET_SMTP_DOMAIN}
-        smtp:
-          host: ${SECRET_SMTP_HOST}
-          secure: tls
-          port: 587
-          authtype: LOGIN
-          name: ${SECRET_SMTP_USERNAME}
-          password: ${SECRET_SMTP_PASSWORD}
 
     redis:
       enabled: true
