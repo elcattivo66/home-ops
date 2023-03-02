@@ -26,7 +26,7 @@ spec:
       nameOverride: *app
     image:
       repository: ghcr.io/onedr0p/kopia
-      tag: 0.12.1@sha256:95b8be9d55d087983ab1982efc75c0b1f905ea5d62aa8696012e5aff32555776
+      tag: 0.12.1@sha256:42b06533d804eab5fdfa7846599a87aca20eb51ff96ce4dabd8c1b1f1e858b0d
 
     service:
       main:
