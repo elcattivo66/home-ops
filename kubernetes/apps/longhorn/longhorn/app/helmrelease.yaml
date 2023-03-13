@@ -50,7 +50,7 @@ spec:
       orphanAutoDeletion: true
     resources:
       requests:
-        cpu: 50m
+        cpu: 25m
         memory: 100Mi
       limits:
         cpu: 600m
