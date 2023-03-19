@@ -23,7 +23,7 @@ spec:
       retries: 5
   values:
     image:
-      repository: docker.io/gotify/server
+      repository: ghcr.io/gotify/server
       pullPolicy: IfNotPresent
       tag: 2.2.4
 
