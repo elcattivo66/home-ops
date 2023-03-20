@@ -6,5 +6,6 @@ resources:
   - ./microservices
   - ./machine-learning
   - ./web
+  - ./typesense
   - ./config-map.yaml
   - ./secret.sops.yaml
