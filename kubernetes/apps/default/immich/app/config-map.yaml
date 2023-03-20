@@ -24,3 +24,5 @@ data:
   OAUTH_CLIENT_SECRET: "${SECRET_IMMICH_OAUTH_CLIENT_SECRET}"
   OAUTH_AUTO_REGISTER: "true"
   OAUTH_BUTTON_TEXT: "Login with Authelia"
+  TYPESENSE_HOST: immich-typesense.default.svc.cluster.local
+  TYPESENSE_DATA_DIR: /config
