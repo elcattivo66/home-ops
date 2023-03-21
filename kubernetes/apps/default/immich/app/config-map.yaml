@@ -26,3 +26,5 @@ data:
   OAUTH_BUTTON_TEXT: "Login with Authelia"
   TYPESENSE_HOST: immich-typesense.default.svc.cluster.local
   TYPESENSE_DATA_DIR: /config
+  TYPESENSE_PORT: "8108"
+  TYPESENSE_PROTOCOL: http
