@@ -21,9 +21,9 @@ spec:
       serviceAccount: kube-prometheus-stack-prometheus
       namespace: monitoring
       serviceMonitor:
-        enabled: true
+        enabled: false
       prometheusRule:
-        enabled: true
+        enabled: false
     crds:
       enabled: true
     psp:
