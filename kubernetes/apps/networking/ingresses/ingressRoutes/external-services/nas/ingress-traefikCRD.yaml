@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name nas
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`nas.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: networking
+      services:
+        - name: *name
+          port: 80
+          namespace: networking
+  tls:
+    secretName: ${SECRET_CERT_NAME}-prod-tls
