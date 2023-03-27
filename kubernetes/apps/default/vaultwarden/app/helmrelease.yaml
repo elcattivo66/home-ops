@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
       interval: 15m
   install:
-    createNamespace: true 
+    createNamespace: true
     remediation:
       retries: 5
   upgrade:
@@ -24,7 +24,7 @@ spec:
 
   values:
     image:
-        repository: docker.io/vaultwarden/server
+        repository: ghcr.io/dani-garcia/vaultwarden
         tag: 1.28.0
     replicaCount: 1
 
@@ -36,7 +36,7 @@ spec:
       WEBSOCKET_PORT: 3012
       SENDS_ALLOWED: true
       DISABLE_ADMIN_TOKEN: false
-      SMTP_HOST: "${SECRET_SMTP_HOST}" 
+      SMTP_HOST: "${SECRET_SMTP_HOST}"
       SMTP_FROM: "${SECRET_SMTP_SENDER}"
       SMTP_FROM_NAME: "Philipps Bitwarden"
       SMTP_SECURITY: starttls
@@ -58,7 +58,7 @@ spec:
             enabled: true
             port: 3012
             protocol: TCP
-            
+
     persistence:
       config:
         enabled: true
