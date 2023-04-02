@@ -11,6 +11,7 @@ resources:
 - ./intel.yaml
 - ./traefik.yaml
 - ./metallb.yaml
+- ./metrics-server.yaml
 - ./longhorn.yaml
 - ./jetstack.yaml
 - ./node-feature-discovery-charts.yaml
