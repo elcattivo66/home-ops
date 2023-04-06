@@ -7,32 +7,36 @@ timezone: "Europe/Berlin"
 ssh_authorized_keys:
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEOPBEcMeCeXe89KwvtKkfjAy1u6ni065jMxOQ4dBR6B philipp@MacBook-Air.fritz.box"
 
-archlinux:
-  packages:
-    - hdparm
-    - htop
-    - ipvsadm
-    - lm_sensors
-    - nano
-    - nvme-cli
-    - socat
-    - python3-kubernetes
-    - python3-libselinux
-    - python3-pyyaml
-    - open-iscsi
-    - jq
-    - smartmontools
-    - sudo
-
-ubuntu:
-  packages:
-    - hdparm
-    - htop
-    - ipvsadm
-    - lm-sensors
-    - nano
-    - nfs-common
-    - nvme-cli
-    - socat
-    - python3-kubernetes
-    - python3-yaml
+packages_repositories:
+  - ppa:fish-shell/release-3
+packages_install:
+  - apt-transport-https
+  - arptables
+  - ca-certificates
+  - curl
+  - ebtables
+  - fish
+  - fzf
+  - gdisk
+  - hdparm
+  - htop
+  - iputils-ping
+  - ipvsadm
+  - lm-sensors
+  - lvm2
+  - nano
+  - net-tools
+  - nfs-common
+  - ntpdate
+  - open-iscsi
+  - psmisc
+  - python3-kubernetes
+  - python3-yaml
+  - smartmontools
+  - socat
+  - software-properties-common
+  - unzip
+packages_remove:
+  - apparmor
+  - ufw
+  - unattended-upgrades
