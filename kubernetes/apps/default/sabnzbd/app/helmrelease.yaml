@@ -26,7 +26,7 @@ spec:
 
     image:
       repository: ghcr.io/onedr0p/sabnzbd
-      tag: 3.7.2@sha256:89aa25e7af3e3bbec84648db92928d5bdefc3787d6534133fc46ad90f12ecdec
+      tag: 3.7.2@sha256:50286aa2ec8daa5cb6ecd52c858c9d8d17fd8c0e960513cd49e4d3610eb6e8d3
 
     env:
       TZ: ${TZ}
