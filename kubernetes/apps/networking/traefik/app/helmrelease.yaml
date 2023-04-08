@@ -78,7 +78,7 @@ spec:
       - "--serverstransport.insecureskipverify=true"
       - "--providers.kubernetesingress.ingressclass=traefik"
     additionalArguments:
-      # - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
+      - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
       - "--entrypoints.metrics.address=:9100"
