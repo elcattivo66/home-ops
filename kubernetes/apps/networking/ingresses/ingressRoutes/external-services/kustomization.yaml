@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./gitea
   - ./minio
-  - ./nas
+  # - ./nas
   # - ./nextcloud-external
