@@ -21,7 +21,7 @@ spec:
     secretName: ${SECRET_CERT_NAME}-prod-tls
 
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: weave-gitops-external-dns
