@@ -4,3 +4,9 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
+configMapGenerator:
+  - name: k8s-gateway-configmap
+    files:
+      - ./Corefile
+configurations:
+  - kustomizeconfig.yaml
