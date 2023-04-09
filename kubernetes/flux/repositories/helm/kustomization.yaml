@@ -8,6 +8,7 @@ resources:
 - ./bjw-s-charts.yaml
 - ./cloudnative-pg-charts.yaml
 - ./helm-stable.yaml
+- ./ingress-nginx.yaml
 - ./intel.yaml
 - ./traefik.yaml
 - ./metallb.yaml
