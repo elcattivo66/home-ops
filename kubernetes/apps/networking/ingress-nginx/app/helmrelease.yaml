@@ -68,7 +68,7 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: |-
-          networking/${SECRET_CERT_NAME}-prod-tls
+          networking/elcattivo-prod-tls
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
