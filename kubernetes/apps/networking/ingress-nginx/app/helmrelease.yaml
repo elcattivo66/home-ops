@@ -32,7 +32,7 @@ spec:
         - name: TZ
           value: Europe/Berlin
       service:
-        externalIPs: ["192.168.178.220"]
+        externalIPs: ["192.168.178.231"]
         externalTrafficPolicy: Local
       ingressClassResource:
         default: true
