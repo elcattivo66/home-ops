@@ -2,8 +2,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: weave-gitops
-  annotations:
-    coredns.io/hostname: gitops.${SECRET_DOMAIN}
 spec:
   entryPoints:
     - websecure
