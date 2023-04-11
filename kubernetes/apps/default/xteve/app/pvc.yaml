@@ -6,7 +6,7 @@ metadata:
   name: xteve-config-v1
   labels:
     app.kubernetes.io/name: xteve
-    snapshot.home.cluster/enabled: "true"
+    snapshot.home.cluster/enabled: "false"
 spec:
   accessModes:
     - ReadWriteOnce
