@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: docker.io/nitnelave/lldap
-      tag: v0.4.2
+      tag: v0.4.3
     env:
       TZ: "${TZ}"
       LLDAP_LDAP_BASE_DN: "dc=elcattivo,dc=de"
