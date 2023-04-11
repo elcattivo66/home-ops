@@ -5,7 +5,7 @@ metadata:
   namespace: default
   name: xteve-config-v1
   labels:
-    app.kubernetes.io/name: watchstate
+    app.kubernetes.io/name: xteve
     snapshot.home.cluster/enabled: "true"
 spec:
   accessModes:
