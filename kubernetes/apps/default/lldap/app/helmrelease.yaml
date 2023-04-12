@@ -24,8 +24,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/nitnelave/lldap
-      tag: v0.4.3@sha256:a2ac9a9a63fd7e926ee7b3bedafc77d428a2e8c80131853071f29234d85efa96
+      repository: docker.io/nitnelave/lldap
+      tag: v0.4.3
     env:
       TZ: "${TZ}"
       LLDAP_LDAP_BASE_DN: "dc=elcattivo,dc=de"
