@@ -34,8 +34,8 @@ spec:
       EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Berlin -Dlog4j2.formatMsgNoLookups=true"
 
     hostNetwork: true
-    podAnnotations:
-      k8s.v1.cni.cncf.io/networks: macvlan-static-iot-openhab
+    # podAnnotations:
+    #   k8s.v1.cni.cncf.io/networks: macvlan-static-iot-openhab
 
     service:
       main:
@@ -63,6 +63,23 @@ spec:
             port: 8009
           hueemulation:
             port: 80
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: |
+            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          hajimari.io/icon: mdi:play-circle-outline
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
 
     persistence:
       conf:
