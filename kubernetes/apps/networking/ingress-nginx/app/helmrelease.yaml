@@ -35,6 +35,8 @@ spec:
         # externalIPs: ["192.168.178.231"]
         loadBalancerIP: 192.168.178.231
         externalTrafficPolicy: Local
+      publishService:
+        enabled: true
       ingressClassResource:
         default: true
       config:
