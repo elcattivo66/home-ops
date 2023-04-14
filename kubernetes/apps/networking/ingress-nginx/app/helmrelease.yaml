@@ -88,7 +88,7 @@ spec:
           memory: 500Mi
     # Note: obsidian-livesync does not work with a default backend enabled
     defaultBackend:
-      enabled: false
+      enabled: true
   valuesFrom:
     # Cloudflare Networks
     # https://www.cloudflare.com/ips/
