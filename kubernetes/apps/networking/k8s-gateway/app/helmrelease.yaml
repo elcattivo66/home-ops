@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     fullnameOverride: k8s-gateway
-    domain: elcattivo.de
+    domain: ${SECRET_DOMAIN}
     ttl: 1
     service:
       type: LoadBalancer
