@@ -12,7 +12,7 @@ resources:
     - ./immich
     - ./kopia
     - ./lidarr
-    - ./longhorn
+    # - ./longhorn
     - ./nextcloud
     - ./overseerr
     - ./paperless
