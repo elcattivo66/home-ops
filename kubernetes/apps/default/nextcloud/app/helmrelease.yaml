@@ -28,7 +28,22 @@ spec:
       tag: 26.0.0-fpm-alpine
       flavor: fpm-alpine
     ingress:
-      enabled: false
+      enabled: true
+      className: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: >-
+          networking-headers@kubernetescrd,
+          networking-nextcloud-redirect-1@kubernetescrd,
+          networking-nextcloud-redirect-2@kubernetescrd
+      host: longhorn.${SECRET_DOMAIN}
+      path: /
+      pathType: Prefix
+      tls:
+        - secretName: ${SECRET_DOMAIN}-prod-tls
+          hosts:
+            - cloud.${SECRET_DOMAIN}
+
     nextcloud:
       host: cloud.${SECRET_DOMAIN}
       existingSecret:

@@ -13,7 +13,7 @@ resources:
     - ./kopia
     # - ./lidarr
     # - ./longhorn
-    - ./nextcloud
+    # - ./nextcloud
     # - ./overseerr
     # - ./paperless
     # - ./plex

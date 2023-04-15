@@ -6,3 +6,4 @@ resources:
   - ./secure-headers.yaml
   - ./strip-api-prefix.yaml
   - ./tlsoptions.yaml
+  - ./nextcloud-redirect.yaml
