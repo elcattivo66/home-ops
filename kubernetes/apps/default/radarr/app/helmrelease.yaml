@@ -26,7 +26,7 @@ spec:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
       pullPolicy: IfNotPresent
-      tag: 4.4.3.7030@sha256:c0fe33ce0c74d36f8262d83ce3bebf1c9e23fc5b1531f929339c56d54ef42a42
+      tag: 4.4.4.7068@sha256:e6de98e544079b82afb069cccbf50dd4de1a8604368d597cd64b5dfe8c0c6722
 
     env:
       TZ: "${TZ}"
