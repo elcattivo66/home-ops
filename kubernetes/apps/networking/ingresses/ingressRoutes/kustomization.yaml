@@ -22,7 +22,7 @@ resources:
     - ./radicale
     - ./readarr
     - ./sabnzbd
-    - ./sonarr
+    # - ./sonarr
     - ./syncthing
     - ./tautulli
     - ./traefik
