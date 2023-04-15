@@ -9,7 +9,7 @@ resources:
     - ./external-services
     # - ./gotify
     # - ./grafana
-    - ./immich
+    # - ./immich
     - ./kopia
     # - ./lidarr
     # - ./longhorn
