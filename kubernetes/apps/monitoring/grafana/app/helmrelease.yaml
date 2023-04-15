@@ -152,7 +152,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: >-
           networking-headers@kubernetescrd
       hosts:
-        - &host grafana.{SECRET_DOMAIN}
+        - &host grafana.elcattivo.de
       tls:
         - hosts:
             - *host
