@@ -64,6 +64,10 @@ spec:
                 pathType: Prefix
                 service:
                   port: 3001
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-prod-tls
 
     persistence:
       library:
