@@ -8,7 +8,7 @@ resources:
     # - ./calibre-web
     - ./external-services
     # - ./gotify
-    - ./grafana
+    # - ./grafana
     - ./immich
     - ./kopia
     # - ./lidarr
@@ -19,11 +19,11 @@ resources:
     # - ./plex
     # - ./prowlarr
     # - ./radarr
-    - ./radicale
+    # - ./radicale
     # - ./readarr
     # - ./sabnzbd
     # - ./sonarr
     # - ./syncthing
     # - ./tautulli
     - ./traefik
-    - ./vaultwarden
+    # - ./vaultwarden
