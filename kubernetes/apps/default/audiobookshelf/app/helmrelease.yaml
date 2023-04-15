@@ -56,7 +56,7 @@ spec:
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-headers@kubernetescrd
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "audiobooks.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix

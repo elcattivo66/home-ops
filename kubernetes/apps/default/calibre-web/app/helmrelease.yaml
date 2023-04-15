@@ -42,7 +42,7 @@ spec:
             networking-headers@kubernetescrd,
             networking-authelia@kubernetescrd
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "ebooks.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
