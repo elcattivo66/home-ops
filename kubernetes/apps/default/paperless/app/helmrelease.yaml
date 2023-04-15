@@ -42,11 +42,33 @@ spec:
     envFrom:
       - secretRef:
           name: paperless-secrets
+
     service:
       main:
         ports:
           http:
             port: 8000
+
+    ingress:
+      main:
+        enabled: true
+        primary: true
+        ingressClassName: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: >-
+            networking-headers@kubernetescrd,
+            networking-authelia@kubernetescrd
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-prod-tls
+
     persistence:
       data:
         enabled: true
