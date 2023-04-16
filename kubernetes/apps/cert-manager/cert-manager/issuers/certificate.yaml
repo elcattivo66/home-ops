@@ -5,6 +5,9 @@ metadata:
   namespace: networking
 spec:
   secretName: "${SECRET_CERT_NAME}-prod-tls"
+  secretTemplate:
+    annotations:
+      replicator.v1.mittwald.de/replicate-to: default,flux-system,monitoring,longhorn-system
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
