@@ -13,6 +13,7 @@ resources:
 - ./traefik.yaml
 - ./metallb.yaml
 - ./metrics-server.yaml
+- ./mittwald-charts.yaml
 - ./longhorn.yaml
 - ./jetstack.yaml
 - ./node-feature-discovery-charts.yaml
