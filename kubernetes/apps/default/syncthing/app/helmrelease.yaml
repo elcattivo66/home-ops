@@ -64,7 +64,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_DOMAIN}-prod-tls
+            secretName: ${SECRET_CERT_NAME}-prod-tls
 
     persistence:
       config:

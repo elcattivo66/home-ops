@@ -39,7 +39,7 @@ spec:
       path: /
       pathType: Prefix
       tls:
-        - secretName: ${SECRET_DOMAIN}-prod-tls
+        - secretName: ${SECRET_CERT_NAME}-prod-tls
           hosts:
             - cloud.${SECRET_DOMAIN}
 
