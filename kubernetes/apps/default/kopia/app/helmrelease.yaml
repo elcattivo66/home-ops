@@ -40,7 +40,13 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        primary: true
+        ingressClassName: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: >-
+            networking-headers@kubernetescrd,
+            networking-local-only@kubernetescrd
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -49,6 +55,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_DOMAIN}-prod-tls
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: kopia-config

@@ -46,10 +46,13 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        primary: true
+        ingressClassName: traefik
         annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: |
-            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: >-
+            networking-headers@kubernetescrd,
+            networking-local-only@kubernetescrd
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -58,6 +61,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_DOMAIN}-prod-tls
 
     securityContext:
       privileged: true
