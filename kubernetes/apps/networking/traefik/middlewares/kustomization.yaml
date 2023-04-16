@@ -7,3 +7,4 @@ resources:
   - ./strip-api-prefix.yaml
   - ./tlsoptions.yaml
   - ./nextcloud-redirect.yaml
+  - ./local-only.yaml
