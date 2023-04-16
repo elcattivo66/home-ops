@@ -10,7 +10,7 @@ spec:
   path: ./kubernetes/apps/kube-system/kubernetes-replicator/app
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: home-ops-kubernetes
   interval: 30m
   prune: true
   wait: true
