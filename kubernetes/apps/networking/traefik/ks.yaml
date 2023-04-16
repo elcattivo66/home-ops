@@ -26,27 +26,6 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-traefik-servicemonitors
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  dependsOn:
-    - name: cluster-apps-traefik
-    - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/networking/traefik/servicemonitors
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-ops-kubernetes
-  wait: true
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: cluster-apps-traefik-middlewares
   namespace: flux-system
   labels:
