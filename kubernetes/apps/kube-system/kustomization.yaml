@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./intel-device-plugin/ks.yaml
+  - ./kubernetes-replicator/ks.yaml
   - ./node-feature-discovery/ks.yaml
   - ./reloader/ks.yaml
   - ./smarter-device-manager/ks.yaml
