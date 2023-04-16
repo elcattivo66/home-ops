@@ -24,7 +24,7 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/nitnelave/lldap
+      repository: ghcr.io/lldap/lldap
       tag: v0.4.3
     env:
       TZ: "${TZ}"
