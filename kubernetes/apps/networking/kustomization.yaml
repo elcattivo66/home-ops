@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
-  - ./external-services
   # Flux-Kustomization
   - ./cloudflare-ddns/ks.yaml
+  - ./external-services/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
   - ./traefik/ks.yaml
