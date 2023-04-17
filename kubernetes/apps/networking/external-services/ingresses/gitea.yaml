@@ -16,32 +16,25 @@ spec:
       protocol: TCP
       targetPort: 8687
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: gitea
+  name: &name gitea
   namespace: networking
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-headers@kubernetescrd,
-      networking-local-only@kubernetescrd
-  labels:
-    app.kubernetes.io/name: *app
-    app.kubernetes.io/instance: *app
 spec:
-  ingressClassName: traefik
-  rules:
-    - host: &host gitea.elcattivo.de
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: gitea
-                port:
-                  number: 8687
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`gitea.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers
+          namespace: networking
+        # - name: authelia
+        #   namespace: default
+      services:
+        - name: *name
+          port: 8687
+          namespace: networking
   tls:
-    - hosts:
-        - *host
+    secretName: ${SECRET_CERT_NAME}-prod-tls
