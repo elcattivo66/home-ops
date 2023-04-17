@@ -7,7 +7,6 @@ metadata:
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   type: ExternalName
   externalName: ${NAS_ADDR}
@@ -22,8 +21,6 @@ kind: Ingress
 metadata:
   name: gitea
   namespace: networking
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
@@ -32,7 +29,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: &host gitea.{SECRET_DOMAIN}
+    - host: &host gitea.elcattivo.de
       http:
         paths:
           - path: /
