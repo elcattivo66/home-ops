@@ -71,6 +71,16 @@ spec:
           enabled: true
         serviceMonitor:
           namespace: networking
+    tlsOptions:
+      default:
+        minVersion: VersionTLS12
+        cipherSuites:
+          - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        curvePreferences:
+          - CurveP521
+          - CurveP384
+        sniStrict: true
+        preferServerCipherSuites: true
     experimental:
       http3:
         enabled: true
@@ -80,7 +90,14 @@ spec:
       fallbackApiVersion: v1
     ingressRoute:
       dashboard:
-        enabled: false
+        enabled: true
+        matchRule: Host(`traefik.${SECRET_DOMAIN}`)
+        entryPoints: ["websecure"]
+        middlewares:
+          - name: authelia
+          - name: local-only
+        tls:
+          secretName: "${SECRET_CERT_NAME}-prod-tls"
     globalArguments:
       - "--global.sendanonymoususage=false"
       - "--global.checknewversion=true"

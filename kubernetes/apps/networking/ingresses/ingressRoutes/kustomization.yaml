@@ -10,7 +10,7 @@ resources:
     # - ./gotify
     # - ./grafana
     # - ./immich
-    - ./kopia
+    # - ./kopia
     # - ./lidarr
     # - ./longhorn
     # - ./nextcloud
@@ -25,5 +25,5 @@ resources:
     # - ./sonarr
     # - ./syncthing
     # - ./tautulli
-    - ./traefik
+    # - ./traefik
     # - ./vaultwarden
