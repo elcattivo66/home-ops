@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: networking
 resources:
     # - ./audiobookshelf
-    - ./authelia
+    # - ./authelia
     # - ./bazarr
     # - ./calibre-web
     - ./external-services
