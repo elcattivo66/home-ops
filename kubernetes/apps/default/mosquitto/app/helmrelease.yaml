@@ -30,6 +30,8 @@ spec:
     service:
       main:
         type: LoadBalancer
+        annotations:
+          coredns.io/hostname: mosquitto.elcattivo.de
         loadBalancerIP: "${SVC_MQTT_ADDR}"
         externalTrafficPolicy: Local
         ports:
