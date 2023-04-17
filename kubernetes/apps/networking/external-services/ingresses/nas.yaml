@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: *app
 spec:
   type: ExternalName
-  externalName: $(SECRET_DOMAIN)
+  externalName: $(NAS_ADDR)
   ports:
     - name: webui
       port: 80
@@ -29,7 +29,7 @@ spec:
       match: Host(`nas.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: networking
+        - name: local-only
       services:
         - name: *name
           port: 80

@@ -29,9 +29,7 @@ spec:
       match: Host(`gitea.${SECRET_DOMAIN}`)
       middlewares:
         - name: headers
-          namespace: networking
         # - name: authelia
-        #   namespace: default
       services:
         - name: *name
           port: 8687
