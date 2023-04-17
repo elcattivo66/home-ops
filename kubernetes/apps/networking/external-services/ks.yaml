@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-networking-ingresses
+  name: cluster-networking-external-services
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
