@@ -30,9 +30,8 @@ spec:
   values:
     image:
       repository: ghcr.io/hotio/cloudflareddns
-      tag: release-20221228150705
+      tag: release-20230329201029
       pullPolicy: IfNotPresent
-
     env:
       TZ: ${TZ}
       LOG_LEVEL: 2
