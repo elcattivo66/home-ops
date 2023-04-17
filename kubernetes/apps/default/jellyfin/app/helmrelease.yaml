@@ -41,6 +41,26 @@ spec:
           http:
             port: 8096
 
+    ingress:
+      main:
+        enabled: true
+        primary: true
+        ingressClassName: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: >-
+            networking-headers@kubernetescrd,
+            networking-local-only@kubernetescrd
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_CERT_NAME}-prod-tls
+
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
