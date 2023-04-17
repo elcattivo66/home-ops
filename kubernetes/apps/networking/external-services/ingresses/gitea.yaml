@@ -22,6 +22,8 @@ kind: Ingress
 metadata:
   name: gitea
   namespace: networking
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
