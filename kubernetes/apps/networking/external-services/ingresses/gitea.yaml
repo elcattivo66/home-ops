@@ -26,6 +26,9 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: >-
       networking-headers@kubernetescrd,
       networking-local-only@kubernetescrd
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
 spec:
   ingressClassName: traefik
   rules:
