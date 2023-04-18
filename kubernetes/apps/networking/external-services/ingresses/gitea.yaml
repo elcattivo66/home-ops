@@ -16,23 +16,52 @@ spec:
       protocol: TCP
       targetPort: 8687
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: &name gitea
+#   namespace: networking
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`gitea.${SECRET_DOMAIN}`)
+#       middlewares:
+#         - name: headers
+#         # - name: authelia
+#       services:
+#         - name: *name
+#           port: 8687
+#           namespace: networking
+#   tls:
+#     secretName: ${SECRET_CERT_NAME}-prod-tls
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: &name gitea
-  namespace: networking
+  name: gitea
+  labels:
+    app.kubernetes.io/name: gitea
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: >-
+      networking-headers@kubernetescrd
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`gitea.${SECRET_DOMAIN}`)
-      middlewares:
-        - name: headers
-        # - name: authelia
-      services:
-        - name: *name
-          port: 8687
-          namespace: networking
+  ingressClassName: traefik
+  rules:
+    - host: &host gitea.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gitea
+                port:
+                  number: 8687
   tls:
-    secretName: ${SECRET_CERT_NAME}-prod-tls
+    - hosts:
+        - *host
+      secretName: ${SECRET_CERT_NAME}-prod-tls
