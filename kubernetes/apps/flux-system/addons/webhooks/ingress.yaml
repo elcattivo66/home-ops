@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -7,12 +8,12 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-headers@kubernetescrd,
+      networking-flux-webhook@kubernetescrd,
       networking-local-only@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
-    - host: &host flux-webhook.elcattivo.de
+    - host: &host flux-webhook.${SECRET_DOMAIN}
       http:
         paths:
           - path: /hook/
@@ -25,3 +26,4 @@ spec:
   tls:
     - hosts:
         - *host
+      secretName: ${SECRET_CERT_NAME}-prod-tls
