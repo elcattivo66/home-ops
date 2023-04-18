@@ -11,11 +11,11 @@ spec:
   type: ExternalName
   externalName: ${NAS_ADDR}
   ports:
-    - name: webui
+    - name: api
       port: 9102
       protocol: TCP
       targetPort: 9102
-    - name: api
+    - name: webui
       port: 9101
       protocol: TCP
       targetPort: 9101
@@ -44,7 +44,7 @@ spec:
               service:
                 name: minio
                 port:
-                  number: 9102
+                  number: 9101
   tls:
     - hosts:
         - *host
@@ -73,7 +73,7 @@ spec:
               service:
                 name: minio
                 port:
-                  number: 9101
+                  number: 9102
   tls:
     - hosts:
         - *host
