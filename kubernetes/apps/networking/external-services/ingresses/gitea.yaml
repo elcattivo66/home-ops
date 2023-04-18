@@ -16,27 +16,6 @@ spec:
       protocol: TCP
       targetPort: 8687
 ---
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: &name gitea
-#   namespace: networking
-# spec:
-#   entryPoints:
-#     - websecure
-#   routes:
-#     - kind: Rule
-#       match: Host(`gitea.${SECRET_DOMAIN}`)
-#       middlewares:
-#         - name: headers
-#         # - name: authelia
-#       services:
-#         - name: *name
-#           port: 8687
-#           namespace: networking
-#   tls:
-#     secretName: ${SECRET_CERT_NAME}-prod-tls
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
 apiVersion: networking.k8s.io/v1
 kind: Ingress

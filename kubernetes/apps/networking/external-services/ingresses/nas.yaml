@@ -16,23 +16,53 @@ spec:
       protocol: TCP
       targetPort: 80
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: &name nas
-  namespace: networking
+  name: nas
+  labels:
+    app.kubernetes.io/name: nas
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: >-
+      networking-headers@kubernetescrd,
+      networking-local-only@kubernetescrd
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`nas.${SECRET_DOMAIN}`)
-      middlewares:
-        - name: headers
-        - name: local-only
-      services:
-        - name: *name
-          port: 80
-          namespace: networking
+  ingressClassName: traefik
+  rules:
+    - host: &host nas.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nas
+                port:
+                  number: 80
   tls:
-    secretName: ${SECRET_CERT_NAME}-prod-tls
+    - hosts:
+        - *host
+      secretName: ${SECRET_CERT_NAME}-prod-tls
+---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: &name nas
+#   namespace: networking
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`nas.${SECRET_DOMAIN}`)
+#       middlewares:
+#         - name: headers
+#         - name: local-only
+#       services:
+#         - name: *name
+#           port: 80
+#           namespace: networking
+#   tls:
+#     secretName: ${SECRET_CERT_NAME}-prod-tls

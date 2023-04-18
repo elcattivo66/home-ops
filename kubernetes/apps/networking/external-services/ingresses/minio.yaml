@@ -20,30 +20,89 @@ spec:
       protocol: TCP
       targetPort: 9101
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: &name minio
-  namespace: networking
+  name: minio-admin
+  labels:
+    app.kubernetes.io/name: minio
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: >-
+      networking-headers@kubernetescrd,
+      networking-local-only@kubernetescrd
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`minio-admin.${SECRET_DOMAIN}`)
-      middlewares:
-        - name: headers
-        - name: authelia
-      services:
-        - name: *name
-          port: 9101
-    - kind: Rule
-      match: Host(`minio.${SECRET_DOMAIN}`)
-      middlewares:
-        - name: headers
-        - name: local-only
-      services:
-        - name: *name
-          port: 9102
+  ingressClassName: traefik
+  rules:
+    - host: &host minio-admin.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9102
   tls:
-    secretName: ${SECRET_CERT_NAME}-prod-tls
+    - hosts:
+        - *host
+      secretName: ${SECRET_CERT_NAME}-prod-tls
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-api
+  labels:
+    app.kubernetes.io/name: minio
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: >-
+      networking-headers@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host minio.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9101
+  tls:
+    - hosts:
+        - *host
+      secretName: ${SECRET_CERT_NAME}-prod-tls
+---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: &name minio
+#   namespace: networking
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`minio-admin.${SECRET_DOMAIN}`)
+#       middlewares:
+#         - name: headers
+#         - name: authelia
+#       services:
+#         - name: *name
+#           port: 9101
+#     - kind: Rule
+#       match: Host(`minio.${SECRET_DOMAIN}`)
+#       middlewares:
+#         - name: headers
+#         - name: local-only
+#       services:
+#         - name: *name
+#           port: 9102
+#   tls:
+#     secretName: ${SECRET_CERT_NAME}-prod-tls
