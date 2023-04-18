@@ -27,7 +27,7 @@ spec:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
       pullPolicy: IfNotPresent
-      tag: 4.0.0.448@sha256:3005c9b82b35cdd643cff45bd49322a0fdce1643829979be4ca6a04ac407b60f
+      tag: 4.0.0.449@sha256:5f97217bfeea0033da13ed4317068dd4596cd25bc1d13ac3125cc1d8da690bc0
 
     env:
       TZ: ${TZ}
