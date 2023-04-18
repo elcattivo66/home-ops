@@ -11,7 +11,7 @@ spec:
   type: ExternalName
   externalName: ${NAS_ADDR}
   ports:
-    - name: webui
+    - name: http
       port: 8687
       protocol: TCP
       targetPort: 8687
