@@ -26,7 +26,7 @@ kind: Ingress
 metadata:
   name: minio-admin
   labels:
-    app.kubernetes.io/name: minio
+    app.kubernetes.io/name: minio-admin
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
@@ -56,7 +56,7 @@ kind: Ingress
 metadata:
   name: minio-api
   labels:
-    app.kubernetes.io/name: minio
+    app.kubernetes.io/name: minio-api
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
