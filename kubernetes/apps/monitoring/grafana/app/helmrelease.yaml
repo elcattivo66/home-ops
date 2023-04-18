@@ -37,11 +37,11 @@ spec:
       GF_PANELS_DISABLE_SANITIZE_HTML: true
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
-      GF_SERVER_DOMAIN: grafana.elcattivo.de
-      GF_SERVER_ROOT_URL: "https://grafana.elcattivo.de"
+      GF_SERVER_DOMAIN: grafana.${SECRET_DOMAIN}
+      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
     grafana.ini:
       auth:
-        signout_redirect_url: "https://grafana.elcattivo.de/"
+        signout_redirect_url: "https://grafana.${SECRET_DOMAIN}/"
         oauth_auto_login: false
       auth.generic_oauth:
         enabled: true
@@ -50,9 +50,9 @@ spec:
         client_secret: "${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}"
         scopes: "openid profile email groups"
         empty_scopes: false
-        auth_url: "https://authelia.elcattivo.de/api/oidc/authorization"
-        token_url: "https://authelia.elcattivo.de/api/oidc/token"
-        api_url: "https://authelia.elcattivo.de/api/oidc/userinfo"
+        auth_url: "https://authelia.${SECRET_DOMAIN}/api/oidc/authorization"
+        token_url: "https://authelia.${SECRET_DOMAIN}/api/oidc/token"
+        api_url: "https://authelia.${SECRET_DOMAIN}/api/oidc/userinfo"
         login_attribute_path: preferred_username
         groups_attribute_path: groups
         name_attribute_path: name
@@ -153,7 +153,7 @@ spec:
           networking-headers@kubernetescrd,
           networking-authelia@kubernetescrd
       hosts:
-        - &host grafana.elcattivo.de
+        - &host grafana.${SECRET_DOMAIN}
       tls:
         - hosts:
             - *host
