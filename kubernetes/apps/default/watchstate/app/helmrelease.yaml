@@ -53,3 +53,10 @@ spec:
         enabled: false
       startup:
         enabled: false
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 92M
+      limits:
+        memory: 92M

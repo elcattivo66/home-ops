@@ -88,9 +88,9 @@ spec:
 
     resources:
       requests:
-        cpu: 15m
-        memory: 105Mi
+        cpu: 5m
+        memory: 52M
       limits:
-        memory: 136Mi
+        memory: 52M
     env:
       KOPIA_PASSWORD: none

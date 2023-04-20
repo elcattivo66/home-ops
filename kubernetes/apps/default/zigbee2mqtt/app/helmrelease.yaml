@@ -77,10 +77,10 @@ spec:
       #   mountPath: /dev/ttyUSB0
     resources:
       requests:
-        cpu: 10m
-        memory: 100Mi
+        cpu: 5m
+        memory: 102M
       limits:
-        memory: 300Mi
+        memory: 102M
         smarter-devices/ttyUSB0: 1
     # affinity:
     #   nodeAffinity:

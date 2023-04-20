@@ -71,10 +71,10 @@ spec:
 
     resources:
       requests:
-        cpu: 15m
-        memory: 249M
+        cpu: 5m
+        memory: 127M
       limits:
-        memory: 299M
+        memory: 127M
 
     probes:
         startup:
