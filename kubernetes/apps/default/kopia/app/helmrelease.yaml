@@ -91,6 +91,6 @@ spec:
         cpu: 5m
         memory: 52M
       limits:
-        memory: 52M
+        memory: 152M
     env:
       KOPIA_PASSWORD: none
