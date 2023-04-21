@@ -25,3 +25,9 @@ spec:
     installCRDs: true
     serviceMonitor:
       enabled: true
+    resources:
+      requests:
+        cpu: 30m
+        memory: 292M
+      limits:
+        memory: 292M

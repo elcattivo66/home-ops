@@ -121,10 +121,10 @@ spec:
                   storage: 10Gi
         resources:
           requests:
-            cpu: 10m
-            memory: 500Mi
+            cpu: 220m
+            memory: 500M
           limits:
-            memory: 2500Mi
+            memory: 2635M
         additionalScrapeConfigs:
           - job_name: 'openhab'
             scrape_interval: 1m
