@@ -129,6 +129,12 @@ spec:
       master:
         persistence:
           enabled: false
+      resources:
+        requests:
+          cpu: 10m
+          memory: 21M
+        limits:
+          memory: 21M
 
     nginx:
       enabled: true
@@ -136,10 +142,10 @@ spec:
         default: true
       resources:
         requests:
-          cpu: 50m
-          memory: 20Mi
+          cpu: 5m
+          memory: 10M
         limits:
-          memory: 100Mi
+          memory: 10M
 
     internalDatabase:
       enabled: false
@@ -187,8 +193,10 @@ spec:
 
     resources:
       requests:
-        cpu: 50m
-        memory: 150Mi
+        cpu: 42m
+        memory: 185M
+      limits:
+        memory: 185M
 
   valuesFrom:
     - kind: Secret
