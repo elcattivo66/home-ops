@@ -23,6 +23,13 @@ spec:
     remediation:
       retries: 5
   values:
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.7
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: lldap-secret
     image:
       repository: ghcr.io/lldap/lldap
       tag: v0.4.3
