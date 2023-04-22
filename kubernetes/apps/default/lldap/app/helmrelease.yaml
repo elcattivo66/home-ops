@@ -30,6 +30,11 @@ spec:
         envFrom:
           - secretRef:
               name: lldap-secret
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/lldap/lldap
       tag: v0.4.3
@@ -71,11 +76,6 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    # podSecurityContext:
-    #   runAsUser: 1000
-    #   runAsGroup: 1000
-    #   fsGroup: 1000
-    #   fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       data:
         enabled: true
