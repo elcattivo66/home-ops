@@ -28,3 +28,9 @@ spec:
       enabled: true
     psp:
       create: false
+    resources:
+      requests:
+        cpu: 5m
+        memory: 34M
+      limits:
+        memory: 34M

@@ -121,7 +121,7 @@ spec:
           options: "default"
     resources:
       requests:
-        memory: 100Mi
-        cpu: 10m
+        cpu: 5m
+        memory: 121M
       limits:
-        memory: 200Mi
+        memory: 121M
