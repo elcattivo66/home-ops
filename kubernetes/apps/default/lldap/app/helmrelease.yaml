@@ -35,7 +35,7 @@ spec:
           - secretRef:
               name: lldap-secret
     controller:
-      replicas: 2
+      replicas: 1
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
