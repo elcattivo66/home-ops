@@ -132,21 +132,9 @@ spec:
         folderAnnotation: grafana_folder
         # provider:
         #   foldersFromFilesStructure: true
-        resources:
-          requests:
-            cpu: 5m
-            memory: 88M
-          limits:
-            memory: 88M
       datasources:
         enabled: true
         searchNamespace: ALL
-        resources:
-          requests:
-            cpu: 5m
-            memory: 79M
-          limits:
-            memory: 79M
     plugins:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
