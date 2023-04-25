@@ -22,6 +22,9 @@ spec:
     remediation:
       retries: 5
   values:
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
     image:
       repository: bitnami/influxdb
       tag: 2.7.0
