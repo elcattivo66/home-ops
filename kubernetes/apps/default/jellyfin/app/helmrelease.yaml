@@ -70,10 +70,16 @@ spec:
         - 985
         - 989
 
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 20Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+
     persistence:
-      config:
-        enabled: true
-        existingClaim: jellyfin-config-v1
       media:
         enabled: true
         type: nfs

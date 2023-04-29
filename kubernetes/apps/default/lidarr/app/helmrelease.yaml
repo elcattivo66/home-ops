@@ -62,11 +62,16 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: lidarr-config-v1
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
 
+    persistence:
       nfs-media:
         enabled: true
         type: nfs
