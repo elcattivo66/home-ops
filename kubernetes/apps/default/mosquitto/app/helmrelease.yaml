@@ -60,7 +60,7 @@ spec:
           mosquitto_pwd: ${SECRET_MOSQUITTO_PASS_HASH}
 
     volumeClaimTemplates:
-      - name: config
+      - name: data
         mountPath: /mosquitto/data
         accessMode: ReadWriteOnce
         size: 128Mi
