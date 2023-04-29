@@ -80,6 +80,6 @@ spec:
     resources:
       requests:
         cpu: 5m
-        memory: 15M
+        memory: 45M
       limits:
-        memory: 15M
+        memory: 45M
