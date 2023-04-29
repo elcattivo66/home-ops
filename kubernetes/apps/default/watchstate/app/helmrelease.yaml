@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: watchstate
+  name: &app watchstate
   namespace: default
 spec:
   chart:
@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
   interval: 30m
   values:
+    controller:
+      type: statefulset
+
     image:
       repository: ghcr.io/arabcoders/watchstate
       tag: sha-44df22e@sha256:9bb559f247df86dc3eb1c399ecb4f2e50093c2e17ce24595097638bc8c843d54
@@ -35,11 +38,15 @@ spec:
       main:
         enabled: false
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: watchstate-config-v1
+    volumeClaimTemplates:
+      - name: config
         mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+          app.kubernetes.io/name: *app
 
     podSecurityContext:
       runAsUser: 1000

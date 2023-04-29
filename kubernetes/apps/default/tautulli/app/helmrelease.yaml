@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: tautulli
+  name: &app tautulli
   namespace: default
 spec:
   interval: 15m
@@ -23,6 +23,8 @@ spec:
       retries: 5
 
   values:
+    controller:
+      type: statefulset
 
     image:
       repository: ghcr.io/onedr0p/tautulli
@@ -57,10 +59,15 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: tautulli-config-v1
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+          app.kubernetes.io/name: *app
 
     podSecurityContext:
       runAsUser: 1000

@@ -25,6 +25,9 @@ spec:
     - name: mosquitto
       namespace: default
   values:
+    controller:
+      type: statefulset
+
     image:
       repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.30.3
@@ -65,11 +68,17 @@ spec:
 
     securityContext:
       privileged: true
-    persistence:
-      config:
-        enabled: true
-        existingClaim: zigbee2mqtt-config-v1
-        mountPath: "/data"
+
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /data
+        accessMode: ReadWriteOnce
+        size: 128Mi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+          app.kubernetes.io/name: *app
+
       # usb:
       #   enabled: true
       #   type: hostPath

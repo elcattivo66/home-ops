@@ -23,6 +23,8 @@ spec:
       retries: 5
 
   values:
+    controller:
+      type: statefulset
 
     image:
       repository: ghcr.io/onedr0p/sabnzbd
@@ -63,11 +65,16 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: sabnzbd-config-v1
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
 
+    persistence:
       nfs-media:
         enabled: true
         type: nfs

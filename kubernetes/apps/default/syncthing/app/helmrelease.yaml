@@ -22,6 +22,9 @@ spec:
     remediation:
       retries: 5
   values:
+    controller:
+      type: statefulset
+
     global:
       nameOverride: *app
     image:
@@ -66,11 +69,17 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: syncthing-config-v1
+    volumeClaimTemplates:
+      - name: config
         mountPath: /var/syncthing
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+          app.kubernetes.io/name: *app
+
+    persistence:
       backup:
         enabled: true
         type: nfs

@@ -23,6 +23,8 @@ spec:
       retries: 5
 
   values:
+    controller:
+      type: statefulset
 
     image:
       repository: ghcr.io/onedr0p/readarr-develop
@@ -61,11 +63,16 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: readarr-config-v1
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
 
+    persistence:
       media:
         enabled: true
         type: nfs
