@@ -59,11 +59,14 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: gotify-config-v1
+    volumeClaimTemplates:
+      - name: config
         mountPath: /app/data
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
 
     podSecurityContext:
       runAsUser: 1000

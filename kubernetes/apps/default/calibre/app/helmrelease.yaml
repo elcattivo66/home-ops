@@ -41,10 +41,16 @@ spec:
             targetPort: 8081
         type: ClusterIP
 
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 128Mi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+
     persistence:
-      config:
-        enabled: true
-        existingClaim: calibre-config-v1
       books:
         enabled: true
         type: nfs

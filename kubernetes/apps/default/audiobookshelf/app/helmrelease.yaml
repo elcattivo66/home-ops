@@ -73,12 +73,10 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
         storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
 
     persistence:
-      # data:
-      #   enabled: true
-      #   existingClaim: audiobookshelf-config-v1
-      #   mountPath: /data
       media:
         enabled: true
         type: nfs
