@@ -27,6 +27,13 @@ spec:
     - name: redis
       namespace: databases
   values:
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.7
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: immich
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
