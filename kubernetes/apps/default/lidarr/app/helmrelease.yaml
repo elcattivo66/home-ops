@@ -23,6 +23,8 @@ spec:
       retries: 5
 
   values:
+    controller:
+      type: statefulset
 
     image:
       repository: ghcr.io/onedr0p/lidarr-develop
