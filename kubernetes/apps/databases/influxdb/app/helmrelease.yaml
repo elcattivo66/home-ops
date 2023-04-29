@@ -27,7 +27,7 @@ spec:
       strategy: RollingUpdate
     image:
       repository: bitnami/influxdb
-      tag: 2.7.0
+      tag: 2.7.1
 
     auth:
       existingSecret: influxdb-secret
