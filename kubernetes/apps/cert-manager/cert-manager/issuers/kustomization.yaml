@@ -5,7 +5,6 @@ resources:
   - ./letsencrypt-production.yaml
   - ./letsencrypt-staging.yaml
   - ./secret.sops.yaml
-  - ./certificate.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: cert-manager-issuers
