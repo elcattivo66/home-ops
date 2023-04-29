@@ -23,6 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
+    controller:
+      type: statefulset
+
     image:
       repository: ghcr.io/onedr0p/bazarr
       tag: 1.2.0
