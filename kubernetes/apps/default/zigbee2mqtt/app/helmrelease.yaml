@@ -87,9 +87,9 @@ spec:
     resources:
       requests:
         cpu: 5m
-        memory: 102M
+        memory: 202M
       limits:
-        memory: 102M
+        memory: 202M
         smarter-devices/ttyUSB0: 1
     # affinity:
     #   nodeAffinity:
