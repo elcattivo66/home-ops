@@ -23,6 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
+    controller:
+      type: statefulset
+
     image:
       repository: ghcr.io/onedr0p/plex
       tag: 1.32.0.6973-a787c5a8e@sha256:970a7f3226b6d9e3dcda12134647b465a4f14115c03d52751264d603a8f621e5
@@ -57,11 +60,14 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: plex-config-v1
+    volumeClaimTemplates:
+      - name: config
         mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 100Gi
+        storageClass: longhorn
+
+    persistence:
       media:
         enabled: true
         type: nfs
