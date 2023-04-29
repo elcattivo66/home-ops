@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-cert-manager-issuers
-  path: ./cluster/apps/networking/traefik/certificates
+  path: ./kubernetes/apps/networking/traefik/certificates
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
