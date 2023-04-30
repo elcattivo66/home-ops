@@ -31,6 +31,7 @@ spec:
       enabled: true
       className: traefik
       annotations:
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: >-
           networking-headers@kubernetescrd,
