@@ -104,7 +104,7 @@ resource "cloudflare_page_rule" "cf_domain_ingress_plex_bypass_cache" {
   }
 }
 
-resource "cloudflare_page_rule" "cf_domain_ingress_plex_bypass_cache" {
+resource "cloudflare_page_rule" "cf_domain_ingress_minio_bypass_cache" {
   zone_id  = lookup(data.cloudflare_zones.domain.zones[0], "id")
   target   = format("minio.%s/*", data.sops_file.cloudflare_secrets.data["cloudflare_domain"])
   status   = "active"
