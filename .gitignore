@@ -8,6 +8,8 @@ xanmanning.k3s*
 # terraform
 .terraform
 *.tfvars
+.terraform.tfstate*
+terraform.tfstate*
 # sops
 .decrypted~*
 .config.env
