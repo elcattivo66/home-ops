@@ -6,6 +6,7 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomization
   - ./cloudflare-ddns/ks.yaml
+  - ./external-dns/ks.yaml
   - ./external-services/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
