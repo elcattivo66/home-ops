@@ -58,6 +58,7 @@ metadata:
   labels:
     app.kubernetes.io/name: minio-api
   annotations:
+    external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
       networking-headers@kubernetescrd
@@ -78,31 +79,3 @@ spec:
     - hosts:
         - *host
       secretName: ${SECRET_CERT_NAME}-prod-tls
----
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: &name minio
-#   namespace: networking
-# spec:
-#   entryPoints:
-#     - websecure
-#   routes:
-#     - kind: Rule
-#       match: Host(`minio-admin.${SECRET_DOMAIN}`)
-#       middlewares:
-#         - name: headers
-#         - name: authelia
-#       services:
-#         - name: *name
-#           port: 9101
-#     - kind: Rule
-#       match: Host(`minio.${SECRET_DOMAIN}`)
-#       middlewares:
-#         - name: headers
-#         - name: local-only
-#       services:
-#         - name: *name
-#           port: 9102
-#   tls:
-#     secretName: ${SECRET_CERT_NAME}-prod-tls
