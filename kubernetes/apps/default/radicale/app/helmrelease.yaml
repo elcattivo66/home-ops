@@ -18,6 +18,7 @@ spec:
 
   values:
     controller:
+      type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
     image:
@@ -50,6 +51,15 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
+    volumeClaimTemplates:
+      - name: data
+        mountPath: /data
+        accessMode: ReadWriteOnce
+        size: 128Mi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+
     persistence:
       config:
         enabled: true
@@ -58,11 +68,6 @@ spec:
         subPath: config.cfg
         mountPath: /config/config
         readOnly: true
-
-      data:
-        enabled: true
-        existingClaim: radicale-data-v1
-        mountPath: /data
 
       auth:
         enabled: true
