@@ -28,16 +28,7 @@
   },
   "regexManagers": [
     {
-      "description": "Process CRD dependencies",
-      "fileMatch": ["kubernetes/.+\\.ya?ml$"],
-      "matchStrings": [
-        "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
-        "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
-      ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
-    },
-    {
-      "description": "Process various dependencies",
+      "description": "Process custom dependencies",
       "fileMatch": [
         "ansible/.+\\.ya?ml$",
         "kubernetes/.+\\.ya?ml$"
