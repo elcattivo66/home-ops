@@ -15,7 +15,7 @@ tasks:
     desc: Install / Upgrade Ansible galaxy deps
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
-      # - pip3 install --user --requirement requirements.txt
+      - pip3 install --user --requirement requirements.txt
       - ansible-galaxy install -r requirements.yml --roles-path ~/.ansible/roles --force
       - ansible-galaxy collection install -r requirements.yml --collections-path ~/.ansible/collections --force
 
@@ -79,4 +79,4 @@ tasks:
     desc: Perform pacman -Syu
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/update-os.yml --ask-become-pass
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/update-os.yml -v
