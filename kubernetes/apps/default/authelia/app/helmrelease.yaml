@@ -32,9 +32,16 @@ spec:
       repository: ghcr.io/authelia/authelia
       tag: 4.37.5
 
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.7
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: authelia-secret
     envFrom:
       - secretRef:
-          name: authelia
+          name: authelia-secret
     enableServiceLinks: false
 
     service:

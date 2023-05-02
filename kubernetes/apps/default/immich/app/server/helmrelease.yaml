@@ -33,7 +33,7 @@ spec:
         imagePullPolicy: IfNotPresent
         envFrom:
           - secretRef:
-              name: immich
+              name: immich-secret
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
@@ -45,9 +45,9 @@ spec:
       - ./start-server.sh
     envFrom:
       - secretRef:
-          name: immich
+          name: immich-secret
       - configMapRef:
-          name: immich
+          name: immich-config
     service:
       main:
         ports:

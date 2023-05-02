@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: immich
+  name: immich-config
   namespace: default
 data:
   DB_DATABASE_NAME: immich

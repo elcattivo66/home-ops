@@ -21,7 +21,7 @@ spec:
         imagePullPolicy: IfNotPresent
         envFrom:
           - secretRef:
-              name: paperless-secrets
+              name: paperless-secret
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 1.14.2
@@ -48,7 +48,7 @@ spec:
       PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
     envFrom:
       - secretRef:
-          name: paperless-secrets
+          name: paperless-secret
 
     service:
       main:
