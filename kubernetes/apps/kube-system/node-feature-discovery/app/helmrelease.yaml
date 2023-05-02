@@ -45,6 +45,6 @@ spec:
             - name: "zigbee"
               matchOn:
                 - usbId:
-                    class: ["00"]
+                    class: ["00", "ff"]
                     vendor: ["10c4"]
-                    # device: ["7523"]
+                    device: ["ea60"]

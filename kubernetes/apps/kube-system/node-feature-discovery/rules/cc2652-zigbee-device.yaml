@@ -14,4 +14,4 @@ spec:
           matchExpressions:
             class: { op: In, value: ["00"] }
             vendor: { op: In, value: ["10c4"] }
-            # device: { op: In, value: ["0200"] }
+            device: { op: In, value: ["ea60"] }
