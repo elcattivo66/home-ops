@@ -42,7 +42,7 @@ spec:
       - secretRef:
           name: immich-secret
       - configMapRef:
-          name: immich-secret
+          name: immich-config
     service:
       main:
         enabled: false
