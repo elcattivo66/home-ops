@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
-    - name: cluster-apps-smarter-device-manager
+    - name: cluster-apps-node-feature-rules
   path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:

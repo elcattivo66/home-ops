@@ -21,9 +21,6 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  dependsOn:
-    - name: mosquitto
-      namespace: default
   values:
     controller:
       type: statefulset
@@ -31,9 +28,7 @@ spec:
     image:
       repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.30.4
-    # envFrom:
-    #   - secretRef:
-    #       name: *app
+
     env:
       TZ: "${TZ}"
       ZIGBEE2MQTT_DATA: /data
@@ -78,25 +73,20 @@ spec:
         labels:
           snapshot.home.cluster/enabled: "true"
           app.kubernetes.io/name: *app
+    persistence:
+      usb:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_23_93_35_0A-if00-port0
+        hostPathType: CharDevice
 
-      # usb:
-      #   enabled: true
-      #   type: hostPath
-      #   hostPath: /dev/ttyUSB0
-      #   mountPath: /dev/ttyUSB0
+    nodeSelector:
+      cc2652.feature.node.kubernetes.io/zigbee: "true"
+
     resources:
       requests:
         cpu: 5m
         memory: 202M
       limits:
         memory: 202M
-        smarter-devices/ttyUSB0: 1
-    # affinity:
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #         - matchExpressions:
-    #             - key: feature.node.kubernetes.io/usb-ff_10c4_ea60.present
-    #               operator: In
-    #               values:
-    #                 - "true"
+        # smarter-devices/ttyUSB0: 1
