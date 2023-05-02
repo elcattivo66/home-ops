@@ -80,8 +80,8 @@ spec:
         hostPath: /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_23_93_35_0A-if00-port0
         hostPathType: CharDevice
 
-    nodeSelector:
-      cc2652.feature.node.kubernetes.io/zigbee: "true"
+    # nodeSelector:
+    #   cc2652.feature.node.kubernetes.io/zigbee: "true"
 
     resources:
       requests:
@@ -90,3 +90,13 @@ spec:
       limits:
         memory: 202M
         # smarter-devices/ttyUSB0: 1
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: feature.node.kubernetes.io/custom-zigbee
+              operator: In
+              values:
+              - "true"
