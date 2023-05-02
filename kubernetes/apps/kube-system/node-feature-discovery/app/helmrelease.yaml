@@ -41,10 +41,3 @@ spec:
           cpu:
             cpuid:
               attributeWhitelist: ["AVX", "AVX2"]
-          custom:
-            - name: "zigbee"
-              matchOn:
-                - usbId:
-                    class: ["00", "ff"]
-                    vendor: ["10c4"]
-                    device: ["ea60"]
