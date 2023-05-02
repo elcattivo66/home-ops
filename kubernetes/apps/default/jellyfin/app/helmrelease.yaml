@@ -67,6 +67,8 @@ spec:
       supplementalGroups:
         - 985
         - 989
+        - 44
+        - 109
 
     volumeClaimTemplates:
       - name: config
