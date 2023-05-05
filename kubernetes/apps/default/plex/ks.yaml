@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
+    - name: cluster-apps-intel-device-plugin-gpu
   path: ./kubernetes/apps/default/plex/app
   prune: true
   sourceRef:
