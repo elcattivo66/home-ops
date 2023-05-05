@@ -52,7 +52,7 @@ spec:
       library:
         enabled: true
         type: nfs
-        server: ${NFS_ADDR}
+        server: ${NAS_ADDR}
         path: /photos/immich_upload/
         mountPath: /usr/src/app/upload
         readOnly: false
