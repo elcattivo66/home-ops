@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.6
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.7
   storage:
     size: 15Gi
     storageClass: local-path
@@ -14,7 +14,7 @@ spec:
     name: postgres-superuser
   bootstrap:
     recovery:
-      source: postgres-v1
+      source: &previous-cluster postgres-v1
   monitoring:
     enablePodMonitor: true
 
@@ -36,7 +36,7 @@ spec:
           key: MINIO_SECRET_KEY
 
   externalClusters:
-    - name: postgres-v1
+    - name: &previous-cluster
       barmanObjectStore:
         wal:
           compression: bzip2
