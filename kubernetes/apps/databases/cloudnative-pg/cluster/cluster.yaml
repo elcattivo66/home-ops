@@ -36,7 +36,7 @@ spec:
           key: MINIO_SECRET_KEY
 
   externalClusters:
-    - name: &previous-cluster
+    - name: *previous-cluster
       barmanObjectStore:
         wal:
           compression: bzip2
