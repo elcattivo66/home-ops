@@ -1,6 +1,6 @@
 ---
 - hosts:
-    # - master
+    - master
     - worker
   become: true
   gather_facts: true
