@@ -61,15 +61,17 @@ spec:
           mdns:
             enabled: true
             port: 5353
+            protocol: UDP
+            targetPort: 5353
           chromecast1:
             port: 8008
           chromecast2:
             port: 8009
           hueemulation:
             enabled: true
-            port: 80
+            port: 8080
             protocol: TCP
-            targetPort: 80
+            targetPort: 8080
           sonos:
             enabled: true
             port: 1400
