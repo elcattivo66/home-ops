@@ -34,7 +34,7 @@ spec:
       clientID: weave-gitops
       issuerURL: https://authelia.${SECRET_DOMAIN}
       redirectURL: https://gitops.${SECRET_DOMAIN}/oauth2/callback
-
+      claimUsername: preferred_username
     ingress:
       enabled: true
       className: traefik
