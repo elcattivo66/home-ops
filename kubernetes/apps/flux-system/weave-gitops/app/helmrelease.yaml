@@ -61,6 +61,7 @@ spec:
     rbac:
       create: true
       impersonationResourceNames: ["philipp", "${SECRET_SMTP_USERNAME}"]
+      impersonationResources: ["groups"]
       # additionalRules:
       #   - apiGroups: ["infra.contrib.fluxcd.io"]
       #     resources: ["terraforms"]
