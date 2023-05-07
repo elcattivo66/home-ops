@@ -23,7 +23,7 @@ spec:
       retries: 5
 
   values:
-    replicas: 2
+    replicas: 1
     rbac:
       pspEnabled: false
     admin:
@@ -43,7 +43,7 @@ spec:
         check_for_plugin_updates: false
       auth:
         signout_redirect_url: "https://grafana.${SECRET_DOMAIN}/"
-        oauth_auto_login: true
+        oauth_auto_login: false
       auth.generic_oauth:
         enabled: true
         name: Authelia
