@@ -54,6 +54,7 @@ spec:
             enabled: true
             port: 1900
             protocol: UDP
+            targetPort: 1900
           karaf:
             enabled: true
             port: 8101
@@ -67,6 +68,8 @@ spec:
           hueemulation:
             enabled: true
             port: 80
+            protocol: TCP
+            targetPort: 80
           sonos:
             enabled: true
             port: 1400
