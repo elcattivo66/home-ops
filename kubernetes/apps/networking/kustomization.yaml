@@ -10,5 +10,4 @@ resources:
   - ./external-services/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
-  # - ./multus/ks.yaml
   - ./traefik/ks.yaml
