@@ -99,14 +99,6 @@ spec:
         storageClass: longhorn
 
     persistence:
-      config:
-        enabled: true
-        existingClaim: tdarr-config-v1
-        subPath:
-          - path: tdarr/config
-            mountPath: /app/configs
-          - path: tdarr/data
-            mountPath: /app/server
       media:
         enabled: true
         type: nfs
