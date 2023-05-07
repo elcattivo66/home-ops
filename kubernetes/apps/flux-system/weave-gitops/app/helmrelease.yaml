@@ -28,7 +28,7 @@ spec:
   values:
     adminUser:
       create: true
-      username: admin
+      username: philipp
     oidcSecret:
       create: true
       clientID: weave-gitops
@@ -58,7 +58,6 @@ spec:
       enabled: true
     rbac:
       create: true
-      impersonationResources: ["groups"]
       impersonationResourceNames: ["admin"]
       # additionalRules:
       #   - apiGroups: ["infra.contrib.fluxcd.io"]
