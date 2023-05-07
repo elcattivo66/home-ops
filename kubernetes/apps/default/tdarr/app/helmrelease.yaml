@@ -23,8 +23,6 @@ spec:
     remediation:
       retries: 5
   values:
-    controller:
-      type: statefulset
     image:
       repository: haveagitgat/tdarr
       tag: 2.00.20
@@ -34,7 +32,7 @@ spec:
       serverIP: 0.0.0.0
       serverPort: &server-port 8266
       TZ: ${TZ}
-      ffmpegPath: ""
+      ffmpegPath: /usr/bin/ffmpeg
       PGID: 1000
       PUID: 1000
 
@@ -56,8 +54,6 @@ spec:
             value: 1000
           - name: PGID
             value: 1000
-          - name: ffmpegPath
-            value: ""
         volumeMounts:
           - name: config
             mountPath: /app/configs
@@ -65,22 +61,10 @@ spec:
             mountPath: /media
           - name: shared
             mountPath: /shared
-        resources:
-          requests:
-            gpu.intel.com/i915: 1
-          limits:
-            gpu.intel.com/i915: 1
-        podSecurityContext:
-          supplementalGroups:
-            - 985
-            - 989
-            - 44
-            - 109
     podSecurityContext:
       supplementalGroups:
         - 985
         - 989
-        - 1000
         - 44
         - 109
     resources:
@@ -89,18 +73,15 @@ spec:
       limits:
         gpu.intel.com/i915: 1
 
-    volumeClaimTemplates:
-      - name: config
+    persistence:
+      config:
+        enabled: true
+        existingClaim: tdarr-config-v1
         subPath:
           - path: tdarr/config
             mountPath: /app/configs
           - path: tdarr/data
             mountPath: /app/server
-        accessMode: ReadWriteOnce
-        size: 5Gi
-        storageClass: longhorn
-
-    persistence:
       media:
         enabled: true
         type: nfs
