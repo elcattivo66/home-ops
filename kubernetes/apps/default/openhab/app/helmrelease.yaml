@@ -33,7 +33,7 @@ spec:
       OPENHAB_HTTPS_PORT: "8443"
       EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Berlin -Dlog4j2.formatMsgNoLookups=true"
 
-    hostNetwork: true
+    # hostNetwork: true
     # podAnnotations:
     #   k8s.v1.cni.cncf.io/networks: macvlan-static-iot-openhab
 
@@ -58,12 +58,14 @@ spec:
             enabled: true
             port: 8101
           mdns:
+            enabled: true
             port: 5353
           chromecast1:
             port: 8008
           chromecast2:
             port: 8009
           hueemulation:
+            enabled: true
             port: 80
           sonos:
             enabled: true
