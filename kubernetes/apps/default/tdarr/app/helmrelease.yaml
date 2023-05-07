@@ -23,6 +23,8 @@ spec:
     remediation:
       retries: 5
   values:
+    controller:
+      type: statefulset
     image:
       repository: haveagitgat/tdarr
       tag: 2.00.20
