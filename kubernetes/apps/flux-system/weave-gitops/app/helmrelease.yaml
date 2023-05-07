@@ -35,7 +35,7 @@ spec:
       issuerURL: https://authelia.${SECRET_DOMAIN}
       redirectURL: https://gitops.${SECRET_DOMAIN}/oauth2/callback
       claimUsername: preferred_username
-      customScopes: ["profile"]
+      customScopes: ["offline_access", "openid", "profile"]
     ingress:
       enabled: true
       className: traefik
