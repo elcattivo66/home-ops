@@ -64,6 +64,7 @@ spec:
               s3forcepathstyle: true
               endpoint: "nas:9102"
               bucketnames: loki
+              bucketregion: eu-central-1
               access_key_id: "${MINIO_ACCESS_KEY}"
               secret_access_key: "${MINIO_SECRET_KEY}"
           ring:
