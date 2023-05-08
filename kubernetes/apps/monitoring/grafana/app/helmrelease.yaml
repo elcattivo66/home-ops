@@ -111,6 +111,12 @@ spec:
               httpHeaderName1: Authorization
             secureJsonData:
               httpHeaderValue1: "${SECRET_INFLUXDB_TOKEN}"
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://loki-gateway.monitoring.svc.cluster.local
+            jsonData:
+              maxLines: 250
     dashboards:
       openhab:
         metrics:
