@@ -156,8 +156,8 @@ spec:
                     {{- include "loki.writeSelectorLabels" . | nindent 12 }}
                 topologyKey: kubernetes.io/hostname
       persistence:
-        size: 20Gi
-        storageClass: longhorn
+        size: 10Gi
+        storageClass: local-path
 
     read:
       replicas: 3
@@ -177,8 +177,8 @@ spec:
         - name: rules
           emptyDir: {}
       persistence:
-        size: 20Gi
-        storageClass: longhorn
+        size: 10Gi
+        storageClass: local-path
 
     backend:
       replicas: 3
@@ -198,8 +198,8 @@ spec:
         - name: rules
           emptyDir: {}
       persistence:
-        size: 20Gi
-        storageClass: longhorn
+        size: 10Gi
+        storageClass: local-path
 
     monitoring:
       dashboards:
