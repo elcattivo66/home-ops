@@ -65,8 +65,8 @@ spec:
               endpoint: "nas:9102"
               bucketnames: loki
               region: eu-central-1
-              access_key_id: "${MINIO_ACCESS_KEY}"
-              secret_access_key: "${MINIO_SECRET_KEY}"
+              secret_access_key: "${MINIO_ACCESS_KEY}"
+              access_key_id: "${MINIO_SECRET_KEY}"
           ring:
             kvstore:
               store: memberlist
