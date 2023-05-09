@@ -122,7 +122,7 @@ spec:
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-local-only@kubernetescrd
         hosts:
-          - host: &host "loki-cluster-0.bjw-s.dev"
+          - host: &host "loki.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
