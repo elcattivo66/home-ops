@@ -83,6 +83,15 @@ resource "cloudflare_record" "ipv4" {
   ttl     = 1
 }
 
+resource "cloudflare_record" "minio" {
+  name    = "minio"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = chomp(data.http.ipv4.response_body)
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
+
 resource "cloudflare_record" "root" {
   name    = data.sops_file.cloudflare_secrets.data["cloudflare_domain"]
   zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
