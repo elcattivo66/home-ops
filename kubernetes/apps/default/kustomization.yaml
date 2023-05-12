@@ -29,6 +29,7 @@ resources:
     - sonarr/ks.yaml
     - syncthing/ks.yaml
     - tautulli/ks.yaml
+    - unmanic/ks.yaml
     - vaultwarden/ks.yaml
     - watchstate/ks.yaml
     - xteve/ks.yaml
