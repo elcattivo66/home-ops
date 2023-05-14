@@ -26,5 +26,5 @@ spec:
     keepHistory: false
   values:
     name: intel-gpu-plugin
-    sharedDevNum: 2
+    sharedDevNum: 3
     nodeFeatureRule: true
