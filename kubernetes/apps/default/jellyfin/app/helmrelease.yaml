@@ -100,5 +100,5 @@ spec:
         cpu: 5m
         memory: 1513M
       limits:
-        memory: 1513M
+        memory: 2513M
         gpu.intel.com/i915: 1

@@ -111,7 +111,7 @@ spec:
         memory: 2206M
       limits:
         gpu.intel.com/i915: 1
-        memory: 2206M
+        memory: 4206M
 
     nodeSelector:
       intel.feature.node.kubernetes.io/gpu: "true"
