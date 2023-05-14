@@ -17,12 +17,12 @@ sources:
   journald_source:
     type: vector
     version: "2"
-    address: 0.0.0.0:6000
+    address: 0.0.0.0:6002
 
   kubernetes_source:
     type: vector
     version: "2"
-    address: 0.0.0.0:6010
+    address: 0.0.0.0:6000
 
 #
 # Transforms
@@ -31,39 +31,46 @@ sources:
 transforms:
   kubernetes_remap:
     type: remap
-    inputs: ["kubernetes_source"]
+    inputs:
+      - kubernetes_source
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
-      # Drop pod_labels
-      del(.pod_labels)
 
 #
 # Sinks
 #
-
 sinks:
-  journald:
-    inputs: ["journald_source"]
+  loki_kubernetes:
+    type: loki
+    inputs:
+      - kubernetes_remap
+    endpoint: http://loki-gateway.monitoring.svc.cluster.local
+    encoding:
+      codec: json
+    out_of_order_action: rewrite_timestamp
+    remove_label_fields: true
+    remove_timestamp: true
+    labels:
+      hostname: '{{ kubernetes.pod_node_name }}'
+      k8s_app: '{{ custom_app_name }}'
+      k8s_container: '{{ kubernetes.container_name }}'
+      k8s_filename: '{{ kubernetes.file }}'
+      k8s_instance: '{{ kubernetes.pod_labels."app.kubernetes.io/instance" }}'
+      k8s_namespace: '{{ kubernetes.pod_namespace }}'
+      k8s_node: '{{ kubernetes.pod_node_name }}'
+      k8s_pod: '{{ kubernetes.pod_name }}'
+
+
+  loki_journal:
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
-    encoding: { codec: json }
+    encoding:
+      codec: json
+    inputs:
+      - journald_source
     out_of_order_action: accept
     remove_label_fields: true
     remove_timestamp: true
     labels:
       hostname: '{{ host }}'
-
-  kubernetes:
-    inputs: ["kubernetes_remap"]
-    type: loki
-    endpoint: http://loki-gateway.monitoring.svc.cluster.local
-    encoding: { codec: json }
-    out_of_order_action: accept
-    remove_label_fields: true
-    remove_timestamp: true
-    labels:
-      app: '{{ custom_app_name }}'
-      namespace: '{{ kubernetes.pod_namespace }}'
-      node: '{{ kubernetes.pod_node_name }}'
-

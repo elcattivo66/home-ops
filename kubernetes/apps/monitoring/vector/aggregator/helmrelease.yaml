@@ -42,7 +42,7 @@ spec:
     #     volumeMounts:
     #       - { name: geoip, mountPath: /usr/share/GeoIP }
     controller:
-      replicas: 3
+      replicas: 1
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
@@ -53,24 +53,15 @@ spec:
     args: ["--config", "/etc/vector/vector.yaml"]
     service:
       main:
-        type: LoadBalancer
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: vector.devbu.io
-        externalIPs: ["192.168.69.111"]
-        externalTrafficPolicy: Local
         ports:
           http:
             port: 8686
-          journald:
+          kubernetes-logs:
             enabled: true
             port: 6000
-          kubernetes:
+          journald-logs:
             enabled: true
-            port: 6010
-          vyos:
-            enabled: true
-            port: 6020
-            # protocol: UDP
+            port: 6002
     persistence:
       config:
         enabled: true
