@@ -1,7 +1,6 @@
 ---
 - hosts:
-    - master
-    # - worker
+    - worker
   become: true
   gather_facts: true
   any_errors_fatal: true
@@ -10,7 +9,7 @@
       ansible.builtin.pause:
         seconds: 5
   tasks:
-  - name: full system upgrade
-    pacman:
-      update_cache: yes
-      upgrade: yes
+    - name: Reboot
+      ansible.builtin.reboot:
+        msg: Rebooting nodes
+        reboot_timeout: 3600

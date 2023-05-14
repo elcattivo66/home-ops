@@ -2,16 +2,13 @@
 version: "3"
 
 vars:
-  PROJECT_DIR:
-    sh: "git rev-parse --show-toplevel"
-  KUBERNETES_DIR: "{{.PROJECT_DIR}}/kubernetes"
-  ANSIBLE_DIR: "{{.PROJECT_DIR}}/ansible"
-  TERRAFORM_DIR: "{{.PROJECT_DIR}}/terraform"
-
-dotenv: [".config.env"]
+  CLUSTER_DIR: "{{.ROOT_DIR}}/kubernetes"
+  PROVISION_DIR: "{{.ROOT_DIR}}/provision"
+  ANSIBLE_DIR: "{{.PROVISION_DIR}}/kubernetes/servers"
+  TERRAFORM_DIR: "{{.PROVISION_DIR}}/kubernetes/"
 
 env:
-  KUBECONFIG: "{{.PROJECT_DIR}}/kubeconfig"
+  KUBECONFIG: ./kubeconfig
   SOPS_AGE_KEY_FILE: ~/.config/sops/age/keys.txt
 
 includes:
@@ -57,7 +54,6 @@ tasks:
     cmds:
       - ./configure --verify
 
-  configure:
-    desc: Configure repository from env settings
-    cmds:
-      - ./configure
+  default:
+    silent: true
+    cmds: ["task -l"]
