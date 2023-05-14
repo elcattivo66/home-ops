@@ -61,7 +61,7 @@ spec:
           value: "6379"
       mail:
         enabled: true
-        fromAddress: elcattivo
+        fromAddress: ${SECRET_CERT_NAME}
         domain: ${SECRET_SMTP_DOMAIN}
         smtp:
           host: ${SECRET_SMTP_HOST}

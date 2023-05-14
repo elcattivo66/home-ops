@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: ssh://git@nas:222/philipp/k3s-gitops.git #https://gitea.elcattivo.de/philipp/k3s-gitops
+  url: ssh://git@nas:222/philipp/k3s-gitops.git
   ref:
     branch: main
   secretRef:
