@@ -12,13 +12,13 @@ spec:
   externalName: ${NAS_ADDR}
   ports:
     - name: api
-      port: 9102
+      port: 9000
       protocol: TCP
-      targetPort: 9102
+      targetPort: 9000
     - name: webui
-      port: 9101
+      port: 9001
       protocol: TCP
-      targetPort: 9101
+      targetPort: 9001
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
 apiVersion: networking.k8s.io/v1
