@@ -165,3 +165,7 @@ spec:
             static_configs:
             - targets:
               - 'openhab.default.svc.cluster.local:8282'
+          - job_name: minio
+            metrics_path: /minio/v2/metrics/cluster
+            static_configs:
+              - targets: ["nas:9000"]
