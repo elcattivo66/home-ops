@@ -44,7 +44,7 @@ spec:
               service:
                 name: minio
                 port:
-                  number: 9101
+                  number: 9001
   tls:
     - hosts:
         - *host
@@ -74,7 +74,7 @@ spec:
               service:
                 name: minio
                 port:
-                  number: 9102
+                  number: 9000
   tls:
     - hosts:
         - *host
