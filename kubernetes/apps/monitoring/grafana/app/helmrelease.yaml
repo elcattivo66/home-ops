@@ -145,7 +145,7 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
         minio:
           gnetId: 13502
-          revision: 21
+          revision: 22
           datasource: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
