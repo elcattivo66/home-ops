@@ -7,10 +7,9 @@ k3s_registration_address: 192.168.178.23
 k3s_control_node: true
 k3s_server:
   node-ip: "{{ ansible_host }}"
-  # flannel-iface: bond0
   tls-san:
     - "{{ k3s_registration_address }}"
-    # - nas.turbo.ac
+    # - helios.natallan.com
   docker: false
   disable-network-policy: true
   disable-cloud-controller: true
