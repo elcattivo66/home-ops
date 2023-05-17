@@ -117,6 +117,8 @@ spec:
             url: http://loki-gateway.monitoring.svc.cluster.local:80
             jsonData:
               maxLines: 250
+          - name: DS_PROMETHEUS
+            value: Prometheus
         deleteDatasources:
           - name: Loki
             orgId: 1
@@ -146,7 +148,9 @@ spec:
         minio:
           gnetId: 13502
           revision: 22
-          datasource: Prometheus
+        datasource:
+        - name: DS_PROMETHEUS
+          value: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
