@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 2h
-  url: https://gitea.elcattivo.de/api/packages/philipp/helm
+  url: http://gitea.nas.local/api/packages/philipp/helm
