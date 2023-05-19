@@ -19,6 +19,7 @@ resources:
     - overseerr/ks.yaml
     - paperless/ks.yaml
     - plex/ks.yaml
+    - plex-meta-manager/ks.yaml
     - plexstate/ks.yaml
     - prowlarr/ks.yaml
     - radarr/ks.yaml
