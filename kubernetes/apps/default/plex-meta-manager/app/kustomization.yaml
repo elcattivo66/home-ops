@@ -5,18 +5,18 @@ resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
 configMapGenerator:
-  - name: pmm-config-tpl
+  - name: pmm-config
     files:
-      - ./configs/config.yml
+      - configs/config.yaml
   - name: pmm-tv
     files:
       - configs/tv.yml
   - name: pmm-movies
     files:
       - configs/movies.yml
-  - name: pmm-scripts
-    files:
-      - ./scripts/run.sh
+  # - name: pmm-scripts
+  #   files:
+  #     - ./scripts/run.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
