@@ -39,9 +39,9 @@ spec:
       TZ: "${TZ}"
       PUID: "1000"
       PGID: "1000"
-      PMM_TIME: "06:00, 18:00"
+      PMM_TIME: "06:00"
       # Runs PMM immediately. Used to test
-      PMM_RUN: true
+      PMM_RUN: false
       PMM_DEBUG: true
       PMM_READ_ONLY_CONFIG: true
 
