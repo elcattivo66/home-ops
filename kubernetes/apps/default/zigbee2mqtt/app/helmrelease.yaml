@@ -71,7 +71,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: "${SVC_Z2M_ADDR}"
+        externalIPs: ["${SVC_Z2M_ADDR}"]
         externalTrafficPolicy: Local
         ports:
           http:

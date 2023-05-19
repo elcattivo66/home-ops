@@ -39,7 +39,7 @@ spec:
       enabled: true
       type: LoadBalancer
       spec:
-        loadBalancerIP: "${SVC_TRAEFIK_ADDR}"
+        externalIPs: ["${SVC_TRAEFIK_ADDR}"]
         externalTrafficPolicy: Local
     logs:
       general:
