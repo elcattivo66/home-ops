@@ -43,10 +43,10 @@ resource "kubernetes_stateful_set_v1" "minio" {
             name = "MINIO_ROOT_PASSWORD"
             value = "${data.sops_file.secrets.data["minio_root_password"]}"
           }
-          # env {
-          #   name  = "MINIO_API_CORS_ALLOW_ORIGIN"
-          #   value = "http://minio-admin.nas.local,http://minio.nas.local,https://minio.elcattivo.de"
-          # }
+          env {
+            name  = "MINIO_API_CORS_ALLOW_ORIGIN"
+            value = "http://minio-admin.nas.local,http://minio.nas.local,https://minio-admin.${data.sops_file.secrets.data["secret_domain"]}"
+          }
           # env {
           #   name  = "MINIO_BROWSER_REDIRECT_URL"
           #   value = "http://minio-admin.nas.local"
@@ -57,7 +57,7 @@ resource "kubernetes_stateful_set_v1" "minio" {
           }
           env {
             name  = "MINIO_PROMETHEUS_URL"
-            value = "https://prometheus.elcattivo.de"
+            value = "https://prometheus.${data.sops_file.secrets.data["secret_domain"]}"
           }
           env {
             name  = "MINIO_PROMETHEUS_AUTH_TYPE"

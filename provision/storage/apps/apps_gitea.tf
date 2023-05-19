@@ -1,174 +1,129 @@
-resource "kubernetes_stateful_set_v1" "gitea" {
+
+resource "helm_release" "gitea" {
+  name       = "gitea"
+
+  repository = "https://dl.gitea.io/charts/"
+  chart      = "gitea"
+  version    = "8.3.0"
+
+  values = [
+    yamlencode({
+      image = {
+        repository = "gitea/gitea"
+        tag = "1.19.3"
+        pullPolicy = "IfNotPresent"
+        rootless = false
+      }
+      containerSecurityContext = {
+        capabilities = {
+          add = [
+            "SYS_CHROOT"
+          ]
+        }
+      }
+      service = {
+        ssh = {
+          type = "LoadBalancer"
+          port = 222
+          externalTrafficPolicy = "Local"
+        }
+        http = {
+          type = "LoadBalancer"
+          port = 8687
+          externalTrafficPolicy = "Local"
+        }
+      }
+      memcached = {
+        enabled = true
+      }
+      persistence = {
+        enabled = true
+        existingClaim = "gitea-config-pvc"
+      }
+      postgresql = {
+        enabled = false
+      }
+      mysql = {
+        enabled = false
+      }
+      mariadb = {
+        enabled = false
+      }
+      gitea = {
+        admin = {
+          APP_NAME = "Gitea: Git with a cup of tea"
+          "cron.resync_all_sshkeys" = {
+            ENABLED = true
+            RUN_AT_START = true
+          }
+        }
+        config = {
+          server = {
+            SSH_PORT = "22"
+            SSH_LISTEN_PORT = "22"
+            root_url = "https://gitea.${data.sops_file.secrets.data["secret_domain"]}"
+          }
+          database = {
+            DB_TYPE = "postgres"
+            HOST = "postgres:5432"
+            NAME = "gitea"
+            PASSWD = "${data.sops_file.secrets.data["gitea_database_password"]}"
+            USER = "gitea"
+          }
+        }
+      }
+
+      # podSecurityPolicy = {
+      #   enabled = true
+      # }
+      # server            = {
+      #   persistentVolume = {
+      #     enabled = false
+      #   }
+      #   resources        = {
+      #     limits   = {
+      #       cpu    = "5m"
+      #       memory = "256Mi"
+      #     }
+      #     requests = {
+      #       memory = "256Mi"
+      #     }
+      #   }
+      # }
+    })
+  ]
+}
+
+resource "kubernetes_persistent_volume_claim_v1" "gitea-pvc" {
   metadata {
-    name      = "gitea"
-    namespace = "default"
-    labels = {
-      "app.arpa.home/name" = "gitea"
-    }
+    name = "gitea-config-pvc"
   }
   spec {
-    selector {
-      match_labels = {
-        "app.arpa.home/name" = "gitea"
+    storage_class_name = "manual"
+    access_modes = ["ReadWriteOnce"]
+    resources {
+      requests = {
+        storage = "1Gi"
       }
     }
-    service_name = "gitea"
-    replicas     = 1
-    template {
-      metadata {
-        labels = {
-          "app.arpa.home/name" = "gitea"
-        }
-      }
-      spec {
-        container {
-          name              = "main"
-          image             = "gitea/gitea:1.19.3"
-          image_pull_policy = "IfNotPresent"
-
-          # env {
-          #   name  = "USER_ID"
-          #   value = "1000"
-          # }
-          # env {
-          #   name  = "GROUP_ID"
-          #   value = "1000"
-          # }
-          env {
-            name  = "GITEA__database__HOST"
-            value = "postgres:5432"
-          }
-          env {
-            name = "GITEA__database__USER"
-            value = "${data.sops_file.secrets.data["gitea_database_user"]}"
-          }
-          env {
-            name = "GITEA__database__PASSWD"
-            value = "${data.sops_file.secrets.data["gitea_database_password"]}"
-          }
-          env {
-            name  = "GITEA__database__DB_TYPE"
-            value = "postgres"
-          }
-          env {
-            name  = "GITEA__database__NAME"
-            value = "gitea"
-          }
-
-          port {
-            name           = "ssh"
-            container_port = 22
-            host_port      = 222
-          }
-          port {
-            name           = "ui"
-            container_port = 3000
-            host_port      = 8687
-          }
-          # volume_mount {
-          #   name       = "data"
-          #   mount_path = "/var/lib/gitea"
-          # }
-          volume_mount {
-            name       = "config"
-            mount_path = "/data"
-          }
-          resources {
-            requests = {
-              cpu    = "5m"
-              memory = "10Mi"
-            }
-            limits = {
-              memory = "150Mi"
-            }
-          }
-        }
-        # security_context {
-        #   run_as_user = 1000
-        #   run_as_group = 1000
-        #   fs_group = 1000
-        #   fs_group_change_policy = "OnRootMismatch"
-        # }
-        toleration {
-          effect   = "NoSchedule"
-          operator = "Exists"
-        }
-        volume {
-          name = "data"
-          host_path {
-            path = "/spool/gitea/data"
-          }
-        }
-        volume {
-          name = "config"
-          host_path {
-            path = "/spool/gitea"
-          }
-        }
-      }
-    }
-    update_strategy {
-      type = "RollingUpdate"
-    }
+    volume_name = "${kubernetes_persistent_volume_v1.gitea-pv.metadata.0.name}"
   }
 }
 
-resource "kubernetes_service_v1" "gitea" {
+resource "kubernetes_persistent_volume_v1" "gitea-pv" {
   metadata {
-    name      = "gitea"
-    namespace = "default"
-    labels = {
-      "app.arpa.home/name" = "gitea"
-    }
+    name = "gitea-config-pv"
   }
   spec {
-    selector = {
-      "app.arpa.home/name" = "gitea"
+    storage_class_name = "manual"
+    capacity = {
+      storage = "1Gi"
     }
-    port {
-      name        = "ssh"
-      port        = 222
-      target_port = 222
-      protocol    = "TCP"
-    }
-    port {
-      name        = "ui"
-      port        = 8687
-      target_port = 8687
-      protocol    = "TCP"
+    access_modes = ["ReadWriteOnce"]
+    persistent_volume_source {
+      host_path {
+        path = "/spool/gitea"
+      }
     }
   }
 }
-
-# resource "kubernetes_ingress_v1" "gitea" {
-#   metadata {
-#     name      = "gitea-ssh"
-#     namespace = "default"
-#     annotations = {
-#       "traefik.ingress.kubernetes.io/router.entrypoints" = "web"
-#     }
-#     labels = {
-#       "app.arpa.home/name" = "gitea"
-#     }
-#   }
-#   spec {
-#     ingress_class_name = "traefik"
-#     rule {
-#       host = "gitea-ssh.nas.local"
-#       http {
-#         path {
-#           path      = "/"
-#           path_type = "Prefix"
-#           backend {
-#             service {
-#               name = "gitea"
-#               port {
-#                 number = 222
-#               }
-#             }
-#           }
-#         }
-#       }
-#     }
-#   }
-# }
