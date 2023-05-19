@@ -52,14 +52,17 @@ spec:
           http:
             port: 3030
 
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 128Mi
-        storageClass: longhorn
+    # volumeClaimTemplates:
+    #   - name: config
+    #     mountPath: /config
+    #     accessMode: ReadWriteOnce
+    #     size: 128Mi
+    #     storageClass: longhorn
 
     persistence:
+      config:
+        enabled: true
+        existingClaim: plex-meta-manager
       config-file:
         enabled: true
         type: configMap
