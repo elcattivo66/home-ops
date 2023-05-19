@@ -65,21 +65,21 @@ spec:
         type: configMap
         name: pmm-config
         mountPath: /config/config.yml
-        subPath: config.yml
+        subPath: config.yaml
         readOnly: true
       pmm-tv:
         enabled: true
         type: configMap
         name: pmm-tv
-        subPath: tv.yml
-        mountPath: config/tv.yml
+        subPath: tv.yaml
+        mountPath: config/tv.yaml
         readOnly: false
       pmm-movies:
         enabled: true
         type: configMap
         name: pmm-movies
-        subPath: movies.yml
-        mountPath: config/movies.yml
+        subPath: movies.yaml
+        mountPath: config/movies.yaml
         readOnly: false
       scripts:
         enabled: true

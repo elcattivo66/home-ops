@@ -7,13 +7,13 @@ resources:
 configMapGenerator:
   - name: pmm-config
     files:
-      - configs/config.yml
+      - configs/config.yaml
   - name: pmm-tv
     files:
-      - configs/tv.yml
+      - configs/tv.yaml
   - name: pmm-movies
     files:
-      - configs/movies.yml
+      - configs/movies.yaml
   # - name: pmm-scripts
   #   files:
   #     - ./scripts/run.sh
