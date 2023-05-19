@@ -62,8 +62,8 @@ spec:
     persistence:
       config-file:
         enabled: true
-        type: secret
-        name: *secret
+        type: configMap
+        name: pmm-config
         mountPath: /config/config.yml
         subPath: config.yml
         readOnly: true
