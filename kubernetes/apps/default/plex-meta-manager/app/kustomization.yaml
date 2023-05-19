@@ -10,10 +10,10 @@ configMapGenerator:
       - ./configs/config.yml
   - name: pmm-tv
     files:
-      - configs/tv.yaml
+      - configs/tv.yml
   - name: pmm-movies
     files:
-      - configs/movies.yaml
+      - configs/movies.yml
   - name: pmm-scripts
     files:
       - ./scripts/run.sh
