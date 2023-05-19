@@ -27,9 +27,9 @@ spec:
     keepHistory: false
   values:
     controller:
-      type: cronjob
+      type: statefulset
       annotations:
-        secret.reloader.stakater.com/reload: &secret pmm-secret
+        reloader.stakater.com/auto: "true"
       cronjob:
         schedule: 0 6 * * *
     image:
@@ -39,11 +39,18 @@ spec:
       TZ: "${TZ}"
       PUID: "1000"
       PGID: "1000"
-    command:
-      - /scripts/run.sh
+      PMM_TIME: "06:00, 18:00"
+      # Runs PMM immediately. Used to test
+      PMM_RUN: true
+      PMM_DEBUG: true
+      PMM_READ_ONLY_CONFIG: true
+
     service:
       main:
         enabled: false
+        ports:
+          http:
+            port: 3030
 
     volumeClaimTemplates:
       - name: config
@@ -65,14 +72,14 @@ spec:
         type: configMap
         name: pmm-tv
         subPath: tv.yaml
-        mountPath: config/tv.yaml
+        mountPath: config/tv.yml
         readOnly: false
       pmm-movies:
         enabled: true
         type: configMap
         name: pmm-movies
         subPath: movies.yaml
-        mountPath: config/movies.yaml
+        mountPath: config/movies.yml
         readOnly: false
       scripts:
         enabled: true
