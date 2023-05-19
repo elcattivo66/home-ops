@@ -3,7 +3,7 @@ libraries:
     schedule: weekly(sunday)
     metadata_path:
       - file: config/movies.yaml
-  TVShows:
+  TV Shows:
     schedule: weekly(monday)
     metadata_path:
       - file: config/tv.yaml
