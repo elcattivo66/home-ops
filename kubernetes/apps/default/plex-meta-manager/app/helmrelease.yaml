@@ -44,23 +44,21 @@ spec:
     service:
       main:
         enabled: false
+
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 128Mi
+        storageClass: longhorn
+
     persistence:
-      config:
-        enabled: true
-        existingClaim: pmm-config
       config-file:
         enabled: true
         type: secret
         name: *secret
         mountPath: /config/config.yml
         subPath: config.yml
-        readOnly: true
-      config-prerolls:
-        enabled: true
-        type: configMap
-        name: pmm-prerolls
-        mountPath: /config/Pre-rolls.yml
-        subPath: Pre-rolls.yml
         readOnly: true
       scripts:
         enabled: true
