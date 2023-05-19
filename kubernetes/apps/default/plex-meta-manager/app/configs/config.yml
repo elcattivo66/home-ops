@@ -2,12 +2,12 @@ libraries: # Library mappings must have a colon (:) placed after them
   Movies:
     schedule: weekly(sunday)
     metadata_path:
-      - file: config/Movies.yml
+      - file: config/movies.yml
   TVShows:
     schedule: weekly(monday)
     metadata_path:
-      - file: config/TVShows.yml
-      - file: config/MoneyHeist.yml
+      - file: config/tv.yml
+      # - file: config/MoneyHeist.yml
 settings: # Can be individually specified per library as well
   cache: true
   cache_expiration: 60

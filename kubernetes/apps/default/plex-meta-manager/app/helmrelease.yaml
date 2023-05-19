@@ -71,14 +71,14 @@ spec:
         enabled: true
         type: configMap
         name: pmm-tv
-        subPath: tv.yaml
+        subPath: tv.yml
         mountPath: config/tv.yml
         readOnly: false
       pmm-movies:
         enabled: true
         type: configMap
         name: pmm-movies
-        subPath: movies.yaml
+        subPath: movies.yml
         mountPath: config/movies.yml
         readOnly: false
       scripts:
