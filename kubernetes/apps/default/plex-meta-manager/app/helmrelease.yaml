@@ -60,6 +60,20 @@ spec:
         mountPath: /config/config.yml
         subPath: config.yml
         readOnly: true
+      pmm-tv:
+        enabled: true
+        type: configMap
+        name: pmm-tv
+        subPath: tv.yaml
+        mountPath: config/TVShows.yaml
+        readOnly: false
+      pmm-movies:
+        enabled: true
+        type: configMap
+        name: pmm-movies
+        subPath: movies.yaml
+        mountPath: config/Movies.yaml
+        readOnly: false
       scripts:
         enabled: true
         type: configMap

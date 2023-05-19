@@ -8,8 +8,16 @@ configMapGenerator:
   - name: pmm-config-tpl
     files:
       - ./configs/config.yml
+  - name: pmm-tv
+    files:
+      - configs/TVShows.yaml
+  - name: pmm-movies
+    files:
+      - configs/Movies.yaml
   - name: pmm-scripts
     files:
       - ./scripts/run.sh
 generatorOptions:
   disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: enabled

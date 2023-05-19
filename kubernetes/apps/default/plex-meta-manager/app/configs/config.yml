@@ -3,10 +3,10 @@ libraries: # Library mappings must have a colon (:) placed after them
     schedule: weekly(sunday)
     metadata_path:
       - file: config/Movies.yml
-  TV Shows:
+  TVShows:
     schedule: weekly(monday)
     metadata_path:
-      - file: config/TV Shows.yml
+      - file: config/TVShows.yml
       - file: config/MoneyHeist.yml
 settings: # Can be individually specified per library as well
   cache: true
@@ -54,7 +54,7 @@ plex: # Can be individually specified per library as well; REQUIRED for the scri
   empty_trash: false
   optimize: false
 tmdb: # REQUIRED for the script to run
-  apikey: e6bf29688baecbc2f9dad2325707636f
+  apikey: ${TMDB_API_KEY}
   language: en
 tautulli: # Can be individually specified per library as well
   url: http://tautulli:8181
