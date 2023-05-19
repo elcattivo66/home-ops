@@ -38,7 +38,7 @@ spec:
       listdisc:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: 192.168.178.232
+        externalIPs:: ["192.168.178.232"]
         ports:
           discovery:
             enabled: true
