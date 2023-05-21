@@ -1,9 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: gitea-registry-charts
-  namespace: flux-system
-spec:
-  interval: 2h
-  url: http://gitea.nas.local/api/packages/philipp/helm

@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - ./authelia-charts.yaml
 - ./angelnu.yaml
-- ./backube.yaml
 - ./bitnami.yaml
 - ./bjw-s-charts.yaml
 - ./cloudnative-pg-charts.yaml
@@ -22,9 +21,7 @@ resources:
 - ./prometheus-community-charts.yaml
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
-- ./gitea-registry-charts.yaml
 - ./stakater.yaml
 - ./kyverno-charts.yaml
-- ./piraeus.yaml
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
