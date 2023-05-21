@@ -34,7 +34,7 @@ resource "helm_release" "gitea" {
         }
       }
       memcached = {
-        enabled = true
+        enabled = false
       }
       persistence = {
         enabled = true
@@ -51,17 +51,19 @@ resource "helm_release" "gitea" {
       }
       gitea = {
         admin = {
+          username = "philipp"
+          password = "${data.sops_file.secrets.data["gitea_admin_password"]}"
+        }
+        config = {
           APP_NAME = "Gitea: Git with a cup of tea"
           "cron.resync_all_sshkeys" = {
             ENABLED = true
             RUN_AT_START = true
           }
-        }
-        config = {
           server = {
-            SSH_PORT = "22"
-            SSH_LISTEN_PORT = "22"
-            root_url = "https://gitea.${data.sops_file.secrets.data["secret_domain"]}"
+            SSH_PORT = "222"
+            SSH_LISTEN_PORT = "222"
+            ROOT_URL = "https://gitea.${data.sops_file.secrets.data["secret_domain"]}"
           }
           database = {
             DB_TYPE = "postgres"
