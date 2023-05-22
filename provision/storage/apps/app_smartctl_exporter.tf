@@ -25,7 +25,7 @@ resource "kubernetes_daemon_set_v1" "smartctl_exporter" {
           image_pull_policy = "IfNotPresent"
           args = [
             "--smartctl.path=/usr/sbin/smartctl",
-            "--smartctl.interval=120s",
+            "--smartctl.interval=300s",
             "--web.listen-address=0.0.0.0:9633",
             "--web.telemetry-path=/metrics"
           ]
