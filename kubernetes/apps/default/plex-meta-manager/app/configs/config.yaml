@@ -1,13 +1,13 @@
 libraries:
   Movies:
-    # schedule: weekly(sunday)
+    schedule: weekly(sunday)
     metadata_path:
       - file: config/movies.yaml
   TV Shows:
-    # schedule: weekly(monday)
+    schedule: weekly(monday)
     metadata_path:
       - file: config/tv.yaml
-      # - file: config/MoneyHeist.yaml
+      - file: config/MoneyHeist.yaml
 settings: # Can be individually specified per library as well
   cache: true
   cache_expiration: 60
