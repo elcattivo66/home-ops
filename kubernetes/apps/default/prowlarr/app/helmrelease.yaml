@@ -30,6 +30,7 @@ spec:
         envFrom:
           - secretRef:
               name: prowlarr-secret
+
     controller:
       type: statefulset
       annotations:
@@ -46,7 +47,7 @@ spec:
       PROWLARR__AUTHENTICATION_METHOD: External
     envFrom:
       - secretRef:
-          name: radarr-secret
+          name: prowlarr-secret
 
     service:
       main:
@@ -73,15 +74,6 @@ spec:
           - hosts:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
-
-    # volumeClaimTemplates:
-    #   - name: config
-    #     mountPath: /config
-    #     accessMode: ReadWriteOnce
-    #     size: 1Gi
-    #     storageClass: longhorn
-    #     labels:
-    #       snapshot.home.cluster/enabled: "true"
 
     persistence:
       config:
