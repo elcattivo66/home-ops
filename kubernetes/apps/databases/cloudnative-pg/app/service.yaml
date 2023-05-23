@@ -9,12 +9,12 @@ spec:
   annotations:
     coredns.io/hostname: postgres.${SECRET_DOMAIN}
   externalTrafficPolicy: Local
-  loadBalancerIP: ${SVC_POSTGRES_ADDR} #["${SVC_POSTGRES_ADDR}"]
+  externalIPs: ["${SVC_POSTGRES_ADDR}"]
   ports:
     - name: postgres
       port: 5432
       protocol: TCP
       targetPort: 5432
   selector:
-    postgresql: cloudnative-pg
+    postgresql: postgres
     role: primary
