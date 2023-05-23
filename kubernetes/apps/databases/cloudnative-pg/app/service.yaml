@@ -6,6 +6,8 @@ metadata:
   namespace: databases
 spec:
   type: LoadBalancer
+  annotations:
+    coredns.io/hostname: postgres.${SECRET_DOMAIN}
   externalTrafficPolicy: Local
   externalIPs: ["${SVC_POSTGRES_ADDR}"]
   ports:
