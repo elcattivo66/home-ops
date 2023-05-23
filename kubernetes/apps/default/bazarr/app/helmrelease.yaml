@@ -80,6 +80,10 @@ spec:
         path: ${MEDIADIR}
         mountPath: /media
         readOnly: false
+      add-ons:
+        enabled: true
+        type: emptyDir
+        mountPath: /add-ons
 
     podSecurityContext:
       runAsUser: 1000
