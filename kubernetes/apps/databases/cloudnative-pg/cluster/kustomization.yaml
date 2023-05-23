@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./cluster.yaml
   - ./scheduled-backup.yaml
+  - ./service.yaml
