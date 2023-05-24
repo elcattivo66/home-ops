@@ -49,7 +49,7 @@ spec:
       LIDARR__LOG_LEVEL: info
     envFrom:
       - secretRef:
-          name: prowlarr-secret
+          name: lidarr-secret
 
     service:
       main:
