@@ -28,7 +28,7 @@ spec:
         image: ghcr.io/onedr0p/postgres-init:14.8
         imagePullPolicy: IfNotPresent
         envFrom:
-          -   Ref:
+          - secretRef:
               name: bazarr-secret
     controller:
       type: statefulset
