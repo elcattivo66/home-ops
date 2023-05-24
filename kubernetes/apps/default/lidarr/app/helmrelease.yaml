@@ -1,0 +1,96 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lidarr
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+
+  values:
+    controller:
+      type: statefulset
+
+    image:
+      repository: ghcr.io/onedr0p/lidarr-develop
+      tag: 1.2.0.3183@sha256:e48c451e0c9c3c2f313e2543cd6c1119253e2690a3784c55d34e08a7c887b623
+
+    env:
+      TZ: ${TZ}
+      PUID: "1000"
+      PGID: "1000"
+      LIDARR__INSTANCE_NAME: Lidarr
+      LIDARR__PORT: &port 80
+      LIDARR__LOG_LEVEL: info
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        primary: true
+        ingressClassName: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: >-
+            networking-headers@kubernetescrd,
+            networking-authelia@kubernetescrd
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_CERT_NAME}-prod-tls
+
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.cluster/enabled: "true"
+
+    persistence:
+      nfs-media:
+        enabled: true
+        type: nfs
+        server: ${NAS_ADDR}
+        path: ${MEDIADIR}
+        mountPath: /media
+        readOnly: false
+
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 597M
+      limits:
+        memory: 597M
