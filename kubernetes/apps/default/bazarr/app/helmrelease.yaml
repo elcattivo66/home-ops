@@ -23,8 +23,17 @@ spec:
     remediation:
       retries: 5
   values:
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: bazarr-secret
     controller:
       type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
 
     image:
       repository: ghcr.io/onedr0p/bazarr
@@ -35,6 +44,9 @@ spec:
       TZ: "Europe/Berlin"
       PUID: "1000"
       PGID: "1000"
+    envFrom:
+      - secretRef:
+          name: bazarr-secret
 
     service:
       main:
