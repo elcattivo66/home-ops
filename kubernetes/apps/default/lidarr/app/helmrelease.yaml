@@ -23,8 +23,18 @@ spec:
       retries: 5
 
   values:
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: lidarr-secret
+
     controller:
       type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
 
     image:
       repository: ghcr.io/onedr0p/lidarr-develop
@@ -37,6 +47,9 @@ spec:
       LIDARR__INSTANCE_NAME: Lidarr
       LIDARR__PORT: &port 80
       LIDARR__LOG_LEVEL: info
+    envFrom:
+      - secretRef:
+          name: prowlarr-secret
 
     service:
       main:
