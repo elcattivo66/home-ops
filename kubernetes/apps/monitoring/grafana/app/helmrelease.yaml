@@ -117,8 +117,6 @@ spec:
             url: http://loki-gateway.monitoring.svc.cluster.local:80
             jsonData:
               maxLines: 250
-          - name: DS_PROMETHEUS
-            value: Prometheus
         deleteDatasources:
           - name: Loki
             orgId: 1
