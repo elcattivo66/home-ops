@@ -22,6 +22,6 @@ resources:
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
 - ./stakater.yaml
-- ./kyverno-charts.yaml
+- ./kyverno.yaml
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
