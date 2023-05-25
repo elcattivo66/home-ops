@@ -41,34 +41,24 @@ transforms:
 # Sinks
 #
 sinks:
-  loki_kubernetes:
+  kubernetes:
+    inputs: ["kubernetes_remap"]
     type: loki
-    inputs:
-      - kubernetes_remap
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
-    encoding:
-      codec: json
-    out_of_order_action: rewrite_timestamp
+    encoding: { codec: json }
+    out_of_order_action: accept
     remove_label_fields: true
     remove_timestamp: true
     labels:
-      hostname: '{{ kubernetes.pod_node_name }}'
-      k8s_app: '{{ custom_app_name }}'
-      k8s_container: '{{ kubernetes.container_name }}'
-      k8s_filename: '{{ kubernetes.file }}'
-      k8s_instance: '{{ kubernetes.pod_labels."app.kubernetes.io/instance" }}'
-      k8s_namespace: '{{ kubernetes.pod_namespace }}'
-      k8s_node: '{{ kubernetes.pod_node_name }}'
-      k8s_pod: '{{ kubernetes.pod_name }}'
+      app: '{{ custom_app_name }}'
+      namespace: '{{ kubernetes.pod_namespace }}'
+      node: '{{ kubernetes.pod_node_name }}'
 
-
-  loki_journal:
+  journald:
+    inputs: ["journald_source"]
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
-    encoding:
-      codec: json
-    inputs:
-      - journald_source
+    encoding: { codec: json }
     out_of_order_action: accept
     remove_label_fields: true
     remove_timestamp: true
