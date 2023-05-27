@@ -137,6 +137,11 @@ spec:
           gnetId: 1860
           revision: 30
           datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/7845-zfs/
+        zfs:
+          gnetId: 7845
+          revision: 4
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/763-redis-dashboard-for-prometheus-redis-exporter-1-x/
         redis:
           gnetId: 763
