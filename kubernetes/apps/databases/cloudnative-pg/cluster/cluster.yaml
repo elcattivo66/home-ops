@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/postgresql.cnpg.io/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -6,7 +8,7 @@ metadata:
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.8-2
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.8-4
   storage:
     size: 15Gi
     storageClass: local-path
