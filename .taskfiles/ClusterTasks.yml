@@ -110,5 +110,5 @@ tasks:
   longhorn-deps-scale-up:
     desc: Pause all Helm Releases that rely on longhorn storage
     cmds:
-      - kubectl scale deployment -n default –-replicas 1 – all
+      - kubectl scale -n default statefulset,deployment --all --replicas=1
       - kubectl scale -n databases deploy/influxdb --replicas 1
