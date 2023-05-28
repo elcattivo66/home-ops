@@ -131,7 +131,7 @@ resource "kubernetes_stateful_set_v1" "minio" {
         volume {
           name = "config"
           host_path {
-            path = "/spool/minio"
+            path = "/tank/minio"
           }
         }
       }
