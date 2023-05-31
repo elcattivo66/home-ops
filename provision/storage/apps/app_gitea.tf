@@ -124,7 +124,7 @@ resource "kubernetes_persistent_volume_v1" "gitea-pv" {
     access_modes = ["ReadWriteOnce"]
     persistent_volume_source {
       host_path {
-        path = "/tank/gitea"
+        path = "/spool/gitea"
       }
     }
   }
