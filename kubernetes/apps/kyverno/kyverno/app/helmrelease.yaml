@@ -22,12 +22,48 @@ spec:
     remediation:
       retries: 5
   values:
-    installCRDs: true
-    serviceMonitor:
+    crds:
+      install: true
+    grafana:
       enabled: true
-    resources:
-      requests:
-        cpu: 30m
-        memory: 292M
-      limits:
-        memory: 292M
+      annotations:
+        grafana_folder: System
+    backgroundController:
+      serviceMonitor:
+        enabled: true
+      rbac:
+        clusterRole:
+          extraResources:
+            - apiGroups:
+                - ""
+              resources:
+                - pods
+    cleanupController:
+      serviceMonitor:
+        enabled: true
+    reportsController:
+      serviceMonitor:
+        enabled: true
+    admissionController:
+      replicas: 3
+      serviceMonitor:
+        enabled: true
+      rbac:
+        clusterRole:
+          extraResources:
+            - apiGroups:
+                - ""
+              resources:
+                - pods
+              verbs:
+                - create
+                - update
+                - delete
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: kyverno
+              app.kubernetes.io/component: kyverno
