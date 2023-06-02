@@ -47,6 +47,10 @@ spec:
     envFrom:
       - secretRef:
           name: home-assistant-secret
+
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
+
     service:
       main:
         ports:
@@ -55,20 +59,23 @@ spec:
     ingress:
       main:
         enabled: true
+        primary: true
         ingressClassName: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-headers@kubernetescrd,
-            networking-local-only@kubernetescrd
+            networking-authelia@kubernetescrd
         hosts:
-          - host: &host hass.${SECRET_DOMAIN}
+          - host: &host "hass.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_CERT_NAME}-prod-tls
+
     probes:
       liveness:
         enabled: false
