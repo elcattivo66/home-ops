@@ -6,3 +6,5 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./secret.sops.yaml
+patchesStrategicMerge:
+  - ./patches/addons.yaml
