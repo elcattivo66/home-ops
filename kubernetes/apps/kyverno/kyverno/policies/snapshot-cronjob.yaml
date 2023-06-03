@@ -11,8 +11,6 @@ metadata:
       that is labeled with `snapshot.home.cluster/enabled: \"true\"`.
       The PVC also needs to be labeled with `app.kubernetes.io/name`.
 spec:
-  mutateExistingOnPolicyUpdate: true
-  generateExistingOnPolicyUpdate: true
   rules:
     - name: create-snapshot-cronjob
       match:
