@@ -23,13 +23,13 @@ spec:
       retries: 5
 
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.8
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: radarr-secret
+    # initContainers:
+    #   01-init-db:
+    #     image: ghcr.io/onedr0p/postgres-init:14.8
+    #     imagePullPolicy: IfNotPresent
+    #     envFrom:
+    #       - secretRef:
+    #           name: radarr-secret
     controller:
       type: statefulset
       annotations:
@@ -38,7 +38,7 @@ spec:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
       pullPolicy: IfNotPresent
-      tag: 4.5.2.7318 #4.6.0.7439@sha256:33c756263d814c60f1929fa72468b40c7fed7bd314b9c7f68c5da93f29e09539
+      tag: 4.6.0.7439@sha256:33c756263d814c60f1929fa72468b40c7fed7bd314b9c7f68c5da93f29e09539
 
     env:
       TZ: "${TZ}"
@@ -46,9 +46,9 @@ spec:
       PGID: "1000"
       RADARR__LOG_LEVEL: info
       RADARR__API_KEY: ${RADARR_API_KEY}
-    envFrom:
-      - secretRef:
-          name: radarr-secret
+    # envFrom:
+    #   - secretRef:
+    #       name: radarr-secret
     service:
       main:
         ports:
