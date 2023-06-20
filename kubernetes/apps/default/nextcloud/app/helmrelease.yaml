@@ -51,8 +51,6 @@ spec:
         secretName: nextcloud-secret
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
-        # smtpUsernameKey: smtp-username
-        # smtpPasswordKey: smtp-password
       # datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
@@ -67,7 +65,6 @@ spec:
           host: smtp-relay.default.svc.cluster.local
           secure: ""
           port: 2525
-          auth: false
       configs:
         custom.config.php: |-
           <?php
