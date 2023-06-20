@@ -35,7 +35,7 @@ spec:
       SMTP_DOMAIN: "${SECRET_SMTP_DOMAIN}"
       SMTP_SERVER: "${SECRET_SMTP_HOST}"
       SMTP_USERNAME: "${SECRET_SMTP_USERNAME}"
-      SMTP_PORT: "587"
+      SMTP_PORT: "465"
       SMTP_PASSWORD: "${SECRET_SMTP_PASSWORD}"
     # envFrom:
     #   - secretRef:
