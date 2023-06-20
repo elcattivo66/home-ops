@@ -38,13 +38,13 @@ spec:
       WEBSOCKET_PORT: 3012
       SENDS_ALLOWED: true
       DISABLE_ADMIN_TOKEN: false
-      SMTP_HOST: "${SECRET_SMTP_HOST}"
+      SMTP_HOST: "smtp-relay.default.svc.cluster.local"
       SMTP_FROM: "${SECRET_SMTP_SENDER}"
       SMTP_FROM_NAME: "Philipps Bitwarden"
-      SMTP_SECURITY: starttls
-      SMTP_PORT: 587
-      SMTP_USERNAME: ${SECRET_SMTP_USERNAME}
-      SMTP_PASSWORD: ${SECRET_SMTP_PASSWORD}
+      SMTP_SECURITY: "off"
+      SMTP_PORT: 2525
+      # SMTP_USERNAME: ${SECRET_SMTP_USERNAME}
+      # SMTP_PASSWORD: ${SECRET_SMTP_PASSWORD}
       SMTP_TIMEOUT: 15
 
     envFrom:
