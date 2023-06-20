@@ -43,8 +43,6 @@ spec:
       SMTP_FROM_NAME: "Philipps Bitwarden"
       SMTP_SECURITY: "off"
       SMTP_PORT: 2525
-      # SMTP_USERNAME: ${SECRET_SMTP_USERNAME}
-      # SMTP_PASSWORD: ${SECRET_SMTP_PASSWORD}
       SMTP_TIMEOUT: 15
 
     envFrom:

@@ -64,10 +64,10 @@ spec:
         fromAddress: ${SECRET_CERT_NAME}
         domain: ${SECRET_SMTP_DOMAIN}
         smtp:
-          host: ${SECRET_SMTP_HOST}
-          secure: tls
-          port: 587
-          authtype: LOGIN
+          host: smtp-relay.default.svc.cluster.local
+          # secure: tls
+          port: 2525
+          # authtype: LOGIN
       configs:
         custom.config.php: |-
           <?php
