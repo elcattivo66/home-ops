@@ -24,7 +24,7 @@ spec:
       tag: 0.6.20@sha256:fccd775fefedcfa2d3175b6fe600f912c7c8a49d59fd7ae5684f9ac481a8faca
 
     env:
-      DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
+      # DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
       PGID: "1000"
       PUID: "1000"
 
@@ -61,8 +61,6 @@ spec:
         accessMode: ReadWriteOnce
         size: 128Mi
         storageClass: longhorn
-        labels:
-          snapshot.home.cluster/enabled: "true"
 
     persistence:
       books:
