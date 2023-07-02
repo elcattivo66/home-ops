@@ -6,9 +6,18 @@ sonarr:
   standard:
     base_url: http://sonarr.default.svc.cluster.local:8989
     api_key: ${SONARR_APIKEY}
+    delete_old_custom_formats: true
     quality_definition:
       type: series
-    delete_old_custom_formats: true
+    quality_profiles:
+      - name: HD-1080p
+        reset_unmatched_scores: true
+      - name: Ultra-HD
+        reset_unmatched_scores: true
+      - name: WEB-1080p
+        reset_unmatched_scores: true
+      - name: HDTV
+        reset_unmatched_scores: true
     custom_formats:
       - trash_ids:
           # Streaming Services
@@ -59,9 +68,7 @@ sonarr:
           # - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
         quality_profiles:
           - name: HD-1080p
-            reset_unmatched_scores: true
           - name: Ultra-HD
-            reset_unmatched_scores: true
 
       - trash_ids:
           # Streaming Services
@@ -107,9 +114,7 @@ sonarr:
           - 06d66ab109d4d2eddb2794d21526d140 # Retags
         quality_profiles:
           - name: WEB-1080p
-            reset_unmatched_scores: true
           - name: HDTV
-            reset_unmatched_scores: true
 
       - trash_ids:
         - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
@@ -125,6 +130,11 @@ radarr:
     delete_old_custom_formats: true
     quality_definition:
       type: movie
+    quality_profiles:
+      - name: HD-1080p
+        reset_unmatched_scores: true
+      - name: Ultra-HD
+        reset_unmatched_scores: true
     custom_formats:
       - trash_ids:
           - ff5bc9e8ce91d46c997ca3ac6994d6f8 # UHD FraMeSToR (set to 0, 1 or 3200)
@@ -183,9 +193,7 @@ radarr:
           # - dc98083864ea246d05a42df0d05f81cc # x265 (720/1080p)
         quality_profiles:
           - name: HD-1080p
-            reset_unmatched_scores: true
           - name: Ultra-HD
-            reset_unmatched_scores: true
       - trash_ids:
           - 4b900e171accbfb172729b63323ea8ca # Optional: Multi
           - 923b6abef9b17f937fab56cfcf89e1f1 # Optional: DV (WEBDL) without fallback to HDR, set to manual score 0 or -10000
