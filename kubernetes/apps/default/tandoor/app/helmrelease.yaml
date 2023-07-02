@@ -43,6 +43,7 @@ spec:
       TIMEZONE: ${TZ}
       ENABLE_METRICS: 1
       ENABLE_SIGNUP: 0
+      DB_ENGINE: django.db.backends.postgresql
     envFrom:
       - secretRef:
           name: tandoor-secret
