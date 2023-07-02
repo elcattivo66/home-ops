@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: radarr
+  name: tandoor
   namespace: default
 spec:
   interval: 15m
@@ -18,10 +18,10 @@ spec:
   install:
     createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
     remediation:
-      retries: 5
+      retries: 3
 
   values:
     initContainers:
@@ -30,31 +30,45 @@ spec:
         imagePullPolicy: IfNotPresent
         envFrom:
           - secretRef:
-              name: radarr-secret
+              name: tandoor-secret
     controller:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
 
     image:
-      repository: ghcr.io/onedr0p/radarr-develop
-      pullPolicy: IfNotPresent
-      tag: 4.6.3.7516@sha256:92e1686ce807d143e2db8ddf4da22fa34e81c99f94fac00a1584d8663e4a8237
-
+      repository: docker.io/vabene1111/recipes
+      tag: 1.5.3
     env:
-      TZ: "${TZ}"
-      PUID: "1000"
-      PGID: "1000"
-      RADARR__LOG_LEVEL: info
-      RADARR__API_KEY: ${RADARR_API_KEY}
+      TIMEZONE: ${TZ}
+      ENABLE_METRICS: 1
+      ENABLE_SIGNUP: 0
     envFrom:
       - secretRef:
-          name: radarr-secret
+          name: tandoor-secret
+
+    volumeClaimTemplates:
+      - name: tandoor-media
+        mountPath: /opt/recipes/mediafiles
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+
+    persistence:
+      static:
+        enabled: true
+        mountPath: /opt/recipes/staticfiles
+        type: emptyDir
+      cache:
+        enabled: true
+        mountPath: /mnt/cache
+        type: emptyDir
+
     service:
       main:
         ports:
           http:
-            port: 7878
+            port: 8080
 
     ingress:
       main:
@@ -77,34 +91,8 @@ spec:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 5Gi
-        storageClass: longhorn
-        labels:
-          snapshot.home.cluster/enabled: "true"
-
-    persistence:
-      media:
-        enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: ${MEDIADIR}
-        mountPath: /media
-
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: OnRootMismatch
-      supplementalGroups:
-        - 5600
-
-    resources:
-      requests:
-        cpu: 5m
-        memory: 480M
-      limits:
-        memory: 480M
