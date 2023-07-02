@@ -43,6 +43,7 @@ spec:
       TIMEZONE: ${TZ}
       ENABLE_METRICS: 1
       ENABLE_SIGNUP: 0
+      TANDOOR_PORT: 8080
       DB_ENGINE: django.db.backends.postgresql
     envFrom:
       - secretRef:
