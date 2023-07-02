@@ -64,6 +64,10 @@ spec:
         enabled: true
         mountPath: /mnt/cache
         type: emptyDir
+      django-js-reverse:
+        enabled: true
+        type: emptyDir
+        mountPath: /opt/recipes/cookbook/static/django_js_reverse
 
     service:
       main:
