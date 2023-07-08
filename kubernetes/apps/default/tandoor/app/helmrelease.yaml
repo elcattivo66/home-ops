@@ -45,6 +45,9 @@ spec:
       ENABLE_SIGNUP: 0
       TANDOOR_PORT: 8080
       GUNICORN_MEDIA: 0
+      DEBUG: 0
+      SQL_DEBUG: 0
+      DEBUG_TOOLBAR: 0
       DB_ENGINE: django.db.backends.postgresql
       EMAIL_HOST: "smtp-relay.default.svc.cluster.local"
       EMAIL_PORT: 2525
