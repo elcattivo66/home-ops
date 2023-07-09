@@ -25,10 +25,10 @@ spec:
   values:
     controller:
       type: statefulset
+      replicas: 1
     image:
         repository: ghcr.io/dani-garcia/vaultwarden
         tag: 1.29.0
-    replicaCount: 1
 
     env:
       TIMEZONE: ${TZ}
@@ -42,11 +42,11 @@ spec:
       SMTP_SECURITY: "off"
       SMTP_PORT: 2525
       SMTP_TIMEOUT: 15
-      PUSH_ENABLED: false
+      PUSH_ENABLED: true
 
     envFrom:
-    - secretRef:
-        name: vaultwarden-secret
+      - secretRef:
+          name: vaultwarden-secret
 
     podAnnotations:
       secret.reloader.stakater.com/reload: vaultwarden-secret
@@ -85,9 +85,6 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
         storageClass: longhorn
-        labels:
-          snapshot.home.cluster/enabled: "true"
-          app.kubernetes.io/name: *app
 
     resources:
       requests:
