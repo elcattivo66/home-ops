@@ -25,6 +25,8 @@ spec:
   values:
     controller:
       type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
         repository: ghcr.io/dani-garcia/vaultwarden
         tag: 1.29.0
@@ -70,7 +72,6 @@ spec:
                 pathType: Prefix
                 service:
                   port: *port
-
         tls:
           - hosts:
               - *host
