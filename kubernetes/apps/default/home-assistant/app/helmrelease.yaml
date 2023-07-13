@@ -54,6 +54,9 @@ spec:
 
     service:
       main:
+        type: LoadBalancer
+        externalIPs: ["${SVC_HASS_ADDR}"]
+        externalTrafficPolicy: Local
         ports:
           http:
             port: 8123
