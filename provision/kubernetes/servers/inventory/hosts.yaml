@@ -1,0 +1,15 @@
+---
+kubernetes:
+  vars:
+    ansible_user: philipp
+  children:
+    master:
+      hosts:
+        kubi:
+          ansible_host: 192.168.178.10
+    worker:
+      hosts:
+        nuc:
+          ansible_host: 192.168.178.12
+        tonibrix:
+          ansible_host: 192.168.178.11
