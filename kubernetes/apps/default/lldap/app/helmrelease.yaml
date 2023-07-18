@@ -41,7 +41,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/lldap/lldap
-      tag: latest-alpine@sha256:2f10998dbee1d25b3466abfae8a81abc804447661dba790e4d0df94c6bc2bcda
+      tag: latest-alpine@sha256:477823d5efcce0a67c61581bd02b8f78124f6ea8f9fcc28ac3917f0a59b1b25c
     env:
       TZ: "${TZ}"
       LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
