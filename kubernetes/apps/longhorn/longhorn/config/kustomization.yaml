@@ -3,6 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
-  - ./backup-definition.yaml
+  - ./recurring-jobs.yaml
   - ./backup.secret.sops.yaml
   - ./storage-class-definition.yaml

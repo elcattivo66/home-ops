@@ -23,3 +23,14 @@ spec:
   - default
   retain: 3
   concurrency: 2
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: trim
+  namespace: longhorn-system
+spec:
+  cron: "0 8 * * 7/1" # Every Saturday at 8:00
+  task: "filesystem-trim"
+  groups:
+  - default
