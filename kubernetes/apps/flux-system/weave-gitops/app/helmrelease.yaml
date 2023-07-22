@@ -60,9 +60,9 @@ spec:
     metrics:
       enabled: true
     rbac:
-      create: true
+      create: false
       # impersonationResourceNames: ["philipp", "${SECRET_SMTP_USERNAME}"]
-      impersonationResources: ["groups"]
+      # impersonationResources: ["groups"]
       # additionalRules:
       #   - apiGroups: ["infra.contrib.fluxcd.io"]
       #     resources: ["terraforms"]
