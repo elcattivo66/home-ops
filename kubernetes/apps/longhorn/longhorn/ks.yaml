@@ -51,7 +51,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
-    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/longhorn/longhorn/monitoring
   prune: true
   sourceRef:
