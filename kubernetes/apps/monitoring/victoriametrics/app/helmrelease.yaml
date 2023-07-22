@@ -80,7 +80,7 @@ spec:
           key: prometheus-additional.yaml
       ingress:
         enabled: true
-        ingressClassName: trafik
+        ingressClassName: traefik
         hosts:
           - &hostagent vmagent.${SECRET_DOMAIN}
         tls:
