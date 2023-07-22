@@ -1,0 +1,277 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-stack
+  namespace: monitoring
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: victoria-metrics-k8s-stack
+      version: 0.17.1
+      sourceRef:
+        kind: HelmRepository
+        name: victoriametrics-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    fullnameOverride: victoria-metrics
+
+    victoria-metrics-operator:
+      enabled: true
+      operator:
+        disable_prometheus_converter: false
+
+    vmcluster:
+      enabled: true
+      spec:
+        retentionPeriod: "1" # this is months unless a character prefix is added (1d, 1w, etc)
+        replicationFactor: 3
+        vmstorage:
+          replicaCount: 3
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: local-path
+                resources:
+                  requests:
+                    storage: 10Gi
+        vmselect:
+          replicaCount: 3
+          cacheMountPath: /select-cache
+          extraArgs: {}
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: local-path
+                resources:
+                  requests:
+                    storage: 2Gi
+        vminsert:
+          replicaCount: 3
+
+    vmalert:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - &hostalert vmalert.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *hostalert
+
+    vmagent:
+      enabled: true
+      spec:
+        additionalScrapeConfigs:
+          name: vm-additional-scrape-configs
+          key: prometheus-additional.yaml
+      ingress:
+        enabled: true
+        ingressClassName: trafik
+        hosts:
+          - &hostagent vmagent.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *hostagent
+
+    vmsingle:
+      enabled: false
+
+    monzoTemplate:
+      enabled: false
+
+    defaultRules:
+      create: true
+      rules:
+        alertmanager: true
+        etcd: false # Disable until I use etcd
+        configReloaders: true
+        general: true
+        k8s: true
+        kubeApiserver: true
+        kubeApiserverAvailability: true
+        kubeApiserverSlos: true
+        kubelet: true
+        kubeProxy: false
+        kubePrometheusGeneral: true
+        kubePrometheusNodeRecording: true
+        kubernetesApps: true
+        kubernetesResources: true
+        kubernetesStorage: true
+        kubernetesSystem: true
+        kubeScheduler: false
+        kubeStateMetrics: true
+        network: true
+        node: true
+        nodeExporterAlerting: true
+        nodeExporterRecording: true
+        prometheus: true
+        prometheusOperator: true
+
+    alertmanager:
+      enabled: true
+      config:
+        global:
+          resolve_timeout: 5m
+        receivers:
+          - name: "null"
+          - name: "pushover"
+            pushover_configs:
+              - user_key: ${SECRET_ALERTMANAGER_PUSHOVER_USER_KEY}
+                token: ${SECRET_ALERTMANAGER_PUSHOVER_TOKEN}
+                send_resolved: true
+                html: true
+                priority: |-
+                  {{ if eq .Status "firing" }}1{{ else }}0{{ end }}
+                title: |-
+                  {{ .CommonLabels.alertname }} [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}]
+                message: |-
+                  {{- range .Alerts }}
+                    {{- if ne .Annotations.description "" }}
+                      {{ .Annotations.description }}
+                    {{- else if ne .Annotations.summary "" }}
+                      {{ .Annotations.summary }}
+                    {{- else if ne .Annotations.message "" }}
+                      {{ .Annotations.message }}
+                    {{- else }}
+                      Alert description not available
+                    {{- end }}
+                    {{- if gt (len .Labels.SortedPairs) 0 }}
+                      <small>
+                      {{- range .Labels.SortedPairs }}
+                        <b>{{ .Name }}:</b> {{ .Value }}
+                      {{- end }}
+                      </small>
+                    {{- end }}
+                  {{- end }}
+        route:
+          group_by: ["alertname", "job"]
+          group_wait: 1m
+          group_interval: 10m
+          repeat_interval: 24h
+          receiver: "pushover"
+          routes:
+            - receiver: "null"
+              matchers:
+                - alertname =~ "InfoInhibitor|Watchdog"
+            - receiver: "pushover"
+              matchers:
+                - severity = "critical"
+              continue: true
+        inhibit_rules:
+          - source_matchers:
+              - severity = "critical"
+            target_matchers:
+              - severity = "warning"
+            equal: ["alertname", "namespace"]
+      spec:
+        securityContext:
+          runAsGroup: 2000
+          runAsNonRoot: true
+          runAsUser: 1000
+          fsGroup: 2000
+          seccompProfile:
+            type: RuntimeDefault
+        # replicaCount: 3
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 50Mi
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - &hostam alertmanager.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *hostam
+
+    kubelet:
+      enabled: true
+      spec:
+        metricRelabelConfigs:
+          # Drop high cardinality labels
+          - action: labeldrop
+            regex: (uid)
+          - action: labeldrop
+            regex: (id|name)
+          - action: drop
+            source_labels: ["__name__"]
+            regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
+
+    kubeApiServer:
+      enabled: true
+      spec:
+        metricRelabelConfigs:
+          # Drop high cardinality labels
+          - sourceLabels: ["__name__"]
+            regex: (apiserver|etcd|rest_client)_request(|_sli|_slo)_duration_seconds_bucket
+            action: drop
+          - sourceLabels: ["__name__"]
+            regex: (apiserver_response_sizes_bucket|apiserver_watch_events_sizes_bucket)
+            action: drop
+
+    kubeControllerManager:
+      enabled: false
+      endpoints: &cp
+        - 10.8.20.40
+        - 10.8.20.42
+        - 10.8.20.44
+      service:
+        enabled: true
+        port: 10259
+        targetPort: 10259
+      spec:
+        endpoints:
+          - port: http-metrics
+            scheme: http
+
+    kubeScheduler:
+      enabled: false
+      # endpoints: *cp
+      # service:
+      #   enabled: true
+      #   port: 10259
+      #   targetPort: 10259
+      #
+      # spec:
+      #   endpoints:
+      #     - port: http-metrics
+      #       insecureSkipVerify: true
+
+    kubeEtcd:
+      enabled: false
+      endpoints: *cp
+      service:
+        enabled: true
+        port: 2381
+        targetPort: 2381
+      spec:
+        endpoints:
+          - port: http-metrics
+            scheme: http
+
+    kube-state-metrics:
+      enabled: true
+
+    prometheus-node-exporter:
+      enabled: true
+
+    grafana:
+      enabled: false
