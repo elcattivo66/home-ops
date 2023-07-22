@@ -132,7 +132,7 @@ spec:
           cpu: 10m
           memory: 21M
         limits:
-          memory: 21M
+          memory: 50M
 
     nginx:
       enabled: true
@@ -192,7 +192,7 @@ spec:
         cpu: 42m
         memory: 185M
       limits:
-        memory: 185M
+        memory: 512M
 
   valuesFrom:
     - kind: Secret
