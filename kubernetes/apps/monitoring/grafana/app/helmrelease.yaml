@@ -98,9 +98,14 @@ spec:
         datasources:
           - name: Prometheus
             type: prometheus
+            url: http://vmselect-victoria-metrics.monitoring.svc:8481/select/0/prometheus
             access: proxy
-            url: http://prometheus-operated:9090/
             isDefault: true
+          # - name: Prometheus
+          #   type: prometheus
+          #   access: proxy
+          #   url: http://prometheus-operated:9090/
+            # isDefault: true
           - name: influxdb
             type: influxdb
             access: proxy
@@ -111,18 +116,21 @@ spec:
               httpHeaderName1: Authorization
             secureJsonData:
               httpHeaderValue1: "${SECRET_INFLUXDB_TOKEN}"
-          - name: Loki
-            type: loki
-            access: proxy
-            url: http://loki-gateway.monitoring.svc.cluster.local:80
-            jsonData:
-              maxLines: 250
+          # - name: Loki
+          #   type: loki
+          #   access: proxy
+          #   url: http://loki-gateway.monitoring.svc.cluster.local:80
+          #   jsonData:
+          #     maxLines: 250
         deleteDatasources:
+          - name: VictoriaMetrics
+            orgId: 1
+          - name: Prometheus
+            orgId: 1
           - name: Loki
             orgId: 1
           - name: Alertmanager
             orgId: 1
-
     dashboards:
       openhab:
         metrics:
@@ -183,6 +191,23 @@ spec:
           datasource: Prometheus
         kubernetes-pods:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
+          datasource: Prometheus
+      victoriametrics:
+        vmcluster:
+          gnetId: 11176
+          revision: 30
+          datasource: Prometheus
+        vmoperator:
+          gnetId: 17869
+          revision: 1
+          datasource: Prometheus
+        vmagent:
+          gnetId: 12683
+          revision: 11
+          datasource: Prometheus
+        vmalert:
+          gnetId: 14950
+          revision: 5
           datasource: Prometheus
 
     sidecar:
