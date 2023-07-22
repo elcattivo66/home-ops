@@ -142,8 +142,6 @@ spec:
         requests:
           cpu: 5m
           memory: 10M
-        limits:
-          memory: 10M
 
     internalDatabase:
       enabled: false
