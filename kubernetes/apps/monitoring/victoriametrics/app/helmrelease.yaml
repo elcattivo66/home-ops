@@ -162,7 +162,7 @@ spec:
           group_wait: 1m
           group_interval: 10m
           repeat_interval: 24h
-          receiver: "pushover"
+          receiver: "null"
           routes:
             - receiver: "null"
               matchers:
