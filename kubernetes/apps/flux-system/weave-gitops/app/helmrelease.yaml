@@ -35,9 +35,9 @@ spec:
       issuerURL: https://authelia.${SECRET_DOMAIN}
       redirectURL: https://gitops.${SECRET_DOMAIN}/oauth2/callback
       # This works not at the moment
-      claimUsername: preferred_username
-      claimGroups: groups
-      customScopes: ["offline_access", "openid", "profile", "email"]
+      # claimUsername: preferred_username
+      # claimGroups: groups
+      # customScopes: ["offline_access", "openid", "profile", "email"]
     ingress:
       enabled: true
       className: traefik
@@ -61,8 +61,8 @@ spec:
       enabled: true
     rbac:
       create: true
-      impersonationResourceNames: ["philipp", "${SECRET_SMTP_USERNAME}"]
-      impersonationResources: ["admin"]
+      # impersonationResourceNames: ["philipp", "${SECRET_SMTP_USERNAME}"]
+      impersonationResources: ["groups"]
       # additionalRules:
       #   - apiGroups: ["infra.contrib.fluxcd.io"]
       #     resources: ["terraforms"]
