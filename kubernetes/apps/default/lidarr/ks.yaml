@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
+    - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/default/lidarr/app
   prune: true
   sourceRef:
