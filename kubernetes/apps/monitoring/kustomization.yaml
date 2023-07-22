@@ -6,7 +6,7 @@ resources:
   - ./namespace.yaml
   # Flux Kustomizations
   - ./grafana/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
+  # - ./kube-prometheus-stack/ks.yaml
   - ./victoriametrics/ks.yaml
   # - ./loki/ks.yaml
   # - ./vector/ks.yaml
