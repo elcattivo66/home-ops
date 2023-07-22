@@ -25,3 +25,4 @@ resources:
 - ./kyverno.yaml
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
+- ./victoria-metrics.yaml
