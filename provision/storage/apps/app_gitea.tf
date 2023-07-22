@@ -4,7 +4,7 @@ resource "helm_release" "gitea" {
 
   repository = "https://dl.gitea.io/charts/"
   chart      = "gitea"
-  version    = "9.0.3"
+  version    = "8.3.0"
 
   values = [
     yamlencode({
@@ -74,7 +74,15 @@ resource "helm_release" "gitea" {
           }
         }
       }
-
+      resources = {
+        limits   = {
+          memory = "512Mi"
+        }
+        requests = {
+          cpu    = "10m"
+          memory = "256Mi"
+        }
+      }
       # podSecurityPolicy = {
       #   enabled = true
       # }
@@ -82,15 +90,7 @@ resource "helm_release" "gitea" {
       #   persistentVolume = {
       #     enabled = false
       #   }
-      #   resources        = {
-      #     limits   = {
-      #       cpu    = "5m"
-      #       memory = "256Mi"
-      #     }
-      #     requests = {
-      #       memory = "256Mi"
-      #     }
-      #   }
+
       # }
     })
   ]
