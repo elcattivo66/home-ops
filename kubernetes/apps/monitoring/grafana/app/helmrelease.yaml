@@ -92,6 +92,14 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/openhab
+          - name: "victoriametrics"
+            orgId: 1
+            folder: "VictoriaMetrics"
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/victoriametrics
     datasources:
       datasources.yaml:
         apiVersion: 1
