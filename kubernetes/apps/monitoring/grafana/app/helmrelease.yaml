@@ -87,7 +87,6 @@ spec:
             orgId: 1
             folder: "Openhab"
             type: file
-            updateIntervalSeconds: 10
             disableDeletion: false
             allowUiUpdates: true
             options:
@@ -100,14 +99,37 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/victoriametrics
+          - name: flux
+            orgId: 1
+            folder: Flux
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/flux
+          - name: kubernetes
+            orgId: 1
+            folder: Kubernetes
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/kubernetes
     datasources:
       datasources.yaml:
         apiVersion: 1
+        deleteDatasources:
+          - { name: Alertmanager, orgId: 1 }
+          - { name: Loki, orgId: 1 }
+          - { name: Prometheus, orgId: 1 }
         datasources:
           - name: Prometheus
             type: prometheus
-            url: http://vmselect-victoria-metrics.monitoring.svc:8481/select/0/prometheus
             access: proxy
+            url: http://vmselect-victoria-metrics.monitoring.svc.cluster.local:8481/select/0/prometheus
+            jsonData:
+              prometheusType: Prometheus
+            uid: prometheus
             isDefault: true
           # - name: Prometheus
           #   type: prometheus
@@ -130,20 +152,7 @@ spec:
           #   url: http://loki-gateway.monitoring.svc.cluster.local:80
           #   jsonData:
           #     maxLines: 250
-        deleteDatasources:
-          - name: VictoriaMetrics
-            orgId: 1
-          - name: Prometheus
-            orgId: 1
-          - name: Loki
-            orgId: 1
-          - name: Alertmanager
-            orgId: 1
     dashboards:
-      openhab:
-        metrics:
-          url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
-          datasource: Prometheus
       default:
         longhorn:
           gnetId: 17626
@@ -151,7 +160,7 @@ spec:
           datasource: Prometheus
         node-exporter-full:
           gnetId: 1860
-          revision: 30
+          revision: 31
           datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/7845-zfs/
         zfs:
@@ -159,10 +168,10 @@ spec:
           revision: 4
           datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/763-redis-dashboard-for-prometheus-redis-exporter-1-x/
-        redis:
-          gnetId: 763
-          revision: 4
-          datasource: Prometheus
+        # redis:
+        #   gnetId: 763
+        #   revision: 4
+        #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
         minio:
           gnetId: 13502
@@ -173,15 +182,7 @@ spec:
         cert-manager:
           url: https://gitlab.com/uneeq-oss/cert-manager-mixin/-/raw/master/dashboards/cert-manager.json
           datasource: Prometheus
-        flux-cluster:
-          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
-          datasource: Prometheus
-        flux-control-plane:
-          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/control-plane.json
-          datasource: Prometheus
-        flux-logs:
-          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
-          datasource: Prometheus
+      kubernetes:
         kubernetes-api-server:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
           datasource: Prometheus
@@ -200,6 +201,16 @@ spec:
         kubernetes-pods:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
           datasource: Prometheus
+      flux:
+        flux-cluster:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
+          datasource: Prometheus
+        flux-control-plane:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/control-plane.json
+          datasource: Prometheus
+        flux-logs:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
+          datasource: Prometheus
       victoriametrics:
         vmcluster:
           gnetId: 11176
@@ -217,7 +228,10 @@ spec:
           gnetId: 14950
           revision: 5
           datasource: Prometheus
-
+      openhab:
+        metrics:
+          url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
+          datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true

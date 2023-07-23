@@ -40,6 +40,8 @@ spec:
         replicationFactor: 1
         vmstorage:
           replicaCount: 1
+          extraArgs:
+            dedup.minScrapeInterval: 60s
           storage:
             volumeClaimTemplate:
               spec:
@@ -52,7 +54,8 @@ spec:
         vmselect:
           replicaCount: 1
           cacheMountPath: /select-cache
-          extraArgs: {}
+          extraArgs:
+            dedup.minScrapeInterval: 60s
           storage:
             volumeClaimTemplate:
               spec:
