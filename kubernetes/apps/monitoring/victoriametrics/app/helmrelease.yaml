@@ -110,7 +110,7 @@ spec:
               storageClassName: local-path
               resources:
                 requests:
-                  storage: 1Gi
+                  storage: 50Mi
       ingress:
         enabled: true
         ingressClassName: traefik
