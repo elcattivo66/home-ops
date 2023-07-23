@@ -113,7 +113,7 @@ spec:
                   storage: 1Gi
       ingress:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: traefik
         hosts:
           - &hostam alertmanager.${SECRET_DOMAIN}
         tls:
