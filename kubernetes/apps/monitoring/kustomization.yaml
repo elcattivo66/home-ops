@@ -8,5 +8,7 @@ resources:
   - ./grafana/ks.yaml
   # - ./kube-prometheus-stack/ks.yaml
   - ./victoriametrics/ks.yaml
+  - ./node-exporter/ks.yaml
+  - ./kube-state-metrics/ks.yaml
   # - ./loki/ks.yaml
   # - ./vector/ks.yaml

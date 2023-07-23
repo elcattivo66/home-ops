@@ -246,10 +246,10 @@ spec:
             scheme: http
 
     kube-state-metrics:
-      enabled: true
+      enabled: false
 
     prometheus-node-exporter:
-      enabled: true
+      enabled: false
 
     grafana:
       enabled: false
