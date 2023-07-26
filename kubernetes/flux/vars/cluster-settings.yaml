@@ -5,10 +5,10 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  NAS_ADDR: 192.168.178.23
-  MEDIADIR: /media
-  BACKUPDIR: /backup
-  DOWNLOADDIR: /media/downloads
+  NAS_ADDR: 192.168.178.5
+  MEDIADIR: /tank/media
+  BACKUPDIR: /tank/backup
+  DOWNLOADDIR: /tank/media/downloads
   TZ: "Europe/Berlin"
 
   #Metallb

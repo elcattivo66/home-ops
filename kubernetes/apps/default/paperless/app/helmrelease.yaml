@@ -82,25 +82,25 @@ spec:
         mountPath: /usr/src/paperless/data
         type: nfs
         server: ${NAS_ADDR}
-        path: /paperless/data
+        path: /spool/paperless/data
       media:
         enabled: true
         mountPath: /usr/src/paperless/media
         type: nfs
         server: ${NAS_ADDR}
-        path: /paperless/media
+        path: /spool/paperless/media
       consume:
         enabled: true
         mountPath: /usr/src/paperless/consume
         type: nfs
         server: ${NAS_ADDR}
-        path: /paperless/consume
+        path: /spool/paperless/consume
       export:
         enabled: true
         mountPath: /usr/src/paperless/export
         type: nfs
         server: ${NAS_ADDR}
-        path: /paperless/export
+        path: /spool/paperless/export
 
     sidecars:
       redis:

@@ -65,29 +65,29 @@ resource "kubernetes_stateful_set_v1" "postgres" {
           effect   = "NoSchedule"
           operator = "Exists"
         }
-        # volume {
-        #   name = "config"
-        #   host_path {
-        #     path = "/spool/postgresql"
-        #   }
-        # }
-      }
-    }
-    volume_claim_template {
-      metadata {
-        name = "postgres-data"
-      }
-      spec {
-        access_modes       = ["ReadWriteOnce"]
-        storage_class_name = "local-path"
-
-        resources {
-          requests = {
-            storage = "1Gi"
+        volume {
+          name = "postgres-data"
+          host_path {
+            path = "/spool/postgres"
           }
         }
       }
     }
+    # volume_claim_template {
+    #   metadata {
+    #     name = "postgres-data"
+    #   }
+    #   spec {
+    #     access_modes       = ["ReadWriteOnce"]
+    #     storage_class_name = "local-path"
+
+    #     resources {
+    #       requests = {
+    #         storage = "1Gi"
+    #       }
+    #     }
+    #   }
+    # }
     update_strategy {
       type = "RollingUpdate"
     }

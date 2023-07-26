@@ -82,7 +82,7 @@ spec:
         enabled: true
         type: nfs
         server: nas
-        path: /media/audiobooks
+        path: ${MEDIADIR}/audiobooks
         mountPath: /audiobooks
         readOnly: false
       cache:

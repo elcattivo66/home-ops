@@ -104,13 +104,13 @@ spec:
         mountPath: /openhab/conf
         type: nfs
         server: ${NAS_ADDR}
-        path: /openhab/conf
+        path: /spool/openhab/conf
       userdata:
         enabled: true
         mountPath: /openhab/userdata
         type: nfs
         server: ${NAS_ADDR}
-        path: /openhab/userdata
+        path: /spool/openhab/userdata
     # podSecurityContext:
     #     runAsUser: 1000
     #     runAsGroup: 1000

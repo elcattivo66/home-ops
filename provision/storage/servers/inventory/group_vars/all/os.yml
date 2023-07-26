@@ -1,13 +1,13 @@
 ---
 timezone: Europe/Berlin
-# create_user:
-#   id: 568
-#   name: devin
-#   group: devin
-#   additional_groups: ["users"]
-# create_group:
-#   id: 568
-#   name: devin
+create_user:
+  id: 1000
+  name: philipp
+  group: philipp
+  additional_groups: ["users"]
+create_group:
+  id: 1000
+  name: philipp
 ssh_authorized_keys:
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEOPBEcMeCeXe89KwvtKkfjAy1u6ni065jMxOQ4dBR6B philipp@MacBook-Air.fritz.box"
 packages_repositories:

@@ -80,7 +80,7 @@ spec:
         enabled: true
         type: nfs
         server: ${NAS_ADDR}
-        path: /photos
+        path: /spool/photos
         mountPath: /photos
         readOnly: true
       transcode:
