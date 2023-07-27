@@ -53,6 +53,7 @@ packages_install:
   - nvme-cli
   - open-iscsi
   - samba
+  - samba-vfs-modules
   - smartmontools
   - socat
 packages_remove:
