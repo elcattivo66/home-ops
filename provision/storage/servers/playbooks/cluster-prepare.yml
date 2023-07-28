@@ -173,6 +173,22 @@
             src: backup_spool.sh.j2
             dest: /usr/local/bin/backup_spool.sh
             mode: "0744"
+    - name: Cronjobs
+      block:
+        - name: Create tank backup job
+          ansible.builtin.cron:
+            name: "Backup datasets in tank"
+            user: root
+            minute: "30"
+            hour: "0"
+            job: "/usr/local/bin/backup_tank.sh"
+        - name: Create spool backup job
+          ansible.builtin.cron:
+            name: "Backup datasets in spool"
+            user: root
+            minute: "45"
+            hour: "0"
+            job: "/usr/local/bin/backup_spool.sh"
 
   handlers:
     - name: Reboot
