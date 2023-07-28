@@ -6,7 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   staticConfigs:
-    - targets: ["minio:9000"]
+    - targets: ["nas:9000"]
   metricsPath: /minio/v2/metrics/cluster
 ---
 apiVersion: monitoring.coreos.com/v1alpha1
