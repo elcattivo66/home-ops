@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./helmrelease.yaml
-  - ./scrapeconfigs.yaml
+  - ./scrapeconfigs

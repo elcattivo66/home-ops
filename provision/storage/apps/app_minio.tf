@@ -57,7 +57,7 @@ resource "kubernetes_stateful_set_v1" "minio" {
           }
           env {
             name  = "MINIO_PROMETHEUS_URL"
-            value = "https://vmagent.${data.sops_file.secrets.data["secret_domain"]}"
+            value = "https://prometheus.${data.sops_file.secrets.data["secret_domain"]}"
           }
           env {
             name  = "MINIO_PROMETHEUS_AUTH_TYPE"

@@ -51,7 +51,7 @@ resource "kubernetes_cron_job_v1" "postgres-backup" {
               name = "nas-backups"
               nfs {
                 server = "nas"
-                path = "/backup/kubernetes/postgres-nas"
+                path = "/tank/backup/kubernetes/postgres-nas"
               }
             }
           }
