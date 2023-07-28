@@ -1,0 +1,21 @@
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: nas-minio
+  namespace: monitoring
+spec:
+  staticConfigs:
+    - targets: ["minio:9000"]
+  metricsPath: /minio/v2/metrics/cluster
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: nas-smartctl-exporter
+  namespace: monitoring
+spec:
+  staticConfigs:
+    - targets: ["nas:9633"]
+  metricsPath: /metrics
+---

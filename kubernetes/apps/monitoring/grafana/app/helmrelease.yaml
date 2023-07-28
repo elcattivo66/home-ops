@@ -91,14 +91,14 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/openhab
-          - name: victoriametrics
-            orgId: 1
-            folder: VictoriaMetrics
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/victoriametrics
+          # - name: victoriametrics
+          #   orgId: 1
+          #   folder: VictoriaMetrics
+          #   type: file
+          #   disableDeletion: false
+          #   editable: true
+          #   options:
+          #     path: /var/lib/grafana/dashboards/victoriametrics
           - name: flux
             orgId: 1
             folder: Flux
@@ -126,7 +126,8 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://vmselect-victoria-metrics.monitoring.svc.cluster.local:8481/select/0/prometheus
+            url: http://prometheus-operated:9090/
+            # url: http://vmselect-victoria-metrics.monitoring.svc.cluster.local:8481/select/0/prometheus
             jsonData:
               prometheusType: Prometheus
             uid: prometheus
@@ -170,7 +171,7 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
         minio:
           gnetId: 13502
-          revision: 22
+          revision: 23
           datasource:
           - name: DS_PROMETHEUS
             value: Prometheus
@@ -206,23 +207,23 @@ spec:
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
           datasource: Prometheus
-      victoriametrics:
-        vmcluster:
-          gnetId: 11176
-          revision: 30
-          datasource: Prometheus
-        vmoperator:
-          gnetId: 17869
-          revision: 1
-          datasource: Prometheus
-        vmagent:
-          gnetId: 12683
-          revision: 11
-          datasource: Prometheus
-        vmalert:
-          gnetId: 14950
-          revision: 5
-          datasource: Prometheus
+      # victoriametrics:
+      #   vmcluster:
+      #     gnetId: 11176
+      #     revision: 30
+      #     datasource: Prometheus
+      #   vmoperator:
+      #     gnetId: 17869
+      #     revision: 1
+      #     datasource: Prometheus
+      #   vmagent:
+      #     gnetId: 12683
+      #     revision: 11
+      #     datasource: Prometheus
+      #   vmalert:
+      #     gnetId: 14950
+      #     revision: 5
+      #     datasource: Prometheus
       openhab:
         metrics:
           url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
