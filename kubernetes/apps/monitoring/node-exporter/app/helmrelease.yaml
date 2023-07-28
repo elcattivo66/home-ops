@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     fullnameOverride: node-exporter
-    # releaseLabel: true
+    releaseLabel: true
     podLabels:
       jobLabel: node-exporter
     extraArgs:
