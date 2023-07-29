@@ -76,8 +76,6 @@ spec:
         accessMode: ReadWriteOnce
         size: 20Gi
         storageClass: longhorn
-        labels:
-          snapshot.home.cluster/enabled: "true"
 
     persistence:
       media:

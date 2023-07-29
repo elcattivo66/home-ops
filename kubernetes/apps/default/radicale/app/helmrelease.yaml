@@ -57,8 +57,6 @@ spec:
         accessMode: ReadWriteOnce
         size: 128Mi
         storageClass: longhorn
-        labels:
-          snapshot.home.cluster/enabled: "true"
 
     persistence:
       config:

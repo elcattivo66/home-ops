@@ -69,8 +69,6 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
         storageClass: longhorn
-        labels:
-          snapshot.home.cluster/enabled: "true"
 
     podSecurityContext:
       runAsUser: 1000
