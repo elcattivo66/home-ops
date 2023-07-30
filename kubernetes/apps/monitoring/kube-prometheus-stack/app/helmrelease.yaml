@@ -152,6 +152,10 @@ spec:
         retentionSize: 6GB
         enableAdminAPI: true
         walCompression: true
+        enableFeatures:
+          - auto-gomaxprocs
+          - memory-snapshot-on-shutdown
+          - new-service-discovery-manager
         storageSpec:
           volumeClaimTemplate:
             spec:
