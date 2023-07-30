@@ -49,9 +49,8 @@ resource "kubernetes_cron_job_v1" "postgres-backup" {
             }
             volume {
               name = "nas-backups"
-              nfs {
-                server = "nas"
-                path = "/tank/backup/kubernetes/postgres-nas"
+              host_path {
+                path = "/backup/kubernetes/postgres-nas"
               }
             }
           }
