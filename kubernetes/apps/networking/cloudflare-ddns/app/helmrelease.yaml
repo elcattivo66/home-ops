@@ -30,7 +30,7 @@ spec:
   values:
     image:
       repository: ghcr.io/hotio/cloudflareddns
-      tag: release-21e2394@sha256:ceaf7930d388dbe9e1b14993fcb090f276f3ece6d2842713df65bee0a2cff225
+      tag: release-20230707004655
       pullPolicy: IfNotPresent
     env:
       TZ: ${TZ}
