@@ -35,5 +35,5 @@ resources:
     - tautulli/ks.yaml
     - vaultwarden/ks.yaml
     - watchstate/ks.yaml
-    - xteve/ks.yaml
+    # - xteve/ks.yaml
     - zigbee2mqtt/ks.yaml
