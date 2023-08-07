@@ -54,6 +54,19 @@ spec:
         path: /tank/photos/immich_upload/
         mountPath: /usr/src/app/upload
         readOnly: false
+      geocoding-dump:
+        enabled: true
+        type: emptyDir
+        mountPath: /usr/src/app/.reverse-geocoding-dump
+      transformers-cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /usr/src/app/.transformers_cache
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
     resources:
       requests:
         cpu: 5m

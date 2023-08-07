@@ -52,14 +52,25 @@ spec:
       cache:
         enabled: true
         type: emptyDir
-
+      geocoding-dump:
+        enabled: true
+        type: emptyDir
+        mountPath: /usr/src/app/.reverse-geocoding-dump
+      transformers-cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /usr/src/app/.transformers_cache
     resources:
       requests:
         cpu: 5m
         memory: 1404M
       # limits:
       #   memory: 1404M
-
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
