@@ -161,6 +161,13 @@
             mode: "0644"
           notify:
             - Restart smbd
+        - name: Config hd-idle | Copy /etc/default/hd-idle
+          ansible.builtin.template:
+            src: hd-idle.j2
+            dest: /etc/default/hd-idle
+            mode: "0644"
+          notify:
+            - Restart hd-idle
     - name: Backup
       block:
         - name: Setup tank backup | Copy /usr/local/bin/backup_tank.sh
@@ -213,5 +220,10 @@
     - name: Restart smbd
       ansible.builtin.service:
         name: smbd.service
+        enabled: true
+        state: restarted
+    - name: Restart hd-idle
+      ansible.builtin.service:
+        name: hd-idle.service
         enabled: true
         state: restarted
