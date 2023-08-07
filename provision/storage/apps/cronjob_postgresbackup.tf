@@ -6,7 +6,7 @@ resource "kubernetes_cron_job_v1" "postgres-backup" {
   spec {
     concurrency_policy            = "Replace"
     failed_jobs_history_limit     = 5
-    schedule                      = "35 3 * * *"
+    schedule                      = "35 0 * * *"
     timezone                      = "Europe/Berlin"
     starting_deadline_seconds     = 10
     successful_jobs_history_limit = 10
