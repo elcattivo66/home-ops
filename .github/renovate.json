@@ -9,12 +9,12 @@
     ":enablePreCommit",
     ":automergeDigest",
     ":automergeBranchPush",
-    "local>philipp/k3s-gitops//renovate/allowedVersions.json5",
-    "local>philipp/k3s-gitops//renovate/autoMerge.json5",
-    "local>philipp/k3s-gitops//renovate/commitMessage.json5",
-    "local>philipp/k3s-gitops//renovate/groups.json5",
-    "local>philipp/k3s-gitops//renovate/labels.json5",
-    "local>philipp/k3s-gitops//renovate/semanticCommits.json5"
+    "local>philipp/k3s-gitops//.github/renovate/allowedVersions.json5",
+    "local>philipp/k3s-gitops//.github/renovate/autoMerge.json5",
+    "local>philipp/k3s-gitops//.github/renovate/commitMessage.json5",
+    "local>philipp/k3s-gitops//.github/renovate/groups.json5",
+    "local>philipp/k3s-gitops//.github/renovate/labels.json5",
+    "local>philipp/k3s-gitops//.github/renovate/semanticCommits.json5"
   ],
   "ignorePaths": ["archive/**"],
   "flux": {

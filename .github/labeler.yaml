@@ -1,0 +1,8 @@
+---
+area/ansible:
+  - "provision/kubernetes/servers/**/*"
+  - "provision/storage/servers/**/*"
+area/github:
+  - ".github/**/*"
+area/kubernetes:
+  - "kubernetes/**/*"
