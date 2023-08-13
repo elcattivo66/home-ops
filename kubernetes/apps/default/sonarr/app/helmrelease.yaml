@@ -47,6 +47,7 @@ spec:
       SONARR__API_KEY: ${SONARR_API_KEY}
       SONARR__LOG_LEVEL: info
       SONARR__THEME: dark
+    envFrom: *envFrom
 
     service:
       main:
