@@ -23,8 +23,17 @@ spec:
       retries: 5
 
   values:
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: sonarr-secret
     controller:
       type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
 
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
@@ -36,6 +45,8 @@ spec:
       PUID: "1000"
       PGID: "1000"
       SONARR__API_KEY: ${SONARR_API_KEY}
+      SONARR__LOG_LEVEL: info
+      SONARR__THEME: dark
 
     service:
       main:
