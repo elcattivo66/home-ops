@@ -32,7 +32,6 @@ spec:
               name: prowlarr-secret
 
     controller:
-      type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
     image:
@@ -45,6 +44,8 @@ spec:
       PUID: "1000"
       PGID: "1000"
       PROWLARR__AUTHENTICATION_METHOD: External
+      PROWLARR__LOG_LEVEL: info
+      PROWLARR__THEME: dark
     envFrom:
       - secretRef:
           name: prowlarr-secret
