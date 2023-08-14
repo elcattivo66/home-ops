@@ -34,3 +34,14 @@ spec:
   task: "filesystem-trim"
   groups:
   - default
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: delete-old-snapshots
+  namespace: longhorn-system
+spec:
+  cron: "0 9 * * 7/1" # Every Saturday at 9:00
+  task: "snapshot-delete"
+  groups:
+  - default
