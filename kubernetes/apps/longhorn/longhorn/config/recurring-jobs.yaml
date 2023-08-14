@@ -30,7 +30,7 @@ metadata:
   name: trim
   namespace: longhorn-system
 spec:
-  cron: "0 8 * * 7/1" # Every Saturday at 8:00
+  cron: "0 8 ? * SAT" # Every Saturday at 8:00
   task: "filesystem-trim"
   groups:
   - default
@@ -41,7 +41,7 @@ metadata:
   name: delete-old-snapshots
   namespace: longhorn-system
 spec:
-  cron: "0 9 * * 7/1" # Every Saturday at 9:00
+  cron: "0 9 ? * SAT" # Every Saturday at 9:00
   task: "snapshot-delete"
   groups:
   - default
