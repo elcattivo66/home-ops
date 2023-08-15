@@ -45,3 +45,4 @@ spec:
   task: "snapshot-delete"
   groups:
   - default
+  retain: 3
