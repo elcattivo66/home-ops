@@ -4,13 +4,13 @@ resource "helm_release" "gitea" {
 
   repository = "https://dl.gitea.io/charts/"
   chart      = "gitea"
-  version    = "8.3.0"
+  version    = "9.1.0"
 
   values = [
     yamlencode({
       image = {
         repository = "gitea/gitea"
-        tag = "1.19.3"
+        tag = "1.20.2"
         pullPolicy = "IfNotPresent"
         rootless = false
       }
@@ -36,11 +36,18 @@ resource "helm_release" "gitea" {
       memcached = {
         enabled = false
       }
+      redis-cluster = {
+        enabled = false
+      }
       persistence = {
         enabled = true
+        create = false
         existingClaim = "gitea-config-pvc"
       }
       postgresql = {
+        enabled = false
+      }
+      postgresql-ha = {
         enabled = false
       }
       mysql = {
