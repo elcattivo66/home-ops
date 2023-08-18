@@ -22,9 +22,11 @@ spec:
     remediation:
       retries: 5
   values:
-    updateStrategy:
-      type: RollingUpdate
-    podManagementPolicy: OrderedReady
+    influxdb:
+      updateStrategy:
+        type: RollingUpdate
+
+      podManagementPolicy: OrderedReady
 
     image:
       repository: bitnami/influxdb
