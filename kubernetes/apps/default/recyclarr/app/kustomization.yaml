@@ -4,11 +4,11 @@ kind: Kustomization
 namespace: default
 resources:
   - ./secret.sops.yaml
-  - ./cron-job.yaml
+  - ./helmrelease.yaml
 configMapGenerator:
-  - name: recyclarr
+  - name: recyclarr-configmap
     files:
-      - ./recyclarr.yml
+      - recyclarr.yml=./config/recyclarr.yml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
