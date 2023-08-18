@@ -33,16 +33,14 @@ resource "helm_release" "gitea" {
           externalTrafficPolicy = "Local"
         }
       }
-      memcached = {
-        enabled = false
-      }
       redis-cluster = {
         enabled = false
       }
       persistence = {
         enabled = true
         create = false
-        existingClaim = "gitea-config-pvc"
+        mount = true
+        claimName = "gitea-config-pvc"
       }
       postgresql = {
         enabled = false
@@ -78,6 +76,15 @@ resource "helm_release" "gitea" {
             NAME = "gitea"
             PASSWD = "${data.sops_file.secrets.data["gitea_database_password"]}"
             USER = "gitea"
+          }
+          session = {
+            PROVIDER = "memory"
+          }
+          cache = {
+            ADAPTER = "memory"
+          }
+          queue = {
+            TYPE = "level"
           }
         }
       }
