@@ -10,7 +10,7 @@ resource "helm_release" "gitea" {
     yamlencode({
       image = {
         repository = "gitea/gitea"
-        tag = "1.19.3"
+        tag = "1.20.2"
         pullPolicy = "IfNotPresent"
         rootless = false
       }
@@ -36,11 +36,18 @@ resource "helm_release" "gitea" {
       memcached = {
         enabled = false
       }
+      redis-cluster = {
+        enabled = false
+      }
       persistence = {
         enabled = true
+        create = false
         existingClaim = "gitea-config-pvc"
       }
       postgresql = {
+        enabled = false
+      }
+      postgresql-ha = {
         enabled = false
       }
       mysql = {
