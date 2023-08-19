@@ -67,7 +67,7 @@ spec:
         enabled: true
         type: nfs
         server: ${NAS_ADDR}
-        path: ${MEDIADIR}/ebooks/calibre_library
+        path: /spool/ebooks/calibre_library
         mountPath: /books
         readOnly: false
 
