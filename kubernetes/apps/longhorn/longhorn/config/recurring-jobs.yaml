@@ -34,6 +34,7 @@ spec:
   task: "filesystem-trim"
   groups:
   - default
+  concurrency: 2
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
@@ -46,3 +47,4 @@ spec:
   groups:
   - default
   retain: 3
+  concurrency: 2
