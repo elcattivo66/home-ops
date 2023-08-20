@@ -36,7 +36,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/onedr0p/prowlarr-develop
-      tag: 1.8.2.3860@sha256:1660bc4db76b583aa875eaab83c0c61fc10ed533fb2c0cff36cbef9101d68302
+      tag: 1.8.3.3880@sha256:13a07d5383f2be3cf1de6682ba41057b8096b0f5d0d0d53526cd0c158af9a9ec
       pullPolicy: IfNotPresent
 
     env:
