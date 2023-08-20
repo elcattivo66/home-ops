@@ -40,6 +40,8 @@ spec:
     image:
       repository: ghcr.io/onedr0p/home-assistant
       tag: 2023.8.3@sha256:c431306c7a24c8d197e907134a905bc1d756bd6e5940ff2af05c60c675bc3192
+    podAnnotations:
+      k8s.v1.cni.cncf.io/networks: "hass-iot-static"
     env:
       TZ: ${TZ}
       HASS_TRUSTED_PROXIES: "192.168.178.0/24,10.42.0.0/16,10.43.0.0/16"
@@ -49,8 +51,8 @@ spec:
       - secretRef:
           name: home-assistant-secret
 
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+    # hostNetwork: true
+    # dnsPolicy: ClusterFirstWithHostNet
 
     service:
       main:
