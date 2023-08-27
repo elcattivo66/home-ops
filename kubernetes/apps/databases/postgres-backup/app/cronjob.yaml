@@ -38,7 +38,7 @@ spec:
                       name: postgres-superuser
                       key: password
                 - name: POSTGRES_DB
-                  value: "authelia,immich,paperless,radarr_main,nextcloud,lldap,prowlarr_main,lidarr_main,bazarr,home_assistant,vaultwarden,tandoor"
+                  value: "authelia,immich,paperless,radarr_main,nextcloud,lldap,prowlarr_main,lidarr_main,bazarr,home_assistant,vaultwarden,tandoor,sonarr_main"
               volumeMounts:
                 - name: nas-backups
                   mountPath: /backups
