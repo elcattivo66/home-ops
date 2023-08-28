@@ -47,6 +47,10 @@ spec:
       PGID: "1000"
       RADARR__LOG_LEVEL: info
       RADARR__API_KEY: ${RADARR_API_KEY}
+      RADARR__THEME: dark
+      RADARR__AUTHENTICATION_METHOD: External
+      RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+
     envFrom:
       - secretRef:
           name: radarr-secret

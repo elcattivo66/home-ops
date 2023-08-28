@@ -47,6 +47,9 @@ spec:
       SONARR__API_KEY: ${SONARR_API_KEY}
       SONARR__LOG_LEVEL: info
       SONARR__THEME: dark
+      SONARR__AUTHENTICATION_METHOD: External
+      SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+
     envFrom: *envFrom
 
     service:
