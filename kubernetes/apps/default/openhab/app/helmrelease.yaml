@@ -33,8 +33,8 @@ spec:
       OPENHAB_HTTPS_PORT: "8443"
       EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Berlin -Dlog4j2.formatMsgNoLookups=true"
 
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+    # hostNetwork: true
+    # dnsPolicy: ClusterFirstWithHostNet
     # podAnnotations:
     #   k8s.v1.cni.cncf.io/networks: macvlan-static-iot-openhab
 
@@ -42,7 +42,7 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          coredns.io/hostname: openhab.${SECRET_DOMAIN}
+          # coredns.io/hostname: openhab.${SECRET_DOMAIN}
           io.cilium/lb-ipam-ips: ${SVC_OPENHAB_ADDR}
         externalTrafficPolicy: Local
         ports:
@@ -64,16 +64,16 @@ spec:
             port: 5353
             protocol: UDP
             targetPort: 5353
-          hueemulation:
-            enabled: true
-            port: 8080
-            protocol: TCP
-            targetPort: 8080
-          sonos:
-            enabled: true
-            port: 1400
-            protocol: TCP
-            targetPort: 1400
+          # hueemulation:
+          #   enabled: true
+          #   port: 8080
+          #   protocol: TCP
+          #   targetPort: 8080
+          # sonos:
+          #   enabled: true
+          #   port: 1400
+          #   protocol: TCP
+          #   targetPort: 1400
           # chromecast1:
           #   port: 8008
           # chromecast2:
