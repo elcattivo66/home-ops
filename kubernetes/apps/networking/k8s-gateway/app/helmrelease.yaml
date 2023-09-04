@@ -34,5 +34,5 @@ spec:
       type: LoadBalancer
       port: 53
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 192.168.178.221
+        io.cilium/lb-ipam-ips: 192.168.178.221
       externalTrafficPolicy: Local
