@@ -12,7 +12,7 @@ resources:
     - immich/ks.yaml
     # - jellyfin/ks.yaml
     # - kopia/ks.yaml
-    - lidarr/ks.yaml
+    # - lidarr/ks.yaml
     - lldap/ks.yaml
     - nextcloud/ks.yaml
     - mosquitto/ks.yaml
