@@ -8,8 +8,8 @@ spec:
   type: LoadBalancer
   annotations:
     coredns.io/hostname: postgres.${SECRET_DOMAIN}
+    io.cilium/lb-ipam-ips: ${SVC_POSTGRES_ADDR}
   externalTrafficPolicy: Local
-  io.cilium/lb-ipam-ips: ${SVC_POSTGRES_ADDR}
   ports:
     - name: postgres
       port: 5432

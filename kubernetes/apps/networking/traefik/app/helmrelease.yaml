@@ -38,8 +38,9 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
-      spec:
+      annotations:
         io.cilium/lb-ipam-ips: ${SVC_TRAEFIK_ADDR}
+      spec:
         externalTrafficPolicy: Local
     logs:
       general:
