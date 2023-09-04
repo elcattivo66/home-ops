@@ -125,7 +125,7 @@ spec:
       fsGroup: 1000
       fsGroupChangePolicy: OnRootMismatch
       supplementalGroups:
-        - 986
+        - 20
 
     resources:
       requests:
