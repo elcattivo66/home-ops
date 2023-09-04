@@ -9,7 +9,7 @@ spec:
   annotations:
     coredns.io/hostname: postgres.${SECRET_DOMAIN}
   externalTrafficPolicy: Local
-  externalIPs: ["${SVC_POSTGRES_ADDR}"]
+  io.cilium/lb-ipam-ips: ${SVC_POSTGRES_ADDR}
   ports:
     - name: postgres
       port: 5432

@@ -72,7 +72,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs: ["${SVC_Z2M_ADDR}"]
+        io.cilium/lb-ipam-ips: ${SVC_Z2M_ADDR}
         externalTrafficPolicy: Local
         ports:
           http:

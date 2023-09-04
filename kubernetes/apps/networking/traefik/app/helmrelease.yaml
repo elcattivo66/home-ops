@@ -39,7 +39,7 @@ spec:
       enabled: true
       type: LoadBalancer
       spec:
-        externalIPs: ["${SVC_TRAEFIK_ADDR}"]
+        io.cilium/lb-ipam-ips: ${SVC_TRAEFIK_ADDR}
         externalTrafficPolicy: Local
     logs:
       general:

@@ -38,7 +38,7 @@ spec:
       listdisc:
         enabled: true
         type: LoadBalancer
-        externalIPs:: ["192.168.178.232"]
+        io.cilium/lb-ipam-ips:: 192.168.178.232
         ports:
           discovery:
             enabled: true
