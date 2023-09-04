@@ -46,7 +46,7 @@ spec:
         annotations:
           coredns.io/hostname: smtp-relay.${SECRET_DOMAIN}
           io.cilium/lb-ipam-ips: ${SVC_SMTP_RELAY_ADDRESS}
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
         ports:
           http:
             port: 2525

@@ -44,7 +44,7 @@ spec:
         annotations:
           # coredns.io/hostname: openhab.${SECRET_DOMAIN}
           io.cilium/lb-ipam-ips: ${SVC_OPENHAB_ADDR}
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
         ports:
           http:
             port: 8282
