@@ -41,7 +41,7 @@ spec:
       annotations:
         io.cilium/lb-ipam-ips: ${SVC_TRAEFIK_ADDR}
       spec:
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
     logs:
       general:
         format: json
