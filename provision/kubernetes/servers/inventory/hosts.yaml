@@ -5,11 +5,11 @@ kubernetes:
   children:
     master:
       hosts:
-        kubi:
+        nuc:
           ansible_host: 192.168.178.10
     worker:
       hosts:
-        nuc:
-          ansible_host: 192.168.178.12
-        tonibrix:
+        brix:
           ansible_host: 192.168.178.11
+        kubi:
+          ansible_host: 192.168.178.12
