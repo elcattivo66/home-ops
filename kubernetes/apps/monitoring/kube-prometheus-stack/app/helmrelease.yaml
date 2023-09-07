@@ -87,6 +87,8 @@ spec:
       enabled: true
       endpoints: &cp
         - 192.168.178.10
+        - 192.168.178.11
+        - 192.168.178.12
       serviceMonitor:
         metricRelabelings:
           # Remove duplicate labels provided by k3s
