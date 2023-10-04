@@ -30,7 +30,7 @@ spec:
   values:
     image:
       repository: docker.io/pdreker/fritz_exporter
-      tag: 2.2.4
+      tag: 2.3.0
 
     envFrom:
       - secretRef:
