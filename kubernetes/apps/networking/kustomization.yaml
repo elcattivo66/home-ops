@@ -9,6 +9,5 @@ resources:
   - ./external-dns/ks.yaml
   - ./external-services/ks.yaml
   - ./k8s-gateway/ks.yaml
-  # - ./metallb/ks.yaml
   - ./traefik/ks.yaml
   - ./multus/ks.yaml
