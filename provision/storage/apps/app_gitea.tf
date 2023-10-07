@@ -10,7 +10,7 @@ resource "helm_release" "gitea" {
     yamlencode({
       image = {
         repository = "gitea/gitea"
-        tag = "1.20.2"
+        tag = "1.20.5"
         pullPolicy = "IfNotPresent"
         rootless = false
       }
