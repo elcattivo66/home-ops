@@ -21,7 +21,7 @@ spec:
 
     image:
       repository: ghcr.io/bjw-s/calibre-web
-      tag: 0.6.20@sha256:86347342303d446e10915d1881b8f0a7fc4e2e6d33b68a5455a7a5880a1c47eb
+      tag: 0.6.20@sha256:05f36eb46effdbacc88217654def7f5c3cd40e933d9d4e3799d24efcf2fdff40
 
     env:
       # DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
