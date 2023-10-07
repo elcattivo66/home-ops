@@ -2,20 +2,42 @@
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: hass-iot-static
+  name: multus-iot
   namespace: default
 spec:
-  config: '{
+  config: |-
+    {
       "cniVersion": "0.3.1",
-      "type": "macvlan",
-      "master": "enp89s0",
-      "mode": "bridge",
-      "ipam": {
-        "type": "static",
-        "addresses": [
-           {
-             "address": "192.168.178.250/24"
-           }
-         ]
-      }
-    }'
+      "name": "multus-iot",
+      "plugins": [
+        {
+          "type": "macvlan",
+          "master": "eth0.71",
+          "mode": "bridge",
+          "capabilities": {
+            "ips": true
+          },
+          "ipam": {
+            "type": "static",
+            "routes": [
+              { "dst": "192.168.178.0/24", "gw": "192.168.178.1" }
+            ]
+          }
+        }
+      ]
+    }
+
+  # config: '{
+  #     "cniVersion": "0.3.1",
+  #     "type": "macvlan",
+  #     "master": "enp89s0",
+  #     "mode": "bridge",
+  #     "ipam": {
+  #       "type": "static",
+  #       "addresses": [
+  #          {
+  #            "address": "192.168.178.250/24"
+  #          }
+  #        ]
+  #     }
+  #   }'
