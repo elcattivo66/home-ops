@@ -16,7 +16,7 @@ spec:
     name: postgres-superuser
   bootstrap:
     recovery:
-      source: &previous-cluster postgres-v2
+      source: &previous-cluster postgres-v3
   monitoring:
     enablePodMonitor: true
 
@@ -28,7 +28,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: http://minio.nas.local
-      serverName: postgres-v3
+      serverName: postgres-v4
       s3Credentials:
         accessKeyId:
           name: postgres-minio
