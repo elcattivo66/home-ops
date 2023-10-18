@@ -66,10 +66,8 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-        - 985
-        - 989
         - 44
-        - 109
+        - 105
 
     volumeClaimTemplates:
       - name: config
