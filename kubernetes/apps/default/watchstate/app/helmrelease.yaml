@@ -21,7 +21,7 @@ spec:
 
     image:
       repository: ghcr.io/arabcoders/watchstate
-      tag: sha-b3de477@sha256:e8c6409284dbe9ca6ac0636973c86fbd30a9d5f0d4793370689cea4cb21136e1
+      tag: master-20230915-063bdf4
 
     env:
       WS_TZ: ${TZ}
