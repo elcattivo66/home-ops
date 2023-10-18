@@ -77,7 +77,7 @@ spec:
                 cpu: 5m
                 memory: 101M
               limits:
-                memory: 101M
+                memory: 200M
 
     service:
       main:
