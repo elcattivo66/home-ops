@@ -100,10 +100,8 @@ spec:
       # video:x:44:
       # render:x:109:
       supplementalGroups:
-      - 985
-      - 989
       - 44
-      - 109
+      - 105
 
     resources:
       requests:
