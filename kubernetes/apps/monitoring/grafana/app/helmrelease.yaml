@@ -173,7 +173,7 @@ spec:
         redis:
           # renovate: depName="Redis Dashboard for Prometheus Redis Exporter 1.x"
           gnetId: 763
-          revision: 4
+          revision: 5
           datasource: Prometheus
         minio:
           # renovate: depName="MinIO Dashboard"
