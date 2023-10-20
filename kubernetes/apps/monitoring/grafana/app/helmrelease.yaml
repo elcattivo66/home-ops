@@ -150,37 +150,35 @@ spec:
           #     maxLines: 250
     dashboards:
       default:
-        cloudflared:
-          gnetId: 17457 # https://grafana.com/grafana/dashboards/17457?tab=revisions
-          revision: 6
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
         external-dns:
-          gnetId: 15038 # https://grafana.com/grafana/dashboards/15038?tab=revisions
+          # renovate: depName="External-dns"
+          gnetId: 15038
           revision: 1
           datasource: Prometheus
         longhorn:
-          gnetId: 17626
-          revision: 1
+          # renovate: depName="Longhorn"
+          gnetId: 16888
+          revision: 8
           datasource: Prometheus
         node-exporter-full:
+          # renovate: depName="Node Exporter Full"
           gnetId: 1860
-          revision: 31
+          revision: 32
           datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/7845-zfs/
         zfs:
+          # renovate: depName="ZFS"
           gnetId: 7845
           revision: 4
           datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/763-redis-dashboard-for-prometheus-redis-exporter-1-x/
-        # redis:
-        #   gnetId: 763
-        #   revision: 4
-        #   datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
+        redis:
+          # renovate: depName="Redis Dashboard for Prometheus Redis Exporter 1.x"
+          gnetId: 763
+          revision: 4
+          datasource: Prometheus
         minio:
+          # renovate: depName="MinIO Dashboard"
           gnetId: 13502
-          revision: 23
+          revision: 24
           datasource:
           - name: DS_PROMETHEUS
             value: Prometheus
@@ -189,22 +187,39 @@ spec:
           datasource: Prometheus
       kubernetes:
         kubernetes-api-server:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
+          # renovate: depName="Kubernetes / System / API Server"
+          gnetId: 15761
+          revision: 14
           datasource: Prometheus
         kubernetes-coredns:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
+          # renovate: depName="Kubernetes / System / CoreDNS"
+          gnetId: 15762
+          revision: 13
           datasource: Prometheus
         kubernetes-global:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
+          # renovate: depName="Kubernetes / Views / Global"
+          gnetId: 15757
+          revision: 31
           datasource: Prometheus
         kubernetes-namespaces:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-namespaces.json
+          # renovate: depName="Kubernetes / Views / Namespaces"
+          gnetId: 15758
+          revision: 27
           datasource: Prometheus
         kubernetes-nodes:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-nodes.json
+          # renovate: depName="Kubernetes / Views / Nodes"
+          gnetId: 15759
+          revision: 19
           datasource: Prometheus
         kubernetes-pods:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
+          # renovate: depName="Kubernetes / Views / Pods"
+          gNetId: 15760
+          revision: 21
+          datasource: Prometheus
+        kubernetes-volumes:
+          # renovate: depName="K8s / Storage / Volumes / Cluster"
+          gnetId: 11454
+          revision: 14
           datasource: Prometheus
       flux:
         flux-cluster:
@@ -216,23 +231,6 @@ spec:
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
           datasource: Prometheus
-      # victoriametrics:
-      #   vmcluster:
-      #     gnetId: 11176
-      #     revision: 30
-      #     datasource: Prometheus
-      #   vmoperator:
-      #     gnetId: 17869
-      #     revision: 1
-      #     datasource: Prometheus
-      #   vmagent:
-      #     gnetId: 12683
-      #     revision: 11
-      #     datasource: Prometheus
-      #   vmalert:
-      #     gnetId: 14950
-      #     revision: 5
-      #     datasource: Prometheus
       openhab:
         metrics:
           url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
