@@ -40,6 +40,7 @@ spec:
       startupProbe:
         failureThreshold: 2
     metrics:
-      enabled: false
+      enabled: true
       serviceMonitor:
         enabled: true
+        interval: 1m
