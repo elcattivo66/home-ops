@@ -6,6 +6,7 @@ resources:
 - ./bitnami.yaml
 - ./bjw-s-charts.yaml
 - ./cloudnative-pg-charts.yaml
+- ./cilium.yaml
 - ./coredns.yaml
 - ./descheduler.yaml
 - ./external-dns.yaml
