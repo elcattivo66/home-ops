@@ -8,13 +8,13 @@ resources:
 - ./cloudnative-pg-charts.yaml
 - ./cilium.yaml
 - ./coredns.yaml
-- ./descheduler.yaml
+# - ./descheduler.yaml
 - ./external-dns.yaml
 - ./helm-stable.yaml
-- ./ingress-nginx.yaml
+# - ./ingress-nginx.yaml
 - ./intel.yaml
 - ./traefik.yaml
-- ./metallb.yaml
+# - ./metallb.yaml
 - ./metrics-server.yaml
 - ./mittwald-charts.yaml
 - ./longhorn.yaml
@@ -27,4 +27,4 @@ resources:
 - ./kyverno.yaml
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
-- ./victoria-metrics.yaml
+# - ./victoria-metrics.yaml
