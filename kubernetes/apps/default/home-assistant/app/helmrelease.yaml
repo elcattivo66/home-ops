@@ -41,13 +41,13 @@ spec:
       repository: ghcr.io/onedr0p/home-assistant
       tag: 2023.10.4@sha256:369c6f43a75c68333d694297f899803829ecdadb7a6aa16be3452897a556b3cd
     podAnnotations:
-      # k8s.v1.cni.cncf.io/networks: "hass-iot-static"
-      k8s.v1.cni.cncf.io/networks: |
-        [{
-          "name":"multus-iot",
-          "namespace": "networking",
-          "ips": ["192.168.178.250/24"]
-        }]
+      k8s.v1.cni.cncf.io/networks: "hass-iot-static"
+      # k8s.v1.cni.cncf.io/networks: |
+      #   [{
+      #     "name":"multus-iot",
+      #     "namespace": "networking",
+      #     "ips": ["192.168.178.250/24"]
+      #   }]
     env:
       TZ: ${TZ}
       HASS_TRUSTED_PROXIES: "192.168.178.0/24,10.42.0.0/16,10.43.0.0/16"
