@@ -27,7 +27,7 @@ spec:
     keepHistory: false
 
   values:
-    controller:
+    controllers:
       main:
         type: statefulset
         annotations:
