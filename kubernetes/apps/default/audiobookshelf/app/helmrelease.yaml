@@ -5,19 +5,17 @@ metadata:
   name: audiobookshelf
   namespace: default
 spec:
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
-      interval: 15m
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-  interval: 15m
   maxHistory: 3
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -29,19 +27,43 @@ spec:
 
   values:
     controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/advplyr/audiobookshelf
-      tag: 2.4.4
-      pullPolicy: IfNotPresent
-
-    env:
-      TZ: ${TZ}
-      AUDIOBOOKSHELF_UID: 1000
-      AUDIOBOOKSHELF_GID: 1000
-      METADATA_PATH: /data/metadata
-      CONFIG_PATH: /data/config
-
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        statefulset:
+          volumeClaimTemplates:
+            - name: data
+              accessMode: ReadWriteOnce
+              size: 1Gi
+              storageClass: longhorn
+              globalMounts:
+                - path: /data
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: ghcr.io/advplyr/audiobookshelf
+              tag: 2.4.4
+              pullPolicy: IfNotPresent
+            env:
+              TZ: ${TZ}
+              AUDIOBOOKSHELF_UID: 1000
+              AUDIOBOOKSHELF_GID: 1000
+              METADATA_PATH: /data/metadata
+              CONFIG_PATH: /data/config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 100M
+              limits:
+                memory: 500M
     service:
       main:
         ports:
@@ -62,41 +84,23 @@ spec:
           - host: &host "audiobooks.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
-
-    volumeClaimTemplates:
-      - name: data
-        mountPath: /data
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: longhorn
 
     persistence:
       media:
-        enabled: true
         type: nfs
         server: nas
         path: /spool/audiobooks
-        mountPath: /audiobooks
-        readOnly: false
+        globalMounts:
+          - path: /audiobooks
+            readOnly: false
       cache:
-        enabled: true
-        mountPath: /.npm
         type: emptyDir
+        globalMounts:
+          - path: /.npm
 
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
-
-    resources:
-      requests:
-        cpu: 5m
-        memory: 100M
-      limits:
-        memory: 500M
