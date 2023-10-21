@@ -5,7 +5,8 @@ metadata:
   name: hass-iot-static
   namespace: networking
 spec:
-  config: '{
+  config: |-
+    {
       "cniVersion": "0.3.1",
       "type": "macvlan",
       "master": "enx00e04c68013b",
@@ -18,4 +19,4 @@ spec:
           }
         ]
       }
-    }'
+    }
