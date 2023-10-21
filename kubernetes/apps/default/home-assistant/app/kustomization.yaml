@@ -6,6 +6,5 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./secret.sops.yaml
-  - ./net-attach.yaml
 patchesStrategicMerge:
   - ./patches/addons.yaml
