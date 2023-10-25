@@ -14,7 +14,7 @@ spec:
             - name: renovate
               # Update this to the latest available and then enable Renovate on
               # the manifest
-              image: ghcr.io/renovatebot/renovate:37.31.7-slim
+              image: ghcr.io/renovatebot/renovate:37.33.1-slim
               # args:
               #   - user/repo
               # # Environment Variables
