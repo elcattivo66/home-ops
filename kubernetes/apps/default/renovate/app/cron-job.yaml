@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: renovate
-  namespace: system-upgrade
+  namespace: default
 spec:
   schedule: '0 */6 * * *'
   concurrencyPolicy: Forbid
