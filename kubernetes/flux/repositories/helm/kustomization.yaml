@@ -23,6 +23,7 @@ resources:
 - ./prometheus-community-charts.yaml
 - ./grafana-charts.yaml
 - ./nextcloud-charts.yaml
+- ./renovate.yaml
 - ./stakater.yaml
 - ./kyverno.yaml
 - ./weave-gitops.yaml
