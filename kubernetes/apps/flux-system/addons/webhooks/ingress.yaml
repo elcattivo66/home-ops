@@ -6,10 +6,10 @@ metadata:
   name: webhook-receiver
   namespace: flux-system
   annotations:
+    external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-flux-webhook@kubernetescrd,
-      networking-local-only@kubernetescrd
+      networking-flux-webhook@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
