@@ -65,10 +65,16 @@ resource "helm_release" "gitea" {
             ENABLED = true
             RUN_AT_START = true
           }
+
           server = {
             SSH_PORT = "222"
             SSH_LISTEN_PORT = "222"
             ROOT_URL = "https://gitea.${data.sops_file.secrets.data["secret_domain"]}"
+            SSL_MIN_VERSION = "TLSv1.2"
+            SSL_CIPHER_SUITES = "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+          }
+          security = {
+            SECRET_KEY = "${data.sops_file.secrets.data["gitea_secret_key"]}"
           }
           database = {
             DB_TYPE = "postgres"
@@ -139,6 +145,39 @@ resource "kubernetes_persistent_volume_v1" "gitea-pv" {
     persistent_volume_source {
       host_path {
         path = "/spool/gitea"
+      }
+    }
+  }
+}
+
+resource "kubernetes_ingress_v1" "gitea" {
+  metadata {
+    name      = "gitea"
+    namespace = "default"
+    annotations = {
+      "traefik.ingress.kubernetes.io/router.entrypoints" = "web"
+    }
+    labels = {
+      "app.arpa.home/name" = "gitea"
+    }
+  }
+  spec {
+    ingress_class_name = "traefik"
+    rule {
+      host = "gitea.bross.casa"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "gitea-http"
+              port {
+                number = 8687
+              }
+            }
+          }
+        }
       }
     }
   }
