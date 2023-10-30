@@ -19,6 +19,10 @@
     "github>elcattivo66/k3s-gitops//.github/renovate/semanticCommits.json5",
     "github>elcattivo66/k3s-gitops//.github/renovate/packageRules.json5"
   ],
+  "platform": "github",
+  "onboarding": false,
+  "requireConfig": "optional",
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "ignorePaths": ["archive/**"],
   "flux": {
     "fileMatch": ["kubernetes/.+\\.ya?ml$"]
