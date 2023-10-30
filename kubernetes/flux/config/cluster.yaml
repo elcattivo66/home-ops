@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 30m
   # url: ssh://git@nas:222/philipp/k3s-gitops.git
-  url: ssh://git@github/elcattivo66/k3s-gitops
+  url: ssh://git@github.com/elcattivo66/k3s-gitops
   ref:
     branch: main
   secretRef:
