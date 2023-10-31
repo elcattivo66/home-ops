@@ -25,24 +25,11 @@ kubectl apply -f kubernetes/flux/vars/cluster-settings.yaml
 kubectl apply --server-side --kustomize ./kubernetes/flux/config
 ```
 
-
 # Install k3s:
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.25.5+k3s1 K3S_TOKEN=<TOKEN> sh -s - --write-kubeconfig-mode 644 --disable=traefik --disable=local-storage --disable=servicelb --cluster-init
-
-
-curl -sfL https://get.k3s.io | K3S_TOKEN=<TOKEN> sh -s - --write-kubeconfig-mode 644 --disable=traefik --disable=local-storage --disable=servicelb --node-taint 'node-role.kubernetes.io/master=true:NoSchedule' --server https://192.168.178.21:6443
-
-
-Uninstall k3s:
-/usr/local/bin/k3s-uninstall.sh
-
 SOPS Secrets:
 pacman -S sops
 https://fluxcd.io/docs/guides/mozilla-sops/
 https://devopstales.github.io/kubernetes/gitops-flux2-sops/
-
-### Apply flux2
-kubectl apply --kustomize k3s-gitops/kubernetes/bootstrap/
 
 ### Add sops key to cluster
 cat age.agekey |
@@ -62,7 +49,3 @@ sops -d -i secret.yaml
 
 Longhorn:
 pacman -S open-iscsi
-
-Worker:
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.24.7+k3s1 K3S_URL=https://192.168.178.21:6443 K3S_TOKEN="<TOKEN>" sh -
-
