@@ -115,18 +115,14 @@ spec:
     nodeSelector:
       intel.feature.node.kubernetes.io/gpu: "true"
 
-    probes:
-        startup:
-          enabled: false
-          # spec:
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 3
-          #   failureThreshold: 160
-        readiness:
-          enabled: false
-        liveness:
-          enabled: false
-          # spec:
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 3
-          #   failureThreshold: 160
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - nuc
+                    - morefine
