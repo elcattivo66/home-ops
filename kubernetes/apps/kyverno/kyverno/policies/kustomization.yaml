@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - ./inject-tz.yaml
   # - ./snapshot-cronjob.yaml
-  - ./remove-cpu-limit.yaml
+  # - ./remove-cpu-limit.yaml
