@@ -1,9 +1,9 @@
 ---
 # Area
-- name: area/ansible
+- name: area/infrastructure
   color: "72ccf3"
   description: >-
-    Changes made in the ansible directory
+    Changes made in the infrastructure directory
 - name: area/github
   color: "72ccf3"
   description: >-
@@ -12,10 +12,16 @@
   color: "72ccf3"
   description: >-
     Changes made in the kubernetes directory
+- name: area/hack
+  color: "72ccf3"
+  description: >-
+    Changes made in the hack directory
 # Renovate
 - name: renovate/container
   color: "ffc300"
 - name: renovate/github-action
+  color: "ffc300"
+- name: renovate/grafana-dashboard
   color: "ffc300"
 - name: renovate/github-release
   color: "ffc300"
