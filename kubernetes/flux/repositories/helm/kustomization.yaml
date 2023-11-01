@@ -28,4 +28,5 @@ resources:
 - ./kyverno.yaml
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
+- ./k8tz.yaml
 # - ./victoria-metrics.yaml
