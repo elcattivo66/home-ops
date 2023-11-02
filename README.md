@@ -40,8 +40,8 @@ kubectl create secret generic sops-age \
 sops -d -i secret.yaml
 
 ### Apply gitea secrets and flux-system
-sops -d k3s-gitops/kubernetes/flux/flux-system/secret.sops.yaml | kubectl apply -f -
-kubectl apply --kustomize k3s-gitops/kubernetes/flux/flux-system/
+sops -d home-ops/kubernetes/flux/flux-system/secret.sops.yaml | kubectl apply -f -
+kubectl apply --kustomize home-ops/kubernetes/flux/flux-system/
 
 ### Reconcile
       - flux reconcile -n flux-system source git flux-cluster
