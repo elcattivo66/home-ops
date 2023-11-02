@@ -66,6 +66,8 @@ spec:
               fsGroup: 100
               fsGroupChangePolicy: "OnRootMismatch"
     service:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
       main:
         ports:
           http:
