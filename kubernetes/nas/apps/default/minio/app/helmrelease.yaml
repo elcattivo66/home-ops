@@ -25,12 +25,12 @@ spec:
         # annotations:
         #   reloader.stakater.com/auto: "true"
 
-        # pod:
-        #   securityContext:
-        #     runAsUser: 1000
-        #     runAsGroup: 100
-        #     fsGroup: 100
-        #     fsGroupChangePolicy: "OnRootMismatch"
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
           main:
@@ -60,9 +60,9 @@ spec:
               requests:
                 cpu: 5m
                 memory: 128M
-            securityContext:
-              privileged: true
-              runAsUser: 0
+            # securityContext:
+            #   privileged: true
+            #   runAsUser: 0
     service:
       main:
         ports:
@@ -94,5 +94,5 @@ spec:
         type: hostPath
         hostPath: /spool/minio
         hostPathType: Directory
-        globalMounts:
-          - path: /data
+        mountPath: /data
+
