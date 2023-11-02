@@ -61,8 +61,10 @@ spec:
                 cpu: 5m
                 memory: 128M
             securityContext:
-              privileged: true
-              runAsUser: 0
+              runAsUser: 1000
+              runAsGroup: 100
+              fsGroup: 100
+              fsGroupChangePolicy: "OnRootMismatch"
     service:
       main:
         ports:
