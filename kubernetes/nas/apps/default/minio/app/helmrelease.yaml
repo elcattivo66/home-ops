@@ -60,9 +60,9 @@ spec:
               requests:
                 cpu: 5m
                 memory: 128M
-            # securityContext:
-            #   privileged: true
-            #   runAsUser: 0
+            securityContext:
+              privileged: true
+              runAsUser: 0
     service:
       main:
         ports:
@@ -90,9 +90,10 @@ spec:
                   port: s3
 
     persistence:
-      config:
+      data:
         type: hostPath
         hostPath: /spool/minio
         hostPathType: Directory
         mountPath: /data
-
+        globalMounts:
+          - path: /data
