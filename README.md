@@ -14,7 +14,7 @@ _These cannot be applied with `kubectl` in the regular fashion due to be encrypt
 
 ```sh
 sops --decrypt kubernetes/bootstrap/age-key.sops.yaml | kubectl apply -f -
-sops --decrypt kubernetes/bootstrap/gitea-ssh-key.sops.yaml | kubectl apply -f -
+sops --decrypt kubernetes/bootstrap/github-deploy-key.sops.yaml | kubectl apply -f -
 sops --decrypt kubernetes/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
 kubectl apply -f kubernetes/flux/vars/cluster-settings.yaml
 ```
