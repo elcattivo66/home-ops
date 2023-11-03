@@ -1,14 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     "docker:enableMajor",
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
-    ":enablePreCommit",
     ":automergeDigest",
-    ":automergeBranchPush",
+    ":automergeBranch",
     "github>elcattivo66/home-ops//.github/renovate/allowedVersions.json5",
     "github>elcattivo66/home-ops//.github/renovate/autoMerge.json5",
     "github>elcattivo66/home-ops//.github/renovate/commitMessage.json5",
@@ -25,13 +24,17 @@
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "ignorePaths": ["archive/**"],
   "flux": {
-    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
+    "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"]
   },
   "helm-values": {
-    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
+    "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"]
   },
   "kubernetes": {
-    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
+    "fileMatch": [
+      "(^|/)\\.taskfiles/.+\\.ya?ml(\\.j2)?$",
+      "(^|/)ansible/.+\\.ya?ml(\\.j2)?$",
+      "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+    ]
   }
 }
 
