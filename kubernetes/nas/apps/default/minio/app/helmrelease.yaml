@@ -22,27 +22,18 @@ spec:
       main:
         type: statefulset
 
-        # annotations:
-        #   reloader.stakater.com/auto: "true"
-
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 100
-            fsGroup: 100
-            fsGroupChangePolicy: "OnRootMismatch"
+        annotations:
+          reloader.stakater.com/auto: "true"
 
         containers:
           main:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2023-11-01T01-57-10Z
-            args:
-              - server
-              - /data
-              - --console-address
-              - :9001
+            args: ["server", "/data", "--console-address", ":9001"]
             env:
+              TZ: ${TZ}
+              MINIO_UPDATE: "off"
               MINIO_PROMETHEUS_JOB_ID: minio
               MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
               MINIO_PROMETHEUS_AUTH_TYPE: public
