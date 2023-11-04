@@ -11,14 +11,6 @@ vars:
 
 tasks:
 
-  init:
-    desc: Install / Upgrade Ansible galaxy deps
-    dir: "{{.ANSIBLE_DIR}}"
-    cmds:
-      - pip3 install --user --requirement requirements.txt
-      - ansible-galaxy install -r requirements.yaml --roles-path ~/.ansible/roles --force
-      - ansible-galaxy collection install -r requirements.yaml --collections-path ~/.ansible/collections --force
-
   list:
     desc: List all the hosts
     dir: "{{.ANSIBLE_DIR}}"
