@@ -42,11 +42,11 @@ spec:
 
     env:
       TZ: ${TZ}
-      PUID: "1000"
-      PGID: "1000"
       LIDARR__INSTANCE_NAME: Lidarr
       LIDARR__PORT: &port 80
       LIDARR__LOG_LEVEL: info
+      RADARR__AUTHENTICATION_METHOD: External
+      RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
     envFrom:
       - secretRef:
           name: lidarr-secret
