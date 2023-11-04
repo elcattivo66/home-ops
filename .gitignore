@@ -5,6 +5,7 @@ Thumbs.db
 .private/
 # ansible
 xanmanning.k3s*
+.venv*
 # terraform
 .terraform
 *.tfvars
