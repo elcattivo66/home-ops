@@ -2,7 +2,7 @@
 version: "3"
 
 env:
-  # ANSIBLE_CONFIG: "{{.ROOT_DIR}}/provision/kubernetes/server/ansible.cfg"
+  # ANSIBLE_CONFIG: "{{.ROOT_DIR}}/ansible/kubernetes/ansible.cfg"
   K8S_AUTH_KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
 
 vars:

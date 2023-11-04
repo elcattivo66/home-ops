@@ -5,19 +5,11 @@ creation_rules:
     key_groups:
       - age:
           - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
-  - path_regex: kubernetes/.*\.sops\.ini
+  - path_regex: kubernetes/.*\.sops\.(env|ini|json|toml)
     key_groups:
       - age:
           - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
-  - path_regex: kubernetes/.*\.sops\.toml
-    key_groups:
-      - age:
-          - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
-  - path_regex: kubernetes/.*\.sops\.json
-    key_groups:
-      - age:
-          - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
-  - path_regex: provision/.*\.sops\.ya?ml
+  - path_regex: (ansible|terraform)/.*\.sops\.ya?ml
     key_groups:
       - age:
           - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq

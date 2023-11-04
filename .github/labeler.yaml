@@ -1,8 +1,11 @@
 ---
 area/ansible:
-  - "provision/kubernetes/servers/**/*"
-  - "provision/storage/servers/**/*"
+  - "ansible/**/*"
 area/github:
   - ".github/**/*"
 area/kubernetes:
   - "kubernetes/**/*"
+area/hack:
+  - "hack/**/*"
+area/terraform:
+  - "terraform/**/*"
