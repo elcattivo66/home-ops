@@ -141,7 +141,6 @@ spec:
               - *host_prometheus
 
       prometheusSpec:
-        scrapeInterval: 60s
         replicas: 2
         replicaExternalLabelName: __replica__
         podAntiAffinity: hard
