@@ -4,7 +4,7 @@ metadata:
   name: "${SECRET_NAS_CERT_NAME}-staging"
   namespace: kube-system
 spec:
-  name: "${SECRET_NAS_CERT_NAME}-staging"
+  secretName: "${SECRET_NAS_CERT_NAME}-staging"
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
