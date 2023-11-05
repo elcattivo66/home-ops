@@ -83,7 +83,9 @@ spec:
                 service:
                   name: main
                   port: s3
-
+        tls:
+          - hosts:
+              - *host
     persistence:
       data:
         type: hostPath
