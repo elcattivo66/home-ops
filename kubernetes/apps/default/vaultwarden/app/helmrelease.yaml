@@ -28,7 +28,7 @@ spec:
       replicas: 1
     image:
         repository: ghcr.io/dani-garcia/vaultwarden
-        tag: 1.29.2
+        tag: 1.30.0
 
     env:
       TIMEZONE: ${TZ}
