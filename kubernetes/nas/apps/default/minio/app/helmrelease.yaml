@@ -86,7 +86,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_NAS_CERT_NAME}-prod-tls
+            secretName: kube-system/${SECRET_NAS_CERT_NAME}-prod-tls
 
     persistence:
       data:
