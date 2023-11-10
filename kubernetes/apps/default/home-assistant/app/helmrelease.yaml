@@ -39,7 +39,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/onedr0p/home-assistant
-      tag: 2023.11.1@sha256:28fb67d8cfc79ae5d779c9fee4303a13398ef580e25caeb5ff8c160e50e90d9d
+      tag: 2023.11.2@sha256:fb61307e9c130299beff64ea73b88a849b704434b377c8ae855187ef328224f5
     podAnnotations:
       k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
       # k8s.v1.cni.cncf.io/networks: |
