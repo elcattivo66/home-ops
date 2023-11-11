@@ -8,7 +8,6 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
     - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/default/radarr/app
   prune: true
