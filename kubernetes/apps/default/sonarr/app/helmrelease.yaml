@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: longhorn
-      namespace: longhorn
+      namespace: longhorn-system
   values:
     controllers:
       main:
