@@ -1,67 +1,81 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: lidarr
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-      interval: 15m
+  maxHistory: 2
   install:
-    createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
-
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.9
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: lidarr-secret
-
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
-
-    image:
-      repository: ghcr.io/onedr0p/lidarr-develop
-      tag: 2.0.2.3782@sha256:ce84367f7a1fb03de55dc849350cb349eb4bc1a32ef3b1154c63ce6c564f40af
-
-    env:
-      TZ: ${TZ}
-      LIDARR__INSTANCE_NAME: Lidarr
-      LIDARR__PORT: &port 80
-      LIDARR__LOG_LEVEL: info
-      LIDARR__AUTHENTICATION_METHOD: External
-      LIDARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
-    envFrom:
-      - secretRef:
-          name: lidarr-secret
-
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: sonarr-secret
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/lidarr-develop
+              tag: 2.0.2.3782@sha256:ce84367f7a1fb03de55dc849350cb349eb4bc1a32ef3b1154c63ce6c564f40af
+            env:
+              TZ: ${TZ}
+              LIDARR__INSTANCE_NAME: Lidarr
+              LIDARR__PORT: &port 80
+              LIDARR__LOG_LEVEL: info
+              LIDARR__AUTHENTICATION_METHOD: External
+              LIDARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+            envFrom: *envFrom
+          resources:
+            requests:
+              cpu: 5m
+              memory: 597M
+            limits:
+              memory: 597M
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
     service:
       main:
         ports:
           http:
             port: *port
-
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: >-
@@ -71,37 +85,16 @@ spec:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
-
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 10Gi
-        storageClass: longhorn
-
     persistence:
-      nfs-media:
+      config:
         enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: ${MEDIADIR}
-        mountPath: /media
-        readOnly: false
+        existingClaim: lidarr-config
+      media:
+        existingClaim: media
 
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
-
-    resources:
-      requests:
-        cpu: 5m
-        memory: 597M
-      limits:
-        memory: 597M
