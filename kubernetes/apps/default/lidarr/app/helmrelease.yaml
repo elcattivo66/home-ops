@@ -55,12 +55,12 @@ spec:
               LIDARR__AUTHENTICATION_METHOD: External
               LIDARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
             envFrom: *envFrom
-          resources:
-            requests:
-              cpu: 5m
-              memory: 597M
-            limits:
-              memory: 597M
+            resources:
+              requests:
+                cpu: 5m
+                memory: 597M
+              limits:
+                memory: 597M
         pod:
           securityContext:
             runAsUser: 1000
