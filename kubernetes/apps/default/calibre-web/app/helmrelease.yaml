@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -8,25 +9,50 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
-      interval: 15m
+      version: 2.2.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-  interval: 15m
+  interval: 30m
   values:
-    controller:
-      type: statefulset
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    image:
-      repository: ghcr.io/bjw-s/calibre-web
-      tag: 0.6.21@sha256:63d89950e5157965f4ae85a12f761d3b155eebf7a5ad277190d09b48d1fb7fad
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 128Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /config
 
-    env:
-      # DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
-      PGID: "1000"
-      PUID: "1000"
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/bjw-s/calibre-web
+              tag: 0.6.21@sha256:63d89950e5157965f4ae85a12f761d3b155eebf7a5ad277190d09b48d1fb7fad
+            env:
+              CACHE_DIR: /cache
+            resources:
+              requests:
+                cpu: 5m
+                memory: 470M
+              limits:
+                memory: 470M
 
     service:
       main:
@@ -37,8 +63,7 @@ spec:
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -49,43 +74,22 @@ spec:
           - host: &host "ebooks.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
-
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 128Mi
-        storageClass: longhorn
 
     persistence:
-      books:
-        enabled: true
+      media:
         type: nfs
-        server: ${NAS_ADDR}
+        server: nas
         path: /spool/ebooks/calibre_library
-        mountPath: /books
-        readOnly: false
-
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
-
-    resources:
-      requests:
-        cpu: 5m
-        memory: 127M
-      limits:
-        memory: 327M
-
-    probes:
-        startup:
-          spec:
-            initialDelaySeconds: 60
-            failureThreshold: 160
+        globalMounts:
+          - path: /books
+            readOnly: false
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /cache
