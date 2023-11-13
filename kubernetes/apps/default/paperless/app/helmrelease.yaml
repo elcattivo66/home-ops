@@ -36,6 +36,10 @@ spec:
                   name: paperless-secret
             env:
               COMPOSE_PROJECT_NAME: paperless
+              PAPERLESS_CONSUMPTION_DIR: /library/consume
+              PAPERLESS_DATA_DIR: /library/data
+              PAPERLESS_EXPORT_DIR: /library/export
+              PAPERLESS_MEDIA_ROOT: /library/media
               PAPERLESS_CONSUMER_POLLING: '60'
               PAPERLESS_CONSUMER_RECURSIVE: 'true'
               PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: 'true'
@@ -98,35 +102,12 @@ spec:
         tls:
           - hosts:
               - *host
-
     persistence:
-      data:
+      library:
         enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: /spool/paperless/data
+        existingClaim: paperless-nfs
         globalMounts:
-          - path: /usr/src/paperless/data
-      media:
-        enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: /spool/paperless/media
-        globalMounts:
-          - path: /usr/src/paperless/media
-      consume:
-        enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: /spool/paperless/consume
-        globalMounts:
-          - path: /usr/src/paperless/consume
-      export:
-        enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: /spool/paperless/export
-        globalMounts:
-          - path: /usr/src/paperless/export
+          - path: /library
+
 
 
