@@ -34,7 +34,6 @@ spec:
             envFrom:
               - secretRef:
                   name: paperless-secret
-
             env:
               COMPOSE_PROJECT_NAME: paperless
               PAPERLESS_CONSUMER_POLLING: '60'
@@ -62,6 +61,17 @@ spec:
                 memory: 697M
               limits:
                 memory: 697M
+          redis:
+            name: redis
+            image: public.ecr.aws/docker/library/redis:7.2.3
+          gotenburg:
+            name: gotenburg
+            image: thecodingmachine/gotenberg:7.9.2
+            env:
+              - { name: DISABLE_GOOGLE_CHROME, value: "1" }
+          tika:
+            image: ghcr.io/paperless-ngx/tika:2.9.0-full
+            name: tika
     service:
       main:
         ports:
@@ -116,22 +126,7 @@ spec:
         type: nfs
         server: ${NAS_ADDR}
         path: /spool/paperless/export
-
         globalMounts:
           - path: /usr/src/paperless/export
-    sidecars:
-      redis:
-        name: redis
-        image: public.ecr.aws/docker/library/redis:7.2.3
-        imagePullPolicy: IfNotPresent
-      gotenburg:
-        name: gotenburg
-        image: thecodingmachine/gotenberg:7.9.2
-        env:
-          - name: DISABLE_GOOGLE_CHROME
-            value: '1'
-      tika:
-        image: ghcr.io/paperless-ngx/tika:2.9.0-full
-        name: tika
-        imagePullPolicy: Always
+
 
