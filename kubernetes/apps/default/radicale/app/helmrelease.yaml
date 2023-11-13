@@ -1,30 +1,46 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: radicale
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
-      interval: 15m
+      version: 2.2.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
 
   values:
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: tomsquest/docker-radicale
-      tag: 3.1.8.3
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: 'true'
+        containers:
+          main:
+            image:
+              repository: tomsquest/docker-radicale
+              tag: 3.1.8.3
 
+            resources:
+              requests:
+                cpu: 5m
+                memory: 22M
+              limits:
+                memory: 22M
+        statefulset:
+          volumeClaimTemplates:
+            - name: data
+              accessMode: ReadWriteOnce
+              size: 128Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /data
     service:
       main:
         ports:
@@ -34,50 +50,38 @@ spec:
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-headers@kubernetescrd
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
-
-    volumeClaimTemplates:
-      - name: data
-        mountPath: /data
-        accessMode: ReadWriteOnce
-        size: 128Mi
-        storageClass: longhorn
 
     persistence:
       config:
         enabled: true
         type: configMap
         name: radicale-config
-        subPath: config.cfg
-        mountPath: /config/config
         readOnly: true
-
+        globalMounts:
+          - path: /config/config
+            subPath: config.cfg
       auth:
         enabled: true
         type: secret
         name: radicale-auth
-        subPath: users
-        mountPath: /config/users
         readOnly: true
-
-    resources:
-      requests:
-        cpu: 5m
-        memory: 22M
-      limits:
-        memory: 22M
+        globalMounts:
+          - path: /config/users
+            subPath: users

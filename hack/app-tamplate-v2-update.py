@@ -93,7 +93,7 @@ def main():
 
 def process(filepath, data):
     new = deepcopy(data)
-    new['spec']['chart']['spec']['version'] = '2.0.2'
+    new['spec']['chart']['spec']['version'] = '2.2.0'
     helm_values = new['spec'].pop('values')
     new_helm_values = deepcopy(helm_values)
 

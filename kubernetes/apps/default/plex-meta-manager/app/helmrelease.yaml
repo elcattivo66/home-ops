@@ -1,15 +1,14 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: plex-meta-manager
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -26,24 +25,27 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: 'true'
       # cronjob:
       #   schedule: 0 6 * * *
-    image:
-      repository: docker.io/meisnate12/plex-meta-manager
-      tag: v1.19.1
-    env:
-      TZ: "${TZ}"
-      PUID: "1000"
-      PGID: "1000"
-      PMM_TIME: "06:00"
+        containers:
+          main:
+            image:
+              repository: docker.io/meisnate12/plex-meta-manager
+              tag: v1.19.1
+            env:
+              TZ: ${TZ}
+              PUID: '1000'
+              PGID: '1000'
+              PMM_TIME: 06:00
       # Runs PMM immediately. Used to test
-      PMM_RUN: false
-      PMM_DEBUG: true
-      PMM_READ_ONLY_CONFIG: true
+              PMM_RUN: false
+              PMM_DEBUG: true
+              PMM_READ_ONLY_CONFIG: true
 
     service:
       main:
@@ -67,22 +69,22 @@ spec:
         enabled: true
         type: configMap
         name: pmm-config
-        mountPath: /config/config.yml
-        subPath: config.yaml
         readOnly: true
+        globalMounts:
+          - path: /config/config.yml
+            subPath: config.yaml
       pmm-tv:
         enabled: true
         type: configMap
         name: pmm-tv
-        subPath: tv.yaml
-        mountPath: config/tv.yaml
         readOnly: false
+        globalMounts:
+          - path: config/tv.yaml
+            subPath: tv.yaml
       pmm-movies:
         enabled: true
         type: configMap
         name: pmm-movies
-        subPath: movies.yaml
-        mountPath: config/movies.yaml
         readOnly: false
       # scripts:
       #   enabled: true
@@ -90,3 +92,6 @@ spec:
       #   name: pmm-scripts
       #   mountPath: /scripts
       #   defaultMode: 511
+        globalMounts:
+          - path: config/movies.yaml
+            subPath: movies.yaml
