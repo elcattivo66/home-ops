@@ -65,17 +65,20 @@ spec:
                 memory: 697M
               limits:
                 memory: 697M
-          redis:
-            name: redis
-            image: public.ecr.aws/docker/library/redis:7.2.3
           gotenburg:
-            name: gotenburg
-            image: thecodingmachine/gotenberg:7.9.2
+            image:
+              repository: thecodingmachine/gotenberg
+              tag: 7.9.2
             env:
               - { name: DISABLE_GOOGLE_CHROME, value: "1" }
+          redis:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 7.2.3
           tika:
-            image: ghcr.io/paperless-ngx/tika:2.9.0-full
-            name: tika
+            image:
+              repository: ghcr.io/paperless-ngx/tika
+              tag: 2.9.0-full
     service:
       main:
         ports:
