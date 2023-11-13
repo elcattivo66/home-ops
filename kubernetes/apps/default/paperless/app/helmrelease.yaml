@@ -4,52 +4,64 @@ metadata:
   name: paperless
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.9
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: paperless-secret
-    image:
-      repository: ghcr.io/paperless-ngx/paperless-ngx
-      tag: 1.17.4
-    env:
-      COMPOSE_PROJECT_NAME: paperless
-      PAPERLESS_CONSUMER_POLLING: "60"
-      PAPERLESS_CONSUMER_RECURSIVE: "true"
-      PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
-      PAPERLESS_OCR_LANGUAGES: deu
-      PAPERLESS_OCR_LANGUAGE: deu
-      PAPERLESS_PORT: 8000
-      PAPERLESS_TASK_WORKERS: 2
-      PAPERLESS_TIME_ZONE: ${TZ}
-      PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
-      USERMAP_UID: 1000
-      USERMAP_GID: 1000
-      PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
-      PAPERLESS_ENABLE_HTTP_REMOTE_USER: true
-      PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
-      # PAPERLESS_REDIS: redis://redis-master.databases.svc.cluster.local:6379
-      PAPERLESS_REDIS: redis://localhost:6379
-      PAPERLESS_TIKA_ENABLED: 1
-      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
-      PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
-    envFrom:
-      - secretRef:
-          name: paperless-secret
+    controllers:
+      main:
+        initContainers:
+          01-init-db:
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: paperless-secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: '14.9'
+        containers:
+          main:
+            image:
+              repository: ghcr.io/paperless-ngx/paperless-ngx
+              tag: 1.17.4
+            envFrom:
+              - secretRef:
+                  name: paperless-secret
 
+            env:
+              COMPOSE_PROJECT_NAME: paperless
+              PAPERLESS_CONSUMER_POLLING: '60'
+              PAPERLESS_CONSUMER_RECURSIVE: 'true'
+              PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: 'true'
+              PAPERLESS_OCR_LANGUAGES: deu
+              PAPERLESS_OCR_LANGUAGE: deu
+              PAPERLESS_PORT: 8000
+              PAPERLESS_TASK_WORKERS: 2
+              PAPERLESS_TIME_ZONE: ${TZ}
+              PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+              USERMAP_UID: 1000
+              USERMAP_GID: 1000
+              PAPERLESS_FILENAME_FORMAT: '{created_year}/{correspondent}/{title}'
+              PAPERLESS_ENABLE_HTTP_REMOTE_USER: true
+              PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
+              # PAPERLESS_REDIS: redis://redis-master.databases.svc.cluster.local:6379
+              PAPERLESS_REDIS: redis://localhost:6379
+              PAPERLESS_TIKA_ENABLED: 1
+              PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
+              PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
+            resources:
+              requests:
+                cpu: 5m
+                memory: 697M
+              limits:
+                memory: 697M
     service:
       main:
         ports:
@@ -59,49 +71,54 @@ spec:
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-headers@kubernetescrd,
             networking-authelia@kubernetescrd
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
 
     persistence:
       data:
         enabled: true
-        mountPath: /usr/src/paperless/data
         type: nfs
         server: ${NAS_ADDR}
         path: /spool/paperless/data
+        globalMounts:
+          - path: /usr/src/paperless/data
       media:
         enabled: true
-        mountPath: /usr/src/paperless/media
         type: nfs
         server: ${NAS_ADDR}
         path: /spool/paperless/media
+        globalMounts:
+          - path: /usr/src/paperless/media
       consume:
         enabled: true
-        mountPath: /usr/src/paperless/consume
         type: nfs
         server: ${NAS_ADDR}
         path: /spool/paperless/consume
+        globalMounts:
+          - path: /usr/src/paperless/consume
       export:
         enabled: true
-        mountPath: /usr/src/paperless/export
         type: nfs
         server: ${NAS_ADDR}
         path: /spool/paperless/export
 
+        globalMounts:
+          - path: /usr/src/paperless/export
     sidecars:
       redis:
         name: redis
@@ -118,9 +135,3 @@ spec:
         name: tika
         imagePullPolicy: Always
 
-    resources:
-        requests:
-            cpu: 5m
-            memory: 697M
-        limits:
-            memory: 697M

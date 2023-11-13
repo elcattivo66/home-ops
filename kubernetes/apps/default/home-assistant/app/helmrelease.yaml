@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -9,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -26,40 +25,64 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.9
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: home-assistant-secret
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: ghcr.io/onedr0p/home-assistant
-      tag: 2023.11.2@sha256:fb61307e9c130299beff64ea73b88a849b704434b377c8ae855187ef328224f5
-    podAnnotations:
-      k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
-      # k8s.v1.cni.cncf.io/networks: |
-      #   [{
-      #     "name":"multus-iot",
-      #     "namespace": "networking",
-      #     "ips": ["192.168.178.250/24"]
-      #   }]
-    env:
-      TZ: ${TZ}
-      HASS_TRUSTED_PROXIES: "192.168.178.0/24,10.42.0.0/16,10.43.0.0/16"
-      POSTGRES_HOST: postgres-rw.databases.svc.cluster.local
-      POSTGRES_DB: home_assistant
-    envFrom:
-      - secretRef:
-          name: home-assistant-secret
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: 'true'
+        initContainers:
+          01-init-db:
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: home-assistant-secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: '14.9'
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/home-assistant
+              tag: 2023.11.2@sha256:fb61307e9c130299beff64ea73b88a849b704434b377c8ae855187ef328224f5
+            envFrom:
+              - secretRef:
+                  name: home-assistant-secret
 
     # hostNetwork: true
     # dnsPolicy: ClusterFirstWithHostNet
 
+            env:
+              TZ: ${TZ}
+              HASS_TRUSTED_PROXIES: 192.168.178.0/24,10.42.0.0/16,10.43.0.0/16
+              POSTGRES_HOST: postgres-rw.databases.svc.cluster.local
+              POSTGRES_DB: home_assistant
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 750Mi
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 5Gi
+              storageClass: longhorn
+              globalMounts:
+                - path: /config
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
     service:
       main:
         type: LoadBalancer
@@ -69,62 +92,33 @@ spec:
         ports:
           http:
             port: 8123
-          # mdns-tcp:
-          #   enabled: true
-          #   port: 5353
-          #   protocol: TCP
-          #   targetPort: 5353
-          # mdns-udp:
-          #   enabled: true
-          #   port: 5353
-          #   protocol: UDP
-          #   targetPort: 5353
-          # sonos:
-          #   enabled: true
-          #   port: 1400
-          # emulated_hue:
-          #   enabled: true
-          #   port: 80
+
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-local-only@kubernetescrd
         hosts:
-          - host: &host "hass.${SECRET_DOMAIN}"
+          - host: &host hass.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 5Gi
-        storageClass: longhorn
-    resources:
-      requests:
-        cpu: 10m
-        memory: 100Mi
-      limits:
-        memory: 750Mi
+    podAnnotations:
+      k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
+      # k8s.v1.cni.cncf.io/networks: |
+      #   [{
+      #     "name":"multus-iot",
+      #     "namespace": "networking",
+      #     "ips": ["192.168.178.250/24"]
+      #   }]

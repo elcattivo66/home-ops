@@ -4,16 +4,16 @@ metadata:
   name: &app mosquitto
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-      interval: 15m
+      interval: 30m
   install:
     createNamespace: true
     remediation:
@@ -22,13 +22,30 @@ spec:
     remediation:
       retries: 5
   values:
-    controller:
-      type: statefulset
+    controllers:
+      main:
+        type: statefulset
 
-    image:
-      repository: eclipse-mosquitto
-      tag: 2.0.18
+        containers:
+          main:
+            image:
+              repository: eclipse-mosquitto
+              tag: 2.0.18
 
+            resources:
+              requests:
+                cpu: 5m
+                memory: 35M
+              limits:
+                memory: 35M
+        statefulset:
+          volumeClaimTemplates:
+            - name: data
+              accessMode: ReadWriteOnce
+              size: 128Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /mosquitto/data
     service:
       main:
         type: LoadBalancer
@@ -43,6 +60,15 @@ spec:
             enabled: true
             port: 1883
 
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        volumeSpec:
+          configMap:
+            name: mosquitto-config
+        globalMounts:
+          - path: /mosquitto/config/
     auth:
       enabled: true
 
@@ -59,25 +85,3 @@ spec:
             autosave_interval 60
           mosquitto_pwd: ${SECRET_MOSQUITTO_PASS_HASH}
 
-    volumeClaimTemplates:
-      - name: data
-        mountPath: /mosquitto/data
-        accessMode: ReadWriteOnce
-        size: 128Mi
-        storageClass: longhorn
-
-    persistence:
-      config:
-        enabled: true
-        type: custom
-        mountPath: /mosquitto/config/
-        volumeSpec:
-          configMap:
-            name: mosquitto-config
-
-    resources:
-      requests:
-        cpu: 5m
-        memory: 35M
-      limits:
-        memory: 35M
