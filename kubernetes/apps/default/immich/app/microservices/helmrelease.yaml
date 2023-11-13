@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -9,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -25,54 +24,61 @@ spec:
     - name: immich-server
       namespace: default
   values:
-    controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: ghcr.io/immich-app/immich-server
-      tag: v1.85.0
-    args: ["start-microservices.sh"]
-    envFrom:
-      - secretRef:
-          name: immich-secret
-      - configMapRef:
-          name: immich-config
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: 'true'
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.85.0
+            env:
+              IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-config
+            resources:
+              requests:
+                gpu.intel.com/i915: 1
+                cpu: 5m
+                memory: 277M
+              limits:
+                gpu.intel.com/i915: 1
+            #   memory: 512M
+            args: [start-microservices.sh]
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [44, 105]
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: 'true'
     service:
       main:
         enabled: false
     persistence:
       library:
-        enabled: true
-        type: nfs
-        server: ${NAS_ADDR}
-        path: /tank/photos/immich_upload/
-        mountPath: /usr/src/app/upload
-        readOnly: false
+        type: persistentVolumeClaim
+        existingClaim: immich-nfs
+        globalMounts:
+          - path: *mediaLocation
       geocoding-dump:
         enabled: true
         type: emptyDir
-        mountPath: /usr/src/app/.reverse-geocoding-dump
+        globalMounts:
+          - path: /usr/src/app/.reverse-geocoding-dump
       geoname-dump:
         enabled: true
         type: emptyDir
-        mountPath: /usr/src/app/node_modules/local-reverse-geocoder/geonames_dump
+        globalMounts:
+          - path: /usr/src/app/node_modules/local-reverse-geocoder/geonames_dump
       transformers-cache:
         enabled: true
         type: emptyDir
-        mountPath: /usr/src/app/.transformers_cache
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
-      supplementalGroups: [44, 105]
-    nodeSelector:
-      intel.feature.node.kubernetes.io/gpu: "true"
-    resources:
-      requests:
-        gpu.intel.com/i915: 1
-        cpu: 5m
-        memory: 277M
-      limits:
-        gpu.intel.com/i915: 1
-      #   memory: 512M
+        globalMounts:
+          - path: /usr/src/app/.transformers_cache
