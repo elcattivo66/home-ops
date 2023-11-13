@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -9,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -24,62 +23,61 @@ spec:
       retries: 3
 
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.9
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: tandoor-secret
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: 'true'
 
-    image:
-      repository: docker.io/vabene1111/recipes
-      tag: 1.5.6
-    env:
-      TIMEZONE: ${TZ}
-      ENABLE_METRICS: 1
-      ENABLE_SIGNUP: 0
-      TANDOOR_PORT: 8080
-      GUNICORN_MEDIA: 0
-      DEBUG: 0
-      SQL_DEBUG: 0
-      DEBUG_TOOLBAR: 0
-      DB_ENGINE: django.db.backends.postgresql
-      EMAIL_HOST: "smtp-relay.default.svc.cluster.local"
-      EMAIL_PORT: 2525
-      EMAIL_USE_TLS: 0
-      EMAIL_USE_SSL: 0
-      DEFAULT_FROM_EMAIL: "${SECRET_SMTP_SENDER}"
+        initContainers:
+          01-init-db:
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: tandoor-secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: '14.9'
+        containers:
+          main:
+            image:
+              repository: docker.io/vabene1111/recipes
+              tag: 1.5.6
+            envFrom:
+              - secretRef:
+                  name: tandoor-secret
 
-    envFrom:
-      - secretRef:
-          name: tandoor-secret
+            env:
+              TIMEZONE: ${TZ}
+              ENABLE_METRICS: 1
+              ENABLE_SIGNUP: 0
+              TANDOOR_PORT: 8080
+              GUNICORN_MEDIA: 0
+              DEBUG: 0
+              SQL_DEBUG: 0
+              DEBUG_TOOLBAR: 0
+              DB_ENGINE: django.db.backends.postgresql
+              EMAIL_HOST: smtp-relay.default.svc.cluster.local
+              EMAIL_PORT: 2525
+              EMAIL_USE_TLS: 0
+              EMAIL_USE_SSL: 0
+              DEFAULT_FROM_EMAIL: ${SECRET_SMTP_SENDER}
 
-    volumeClaimTemplates:
-      - name: tandoor-media
-        mountPath: /opt/recipes/mediafiles
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: longhorn
+        statefulset:
+          volumeClaimTemplates:
+            - name: tandoor-media
+              accessMode: ReadWriteOnce
+              size: 1Gi
+              storageClass: longhorn
 
-    persistence:
-      static:
-        enabled: true
-        mountPath: /opt/recipes/staticfiles
-        type: emptyDir
-      cache:
-        enabled: true
-        mountPath: /mnt/cache
-        type: emptyDir
-      django-js-reverse:
-        enabled: true
-        type: emptyDir
-        mountPath: /opt/recipes/cookbook/static/django_js_reverse
-
+              globalMounts:
+                - path: /opt/recipes/mediafiles
     service:
       main:
         ports:
@@ -89,8 +87,7 @@ spec:
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -98,17 +95,31 @@ spec:
             networking-headers@kubernetescrd,
             networking-authelia@kubernetescrd
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
             secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+    persistence:
+      static:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /opt/recipes/staticfiles
+      cache:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /mnt/cache
+      django-js-reverse:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /opt/recipes/cookbook/static/django_js_reverse
