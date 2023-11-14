@@ -78,6 +78,8 @@ spec:
               globalMounts:
                 - path: /config
         pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -112,10 +114,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
 
-    podAnnotations:
-      k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
       # k8s.v1.cni.cncf.io/networks: |
       #   [{
       #     "name":"multus-iot",
