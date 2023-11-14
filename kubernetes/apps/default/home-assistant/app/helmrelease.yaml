@@ -29,7 +29,6 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: 'true'
         initContainers:
@@ -49,7 +48,6 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-secret
-
     # hostNetwork: true
     # dnsPolicy: ClusterFirstWithHostNet
 
@@ -71,14 +69,6 @@ spec:
                 enabled: false
               startup:
                 enabled: false
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 5Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
         pod:
           annotations:
             k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
@@ -125,6 +115,10 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant-config
 
       # k8s.v1.cni.cncf.io/networks: |
       #   [{
