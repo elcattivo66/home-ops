@@ -16,3 +16,17 @@ spec:
   interval: 30m
   prune: true
   wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-traefik-middlewares
+  namespace: flux-system
+spec:
+  path: ./kubernetes/nas/apps/kube-system/traefik/middlewares
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  prune: true
+  wait: true
