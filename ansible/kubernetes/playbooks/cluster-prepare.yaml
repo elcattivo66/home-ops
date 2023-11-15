@@ -45,22 +45,22 @@
 
     - name: User Configuration
       block:
-      - name: User Configuration
-        block:
-        - name: User Configuration | Add additional SSH public keys
-          ansible.posix.authorized_key:
-            user: "{{ ansible_user }}"
-            key: "{{ item }}"
-          loop: "{{ public_ssh_keys | default([]) }}"
-        - name: User Configuration | Silence login
-          ansible.builtin.file:
-            dest: "{{ '/home/' + ansible_user if ansible_user != 'root' else '/root' }}/.hushlogin"
-            state: touch
-            owner: "{{ ansible_user }}"
-            group: "{{ ansible_user }}"
-            mode: "0644"
-            modification_time: preserve
-            access_time: preserve
+        - name: User Configuration
+          block:
+            - name: User Configuration | Add additional SSH public keys
+              ansible.posix.authorized_key:
+                user: "{{ ansible_user }}"
+                key: "{{ item }}"
+              loop: "{{ public_ssh_keys | default([]) }}"
+            - name: User Configuration | Silence login
+              ansible.builtin.file:
+                dest: "{{ '/home/' + ansible_user if ansible_user != 'root' else '/root' }}/.hushlogin"
+                state: touch
+                owner: "{{ ansible_user }}"
+                group: "{{ ansible_user }}"
+                mode: "0644"
+                modification_time: preserve
+                access_time: preserve
         - name: User Configuration | Fish shell (1)
           ansible.builtin.user:
             name: "{{ ansible_user }}"

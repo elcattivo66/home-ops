@@ -1,5 +1,6 @@
 ---
-- hosts:
+- name: Reboot
+  hosts:
     - master
   become: true
   gather_facts: true

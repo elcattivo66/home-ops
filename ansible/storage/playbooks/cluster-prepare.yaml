@@ -96,7 +96,7 @@
               manage-gids = 1
     - name: File System
       block:
-        - name: File System | Disable swap
+        - name: File System | Disable swap # noqa: no-changed-when no-handler
           ansible.builtin.command: swapoff -a
           when: ansible_swaptotal_mb > 0
         - name: File System | Disable swap on boot
@@ -118,7 +118,7 @@
               apparmor: "0"
               mitigations: "off"
           register: grub_status
-        - name: System | Run grub-mkconfig
+        - name: System Configuration | Grub (2) # noqa: no-changed-when no-handler
           ansible.builtin.command: update-grub
           when: grub_status.changed
     - name: Notifications
