@@ -22,14 +22,40 @@ spec:
     remediation:
       retries: 5
   values:
-    controller:
-      type: statefulset
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    controllers:
+      main:
+        type: statefulset
 
-    global:
-      nameOverride: *app
-    image:
-      repository: syncthing/syncthing
-      tag: 1.26.0
+        containers:
+          main:
+            image:
+              repository: syncthing/syncthing
+              tag: 1.26.0
+            env:
+              PUID: '1000'
+              PGID: '100'
+              TZ: ${TZ}
+            resources:
+              requests:
+                cpu: 5m
+                memory: 88M
+              limits:
+                memory: 88M
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 2Gi
+              storageClass: longhorn
+
+              globalMounts:
+                - path: /var/syncthing
     service:
       main:
         ports:
@@ -38,7 +64,8 @@ spec:
       listdisc:
         enabled: true
         type: LoadBalancer
-        io.cilium/lb-ipam-ips:: 192.168.178.232
+        annotations:
+          io.cilium/lb-ipam-ips:: 192.168.178.232
         ports:
           discovery:
             enabled: true
@@ -52,29 +79,23 @@ spec:
     ingress:
       main:
         enabled: true
-        primary: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: >-
             networking-headers@kubernetescrd,
             networking-authelia@kubernetescrd
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
-
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /var/syncthing
-        accessMode: ReadWriteOnce
-        size: 2Gi
-        storageClass: longhorn
 
     persistence:
       backup:
@@ -82,20 +103,8 @@ spec:
         type: nfs
         server: ${NAS_ADDR}
         path: ${BACKUPDIR}
-        mountPath: /backup
         readOnly: false
-    resources:
-      requests:
-        cpu: 5m
-        memory: 88M
-      limits:
-        memory: 88M
-    env:
-      PUID: "1000"
-      PGID: "100"
-      TZ: ${TZ}
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
+        globalMounts:
+          - path: /backup
+    global:
+      nameOverride: &app syncthing

@@ -95,7 +95,6 @@ spec:
     ingress:
       main:
         enabled: true
-        primary: true
         ingressClassName: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
