@@ -3,8 +3,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: tandoor
-  namespace: default
+  name: &app tandoor
+  namespace: &ns default
 spec:
   interval: 15m
   chart:
