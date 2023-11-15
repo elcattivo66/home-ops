@@ -76,7 +76,6 @@ spec:
               DEBUG: 0
               SQL_DEBUG: 0
               DEBUG_TOOLBAR: 0
-              DB_ENGINE: django.db.backends.postgresql
               EMAIL_HOST: smtp-relay.default.svc.cluster.local
               EMAIL_PORT: 2525
               EMAIL_USE_TLS: 0
