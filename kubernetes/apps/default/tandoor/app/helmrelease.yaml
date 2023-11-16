@@ -144,8 +144,7 @@ spec:
               - *host
     persistence:
       config:
-        type: persistentvolumeclaim
-        name: tandoor-configmap
+        enabled: true
         existingClaim: tandoor-files
         advancedMounts:
           main:
