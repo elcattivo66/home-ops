@@ -39,7 +39,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: http://minio.nas.local
+      endpointURL: http://s3.${SECRET_HOME_DOMAIN}
       serverName: postgres16-v1
       s3Credentials:
         accessKeyId:
@@ -56,7 +56,7 @@ spec:
   #         compression: bzip2
   #         maxParallel: 8
   #       destinationPath: s3://postgresql/
-  #       endpointURL: http://minio.nas.local
+  #       endpointURL: http://s3.${SECRET_HOME_DOMAIN}
   #       s3Credentials:
   #         accessKeyId:
   #           name: postgres-minio
