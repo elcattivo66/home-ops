@@ -12,7 +12,6 @@ resources:
     - gotify/ks.yaml
     - home-assistant/ks.yaml
     - immich/ks.yaml
-    - jellyfin/ks.yaml
     - lidarr/ks.yaml
     - lldap/ks.yaml
     - nextcloud/ks.yaml
@@ -29,9 +28,7 @@ resources:
     - sabnzbd/ks.yaml
     - smtp-relay/ks.yaml
     - sonarr/ks.yaml
-    # - syncthing/ks.yaml
     - tandoor/ks.yaml
     - tautulli/ks.yaml
     - vaultwarden/ks.yaml
-    - watchstate/ks.yaml
     - zigbee2mqtt/ks.yaml
