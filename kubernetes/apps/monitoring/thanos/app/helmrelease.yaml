@@ -37,6 +37,8 @@ spec:
     objstoreConfig:
       type: s3
       config:
+        bucket: thanos
+        endpoint: "nas:9000"
         insecure: true
     queryFrontend:
       enabled: true
