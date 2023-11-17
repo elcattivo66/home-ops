@@ -16,7 +16,7 @@
       block:
         - name: Locale | Set timezone
           community.general.timezone:
-            name: "{{ timezone | default('America/New_York') }}"
+            name: "{{ timezone | default('Europe/Berlin') }}"
     - name: Packages
       block:
         - name: Packages | Add apt repositories
