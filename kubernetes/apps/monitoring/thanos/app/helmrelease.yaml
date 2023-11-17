@@ -41,7 +41,7 @@ spec:
         endpoint: "https://s3.${SECRET_HOME_DOMAIN}"
         access_key: "${MINIO_ACCESS_KEY}"
         secret_key: "${MINIO_SECRET_KEY}"
-        insecure: true
+        insecure: false
     queryFrontend:
       enabled: true
       replicaCount: 2
