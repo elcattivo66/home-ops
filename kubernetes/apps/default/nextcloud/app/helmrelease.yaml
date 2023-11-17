@@ -110,8 +110,8 @@ spec:
                     'arguments' => [
                             'bucket' => 'nextcloud-data',
                             'autocreate' => true,
-                            'key'    => '${MINIO_SECRET_KEY}',
-                            'secret' => '${MINIO_ACCESS_KEY}',
+                            'key'    => '${MINIO_ACCESS_KEY}',
+                            'secret' => '${MINIO_SECRET_KEY}',
                             'hostname' => '${NAS_ADDR}',
                             'port' => 9000,
                             'region' => 'eu-central-1',
