@@ -51,6 +51,10 @@ spec:
       main:
         enabled: true
         className: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_NAS_DOMAIN}"
             paths:
@@ -58,9 +62,11 @@ spec:
                 service:
                   name: main
                   port: http
-        # tls:
-        #   - hosts:
-        #       - *host
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.zot
+
     persistence:
       config-file:
         type: configMap
