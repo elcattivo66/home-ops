@@ -46,11 +46,11 @@ spec:
             resources:
               requests:
                 gpu.intel.com/i915: 1
-                cpu: 100m
-                memory: 2Gi
+                cpu: 270m
+                memory: 2685Mi
               limits:
                 gpu.intel.com/i915: 1
-                memory: 5Gi
+                memory: 2685Mi
         pod:
           affinity:
             nodeAffinity:

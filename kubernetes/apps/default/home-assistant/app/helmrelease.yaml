@@ -58,10 +58,10 @@ spec:
               POSTGRES_DB: home_assistant
             resources:
               requests:
-                cpu: 10m
-                memory: 100Mi
+                cpu: 41m
+                memory: 551Mi
               limits:
-                memory: 750Mi
+                memory: 551Mi
             probes:
               liveness:
                 enabled: false

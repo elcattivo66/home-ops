@@ -46,10 +46,10 @@ spec:
               REFRESH_LIBRARY_ON_SCAN: false
             resources:
               requests:
-                cpu: 5m
-                memory: 100Mi
+                cpu: 34m
+                memory: 149Mi
               limits:
-                memory: 1Gi
+                memory: 149Mi
     service:
       main:
         enabled: false

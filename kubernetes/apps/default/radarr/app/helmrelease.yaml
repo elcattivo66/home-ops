@@ -60,10 +60,10 @@ spec:
             envFrom: *envFrom
             resources:
               requests:
-                cpu: 10m
-                memory: 256M
+                cpu: 30m
+                memory: 491Mi
               limits:
-                memory: 1Gi
+                memory: 491Mi
         pod:
           securityContext:
             runAsUser: 1000

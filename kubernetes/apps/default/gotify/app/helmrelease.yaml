@@ -58,6 +58,12 @@ spec:
               GOTIFY_DATABASE_CONNECTION: data/gotify.db
               GOTIFY_PLUGINSDIR: data/plugins
               GOTIFY_UPLOADEDIMAGESDIR: data/images
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 100Mi
 
     service:
       main:

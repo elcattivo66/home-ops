@@ -49,10 +49,10 @@ spec:
               CACHE_DIR: /cache
             resources:
               requests:
-                cpu: 5m
-                memory: 470M
+                cpu: 10m
+                memory: 204Mi
               limits:
-                memory: 470M
+                memory: 204Mi
 
     service:
       main:

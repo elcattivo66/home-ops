@@ -63,10 +63,10 @@ spec:
               PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
             resources:
               requests:
-                cpu: 5m
-                memory: 697M
+                cpu: 10m
+                memory: 601Mi
               limits:
-                memory: 697M
+                memory: 601Mi
           gotenburg:
             image:
               repository: thecodingmachine/gotenberg

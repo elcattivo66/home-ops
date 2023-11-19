@@ -43,10 +43,10 @@ spec:
                     name: fritzbox-exporter-secret
               resources:
                 requests:
-                  cpu: 5m
-                  memory: 31M
+                  cpu: 10m
+                  memory: 31Mi
                 limits:
-                  memory: 31M
+                  memory: 31Mi
     service:
       main:
         ports:
