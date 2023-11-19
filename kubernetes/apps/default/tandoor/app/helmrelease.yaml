@@ -99,13 +99,19 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 256Mi
+                memory: 150Mi
               limits:
-                memory: 512Mi
+                memory: 150Mi
           nginx:
             image:
               repository: nginxinc/nginx-unprivileged
               tag: 1.25.3-alpine
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 100Mi
     service:
       main:
         ports:

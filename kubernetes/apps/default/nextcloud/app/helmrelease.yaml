@@ -142,8 +142,10 @@ spec:
         default: true
       resources:
         requests:
-          cpu: 5m
-          memory: 10M
+          cpu: 10m
+          memory: 100M
+        limits:
+          memory: 100M
 
     internalDatabase:
       enabled: false
@@ -191,7 +193,7 @@ spec:
 
     resources:
       requests:
-        cpu: 42m
+        cpu: 17m
         memory: 185Mi
       limits:
         memory: 1Gi

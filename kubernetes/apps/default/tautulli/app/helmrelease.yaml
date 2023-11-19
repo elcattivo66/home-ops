@@ -43,10 +43,10 @@ spec:
               TZ: ${TZ}
             resources:
               requests:
-                cpu: 100m
-                memory: 128Mi
+                cpu: 26m
+                memory: 576Mi
               limits:
-                memory: 512Mi
+                memory: 576Mi
         pod:
           securityContext:
             runAsUser: 1000
