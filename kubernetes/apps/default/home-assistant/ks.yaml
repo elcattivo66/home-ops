@@ -8,6 +8,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: default
   dependsOn:
     - name: cluster-apps-mosquitto
     - name: cluster-apps-cloudnative-pg-cluster
@@ -31,6 +32,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: default
   path: ./kubernetes/apps/default/home-assistant/code
   prune: true
   sourceRef:

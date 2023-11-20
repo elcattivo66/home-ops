@@ -6,6 +6,7 @@ metadata:
   name: cluster-apps-k8s-ycl
   namespace: flux-system
 spec:
+  targetNamespace: system-controllers
   interval: 10m
   path: ./kubernetes//apps/system-controllers/k8s-ycl/app
   prune: true

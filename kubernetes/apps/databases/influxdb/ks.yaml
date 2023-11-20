@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: databases
   dependsOn:
     - name: cluster-apps-longhorn
   path: ./kubernetes/apps/databases/influxdb/app

@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: databases
   path: ./kubernetes/apps/databases/cloudnative-pg/app
   prune: true
   sourceRef:
@@ -29,6 +30,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: databases
   dependsOn:
     - name: cluster-apps-cloudnative-pg
   path: ./kubernetes/apps/databases/cloudnative-pg/cluster

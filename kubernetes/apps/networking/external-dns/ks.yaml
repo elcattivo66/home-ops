@@ -7,16 +7,12 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: networking
   path: ./kubernetes/apps/networking/external-dns/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: external-dns
-      namespace: networking
   interval: 15m
   retryInterval: 1m
   timeout: 3m

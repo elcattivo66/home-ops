@@ -8,6 +8,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: monitoring
   path: ./kubernetes/apps/monitoring/thanos/app
   prune: true
   sourceRef:
