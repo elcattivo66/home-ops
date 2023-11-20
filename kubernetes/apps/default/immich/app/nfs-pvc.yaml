@@ -33,6 +33,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: immich-nfs
+  namespace: default # keep
 spec:
   accessModes:
     - ReadWriteMany
