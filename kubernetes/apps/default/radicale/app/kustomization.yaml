@@ -6,7 +6,6 @@ resources:
   - ./secret.sops.yaml
 configMapGenerator:
   - name: radicale-config
-    namespace: default
     files:
       - ./config/config.cfg
 generatorOptions:

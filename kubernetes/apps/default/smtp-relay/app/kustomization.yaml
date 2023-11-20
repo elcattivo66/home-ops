@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./secret.sops.yaml
-namespace: default
 configMapGenerator:
   - name: smtp-relay
     files:

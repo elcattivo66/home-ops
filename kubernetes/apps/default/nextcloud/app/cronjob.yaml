@@ -2,7 +2,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: &name nextcloud-cron
-  namespace: default
   labels: &labels
     app.kubernetes.io/name: nextcloud
     app.kubernetes.io/instance: nextcloud
