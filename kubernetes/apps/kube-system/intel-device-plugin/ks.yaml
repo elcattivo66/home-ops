@@ -10,7 +10,7 @@ spec:
   targetNamespace: kube-system
   dependsOn:
     - name: cluster-apps-node-feature-discovery
-    - name: cluster-apps-cert-manager-issuers
+    - name: cert-manager-issuers
   path: ./kubernetes/apps/kube-system/intel-device-plugin/app
   prune: true
   sourceRef:
