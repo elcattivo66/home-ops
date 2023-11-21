@@ -94,7 +94,7 @@ spec:
         enabled: true
     ingressClass:
       enabled: true
-      isDefaultClass: true
+      isDefaultClass: false
       fallbackApiVersion: v1
     ingressRoute:
       dashboard:
