@@ -6,6 +6,5 @@ resources:
   - ./authelia.yaml
   - ./flux-webhook.yaml
   - ./secure-headers.yaml
-  - ./strip-api-prefix.yaml
   - ./nextcloud-redirect.yaml
   - ./local-only.yaml
