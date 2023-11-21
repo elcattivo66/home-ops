@@ -11,7 +11,7 @@ resources:
 # - ./descheduler.yaml
 - ./external-dns.yaml
 - ./helm-stable.yaml
-# - ./ingress-nginx.yaml
+- ./ingress-nginx.yaml
 - ./intel.yaml
 - ./traefik.yaml
 # - ./metallb.yaml
