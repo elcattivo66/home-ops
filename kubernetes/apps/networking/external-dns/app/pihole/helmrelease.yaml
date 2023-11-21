@@ -39,7 +39,7 @@ spec:
       - name: EXTERNAL_DNS_PIHOLE_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: external-dns-secret
+            name: external-dns-pihole-secret
             key: PIHOLE_PASSWORD
     domainFilters: ["${SECRET_DOMAIN}"]
     podAnnotations:
