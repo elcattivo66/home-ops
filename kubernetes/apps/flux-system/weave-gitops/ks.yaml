@@ -9,7 +9,7 @@ metadata:
 spec:
   targetNamespace: flux-system
   dependsOn:
-    - name: cluster-apps-traefik
+    - name: cluster-apps-nginx-external
   path: ./kubernetes/apps/flux-system/weave-gitops/app
   prune: true
   sourceRef:

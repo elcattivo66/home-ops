@@ -9,7 +9,7 @@ metadata:
 spec:
   targetNamespace: networking
   dependsOn:
-    - name: cluster-apps-traefik
+    - name: cluster-apps-nginx-external
   path: ./kubernetes/apps/networking/external-services/ingresses
   prune: true
   sourceRef:
