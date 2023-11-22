@@ -41,7 +41,7 @@ spec:
       host: longhorn.${SECRET_DOMAIN}
       path: /
       tls: true
-      tlsSecret: networking/${SECRET_CERT_NAME}-prod-tls
+      tlsSecret: ${SECRET_CERT_NAME}-prod-tls
 
 
     defaultSettings:
