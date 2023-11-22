@@ -51,7 +51,7 @@ metadata:
 spec:
   targetNamespace: networking
   dependsOn:
-    - name: cluster-apps-traefik-certificates
+    - name: cluster-apps-nginx-certificates
   path: ./kubernetes/apps/networking/nginx/external
   prune: true
   sourceRef:
