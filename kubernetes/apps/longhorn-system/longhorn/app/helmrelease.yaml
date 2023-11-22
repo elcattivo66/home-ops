@@ -37,16 +37,11 @@ spec:
 
     ingress:
       enabled: true
-      ingressClassName: traefik
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: >-
-          networking-headers@kubernetescrd,
-          networking-local-only@kubernetescrd
+      ingressClassName: internal
       host: longhorn.${SECRET_DOMAIN}
       path: /
       tls: true
-      tlsSecret: ${SECRET_CERT_NAME}-prod-tls
+      # tlsSecret: ${SECRET_CERT_NAME}-prod-tls
 
 
     defaultSettings:

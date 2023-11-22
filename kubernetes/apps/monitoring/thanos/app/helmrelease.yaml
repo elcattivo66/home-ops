@@ -47,7 +47,7 @@ spec:
       replicaCount: 2
       ingress:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: internal
         hostname: &host thanos-query-frontend.${SECRET_DOMAIN}
         tls: true
         extraTls:

@@ -30,14 +30,23 @@ spec:
       flavor: fpm-alpine
     ingress:
       enabled: true
-      className: traefik
+      className: external
       annotations:
-        external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: >-
-          networking-headers@kubernetescrd,
-          networking-nextcloud-redirect-1@kubernetescrd,
-          networking-nextcloud-redirect-2@kubernetescrd
+        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        nginx.ingress.kubernetes.io/proxy-body-size: 512M
+        nginx.ingress.kubernetes.io/proxy-buffering: "off"
+        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/server-snippet: |
+          server_tokens off;
+          location ^~ /.well-known {
+            location = /.well-known/carddav { return 301 /remote.php/dav/; }
+            location = /.well-known/caldav { return 301 /remote.php/dav/; }
+            location = /.well-known/acme-challenge { try_files $uri $uri/ =404; }
+            location = /.well-known/pki-validation { try_files $uri $uri/ =404; }
+            return 301 /index.php$request_uri;
+          }
+          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/)  { return 404; }
+          location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console)                { return 404; }
       path: /
       pathType: Prefix
       tls:

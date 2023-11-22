@@ -39,12 +39,7 @@ spec:
       # customScopes: ["offline_access", "openid", "profile"]
     ingress:
       enabled: true
-      className: traefik
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: >-
-          networking-headers@kubernetescrd,
-          networking-local-only@kubernetescrd
+      className: internal
       hosts:
         - host: &host gitops.${SECRET_DOMAIN}
           paths:

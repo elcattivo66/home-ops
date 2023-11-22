@@ -78,12 +78,9 @@ spec:
     ingress:
       main:
         enabled: true
-        className: traefik
+        className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: >-
-            networking-headers@kubernetescrd
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
           - host: &host bitwarden.${SECRET_DOMAIN}
             paths:
@@ -95,7 +92,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_CERT_NAME}-prod-tls
 
     podAnnotations:
       secret.reloader.stakater.com/reload: vaultwarden-secret

@@ -74,12 +74,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: traefik
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: >-
-            networking-headers@kubernetescrd,
-            networking-authelia@kubernetescrd
+        className: internal
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

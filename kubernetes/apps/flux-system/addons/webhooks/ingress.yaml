@@ -1,16 +1,12 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/ingress-networking-v1.json
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: webhook-receiver
   annotations:
-    external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-flux-webhook@kubernetescrd
+    external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
 spec:
-  ingressClassName: traefik
+  ingressClassName: external
   rules:
     - host: &host flux-webhook.${SECRET_DOMAIN}
       http:
@@ -25,4 +21,3 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: ${SECRET_CERT_NAME}-prod-tls

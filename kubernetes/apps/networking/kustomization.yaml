@@ -10,5 +10,5 @@ resources:
   - ./external-services/ks.yaml
   - ./nginx/ks.yaml
   - ./k8s-gateway/ks.yaml
-  - ./traefik/ks.yaml
+  # - ./traefik/ks.yaml
   - ./multus/ks.yaml

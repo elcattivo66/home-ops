@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: &app external-dns-cloudflare
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: external-dns
@@ -46,7 +46,7 @@ spec:
             name: external-dns-cloudflare-secret
             key: api-token
     extraArgs:
-      - --annotation-filter=external-dns.alpha.kubernetes.io/target
+      - --ingress-class=external
       - --cloudflare-proxied
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint

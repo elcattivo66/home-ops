@@ -27,13 +27,8 @@ metadata:
   name: minio-admin
   labels:
     app.kubernetes.io/name: minio-admin
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-headers@kubernetescrd,
-      networking-local-only@kubernetescrd
 spec:
-  ingressClassName: traefik
+  ingressClassName: internal
   rules:
     - host: &host minio-admin.${SECRET_DOMAIN}
       http:
@@ -57,13 +52,8 @@ metadata:
   name: minio-api
   labels:
     app.kubernetes.io/name: minio-api
-  annotations:
-    # external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-headers@kubernetescrd
 spec:
-  ingressClassName: traefik
+  ingressClassName: external
   rules:
     - host: &host minio.${SECRET_DOMAIN}
       http:

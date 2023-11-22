@@ -47,7 +47,7 @@ data:
         rollOutPods: true
         ingress:
           enabled: true
-          className: traefik
+          className: internal
           hosts:
             - "hubble.${SECRET_DOMAIN}"
           tls:

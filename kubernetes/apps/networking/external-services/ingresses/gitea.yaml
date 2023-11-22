@@ -23,12 +23,8 @@ metadata:
   name: gitea
   labels:
     app.kubernetes.io/name: gitea
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: >-
-      networking-headers@kubernetescrd
 spec:
-  ingressClassName: traefik
+  ingressClassName: internal
   rules:
     - host: &host gitea.${SECRET_DOMAIN}
       http:
@@ -43,4 +39,3 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: ${SECRET_CERT_NAME}-prod-tls

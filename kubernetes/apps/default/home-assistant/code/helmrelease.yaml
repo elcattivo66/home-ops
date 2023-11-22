@@ -68,11 +68,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: traefik
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: >-
-            networking-local-only@kubernetescrd
+        className: internal
         hosts:
           - host: &host hass-code.${SECRET_DOMAIN}
             paths:
