@@ -10,7 +10,7 @@ spec:
   targetNamespace: networking
   dependsOn:
     - name: cluster-apps-nginx-external
-  path: ./kubernetes/apps/networking/external-services/ingresses
+  path: ./kubernetes/apps/networking/external-services/minio
   prune: true
   sourceRef:
     kind: GitRepository
