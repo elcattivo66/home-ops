@@ -47,9 +47,6 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-secret
-    # hostNetwork: true
-    # dnsPolicy: ClusterFirstWithHostNet
-
             env:
               TZ: ${TZ}
               HASS_TRUSTED_PROXIES: 192.168.178.0/24,10.42.0.0/16,10.43.0.0/16
@@ -69,6 +66,8 @@ spec:
               startup:
                 enabled: false
         pod:
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
           # annotations:
           #   k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
           securityContext:
@@ -76,15 +75,15 @@ spec:
             runAsGroup: 1000
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
-          affinity:
-            nodeAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 1
-                  preference:
-                    matchExpressions:
-                      - key: kubernetes.io/hostname
-                        operator: In
-                        values: ["brix"]
+          # affinity:
+          #   nodeAffinity:
+          #     preferredDuringSchedulingIgnoredDuringExecution:
+          #       - weight: 1
+          #         preference:
+          #           matchExpressions:
+          #             - key: kubernetes.io/hostname
+          #               operator: In
+          #               values: ["brix"]
     service:
       main:
         type: LoadBalancer
