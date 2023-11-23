@@ -6,6 +6,8 @@ metadata:
   name: minio-s3
   labels:
     app.kubernetes.io/name: minio-s3
+  annotations:
+    external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
 spec:
   ingressClassName: external
   rules:
