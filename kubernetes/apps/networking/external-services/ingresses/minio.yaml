@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: *app
 spec:
   type: ExternalName
-  externalName: ${NAS_ADDR}
+  externalName: nas
   ports:
     - name: api
       port: 9000
