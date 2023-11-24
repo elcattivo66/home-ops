@@ -30,6 +30,7 @@ spec:
     controller:
       replicaCount: 1
       service:
+        type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: internal.${SECRET_NAS_DOMAIN}
       ingressClassResource:
