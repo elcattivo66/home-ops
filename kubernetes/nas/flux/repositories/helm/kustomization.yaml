@@ -5,6 +5,7 @@ resources:
 - ./bjw-s-charts.yaml
 - ./external-dns.yaml
 - ./helm-stable.yaml
+- ./ingress-nginx.yaml
 - ./intel.yaml
 - ./jetstack.yaml
 - ./k8tz.yaml
