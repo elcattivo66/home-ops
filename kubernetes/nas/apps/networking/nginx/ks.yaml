@@ -11,7 +11,7 @@ spec:
   targetNamespace: networking
   dependsOn:
     - name: cluster-apps-cert-manager-issuers
-  path: ./kubernetes/apps/nas/networking/nginx/certificates
+  path: ./kubernetes/nas/apps/networking/nginx/certificates
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
@@ -31,7 +31,7 @@ spec:
   targetNamespace: networking
   dependsOn:
     - name: nginx-certificates
-  path: ./kubernetes/apps/nas/networking/nginx/internal
+  path: ./kubernetes/nas/apps/networking/nginx/internal
   prune: true
   sourceRef:
     kind: GitRepository
