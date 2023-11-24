@@ -1,20 +1,20 @@
 ---
 # https://github.com/kevincoakley/ansible-role-k8s-rolling-update
-- name: Cluster rollout update
+- name: Cluster update rollout
   hosts: all
   become: true
   gather_facts: true
   any_errors_fatal: true
   serial: 1
   pre_tasks:
-    - name: Pausing for 5 seconds...
+    - name: Pausing for 2 seconds...
       ansible.builtin.pause:
-        seconds: 5
+        seconds: 2
   tasks:
     - name: Details
-      ansible.builtin.command: "kubectl get node {% raw %}{{ inventory_hostname }}{% endraw %} -o json"
+      ansible.builtin.command: "kubectl get node {{ inventory_hostname }} -o json"
       register: kubectl_get_node
-      delegate_to: "{% raw %}{{ groups['master'][0] }}{% endraw %}"
+      delegate_to: "{{ groups['master'][0] }}"
       failed_when: false
       changed_when: false
 
@@ -27,10 +27,10 @@
       block:
         - name: Cordon
           kubernetes.core.k8s_drain:
-            name: "{% raw %}{{ inventory_hostname }}{% endraw %}"
+            name: "{{ inventory_hostname }}"
             kubeconfig: /etc/rancher/k3s/k3s.yaml
             state: cordon
-          delegate_to: "{% raw %}{{ groups['master'][0] }}{% endraw %}"
+          delegate_to: "{{ groups['master'][0] }}"
 
         - name: Drain
           kubernetes.core.k8s_drain:
@@ -42,10 +42,9 @@
               terminate_grace_period: 600
               wait_timeout: 900
             pod_selectors:
-              # Longhorn
               - app!=csi-attacher
               - app!=csi-provisioner
-          delegate_to: "{% raw %}{{ groups['master'][0] }}{% endraw %}"
+          delegate_to: "{{ groups['master'][0] }}"
 
         - name: Update
           ansible.builtin.apt:
@@ -61,12 +60,12 @@
           when: reboot_required.stat.exists
           ansible.builtin.reboot:
             msg: Rebooting node
-            post_reboot_delay: 60
+            post_reboot_delay: 120
             reboot_timeout: 3600
 
         - name: Uncordon
           kubernetes.core.k8s_drain:
-            name: "{% raw %}{{ inventory_hostname }}{% endraw %}"
+            name: "{{ inventory_hostname }}"
             kubeconfig: /etc/rancher/k3s/k3s.yaml
             state: uncordon
-          delegate_to: "{% raw %}{{ groups['master'][0] }}{% endraw %}"
+          delegate_to: "{{ groups['master'][0] }}"
