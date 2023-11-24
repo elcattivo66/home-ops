@@ -69,11 +69,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "traefik"
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          cert-manager.io/cluster-issuer: letsencrypt-production
+        className: internal
         hosts:
           - host: &host-console "minio.${SECRET_NAS_DOMAIN}"
             paths:
@@ -91,7 +87,6 @@ spec:
           - hosts:
               - *host-s3
               - *host-console
-            secretName: tls.minio
 
     persistence:
       data:

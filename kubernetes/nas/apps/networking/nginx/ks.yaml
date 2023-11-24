@@ -1,0 +1,41 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-certificates
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  targetNamespace: networking
+  dependsOn:
+    - name: cluster-apps-cert-manager-issuers
+  path: ./kubernetes/apps/nas/networking/nginx/certificates
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  prune: true
+  wait: true
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-internal
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  targetNamespace: networking
+  dependsOn:
+    - name: nginx-certificates
+  path: ./kubernetes/apps/nas/networking/nginx/internal
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
