@@ -168,6 +168,11 @@ spec:
           #     maxLines: 250
     dashboards:
       default:
+        fritzbox-exporter:
+          # renovate: depName="Fritz!Exporter"
+          gnetId: 13983
+          revision: 10
+          datasource: Prometheus
         external-dns:
           # renovate: depName="External-dns"
           gnetId: 15038
