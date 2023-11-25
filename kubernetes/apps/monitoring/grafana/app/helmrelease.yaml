@@ -172,7 +172,9 @@ spec:
           # renovate: depName="Fritz!Exporter"
           gnetId: 13983
           revision: 10
-          datasource: Prometheus
+          datasource:
+          - name: DS_PROMETHEUS
+            value: Prometheus
         external-dns:
           # renovate: depName="External-dns"
           gnetId: 15038
