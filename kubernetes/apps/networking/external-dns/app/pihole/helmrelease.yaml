@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     serviceMonitor:
-      enabled: false
+      enabled: true
     logLevel: debug
     policy: upsert-only
     registry: noop
