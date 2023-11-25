@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-cert-manager
+  name: cert-manager
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -24,13 +24,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-cert-manager-issuers
+  name: cert-manager-issuers
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-cert-manager
+    - name: cert-manager
   path: ./kubernetes/nas/apps/cert-manager/cert-manager/issuers
   prune: false
   sourceRef:

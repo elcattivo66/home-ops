@@ -10,7 +10,7 @@ metadata:
 spec:
   targetNamespace: networking
   dependsOn:
-    - name: cluster-apps-cert-manager-issuers
+    - name: cert-manager-issuers
   path: ./kubernetes/nas/apps/networking/nginx/certificates
   sourceRef:
     kind: GitRepository
