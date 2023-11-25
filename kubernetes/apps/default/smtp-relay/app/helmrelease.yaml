@@ -38,7 +38,7 @@ spec:
                   name: smtp-relay-secret
             env:
               DEBUG: 'true'
-              SMTP_DOMAIN: ${SECRET_SMTP_DOMAIN}
+              SMTP_DOMAIN: ${SECRET_SMTP_HOME_DOMAIN}
               SMTP_SERVER: ${SECRET_SMTP_HOST}
               SMTP_USERNAME: ${SECRET_SMTP_USERNAME}
               SMTP_PORT: '465'
