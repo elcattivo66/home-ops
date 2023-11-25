@@ -46,6 +46,11 @@ spec:
               limits:
                 memory: 50Mi
         pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
           topologySpreadConstraints:
             - maxSkew: 1
               topologyKey: kubernetes.io/hostname
@@ -63,24 +68,20 @@ spec:
         externalTrafficPolicy: Cluster
         ports:
           http:
+            port: 8080
+          smtp:
             port: 2525
-          metrics:
-            enabled: true
-            port: 9749
 
     persistence:
       config:
         enabled: true
         type: configMap
-        name: *app
-        readOnly: true
+        name: smtp-relay-configmap
         globalMounts:
           - path: /data/maddy.conf
             subPath: maddy.conf
-      data:
-        enabled: true
+            readOnly: true
+      cache:
         type: emptyDir
-        medium: Memory
-        sizeLimit: 1Gi
         globalMounts:
-          - path: /dev/shm
+          - path: /cache
