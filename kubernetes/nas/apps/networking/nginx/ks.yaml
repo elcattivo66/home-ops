@@ -16,7 +16,7 @@ spec:
     kind: GitRepository
     name: home-ops-kubernetes
   interval: 30m
-  prune: false
+  prune: true
   wait: true
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -32,7 +32,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/nas/apps/networking/nginx/internal
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes

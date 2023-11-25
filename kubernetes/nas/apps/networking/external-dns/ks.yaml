@@ -9,7 +9,7 @@ metadata:
 spec:
   targetNamespace: networking
   path: ./kubernetes/nas/apps/networking/external-dns/app
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
