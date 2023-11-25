@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -26,30 +25,34 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    command:
-      - "/bin/bash"
-      - &scriptPath "/app/cloudflare-ddns.sh"
-    controller:
-      cronjob:
-        concurrencyPolicy: Forbid
-        schedule: "@hourly"
-      type: cronjob
-    envFrom:
-      - secretRef:
-          name: *app
-    image:
-      repository: ghcr.io/onedr0p/kubernetes-kubectl
-      tag: 1.28.4@sha256:7039783f8ecb83acf0f5359ec7aa901f6e73af1c76470e7317caf19f7514fedd
+    controllers:
+      main:
+        cronjob:
+          concurrencyPolicy: Forbid
+          schedule: '@hourly'
+        type: cronjob
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/kubernetes-kubectl
+              tag: 1.28.4@sha256:7039783f8ecb83acf0f5359ec7aa901f6e73af1c76470e7317caf19f7514fedd
+            envFrom:
+              - secretRef:
+                  name: &app cloudflare-ddns
+            command:
+              - /bin/bash
+              - &scriptPath /app/cloudflare-ddns.sh
+    service:
+      main:
+        enabled: false
     persistence:
       config:
         defaultMode: 0775
         enabled: true
-        mountPath: *scriptPath
         name: cloudflare-ddns-configmap
         readOnly: true
-        subPath: cloudflare-ddns.sh
         type: configMap
+        globalMounts:
+          - path: *scriptPath
+            subPath: cloudflare-ddns.sh
     restartPolicy: OnFailure
-    service:
-      main:
-        enabled: false
