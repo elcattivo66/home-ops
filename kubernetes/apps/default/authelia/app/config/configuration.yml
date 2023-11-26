@@ -130,5 +130,5 @@ identity_providers:
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://audiobooks.${SECRET_DOMAIN}/oauth2/callback"]
+        redirect_uris: ["https://audiobooks.${SECRET_DOMAIN}/openid/callback", "audiobookshelf://oauth"]
         userinfo_signing_algorithm: none
