@@ -45,11 +45,7 @@ spec:
               requests:
                 cpu: 5m
                 memory: 128M
-            securityContext:
-              runAsUser: 1000
-              runAsGroup: 1000
-              fsGroup: 1000
-              fsGroupChangePolicy: "OnRootMismatch"
+
         pod:
           statefulset:
             volumeClaimTemplates:
@@ -59,7 +55,11 @@ spec:
                 storageClass: longhorn
                 globalMounts:
                   - path: /etc
-
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
+              fsGroupChangePolicy: "OnRootMismatch"
     service:
       main:
         type: LoadBalancer
