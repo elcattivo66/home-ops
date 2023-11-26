@@ -47,9 +47,19 @@ spec:
                 memory: 128M
             securityContext:
               runAsUser: 1000
-              runAsGroup: 100
-              fsGroup: 100
+              runAsGroup: 1000
+              fsGroup: 1000
               fsGroupChangePolicy: "OnRootMismatch"
+      pod:
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 512Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /etc
+
     service:
       main:
         type: LoadBalancer
@@ -75,11 +85,3 @@ spec:
             protocol: UDP
             targetPort: 53
 
-    persistence:
-      data:
-        type: hostPath
-        hostPath: /spool/minio
-        hostPathType: Directory
-        mountPath: /data
-        globalMounts:
-          - path: /data
