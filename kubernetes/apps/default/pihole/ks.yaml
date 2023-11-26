@@ -9,7 +9,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: "./kubernetes/nas/apps/default/pihole/app"
+  path: "./kubernetes/apps/default/pihole/app"
   prune: true
   sourceRef:
     kind: GitRepository
