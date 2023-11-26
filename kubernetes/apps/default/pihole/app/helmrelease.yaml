@@ -32,7 +32,7 @@ spec:
               tag: latest
             env:
               TZ: ${TZ}
-              WEBTHEME: default-light
+              WEBTHEME: default-dark
               REV_SERVER: true
               PIHOLE_DNS_: 127.0.0.1#5335
               DNSSEC: "true"
