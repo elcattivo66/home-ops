@@ -37,6 +37,10 @@ spec:
               PIHOLE_DNS_: 127.0.0.1#5335
               DNSSEC: "true"
               DNSMASQ_LISTENING: single
+              FTLCONF_LOCAL_IPV4: 192.168.178.6
+              REV_SERVER_TARGET: 192.168.178.1
+              REV_SERVER_DOMAIN: fritz.box
+              REV_SERVER_CIDR: 192.168.178.0/24
             envFrom:
               - secretRef:
                   name: pihole-secret
