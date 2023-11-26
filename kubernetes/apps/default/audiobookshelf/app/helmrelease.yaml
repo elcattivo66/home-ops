@@ -50,7 +50,7 @@ spec:
           main:
             image:
               repository: ghcr.io/advplyr/audiobookshelf
-              tag: 2.5.0
+              tag: edge #2.5.0
               pullPolicy: IfNotPresent
             env:
               TZ: ${TZ}
