@@ -70,7 +70,7 @@ spec:
             env:
               TIMEZONE: ${TZ}
               ENABLE_METRICS: 1
-              ENABLE_SIGNUP: 0
+              ENABLE_SIGNUP: 1
               TANDOOR_PORT: &port 8888
               GUNICORN_MEDIA: 0
               DEBUG: 0
@@ -85,11 +85,8 @@ spec:
               FRACTION_PREF_DEFAULT: 0
               COMMENT_PREF_DEFAULT: 1
               SHOPPING_MIN_AUTOSYNC_INTERVAL: 5
-              LDAP_AUTH: 1
-              AUTH_LDAP_SERVER_URI: ldap://lldap.default.svc.cluster.local:3890
-              AUTH_LDAP_BIND_DN: dc=${SECRET_CERT_NAME},dc=de
-              AUTH_LDAP_USER_SEARCH_BASE_DN: uid=admin,ou=people,dc=${SECRET_CERT_NAME},dc=de
-              AUTH_LDAP_USER_SEARCH_FILTER_STR: (&({username_attribute}={input})(objectClass=person))
+              SOCIALACCOUNT_PROVIDERS: { "openid_connect": { "SERVERS": [ { "id": "tandoor", "name": "Authelia", "server_url": "https://authelia.${SECRET_DOMAIN}", "token_auth_method": "client_secret_basic", "APP": { "client_id": "tandoor", "secret": "${SECRET_TANDOOR_OAUTH_CLIENT_SECRET}", }, } ] }}
+              SOCIAL_PROVIDERS: allauth.socialaccount.providers.openid_connect
             command:
               - /opt/recipes/venv/bin/gunicorn
               - -b
