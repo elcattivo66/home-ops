@@ -28,7 +28,7 @@ spec:
         containers:
           main:
             image:
-              repository: docker.io/rlabinc/pihole-unbound
+              repository: docker.io/cbcrowe/pihole-unbound
               tag: latest
             env:
               TZ: ${TZ}
