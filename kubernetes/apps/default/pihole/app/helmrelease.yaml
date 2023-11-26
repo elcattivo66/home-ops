@@ -50,15 +50,15 @@ spec:
               runAsGroup: 1000
               fsGroup: 1000
               fsGroupChangePolicy: "OnRootMismatch"
-      pod:
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 512Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /etc
+        pod:
+          statefulset:
+            volumeClaimTemplates:
+              - name: config
+                accessMode: ReadWriteOnce
+                size: 512Mi
+                storageClass: longhorn
+                globalMounts:
+                  - path: /etc
 
     service:
       main:
