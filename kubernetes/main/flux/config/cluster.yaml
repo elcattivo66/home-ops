@@ -14,6 +14,11 @@ spec:
   secretRef:
     # name: gitea-ssh-key #gitea-credentials
     name: github-deploy-key
+  ignore: |
+    # exclude all
+    /*
+    # include kubernetes directory
+    !/kubernetes/main
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -23,7 +28,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  path: ./kubernetes/flux
+  path: ./kubernetes/main/flux
   prune: true
   wait: false
   sourceRef:
