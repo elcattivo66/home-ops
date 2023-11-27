@@ -1,0 +1,143 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: 'true'
+        initContainers:
+          01-init-db:
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: home-assistant-secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: '15.5'
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/home-assistant
+              tag: 2023.11.3@sha256:2c6fc5e1b11964da5a76579d003a2110f37b1583a3d7709db214e1f93f77e4fc
+            envFrom:
+              - secretRef:
+                  name: home-assistant-secret
+            env:
+              TZ: ${TZ}
+              HASS_TRUSTED_PROXIES: 192.168.178.0/24,10.42.0.0/16,10.43.0.0/16
+              POSTGRES_HOST: postgres-rw.databases.svc.cluster.local
+              POSTGRES_DB: home_assistant
+            resources:
+              requests:
+                cpu: 41m
+                memory: 551Mi
+              limits:
+                memory: 551Mi
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+        pod:
+          # hostNetwork: true
+          # dnsPolicy: ClusterFirstWithHostNet
+          annotations:
+            # k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "networking",
+                "ips": ["192.168.178.250/24"]
+              }]
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+          affinity:
+            nodeAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 1
+                  preference:
+                    matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values: ["brix"]
+    service:
+      main:
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: ${SVC_HASS_ADDR}
+        externalTrafficPolicy: Cluster
+        ports:
+          http:
+            port: 8123
+          # mdns-tcp:
+          #   enabled: true
+          #   port: 5353
+          #   protocol: TCP
+          #   targetPort: 5353
+          # mdns-udp:
+          #   enabled: true
+          #   port: 5353
+          #   protocol: UDP
+          #   targetPort: 5353
+          # sonos:
+          #   enabled: true
+          #   port: 1400
+          # emulated-hue:
+          #   enabled: true
+          #   port: 80
+          # upnp:
+          #   enabled: true
+          #   port: 1900
+          #   protocol: UDP
+          #   targetPort: 1900
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        hosts:
+          - host: &host hass.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant-config
+
+

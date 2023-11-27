@@ -1,0 +1,66 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/postgresql.cnpg.io/cluster_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres16
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.1-4
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 15Gi
+    storageClass: local-path
+  superuserSecret:
+    name: postgres-superuser
+  enableSuperuserAccess: true
+  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v1
+  postgresql:
+    parameters:
+      max_connections: "600"
+      shared_buffers: 512MB
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "250m"
+    limits:
+      memory: "2Gi"
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://postgresql/
+      endpointURL: https://s3.${SECRET_HOME_DOMAIN}
+      serverName: postgres16-v1
+      s3Credentials:
+        accessKeyId:
+          name: postgres-minio
+          key: MINIO_ACCESS_KEY
+        secretAccessKey:
+          name: postgres-minio
+          key: MINIO_SECRET_KEY
+
+  # externalClusters:
+  #   - name: *previous-cluster
+  #     barmanObjectStore:
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 8
+  #       destinationPath: s3://postgresql/
+  #       endpointURL: http://s3.${SECRET_HOME_DOMAIN}
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: postgres-minio
+  #           key: MINIO_ACCESS_KEY
+  #         secretAccessKey:
+  #           name: postgres-minio
+  #           key: MINIO_SECRET_KEY

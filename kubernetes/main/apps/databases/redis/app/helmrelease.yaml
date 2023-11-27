@@ -1,0 +1,47 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app redis
+  namespace: databases
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: redis
+      version: 18.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    global:
+      storageClass: local-path
+    # architecture: standalone
+    auth:
+      enabled: false
+      sentinel: false
+      # existingSecret: redis-secret
+      # existingSecretPasswordKey: redis-password
+    # master:
+    #   persistence:
+    #     enabled: false
+    sentinel:
+      enabled: true
+      masterSet: redis-master
+      getMasterTimeout: 10
+      startupProbe:
+        failureThreshold: 2
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        interval: 1m

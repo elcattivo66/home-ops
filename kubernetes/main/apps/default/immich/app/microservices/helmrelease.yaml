@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: immich-microservices
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  dependsOn:
+    - name: immich-server
+      namespace: default
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: 'true'
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.88.2
+            env:
+              IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-config
+            resources:
+              requests:
+                gpu.intel.com/i915: 1
+                cpu: 5m
+                memory: 277M
+              limits:
+                gpu.intel.com/i915: 1
+            #   memory: 512M
+            args: [start-microservices.sh]
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [44, 105]
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: 'true'
+    service:
+      main:
+        enabled: false
+    persistence:
+      library:
+        type: persistentVolumeClaim
+        existingClaim: immich-nfs
+        globalMounts:
+          - path: *mediaLocation
+      geocoding-dump:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /usr/src/app/.reverse-geocoding-dump
+      geoname-dump:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /usr/src/app/node_modules/local-reverse-geocoder/geonames_dump
+      transformers-cache:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /usr/src/app/.transformers_cache

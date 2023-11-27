@@ -1,0 +1,131 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app zigbee2mqtt
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/koenkk/zigbee2mqtt
+              tag: 1.33.2
+            env:
+              TZ: ${TZ}
+              ZIGBEE2MQTT_DATA: /data
+              ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
+              ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: 'false'
+              ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_TRIGGERS: 'true'
+              ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_STATUS_TOPIC: homeassistant/status
+              # ZIGBEE2MQTT_CONFIG_ADVANCED_LAST_SEEN: ISO_8601
+              # ZIGBEE2MQTT_CONFIG_ADVANCED_LEGACY_API: "false"
+              # ZIGBEE2MQTT_CONFIG_ADVANCED_LEGACY_AVAILABILITY_PAYLOAD: "false"
+              # ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_LEVEL: info # debug
+              # ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_OUTPUT: '["console"]'
+              # ZIGBEE2MQTT_CONFIG_AVAILABILITY_ACTIVE_TIMEOUT: 60
+              # ZIGBEE2MQTT_CONFIG_AVAILABILITY_PASSIVE_TIMEOUT: 2000
+              # ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_LEGACY: "false"
+              # ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
+              # ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
+              ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: &port 8183
+              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee2mqtt.${SECRET_DOMAIN}
+              ZIGBEE2MQTT_CONFIG_HOMEASSISTANT: 'true'
+              ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: 'true'
+              ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
+              ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: 'true'
+              ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto.default.svc.cluster.local
+              ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
+              ZIGBEE2MQTT_CONFIG_MQTT_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: zigbee2mqtt-secret
+                    key: username
+              ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: zigbee2mqtt-secret
+                    key: password
+              ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: 'false'
+              ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
+              ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: 'true'
+              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: &serial-port /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_23_93_35_0A-if00-port0
+
+            resources:
+              requests:
+                cpu: 5m
+                memory: 202M
+              limits:
+                memory: 202M
+            securityContext:
+              privileged: true
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [20]
+          nodeSelector:
+            cc2652.feature.node.kubernetes.io/zigbee: 'true'
+
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 128Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /data
+    service:
+      main:
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: ${SVC_Z2M_ADDR}
+        externalTrafficPolicy: Cluster
+        ports:
+          http:
+            port: 8183
+
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        hosts:
+          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      usb:
+        enabled: true
+        type: hostPath
+        hostPath: *serial-port
+        hostPathType: CharDevice
+
