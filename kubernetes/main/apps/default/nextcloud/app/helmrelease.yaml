@@ -188,6 +188,10 @@ spec:
       image: {}
       schedule: '*/5 * * * *'
       successfulJobsHistoryLimit: 2
+      securityContext:
+        runAsUser: 82
+        runAsGroup: 82
+        runAsNonRoot: true
 
     hpa:
       enabled: false
