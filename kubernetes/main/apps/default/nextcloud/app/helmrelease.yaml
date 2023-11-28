@@ -89,6 +89,7 @@ spec:
             'overwrite.cli.url' => 'https://cloud.${SECRET_DOMAIN}',
             'overewritehost' => 'cloud.${SECRET_DOMAIN}',
             'filelocking.enabled' => 'true',
+            'default_phone_region' => 'DE',
             'enable_previews' => true,
             'trusted_domains' =>
               array (
@@ -101,6 +102,11 @@ spec:
                 0 => '10.42.3.0/16',
                 1 => '192.168.178.0/16',
               ),
+          );
+
+        sso.config.php: |-
+          <?php
+          $CONFIG = array (
             'oidc_login_provider_url' => 'https://authelia.${SECRET_DOMAIN}',
             'oidc_login_client_id' => 'nextcloud',
             'oidc_login_client_secret' => '${SECRET_NEXTCLOUD_OAUTH_CLIENT_SECRET}',
@@ -115,7 +121,6 @@ spec:
             'oidc_login_disable_registration' => false,
             'oidc_login_password_authentication' => true,
           );
-
         s3.config.php: |-
           <?php
           $CONFIG = array (
@@ -134,7 +139,24 @@ spec:
                     ],
             ],
           );
-
+      phpConfigs:
+        uploadLimit.ini: |
+          upload_max_filesize = 16G
+          post_max_size = 16G
+          max_input_time = 3600
+          max_execution_time = 3600
+        www.conf: |
+          [www]
+          user = www-data
+          group = www-data
+          listen = 127.0.0.1:9000
+          pm = dynamic
+          pm.max_children = 57
+          pm.start_servers = 14
+          pm.min_spare_servers = 14
+          pm.max_spare_servers = 42
+          pm.max_requests = 500
+          pm.process_idle_timeout = 10s
     redis:
       enabled: true
       architecture: standalone
@@ -187,17 +209,7 @@ spec:
       #   existingClaim: nextcloud-data
 
     cronjob:
-      annotations: {}
-      curlInsecure: false
       enabled: true
-      failedJobsHistoryLimit: 3
-      image: {}
-      schedule: '*/5 * * * *'
-      successfulJobsHistoryLimit: 2
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        runAsNonRoot: true
 
     hpa:
       enabled: false
