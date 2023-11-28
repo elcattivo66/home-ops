@@ -75,6 +75,12 @@ spec:
           host: smtp-relay.default.svc.cluster.local
           secure: ""
           port: 2525
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+        runAsNonRoot: true
       configs:
         custom.config.php: |-
           <?php
@@ -189,8 +195,8 @@ spec:
       schedule: '*/5 * * * *'
       successfulJobsHistoryLimit: 2
       securityContext:
-        runAsUser: 82
-        runAsGroup: 82
+        runAsUser: 1000
+        runAsGroup: 1000
         runAsNonRoot: true
 
     hpa:
