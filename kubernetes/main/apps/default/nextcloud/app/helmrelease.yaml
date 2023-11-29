@@ -63,9 +63,9 @@ spec:
           secure: ""
           port: 2525
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsUser: 82
+        runAsGroup: 82
+        fsGroup: 82
         fsGroupChangePolicy: "OnRootMismatch"
         runAsNonRoot: true
       configs:
