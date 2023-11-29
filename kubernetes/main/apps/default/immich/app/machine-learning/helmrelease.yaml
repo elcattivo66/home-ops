@@ -74,15 +74,7 @@ spec:
         globalMounts:
           - path: *mediaLocation
       cache:
-        enabled: true
-        type: emptyDir
-      geocoding-dump:
-        enabled: true
-        type: emptyDir
+        type: persistentVolumeClaim
+        existingClaim: immich-machine-learning-cache
         globalMounts:
-          - path: /usr/src/app/.reverse-geocoding-dump
-      transformers-cache:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.transformers_cache
+          - path: /cache
