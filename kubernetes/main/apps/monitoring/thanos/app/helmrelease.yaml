@@ -38,7 +38,7 @@ spec:
       type: s3
       config:
         bucket: thanos
-        endpoint: nas:9000 #"https://s3.${SECRET_HOME_DOMAIN}"
+        # endpoint: nas:9000 #"https://s3.${SECRET_HOME_DOMAIN}"
         # access_key: "${MINIO_ACCESS_KEY}"
         # secret_key: "${MINIO_SECRET_KEY}"
         insecure: true
@@ -116,3 +116,7 @@ spec:
       name: thanos-secret
       valuesKey: S3_SECRET_KEY
       targetPath: objstoreConfig.config.secret_key
+    - kind: Secret
+      name: thanos-secret
+      valuesKey: S3_ENDPOINT
+      targetPath: objstoreConfig.config.endpoint
