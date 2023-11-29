@@ -41,6 +41,8 @@ spec:
                   name: immich-config
             env:
               IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
+              MACHINE_LEARNING_CACHE_FOLDER: /cache
+              TRANSFORMERS_CACHE: /cache
             resources:
               requests:
                 cpu: 5m
