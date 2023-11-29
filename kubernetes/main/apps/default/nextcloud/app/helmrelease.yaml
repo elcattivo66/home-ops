@@ -24,49 +24,36 @@ spec:
       retries: 5
   values:
     fullnameOverride: *app
+    deploymentAnnotations:
+      secret.reloader.stakater.com/reload: &secret nextcloud-secret
     image:
-      repository: nextcloud
+      repository: public.ecr.aws/docker/library/nextcloud
       tag: 27.1.4-fpm-alpine
       flavor: fpm-alpine
-    ingress:
-      enabled: true
-      className: external
-      annotations:
-        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-        nginx.ingress.kubernetes.io/proxy-body-size: 512M
-        nginx.ingress.kubernetes.io/proxy-buffering: "off"
-        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-        nginx.ingress.kubernetes.io/server-snippet: |
-          server_tokens off;
-          location ^~ /.well-known {
-            location = /.well-known/carddav { return 301 /remote.php/dav/; }
-            location = /.well-known/caldav { return 301 /remote.php/dav/; }
-            location = /.well-known/acme-challenge { try_files $uri $uri/ =404; }
-            location = /.well-known/pki-validation { try_files $uri $uri/ =404; }
-            return 301 /index.php$request_uri;
-          }
-          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/)  { return 404; }
-          location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console)                { return 404; }
-      path: /
-      pathType: Prefix
-      tls:
-        - secretName: ${SECRET_CERT_NAME}-prod-tls
-          hosts:
-            - cloud.${SECRET_DOMAIN}
-
     nextcloud:
-      host: cloud.${SECRET_DOMAIN}
+      host: &host cloud.${SECRET_DOMAIN}
+      extraInitContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:15.5
+          envFrom:
+            - secretRef:
+                name: *secret
       existingSecret:
         enabled: true
-        secretName: nextcloud-secret
+        secretName: *secret
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
-      # datadir: /var/www/data
       extraEnv:
-        - name: REDIS_HOST
-          value: nextcloud-redis-master
-        - name: REDIS_HOST_PORT
-          value: "6379"
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: *secret
+              key: S3_ACCESS_KEY
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: *secret
+              key: S3_SECRET_KEY
       mail:
         enabled: true
         fromAddress: ${SECRET_CERT_NAME}
@@ -129,12 +116,12 @@ spec:
                     'arguments' => [
                             'bucket' => 'nextcloud-data',
                             'autocreate' => true,
-                            'key'    => '${MINIO_ACCESS_KEY}',
-                            'secret' => '${MINIO_SECRET_KEY}',
-                            'hostname' => '${NAS_ADDR}',
+                            'key'    => getenv('S3_ACCESS_KEY'),
+                            'secret' => getenv('S3_SECRET_KEY'),
+                            'hostname' => 's3.${SECRET_HOME_DOMAIN}',
                             'port' => 9000,
                             'region' => 'eu-central-1',
-                            'use_ssl' => false,
+                            'use_ssl' => true,
                             'use_path_style' => true
                     ],
             ],
@@ -162,6 +149,8 @@ spec:
       architecture: standalone
       auth:
         enabled: true
+        existingSecret: *secret
+        existingSecretPasswordKey: REDIS_PASSWORD
       master:
         persistence:
           enabled: false
@@ -174,6 +163,9 @@ spec:
 
     nginx:
       enabled: true
+      image:
+        repository: public.ecr.aws/nginx/nginx
+        tag: "1.25.3"
       config:
         default: true
       resources:
@@ -192,21 +184,38 @@ spec:
       database: nextcloud
       existingSecret:
         enabled: true
-        secretName: nextcloud-pg-secret
-        usernameKey: user
-        passwordKey: password
+        secretName: *secret
+        usernameKey: POSTGRES_USER
+        passwordKey: POSTGRES_PASSWORD
 
-    service:
-      type: ClusterIP
-      port: 8080
-    #   loadBalancerIP: 192.168.178.231
+    ingress:
+      enabled: true
+      className: external
+      annotations:
+        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        nginx.ingress.kubernetes.io/proxy-body-size: 512M
+        nginx.ingress.kubernetes.io/proxy-buffering: "off"
+        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/server-snippet: |
+          server_tokens off;
+          location ^~ /.well-known {
+            location = /.well-known/carddav { return 301 /remote.php/dav/; }
+            location = /.well-known/caldav { return 301 /remote.php/dav/; }
+            location = /.well-known/acme-challenge { try_files $uri $uri/ =404; }
+            location = /.well-known/pki-validation { try_files $uri $uri/ =404; }
+            return 301 /index.php$request_uri;
+          }
+          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/)  { return 404; }
+          location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console)                { return 404; }
+      path: /
+      pathType: Prefix
+      tls:
+          hosts:
+            - *host
 
     persistence:
       enabled: true
       existingClaim: nextcloud-config-v1
-      # nextcloudData:
-      #   enabled: true
-      #   existingClaim: nextcloud-data
 
     cronjob:
       enabled: true
@@ -227,9 +236,3 @@ spec:
         memory: 185Mi
       limits:
         memory: 1Gi
-
-  valuesFrom:
-    - kind: Secret
-      name: nextcloud-secret
-      valuesKey: redis-password
-      targetPath: redis.auth.password
