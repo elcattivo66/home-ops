@@ -49,7 +49,7 @@ spec:
               limits:
                 gpu.intel.com/i915: 1
             #   memory: 512M
-            args: ["start-microservices.sh", "chmod 644 /usr/src/resources/*"]
+            args: ["start-microservices.sh"]
         pod:
           securityContext:
             runAsUser: 1000
