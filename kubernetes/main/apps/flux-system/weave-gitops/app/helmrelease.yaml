@@ -34,7 +34,7 @@ spec:
     adminUser:
       create: true
       createSecret: false
-      username: &admin_user admin
+      username: &admin_user philipp
 
     ingress:
       enabled: true
