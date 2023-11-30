@@ -26,9 +26,15 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    podAnnotations:
+      secret.reloader.stakater.com/reload: oidc-auth,cluster-user-auth
+
+    logLevel: info
+
     adminUser:
       create: true
-      username: admin
+      createSecret: false
+      username: &admin_user admin
     oidcSecret:
       create: true
       clientID: weave-gitops
@@ -55,13 +61,15 @@ spec:
       enabled: true
     rbac:
       create: true
-      impersonationResourceNames: ["admin"]
       additionalRules:
-        - apiGroups: ["infra.contrib.fluxcd.io"]
-          resources: ["terraforms"]
-          verbs: ["get", "list", "patch"]
-    podAnnotations:
-      secret.reloader.stakater.com/reload: weave-gitops-secret
+        - apiGroups:
+            - "infra.contrib.fluxcd.io"
+          resources:
+            - "terraforms"
+          verbs:
+            - "get"
+            - "list"
+            - "patch"
   valuesFrom:
     - kind: Secret
       name: weave-gitops-secret
