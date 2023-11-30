@@ -35,14 +35,7 @@ spec:
       create: true
       createSecret: false
       username: &admin_user admin
-    oidcSecret:
-      create: true
-      clientID: weave-gitops
-      issuerURL: https://authelia.${SECRET_DOMAIN}
-      redirectURL: https://gitops.${SECRET_DOMAIN}/oauth2/callback
-      # This works not at the moment
-      # claimUsername: preferred_username
-      # customScopes: ["offline_access", "openid", "profile"]
+
     ingress:
       enabled: true
       className: internal
@@ -70,12 +63,3 @@ spec:
             - "get"
             - "list"
             - "patch"
-  valuesFrom:
-    - kind: Secret
-      name: weave-gitops-secret
-      valuesKey: adminPassword
-      targetPath: adminUser.passwordHash
-    - kind: Secret
-      name: weave-gitops-secret
-      valuesKey: clientSecret
-      targetPath: oidcSecret.clientSecret
