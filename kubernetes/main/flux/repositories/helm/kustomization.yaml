@@ -29,4 +29,5 @@ resources:
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
 - ./k8tz.yaml
+- ./xenitab.yaml
 # - ./victoria-metrics.yaml
