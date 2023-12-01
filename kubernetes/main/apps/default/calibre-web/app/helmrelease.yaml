@@ -84,7 +84,7 @@ spec:
     persistence:
       media:
         type: nfs
-        server: nas
+        server: nas.${SECRET_HOME_DOMAIN}
         path: /spool/ebooks/calibre_library
         globalMounts:
           - path: /books

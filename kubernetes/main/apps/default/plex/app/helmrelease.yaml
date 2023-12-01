@@ -107,6 +107,9 @@ spec:
         globalMounts:
           - path: /transcode
       media:
-        existingClaim: media
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /tank/media
         globalMounts:
-          - readOnly: true
+          - path: /media
+            readOnly: true

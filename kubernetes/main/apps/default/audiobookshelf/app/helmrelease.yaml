@@ -90,7 +90,7 @@ spec:
     persistence:
       media:
         type: nfs
-        server: nas
+        server: nas.${SECRET_HOME_DOMAIN}
         path: /spool/audiobooks
         globalMounts:
           - path: /audiobooks
@@ -99,4 +99,3 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /.npm
-

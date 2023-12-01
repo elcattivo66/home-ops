@@ -109,10 +109,8 @@ spec:
               - *host
     persistence:
       library:
-        enabled: true
-        existingClaim: paperless-nfs
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /spool/paperless
         globalMounts:
           - path: /library
-
-
-

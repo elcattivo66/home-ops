@@ -99,6 +99,8 @@ spec:
         enabled: true
         existingClaim: sonarr-config
       media:
-        existingClaim: media
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /tank/media
         globalMounts:
           - path: /media
