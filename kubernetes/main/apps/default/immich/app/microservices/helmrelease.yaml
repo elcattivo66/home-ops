@@ -64,8 +64,9 @@ spec:
         enabled: false
     persistence:
       library:
-        type: persistentVolumeClaim
-        existingClaim: immich-nfs
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /tank/photos/immich_upload/
         globalMounts:
           - path: *mediaLocation
       geocoding-dump:

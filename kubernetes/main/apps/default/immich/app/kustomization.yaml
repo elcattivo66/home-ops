@@ -8,4 +8,3 @@ resources:
   - ./typesense
   - ./config-map.yaml
   - ./secret.sops.yaml
-  - ./nfs-pvc.yaml
