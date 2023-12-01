@@ -108,14 +108,14 @@ spec:
       conf:
         enabled: true
         type: nfs
-        server: ${NAS_ADDR}
+        server: nas.${SECRET_HOME_DOMAIN}
         path: /spool/openhab/conf
         globalMounts:
           - path: /openhab/conf
       userdata:
         enabled: true
         type: nfs
-        server: ${NAS_ADDR}
+        server: nas.${SECRET_HOME_DOMAIN}
         path: /spool/openhab/userdata
         globalMounts:
           - path: /openhab/userdata

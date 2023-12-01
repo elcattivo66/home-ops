@@ -48,5 +48,5 @@ spec:
           volumes:
             - name: nas-backups
               nfs:
-                server: nas
+                server: nas.${SECRET_HOME_DOMAIN}
                 path: "/tank/backup/kubernetes/postgres"
