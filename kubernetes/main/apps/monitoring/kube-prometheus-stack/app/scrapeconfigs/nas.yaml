@@ -23,3 +23,16 @@ spec:
 #     - targets: ["nas.${SECRET_HOME_DOMAIN}:9633"]
 #   metricsPath: /metrics
 ---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name nas-zfs-exporter
+  namespace: monitoring
+spec:
+  staticConfigs:
+    - targets: ["nas.${SECRET_HOME_DOMAIN}:9134"]
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      targetLabel: job
+      replacement: *name
