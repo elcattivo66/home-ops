@@ -52,7 +52,6 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          # coredns.io/hostname: openhab.${SECRET_DOMAIN}
           io.cilium/lb-ipam-ips: ${SVC_OPENHAB_ADDR}
         externalTrafficPolicy: Cluster
         ports:

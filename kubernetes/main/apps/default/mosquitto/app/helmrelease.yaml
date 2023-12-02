@@ -51,7 +51,7 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          coredns.io/hostname: mqtt.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/hostname: mqtt.${SECRET_DOMAIN}
           io.cilium/lb-ipam-ips: ${SVC_MQTT_ADDR}
         externalTrafficPolicy: Cluster
         ports:
