@@ -70,10 +70,10 @@ spec:
 
     service:
       main:
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: ${SVC_LLDAP_ADDR}
-        externalTrafficPolicy: Cluster
+        # type: LoadBalancer
+        # annotations:
+        #   io.cilium/lb-ipam-ips: ${SVC_LLDAP_ADDR}
+        # externalTrafficPolicy: Cluster
         ports:
           http:
             port: 17170
