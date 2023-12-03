@@ -1,42 +1,26 @@
 ---
 version: "3"
 
-vars:
-  PYTHON_BIN: python3
-  CLUSTER_DIR: "{{.ROOT_DIR}}/kubernetes"
-  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
-  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
-  CLUSTER_SECRETS_FILE: "{{.CLUSTER_DIR}}/flux/vars/cluster-secrets.sops.env"
-  CLUSTER_SETTINGS_FILE: "{{.CLUSTER_DIR}}/flux/vars/cluster-settings.env"
-
 env:
   KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
-  SOPS_AGE_KEY_FILE: ~/.config/sops/age/keys.txt
-  PATH: "{{.ROOT_DIR}}/.venv/bin:$PATH"
-  VIRTUAL_ENV: "{{.ROOT_DIR}}/.venv"
-  ANSIBLE_COLLECTIONS_PATH: "{{.ROOT_DIR}}/.venv/galaxy"
-  ANSIBLE_ROLES_PATH: "{{.ROOT_DIR}}/.venv/galaxy/ansible_roles"
-  ANSIBLE_VARS_ENABLED: "host_group_vars,community.sops.sops"
+  SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
   K8S_AUTH_KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
 
+vars:
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
+  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
+
 includes:
-  ansible: .taskfiles/AnsibleTasks.yaml
-  cluster: .taskfiles/ClusterTasks.yaml
+  ansible: .taskfiles/Ansible/Taskfile.yaml
+  flux: .taskfiles/Flux/Taskfile.yaml
+  # cluster: .taskfiles/ClusterTasks.yaml
   brew: .taskfiles/BrewTasks.yaml
   terraform: .taskfiles/TerraformTasks.yaml
-  sops: .taskfiles/Sops.yaml
+  sops: .taskfiles/Sops/Taskfile.yaml
 
 tasks:
 
   default:
     silent: true
     cmds: ["task -l"]
-
-  configure-venv:
-    desc: Install or upgrade the Python virtual env
-    cmds:
-      - "{{.PYTHON_BIN}} -m venv {{.ROOT_DIR}}/.venv"
-      - .venv/bin/python3 -m pip install --upgrade pip setuptools wheel
-      - .venv/bin/python3 -m pip install --upgrade --requirement "{{.ROOT_DIR}}/requirements.txt"
-      - .venv/bin/ansible-galaxy install --role-file "{{.ROOT_DIR}}/requirements.yaml" --force
-
