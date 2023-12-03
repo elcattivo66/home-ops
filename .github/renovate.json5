@@ -23,7 +23,7 @@
   "onboarding": false,
   "requireConfig": "optional",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "ignorePaths": ["archive/**"],
+  "ignorePaths": ["**/.archive/**"],
   "flux": {
     "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"]
   },
