@@ -29,13 +29,13 @@ jobs:
         with:
           registry: ghcr.io
           username: "${{ secrets.BOT_APP_ID }}"
-          password: "${{ steps.generate-token.outputs.token }}"
+          token: "${{ steps.app-token.outputs.token }}"
 
       - name: Diff Resources
         uses: allenporter/flux-local/action/diff@19bfc6920e8964a479363bc230e6c329120ead02 # 3.2.0
         id: diff
         with:
-          repo-token: "${{ steps.generate-token.outputs.token }}"
+          token: "${{ steps.app-token.outputs.token }}"
           sources: home-ops-kubernetes
           path: "${{ matrix.path }}"
           resource: "${{ matrix.resource }}"
@@ -44,7 +44,7 @@ jobs:
         name: Add comment
         uses: mshick/add-pr-comment@7c0890544fb33b0bdd2e59467fbacb62e028a096 # v2.8.1
         with:
-          repo-token: "${{ steps.generate-token.outputs.token }}"
+          token: "${{ steps.app-token.outputs.token }}"
           message-id: "${{ github.event.pull_request.number }}/${{ matrix.path }}/${{ matrix.resource }}"
           message-failure: Diff was not successful
           message: |
