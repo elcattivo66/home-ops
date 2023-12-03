@@ -73,13 +73,15 @@ spec:
             env:
               TZ: ${TZ}
             args:
-                - --user-data-dir
-                - "/config/.vscode"
-                - --auth
-                - "password"
-                - --port
-                - "12321"
-                - "/config"
+              - --auth
+              - "none"
+              - --user-data-dir
+              - "/config/.vscode"
+              - --extensions-dir
+              - "/config/.vscode"
+              - "--port"
+              - "12321"
+              - /config
             volumeMounts:
             - name: config
               mountPath: /config
