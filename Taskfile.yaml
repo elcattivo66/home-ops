@@ -24,6 +24,7 @@ includes:
   cluster: .taskfiles/ClusterTasks.yaml
   brew: .taskfiles/BrewTasks.yaml
   terraform: .taskfiles/TerraformTasks.yaml
+  sops: .taskfiles/Sops.yaml
 
 tasks:
 
