@@ -45,7 +45,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.2.3.8303@sha256:b30822dbbe858f9b9af6bcad9bd3d1f09a4f4dacf45021fe5cca071de6644347
+              tag: 5.2.3.8303@sha256:cff1d423eb6d86d0e501ab64c209ed83a5360c8d1934328aab65931f90ac473e
             env:
               TZ: "${TZ}"
               RADARR__API_KEY: ${RADARR_API_KEY}
