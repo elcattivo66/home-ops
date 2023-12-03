@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
   pull_request:
     branches: ["main"]
+    types: ["opened", "synchronize"]
 
 jobs:
   labeler:
@@ -18,9 +19,8 @@ jobs:
           app-id: "${{ secrets.BOT_APP_ID }}"
           private-key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
 
-
       - name: Labeler
         uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
         with:
           configuration-path: .github/labeler.yaml
-          token: "${{ steps.app-token.outputs.token }}"
+          repo-token: "${{ steps.app-token.outputs.token }}"
