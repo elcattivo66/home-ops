@@ -23,3 +23,11 @@ data "sops_file" "cloudflare_secrets" {
 data "http" "ipv4_lookup_raw" {
   url = "http://ipv4.icanhazip.com"
 }
+
+data "cloudflare_zone" "domain" {
+  name = data.sops_file.cloudflare_secrets.data["cloudflare_domain_ingress"]
+}
+
+data "cloudflare_zone" "home" {
+  name = data.sops_file.cloudflare_secrets.data["cloudflare_domain_ingress"]
+}

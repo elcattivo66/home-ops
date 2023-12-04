@@ -6,6 +6,7 @@ Thumbs.db
 # ansible
 xanmanning.k3s*
 .venv*
+.task/
 # terraform
 .terraform
 *.tfvars
