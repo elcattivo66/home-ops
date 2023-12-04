@@ -1,29 +1,38 @@
 ---
-# Area
+# Areas
 - name: area/ansible
-  color: "72ccf3"
+  color: "0e8a16"
+- name: area/docs
+  color: "0e8a16"
 - name: area/github
-  color: "72ccf3"
+  color: "0e8a16"
 - name: area/kubernetes
-  color: "72ccf3"
-- name: area/hack
-  color: "72ccf3"
+  color: "0e8a16"
+- name: area/taskfile
+  color: "0e8a16"
 - name: area/terraform
-  color: "72ccf3"
-# Renovate
+  color: "0e8a16"
+# Clusters
+- name: cluster/main
+  color: "ffc300"
+- name: cluster/storage
+  color: "ffc300"
+# Renovate Types
+- name: renovate/ansible
+  color: "027fa0"
 - name: renovate/container
-  color: "ffc300"
+  color: "027fa0"
 - name: renovate/github-action
-  color: "ffc300"
+  color: "027fa0"
 - name: renovate/grafana-dashboard
-  color: "ffc300"
+  color: "027fa0"
 - name: renovate/github-release
-  color: "ffc300"
+  color: "027fa0"
 - name: renovate/helm
-  color: "ffc300"
+  color: "027fa0"
 - name: renovate/terraform
-  color: "ffc300"
-# Semantic Type
+  color: "027fa0"
+# Semantic Types
 - name: type/digest
   color: "ffeC19"
 - name: type/patch
@@ -32,20 +41,6 @@
   color: "ff9800"
 - name: type/major
   color: "f6412d"
-- name: type/break
-  color: "f6412d"
 # Uncategorized
-- name: bug
+- name: hold
   color: "ee0701"
-- name: do-not-merge
-  color: "ee0701"
-- name: docs
-  color: "f4d1b7"
-- name: enhancement
-  color: "84b6eb"
-- name: broken-links
-  color: "7b55d7"
-- name: question
-  color: "cc317c"
-- name: community
-  color: "0e8a16"
