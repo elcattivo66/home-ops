@@ -14,9 +14,8 @@ vars:
 includes:
   ansible: .taskfiles/Ansible/Taskfile.yaml
   flux: .taskfiles/Flux/Taskfile.yaml
-  # cluster: .taskfiles/ClusterTasks.yaml
-  brew: .taskfiles/BrewTasks.yaml
-  terraform: .taskfiles/TerraformTasks.yaml
+  brew: .taskfiles/Brew/Taskfile.yaml
+  terraform: .taskfiles/Terraform/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
 
 tasks:
