@@ -20,7 +20,7 @@ resource "kubernetes_cron_job_v1" "postgres-backup" {
           spec {
             container {
               name    = "postgres-backup"
-              image   = "docker.io/prodrigestivill/postgres-backup-local:15@sha256:7f12039af361b71c987ad06b5c0a9dca67bad92f10bffa5012a614311363eebb"
+              image   = "docker.io/prodrigestivill/postgres-backup-local:16@sha256:085926531fbabe298792a83384d07d6146683732e53e51891ac75eaa71e09d08"
               command = ["/backup.sh"]
               env {
                 name = "POSTGRES_HOST"
