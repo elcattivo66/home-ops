@@ -23,7 +23,7 @@ resource "kubernetes_stateful_set_v1" "postgres" {
       spec {
         container {
           name              = "main"
-          image             = "bitnami/postgresql:15.5.0"
+          image             = "bitnami/postgresql:16.1.0"
           image_pull_policy = "IfNotPresent"
 
           env {
