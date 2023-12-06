@@ -23,4 +23,4 @@ cluster/main:
       - any-glob-to-any-file: kubernetes/main/**/*
 cluster/storage:
   - changed-files:
-      - any-glob-to-any-file: kubernetes/storage/**/*
+      - any-glob-to-any-file: kubernetes/nas/**/*
