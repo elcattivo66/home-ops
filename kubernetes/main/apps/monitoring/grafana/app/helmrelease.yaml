@@ -177,7 +177,7 @@ spec:
             value: Prometheus
         external-dns:
           # renovate: depName="External-dns"
-          gnetId: 35038
+          gnetId: 15038
           revision: 3
           datasource: Prometheus
         spegel:
