@@ -114,7 +114,7 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: ${SVC_HASS_ADDR}
+          io.cilium/lb-ipam-ips: 192.168.178.250 #${SVC_HASS_ADDR}
         externalTrafficPolicy: Cluster
         ports:
           http:
