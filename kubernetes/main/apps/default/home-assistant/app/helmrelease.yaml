@@ -86,35 +86,17 @@ spec:
             - name: config
               mountPath: /config
         pod:
-          # hostNetwork: true
-          # dnsPolicy: ClusterFirstWithHostNet
-          # annotations:
-            # k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
-            # k8s.v1.cni.cncf.io/networks: |
-            #   [{
-            #     "name":"multus-iot",
-            #     "namespace": "networking",
-            #     "ips": ["192.168.178.250/24"]
-            #   }]
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
-          affinity:
-            nodeAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 1
-                  preference:
-                    matchExpressions:
-                      - key: kubernetes.io/hostname
-                        operator: In
-                        values: ["brix"]
+
     service:
       main:
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: 192.168.178.250 #${SVC_HASS_ADDR}
+          io.cilium/lb-ipam-ips: ${SVC_HASS_ADDR}
         externalTrafficPolicy: Cluster
         ports:
           http:
