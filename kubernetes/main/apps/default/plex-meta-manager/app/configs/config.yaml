@@ -62,7 +62,7 @@ tautulli: # Can be individually specified per library as well
 omdb:
   apikey:
 radarr: # Can be individually specified per library as well
-  url: http://radarr:7878
+  url: http://radarr:80
   token: ${RADARR_API_KEY}
   add_missing: false
   add_existing: false
@@ -75,7 +75,7 @@ radarr: # Can be individually specified per library as well
   radarr_path:
   plex_path:
 sonarr: # Can be individually specified per library as well
-  url: http://sonarr:8989
+  url: http://sonarr:80
   token: ${SONARR_API_KEY}
   add_missing: false
   add_existing: false
