@@ -86,16 +86,16 @@ spec:
             - name: config
               mountPath: /config
         pod:
-          # hostNetwork: true
-          # dnsPolicy: ClusterFirstWithHostNet
-          annotations:
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
+          # annotations:
             # k8s.v1.cni.cncf.io/networks: networking/hass-iot-static
-            k8s.v1.cni.cncf.io/networks: |
-              [{
-                "name":"multus-iot",
-                "namespace": "networking",
-                "ips": ["192.168.178.250/24"]
-              }]
+            # k8s.v1.cni.cncf.io/networks: |
+            #   [{
+            #     "name":"multus-iot",
+            #     "namespace": "networking",
+            #     "ips": ["192.168.178.250/24"]
+            #   }]
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
