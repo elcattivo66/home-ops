@@ -17,6 +17,7 @@ includes:
   brew: .taskfiles/Brew/Taskfile.yaml
   terraform: .taskfiles/Terraform/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
+  external-secrets: .taskfiles/ExternalSecrets/Taskfile.yaml
 
 tasks:
 
