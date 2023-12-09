@@ -10,11 +10,10 @@ resources:
 - ./coredns.yaml
 - ./descheduler.yaml
 - ./external-dns.yaml
+- ./external-secrets.yaml
 - ./helm-stable.yaml
 - ./ingress-nginx.yaml
 - ./intel.yaml
-- ./traefik.yaml
-# - ./metallb.yaml
 - ./metrics-server.yaml
 - ./mittwald-charts.yaml
 - ./longhorn.yaml
@@ -25,9 +24,7 @@ resources:
 - ./nextcloud-charts.yaml
 - ./renovate.yaml
 - ./stakater.yaml
-- ./kyverno.yaml
 - ./weave-gitops.yaml
 - ./k8s-gateway.yaml
 - ./k8tz.yaml
 - ./xenitab.yaml
-# - ./victoria-metrics.yaml
