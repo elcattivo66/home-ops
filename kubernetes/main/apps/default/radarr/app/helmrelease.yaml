@@ -48,7 +48,6 @@ spec:
               tag: 5.2.3.8303@sha256:21ee41a2d7a7e368addb31b61a0dc078674e66d14cc26faef4e2f87ff69eacb0
             env:
               TZ: "${TZ}"
-              RADARR__API_KEY: ${RADARR_API_KEY}
               PUSHOVER_DEBUG: "false"
               RADARR__AUTHENTICATION_METHOD: External
               RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
