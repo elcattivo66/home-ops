@@ -44,7 +44,9 @@ spec:
               TZ: ${TZ}
               PUID: 1000
               PGID: 1000
-
+            envFrom:
+              - secretRef:
+                  name: plex-meta-manager-secret
         pod:
           securityContext:
             runAsUser: 1000
