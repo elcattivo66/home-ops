@@ -92,12 +92,21 @@ plex: # Can be individually specified per library as well; REQUIRED for the scri
 tmdb: # REQUIRED for the script to run
   apikey: ${TMDB_API_KEY}
   language: en
+  cache_expiration: 60
+  region:
+
+mdblist:
+  apikey: <<MDBLIST_API_KEY>>
+  cache_expiration: 60
+
+omdb:
+  apikey: <<OMDB_API_KEY>>
+  cache_expiration: 60
 
 tautulli: # Can be individually specified per library as well
   url: http://tautulli.default.svc.cluster.local:8181
   apikey: ${TAUTULLI_API_KEY}
-omdb:
-  apikey:
+
 radarr: # Can be individually specified per library as well
   url: http://radarr.default.svc.cluster.local:80
   token: ${RADARR_API_KEY}
