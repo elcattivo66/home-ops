@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./auto-languages
   - ./trakt-sync
+  - ./meta-manager
