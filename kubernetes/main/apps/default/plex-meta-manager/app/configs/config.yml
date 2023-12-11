@@ -137,3 +137,4 @@ trakt:
     refresh_token: ${TRAKT_REFRESH_TOKEN}
     scope: public
     created_at: ${TRAKT_CREATED_AT}
+  pin:
