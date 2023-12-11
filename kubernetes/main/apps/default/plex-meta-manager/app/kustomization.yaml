@@ -6,18 +6,11 @@ resources:
   - ./helmrelease.yaml
   - ./pvc.yaml
 configMapGenerator:
-  - name: pmm-config
+  - name: plex-meta-manager-configmap
     files:
-      - configs/config.yaml
-  - name: pmm-tv
-    files:
-      - configs/tv.yaml
-  - name: pmm-movies
-    files:
-      - configs/movies.yaml
-  # - name: pmm-scripts
-  #   files:
-  #     - ./scripts/run.sh
+      - ./configs/config.yml
+      - ./configs/Pre-rolls.yml
+      - ./scripts/run.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

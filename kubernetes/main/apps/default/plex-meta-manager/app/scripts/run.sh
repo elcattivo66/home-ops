@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-pmm () {
+pmm() {
     echo "*** pmm: $1 ***"
 
     python3 plex_meta_manager.py \

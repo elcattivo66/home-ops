@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: plex-meta-manager
+  name: &app plex-meta-manager
 spec:
   interval: 30m
   chart:
@@ -28,71 +28,50 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
+        type: cronjob
         annotations:
-          reloader.stakater.com/auto: 'true'
-      # cronjob:
-      #   schedule: 0 6 * * *
+          reloader.stakater.com/auto: "true"
+        cronjob:
+          schedule: 0 6 * * *
         containers:
           main:
             image:
               repository: docker.io/meisnate12/plex-meta-manager
-              tag: v1.19.1
+              tag: v1.19.1@sha256:51cf68b1b7fff8fc11a9e2c0b02ff225b720ca8c63e6d283521244015af32ec4
+            command:
+              - /scripts/run.sh
             env:
               TZ: ${TZ}
-              PUID: '1000'
-              PGID: '1000'
-              PMM_TIME: 06:00
-      # Runs PMM immediately. Used to test
-              PMM_RUN: false
-              PMM_DEBUG: true
-              PMM_READ_ONLY_CONFIG: true
+              PUID: 1000
+              PGID: 1000
 
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
     service:
       main:
         enabled: false
-        ports:
-          http:
-            port: 3030
-
-    # volumeClaimTemplates:
-    #   - name: config
-    #     mountPath: /config
-    #     accessMode: ReadWriteOnce
-    #     size: 128Mi
-    #     storageClass: longhorn
 
     persistence:
       config:
         enabled: true
-        existingClaim: plex-meta-manager
+        existingClaim: *app
       config-file:
-        enabled: true
         type: configMap
-        name: pmm-config
-        readOnly: true
+        name: plex-meta-manager-configmap
         globalMounts:
           - path: /config/config.yml
-            subPath: config.yaml
-      pmm-tv:
-        enabled: true
+            subPath: config.yml
+            readOnly: true
+      scripts:
         type: configMap
-        name: pmm-tv
-        readOnly: false
+        name: plex-meta-manager-configmap
+        defaultMode: 0775
         globalMounts:
-          - path: config/tv.yaml
-            subPath: tv.yaml
-      pmm-movies:
-        enabled: true
-        type: configMap
-        name: pmm-movies
-        readOnly: false
-      # scripts:
-      #   enabled: true
-      #   type: configMap
-      #   name: pmm-scripts
-      #   mountPath: /scripts
-      #   defaultMode: 511
-        globalMounts:
-          - path: config/movies.yaml
-            subPath: movies.yaml
+          - path: /scripts/run.sh
+            subPath: run.sh
+            readOnly: true
