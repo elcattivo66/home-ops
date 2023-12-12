@@ -114,7 +114,7 @@ plex: # Can be individually specified per library as well; REQUIRED for the scri
   optimize: false
 
 tmdb: # REQUIRED for the script to run
-  apikey: ${TMDB_API_KEY}
+  apikey: <<TMDB_API_KEY>>
   language: en
   cache_expiration: 60
   region:
