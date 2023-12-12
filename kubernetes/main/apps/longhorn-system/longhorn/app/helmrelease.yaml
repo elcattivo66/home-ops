@@ -39,13 +39,9 @@ spec:
       enabled: true
       ingressClassName: internal
       host: longhorn.${SECRET_DOMAIN}
-      path: /
       tls: true
-      tlsSecret: ${SECRET_CERT_NAME}-prod-tls
-
 
     defaultSettings:
-      # backupTarget: nfs://nas:/backup/kubernetes/longhorn_backup
       backupTarget: s3://longhorn-backup@eu-central-1/
       backupTargetCredentialSecret: longhorn-minio
       storageMinimalAvailablePercentage: 20
