@@ -14,5 +14,5 @@ spec:
       interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community-charts
+        name: prometheus-community
         namespace: flux-system

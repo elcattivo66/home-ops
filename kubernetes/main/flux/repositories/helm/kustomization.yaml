@@ -1,11 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ./authelia-charts.yaml
 - ./angelnu.yaml
 - ./bitnami.yaml
-- ./bjw-s-charts.yaml
-- ./cloudnative-pg-charts.yaml
+- ./bjw-s.yaml
+- ./cloudnative-pg.yaml
 - ./cilium.yaml
 - ./coredns.yaml
 - ./descheduler.yaml
@@ -15,13 +14,13 @@ resources:
 - ./ingress-nginx.yaml
 - ./intel.yaml
 - ./metrics-server.yaml
-- ./mittwald-charts.yaml
+- ./mittwald.yaml
 - ./longhorn.yaml
 - ./jetstack.yaml
-- ./node-feature-discovery-charts.yaml
-- ./prometheus-community-charts.yaml
-- ./grafana-charts.yaml
-- ./nextcloud-charts.yaml
+- ./node-feature-discovery.yaml
+- ./prometheus-community.yaml
+- ./grafana.yaml
+- ./nextcloud.yaml
 - ./renovate.yaml
 - ./stakater.yaml
 - ./weave-gitops.yaml
