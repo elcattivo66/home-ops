@@ -47,6 +47,12 @@ spec:
             envFrom:
               - secretRef:
                   name: plex-meta-manager-secret
+            resources:
+              requests:
+                cpu: 10m
+                memory: 2048Mi
+              limits:
+                memory: 4096Mi
         pod:
           securityContext:
             runAsUser: 1000
