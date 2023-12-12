@@ -45,10 +45,10 @@ spec:
               requests:
                 gpu.intel.com/i915: 1
                 cpu: 5m
-                memory: 277M
+                memory: 2755Mi
               limits:
                 gpu.intel.com/i915: 1
-            #   memory: 512M
+                memory: 2755Mi
             args: ["start-microservices.sh"]
         pod:
           securityContext:

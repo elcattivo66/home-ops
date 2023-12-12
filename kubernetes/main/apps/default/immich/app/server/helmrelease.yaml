@@ -50,9 +50,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 114M
+                memory: 356Mi
               limits:
-                memory: 381M
+                memory: 356Mi
             args: [start-server.sh]
         pod:
           securityContext:

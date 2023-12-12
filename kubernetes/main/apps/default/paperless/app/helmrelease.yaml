@@ -63,23 +63,41 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 601Mi
+                memory: 652Mi
               limits:
-                memory: 601Mi
+                memory: 652Mi
           gotenburg:
             image:
               repository: thecodingmachine/gotenberg
               tag: 7.10.1
             env:
               - { name: DISABLE_GOOGLE_CHROME, value: "1" }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100M
+              limits:
+                memory: 100M
           redis:
             image:
               repository: public.ecr.aws/docker/library/redis
               tag: 7.2.3
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100M
+              limits:
+                memory: 100M
           tika:
             image:
               repository: ghcr.io/paperless-ngx/tika
               tag: 2.9.0-full
+            resources:
+              requests:
+                cpu: 10m
+                memory: 437Mi
+              limits:
+                memory: 437Mi
     service:
       main:
         ports:

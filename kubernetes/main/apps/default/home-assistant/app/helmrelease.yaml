@@ -55,9 +55,9 @@ spec:
             resources:
               requests:
                 cpu: 41m
-                memory: 551Mi
+                memory: 552Mi
               limits:
-                memory: 551Mi
+                memory: 552Mi
             probes:
               liveness:
                 enabled: false
@@ -85,6 +85,12 @@ spec:
             volumeMounts:
             - name: config
               mountPath: /config
+            resources:
+              requests:
+                cpu: 41m
+                memory: 593Mi
+              limits:
+                memory: 593Mi
         pod:
           securityContext:
             runAsUser: 1000
