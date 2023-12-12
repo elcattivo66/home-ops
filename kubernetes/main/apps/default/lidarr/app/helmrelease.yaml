@@ -40,7 +40,7 @@ spec:
               pullPolicy: IfNotPresent
             envFrom: &envFrom
               - secretRef:
-                  name: sonarr-secret
+                  name: lidarr-secret
         containers:
           main:
             image:
