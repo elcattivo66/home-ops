@@ -50,7 +50,7 @@ spec:
             env:
               TZ: ${TZ}
               HASS_TRUSTED_PROXIES: 192.168.178.0/24,10.42.0.0/16,10.43.0.0/16
-              POSTGRES_HOST: postgres-rw.databases.svc.cluster.local
+              POSTGRES_HOST: postgres16-rw.databases.svc.cluster.local
               POSTGRES_DB: home_assistant
             resources:
               requests:

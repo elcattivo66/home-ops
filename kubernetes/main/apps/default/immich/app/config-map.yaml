@@ -5,7 +5,7 @@ metadata:
   name: immich-config
 data:
   DB_DATABASE_NAME: immich
-  DB_HOSTNAME: postgres-rw.databases.svc.cluster.local
+  DB_HOSTNAME: postgres16-rw.databases.svc.cluster.local
   DB_PORT: "5432"
   DISABLE_REVERSE_GEOCODING: "false"
   ENABLE_MAPBOX: "false"
