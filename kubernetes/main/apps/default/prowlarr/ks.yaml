@@ -9,8 +9,8 @@ metadata:
 spec:
   targetNamespace: default
   dependsOn:
-    - name: cluster-apps-longhorn
     - name: cluster-apps-cloudnative-pg-cluster
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/prowlarr/app
   prune: true
   sourceRef:
