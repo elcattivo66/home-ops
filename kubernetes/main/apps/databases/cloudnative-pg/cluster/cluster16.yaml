@@ -15,9 +15,9 @@ spec:
     name: postgres-superuser
   enableSuperuserAccess: true
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-  # bootstrap:
-  #   recovery:
-  #     source: &previousCluster postgres16-v1
+  bootstrap:
+    recovery:
+      source: &previousCluster postgres16-v1
   postgresql:
     parameters:
       max_connections: "600"
@@ -40,7 +40,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-      serverName: postgres16-v1
+      serverName: postgres16-v2
       s3Credentials:
         accessKeyId:
           name: postgres-minio
@@ -49,18 +49,18 @@ spec:
           name: postgres-minio
           key: MINIO_SECRET_KEY
 
-  # externalClusters:
-  #   - name: *previous-cluster
-  #     barmanObjectStore:
-  #       wal:
-  #         compression: bzip2
-  #         maxParallel: 8
-  #       destinationPath: s3://postgresql/
-  #       endpointURL: http://s3.${SECRET_HOME_DOMAIN}
-  #       s3Credentials:
-  #         accessKeyId:
-  #           name: postgres-minio
-  #           key: MINIO_ACCESS_KEY
-  #         secretAccessKey:
-  #           name: postgres-minio
-  #           key: MINIO_SECRET_KEY
+  externalClusters:
+    - name: *previous-cluster
+      barmanObjectStore:
+        wal:
+          compression: bzip2
+          maxParallel: 8
+        destinationPath: s3://postgresql/
+        endpointURL: http://s3.${SECRET_HOME_DOMAIN}
+        s3Credentials:
+          accessKeyId:
+            name: postgres-minio
+            key: MINIO_ACCESS_KEY
+          secretAccessKey:
+            name: postgres-minio
+            key: MINIO_SECRET_KEY
