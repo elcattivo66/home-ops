@@ -26,7 +26,7 @@ spec:
                 - "/backup.sh"
               env:
                 - name: POSTGRES_HOST
-                  value: postgres-ro.databases.svc.cluster.local
+                  value: postgres16-ro.databases.svc.cluster.local
                 - name: POSTGRES_USER
                   valueFrom:
                     secretKeyRef:
