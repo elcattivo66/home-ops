@@ -18,6 +18,8 @@ spec:
   bootstrap:
     recovery:
       source: &previousCluster postgres16-v1
+      recoveryTarget:
+        targetTime: "2023-12-15 14:10:00.00000+02"
   postgresql:
     parameters:
       max_connections: "600"
