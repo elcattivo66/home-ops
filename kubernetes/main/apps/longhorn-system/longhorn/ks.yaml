@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-longhorn
+  name: longhorn
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -20,14 +20,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-longhorn-config
+  name: longhorn-config
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: longhorn-system
   dependsOn:
-    - name: cluster-apps-longhorn
+    - name: longhorn
   path: ./kubernetes/main/apps/longhorn-system/longhorn/config
   prune: true
   sourceRef:
@@ -41,14 +41,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-longhorn-monitoring
+  name: longhorn-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: longhorn-system
   dependsOn:
-    - name: cluster-apps-longhorn
+    - name: longhorn
   path: ./kubernetes/main/apps/longhorn-system/longhorn/monitoring
   prune: true
   sourceRef:

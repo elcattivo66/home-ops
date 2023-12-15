@@ -61,20 +61,20 @@ Below is a high-level look at the layout of how my directory structure with Flux
 GitRepository :: home-kubernetes
     Kustomization :: cluster
         Kustomization :: cluster-apps
-            Kustomization :: cluster-apps-cloudnative-pg
+            Kustomization :: cloudnative-pg
                 HelmRelease :: cloudnative-pg
-            Kustomization :: cluster-apps-cloudnative-pg-cluster
+            Kustomization :: cloudnative-pg-cluster
                 DependsOn:
-                    Kustomization :: cluster-apps-cloudnative-pg
+                    Kustomization :: cloudnative-pg
                 Cluster :: postgres
-            Kustomization :: cluster-apps-lldap
+            Kustomization :: lldap
                 HelmRelease :: lldap
                 DependsOn:
-                    Kustomization :: cluster-apps-cloudnative-pg-cluster
-            Kustomization :: cluster-apps-authelia
+                    Kustomization :: cloudnative-pg-cluster
+            Kustomization :: authelia
                 DependsOn:
-                    Kustomization :: cluster-apps-lldap
-                    Kustomization :: cluster-apps-cloudnative-pg-cluster
+                    Kustomization :: lldap
+                    Kustomization :: cloudnative-pg-cluster
                 HelmRelease :: authelia
 ```
 

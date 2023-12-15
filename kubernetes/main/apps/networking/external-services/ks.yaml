@@ -9,7 +9,7 @@ metadata:
 spec:
   targetNamespace: networking
   dependsOn:
-    - name: cluster-apps-nginx-external
+    - name: nginx-external
   path: ./kubernetes/main/apps/networking/external-services/minio
   prune: true
   sourceRef:

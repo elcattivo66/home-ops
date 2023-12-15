@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-traefik-certificates
+  name: traefik-certificates
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -21,14 +21,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-traefik
+  name: traefik
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:
-    - name: cluster-apps-traefik-certificates
+    - name: traefik-certificates
   path: ./kubernetes/apps/networking/traefik/app
   prune: true
   sourceRef:
@@ -41,14 +41,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-traefik-middlewares
+  name: traefik-middlewares
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:
-    - name: cluster-apps-traefik
+    - name: traefik
   path: ./kubernetes/apps/networking/traefik/middlewares
   prune: true
   sourceRef:

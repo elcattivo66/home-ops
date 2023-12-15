@@ -2,15 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-zigbee2mqtt
+  name: zigbee2mqtt
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   dependsOn:
-    - name: cluster-apps-longhorn
-    - name: cluster-apps-node-feature-rules
+    - name: longhorn
+    - name: node-feature-rules
   path: ./kubernetes/main/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:
