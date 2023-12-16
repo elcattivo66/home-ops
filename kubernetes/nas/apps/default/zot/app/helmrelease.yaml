@@ -51,6 +51,10 @@ spec:
       main:
         enabled: true
         className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_NAS_DOMAIN}"
             paths:
