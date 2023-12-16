@@ -21,7 +21,7 @@ spec:
         initContainers:
           01-init-db:
             imagePullPolicy: IfNotPresent
-            envFrom:
+            envFrom: &envFrom
               - secretRef:
                   name: paperless-secret
             image:
@@ -32,9 +32,7 @@ spec:
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
               tag: 2.1.3
-            envFrom:
-              - secretRef:
-                  name: paperless-secret
+            envFrom: *envFrom
             env:
               COMPOSE_PROJECT_NAME: paperless
               PAPERLESS_CONSUMPTION_DIR: /library/consume
@@ -54,7 +52,6 @@ spec:
               USERMAP_GID: 1000
               PAPERLESS_FILENAME_FORMAT: '{created_year}/{correspondent}/{title}'
               PAPERLESS_ENABLE_HTTP_REMOTE_USER: true
-              PAPERLESS_DBHOST: postgres16-rw.databases.svc.cluster.local
               # PAPERLESS_REDIS: redis://redis-master.databases.svc.cluster.local:6379
               PAPERLESS_REDIS: redis://localhost:6379
               PAPERLESS_TIKA_ENABLED: 1

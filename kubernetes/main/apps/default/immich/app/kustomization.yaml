@@ -6,4 +6,4 @@ resources:
   - ./microservices
   - ./machine-learning
   - ./config-map.yaml
-  - ./secret.sops.yaml
+  - ./externalsecret.yaml

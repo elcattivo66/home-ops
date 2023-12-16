@@ -33,7 +33,7 @@ spec:
         initContainers:
           01-init-db:
             imagePullPolicy: IfNotPresent
-            envFrom:
+            envFrom: &envFrom
               - secretRef:
                   name: home-assistant-secret
             image:
@@ -44,14 +44,10 @@ spec:
             image:
               repository: ghcr.io/onedr0p/home-assistant
               tag: 2023.12.3@sha256:d46e33f699d6e08ef9250dff3920523f2e8e854df00b3e4a26ee2b49952d3aee
-            envFrom:
-              - secretRef:
-                  name: home-assistant-secret
+            envFrom: *envFrom
             env:
               TZ: ${TZ}
               HASS_TRUSTED_PROXIES: 192.168.178.0/24,10.42.0.0/16,10.43.0.0/16
-              POSTGRES_HOST: postgres16-rw.databases.svc.cluster.local
-              POSTGRES_DB: home_assistant
             resources:
               requests:
                 cpu: 41m
