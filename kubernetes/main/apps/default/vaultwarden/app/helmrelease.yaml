@@ -22,12 +22,22 @@ spec:
   upgrade:
     remediation:
       retries: 5
-
   values:
     controllers:
       main:
         type: statefulset
         replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.1
+              pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: vaultwarden-secret
         containers:
           main:
             image:
@@ -46,9 +56,7 @@ spec:
               SMTP_PORT: 2525
               SMTP_TIMEOUT: 15
               PUSH_ENABLED: true
-            envFrom:
-              - secretRef:
-                  name: vaultwarden-secret
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 5m
@@ -92,7 +100,3 @@ spec:
         tls:
           - hosts:
               - *host
-
-    podAnnotations:
-      secret.reloader.stakater.com/reload: vaultwarden-secret
-
