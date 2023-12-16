@@ -12,14 +12,12 @@ spec:
     size: 15Gi
     storageClass: local-path
   superuserSecret:
-    name: postgres-superuser
+    name: cloudnative-pg-secret
   enableSuperuserAccess: true
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-  bootstrap:
-    recovery:
-      source: &previousCluster postgres16-v1
-      recoveryTarget:
-        targetTime: "2023-12-15 14:00:00.00000+02"
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v1
   postgresql:
     parameters:
       max_connections: "600"
@@ -47,24 +45,24 @@ spec:
       serverName: postgres16-v2
       s3Credentials:
         accessKeyId:
-          name: postgres-minio
+          name: cloudnative-pg-secret
           key: MINIO_ACCESS_KEY
         secretAccessKey:
-          name: postgres-minio
+          name: cloudnative-pg-secret
           key: MINIO_SECRET_KEY
 
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        wal:
-          compression: bzip2
-          maxParallel: 8
-        destinationPath: s3://postgresql/
-        endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-        s3Credentials:
-          accessKeyId:
-            name: postgres-minio
-            key: MINIO_ACCESS_KEY
-          secretAccessKey:
-            name: postgres-minio
-            key: MINIO_SECRET_KEY
+  # externalClusters:
+  #   - name: *previousCluster
+  #     barmanObjectStore:
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 8
+  #       destinationPath: s3://postgresql/
+  #       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: postgres-minio
+  #           key: MINIO_ACCESS_KEY
+  #         secretAccessKey:
+  #           name: postgres-minio
+  #           key: MINIO_SECRET_KEY
