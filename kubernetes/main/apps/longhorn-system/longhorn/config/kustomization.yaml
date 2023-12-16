@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./recurring-jobs.yaml
-  - ./backup.secret.sops.yaml
   - ./storage-class-definition.yaml
