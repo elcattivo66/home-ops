@@ -1,0 +1,73 @@
+---
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgres-backup
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        type: cronjob
+        cronjob:
+          concurrencyPolicy: Forbid
+          schedule: "30 0 * * *"
+        pod:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+        containers:
+          main:
+            image:
+              repository: docker.io/prodrigestivill/postgres-backup-local
+              tag: 16@sha256:085926531fbabe298792a83384d07d6146683732e53e51891ac75eaa71e09d08
+            command:
+              - /bin/bash
+              - -x
+              - /backup.sh
+            env:
+              - { name: TZ, value: "${TZ}" }
+              - { name: POSTGRES_DB, value: "authelia,immich,paperless,radarr_main,nextcloud,lldap,prowlarr_main,lidarr_main,bazarr,home_assistant,vaultwarden,tandoor,sonarr_main" }
+              - { name: POSTGRES_HOST, value: "postgres16-ro.databases.svc.cluster.local" }
+              - { name: POSTGRES_PORT, value: 5432 }
+              - name: POSTGRES_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: cloudnative-pg-secret
+                    key: username
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: cloudnative-pg-secret
+                    key: password
+    persistence:
+      nas:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /tank/backup/kubernetes/postgres
+        globalMounts:
+          - path: /backups
+    service:
+      main:
+        enabled: false
