@@ -30,7 +30,7 @@ metadata:
   name: &app redis-lb
   namespace: flux-system
 spec:
-  targetNamespace: dbms
+  targetNamespace: databases
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
