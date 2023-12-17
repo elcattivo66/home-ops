@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: longhorn
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: longhorn-system
   path: ./kubernetes/main/apps/longhorn-system/longhorn/app
@@ -22,8 +20,6 @@ kind: Kustomization
 metadata:
   name: longhorn-config
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: longhorn-system
   dependsOn:
@@ -43,8 +39,6 @@ kind: Kustomization
 metadata:
   name: longhorn-monitoring
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: longhorn-system
   dependsOn:

@@ -5,8 +5,6 @@ kind: Kustomization
 metadata:
   name: nginx-certificates
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:
@@ -25,8 +23,6 @@ kind: Kustomization
 metadata:
   name: nginx-internal
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:

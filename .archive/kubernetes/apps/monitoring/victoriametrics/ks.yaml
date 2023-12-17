@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: victoriametrics-stack
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: local-path-provisioner

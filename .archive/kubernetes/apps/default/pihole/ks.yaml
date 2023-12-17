@@ -5,8 +5,6 @@ kind: Kustomization
 metadata:
   name: pihole
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   path: "./kubernetes/apps/default/pihole/app"

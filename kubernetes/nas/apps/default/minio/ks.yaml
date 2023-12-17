@@ -5,8 +5,6 @@ kind: Kustomization
 metadata:
   name: minio
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
   path: "./kubernetes/nas/apps/default/minio/app"

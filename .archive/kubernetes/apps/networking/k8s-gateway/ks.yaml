@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: k8s-gateway
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   path: ./kubernetes/apps/networking/k8s-gateway/app

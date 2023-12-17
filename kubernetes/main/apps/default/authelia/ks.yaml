@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: authelia
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   dependsOn:

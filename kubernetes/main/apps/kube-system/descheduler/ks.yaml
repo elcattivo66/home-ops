@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: descheduler
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: kube-system
   path: ./kubernetes/main/apps/kube-system/descheduler/app

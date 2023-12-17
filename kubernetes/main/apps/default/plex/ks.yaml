@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: plex
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   path: ./kubernetes/main/apps/default/plex/app
@@ -22,8 +20,6 @@ kind: Kustomization
 metadata:
   name: plex-tools
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   dependsOn:

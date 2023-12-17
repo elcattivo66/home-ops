@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: traefik-certificates
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:
@@ -23,8 +21,6 @@ kind: Kustomization
 metadata:
   name: traefik
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:
@@ -43,8 +39,6 @@ kind: Kustomization
 metadata:
   name: traefik-middlewares
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: networking
   dependsOn:

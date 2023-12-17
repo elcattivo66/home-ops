@@ -5,8 +5,6 @@ kind: Kustomization
 metadata:
   name: home-assistant
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   dependsOn:

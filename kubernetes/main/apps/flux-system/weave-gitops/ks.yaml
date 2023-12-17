@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: weave-gitops
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: flux-system
   dependsOn:

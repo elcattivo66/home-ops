@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: fritzbox-exporter
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   path: ./kubernetes/main/apps/default/fritzbox-exporter/app

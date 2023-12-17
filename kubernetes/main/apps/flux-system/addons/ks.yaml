@@ -4,8 +4,6 @@ kind: Kustomization
 metadata:
   name: flux-monitoring
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
   path: ./kubernetes/main/apps/flux-system/addons/monitoring
@@ -23,8 +21,6 @@ kind: Kustomization
 metadata:
   name: flux-webhooks
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: flux-system
   dependsOn:
