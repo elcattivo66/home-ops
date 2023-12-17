@@ -30,12 +30,12 @@ spec:
                 - name: POSTGRES_USER
                   valueFrom:
                     secretKeyRef:
-                      name: postgres-superuser
+                      name: cloudnative-pg-secret
                       key: username
                 - name: POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: postgres-superuser
+                      name: cloudnative-pg-secret
                       key: password
                 - name: POSTGRES_DB
                   value: "authelia,immich,paperless,radarr_main,nextcloud,lldap,prowlarr_main,lidarr_main,bazarr,home_assistant,vaultwarden,tandoor,sonarr_main"
