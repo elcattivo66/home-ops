@@ -27,12 +27,12 @@ spec:
               env:
                 - name: POSTGRES_HOST
                   value: postgres16-ro.databases.svc.cluster.local
-                - name: POSTGRES_SUPER_USER
+                - name: POSTGRES_USER
                   valueFrom:
                     secretKeyRef:
                       name: cloudnative-pg-secret
                       key: username
-                - name: POSTGRES_SUPER_PASS
+                - name: POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: cloudnative-pg-secret
