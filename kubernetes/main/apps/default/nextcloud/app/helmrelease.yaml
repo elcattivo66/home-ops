@@ -54,10 +54,10 @@ spec:
             secretKeyRef:
               name: *secret
               key: S3_SECRET_KEY
-        - name: REDIS_HOST
-          value: redis-lb.databases.svc.cluster.local.
-        - name: REDIS_HOST_PORT
-          value: "6379"
+        # - name: REDIS_HOST
+        #   value: redis-lb.databases.svc.cluster.local.
+        # - name: REDIS_HOST_PORT
+        #   value: "6379"
       mail:
         enabled: true
         fromAddress: ${SECRET_CERT_NAME}
@@ -150,8 +150,21 @@ spec:
           pm.max_requests = 500
           pm.process_idle_timeout = 10s
     redis:
-      enabled: false
-
+      enabled: true
+      architecture: standalone
+      auth:
+        enabled: false
+        # existingSecret: *secret
+        # existingSecretPasswordKey: REDIS_PASSWORD
+      master:
+        persistence:
+          enabled: false
+      resources:
+        requests:
+          cpu: 10m
+          memory: 21M
+        limits:
+          memory: 50M
     nginx:
       enabled: true
       image:

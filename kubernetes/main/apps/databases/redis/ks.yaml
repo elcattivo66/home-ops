@@ -22,26 +22,26 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
----
-# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/kustomization-kustomize-v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: &app redis-lb
-  namespace: flux-system
-spec:
-  targetNamespace: databases
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
-  dependsOn:
-    - name: redis
-  path: ./kubernetes/main/apps/databases/redis/lb
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-ops-kubernetes
-  wait: false
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
+# ---
+# # yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/kustomization-kustomize-v1.json
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: &app redis-lb
+#   namespace: flux-system
+# spec:
+#   targetNamespace: databases
+#   commonMetadata:
+#     labels:
+#       app.kubernetes.io/name: *app
+#   dependsOn:
+#     - name: redis
+#   path: ./kubernetes/main/apps/databases/redis/lb
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: home-ops-kubernetes
+#   wait: false
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 5m
