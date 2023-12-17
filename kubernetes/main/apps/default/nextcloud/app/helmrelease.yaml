@@ -81,7 +81,9 @@ spec:
             'overewritehost' => 'cloud.${SECRET_DOMAIN}',
             'filelocking.enabled' => 'true',
             'default_phone_region' => 'DE',
+            'loglevel' => '2',
             'enable_previews' => true,
+            'log_type' => 'syslog',
             'trusted_domains' =>
               array (
                 0 => 'nextcloud',
@@ -149,20 +151,6 @@ spec:
           pm.process_idle_timeout = 10s
     redis:
       enabled: false
-      architecture: standalone
-      auth:
-        enabled: true
-        existingSecret: *secret
-        existingSecretPasswordKey: REDIS_PASSWORD
-      master:
-        persistence:
-          enabled: false
-      resources:
-        requests:
-          cpu: 10m
-          memory: 21M
-        limits:
-          memory: 50M
 
     nginx:
       enabled: true
