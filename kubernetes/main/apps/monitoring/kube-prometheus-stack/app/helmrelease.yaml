@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
-  namespace: monitoring
 spec:
   interval: 15m
   chart:
@@ -164,7 +163,7 @@ spec:
           image: quay.io/thanos/thanos:v0.33.0
           objectStorageConfig:
             existingSecret:
-              name: thanos-objstore-secret
+              name: kube-prometheus-stack-secret
               key: objstore.yml
         storageSpec:
           volumeClaimTemplate:
