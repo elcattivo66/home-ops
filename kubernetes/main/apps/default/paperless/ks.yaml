@@ -7,8 +7,8 @@ metadata:
 spec:
   targetNamespace: default
   dependsOn:
-    - name: redis
     - name: cloudnative-pg-cluster
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/paperless/app
   prune: true
   sourceRef:

@@ -9,6 +9,7 @@ spec:
   dependsOn:
     - name: longhorn
     - name: cloudnative-pg-cluster
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/nextcloud/app
   prune: true
   sourceRef:

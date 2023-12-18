@@ -6,6 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: longhorn-system
+  dependsOn:
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/longhorn-system/longhorn/app
   prune: true
   sourceRef:
