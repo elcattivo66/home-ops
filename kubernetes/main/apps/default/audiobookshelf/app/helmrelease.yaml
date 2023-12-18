@@ -51,7 +51,6 @@ spec:
             image:
               repository: ghcr.io/advplyr/audiobookshelf
               tag: 2.6.0
-              pullPolicy: IfNotPresent
             env:
               TZ: ${TZ}
               AUDIOBOOKSHELF_UID: 1000

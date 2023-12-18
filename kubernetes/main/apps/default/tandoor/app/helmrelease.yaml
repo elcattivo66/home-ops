@@ -39,7 +39,6 @@ spec:
 
         initContainers:
           01-init-db:
-            imagePullPolicy: IfNotPresent
             envFrom: &envFrom
               - secretRef:
                   name: tandoor-secret

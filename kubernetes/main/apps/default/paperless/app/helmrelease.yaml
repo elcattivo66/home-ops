@@ -20,7 +20,6 @@ spec:
       main:
         initContainers:
           01-init-db:
-            imagePullPolicy: IfNotPresent
             envFrom: &envFrom
               - secretRef:
                   name: paperless-secret

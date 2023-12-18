@@ -24,7 +24,6 @@ spec:
   values:
     image:
       repository: gitea.elcattivo.de/philipp/plexstate
-      pullPolicy: IfNotPresent
       tag: 1.0@sha256:d8a152034a47fd5142f3ba951e735b730f4e1639000db803fdde9aa07e8f0cb0
 
     service:

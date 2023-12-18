@@ -50,7 +50,6 @@ spec:
           main:
             image:
               repository: ghcr.io/gotify/server
-              pullPolicy: IfNotPresent
               tag: 2.4.0
             env:
               TZ: "${TZ}"

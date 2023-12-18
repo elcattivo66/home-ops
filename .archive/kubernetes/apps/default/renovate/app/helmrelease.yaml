@@ -30,7 +30,6 @@ spec:
     image:
       repository: ghcr.io/renovatebot/renovate
       tag: 37.33.1-slim
-      pullPolicy: IfNotPresent
     cronjob:
       schedule: "0 */6 * * *"
     renovate:

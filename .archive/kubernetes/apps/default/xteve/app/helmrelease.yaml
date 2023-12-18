@@ -27,7 +27,6 @@ spec:
 
     image:
       repository: ghcr.io/mrmarble/xteve
-      pullPolicy: IfNotPresent
       tag: v2.3.1
 
     service:

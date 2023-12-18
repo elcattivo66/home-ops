@@ -28,7 +28,6 @@ spec:
           reloader.stakater.com/auto: 'true'
         initContainers:
           01-init-db:
-            imagePullPolicy: IfNotPresent
             envFrom:
               - secretRef:
                   name: immich-secret
