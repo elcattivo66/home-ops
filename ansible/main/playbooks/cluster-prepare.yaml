@@ -132,6 +132,24 @@
             dest: /etc/systemd/networkd.conf
             regexp: ManageForeignRoutes
             line: ManageForeignRoutes=no
+        # https://github.com/onedr0p/flux-cluster-template/discussions/635
+        - name: Network Configuration | Remove immutable flag from /etc/resolv.conf
+          ansible.builtin.file:
+            attributes: -i
+            path: /etc/resolv.conf
+        - name: Network Configuration | Remove /etc/resolv.conf
+          ansible.builtin.file:
+            attributes: -i
+            path: /etc/resolv.conf
+            state: absent
+        - name: Network Configuration | Add custom /etc/resolv.conf
+          ansible.builtin.copy:
+            attributes: +i
+            mode: '0644'
+            dest: /etc/resolv.conf
+            content: |
+              search .
+              nameserver 192.168.178.65
 
     - name: System Configuration
       notify: Reboot
