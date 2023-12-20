@@ -21,6 +21,9 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  dependsOn:
+    - name: mosquitto
+      namespace: default
   values:
     controllers:
       main:
@@ -55,21 +58,13 @@ spec:
               ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: 'true'
               ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto.default.svc.cluster.local
               ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
-              ZIGBEE2MQTT_CONFIG_MQTT_USER:
-                valueFrom:
-                  secretKeyRef:
-                    name: zigbee2mqtt-secret
-                    key: username
-              ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: zigbee2mqtt-secret
-                    key: password
               ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: 'false'
               ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
               ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: 'true'
               ZIGBEE2MQTT_CONFIG_SERIAL_PORT: &serial-port /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_23_93_35_0A-if00-port0
-
+            envFrom:
+              - secretRef:
+                  name: zigbee2mqtt-secret
             resources:
               requests:
                 cpu: 5m
