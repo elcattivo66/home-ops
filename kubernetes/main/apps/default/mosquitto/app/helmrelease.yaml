@@ -25,28 +25,38 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
-
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-config:
+            image:
+              repository: docker.io/library/eclipse-mosquitto
+              tag: 2.0.18@sha256:8c49a0fab9a1ee9bf5d229061eec4e279f04484c07f60c85c13821788360ce4f
+            command: ["/bin/sh", "-c"]
+            args: ["cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd"]
         containers:
           main:
             image:
-              repository: eclipse-mosquitto
-              tag: 2.0.18
-
+              repository: docker.io/library/eclipse-mosquitto
+              tag: 2.0.18@sha256:8c49a0fab9a1ee9bf5d229061eec4e279f04484c07f60c85c13821788360ce4f
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
                 memory: 100Mi
               limits:
                 memory: 100Mi
-        statefulset:
-          volumeClaimTemplates:
-            - name: data
-              accessMode: ReadWriteOnce
-              size: 128Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /mosquitto/data
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+
     service:
       main:
         type: LoadBalancer
@@ -64,25 +74,25 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          configMap:
-            name: mosquitto-config
+        existingClaim: mosquitto-config
         globalMounts:
-          - path: /mosquitto/config/
-    auth:
-      enabled: true
-
-    configMaps:
-      config:
-        enabled: true
-        data:
-          mosquitto.conf: |
-            listener 1883
-            persistence true
-            persistence_location /mosquitto/data
-            connection_messages false
-            password_file /mosquitto/config/mosquitto_pwd
-            autosave_interval 60
-          mosquitto_pwd: ${SECRET_MOSQUITTO_PASS_HASH}
-
+          - path: /data
+      config-file:
+        type: configMap
+        name: mosquitto-configmap
+        advancedMounts:
+          main:
+            main:
+              - path: /mosquitto/config/mosquitto.conf
+                subPath: mosquitto.conf
+      secret-file:
+        type: secret
+        name: mosquitto-secret
+        advancedMounts:
+          main:
+            init-config:
+              - path: /tmp/secret
+      external-config:
+        type: emptyDir
+        globalMounts:
+          - path: /mosquitto/external_config
