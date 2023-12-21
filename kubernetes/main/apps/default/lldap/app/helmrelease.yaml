@@ -69,10 +69,6 @@ spec:
 
     service:
       main:
-        # type: LoadBalancer
-        # annotations:
-        #   io.cilium/lb-ipam-ips: ${SVC_LLDAP_ADDR}
-        # externalTrafficPolicy: Cluster
         ports:
           http:
             port: 17170
@@ -100,7 +96,3 @@ spec:
       data:
         enabled: true
         type: emptyDir
-      # config:
-      #   enabled: true
-      #   existingClaim: lldap-config-v1
-      #   mountPath: /data
