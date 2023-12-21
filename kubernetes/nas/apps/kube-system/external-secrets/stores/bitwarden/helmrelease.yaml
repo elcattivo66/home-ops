@@ -47,7 +47,7 @@ spec:
                   initialDelaySeconds: 20
                   failureThreshold: 3
                   timeoutSeconds: 1
-                  periodSeconds: 120
+                  periodSeconds: 240
               readiness:
                 enabled: false
             resources:
