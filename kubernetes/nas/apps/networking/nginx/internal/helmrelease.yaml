@@ -32,7 +32,7 @@ spec:
       service:
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: internal.${SECRET_NAS_DOMAIN}
+          external-dns.alpha.kubernetes.io/hostname: internal.${SECRET_HOME_DOMAIN}
       ingressClassResource:
         name: internal
         default: true
@@ -76,7 +76,7 @@ spec:
           namespaceSelector:
             any: true
       extraArgs:
-        default-ssl-certificate: networking/${SECRET_NAS_CERT_NAME}-prod-tls
+        default-ssl-certificate: networking/${SECRET_HOME_CERT_NAME}-prod-tls
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname

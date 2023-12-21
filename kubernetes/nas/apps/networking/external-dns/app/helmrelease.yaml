@@ -41,6 +41,6 @@ spec:
           secretKeyRef:
             name: external-dns-secret
             key: PIHOLE_PASSWORD
-    domainFilters: ["${SECRET_NAS_DOMAIN}"]
+    domainFilters: ["${SECRET_HOME_DOMAIN}"]
     podAnnotations:
       secret.reloader.stakater.com/reload: external-dns-secret

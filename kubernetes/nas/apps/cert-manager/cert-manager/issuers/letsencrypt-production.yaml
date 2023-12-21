@@ -18,4 +18,4 @@ spec:
               key: api-token
         selector:
           dnsZones:
-            - "${SECRET_NAS_DOMAIN}"
+            - "${SECRET_HOME_DOMAIN}"
