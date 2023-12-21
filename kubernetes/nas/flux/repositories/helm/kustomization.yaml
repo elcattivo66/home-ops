@@ -4,6 +4,7 @@ resources:
 - ./bitnami.yaml
 - ./bjw-s.yaml
 - ./external-dns.yaml
+- ./external-secrets.yaml
 - ./helm-stable.yaml
 - ./ingress-nginx.yaml
 - ./intel.yaml
