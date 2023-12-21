@@ -37,7 +37,7 @@ spec:
               MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_NAS_DOMAIN}
               MINIO_SERVER_URL: https://s3.${SECRET_NAS_DOMAIN}
               MINIO_UPDATE: "off"
-              MINIO_PROMETHEUS_JOB_ID: minio
+              MINIO_PROMETHEUS_JOB_ID: nas-minio
               MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
               MINIO_PROMETHEUS_AUTH_TYPE: public
               MINIO_ROOT_USER:
