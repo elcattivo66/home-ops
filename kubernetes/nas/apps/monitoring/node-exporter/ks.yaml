@@ -5,6 +5,7 @@ metadata:
   name: node-exporter
   namespace: flux-system
 spec:
+  targetNamespace: monitoring
   path: ./kubernetes/nas/apps/monitoring/node-exporter/app
   prune: true
   sourceRef:

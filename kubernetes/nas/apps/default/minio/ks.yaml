@@ -6,6 +6,9 @@ metadata:
   name: minio
   namespace: flux-system
 spec:
+  targetNamespace: default
+  dependsOn:
+    - name: external-secrets
   interval: 10m
   path: "./kubernetes/nas/apps/default/minio/app"
   prune: true
