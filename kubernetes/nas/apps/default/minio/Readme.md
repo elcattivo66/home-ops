@@ -1,4 +1,5 @@
 ## Setup Bucket Access for backup
+```json
 s3:*
 {
     "Version": "2012-10-17",
@@ -19,3 +20,4 @@ s3:*
         }
     ]
 }
+```
