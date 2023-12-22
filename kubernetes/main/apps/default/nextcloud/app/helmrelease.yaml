@@ -214,7 +214,6 @@ spec:
       path: /
       pathType: Prefix
       tls:
-        - secretName: ${SECRET_CERT_NAME}-prod-tls
           hosts:
             - *host
 
