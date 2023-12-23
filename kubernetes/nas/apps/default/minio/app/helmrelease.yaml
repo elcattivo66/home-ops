@@ -36,19 +36,12 @@ spec:
               MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_HOME_DOMAIN}
               MINIO_SERVER_URL: https://s3.${SECRET_HOME_DOMAIN}
               MINIO_UPDATE: "off"
-              MINIO_PROMETHEUS_JOB_ID: nas-minio
-              MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
+              MINIO_PROMETHEUS_JOB_ID: minio
+              MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_HOME_DOMAIN}
               MINIO_PROMETHEUS_AUTH_TYPE: public
-              MINIO_ROOT_USER:
-                valueFrom:
-                  secretKeyRef:
-                    name: minio-secret
-                    key: MINIO_ROOT_USER
-              MINIO_ROOT_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: minio-secret
-                    key: MINIO_ROOT_PASSWORD
+            envFrom:
+              - secretRef:
+                  name: minio-secret
             resources:
               requests:
                 cpu: 5m
