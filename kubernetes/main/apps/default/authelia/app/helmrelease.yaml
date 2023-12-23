@@ -45,8 +45,8 @@ spec:
             envFrom:
               - secretRef:
                   name: authelia-secret
-              - secretRef:
-                  name: authelia-sops-secret
+              # - secretRef:
+              #     name: authelia-sops-secret
             env:
               AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDITIONAL_USERS_DN: ou=people
               AUTHELIA_AUTHENTICATION_BACKEND_LDAP_BASE_DN: dc=${SECRET_CERT_NAME},dc=de
