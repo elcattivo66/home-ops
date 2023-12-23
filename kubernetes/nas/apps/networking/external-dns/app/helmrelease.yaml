@@ -32,7 +32,7 @@ spec:
     policy: upsert-only
     registry: noop
     provider: pihole
-    sources: ["ingress"]
+    sources: ["ingress", "service"]
     env:
       - name: EXTERNAL_DNS_PIHOLE_SERVER
         value: http://192.168.178.65
