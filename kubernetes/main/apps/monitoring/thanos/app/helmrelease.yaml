@@ -67,6 +67,7 @@ spec:
       dnsDiscovery:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
+      stores: ["thanos.${SECRET_HOME_DOMAIN}:10901"]
     bucketweb:
       enabled: true
       replicaCount: 2
@@ -75,9 +76,9 @@ spec:
       extraFlags:
         - --compact.concurrency=4
         - --delete-delay=30m
-      retentionResolutionRaw: 30d
-      retentionResolution5m: 60d
-      retentionResolution1h: 90d
+      retentionResolutionRaw: 14d
+      retentionResolution5m: 30d
+      retentionResolution1h: 60d
       persistence:
         enabled: true
         storageClass: local-path
