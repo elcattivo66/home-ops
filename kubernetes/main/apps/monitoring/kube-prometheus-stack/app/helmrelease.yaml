@@ -142,8 +142,7 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
-        retention: 2d
-        retentionSize: 6GB
+
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
@@ -156,6 +155,10 @@ spec:
             existingSecret:
               name: kube-prometheus-stack-secret
               key: objstore.yml
+        retention: 2d
+        retentionSize: 6GB
+        externalLabels:
+          cluster: main
         storageSpec:
           volumeClaimTemplate:
             spec:
