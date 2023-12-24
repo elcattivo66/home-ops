@@ -22,7 +22,7 @@ spec:
     remediation:
       retries: 5
   values:
-    replicas: 2
+    replicas: 1
     admin:
       existingSecret: grafana-secret
     env:
