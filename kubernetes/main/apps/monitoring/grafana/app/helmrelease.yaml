@@ -23,6 +23,8 @@ spec:
       retries: 5
   values:
     replicas: 2
+    admin:
+      existingSecret: grafana-secret
     env:
       GF_DATE_FORMATS_FULL_DATE: "MMM Do, YYYY hh:mm:ss a"
       GF_PANELS_DISABLE_SANITIZE_HTML: true
@@ -30,8 +32,6 @@ spec:
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_DOMAIN: grafana.${SECRET_DOMAIN}
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
-    envFromSecrets:
-      - name: &secret grafana-secret
     grafana.ini:
       analytics:
         check_for_updates: false
