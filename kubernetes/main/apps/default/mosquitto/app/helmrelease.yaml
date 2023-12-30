@@ -33,27 +33,27 @@ spec:
               repository: docker.io/library/eclipse-mosquitto
               tag: 2.0.18@sha256:8c49a0fab9a1ee9bf5d229061eec4e279f04484c07f60c85c13821788360ce4f
             command: ["/bin/sh", "-c"]
-            args: ["cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd"]
+            args:
+              - cp /tmp/secret/* /mosquitto/external_config/;
+                mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd;
+                chmod 0600 /mosquitto/external_config/mosquitto_pwd;
+
         containers:
           main:
             image:
               repository: docker.io/library/eclipse-mosquitto
               tag: 2.0.18@sha256:8c49a0fab9a1ee9bf5d229061eec4e279f04484c07f60c85c13821788360ce4f
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
                 memory: 100Mi
               limits:
                 memory: 100Mi
+
         pod:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            runAsNonRoot: true
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
 
@@ -66,6 +66,9 @@ spec:
         externalTrafficPolicy: Cluster
         ports:
           http:
+            enabled: false
+          mqtt:
+            enabled: true
             port: 1883
 
     persistence:
