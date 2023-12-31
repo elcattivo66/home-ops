@@ -24,6 +24,8 @@ spec:
   values:
     controllers:
       main:
+        replicas: 2
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: 'true'
         initContainers:
@@ -33,7 +35,7 @@ spec:
                   name: immich-secret
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: '16.1'
+              tag: 16.1
         containers:
           main:
             image:
