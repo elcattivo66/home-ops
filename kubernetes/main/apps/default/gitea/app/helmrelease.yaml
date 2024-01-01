@@ -155,24 +155,24 @@ spec:
     - targetPath: gitea.config.attachment.MINIO_ACCESS_KEY_ID
       kind: Secret
       name: gitea-secret
-      valuesKey: MINIO_ACCESS_KEY
+      valuesKey: GITEA_AWS_S3_ACCESS_KEY
     - targetPath: gitea.config.attachment.MINIO_SECRET_ACCESS_KEY
       kind: Secret
       name: gitea-secret
-      valuesKey: MINIO_SECRET_KEY
+      valuesKey: GITEA_AWS_S3_SECRET_KEY
     - targetPath: gitea.config.database.PASSWD
       kind: Secret
       name: gitea-secret
-      valuesKey: GITEA_POSTGRES_PASSWORD
+      valuesKey: POSTGRES_PASSWORD
     - targetPath: gitea.config.database.USER
       kind: Secret
       name: gitea-secret
-      valuesKey: GITEA_POSTGRES_USER
+      valuesKey: POSTGRES_USERNAME
     - targetPath: gitea.config.storage.MINIO_ACCESS_KEY_ID
       kind: Secret
       name: gitea-secret
-      valuesKey: MINIO_ACCESS_KEY
+      valuesKey: GITEA_AWS_S3_ACCESS_KEY
     - targetPath: gitea.config.storage.MINIO_SECRET_ACCESS_KEY
       kind: Secret
       name: gitea-secret
-      valuesKey: MINIO_SECRET_KEY
+      valuesKey: GITEA_AWS_S3_SECRET_KEY
