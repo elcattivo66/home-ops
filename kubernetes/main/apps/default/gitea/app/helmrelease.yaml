@@ -77,10 +77,10 @@ spec:
           MINIO_USE_SSL: true
         mailer:
           ENABLED: true
-          MAILER_TYPE: smtp
-          SMTP_ADDR: smtp-relay.default
+          PROTOCOL: smtp
+          SMTP_ADDR: smtp-relay.default.svc.cluster.local
           SMTP_PORT: 2525
-          FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
+          FROM: "Gitea <gitea@${SECRET_HOME_DOMAIN}>"
         "storage.packages":
           STORAGE_TYPE: minio
         # webhook:
