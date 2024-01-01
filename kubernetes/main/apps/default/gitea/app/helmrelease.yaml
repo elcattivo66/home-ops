@@ -68,11 +68,13 @@ spec:
           ENABLED: true
         attachment:
           STORAGE_TYPE: minio
+          MINIO_LOCATION: eu-central-1
           MINIO_ENDPOINT: s3.${SECRET_HOME_DOMAIN}
           MINIO_BUCKET: gitea
           MINIO_USE_SSL: true
         storage:
           STORAGE_TYPE: minio
+          MINIO_LOCATION: eu-central-1
           MINIO_ENDPOINT: s3.${SECRET_HOME_DOMAIN}
           MINIO_BUCKET: gitea
           MINIO_USE_SSL: true
