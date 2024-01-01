@@ -57,9 +57,9 @@ spec:
           DEFAULT_PRIVATE: true
         admin:
           DISABLE_REGULAR_ORG_CREATION: true
-        security:
-          PASSWORD_COMPLEXITY: "lower,upper"
-          MIN_PASSWORD_LENGTH: 12
+        # security:
+        #   PASSWORD_COMPLEXITY: "lower,upper"
+        #   MIN_PASSWORD_LENGTH: 12
         service:
           DISABLE_REGISTRATION: true
           REQUIRE_SIGNIN_VIEW: true
