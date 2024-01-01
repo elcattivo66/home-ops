@@ -42,3 +42,5 @@ spec:
           cpu:
             cpuid:
               attributeWhitelist: ["AVX", "AVX2"]
+    prometheus:
+      enable: true
