@@ -85,10 +85,13 @@ spec:
         #   ALLOWED_HOST_LIST: drone.default.svc
         cache:
           ADAPTER: redis
-          HOST: redis://redis-master.databases.svc.cluster.local:6379
+          HOST: redis://redis-headless.databases.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
         session:
           PROVIDER: redis
-          PROVIDER_CONFIG: redis://redis-master.databases.svc.cluster.local:6379
+          PROVIDER_CONFIG: redis://redis-headless.databases.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+        queue:
+          TYPE: redis
+          CONN_STR: redis://redis-headless.databases.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
         openid:
           ENABLE_OPENID_SIGNIN: false
           ENABLE_OPENID_SIGNUP: true
