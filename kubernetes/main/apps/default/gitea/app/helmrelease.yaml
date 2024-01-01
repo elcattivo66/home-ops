@@ -121,8 +121,9 @@ spec:
       enabled: false
     persistence:
       enabled: true
+      mount: true
       create: false
-      existingClaim: "gitea-config"
+      claimName: gitea-config
     service:
       ssh:
         type: LoadBalancer
