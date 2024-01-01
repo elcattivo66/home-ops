@@ -10,6 +10,7 @@ resources:
 - ./descheduler.yaml
 - ./external-dns.yaml
 - ./external-secrets.yaml
+- ./gitea.yaml
 - ./helm-stable.yaml
 - ./ingress-nginx.yaml
 - ./intel.yaml
