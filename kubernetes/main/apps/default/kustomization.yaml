@@ -8,6 +8,7 @@ resources:
     - bazarr/ks.yaml
     - calibre-web/ks.yaml
     - fritzbox-exporter/ks.yaml
+    - gitea/ks.yaml
     - gotify/ks.yaml
     - home-assistant/ks.yaml
     - immich/ks.yaml
