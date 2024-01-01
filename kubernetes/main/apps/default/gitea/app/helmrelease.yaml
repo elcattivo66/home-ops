@@ -30,6 +30,7 @@ spec:
       repository: gitea/gitea
       tag: 1.21.3
       rootless: true
+    replicaCount: 1
     containerSecurityContext:
       capabilities:
         add: ["SYS_CHROOT"]
