@@ -176,20 +176,3 @@ spec:
       kind: Secret
       name: gitea-secret
       valuesKey: MINIO_SECRET_KEY
-  postRenderers:
-    - kustomize:
-        patches:
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
-              name: gitea
-            spec:
-              template:
-                spec:
-                  initContainers:
-                    - name: 01-init-db
-                      image: ghcr.io/onedr0p/postgres-init:16.1
-                      imagePullPolicy: IfNotPresent
-                      envFrom:
-                        - secretRef:
-                            name: gitea-secret
