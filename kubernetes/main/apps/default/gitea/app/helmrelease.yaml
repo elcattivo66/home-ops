@@ -119,6 +119,7 @@ spec:
       enabled: false
     persistence:
       enabled: true
+      create: false
       existingClaim: "gitea-config"
     service:
       ssh:
