@@ -81,6 +81,8 @@ spec:
           SMTP_ADDR: smtp-relay.default
           SMTP_PORT: 2525
           FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
+        "storage.packages":
+          STORAGE_TYPE: minio
         # webhook:
         #   ALLOWED_HOST_LIST: drone.default.svc
         cache:
