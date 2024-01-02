@@ -72,7 +72,9 @@ spec:
       config:
         enabled: true
         existingClaim: xteve-config
+        globalMounts:
+          - path: /config
       transcode:
         type: emptyDir
         globalMounts:
-          - path: /transcode
+          - path: /tmp/threadfin/
