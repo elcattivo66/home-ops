@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: intel-device-plugin-gpu
-      namespace: kube-system
+      namespace: tools
     - name: longhorn
       namespace: longhorn-system
   values:
