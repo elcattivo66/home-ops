@@ -2,16 +2,18 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: system-upgrade-controller
+  name: intel-device-plugin-operator
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
-  path: ./kubernetes/main/apps/kube-system/system-upgrade-controller/app
+  targetNamespace: tools
+  dependsOn:
+    - name: node-feature-discovery
+    - name: cert-manager-issuers
+  path: ./kubernetes/main/apps/tools/intel-device-plugin/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  wait: true
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -19,18 +21,17 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: system-upgrade-controller-plans
+  name: intel-device-plugin-gpu
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
+  targetNamespace: tools
   dependsOn:
-    - name: system-upgrade-controller
-  path: ./kubernetes/main/apps/kube-system/system-upgrade-controller/plans
+    - name: intel-device-plugin-operator
+  path: ./kubernetes/main/apps/tools/intel-device-plugin/gpu
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  wait: true
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 3m

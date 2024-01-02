@@ -4,8 +4,8 @@ metadata:
   name: reloader
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
-  path: ./kubernetes/main/apps/kube-system/reloader/app
+  targetNamespace: tools
+  path: ./kubernetes/main/apps/tools/reloader/app
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
