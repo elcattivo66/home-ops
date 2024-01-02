@@ -5,18 +5,14 @@ metadata:
   name: xteve
   namespace: flux-system
 spec:
+  targetNamespace: default
   dependsOn:
     - name: longhorn
-  path: ./kubernetes/apps/default/xteve/app
+  path: ./kubernetes/main/apps/default/xteve/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta2
-      kind: HelmRelease
-      name: xteve
-      namespace: default
   interval: 30m
   retryInterval: 1m
   timeout: 3m
