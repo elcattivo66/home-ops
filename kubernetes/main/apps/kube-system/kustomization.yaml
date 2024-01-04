@@ -8,4 +8,4 @@ resources:
   - ./external-secrets/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./metrics-server/ks.yaml
-  # - ./spegel/ks.yaml
+  - ./spegel/ks.yaml
