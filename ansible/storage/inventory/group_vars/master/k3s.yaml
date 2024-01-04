@@ -11,10 +11,21 @@ k3s_server:
     - "{{ k3s_registration_address }}"
     - nas.bross.casa
   docker: false
-  disable-network-policy: true
   disable-cloud-controller: true
+  disable-helm-controller: true
+  disable-network-policy: true
   cluster-cidr: "10.142.0.0/16"
   service-cidr: "10.143.0.0/16"
   write-kubeconfig-mode: "0644"
-  disable:
-    - traefik
+  disable: ["metrics-server", "traefik"]
+  etcd-disable-snapshots: true
+k3s_server_manifests_urls:
+  # Essential Prometheus Operator CRDs (the rest are installed with the kube-prometheus-stack helm release)
+  - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml
+    filename: custom-prometheus-podmonitors.yaml
+  - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_prometheusrules.yaml
+    filename: custom-prometheus-prometheusrules.yaml
+  - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_scrapeconfigs.yaml
+    filename: custom-prometheus-scrapeconfigs.yaml
+  - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+    filename: custom-prometheus-servicemonitors.yaml
