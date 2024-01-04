@@ -20,7 +20,7 @@ terraform.tfstate*
 *.key
 *.pem
 # kubernetes
-kubeconfig*
+kubeconfig
 kubernetes/schemas
 # extras
 config.xml
