@@ -99,13 +99,3 @@ spec:
         path: /tank/photos/immich_upload/
         globalMounts:
           - path: *mediaLocation
-      geocoding-dump:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.reverse-geocoding-dump
-      transformers-cache:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.transformers_cache
