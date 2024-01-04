@@ -78,11 +78,3 @@ spec:
         path: /tank/photos/immich_upload/
         globalMounts:
           - path: *mediaLocation
-      geocoding-dump:
-        type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.reverse-geocoding-dump
-      geoname-dump:
-        type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/node_modules/local-reverse-geocoder/geonames_dump
