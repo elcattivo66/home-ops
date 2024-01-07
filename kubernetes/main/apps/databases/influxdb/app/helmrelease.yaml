@@ -31,7 +31,7 @@ spec:
 
     image:
       repository: bitnami/influxdb
-      tag: 2.7.4
+      tag: 2.7.5
 
     auth:
       existingSecret: influxdb-secret
