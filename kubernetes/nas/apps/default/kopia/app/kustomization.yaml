@@ -5,9 +5,9 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-configMapGenerator:
-  - name: kopia-repository-config-tpl
-    files:
-      - repository.config=./config/repository.config
-generatorOptions:
-  disableNameSuffixHash: true
+# configMapGenerator:
+#   - name: kopia-repository-config-tpl
+#     files:
+#       - repository.config=./config/repository.config
+# generatorOptions:
+#   disableNameSuffixHash: true
