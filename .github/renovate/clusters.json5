@@ -6,7 +6,7 @@
       "matchFileNames": [
         "**/kubernetes/main/**",
         "**/ansible/main/**",
-        // "**/terraform/main/**"
+        "**/terraform/main/**"
       ],
       "additionalBranchPrefix": "main-"
     },
@@ -15,7 +15,7 @@
       "matchFileNames": [
         "**/kubernetes/nas/**",
         "**/ansible/storage/**",
-        // "**/terraform/storage/**"
+        "**/terraform/storage/**"
       ],
       "additionalBranchPrefix": "nas-"
     }
