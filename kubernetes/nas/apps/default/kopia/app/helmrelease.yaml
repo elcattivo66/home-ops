@@ -106,3 +106,9 @@ spec:
         hostPathType: Directory
         globalMounts:
           - path: /data
+      spool:
+        type: hostPath
+        hostPath: /spool
+        hostPathType: Directory
+        globalMounts:
+          - path: /spool
