@@ -48,6 +48,22 @@ spec:
       defaultLonghornStaticStorageClass: longhorn
       defaultReplicaCount: 3
       orphanAutoDeletion: true
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      backupstorePollInterval: 60
+      concurrentAutomaticEngineUpgradePerNodeLimit: 3
+      defaultDataPath: /var/lib/longhorn
+      defaultDataLocality: best-effort
+      allowRecurringJobWhileVolumeDetached: false
+      autoCleanupSystemGeneratedSnapshot: true
+      autoDeletePodWhenVolumeDetachedUnexpectedly: true
+      disableSchedulingOnCordonedNode: true
+      engineReplicaTimeout: 8
+      failedBackupTTL: 1440
+      restoreVolumeRecurringJobs: true
+      snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false
+      snapshotDataIntegrityCronjob: 0 8 */7 * *
+      upgradeChecker: false
+      v2DataEngine: false
     # resources:
     #   requests:
     #     cpu: 25m
