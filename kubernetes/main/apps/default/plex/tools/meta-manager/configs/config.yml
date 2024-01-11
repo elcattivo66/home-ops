@@ -6,19 +6,12 @@ libraries:
       - pmm: tmdb
       - pmm: basic
       - pmm: seasonal                                 # Christmas, Halloween, etc.
-        template_variables:                           # Canadian Thankgsgiving is a different date range. Otherwise, I want to ALWAYS see the seasonal
-          schedule_independence: daily
-          schedule_easter: daily
-          schedule_valentine: daily
-          schedule_patrick: daily
+        template_variables:
+          schedule_valentine: range(02/01-02/14)
           schedule_thanksgiving: range(10/01-10/31)
-          schedule_halloween: daily
+          schedule_halloween: range(10/15-10/31)
           schedule_christmas: range(11/01-12/31)
-          schedule_years: daily
-          schedule_mother: daily
-          schedule_memorial: daily
-          schedule_father: daily
-          schedule_labor: daily
+          schedule_years: range(12/26-01/06)
     overlay_path:
       - remove_overlays: false
       - pmm: streaming
@@ -37,19 +30,12 @@ libraries:
       - pmm: tmdb
       - pmm: basic
       - pmm: seasonal                                 # Christmas, Halloween, etc.
-        template_variables:                           # Canadian Thankgsgiving is a different date range. Otherwise, I want to ALWAYS see the seasonal
-          schedule_independence: daily
-          schedule_easter: daily
-          schedule_valentine: daily
-          schedule_patrick: daily
+        template_variables:
+          schedule_valentine: range(02/01-02/14)
           schedule_thanksgiving: range(10/01-10/31)
-          schedule_halloween: daily
-          schedule_christmas: daily
-          schedule_years: daily
-          schedule_mother: daily
-          schedule_memorial: daily
-          schedule_father: daily
-          schedule_labor: daily
+          schedule_halloween: range(10/15-10/31)
+          schedule_christmas: range(11/01-12/31)
+          schedule_years: range(12/26-01/06)
     overlay_path:
       - remove_overlays: false
       - pmm: streaming
