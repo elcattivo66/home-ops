@@ -81,3 +81,9 @@ spec:
         existingClaim: immich-machine-learning-cache
         globalMounts:
           - path: /cache
+      external:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /tank/photos/Plex_Album/
+        globalMounts:
+          - path: /external-library/
