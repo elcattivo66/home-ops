@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
     # Pre Flux-Kustomizations
     # Flux-Kustomizations
+    - ./actual/ks.yaml
     - ./audiobookshelf/ks.yaml
     - ./authelia/ks.yaml
     - ./bazarr/ks.yaml
