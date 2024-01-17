@@ -158,6 +158,7 @@ sonarr:
           - e1a997ddb54e3ecbfe06341ad323c458 # Obfuscated
           - 06d66ab109d4d2eddb2794d21526d140 # Retags
           - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
+          - 15a05bc7c1a36e2b57fd628f8977e2fc # AV1
         quality_profiles:
           - name: HD-1080p
           - name: Ultra-HD
@@ -270,6 +271,7 @@ radarr:
         - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
         - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
         - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
+        - cae4ca30163749b891686f95532519bd # AV1
         quality_profiles:
           - name: HD-1080p
           - name: Ultra-HD
