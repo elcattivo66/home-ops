@@ -13,7 +13,7 @@ concurrency:
 jobs:
   changed-files:
     name: Changed Files
-    runs-on: ubuntu-latest
+    runs-on: ["arc-runner-set-home-ops"]
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
     steps:
