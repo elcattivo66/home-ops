@@ -37,9 +37,6 @@ spec:
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
     l2announcements:
       enabled: true
-      leaseDuration: 120s
-      leaseRenewDeadline: 60s
-      leaseRetryPeriod: 1s
     loadBalancer:
       algorithm: maglev
       mode: dsr
@@ -49,6 +46,4 @@ spec:
     rollOutCiliumPods: true
     securityContext:
       privileged: true
-    tunnel: disabled
-    cni:
-      exclusive: false
+    routingMode: native
