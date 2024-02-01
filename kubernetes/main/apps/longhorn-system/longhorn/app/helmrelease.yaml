@@ -64,9 +64,9 @@ spec:
       snapshotDataIntegrityCronjob: 0 8 */7 * *
       upgradeChecker: false
       v2DataEngine: false
-    # resources:
-    #   requests:
-    #     cpu: 25m
-    #     memory: 100Mi
-    #   limits:
-    #     memory: 1500Mi
+    resources:
+      requests:
+        cpu: 50m
+        memory: 50Mi
+      # limits:
+      #   memory: 1500Mi
