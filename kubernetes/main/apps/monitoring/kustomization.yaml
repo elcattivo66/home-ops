@@ -10,5 +10,6 @@ resources:
   - ./node-exporter/ks.yaml
   - ./kube-state-metrics/ks.yaml
   - ./thanos/ks.yaml
+  - ./smartctl-exporter/ks.yaml
   # - ./loki/ks.yaml
   # - ./vector/ks.yaml
