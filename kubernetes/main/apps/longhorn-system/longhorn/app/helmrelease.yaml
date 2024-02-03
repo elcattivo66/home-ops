@@ -52,7 +52,8 @@ spec:
       backupstorePollInterval: 60
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
       defaultDataPath: /var/lib/longhorn
-      defaultDataLocality: best-effort
+      defaultDataLocality: true
+      replicaAutoBalance: true
       allowRecurringJobWhileVolumeDetached: false
       autoCleanupSystemGeneratedSnapshot: true
       autoDeletePodWhenVolumeDetachedUnexpectedly: true
@@ -64,6 +65,9 @@ spec:
       snapshotDataIntegrityCronjob: 0 8 */7 * *
       upgradeChecker: false
       v2DataEngine: false
+    metrics:
+      serviceMonitor:
+        enabled: true
     resources:
       requests:
         cpu: 50m
