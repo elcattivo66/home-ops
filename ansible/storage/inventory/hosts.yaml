@@ -1,11 +1,10 @@
 ---
-storage:
+kubernetes:
+  vars:
+    ansible_user: philipp
+    ansible_ssh_port: 22
   children:
-    master:
-      vars:
-        ansible_user: philipp
-        ansible_ssh_port: 22
-        ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+    controllers:
       hosts:
         nas:
           ansible_host: 192.168.178.5
