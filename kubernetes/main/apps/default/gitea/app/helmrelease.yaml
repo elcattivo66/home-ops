@@ -148,11 +148,10 @@ spec:
             - *host
     resources:
       requests:
-        cpu: 15m
-        memory: 226M
+        cpu: 10m
+        memory: 160Mi
       limits:
-        cpu: 500m
-        memory: 1Gi
+        memory: 160Mi
   valuesFrom:
     - targetPath: gitea.admin.email
       kind: Secret

@@ -46,10 +46,10 @@ spec:
               requests:
                 gpu.intel.com/i915: 1
                 cpu: 258m
-                memory: 3011Mi
+                memory: 3443Mi
               limits:
                 gpu.intel.com/i915: 1
-                memory: 3011Mi
+                memory: 3443Mi
         pod:
           affinity:
             nodeAffinity:

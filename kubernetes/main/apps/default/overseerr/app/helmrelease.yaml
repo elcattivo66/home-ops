@@ -59,9 +59,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 371Mi
+                memory: 361Mi
               limits:
-                memory: 371Mi
+                memory: 361Mi
     service:
       main:
         ports:
