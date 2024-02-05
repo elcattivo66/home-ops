@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - ./kopia/ks.yaml
   - ./minio/ks.yaml
-  - ./zot/ks.yaml
