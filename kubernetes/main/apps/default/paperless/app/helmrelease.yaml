@@ -104,13 +104,13 @@ spec:
       main:
         enabled: true
         className: internal
-        annotations:
-          nginx.ingress.kubernetes.io/auth-method: GET
-          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local:9091/api/verify
-          nginx.ingress.kubernetes.io/auth-signin: https://authelia.${SECRET_DOMAIN}/rm=$request_method
-          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        # annotations:
+        #   nginx.ingress.kubernetes.io/auth-method: GET
+        #   nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local:9091/api/verify
+        #   nginx.ingress.kubernetes.io/auth-signin: https://authelia.${SECRET_DOMAIN}/rm=$request_method
+        #   nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+        #   nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+        #   nginx.ingress.kubernetes.io/proxy-body-size: "0"
         hosts:
           - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
             paths:

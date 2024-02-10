@@ -141,3 +141,12 @@ identity_providers:
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris: ["https://tandoor.${SECRET_DOMAIN}/accounts/tandoor/login/callback/"]
         userinfo_signing_algorithm: none
+      - id: paperless
+        description: paperless
+        secret: "$${PAPERLESS_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://paperless.${SECRET_DOMAIN}/accounts/paperless/login/callback/"]
+        userinfo_signing_algorithm: none
