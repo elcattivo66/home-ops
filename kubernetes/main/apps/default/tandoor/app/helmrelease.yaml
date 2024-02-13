@@ -44,7 +44,7 @@ spec:
                   name: tandoor-secret
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: '16.1'
+              tag: '16.2'
           02-init-migrate:
             image:
               repository: docker.io/vabene1111/recipes
