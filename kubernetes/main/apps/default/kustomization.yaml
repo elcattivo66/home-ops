@@ -12,6 +12,7 @@ resources:
     - ./gotify/ks.yaml
     - ./home-assistant/ks.yaml
     - ./immich/ks.yaml
+    - ./libreddit/ks.yaml
     - ./lidarr/ks.yaml
     - ./lldap/ks.yaml
     - ./nextcloud/ks.yaml
