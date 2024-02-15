@@ -107,7 +107,7 @@ spec:
           nginx:
             image:
               repository: nginxinc/nginx-unprivileged
-              tag: 1.25.3-alpine
+              tag: 1.25.4-alpine
             resources:
               requests:
                 cpu: 10m
