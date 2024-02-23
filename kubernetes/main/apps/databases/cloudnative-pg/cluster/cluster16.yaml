@@ -67,7 +67,7 @@ spec:
         endpointURL: https://s3.${SECRET_HOME_DOMAIN}
         s3Credentials:
           accessKeyId:
-            name: pcloudnative-pg-secret
+            name: cloudnative-pg-secret
             key: MINIO_ACCESS_KEY
           secretAccessKey:
             name: cloudnative-pg-secret
