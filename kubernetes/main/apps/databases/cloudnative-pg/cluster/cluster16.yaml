@@ -6,7 +6,7 @@ metadata:
   name: postgres16
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.2-4 # ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.2-v0.2.0
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.2-v0.2.0
   primaryUpdateStrategy: unsupervised
   storage:
     size: 15Gi
@@ -15,15 +15,15 @@ spec:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-  bootstrap:
-    recovery:
-      source: &previousCluster postgres16-v2
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v2
   postgresql:
     parameters:
       max_connections: "600"
       shared_buffers: 512MB
-    # shared_preload_libraries:
-    #   - "vectors.so"
+    shared_preload_libraries:
+      - "vectors.so"
   resources:
     requests:
       memory: "2Gi"
@@ -57,18 +57,18 @@ spec:
           name: cloudnative-pg-secret
           key: MINIO_SECRET_KEY
 
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        wal:
-          compression: bzip2
-          maxParallel: 8
-        destinationPath: s3://postgresql/
-        endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-        s3Credentials:
-          accessKeyId:
-            name: cloudnative-pg-secret
-            key: MINIO_ACCESS_KEY
-          secretAccessKey:
-            name: cloudnative-pg-secret
-            key: MINIO_SECRET_KEY
+  # externalClusters:
+  #   - name: *previousCluster
+  #     barmanObjectStore:
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 8
+  #       destinationPath: s3://postgresql/
+  #       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: cloudnative-pg-secret
+  #           key: MINIO_ACCESS_KEY
+  #         secretAccessKey:
+  #           name: cloudnative-pg-secret
+  #           key: MINIO_SECRET_KEY
