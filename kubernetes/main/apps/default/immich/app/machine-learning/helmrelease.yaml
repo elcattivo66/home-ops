@@ -28,7 +28,7 @@ spec:
     controllers:
       main:
         annotations:
-          reloader.stakater.com/auto: 'true'
+          reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
@@ -63,7 +63,7 @@ spec:
                       - key: feature.node.kubernetes.io/cpu-cpuid.AVX2
                         operator: In
                         values:
-                          - 'true'
+                          - "true"
     service:
       main:
         ports:
@@ -73,7 +73,7 @@ spec:
       library:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/photos/immich_upload/
+        path: /tank/photos/immich/
         globalMounts:
           - path: *mediaLocation
       cache:
