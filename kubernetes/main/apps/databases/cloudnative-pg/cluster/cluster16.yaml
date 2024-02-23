@@ -17,7 +17,7 @@ spec:
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres16-v3
+      source: &previousCluster postgres16-v2
   postgresql:
     parameters:
       max_connections: "600"
@@ -48,7 +48,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-      serverName: postgres16-v4
+      serverName: postgres16-v3
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
