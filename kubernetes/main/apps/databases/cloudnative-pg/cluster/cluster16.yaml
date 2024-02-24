@@ -6,7 +6,7 @@ metadata:
   name: postgres16
 spec:
   instances: 3
-  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.2-v0.2.0
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.2-4 #ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.2-v0.2.0
   storage:
     size: 15Gi
     storageClass: local-path
@@ -19,7 +19,7 @@ spec:
   #   recovery:
   #     source: &previousCluster postgres16-v2
   postgresql:
-    shared_preload_libraries: ["vectors.so"]
+    # shared_preload_libraries: ["vectors.so"]
     parameters:
       max_connections: "600"
       max_slot_wal_keep_size: 10GB
