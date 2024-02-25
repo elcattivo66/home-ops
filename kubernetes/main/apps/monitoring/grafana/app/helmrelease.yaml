@@ -164,8 +164,7 @@ spec:
           gnetId: 13983
           revision: 10
           datasource:
-            - name: DS_PROMETHEUS
-              value: Prometheus
+            - { name: DS_PROMETHEUS, value: Prometheus }
         external-dns:
           # renovate: depName="External-dns"
           gnetId: 15038
@@ -176,8 +175,7 @@ spec:
           gnetId: 18089
           revision: 1
           datasource:
-            - name: DS_PROMETHEUS
-              value: Prometheus
+            - { name: DS_PROMETHEUS, value: Prometheus }
         longhorn:
           # renovate: depName="Longhorn"
           gnetId: 16888
@@ -197,14 +195,14 @@ spec:
           # renovate: depName="Redis Dashboard for Prometheus Redis Exporter 1.x"
           gnetId: 763
           revision: 6
-          datasource: Prometheus
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         minio:
           # renovate: depName="MinIO Dashboard"
           gnetId: 13502
           revision: 25
           datasource:
-            - name: DS_PROMETHEUS
-              value: Prometheus
+            - { name: DS_PROMETHEUS, value: Prometheus }
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
