@@ -164,8 +164,8 @@ spec:
           gnetId: 13983
           revision: 10
           datasource:
-          - name: DS_PROMETHEUS
-            value: Prometheus
+            - name: DS_PROMETHEUS
+              value: Prometheus
         external-dns:
           # renovate: depName="External-dns"
           gnetId: 15038
@@ -203,11 +203,8 @@ spec:
           gnetId: 13502
           revision: 25
           datasource:
-          - name: DS_PROMETHEUS
-            value: Prometheus
-        cloudnative-pg:
-          url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
-          datasource: Prometheus
+            - name: DS_PROMETHEUS
+              value: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
