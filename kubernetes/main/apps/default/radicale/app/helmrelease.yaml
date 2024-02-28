@@ -21,7 +21,7 @@ spec:
       main:
         type: statefulset
         annotations:
-          reloader.stakater.com/auto: 'true'
+          reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
@@ -31,9 +31,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 22M
+                memory: 50M
               limits:
-                memory: 22M
+                memory: 50M
         statefulset:
           volumeClaimTemplates:
             - name: data
@@ -55,7 +55,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
-          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
