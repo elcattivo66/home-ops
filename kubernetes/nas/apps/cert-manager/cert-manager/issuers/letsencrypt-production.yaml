@@ -14,7 +14,7 @@ spec:
           cloudflare:
             email: "${SECRET_LETSENCRYPT_EMAIL}"
             apiKeySecretRef:
-              name: cloudflare-token-secret
+              name: cloudflare-secret
               key: CLOUDFLARE_API_KEY
         selector:
           dnsZones:
