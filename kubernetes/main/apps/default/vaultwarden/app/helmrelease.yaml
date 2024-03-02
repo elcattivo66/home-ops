@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: ghcr.io/dani-garcia/vaultwarden
-              tag: 1.30.4
+              tag: 1.30.5
             env:
               TIMEZONE: ${TZ}
               SIGNUPS_ALLOWED: false
