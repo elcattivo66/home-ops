@@ -1,31 +1,31 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ./actions-runner-controller.yaml
-- ./angelnu.yaml
-- ./bitnami.yaml
-- ./bjw-s.yaml
-- ./cloudnative-pg.yaml
-- ./cilium.yaml
-- ./coredns.yaml
-- ./descheduler.yaml
-- ./external-dns.yaml
-- ./external-secrets.yaml
-- ./gitea.yaml
-- ./helm-stable.yaml
-- ./ingress-nginx.yaml
-- ./intel.yaml
-- ./metrics-server.yaml
-- ./mittwald.yaml
-- ./longhorn.yaml
-- ./jetstack.yaml
-- ./node-feature-discovery.yaml
-- ./prometheus-community.yaml
-- ./grafana.yaml
-- ./nextcloud.yaml
-- ./renovate.yaml
-- ./stakater.yaml
-- ./weave-gitops.yaml
-- ./k8s-gateway.yaml
-- ./k8tz.yaml
-- ./xenitab.yaml
+  - ./actions-runner-controller.yaml
+  - ./angelnu.yaml
+  - ./bitnami.yaml
+  - ./bjw-s.yaml
+  - ./cloudnative-pg.yaml
+  - ./cilium.yaml
+  - ./coredns.yaml
+  - ./descheduler.yaml
+  - ./external-dns.yaml
+  - ./external-secrets.yaml
+  - ./gitea.yaml
+  - ./helm-stable.yaml
+  - ./ingress-nginx.yaml
+  - ./intel.yaml
+  - ./k8tz.yaml
+  - ./kubetail.yaml
+  - ./metrics-server.yaml
+  - ./mittwald.yaml
+  - ./longhorn.yaml
+  - ./jetstack.yaml
+  - ./node-feature-discovery.yaml
+  - ./prometheus-community.yaml
+  - ./grafana.yaml
+  - ./nextcloud.yaml
+  - ./renovate.yaml
+  - ./stakater.yaml
+  - ./weave-gitops.yaml
+  - ./xenitab.yaml
