@@ -2,29 +2,28 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./actions-runner-controller.yaml
-  - ./angelnu.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
-  - ./cloudnative-pg.yaml
   - ./cilium.yaml
+  - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./descheduler.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
   - ./gitea.yaml
+  - ./grafana.yaml
   - ./helm-stable.yaml
   - ./ingress-nginx.yaml
   - ./intel.yaml
+  - ./jetstack.yaml
   - ./k8tz.yaml
   - ./kubetail.yaml
+  - ./longhorn.yaml
   - ./metrics-server.yaml
   - ./mittwald.yaml
-  - ./longhorn.yaml
-  - ./jetstack.yaml
+  - ./nextcloud.yaml
   - ./node-feature-discovery.yaml
   - ./prometheus-community.yaml
-  - ./grafana.yaml
-  - ./nextcloud.yaml
   - ./renovate.yaml
   - ./stakater.yaml
   - ./weave-gitops.yaml
