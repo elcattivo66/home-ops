@@ -114,7 +114,7 @@ identity_providers:
     clients:
       - id: grafana
         description: Grafana
-        secret: ${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}
+        secret: "$${GRAFANA_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -123,7 +123,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: nextcloud
         description: Nextcloud
-        secret: ${SECRET_NEXTCLOUD_OAUTH_CLIENT_SECRET}
+        secret: "$${NEXTCLOUD_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -132,7 +132,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: gitea
         description: Gitea
-        secret: ${SECRET_GITEA_OAUTH_CLIENT_SECRET}
+        secret: "$${GITEA_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         scopes: ["openid", "profile", "groups", "email"]
@@ -141,7 +141,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: immich
         description: Immich
-        secret: ${SECRET_IMMICH_OAUTH_CLIENT_SECRET}
+        secret: "$${SECRET_IMMICH_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -151,7 +151,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: minio
         description: Minio
-        secret: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
+        secret: "$${MINIO_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -169,7 +169,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: audiobookshelf
         description: audiobookshelf
-        secret: "${SECRET_AUDIOBOOKSHELF_OAUTH_CLIENT_SECRET}"
+        secret: "$${AUDIOBOOKSHELF_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -182,7 +182,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: tandoor
         description: tandoor
-        secret: "${SECRET_TANDOOR_OAUTH_CLIENT_SECRET}"
+        secret: "$${TANDOOR_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -192,7 +192,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - id: paperless
         description: paperless
-        secret: "${SECRET_PAPERLESS_OAUTH_CLIENT_SECRET}"
+        secret: "$${PAPERLESS_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
