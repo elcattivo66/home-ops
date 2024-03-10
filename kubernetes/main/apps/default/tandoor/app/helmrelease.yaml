@@ -67,7 +67,7 @@ spec:
               tag: 1.5.14
             envFrom: *envFrom
             env:
-              TIMEZONE: ${TZ}
+              TZ: ${TZ}
               ENABLE_METRICS: 1
               ENABLE_SIGNUP: 0
               TANDOOR_PORT: &port 8888
