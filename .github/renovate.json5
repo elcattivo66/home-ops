@@ -1,6 +1,6 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
     "config:recommended",
     "docker:enableMajor",
     "replacements:k8s-registry-move",
@@ -9,6 +9,7 @@
     ":semanticCommits",
     ":automergeDigest",
     ":automergeBranch",
+    ":skipStatusChecks",
     ":timezone(Europe/Berlin)",
     "github>elcattivo66/home-ops//.github/renovate/allowedVersions.json5",
     "github>elcattivo66/home-ops//.github/renovate/autoMerge.json5",
@@ -20,25 +21,21 @@
     "github>elcattivo66/home-ops//.github/renovate/labels.json5",
     "github>elcattivo66/home-ops//.github/renovate/semanticCommits.json5",
     "github>elcattivo66/home-ops//.github/renovate/packageRules.json5",
-    "helpers:pinGitHubActionDigests"
   ],
-  "onboarding": false,
-  "requireConfig": "optional",
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "suppressNotifications": ["prIgnoreNotification"],
-  "ignorePaths": ["**/.archive/**"],
-  "flux": {
-    "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"]
+  dependencyDashboardTitle: "Renovate Dashboard 🤖",
+  suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
+  ignorePaths: ["**/*.sops.*", "**/.archive/**", "**/config/**"],
+  flux: {
+    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"],
   },
   "helm-values": {
-    "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"]
+    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"],
   },
-  "kubernetes": {
-    "fileMatch": [
+  kubernetes: {
+    fileMatch: [
       "(^|/)\\.taskfiles/.+\\.ya?ml(\\.j2)?$",
       "(^|/)ansible/.+\\.ya?ml(\\.j2)?$",
-      "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
-    ]
-  }
+      "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$",
+    ],
+  },
 }
-
