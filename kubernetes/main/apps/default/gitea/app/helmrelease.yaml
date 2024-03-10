@@ -104,7 +104,7 @@ spec:
       oauth:
         - name: authelia
           provider: openidConnect
-          key: gitea
+          existingSecret: gitea-oauth-secret
           autoDiscoverUrl: "https://authelia.${SECRET_DOMAIN}/.well-known/openid-configuration"
           groupClaimName: groups
           adminGroup: admin
@@ -184,7 +184,8 @@ spec:
       kind: Secret
       name: gitea-secret
       valuesKey: GITEA_AWS_S3_SECRET_KEY
-    - targetPath: gitea.oauth.secret
-      kind: Secret
-      name: gitea-secret
-      valuesKey: GITEA_OAUTH_CLIENT_SECRET
+      # Does not work
+    # - targetPath: gitea.oauth.secret
+    #   kind: Secret
+    #   name: gitea-secret
+    #   valuesKey: GITEA_OAUTH_CLIENT_SECRET
