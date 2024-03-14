@@ -8,4 +8,4 @@ resources:
   - ./cloudnative-pg/ks.yaml
   - ./postgres-backup/ks.yaml
   - ./redis/ks.yaml
-  - ./influxdb2/ks.yaml
+  - ./influxdb/ks.yaml
