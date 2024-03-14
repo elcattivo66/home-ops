@@ -145,7 +145,7 @@ spec:
             type: influxdb
             access: proxy
             url: http://influxdb.databases.svc.cluster.local:8086/
-            database: openhab
+            database: openhab_db
             jsonData:
               httpMode: GET
               httpHeaderName1: Authorization
