@@ -13,6 +13,7 @@ resources:
   - ./gitea.yaml
   - ./grafana.yaml
   - ./helm-stable.yaml
+  - ./influxdata.yaml
   - ./ingress-nginx.yaml
   - ./intel.yaml
   - ./jetstack.yaml
