@@ -8,7 +8,7 @@ spec:
   targetNamespace: databases
   dependsOn:
     - name: longhorn
-  path: ./kubernetes/main/apps/databases/influxdb/app
+  path: ./kubernetes/main/apps/databases/influxdb2/app
   prune: true
   sourceRef:
     kind: GitRepository
