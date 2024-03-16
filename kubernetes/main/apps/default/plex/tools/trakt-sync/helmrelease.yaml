@@ -23,6 +23,9 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: plex
+      namespace: default
   values:
     controllers:
       trakt-sync:
