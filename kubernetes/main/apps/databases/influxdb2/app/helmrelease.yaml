@@ -24,8 +24,8 @@ spec:
       pullPolicy: IfNotPresent
     adminUser:
       create: true
-      organization: sc
-      bucket: default
+      organization: home
+      bucket: smarthome
       user: "admin"
       retention_policy: "0s"
       existingSecret: influxdb-secret
