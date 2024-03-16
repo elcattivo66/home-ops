@@ -5,9 +5,4 @@ resources:
   - ./helmrelease.yaml
   - ./externalsecret.yaml
   - ./pvc.yaml
-configMapGenerator:
-  - name: tandoor-configmap
-    files:
-      - ./config/nginx-config
-generatorOptions:
-  disableNameSuffixHash: true
+  - ./configmap.yaml
