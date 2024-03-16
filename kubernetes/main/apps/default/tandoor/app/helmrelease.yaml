@@ -29,7 +29,7 @@ spec:
       tandoor:
         annotations:
           reloader.stakater.com/auto: "true"
-
+        pod:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
