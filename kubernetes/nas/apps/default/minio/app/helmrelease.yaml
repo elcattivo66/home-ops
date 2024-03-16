@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -15,17 +15,24 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      minio:
         type: statefulset
 
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          main:
+          app:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-03-15T01-07-19Z
@@ -52,7 +59,8 @@ spec:
               fsGroup: 100
               fsGroupChangePolicy: "OnRootMismatch"
     service:
-      main:
+      app:
+        controller: minio
         type: LoadBalancer
         externalTrafficPolicy: Local
         ports:
@@ -61,7 +69,8 @@ spec:
           s3:
             port: 9000
     serviceMonitor:
-      main:
+      app:
+        serviceName: minio
         enabled: true
         endpoints:
           - port: s3
@@ -70,21 +79,20 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
     ingress:
-      main:
-        enabled: true
+      app:
         className: internal
         hosts:
           - host: &host-console "minio.${SECRET_HOME_DOMAIN}"
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
           - host: &host-s3 "s3.${SECRET_HOME_DOMAIN}"
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: s3
         tls:
           - hosts:
@@ -96,6 +104,5 @@ spec:
         type: hostPath
         hostPath: /spool/minio
         hostPathType: Directory
-        mountPath: /data
         globalMounts:
           - path: /data
