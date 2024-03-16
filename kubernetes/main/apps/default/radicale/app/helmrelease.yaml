@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -9,21 +9,28 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      radicale:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: tomsquest/docker-radicale
               tag: 3.1.8.3
@@ -43,14 +50,14 @@ spec:
               globalMounts:
                 - path: /data
     service:
-      main:
+      app:
+        controller: radicale
         ports:
           http:
             port: 5232
 
     ingress:
-      main:
-        enabled: true
+      app:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
@@ -60,7 +67,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
@@ -68,18 +75,16 @@ spec:
 
     persistence:
       config:
-        enabled: true
         type: configMap
         name: radicale-config
-        readOnly: true
         globalMounts:
           - path: /config/config
             subPath: config.cfg
+            readOnly: true
       auth:
-        enabled: true
         type: secret
         name: radicale-auth
-        readOnly: true
         globalMounts:
           - path: /config/users
             subPath: users
+            readOnly: true

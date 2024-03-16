@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -8,16 +8,24 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   interval: 30m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      trakt-sync:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
@@ -40,7 +48,7 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/taxel/plextraktsync
               tag: 0.29.7
@@ -56,9 +64,9 @@ spec:
                     key: PLEX_TOKEN
               PLEX_USERNAME:
                 valueFrom:
-                      secretKeyRef:
-                        name: plex-trakt-sync-secret
-                        key: PLEX_USERNAME
+                  secretKeyRef:
+                    name: plex-trakt-sync-secret
+                    key: PLEX_USERNAME
               TRAKT_USERNAME:
                 valueFrom:
                   secretKeyRef:
@@ -77,14 +85,6 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 100Mi
-
-    service:
-      main:
-        enabled: false
-
-    ingress:
-      main:
-        enabled: false
 
     persistence:
       config-yaml:
