@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -15,16 +15,16 @@ spec:
         name: bjw-s
         namespace: flux-system
   install:
-    createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
-
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      authelia:
         replicas: 2
         strategy: RollingUpdate
         annotations:
@@ -38,7 +38,7 @@ spec:
               repository: ghcr.io/onedr0p/postgres-init
               tag: "16.2"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/authelia/authelia
               tag: 4.38.2@sha256:a1a2d1b2befab7faa0bb8c68c791c26b28c517b1fd6e1eec05d4335ffbf9aeaa
@@ -90,7 +90,8 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
     service:
-      main:
+      app:
+        controller: authelia
         ports:
           http:
             port: *port
@@ -98,8 +99,8 @@ spec:
             enabled: true
             port: 8080
     serviceMonitor:
-      main:
-        enabled: true
+      app:
+        serviceName: authelia
         endpoints:
           - port: metrics
             scheme: http
@@ -107,8 +108,7 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
     ingress:
-      main:
-        enabled: true
+      app:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
@@ -123,7 +123,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:

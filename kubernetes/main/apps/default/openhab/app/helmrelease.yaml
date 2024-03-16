@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -16,31 +16,32 @@ spec:
         namespace: flux-system
   interval: 15m
   install:
-    createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      openhab:
         containers:
-          main:
+          app:
             image:
               repository: docker.io/openhab/openhab
               tag: 4.1.1
             env:
               USER_ID: 1000
               GROUP_ID: 1000
-              OPENHAB_HTTP_PORT: '8282'
-              OPENHAB_HTTPS_PORT: '8443'
+              OPENHAB_HTTP_PORT: "8282"
+              OPENHAB_HTTPS_PORT: "8443"
               EXTRA_JAVA_OPTS: -Duser.timezone=Europe/Berlin -Dlog4j2.formatMsgNoLookups=true
 
-    # hostNetwork: true
-    # dnsPolicy: ClusterFirstWithHostNet
-    # podAnnotations:
-    #   k8s.v1.cni.cncf.io/networks: macvlan-static-iot-openhab
+            # hostNetwork: true
+            # dnsPolicy: ClusterFirstWithHostNet
+            # podAnnotations:
+            #   k8s.v1.cni.cncf.io/networks: macvlan-static-iot-openhab
 
             resources:
               requests:
@@ -49,7 +50,8 @@ spec:
               limits:
                 memory: 1340Mi
     service:
-      main:
+      app:
+        controller: openhab
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${SVC_OPENHAB_ADDR}
@@ -73,31 +75,16 @@ spec:
             port: 5353
             protocol: UDP
             targetPort: 5353
-          # hueemulation:
-          #   enabled: true
-          #   port: 8080
-          #   protocol: TCP
-          #   targetPort: 8080
-          # sonos:
-          #   enabled: true
-          #   port: 1400
-          #   protocol: TCP
-          #   targetPort: 1400
-          # chromecast1:
-          #   port: 8008
-          # chromecast2:
-          #   port: 8009
     ingress:
-      main:
-        enabled: true
+      app:
         className: internal
         hosts:
-          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
@@ -123,4 +110,3 @@ spec:
     #     runAsGroup: 1000
     #     fsGroup: 1000
     #     fsGroupChangePolicy: OnRootMismatch
-

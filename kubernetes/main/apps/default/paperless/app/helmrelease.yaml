@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -15,9 +15,17 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      paperless:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -27,9 +35,9 @@ spec:
                   name: paperless-secret
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: '16.2'
+              tag: "16.2"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
               tag: 2.6.2
@@ -40,9 +48,9 @@ spec:
               PAPERLESS_DATA_DIR: /library/data
               PAPERLESS_EXPORT_DIR: /library/export
               PAPERLESS_MEDIA_ROOT: /library/media
-              PAPERLESS_CONSUMER_POLLING: '60'
-              PAPERLESS_CONSUMER_RECURSIVE: 'true'
-              PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: 'true'
+              PAPERLESS_CONSUMER_POLLING: "60"
+              PAPERLESS_CONSUMER_RECURSIVE: "true"
+              PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
               PAPERLESS_OCR_LANGUAGES: deu
               PAPERLESS_OCR_LANGUAGE: deu
               PAPERLESS_PORT: 8000
@@ -51,7 +59,7 @@ spec:
               PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
               USERMAP_UID: 1000
               USERMAP_GID: 1000
-              PAPERLESS_FILENAME_FORMAT: '{created_year}/{correspondent}/{title}'
+              PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
               PAPERLESS_ENABLE_HTTP_REMOTE_USER: false
               PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: false
               # PAPERLESS_REDIS: redis://redis-master.databases.svc.cluster.local:6379
@@ -98,22 +106,22 @@ spec:
               limits:
                 memory: 437Mi
     service:
-      main:
+      app:
+        controller: paperless
         ports:
           http:
             port: 8000
 
     ingress:
-      main:
-        enabled: true
+      app:
         className: internal
         hosts:
-          - host: &host '{{ .Release.Name }}.${SECRET_DOMAIN}'
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
