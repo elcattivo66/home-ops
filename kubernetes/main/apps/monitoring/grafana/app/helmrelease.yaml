@@ -144,13 +144,15 @@ spec:
           - name: influxdb
             type: influxdb
             access: proxy
-            url: http://influxdb.databases.svc.cluster.local:8086/
-            database: openhab
+            url: http://influxdb.databases.svc.cluster.local:80/
+            organization: home
             jsonData:
-              httpMode: GET
-              httpHeaderName1: Authorization
+              version: Flux
+              organization: home
+              defaultBucket: smarthome
+              tlsSkipVerify: true
             secureJsonData:
-              httpHeaderValue1: "${SECRET_INFLUXDB_TOKEN}"
+              token: "${SECRET_INFLUXDB_TOKEN}"
           # - name: Loki
           #   type: loki
           #   access: proxy

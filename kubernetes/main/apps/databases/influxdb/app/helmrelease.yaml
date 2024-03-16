@@ -4,45 +4,56 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: &app influxdb
-  namespace: databases
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
-      chart: influxdb
-      version: 5.18.1
+      # renovate: registryUrl=https://helm.influxdata.com/
+      chart: influxdb2
+      version: 2.1.2
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: influxdata
         namespace: flux-system
-  install:
-    createNamespace: true
-    remediation:
-      retries: 5
-  upgrade:
-    remediation:
-      retries: 5
+      interval: 5m
   values:
-    influxdb:
-      updateStrategy:
-        type: RollingUpdate
-
-      podManagementPolicy: OrderedReady
-
+    fullnameOverride: *app
     image:
-      repository: bitnami/influxdb
+      repository: docker.io/library/influxdb
       tag: 2.7.5
-
-    auth:
+      pullPolicy: IfNotPresent
+    adminUser:
+      create: true
+      organization: home
+      bucket: smarthome
+      user: "admin"
+      retention_policy: "0s"
       existingSecret: influxdb-secret
+    pdb:
+      create: false
+    env:
+      - name: TZ
+        value: "${TZ}"
+    ingress:
+      enabled: true
+      className: internal
+      path: /
+      hostname: influxdb.${SECRET_DOMAIN}
+      tls: true
+      annotations:
+        nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+
+    # service:
+    #   type: LoadBalancer
+    #   annotations:
+    #     io.cilium/lb-ipam-ips: "${SVC_INFLUXDB}"
 
     persistence:
       enabled: true
-      existingClaim: influxdb-config-v1
+      useExisting: true
+      name: influxdb-config
 
     resources:
       requests:
-        cpu: 50m
-        memory: 300M
-      limits:
-        memory: 600M
+        cpu: 30m
+        memory: 500M
