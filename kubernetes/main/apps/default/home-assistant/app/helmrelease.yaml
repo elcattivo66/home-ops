@@ -117,7 +117,7 @@ spec:
             targetPort: 1900
       codeserver:
         type: ClusterIP
-        controller: codeserver
+        controller: home-assistant
         ports:
           http:
             enabled: true
