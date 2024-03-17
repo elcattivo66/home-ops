@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "Flux Diff"
 
 on:
@@ -11,11 +12,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  changed-files:
-    name: Changed Files
-    runs-on: ["arc-runner-set-home-ops"]
+  changed-clusters:
+    name: Changed Clusters
+    runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+      matrix: ${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@v1
@@ -30,28 +31,27 @@ jobs:
           token: "${{ steps.app-token.outputs.token }}"
           fetch-depth: 0
 
-      - name: Get Changed Files
-        id: changed-files
+      - name: Get Changed Clusters
+        id: changed-clusters
         uses: tj-actions/changed-files@v43
         with:
           files: kubernetes/**
           dir_names: true
           dir_names_max_depth: 2
-          json: true
-          escape_json: false
+          matrix: true
 
-      - name: List All Changed Files
-        run: echo "${{ steps.changed-files.outputs.all_changed_and_modified_files }}"
+      - name: List All Changed Clusters
+        run: echo "${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}"
 
   flux-diff:
     name: Flux Diff
-    runs-on: ["arc-runner-set-home-ops"]
-    needs: ["changed-files"]
+    runs-on: ubuntu-latest
+    needs: ["changed-clusters"]
     permissions:
       pull-requests: write
     strategy:
       matrix:
-        paths: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+        paths: ${{ fromJSON(needs.changed-clusters.outputs.matrix) }}
         resources: ["helmrelease", "kustomization"]
       max-parallel: 4
       fail-fast: false
@@ -82,8 +82,8 @@ jobs:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /github/workspace/pull/${{ matrix.paths }}
-            --path-orig /github/workspace/default/${{ matrix.paths }}
+            --path /github/workspace/pull/${{ matrix.paths }}/flux
+            --path-orig /github/workspace/default/${{ matrix.paths }}/flux
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
@@ -93,10 +93,13 @@ jobs:
       - name: Generate Diff
         id: diff
         run: |
-          cat diff.patch
           echo "diff<<EOF" >> $GITHUB_OUTPUT
           cat diff.patch >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+          echo "### Diff" >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          cat diff.patch >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
@@ -115,7 +118,7 @@ jobs:
     if: ${{ always() }}
     needs: ["flux-diff"]
     name: Flux Diff Successful
-    runs-on: ["arc-runner-set-home-ops"]
+    runs-on: ubuntu-latest
     steps:
       - if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         name: Check matrix status
