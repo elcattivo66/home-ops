@@ -117,7 +117,7 @@ spec:
       enabled: false
 
     kubeStateMetrics:
-          enabled: false
+      enabled: false
 
     prometheus:
       ingress:
@@ -159,6 +159,10 @@ spec:
         retentionSize: 6GB
         externalLabels:
           cluster: main
+        image:
+          registry: quay.io
+          repository: prometheus/prometheus
+          tag: v2.51.0-rc.0-dedupelabels
         storageSpec:
           volumeClaimTemplate:
             spec:
