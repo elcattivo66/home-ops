@@ -27,17 +27,17 @@ spec:
       enabled: false
       sentinel: false
     master:
-      resourcesPreset: small
+      resourcesPreset: micro
       persistence:
         enabled: false
     replica:
-      resourcesPreset: small
+      resourcesPreset: micro
       persistence:
         enabled: false
     sentinel:
       enabled: true
       masterSet: redis-master
-      resourcesPreset: small
+      resourcesPreset: micro
       persistence:
         enabled: false
     metrics:
@@ -45,6 +45,6 @@ spec:
       serviceMonitor:
         enabled: true
         interval: 1m
-      resourcesPreset: small
+      resourcesPreset: nano
     networkPolicy:
       enabled: false
