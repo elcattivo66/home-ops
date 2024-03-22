@@ -46,12 +46,8 @@ spec:
       config: &config |-
         type: REDIS
         config:
-          addr: >-
-            redis-node-0.redis-headless.databases.svc.cluster.local:26379,
-            redis-node-1.redis-headless.databases.svc.cluster.local:26379,
-            redis-node-2.redis-headless.databases.svc.cluster.local:26379
-          db: 13
-          master_name: redis-master
+          addr: "dragonfly.databases.svc.cluster.local:6379"
+          db: 4
       ingress:
         enabled: true
         ingressClassName: internal
@@ -95,7 +91,8 @@ spec:
       enabled: true
       replicaCount: 2
       replicaLabel: __replica__
-      alertmanagers: ["http://alertmanager-operated.monitoring.svc.cluster.local:9093"]
+      alertmanagers:
+        ["http://alertmanager-operated.monitoring.svc.cluster.local:9093"]
       extraFlags: ["--web.prefix-header=X-Forwarded-Prefix"]
       config: |-
         groups:
