@@ -59,10 +59,10 @@ spec:
             secretKeyRef:
               name: *secret
               key: NEXTCLOUD_OAUTH_CLIENT_SECRET
-        # - name: REDIS_HOST
-        #   value: redis-lb.databases.svc.cluster.local.
-        # - name: REDIS_HOST_PORT
-        #   value: "6379"
+        - name: REDIS_HOST
+          value: dragonfly.databases.svc.cluster.local
+        - name: REDIS_HOST_PORT
+          value: "6379"
       mail:
         enabled: true
         fromAddress: ${SECRET_CERT_NAME}
@@ -155,7 +155,7 @@ spec:
           pm.max_requests = 500
           pm.process_idle_timeout = 10s
     redis:
-      enabled: true
+      enabled: false
       architecture: standalone
       auth:
         enabled: false
