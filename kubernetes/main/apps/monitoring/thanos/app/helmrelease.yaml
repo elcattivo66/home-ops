@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
-    - name: redis
+    - name: dragonfly-cluster
       namespace: databases
   values:
     image:
