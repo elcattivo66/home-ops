@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: thanos
-      version: 14.0.2
+      version: 14.0.1
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
-    - name: dragonfly-cluster
+    - name: redis
       namespace: databases
   values:
     image:
@@ -46,8 +46,12 @@ spec:
       config: &config |-
         type: REDIS
         config:
-          addr: "dragonfly.databases.svc.cluster.local:6379"
-          db: 4
+          addr: >-
+            redis-node-0.redis-headless.databases.svc.cluster.local:26379,
+            redis-node-1.redis-headless.databases.svc.cluster.local:26379,
+            redis-node-2.redis-headless.databases.svc.cluster.local:26379
+          db: 13
+          master_name: redis-master
       ingress:
         enabled: true
         ingressClassName: internal
