@@ -69,8 +69,7 @@ spec:
         sidecarsNamespace: monitoring
       stores: ["thanos.${SECRET_HOME_DOMAIN}:10901"]
     bucketweb:
-      enabled: true
-      replicaCount: 2
+      enabled: false
     compactor:
       enabled: true
       extraFlags:
