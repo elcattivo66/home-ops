@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: tomsquest/docker-radicale
-              tag: 3.1.9.0
+              tag: 3.1.9.1
 
             resources:
               requests:
