@@ -62,7 +62,8 @@ spec:
               PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
               PAPERLESS_ENABLE_HTTP_REMOTE_USER: false
               PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: false
-              PAPERLESS_REDIS: redis://dragonfly.databases.svc.cluster.local:6379/2
+              # PAPERLESS_REDIS: redis://dragonfly.databases.svc.cluster.local:6379/2
+              PAPERLESS_REDIS: redis://redis-lb.databases.svc.cluster.local:6379/2
               PAPERLESS_TIKA_ENABLED: 1
               PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
               PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
