@@ -36,7 +36,7 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: redis
-  path: ./kubernetes/apps/databases/redis/lb
+  path: ./kubernetes/main/apps/databases/redis/lb
   prune: true
   sourceRef:
     kind: GitRepository
