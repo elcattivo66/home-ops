@@ -63,7 +63,7 @@ spec:
               PAPERLESS_ENABLE_HTTP_REMOTE_USER: false
               PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: false
               # PAPERLESS_REDIS: redis://dragonfly.databases.svc.cluster.local:6379/2
-              PAPERLESS_REDIS: redis://redis-lb.databases.svc.cluster.local:6379
+              PAPERLESS_REDIS:  redis://redis-headless.databases.svc.cluster.local:6379/2?pool_size=100&idle_timeout=180s&
               PAPERLESS_TIKA_ENABLED: 1
               PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
               PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
