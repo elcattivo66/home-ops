@@ -8,7 +8,7 @@ spec:
   targetNamespace: default
   dependsOn:
     - name: cloudnative-pg-cluster
-    - name: dragonfly-cluster
+    - name: redis
     - name: lldap
   path: ./kubernetes/main/apps/default/authelia/app
   prune: true
