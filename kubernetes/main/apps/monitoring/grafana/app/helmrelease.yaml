@@ -136,8 +136,7 @@ spec:
             type: prometheus
             uid: prometheus
             access: proxy
-            url: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
-            # url: http://vmselect-victoria-metrics.monitoring.svc.cluster.local:8481/select/0/prometheus
+            url: http://thanos-query-frontend.monitoring.svc.cluster.local:10902
             jsonData:
               prometheusType: Thanos # Prometheus for victoria-metrics
             isDefault: true
