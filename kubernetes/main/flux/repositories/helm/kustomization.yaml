@@ -27,6 +27,6 @@ resources:
   - ./prometheus-community.yaml
   - ./renovate.yaml
   - ./stakater.yaml
+  - ./spegel.yaml
   - ./stevehipwell.yaml
   - ./weave-gitops.yaml
-  - ./xenitab.yaml
