@@ -62,7 +62,7 @@ spec:
             securityContext: &securityContext
               fsGroup: 1000
               fsGroupChangePolicy: OnRootMismatch
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
               capabilities: { drop: ["ALL"] }
 
       front:
@@ -89,8 +89,10 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/zoriya/kyoo_scanner
-              tag: 4.4.0
+              repository: ghcr.io/zoriya/kyoo_scanner
+              tag: master
+            env:
+              LIBRARY_ROOT: /media
             envFrom:
               - secretRef:
                   name: kyoo-secret
@@ -102,7 +104,7 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 2Gi
-            # securityContext: *securityContext
+            securityContext: *securityContext
 
       autosync:
         annotations:
