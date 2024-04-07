@@ -262,10 +262,10 @@ spec:
               - *host
 
     persistence:
-      transcode:
+      cache:
         type: emptyDir
         globalMounts:
-          - path: /transcode
+          - path: /cache
       search:
         type: emptyDir
         advancedMounts:
