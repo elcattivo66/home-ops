@@ -1,0 +1,289 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app kyoo
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      back:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: zoriya/kyoo_back
+              tag: v4.4.0
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: &securityContext
+              fsGroup: 1000
+              fsGroupChangePolicy: OnRootMismatch
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
+
+      front:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: zoriya/kyoo_front
+              tag: v4.4.0
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: *securityContext
+
+      migrations:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          01-init-db:
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.2
+        containers:
+          app:
+            image:
+              repository: zoriya/kyoo_migrations
+              tag: v4.4.0
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: *securityContext
+
+      scanner:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: zoriya/kyoo_scanner
+              tag: v4.4.0
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: *securityContext
+
+      autosync:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: zoriya/kyoo_autosync
+              tag: v4.4.0
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: *securityContext
+
+      meilisearch:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: getmeili/meilisearch
+              tag: v.1.4
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: *securityContext
+
+      rabbitmq:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/rabbitmq
+              tag: 3-alpine
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 356Mi
+            securityContext: *securityContext
+
+      transcoder:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: zoriya/kyoo_transcoder
+              tag: v4.4.0
+            env:
+              GOCODER_HWACCEL: qsv
+              GOCODER_PRESET: fast
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                gpu.intel.com/i915: 1
+                cpu: 258m
+                memory: 356Mi
+              limits:
+                gpu.intel.com/i915: 1
+                memory: 356Mi
+            securityContext: *securityContext
+
+        pod:
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: "true"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [44, 105]
+
+    service:
+      back:
+        controller: back
+        ports:
+          http:
+            port: 5000
+      front:
+        controller: front
+        ports:
+          http:
+            port: 8901
+      rabbitmq:
+        controller: rabbitmq
+        ports:
+          http:
+            port: 5672
+
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: &host kyoo.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: front
+                  port: http
+              - path: /api/
+                pathType: Prefix
+                service:
+                  identifier: back
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      transcode:
+        type: emptyDir
+        globalMounts:
+          - path: /transcode
+      search:
+        type: emptyDir
+        advancedMounts:
+          meilisearch:
+            app:
+              - path: /meili_data
+      metadata:
+        type: emptyDir
+        advancedMounts:
+          transcoder:
+            app:
+              - path: /metadata
+      kyoo:
+        type: emptyDir
+        advancedMounts:
+          back:
+            app:
+              - path: /kyoo
+      media:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /tank/media
+        globalMounts:
+          - path: /media
+            readOnly: true

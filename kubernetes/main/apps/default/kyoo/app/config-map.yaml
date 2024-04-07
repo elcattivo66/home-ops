@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kyoo-config
+data:
+  # Library root can either be an absolute path or a relative path to your docker-compose.yml file.
+  LIBRARY_ROOT: /media
+  # You should set this to a path where kyoo can write large amount of data, this is used as a cache by the transcoder.
+  # It will automatically be cleaned up on kyoo's startup/shutdown/runtime.
+  CACHE_ROOT: /transcode
+  LIBRARY_LANGUAGES: en
+  # A pattern (regex) to ignore video files.
+  LIBRARY_IGNORE_PATTERN: ".*/[dD]ownloads?/.*"
+
+  # If this is true, new accounts wont have any permissions before you approve them in your admin dashboard.
+  REQUIRE_ACCOUNT_VERIFICATION: "true"
+  # Specify permissions of guest accounts, default is no permissions.
+  UNLOGGED_PERMISSIONS: overall.play
+  # but you can allow anyone to use your instance without account by doing:
+  # UNLOGGED_PERMISSIONS: overall.read,overall.play
+  # You can specify this to allow guests users to see your collection without behing able to play videos for example:
+  # UNLOGGED_PERMISSIONS: overall.read
+
+  # Specify permissions of new accounts.
+  DEFAULT_PERMISSIONS: overall.read,overall.play
+
+  # The url you can use to reach your kyoo instance. This is used during oidc to redirect users to your instance.
+  PUBLIC_URL: https://kyoo.${SECRET_DOMAIN}
+
+  # Use a builtin oidc service (google, discord, trakt, or simkl):
+  # When you create a client_id, secret combo you may be asked for a redirect url. You need to specify https://YOUR-PUBLIC-URL/api/auth/logged/YOUR-SERVICE-NAME
+  # Or add your custom one:
+  # OIDC_SERVICE_NAME: YourPrettyName
+  # OIDC_SERVICE_LOGO: https://url-of-your-logo.com
+  # OIDC_SERVICE_CLIENTID:
+  # OIDC_SERVICE_SECRET:
+  # OIDC_SERVICE_AUTHORIZATION: https://url-of-the-authorization-endpoint-of-the-oidc-service.com/auth
+  # OIDC_SERVICE_TOKEN: https://url-of-the-token-endpoint-of-the-oidc-service.com/token
+  # OIDC_SERVICE_PROFILE: https://url-of-the-profile-endpoint-of-the-oidc-service.com/userinfo
+  # OIDC_SERVICE_SCOPE: "the list of scopes space separeted like email identity"
+  # on the previous list, service is the internal name of your service, you can add as many as you want.
+
+  # Following options are optional and only useful for debugging.
