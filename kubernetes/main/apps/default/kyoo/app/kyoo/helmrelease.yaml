@@ -89,8 +89,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/zoriya/kyoo_scanner
-              tag: master
+              repository: docker.io/zoriya/kyoo_scanner
+              tag: v4.4.0
             envFrom:
               - secretRef:
                   name: kyoo-secret
