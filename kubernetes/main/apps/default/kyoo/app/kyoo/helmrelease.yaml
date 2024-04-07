@@ -149,7 +149,7 @@ spec:
           app:
             image:
               repository: docker.io/getmeili/meilisearch
-              tag: v.1.4
+              tag: v1.4
             envFrom:
               - secretRef:
                   name: kyoo-secret
