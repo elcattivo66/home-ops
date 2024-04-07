@@ -169,7 +169,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/rabbitmq
+              repository: docker.io/rabbitmq
               tag: 3-alpine
             envFrom:
               - secretRef:
@@ -209,7 +209,6 @@ spec:
                 gpu.intel.com/i915: 1
                 memory: 356Mi
             securityContext: *securityContext
-
         pod:
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
