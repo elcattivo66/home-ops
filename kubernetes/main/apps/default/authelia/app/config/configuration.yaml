@@ -214,6 +214,6 @@ identity_providers:
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris:
           [
-            "https://kyoo.${SECRET_DOMAIN}/api/auth/logged/Authelia",
+            "https://kyoo.${SECRET_DOMAIN}/api/auth/logged/AUTHELIA",
           ]
         userinfo_signed_response_alg: none
