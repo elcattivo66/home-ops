@@ -182,7 +182,6 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 356Mi
-            securityContext: *securityContext
 
       transcoder:
         annotations:
@@ -236,7 +235,7 @@ spec:
           http:
             port: 5672
       meailisearch:
-        controller: rabbitmq
+        controller: meilisearch
         ports:
           http:
             port: 7700
