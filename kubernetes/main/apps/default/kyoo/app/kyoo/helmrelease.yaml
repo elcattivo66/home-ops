@@ -31,7 +31,7 @@ spec:
         containers:
           app:
             image:
-              repository: zoriya/kyoo_back
+              repository: ghcr.io/zoriya/kyoo_back
               tag: v4.4.0
             envFrom:
               - secretRef:
@@ -56,7 +56,7 @@ spec:
         containers:
           app:
             image:
-              repository: zoriya/kyoo_front
+              repository: ghcr.io/zoriya/kyoo_front
               tag: v4.4.0
             envFrom:
               - secretRef:
@@ -85,7 +85,7 @@ spec:
         containers:
           app:
             image:
-              repository: zoriya/kyoo_migrations
+              repository: ghcr.io/zoriya/kyoo_migrations
               tag: v4.4.0
             envFrom:
               - secretRef:
@@ -106,7 +106,7 @@ spec:
         containers:
           app:
             image:
-              repository: zoriya/kyoo_scanner
+              repository: ghcr.io/zoriya/kyoo_scanner
               tag: v4.4.0
             envFrom:
               - secretRef:
@@ -127,7 +127,7 @@ spec:
         containers:
           app:
             image:
-              repository: zoriya/kyoo_autosync
+              repository: ghcr.io/zoriya/kyoo_autosync
               tag: v4.4.0
             envFrom:
               - secretRef:
@@ -148,7 +148,7 @@ spec:
         containers:
           app:
             image:
-              repository: getmeili/meilisearch
+              repository: docker.io/getmeili/meilisearch
               tag: v.1.4
             envFrom:
               - secretRef:
@@ -190,7 +190,7 @@ spec:
         containers:
           app:
             image:
-              repository: zoriya/kyoo_transcoder
+              repository: ghcr.io/zoriya/kyoo_transcoder
               tag: v4.4.0
             env:
               GOCODER_HWACCEL: qsv
