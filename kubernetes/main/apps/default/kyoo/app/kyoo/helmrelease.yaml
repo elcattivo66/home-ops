@@ -90,7 +90,7 @@ spec:
           app:
             image:
               repository: docker.io/zoriya/kyoo_scanner
-              tag: v4.4.0
+              tag: 4.4.0
             envFrom:
               - secretRef:
                   name: kyoo-secret
