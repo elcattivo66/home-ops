@@ -104,7 +104,13 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 2Gi
-            securityContext: *securityContext
+            # securityContext: *securityContext
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
 
       autosync:
         annotations:
@@ -275,7 +281,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/media/movies
+        path: /tank/media/movies/
         globalMounts:
           - path: /media
             readOnly: true
