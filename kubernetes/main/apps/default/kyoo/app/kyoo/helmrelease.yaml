@@ -62,7 +62,7 @@ spec:
             securityContext: &securityContext
               fsGroup: 1000
               fsGroupChangePolicy: OnRootMismatch
-              allowPrivilegeEscalation: true
+              allowPrivilegeEscalation: false
               capabilities: { drop: ["ALL"] }
 
       front:
@@ -104,7 +104,7 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 2Gi
-            # securityContext: *securityContext
+            securityContext: *securityContext
         pod:
           securityContext:
             runAsUser: 1000

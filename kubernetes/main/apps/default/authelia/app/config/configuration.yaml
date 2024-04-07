@@ -215,5 +215,6 @@ identity_providers:
         redirect_uris:
           [
             "https://kyoo.${SECRET_DOMAIN}/api/auth/logged/AUTHELIA",
+            "https://kyoo.${SECRET_DOMAIN}/login/callback",
           ]
         userinfo_signed_response_alg: none
