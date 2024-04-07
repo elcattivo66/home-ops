@@ -28,19 +28,6 @@ data:
   # The url you can use to reach your kyoo instance. This is used during oidc to redirect users to your instance.
   PUBLIC_URL: https://kyoo.${SECRET_DOMAIN}
 
-  # Use a builtin oidc service (google, discord, trakt, or simkl):
-  # When you create a client_id, secret combo you may be asked for a redirect url. You need to specify https://YOUR-PUBLIC-URL/api/auth/logged/YOUR-SERVICE-NAME
-  # Or add your custom one:
-  # OIDC_SERVICE_NAME: YourPrettyName
-  # OIDC_SERVICE_LOGO: https://url-of-your-logo.com
-  # OIDC_SERVICE_CLIENTID:
-  # OIDC_SERVICE_SECRET:
-  # OIDC_SERVICE_AUTHORIZATION: https://url-of-the-authorization-endpoint-of-the-oidc-service.com/auth
-  # OIDC_SERVICE_TOKEN: https://url-of-the-token-endpoint-of-the-oidc-service.com/token
-  # OIDC_SERVICE_PROFILE: https://url-of-the-profile-endpoint-of-the-oidc-service.com/userinfo
-  # OIDC_SERVICE_SCOPE: "the list of scopes space separeted like email identity"
-  # on the previous list, service is the internal name of your service, you can add as many as you want.
-
   # Following options are optional and only useful for debugging.
   KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
   MEILI_HOST: http://kyoo-meilisearch.default.svc.cluster.local:7700

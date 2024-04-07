@@ -205,3 +205,15 @@ identity_providers:
             "https://paperless.${SECRET_DOMAIN}/accounts/oidc/authelia/login/callback/",
           ]
         userinfo_signed_response_alg: none
+      - client_name: Kyoo
+        client_id: kyoo
+        client_secret: "$${KYOO_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris:
+          [
+            "https://kyoo.${SECRET_DOMAIN}/api/auth/logged/kyoo",
+          ]
+        userinfo_signed_response_alg: none
