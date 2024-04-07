@@ -28,6 +28,21 @@ spec:
       back:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          01-init-db:
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.2
+          02-migrations:
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+            image:
+              repository: ghcr.io/zoriya/kyoo_migrations
+              tag: master
         containers:
           app:
             image:
@@ -57,35 +72,6 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_front
-              tag: master
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
-            resources:
-              requests:
-                cpu: 5m
-                memory: 356Mi
-              limits:
-                memory: 356Mi
-            securityContext: *securityContext
-
-      migrations:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        initContainers:
-          01-init-db:
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.2
-        containers:
-          app:
-            image:
-              repository: ghcr.io/zoriya/kyoo_migrations
               tag: master
             envFrom:
               - secretRef:
