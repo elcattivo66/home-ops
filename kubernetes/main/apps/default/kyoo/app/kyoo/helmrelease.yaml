@@ -73,11 +73,8 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
+            env:
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             resources:
               requests:
                 cpu: 5m
@@ -105,7 +102,7 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 2Gi
-            securityContext: *securityContext
+            # securityContext: *securityContext
 
       autosync:
         annotations:
@@ -180,9 +177,8 @@ spec:
             env:
               GOCODER_HWACCEL: qsv
               GOCODER_PRESET: fast
+              GOCODER_VAAPI_RENDERER: /dev/dri/renderD128
             envFrom:
-              - secretRef:
-                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
@@ -225,6 +221,11 @@ spec:
         ports:
           http:
             port: 7700
+      transcoder:
+        controller: transcoder
+        ports:
+          http:
+            port: 7666
 
     ingress:
       app:
