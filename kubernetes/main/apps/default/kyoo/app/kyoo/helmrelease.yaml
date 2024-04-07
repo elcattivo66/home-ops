@@ -118,7 +118,8 @@ spec:
                 cpu: 5m
                 memory: 356Mi
               limits:
-                memory: 356Mi
+                memory: 2Gi
+            securityContext: *securityContext
 
       autosync:
         annotations:

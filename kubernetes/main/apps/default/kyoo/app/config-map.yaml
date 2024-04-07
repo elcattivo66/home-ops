@@ -16,7 +16,7 @@ data:
   # If this is true, new accounts wont have any permissions before you approve them in your admin dashboard.
   REQUIRE_ACCOUNT_VERIFICATION: "true"
   # Specify permissions of guest accounts, default is no permissions.
-  UNLOGGED_PERMISSIONS: overall.play
+  UNLOGGED_PERMISSIONS: overall.read,overall.play
   # but you can allow anyone to use your instance without account by doing:
   # UNLOGGED_PERMISSIONS: overall.read,overall.play
   # You can specify this to allow guests users to see your collection without behing able to play videos for example:
