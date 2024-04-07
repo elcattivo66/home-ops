@@ -92,7 +92,7 @@ spec:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master
             env:
-              LIBRARY_ROOT: /media
+              SCANNER_LIBRARY_ROOT: /media
             envFrom:
               - secretRef:
                   name: kyoo-secret
