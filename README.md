@@ -25,7 +25,7 @@ My cluster is [k3s](https://k3s.io/) provisioned overtop bare-metal Debian using
 - [cilium](https://github.com/cilium/cilium): internal Kubernetes networking plugin
 - [cert-manager](https://cert-manager.io/docs/): creates SSL certificates for services in my cluster
 - [external-dns](https://github.com/kubernetes-sigs/external-dns): automatically syncs DNS records from my cluster ingresses to a DNS provider
-- [traefik](https://github.com/traefik/traefik/): ingress controller for Kubernetes
+- [ingress-nginx](https://github.com/kubernetes/ingress-nginx): ingress controller for Kubernetes
 - [longhorn](https://github.com/longhorn/longhorn): distributed block storage for persistent storage
 - [sops](https://toolkit.fluxcd.io/guides/mozilla-sops/): managed secrets for Kubernetes, Ansible, and Terraform which are committed to Git
 
@@ -99,10 +99,10 @@ Outside the `external-dns` instance mentioned above another instance is deployed
 
 | Device                      | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose             |
 |-----------------------------|-------|--------------|-----------------------------|------|------------------|---------------------|
-| Intel NUC11i3               | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 16GB | Debian           | Kubernetes Master   |
+| Intel NUC11i3               | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 40GB | Debian           | Kubernetes Master   |
 | Morefine M9                 | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 16GB | Debian           | Kubernetes Master   |
-| Gigabyte Brix 7100          | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 16GB | Debian           | Kubernetes Master   |
-| Node 304 + ASROCK J4105     | 1     | 2TB SSD      | 2x16TB + 2x8TB ZFS          | 20GB | Ubuntu           | NAS                 |
+| Gigabyte Brix 7100          | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 24GB | Debian           | Kubernetes Master   |
+| Node 304 + Ryzen 5600G      | 1     | 2TB SSD      | 2x16TB + 2x8TB ZFS          | 32GB | NixOS            | NAS                 |
 
 ---
 
