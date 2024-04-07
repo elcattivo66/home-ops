@@ -42,3 +42,6 @@ data:
   # on the previous list, service is the internal name of your service, you can add as many as you want.
 
   # Following options are optional and only useful for debugging.
+  KYOO_URL: http://kyoo-back:5000
+  MEILI_HOST: http://kyoo-meilisearch:7700
+  RABBITMQ_HOST: kyoo-rabbitmq

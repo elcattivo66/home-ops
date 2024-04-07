@@ -236,6 +236,11 @@ spec:
         ports:
           http:
             port: 5672
+      meailisearch:
+        controller: rabbitmq
+        ports:
+          http:
+            port: 7700
 
     ingress:
       app:
