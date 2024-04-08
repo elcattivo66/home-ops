@@ -236,7 +236,7 @@ spec:
             port: 7666
 
     ingress:
-      app:
+      front:
         className: internal
         hosts:
           - host: &host kyoo.${SECRET_DOMAIN}
@@ -246,8 +246,15 @@ spec:
                 service:
                   identifier: front
                   port: http
+        tls:
+          - hosts:
+              - *host
+      back:
+        className: internal
+        hosts:
+          - host: &host hass-code.${SECRET_DOMAIN}
+            paths:
               - path: /api/
-                pathType: Prefix
                 service:
                   identifier: back
                   port: http
