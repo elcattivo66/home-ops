@@ -295,6 +295,6 @@ spec:
         advancedMounts:
           front:
             nginx:
-              - path: /etc/nginx/nginx.conf
+              - path: /etc/nginx/templates/kyoo.conf.template:ro
                 subPath: nginx-config
                 readOnly: true
