@@ -92,6 +92,7 @@ spec:
               tag: master
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+              SCANNER_LIBRARY_ROOT: /media
             envFrom:
               - secretRef:
                   name: kyoo-secret
