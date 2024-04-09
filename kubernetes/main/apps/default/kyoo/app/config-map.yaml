@@ -14,7 +14,7 @@ data:
   # LIBRARY_IGNORE_PATTERN: ".*/[dD]ownloads?/.*"
 
   # If this is true, new accounts wont have any permissions before you approve them in your admin dashboard.
-  REQUIRE_ACCOUNT_VERIFICATION: "true"
+  REQUIRE_ACCOUNT_VERIFICATION: "false"
   # Specify permissions of guest accounts, default is no permissions.
   UNLOGGED_PERMISSIONS: overall.read,overall.play
   # but you can allow anyone to use your instance without account by doing:
