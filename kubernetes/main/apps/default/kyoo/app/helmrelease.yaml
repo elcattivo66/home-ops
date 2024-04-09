@@ -105,12 +105,6 @@ spec:
               limits:
                 memory: 2Gi
             securityContext: *securityContext
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
 
       autosync:
         annotations:
@@ -263,28 +257,30 @@ spec:
               - *host
 
     persistence:
-      cache:
-        type: emptyDir
-        globalMounts:
-          - path: /cache
       search:
-        type: emptyDir
+        existingClaim: kyoo-meilisearch
         advancedMounts:
           meilisearch:
             app:
               - path: /meili_data
       metadata:
-        type: emptyDir
+        existingClaim: kyoo-metadata
         advancedMounts:
           transcoder:
             app:
               - path: /metadata
       kyoo:
-        type: emptyDir
+        existingClaim: kyoo-config
         advancedMounts:
           back:
             app:
               - path: /kyoo
+      cache:
+        type: emptyDir
+        advancedMounts:
+          transcoder:
+            app:
+              - path: /cache
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
