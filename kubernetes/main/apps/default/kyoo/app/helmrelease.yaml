@@ -96,6 +96,8 @@ spec:
             envFrom:
               - secretRef:
                   name: kyoo-secret
+              - secretRef:
+                  name: kyoo-config
             resources:
               requests:
                 cpu: 5m
