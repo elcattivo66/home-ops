@@ -73,6 +73,8 @@ spec:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master
             envFrom:
+              - secretRef:
+                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
@@ -249,7 +251,7 @@ spec:
                 service:
                   identifier: front
                   port: http
-              - path: /api
+              - path: /api/
                 pathType: Prefix
                 service:
                   identifier: back
