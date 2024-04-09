@@ -1,6 +1,5 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
-
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -82,16 +81,16 @@ spec:
               limits:
                 memory: 356Mi
             securityContext: *securityContext
-          nginx:
-            image:
-              repository: ghcr.io/nginxinc/nginx-unprivileged
-              tag: 1.25.4
-            resources:
-              requests:
-                cpu: 10m
-                memory: 100Mi
-              limits:
-                memory: 100Mi
+          # nginx:
+          #   image:
+          #     repository: ghcr.io/nginxinc/nginx-unprivileged
+          #     tag: 1.25.4
+          #   resources:
+          #     requests:
+          #       cpu: 10m
+          #       memory: 100Mi
+          #     limits:
+          #       memory: 100Mi
       scanner:
         annotations:
           reloader.stakater.com/auto: "true"
@@ -245,8 +244,11 @@ spec:
             port: 7666
 
     ingress:
-      front:
+      main:
         className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            rewrite /api/(.*) /$1 break;
         hosts:
           - host: &host kyoo.${SECRET_DOMAIN}
             paths:
@@ -254,6 +256,11 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: front
+                  port: http
+              - path: /api
+                pathType: Prefix
+                service:
+                  identifier: back
                   port: http
         tls:
           - hosts:
@@ -289,12 +296,12 @@ spec:
         globalMounts:
           - path: /media
             readOnly: true
-      nginx-config:
-        type: configMap
-        name: kyoo-nginx
-        advancedMounts:
-          front:
-            nginx:
-              - path: /etc/nginx/templates/kyoo.conf.template:ro
-                subPath: nginx-config
-                readOnly: true
+      # nginx-config:
+      #   type: configMap
+      #   name: kyoo-nginx
+      #   advancedMounts:
+      #     front:
+      #       nginx:
+      #         - path: /etc/nginx/templates/kyoo.conf.template:ro
+      #           subPath: nginx-config
+      #           readOnly: true

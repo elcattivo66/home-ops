@@ -29,6 +29,5 @@ data:
   PUBLIC_URL: https://kyoo.${SECRET_DOMAIN}
 
   # Following options are optional and only useful for debugging.
-  KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
   MEILI_HOST: http://kyoo-meilisearch.default.svc.cluster.local:7700
   RABBITMQ_HOST: kyoo-rabbitmq.default.svc.cluster.local
