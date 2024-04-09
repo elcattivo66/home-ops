@@ -91,7 +91,6 @@ spec:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master
             env:
-              SCANNER_LIBRARY_ROOT: /video
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom:
               - secretRef:
@@ -284,7 +283,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/media/Serien
+        path: /tank/media/
         globalMounts:
-          - path: /video
+          - path: /media
             readOnly: true
