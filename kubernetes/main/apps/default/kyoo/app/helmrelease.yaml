@@ -77,9 +77,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 356Mi
+                memory: 100Mi
               limits:
-                memory: 356Mi
+                memory: 100Mi
             securityContext: *securityContext
 
       scanner:
@@ -91,7 +91,7 @@ spec:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master
             env:
-              SCANNER_LIBRARY_ROOT: /media
+              SCANNER_LIBRARY_ROOT: /video
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom:
               - secretRef:
@@ -128,9 +128,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 356Mi
+                memory: 100Mi
               limits:
-                memory: 356Mi
+                memory: 100Mi
             securityContext: *securityContext
 
       meilisearch:
@@ -172,9 +172,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 356Mi
+                memory: 100Mi
               limits:
-                memory: 356Mi
+                memory: 100Mi
 
       transcoder:
         annotations:
@@ -194,7 +194,7 @@ spec:
             resources:
               requests:
                 gpu.intel.com/i915: 1
-                cpu: 258m
+                cpu: 10m
                 memory: 356Mi
               limits:
                 gpu.intel.com/i915: 1
@@ -253,7 +253,7 @@ spec:
                 service:
                   identifier: front
                   port: http
-              - path: /api/
+              - path: /api
                 pathType: Prefix
                 service:
                   identifier: back
@@ -288,7 +288,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/media/movies/
+        path: /tank/media/movies
         globalMounts:
-          - path: /media
+          - path: /video
             readOnly: true
