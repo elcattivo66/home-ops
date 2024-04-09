@@ -72,8 +72,6 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master
-            env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             resources:
               requests:
                 cpu: 5m
