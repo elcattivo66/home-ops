@@ -72,11 +72,8 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
+            env:
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             resources:
               requests:
                 cpu: 5m
@@ -95,11 +92,10 @@ spec:
               tag: master
             env:
               SCANNER_LIBRARY_ROOT: /media
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom:
               - secretRef:
                   name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
             resources:
               requests:
                 cpu: 5m
@@ -143,6 +139,8 @@ spec:
             image:
               repository: docker.io/getmeili/meilisearch
               tag: v1.4
+            env:
+              MEILI_ENV: production
             envFrom:
               - secretRef:
                   name: kyoo-secret
