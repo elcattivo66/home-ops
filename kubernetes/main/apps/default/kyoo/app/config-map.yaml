@@ -27,7 +27,7 @@ data:
 
   # The url you can use to reach your kyoo instance. This is used during oidc to redirect users to your instance.
   PUBLIC_URL: https://kyoo.${SECRET_DOMAIN}
-  KYOO_URL: kyoo-back:5000 # http://kyoo-back.default.svc.cluster.local:5000
+  KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
 
   # Following options are optional and only useful for debugging.
   MEILI_HOST: http://kyoo-meilisearch.default.svc.cluster.local:7700
