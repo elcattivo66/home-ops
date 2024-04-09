@@ -288,7 +288,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/media/movies
+        path: /tank/media/Serien
         globalMounts:
           - path: /video
             readOnly: true
