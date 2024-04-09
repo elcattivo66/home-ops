@@ -5,3 +5,4 @@ resources:
   - ./helmrelease.yaml
   - ./config-map.yaml
   - ./externalsecret.yaml
+  - ./pvc.yaml
