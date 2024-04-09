@@ -72,6 +72,11 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
             resources:
               requests:
                 cpu: 5m
@@ -79,16 +84,7 @@ spec:
               limits:
                 memory: 356Mi
             securityContext: *securityContext
-          # nginx:
-          #   image:
-          #     repository: ghcr.io/nginxinc/nginx-unprivileged
-          #     tag: 1.25.4
-          #   resources:
-          #     requests:
-          #       cpu: 10m
-          #       memory: 100Mi
-          #     limits:
-          #       memory: 100Mi
+
       scanner:
         annotations:
           reloader.stakater.com/auto: "true"
@@ -294,12 +290,3 @@ spec:
         globalMounts:
           - path: /media
             readOnly: true
-      # nginx-config:
-      #   type: configMap
-      #   name: kyoo-nginx
-      #   advancedMounts:
-      #     front:
-      #       nginx:
-      #         - path: /etc/nginx/templates/kyoo.conf.template:ro
-      #           subPath: nginx-config
-      #           readOnly: true
