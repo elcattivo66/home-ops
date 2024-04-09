@@ -96,7 +96,7 @@ spec:
             envFrom:
               - secretRef:
                   name: kyoo-secret
-              - secretRef:
+              - configMapRef:
                   name: kyoo-config
             resources:
               requests:
