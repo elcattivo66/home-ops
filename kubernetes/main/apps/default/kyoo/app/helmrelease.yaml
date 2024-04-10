@@ -104,7 +104,30 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 2Gi
-            securityContext: *securityContext
+            # securityContext: *securityContext
+
+      matcher:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/zoriya/kyoo_scanner
+              tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
+            command:
+              - matcher
+            env:
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+            envFrom:
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+                memory: 356Mi
+              limits:
+                memory: 2Gi
+            # securityContext: *securityContext
 
       autosync:
         annotations:
