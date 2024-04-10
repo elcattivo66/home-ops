@@ -41,12 +41,12 @@ spec:
                   name: kyoo-secret
             image:
               repository: ghcr.io/zoriya/kyoo_migrations
-              tag: master
+              tag: master@sha256:b5cef270da34a51cdc2515696ec03513fd45e78fcbf672cda64d61879cf5c513
         containers:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_back
-              tag: master
+              tag: master@sha256:c05b3337d23f8a540e0995db1ab3ae1b22427b53dc8ed2fcbe1f16b92f4867b7
             envFrom:
               - secretRef:
                   name: kyoo-secret
@@ -71,7 +71,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_front
-              tag: master
+              tag: master@sha256:3240df8ca575e17ce8551b3c942a2c1e83fd196d84671a6dea448b20da517cf2
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             resources:
@@ -89,7 +89,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_scanner
-              tag: master
+              tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
               SCANNER_LIBRARY_ROOT: /media
@@ -113,7 +113,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_autosync
-              tag: master
+              tag: master@sha256:418b7de3f63bb5932f1935eb363abbce1d621b7eb85b2a1f3d37bd3a2302f9ae
             envFrom:
               - secretRef:
                   name: kyoo-secret
@@ -177,7 +177,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_transcoder
-              tag: master
+              tag: master@sha256:99d86e06ed323db00777cab5a1180ffecdfbac3fc70443341cd8054a61f5778c
             env:
               GOCODER_HWACCEL: qsv
               GOCODER_PRESET: fast
