@@ -85,16 +85,16 @@ spec:
                 memory: 100M
               limits:
                 memory: 100M
-          redis:
-            image:
-              repository: public.ecr.aws/docker/library/redis
-              tag: 7.2.4
-            resources:
-              requests:
-                cpu: 10m
-                memory: 100M
-              limits:
-                memory: 100M
+          # redis:
+          #   image:
+          #     repository: public.ecr.aws/docker/library/redis
+          #     tag: 7.2.4
+          #   resources:
+          #     requests:
+          #       cpu: 10m
+          #       memory: 100M
+          #     limits:
+          #       memory: 100M
           tika:
             image:
               repository: ghcr.io/paperless-ngx/tika
