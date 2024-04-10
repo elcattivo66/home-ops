@@ -60,8 +60,8 @@ spec:
               name: *secret
               key: NEXTCLOUD_OAUTH_CLIENT_SECRET
         - name: REDIS_HOST
-          # value: dragonfly.databases.svc.cluster.local
-          value: redis-lb.databases.svc.cluster.local
+          value: dragonfly.databases.svc.cluster.local
+          # value: redis-lb.databases.svc.cluster.local
         - name: REDIS_HOST_PORT
           value: "6379"
       mail:

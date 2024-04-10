@@ -90,13 +90,13 @@ spec:
         #   ALLOWED_HOST_LIST: drone.default.svc
         cache:
           ADAPTER: redis
-          HOST: redis://redis-headless.databases.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+          HOST: redis://dragonfly.databases.svc.cluster.local:6379/5
         session:
           PROVIDER: redis
-          PROVIDER_CONFIG: redis://redis-headless.databases.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+          PROVIDER_CONFIG: redis://dragonfly.databases.svc.cluster.local:6379/5
         queue:
           TYPE: redis
-          CONN_STR: redis://redis-headless.databases.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+          CONN_STR: redis://dragonfly.databases.svc.cluster.local:6379/5
         openid:
           ENABLE_OPENID_SIGNIN: false
           ENABLE_OPENID_SIGNUP: true
