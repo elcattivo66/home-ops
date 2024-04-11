@@ -11,7 +11,7 @@ data:
   CACHE_ROOT: /cache
   LIBRARY_LANGUAGES: en
   # A pattern (regex) to ignore video files.
-  LIBRARY_IGNORE_PATTERN: ".*/([dD]ownloads?|audiobooks|documentariese-classes|ebooks|fitness_videos|music)/.*"
+  LIBRARY_IGNORE_PATTERN: ".*/([dD]ownloads?|audiobooks|documentaries|e-classes|ebooks|fitness_videos|music)/.*"
 
   # If this is true, new accounts wont have any permissions before you approve them in your admin dashboard.
   REQUIRE_ACCOUNT_VERIFICATION: "false"
