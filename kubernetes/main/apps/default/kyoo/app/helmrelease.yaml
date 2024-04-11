@@ -127,6 +127,8 @@ spec:
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom:
+              - secretRef:
+                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
