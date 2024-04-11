@@ -59,10 +59,16 @@ spec:
               limits:
                 memory: 356Mi
             securityContext: &securityContext
-              fsGroup: 1000
-              fsGroupChangePolicy: OnRootMismatch
               allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+        pod: &pod
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
 
       front:
         annotations:
@@ -81,6 +87,7 @@ spec:
               limits:
                 memory: 100Mi
             securityContext: *securityContext
+        pod: *pod
 
       scanner:
         annotations:
@@ -104,7 +111,8 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 2Gi
-            # securityContext: *securityContext
+            securityContext: *securityContext
+        pod: *pod
 
       # matcher:
       #   annotations:
@@ -148,6 +156,7 @@ spec:
               limits:
                 memory: 100Mi
             securityContext: *securityContext
+        pod: *pod
 
       meilisearch:
         annotations:
@@ -171,6 +180,7 @@ spec:
               limits:
                 memory: 356Mi
             securityContext: *securityContext
+        pod: *pod
 
       rabbitmq:
         annotations:
@@ -191,6 +201,8 @@ spec:
                 memory: 300Mi
               limits:
                 memory: 300Mi
+            securityContext: *securityContext
+        pod: *pod
 
       transcoder:
         annotations:
