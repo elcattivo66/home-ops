@@ -319,6 +319,12 @@ spec:
           transcoder:
             app:
               - path: /cache
+      back-metadata:
+        type: emptyDir
+        advancedMounts:
+          back:
+            app:
+              - path: /metadata
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
