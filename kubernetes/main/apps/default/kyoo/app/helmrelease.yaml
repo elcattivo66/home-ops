@@ -25,6 +25,8 @@ spec:
   values:
     controllers:
       back:
+        replicas: 2
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -44,6 +46,7 @@ spec:
               tag: master@sha256:b5cef270da34a51cdc2515696ec03513fd45e78fcbf672cda64d61879cf5c513
         containers:
           app:
+
             image:
               repository: ghcr.io/zoriya/kyoo_back
               tag: master@sha256:c05b3337d23f8a540e0995db1ab3ae1b22427b53dc8ed2fcbe1f16b92f4867b7
@@ -57,7 +60,7 @@ spec:
                 cpu: 5m
                 memory: 356Mi
               limits:
-                memory: 2Gi
+                memory: 3Gi
             securityContext: &securityContext
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -71,6 +74,8 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
 
       front:
+        replicas: 2
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -116,6 +121,8 @@ spec:
         pod: *pod
 
       matcher:
+        replicas: 2
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
