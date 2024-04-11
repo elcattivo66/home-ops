@@ -313,12 +313,6 @@ spec:
           transcoder:
             app:
               - path: /metadata
-      kyoo:
-        type: emptyDir
-        advancedMounts:
-          back:
-            app:
-              - path: /kyoo
       cache:
         type: emptyDir
         advancedMounts:
