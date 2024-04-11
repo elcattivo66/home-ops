@@ -307,14 +307,14 @@ spec:
           meilisearch:
             app:
               - path: /meili_data
-      metadata:
-        existingClaim: kyoo-metadata
+      transcoder-metadata:
+        existingClaim: kyoo-transcoder-metadata
         advancedMounts:
           transcoder:
             app:
               - path: /metadata
       kyoo:
-        existingClaim: kyoo-config
+        type: emptyDir
         advancedMounts:
           back:
             app:
@@ -325,8 +325,8 @@ spec:
           transcoder:
             app:
               - path: /cache
-      back-metadata:
-        type: emptyDir
+      backend-metadata:
+        existingClaim: kyoo-backend-metadata
         advancedMounts:
           back:
             app:

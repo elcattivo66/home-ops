@@ -14,7 +14,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: kyoo-metadata
+  name: kyoo-transcoder-metadata
 spec:
   accessModes:
     - ReadWriteOnce
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: kyoo-config
+  name: kyoo-backend-metadata
 spec:
   accessModes:
     - ReadWriteOnce
