@@ -123,9 +123,9 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
-            args: ["matcher"]
+            args: ["matcher", "-v"]
             env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000/api
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom:
               - secretRef:
                   name: kyoo-secret
@@ -136,7 +136,7 @@ spec:
                 cpu: 5m
                 memory: 356Mi
               limits:
-                memory: 2Gi
+                memory: 356Mi
             securityContext: *securityContext
         pod: *pod
 
