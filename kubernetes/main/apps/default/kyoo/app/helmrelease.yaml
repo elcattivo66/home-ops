@@ -79,7 +79,7 @@ spec:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master@sha256:3240df8ca575e17ce8551b3c942a2c1e83fd196d84671a6dea448b20da517cf2
             env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000/api
             resources:
               requests:
                 cpu: 5m
@@ -99,7 +99,7 @@ spec:
               tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
             args: ["scanner", "-v"]
             env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000/api
               SCANNER_LIBRARY_ROOT: /media
             envFrom:
               - secretRef:
@@ -125,7 +125,7 @@ spec:
               tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
             args: ["matcher"]
             env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000/api
             envFrom:
               - secretRef:
                   name: kyoo-secret
