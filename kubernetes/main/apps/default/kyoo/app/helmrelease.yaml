@@ -56,8 +56,8 @@ spec:
                   name: kyoo-config
             resources:
               requests:
-                cpu: 5m
-                memory: 356Mi
+                cpu: 10m
+                memory: 512Mi
               limits:
                 memory: 5Gi
             securityContext: &securityContext
@@ -101,7 +101,7 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
-            args: ["scanner", "-v"]
+            args: ["scanner"]
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
               SCANNER_LIBRARY_ROOT: /media
@@ -129,7 +129,7 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
-            args: ["matcher", "-v"]
+            args: ["matcher"]
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom:
