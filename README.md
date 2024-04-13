@@ -42,10 +42,16 @@ The way Flux works for me here is it will recursively search the [kubernetes/mai
 This Git repository contains the following directories under [Kubernetes](./kubernetes/).
 
 ```sh
-📁 kubernetes      # Kubernetes cluster defined as code
-├─📁 bootstrap     # Flux installation
-├─📁 flux          # Main Flux configuration of the repository
-└─📁 apps          # Apps deployed into my cluster grouped by namespace (see below)
+📁 kubernetes
+├── 📁 main            # main cluster
+│   ├── 📁 apps           # applications
+│   ├── 📁 bootstrap      # bootstrap procedures
+│   ├── 📁 flux           # core flux configuration
+│   └── 📁 templates      # re-useable components
+└── 📁 nas             # nas cluster
+    ├── 📁 apps           # applications
+    ├── 📁 bootstrap      # bootstrap procedures
+    └── 📁 flux           # core flux configuration
 ```
 
 ### Cluster Layout
@@ -74,20 +80,13 @@ GitRepository :: home-kubernetes
                 HelmRelease :: authelia
 ```
 
-### Networking
-
-
----
-
-## ☁️ Cloud Dependencies
-
-
 ---
 
 ## 🌐 DNS
 
 ### Home DNS
 
+I have a Orange Pi Zero SBC with pihole and unbound deployed as containers. In my cluster external-dns is deployed with the pihole provider which syncs DNS records to pihole.
 
 ### Public DNS
 
@@ -99,10 +98,9 @@ Outside the `external-dns` instance mentioned above another instance is deployed
 
 | Device                      | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose             |
 |-----------------------------|-------|--------------|-----------------------------|------|------------------|---------------------|
-| Intel NUC11i3               | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 40GB | Debian           | Kubernetes Master   |
-| Morefine M9                 | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 16GB | Debian           | Kubernetes Master   |
-| Gigabyte Brix 7100          | 1     | 512GB NVMe   | 1TB NVMe (rook-ceph)        | 24GB | Debian           | Kubernetes Master   |
-| Node 304 + Ryzen 5600G      | 1     | 2TB SSD      | 2x16TB + 2x8TB ZFS          | 32GB | NixOS            | NAS                 |
+| Intel NUC11i3               | 1     | 512GB NVMe   |                             | 40GB | Debian           | Kubernetes Master   |
+| Morefine M9                 | 1     | 512GB NVMe   |                             | 16GB | Debian           | Kubernetes Master   |
+| Gigabyte Brix 7100          | 1     | 512GB NVMe   |                             | 24GB | Debian           | Kubernetes Master   |
+| Node 304 + Ryzen 5600G      | 1     | 128GB SSD    | 2x16TB+2x8TB ZFS & 2TB SSD  | 32GB | NixOS            | NAS                 |
 
 ---
-
