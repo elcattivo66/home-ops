@@ -114,7 +114,7 @@ omdb:
   cache_expiration: 60
 
 tautulli: # Can be individually specified per library as well
-  url: http://tautulli.default.svc.cluster.local:8181
+  url: http://tautulli.default.svc.cluster.local:80
   apikey: <<TAUTULLI_API_KEY>>
 
 radarr: # Can be individually specified per library as well
