@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_back
-              tag: master@sha256:a8d79846213bc942ea42a82daca4dde3593893e459569bb012fe3a14b04527c0
+              tag: master@sha256:a2a8e438619b4d91e9c73c2e85c84f28f3b8fbea11dcfe1db56bad9b4fe6ad24
             envFrom:
               - secretRef:
                   name: kyoo-secret
