@@ -84,7 +84,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_front
-              tag: master@sha256:3240df8ca575e17ce8551b3c942a2c1e83fd196d84671a6dea448b20da517cf2
+              tag: master@sha256:6e06c78a5e0a9e95936d0af9990a9036888aca23b2894f398e8b118540e40bc9
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             resources:
