@@ -103,7 +103,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_scanner
-              tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
+              tag: master@sha256:037faf7e4cef05b56aaf04b488e45562e1c8652be2d6a807ed58ecd5f3c9919e
             args: ["scanner"]
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
@@ -131,7 +131,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_scanner
-              tag: master@sha256:48b27c36737502e67e6ebe9d69262da4acf2b91ba24da34ffb5161ab06184f9c
+              tag: master@sha256:037faf7e4cef05b56aaf04b488e45562e1c8652be2d6a807ed58ecd5f3c9919e
             args: ["matcher"]
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
