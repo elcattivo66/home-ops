@@ -27,5 +27,5 @@ data:
 
   # The url you can use to reach your kyoo instance. This is used during oidc to redirect users to your instance.
   PUBLIC_URL: https://kyoo.${SECRET_DOMAIN}
-
+  RABBITMQ_DEFAULT_USER: kyoo
   RABBITMQ_HOST: kyoo-rabbitmq.default.svc.cluster.local

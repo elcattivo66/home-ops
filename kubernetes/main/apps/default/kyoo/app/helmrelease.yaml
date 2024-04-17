@@ -52,6 +52,13 @@ spec:
             env:
               TRANSCODER_URL: http://kyoo-transcoder.default.svc.cluster.local:7666
               MEILI_HOST: http://kyoo-meilisearch.default.svc.cluster.local:7700
+              OIDC_AUTHELIA_NAME: Authelia
+              OIDC_AUTHELIA_LOGO: https://www.authelia.com/images/branding/logo-cropped.png
+              OIDC_AUTHELIA_CLIENTID: kyoo
+              OIDC_AUTHELIA_AUTHORIZATION: https://authelia.${SECRET_DOMAIN}/api/oidc/authorization
+              OIDC_AUTHELIA_TOKEN: https://authelia.${SECRET_DOMAIN}/api/oidc/token
+              OIDC_AUTHELIA_PROFILE: https://authelia.${SECRET_DOMAIN}/api/oidc/userinfo
+              OIDC_AUTHELIA_SCOPE: "openid profile groups email"
             envFrom:
               - secretRef:
                   name: kyoo-secret
@@ -135,9 +142,12 @@ spec:
             args: ["matcher"]
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+              RABBITMQ_DEFAULT_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: kyoo-secret
+                    key: RABBITMQ_DEFAULT_PASS
             envFrom:
-              - secretRef:
-                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
@@ -157,9 +167,13 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_autosync
               tag: master@sha256:418b7de3f63bb5932f1935eb363abbce1d621b7eb85b2a1f3d37bd3a2302f9ae
+            env:
+              RABBITMQ_DEFAULT_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: kyoo-secret
+                    key: RABBITMQ_DEFAULT_PASS
             envFrom:
-              - secretRef:
-                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
@@ -204,9 +218,13 @@ spec:
             image:
               repository: docker.io/rabbitmq
               tag: 3-alpine
+            env:
+              RABBITMQ_DEFAULT_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: kyoo-secret
+                    key: RABBITMQ_DEFAULT_PASS
             envFrom:
-              - secretRef:
-                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
