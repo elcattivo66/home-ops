@@ -181,11 +181,10 @@ spec:
               tag: v1.4
             env:
               MEILI_ENV: production
+              MEILI_NO_ANALYTICS: true
             envFrom:
               - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
+                  identifier: MEILI_MASTER_KEY
             resources:
               requests:
                 cpu: 5m
