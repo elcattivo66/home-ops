@@ -140,14 +140,9 @@ spec:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master@sha256:037faf7e4cef05b56aaf04b488e45562e1c8652be2d6a807ed58ecd5f3c9919e
             args: ["matcher"]
-            env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
-              RABBITMQ_DEFAULT_PASS:
-                valueFrom:
-                  secretKeyRef:
-                    name: kyoo-secret
-                    key: RABBITMQ_DEFAULT_PASS
             envFrom:
+              - secretRef:
+                  name: kyoo-secret
               - configMapRef:
                   name: kyoo-config
             resources:
