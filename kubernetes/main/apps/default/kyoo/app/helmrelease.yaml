@@ -238,7 +238,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_transcoder
-              tag: master@sha256:e77232c6b1e8d8cca696c1640bb8f9862eadd9b09986ba7b0f9f4768146dd033
+              tag: master@sha256:fc39a1f4aa2671e74d1011b72600165e0db4669c8b2ec76401d4fc08eeebdd45
             env:
               GOCODER_HWACCEL: qsv
               GOCODER_PRESET: fast
