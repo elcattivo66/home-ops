@@ -101,6 +101,16 @@ spec:
           - hosts:
               - *host
     persistence:
+      cache:
+        existingClaim: plex-cache
+        globalMounts:
+          - path: /config/Library/Application Support/Plex Media Server/Cache
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/Library/Application Support/Plex Media Server/Logs
+      tmp:
+        type: emptyDir
       transcode:
         type: emptyDir
         globalMounts:

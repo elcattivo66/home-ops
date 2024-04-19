@@ -86,3 +86,9 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /app/.next/cache
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /app/config/logs
+      tmp:
+        type: emptyDir

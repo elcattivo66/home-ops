@@ -96,6 +96,14 @@ spec:
           - hosts:
               - *host
     persistence:
+      config:
+        existingClaim: sabnzbd
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+      tmp:
+        type: emptyDir
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
