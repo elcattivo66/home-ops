@@ -24,9 +24,9 @@
     },
     {
       "customType": "regex",
-      "description": "Process CloudnativePG Postgresql version",
+      "description": ["Process CloudnativePG Postgresql version"],
       "fileMatch": [
-        "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+        "(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$"
       ],
       "matchStrings": [
         "imageName: (?<depName>\\S+):(?<currentValue>.*\\-.*)"
