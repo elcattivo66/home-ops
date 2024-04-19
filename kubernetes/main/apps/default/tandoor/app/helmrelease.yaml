@@ -86,7 +86,7 @@ spec:
           nginx:
             image:
               repository: ghcr.io/nginxinc/nginx-unprivileged
-              tag: 1.25.4
+              tag: 1.25.5
             resources:
               requests:
                 cpu: 10m
