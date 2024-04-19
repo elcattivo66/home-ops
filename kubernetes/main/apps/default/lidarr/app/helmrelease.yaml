@@ -44,7 +44,6 @@ spec:
               repository: ghcr.io/onedr0p/lidarr-develop
               tag: 2.2.5.4141@sha256:e706cb518eed32a850bdddd67084056c47bd1ce2cc93970ed62ffbd118d70fb4
             env:
-              TZ: ${TZ}
               LIDARR__INSTANCE_NAME: Lidarr
               LIDARR__PORT: &port 80
               LIDARR__LOG_LEVEL: info

@@ -51,9 +51,7 @@ spec:
               repository: ghcr.io/sct/overseerr
               tag: 1.33.2
             env:
-              TZ: "${TZ}"
-              PUID: "1000"
-              PGID: "1000"
+              LOG_LEVEL: "info"
             resources:
               requests:
                 cpu: 10m

@@ -37,7 +37,6 @@ spec:
               repository: ghcr.io/onedr0p/sabnzbd
               tag: 4.2.3@sha256:da0b03dabd606e8328d772cd53bbdeaac5e787ad19e3cc0533525d1be27f5261
             env:
-              TZ: ${TZ}
               SABNZBD__PORT: &port 80
               SABNZBD__HOST_WHITELIST_ENTRIES: >-
                 sabnzbd,

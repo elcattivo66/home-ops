@@ -50,7 +50,6 @@ spec:
               repository: ghcr.io/gotify/server
               tag: 2.4.0
             env:
-              TZ: "${TZ}"
               GOTIFY_DATABASE_CONNECTION: data/gotify.db
               GOTIFY_PLUGINSDIR: data/plugins
               GOTIFY_UPLOADEDIMAGESDIR: data/images

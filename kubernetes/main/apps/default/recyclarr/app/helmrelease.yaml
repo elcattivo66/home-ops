@@ -39,8 +39,6 @@ spec:
               - secretRef:
                   name: recyclarr-secret
             args: ["sync"]
-            env:
-              TZ: ${TZ}
             resources:
               requests:
                 cpu: 10m
