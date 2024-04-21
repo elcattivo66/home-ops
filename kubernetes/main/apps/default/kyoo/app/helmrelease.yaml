@@ -247,13 +247,14 @@ spec:
                 memory: 512Mi
               limits:
                 gpu.intel.com/i915: 1
-                memory: 2Gi
+                memory: 4Gi
             securityContext: *securityContext
         pod:
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
           securityContext:
             runAsUser: 1000
+            runAsNonRoot: true
             runAsGroup: 1000
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
