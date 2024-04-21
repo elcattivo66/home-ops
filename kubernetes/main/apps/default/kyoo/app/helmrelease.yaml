@@ -234,7 +234,7 @@ spec:
               repository: ghcr.io/zoriya/kyoo_transcoder
               tag: master@sha256:0eae6c00c4841d28910867be935d566b4617c0e9f99cdfeba84564c94a6e2e67
             env:
-              GOCODER_HWACCEL: qsv
+              GOCODER_HWACCEL: vaapi
               GOCODER_PRESET: fast
               GOCODER_VAAPI_RENDERER: /dev/dri/renderD128
             envFrom:
