@@ -59,7 +59,7 @@ spec:
               OIDC_AUTHELIA_TOKEN: https://authelia.${SECRET_DOMAIN}/api/oidc/token
               OIDC_AUTHELIA_PROFILE: https://authelia.${SECRET_DOMAIN}/api/oidc/userinfo
               OIDC_AUTHELIA_SCOPE: "openid profile groups email"
-            envFrom:
+            envFrom: &envFrom
               - secretRef:
                   name: kyoo-secret
               - configMapRef:
@@ -115,11 +115,7 @@ spec:
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
               SCANNER_LIBRARY_ROOT: /media
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 5m
@@ -142,11 +138,7 @@ spec:
             args: ["matcher"]
             env:
               KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 5m
@@ -252,10 +244,10 @@ spec:
               requests:
                 gpu.intel.com/i915: 1
                 cpu: 10m
-                memory: 356Mi
+                memory: 512Mi
               limits:
                 gpu.intel.com/i915: 1
-                memory: 356Mi
+                memory: 2Gi
             securityContext: *securityContext
         pod:
           nodeSelector:
