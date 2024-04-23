@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_back
-              tag: master@sha256:8512903aada6f2a71b0f5d76afb59a600a393179524475831e29903629a127c7
+              tag: master@sha256:e69ee4ee377e65214995e252d3772baf9b509326f3bcd839c7bdfc155a59cb70
             env:
               TRANSCODER_URL: http://kyoo-transcoder.default.svc.cluster.local:7666
               MEILI_HOST: http://kyoo-meilisearch.default.svc.cluster.local:7700
