@@ -84,7 +84,7 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
 
       front:
-        replicas: 2
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -127,7 +127,7 @@ spec:
         pod: *pod
 
       matcher:
-        replicas: 2
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
