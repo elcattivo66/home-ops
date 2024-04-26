@@ -31,6 +31,8 @@ spec:
       tag: 1.21.11
       rootless: true
     replicaCount: 1
+    strategy:
+      type: Recreate
     containerSecurityContext:
       capabilities:
         add: ["SYS_CHROOT"]
