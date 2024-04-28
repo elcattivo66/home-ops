@@ -50,15 +50,7 @@ spec:
               repository: ghcr.io/zoriya/kyoo_back
               tag: master@sha256:acca2e2a7420fbd1e87b2001799b173f00e525c569ac197fbcf803f380c30d2e
             env:
-              TRANSCODER_URL: http://kyoo-transcoder.default.svc.cluster.local:7666
-              MEILI_HOST: http://kyoo-meilisearch.default.svc.cluster.local:7700
-              OIDC_AUTHELIA_NAME: Authelia
-              OIDC_AUTHELIA_LOGO: https://www.authelia.com/images/branding/logo-cropped.png
-              OIDC_AUTHELIA_CLIENTID: kyoo
-              OIDC_AUTHELIA_AUTHORIZATION: https://authelia.${SECRET_DOMAIN}/api/oidc/authorization
-              OIDC_AUTHELIA_TOKEN: https://authelia.${SECRET_DOMAIN}/api/oidc/token
-              OIDC_AUTHELIA_PROFILE: https://authelia.${SECRET_DOMAIN}/api/oidc/userinfo
-              OIDC_AUTHELIA_SCOPE: "openid profile groups email"
+              TRANSCODER_URL: http://kyoo-transcoder:7666
             envFrom: &envFrom
               - secretRef:
                   name: kyoo-secret
@@ -94,7 +86,7 @@ spec:
               repository: ghcr.io/zoriya/kyoo_front
               tag: master@sha256:f32a063935cf16081e72fa7d05c1058eb69f5f8c8d73f07c6dc098686f994c1d
             env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
+              KYOO_URL: http://kyoo-back:5000
             resources:
               requests:
                 cpu: 5m
@@ -113,9 +105,6 @@ spec:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master@sha256:32e6bf3177d34aa09222a5e1d05eda93ab4ed63422d4471ba3c1a0880fcce667
             args: ["scanner"]
-            env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
-              SCANNER_LIBRARY_ROOT: /media
             envFrom: *envFrom
             resources:
               requests:
@@ -137,8 +126,6 @@ spec:
               repository: ghcr.io/zoriya/kyoo_scanner
               tag: master@sha256:32e6bf3177d34aa09222a5e1d05eda93ab4ed63422d4471ba3c1a0880fcce667
             args: ["matcher"]
-            env:
-              KYOO_URL: http://kyoo-back.default.svc.cluster.local:5000
             envFrom: *envFrom
             resources:
               requests:
@@ -157,15 +144,7 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_autosync
               tag: master@sha256:84b39928a1e811e2e43f61d5fa5e3cb547c712f3f9cc650f67d48cca0e524204
-            env:
-              RABBITMQ_DEFAULT_PASS:
-                valueFrom:
-                  secretKeyRef:
-                    name: kyoo-secret
-                    key: RABBITMQ_DEFAULT_PASS
-            envFrom:
-              - configMapRef:
-                  name: kyoo-config
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 5m
@@ -208,15 +187,7 @@ spec:
             image:
               repository: docker.io/rabbitmq
               tag: 3-alpine
-            env:
-              RABBITMQ_DEFAULT_PASS:
-                valueFrom:
-                  secretKeyRef:
-                    name: kyoo-secret
-                    key: RABBITMQ_DEFAULT_PASS
-            envFrom:
-              - configMapRef:
-                  name: kyoo-config
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 5m
@@ -234,13 +205,7 @@ spec:
             image:
               repository: ghcr.io/zoriya/kyoo_transcoder
               tag: master@sha256:5e535040453c81034aa0f3365546d9f0f8934c4c14db8c6ac319ed2a2172b984
-            env:
-              GOCODER_HWACCEL: vaapi
-              GOCODER_PRESET: fast
-              GOCODER_VAAPI_RENDERER: /dev/dri/renderD128
-            envFrom:
-              - configMapRef:
-                  name: kyoo-config
+            envFrom: *envFrom
             resources:
               requests:
                 gpu.intel.com/i915: 1
