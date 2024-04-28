@@ -42,7 +42,7 @@ spec:
       tls: true
 
     defaultSettings:
-      backupTarget: s3://longhorn-backup@eu-central-1/
+      backupTarget: s3://longhorn-backup@us-east-1/
       backupTargetCredentialSecret: longhorn-minio
       storageMinimalAvailablePercentage: 20
       defaultLonghornStaticStorageClass: longhorn

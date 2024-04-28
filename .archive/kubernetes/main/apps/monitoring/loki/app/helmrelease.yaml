@@ -59,7 +59,7 @@ spec:
               s3forcepathstyle: true
               endpoint: "http://minio.nas.local"
               bucketnames: loki
-              region: eu-central-1
+              region: us-east-1
               secret_access_key: "${MINIO_ACCESS_KEY}"
               access_key_id: "${MINIO_SECRET_KEY}"
           ring:
