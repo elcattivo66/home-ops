@@ -5,4 +5,4 @@ namespace: monitoring
 resources:
   # - ./nas.yaml
   - ./node-exporter.yaml
-  # - ./openhab.yaml
+  - ./smartctl-exporter.yaml

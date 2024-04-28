@@ -1,4 +1,4 @@
 type: REDIS
 config:
   addr: dragonfly.databases.svc.cluster.local:6379
-  db: 9
+  db: 4
