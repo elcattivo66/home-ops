@@ -85,9 +85,9 @@ spec:
             resources:
               requests:
                 cpu: 18m
-                memory: 100Mi
+                memory: 200Mi
               limits:
-                memory: 100Mi
+                memory: 200Mi
 
     persistence:
       config-yaml:
