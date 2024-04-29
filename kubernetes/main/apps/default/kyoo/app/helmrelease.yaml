@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_back
-              tag: master@sha256:acca2e2a7420fbd1e87b2001799b173f00e525c569ac197fbcf803f380c30d2e
+              tag: master@sha256:a54a7cc973127951e30e0fbcfc2399132b9dc102c2f5dc1c0e02d1c2399686e2
             env:
               TRANSCODER_URL: http://kyoo-transcoder:7666
             envFrom: &envFrom
