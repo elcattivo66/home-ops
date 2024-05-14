@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.104.0
+              tag: v1.105.0
             envFrom:
               - secretRef:
                   name: immich-secret
@@ -42,8 +42,6 @@ spec:
                   name: immich-config
             env:
               IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
-              MACHINE_LEARNING_CACHE_FOLDER: /cache
-              TRANSFORMERS_CACHE: /cache
             resources:
               requests:
                 cpu: 5m
@@ -78,14 +76,11 @@ spec:
         path: /tank/photos/immich/
         globalMounts:
           - path: *mediaLocation
-      cache:
-        type: persistentVolumeClaim
-        existingClaim: immich-machine-learning-cache
-        globalMounts:
-          - path: /cache
       external:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
         path: /tank/photos/Plex_Album/
         globalMounts:
           - path: /external-library/
+      cache:
+        type: emptyDir
