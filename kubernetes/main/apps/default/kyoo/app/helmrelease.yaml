@@ -35,6 +35,7 @@ spec:
             env:
               MEILI_ENV: production
               MEILI_NO_ANALYTICS: true
+              MEILI_DB_PATH: /meili_data/data.ms
               MEILI_MASTER_KEY:
                 valueFrom:
                   secretKeyRef:
