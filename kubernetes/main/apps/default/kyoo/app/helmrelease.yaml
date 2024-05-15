@@ -37,7 +37,6 @@ spec:
               MEILI_NO_ANALYTICS: true
               MEILI_DB_PATH: /meili_data/data.ms
               MEILI_DUMP_DIR: /meili_data/dumps
-              MEILI_LOG_LEVEL: trace
               MEILI_MASTER_KEY:
                 valueFrom:
                   secretKeyRef:
@@ -48,18 +47,6 @@ spec:
                 cpu: 5m
               limits:
                 memory: 2Gi
-            securityContext: &securityContext
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
-        pod: &pod
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105]
 
       rabbitmq:
         annotations:
@@ -80,8 +67,6 @@ spec:
                 memory: 300Mi
               limits:
                 memory: 300Mi
-            securityContext: *securityContext
-        pod: *pod
 
       back:
         replicas: 1
@@ -122,8 +107,6 @@ spec:
               limits:
                 cpu: 2000m
                 memory: 5Gi
-            securityContext: *securityContext
-        pod: *pod
 
       front:
         replicas: 1
@@ -143,8 +126,6 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 1Gi
-            securityContext: *securityContext
-        pod: *pod
 
       scanner:
         annotations:
@@ -162,8 +143,6 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 1Gi
-            securityContext: *securityContext
-        pod: *pod
 
       matcher:
         replicas: 1
@@ -183,8 +162,6 @@ spec:
                 memory: 356Mi
               limits:
                 memory: 356Mi
-            securityContext: *securityContext
-        pod: *pod
 
       autosync:
         annotations:
@@ -201,8 +178,6 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 100Mi
-            securityContext: *securityContext
-        pod: *pod
 
       transcoder:
         annotations:
@@ -221,17 +196,18 @@ spec:
               limits:
                 gpu.intel.com/i915: 1
                 memory: 4Gi
-            securityContext: *securityContext
-        pod:
-          nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
-          securityContext:
-            runAsUser: 1000
-            runAsNonRoot: true
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105]
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [44, 105]
+        seccompProfile: { type: RuntimeDefault }
+      nodeSelector:
+        intel.feature.node.kubernetes.io/gpu: "true"
 
     service:
       back:
