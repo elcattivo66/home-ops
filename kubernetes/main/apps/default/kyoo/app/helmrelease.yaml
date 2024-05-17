@@ -123,9 +123,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 100Mi
+                memory: 150Mi
               limits:
-                memory: 1Gi
+                memory: 150Mi
 
       scanner:
         annotations:
@@ -140,9 +140,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 356Mi
+                memory: 100Mi
               limits:
-                memory: 1Gi
+                memory: 100Mi
 
       matcher:
         replicas: 1
@@ -159,9 +159,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 356Mi
+                memory: 100Mi
               limits:
-                memory: 356Mi
+                memory: 100Mi
 
       autosync:
         annotations:
