@@ -73,10 +73,7 @@ spec:
                 memory: 593Mi
               limits:
                 memory: 593Mi
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
