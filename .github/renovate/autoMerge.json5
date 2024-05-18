@@ -33,7 +33,6 @@
         "ghcr.io/onedr0p/radarr-develop",
         "ghcr.io/onedr0p/readarr-develop",
         "ghcr.io/onedr0p/lidarr-develop",
-        "renovate/renovate"
         ]
     }
   ]

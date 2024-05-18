@@ -14,7 +14,7 @@
       "customType": "regex",
       "description": ["Process Grafana dashboards"],
       "fileMatch": [
-        "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+        "(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$"
       ],
       "matchStrings": [
         "depName=\"(?<depName>.*)\"\\n(?<indentation>\\s+)gnetId: (?<packageName>\\d+)\\n.+revision: (?<currentValue>\\d+)"
@@ -27,12 +27,12 @@
   "packageRules": [
     {
       "addLabels": ["renovate/grafana-dashboard"],
-      "commitMessageExtra": "to revision {{newVersion}}",
-      "commitMessageTopic": "dashboard {{depName}}",
-      "matchDatasources": ["grafana-dashboards", "custom.grafana-dashboards"],
+      "matchDatasources": ["custom.grafana-dashboards"],
       "matchUpdateTypes": ["major"],
+      "semanticCommitType": "chore",
       "semanticCommitScope": "grafana-dashboards",
-      "semanticCommitType": "chore"
+      "commitMessageTopic": "dashboard {{depName}}",
+      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
     }
   ]
 }
