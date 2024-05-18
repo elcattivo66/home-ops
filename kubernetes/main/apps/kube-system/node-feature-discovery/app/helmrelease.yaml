@@ -6,7 +6,7 @@ kind: HelmRelease
 metadata:
   name: node-feature-discovery
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://kubernetes-sigs.github.io/node-feature-discovery/charts

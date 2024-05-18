@@ -16,7 +16,6 @@ spec:
         kind: HelmRepository
         name: longhorn
         namespace: flux-system
-      interval: 30m
   values:
     controllerType: deployment
     persistence:

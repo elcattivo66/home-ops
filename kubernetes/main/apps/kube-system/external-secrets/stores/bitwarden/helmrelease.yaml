@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: bitwarden
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       chart: app-template
@@ -59,13 +59,10 @@ spec:
                 cpu: 100m
               limits:
                 memory: 512Mi
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: false
         runAsUser: 999
         runAsGroup: 999
         fsGroup: 999

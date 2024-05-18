@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: cert-manager
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/

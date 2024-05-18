@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: &app influxdb
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://helm.influxdata.com/
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: influxdata
         namespace: flux-system
-      interval: 5m
   values:
     fullnameOverride: *app
     image:

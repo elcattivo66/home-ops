@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: stevehipwell
         namespace: flux-system
-      interval: 30m
   valuesFrom:
     - targetPath: objstoreConfig.value.config.bucket
       kind: Secret

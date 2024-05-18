@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: kube-prometheus-stack
