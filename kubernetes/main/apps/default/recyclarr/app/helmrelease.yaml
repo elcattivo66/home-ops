@@ -30,11 +30,15 @@ spec:
           reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "@daily"
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
         containers:
           app:
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 6.0.2
+              tag: 6.0.2@sha256:02add40feae0569401b5020528e06419b47046723d0bb4bef1e82325e9eefdad
+            env:
+              COMPlus_EnableDiagnostics: "0"
             envFrom:
               - secretRef:
                   name: recyclarr-secret
@@ -59,10 +63,8 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     persistence:
       config:
-        enabled: true
         existingClaim: recyclarr-config
       config-file:
-        enabled: true
         type: configMap
         name: recyclarr-configmap
         globalMounts:
