@@ -37,13 +37,7 @@ spec:
               storageClass: longhorn
               globalMounts:
                 - path: /app/data
-        pod:
-          enableServiceLinks: false
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
+
         containers:
           app:
             image:
@@ -59,6 +53,16 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 100Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile: { type: RuntimeDefault }
 
     service:
       app:

@@ -29,6 +29,16 @@ spec:
     controllers:
       zigbee2mqtt:
         type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 128Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /data
         containers:
           app:
             image:
@@ -73,24 +83,18 @@ spec:
                 memory: 202M
             securityContext:
               privileged: true
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [20]
-          nodeSelector:
-            cc2652.feature.node.kubernetes.io/zigbee: "true"
 
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 128Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /data
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [20]
+        seccompProfile: { type: RuntimeDefault }
+      nodeSelector:
+        cc2652.feature.node.kubernetes.io/zigbee: "true"
+
     service:
       app:
         controller: zigbee2mqtt
