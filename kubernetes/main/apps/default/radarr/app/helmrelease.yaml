@@ -45,12 +45,14 @@ spec:
               tag: 5.6.0.8846@sha256:e5c868ea61be78a10a3294aa0cac2cb02c0eabe23e126f6db772ddf8c3155a19
             env:
               PUSHOVER_DEBUG: "false"
-              RADARR__AUTHENTICATION_METHOD: External
-              RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
-              RADARR__INSTANCE_NAME: Radarr
-              RADARR__PORT: &port 80
-              RADARR__LOG_LEVEL: info
-              RADARR__THEME: dark
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              RADARR__LOG__DBENABLED: "False"
+              RADARR__APP__INSTANCENAME: Radarr
+              RADARR__SERVER__PORT: &port 80
+              RADARR__LOG__LEVEL: info
+              RADARR__APP__THEME: dark
+              RADARR__UPDATE__BRANCH: develop
             envFrom: *envFrom
             resources:
               requests:
