@@ -32,9 +32,8 @@ spec:
         containers:
           app:
             image:
-              repository: tomsquest/docker-radicale
-              tag: 3.1.9.1
-
+              repository: ghcr.io/bjw-s/radicale
+              tag: 3.2.0@sha256:639ebecbfbbf96be0b030d46f0bccaa43a396408fe867a1fc9b2f13bc82653d5
             resources:
               requests:
                 cpu: 5m
