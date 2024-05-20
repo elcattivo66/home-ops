@@ -12,3 +12,4 @@ data:
   IMMICH_SERVER_URL: http://immich-server.default.svc.cluster.local:3001
   IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.default.svc.cluster.local:3003
   DB_VECTOR_EXTENSION: pgvector
+  IMMICH_MEDIA_LOCATION: /usr/src/app/upload
