@@ -107,13 +107,13 @@ spec:
         fsGroup: 1000
         fsGroupChangePolicy: "OnRootMismatch"
         supplementalGroups: [44, 105]
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: *app
+      # topologySpreadConstraints:
+      #   - maxSkew: 1
+      #     topologyKey: kubernetes.io/hostname
+      #     whenUnsatisfiable: DoNotSchedule
+      #     labelSelector:
+      #       matchLabels:
+      #         app.kubernetes.io/name: *app
 
     service:
       server:
