@@ -9,15 +9,6 @@
         "**/terraform/main/**"
       ],
       "additionalBranchPrefix": "main-"
-    },
-    {
-      "description": "Separate PRs for nas cluster",
-      "matchFileNames": [
-        "**/kubernetes/nas/**",
-        "**/ansible/storage/**",
-        "**/terraform/storage/**"
-      ],
-      "additionalBranchPrefix": "nas-"
     }
   ]
 }
