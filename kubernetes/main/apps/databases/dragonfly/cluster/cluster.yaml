@@ -7,20 +7,27 @@ metadata:
 spec:
   image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.18.1
   replicas: 3
-  resources:
-    requests:
-      cpu: 10m
-    limits:
-      memory: 512Mi
-  env:
-    - name: MAX_MEMORY
-      valueFrom:
-        resourceFieldRef:
-          resource: limits.memory
-          divisor: 1Mi
   args:
     - "--maxmemory=$(MAX_MEMORY)Mi"
     - "--proactor_threads=2"
     - "--cluster_mode=emulated"
     - "--default_lua_flags=allow-undeclared-keys"
     - "--lock_on_hashtags"
+  env:
+    - name: MAX_MEMORY
+      valueFrom:
+        resourceFieldRef:
+          resource: limits.memory
+          divisor: 1Mi
+  resources:
+    requests:
+      cpu: 10m
+    limits:
+      memory: 512Mi
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: "kubernetes.io/hostname"
+      whenUnsatisfiable: "DoNotSchedule"
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/part-of: dragonfly
