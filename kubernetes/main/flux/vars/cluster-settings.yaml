@@ -6,9 +6,9 @@ metadata:
   namespace: flux-system
 data:
   NAS_ADDR: 192.168.178.5
-  MEDIADIR: /tank/media
-  BACKUPDIR: /tank/backup
-  DOWNLOADDIR: /tank/media/downloads
+  MEDIADIR: /spool/media
+  BACKUPDIR: /spool/backup
+  DOWNLOADDIR: /spool/media/downloads
   TZ: "Europe/Berlin"
 
   #Metallb
