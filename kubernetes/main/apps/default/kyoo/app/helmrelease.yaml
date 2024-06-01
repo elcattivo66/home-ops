@@ -45,8 +45,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
+                memory: 960Mi
               limits:
-                memory: 2Gi
+                memory: 960Mi
 
       rabbitmq:
         annotations:
@@ -64,9 +65,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 300Mi
+                memory: 261Mi
               limits:
-                memory: 300Mi
+                memory: 261Mi
 
       back:
         replicas: 1
@@ -106,7 +107,7 @@ spec:
                 memory: 512Mi
               limits:
                 cpu: 2000m
-                memory: 5Gi
+                memory: 4678Mi
 
       front:
         replicas: 1
@@ -123,9 +124,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 150Mi
+                memory: 100Mi
               limits:
-                memory: 150Mi
+                memory: 100Mi
 
       scanner:
         annotations:

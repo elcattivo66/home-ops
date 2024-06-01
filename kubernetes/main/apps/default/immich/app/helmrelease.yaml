@@ -101,10 +101,10 @@ spec:
               requests:
                 gpu.intel.com/i915: 1
                 cpu: 5m
-                memory: 2755Mi
+                memory: 977Mi
               limits:
                 gpu.intel.com/i915: 1
-                memory: 2755Mi
+                memory: 977Mi
 
       machine-learning:
         annotations:
@@ -128,9 +128,9 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 2283Mi
+                memory: 1889Mi
               limits:
-                memory: 2283Mi
+                memory: 1889Mi
 
     defaultPodOptions:
       securityContext:
