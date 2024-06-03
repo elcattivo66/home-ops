@@ -2,12 +2,12 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name: &name smartctl-exporter
+  name: &name nas-minio
+  namespace: monitoring
 spec:
   staticConfigs:
-    - targets:
-        - nas.${SECRET_HOME_DOMAIN}:9633
-  metricsPath: /metrics
+    - targets: ["nas.${SECRET_HOME_DOMAIN}:9000"]
+  metricsPath: /minio/v2/metrics/cluster
   relabelings:
     - action: replace
       targetLabel: job
