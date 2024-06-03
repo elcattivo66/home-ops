@@ -6,7 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   staticConfigs:
-    - targets: ["nas.${SECRET_HOME_DOMAIN}:9000"]
+    - targets: ["nas.${SECRET_HOME_DOMAIN}:9290"]
   metricsPath: /minio/v2/metrics/cluster
   relabelings:
     - action: replace
