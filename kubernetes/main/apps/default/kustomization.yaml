@@ -19,7 +19,6 @@ resources:
   - ./lldap/ks.yaml
   - ./nextcloud/ks.yaml
   - ./mosquitto/ks.yaml
-  - ./openhab/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
