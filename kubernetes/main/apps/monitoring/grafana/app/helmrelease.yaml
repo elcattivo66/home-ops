@@ -84,14 +84,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
-          - name: openhab
+          - name: smarthome
             orgId: 1
             folder: Smarthome
             type: file
             disableDeletion: false
             allowUiUpdates: true
             options:
-              path: /var/lib/grafana/dashboards/openhab
+              path: /var/lib/grafana/dashboards/smarthome
           - name: flux
             orgId: 1
             folder: Flux
@@ -198,12 +198,6 @@ spec:
           gnetId: 7845
           revision: 4
           datasource: Prometheus
-        redis:
-          # renovate: depName="Redis Dashboard for Prometheus Redis Exporter 1.x"
-          gnetId: 763
-          revision: 6
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
         minio:
           # renovate: depName="MinIO Dashboard"
           gnetId: 13502
@@ -299,10 +293,6 @@ spec:
           datasource: Prometheus
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
-          datasource: Prometheus
-      openhab:
-        metrics:
-          url: https://raw.githubusercontent.com/openhab/openhab-addons/main/bundles/org.openhab.io.metrics/doc/dashboard.json
           datasource: Prometheus
     sidecar:
       dashboards:
