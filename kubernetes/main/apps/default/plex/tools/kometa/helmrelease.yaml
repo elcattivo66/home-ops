@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app plex-meta-manager
+  name: &app kometa
 spec:
   interval: 30m
   chart:
@@ -33,50 +33,58 @@ spec:
           reloader.stakater.com/auto: "true"
         cronjob:
           schedule: 0 6 * * *
+          timeZone: &timeZone ${TZ}
           concurrencyPolicy: Forbid
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
         containers:
           app:
             image:
-              repository: docker.io/meisnate12/plex-meta-manager
-              tag: v1.21.0@sha256:024b6efe5f3461ed24267c728816c550b6d88c37371dd410b31d06a7af3803e6
+              repository: kometateam/kometa
+              tag: v2.0.2@sha256:2f4515f85b76c83e5bf2c6618af22f4c0c453e4bd5b8f9a00595a0f81f603bef
             command:
-              - /scripts/run.sh
+              - /bin/sh
+              - -c
+            args:
+              - |
+                python3 kometa.py --run --read-only-config --run-libraries "Movies";
+                python3 kometa.py --run --read-only-config --run-libraries "TV Shows";
             env:
-              PUID: 1000
-              PGID: 1000
+              TZ: *timeZone
             envFrom:
               - secretRef:
-                  name: plex-meta-manager-secret
+                  name: kometa-secret
             resources:
               requests:
                 cpu: 10m
                 memory: 2Gi
               limits:
                 memory: 8Gi
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
         enabled: true
-        existingClaim: *app
+        existingClaim: kometa-config
       config-file:
         type: configMap
-        name: plex-meta-manager-configmap
+        name: kometa-configmap
         globalMounts:
           - path: /config/config.yml
             subPath: config.yml
             readOnly: true
-      scripts:
-        type: configMap
-        name: plex-meta-manager-configmap
-        defaultMode: 0775
+      logs:
+        type: emptyDir
         globalMounts:
-          - path: /scripts/run.sh
-            subPath: run.sh
-            readOnly: true
+          - path: /config/logs

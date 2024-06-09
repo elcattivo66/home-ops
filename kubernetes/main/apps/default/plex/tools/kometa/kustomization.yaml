@@ -6,10 +6,9 @@ resources:
   - ./helmrelease.yaml
   - ./pvc.yaml
 configMapGenerator:
-  - name: plex-meta-manager-configmap
+  - name: kometa-configmap
     files:
       - ./configs/config.yml
-      - ./scripts/run.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
