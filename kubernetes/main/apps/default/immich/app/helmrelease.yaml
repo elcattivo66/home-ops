@@ -52,12 +52,13 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.106.1@sha256:b29d17de30931f22719f0ee39dd7bd24e2f6be08e61c13bd881e41ed426087f2
-            args: [start-server.sh]
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret
               - configMapRef:
                   name: immich-config
+            env:
+              IMMICH_WORKERS_INCLUDE: api
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -91,8 +92,9 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.106.1@sha256:b29d17de30931f22719f0ee39dd7bd24e2f6be08e61c13bd881e41ed426087f2
-            args: ["start-microservices.sh"]
             envFrom: *envFrom
+            env:
+              IMMICH_WORKERS_EXCLUDE: api            
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
