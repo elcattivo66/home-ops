@@ -51,13 +51,14 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.105.1@sha256:658b40420d7a39d6eb34c797cec8d36ff315f5adb168301aaf27dc4eafc8e228
-            args: [start-server.sh]
+              tag: v1.106.1@sha256:b29d17de30931f22719f0ee39dd7bd24e2f6be08e61c13bd881e41ed426087f2
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret
               - configMapRef:
                   name: immich-config
+            env:
+              IMMICH_WORKERS_INCLUDE: api
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -90,9 +91,10 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.105.1@sha256:658b40420d7a39d6eb34c797cec8d36ff315f5adb168301aaf27dc4eafc8e228
-            args: ["start-microservices.sh"]
+              tag: v1.106.1@sha256:b29d17de30931f22719f0ee39dd7bd24e2f6be08e61c13bd881e41ed426087f2
             envFrom: *envFrom
+            env:
+              IMMICH_WORKERS_EXCLUDE: api            
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -123,7 +125,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.105.1@sha256:2e2736ba2f2270485c0b6fa33eee66ea0b2279b70b92ea838a015c4d5289c9f0
+              tag: v1.106.1@sha256:9577a58ef2c1b61f6f7d7e8c2d86d2e94facc04d901fb27710cbf92fc5e47bfc
             envFrom: *envFrom
             resources:
               requests:
