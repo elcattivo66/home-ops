@@ -57,44 +57,6 @@ spec:
                   name: immich-secret
               - configMapRef:
                   name: immich-config
-            env:
-              IMMICH_WORKERS_INCLUDE: api
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
-            resources:
-              requests:
-                cpu: 5m
-                memory: 356Mi
-              limits:
-                memory: 356Mi
-
-      microservices:
-        replicas: 2
-        strategy: RollingUpdate
-        annotations:
-          reloader.stakater.com/auto: "true"
-        pod:
-          nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: *app
-                  app.kubernetes.io/instance: *app
-                  app.kubernetes.io/component: microservices
-        containers:
-          app:
-            image:
-              repository: ghcr.io/immich-app/immich-server
-              tag: v1.106.4@sha256:d39cb7ecbcc9924f2c51a3e0deb8a469075996c6ba9e1384eb2ddb550984848e
-            envFrom: *envFrom
-            env:
-              IMMICH_WORKERS_EXCLUDE: api            
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -103,10 +65,10 @@ spec:
               requests:
                 gpu.intel.com/i915: 1
                 cpu: 5m
-                memory: 977Mi
+                memory: 1Gi
               limits:
                 gpu.intel.com/i915: 1
-                memory: 977Mi
+                memory: 1Gi
 
       machine-learning:
         annotations:
