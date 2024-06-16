@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/home-assistant
-              tag: 2024.6.2@sha256:9d04fb920b0da46fb0439a84bebd5ba29592f971db5fe37049a431a62ed846b8
+              tag: 2024.6.3@sha256:c2f6a616694e60e814082634a8df2d239efb6cec1ecb287a82b3eb5e5961746f
             envFrom: *envFrom
             env:
               HASS_TRUSTED_PROXIES: 192.168.178.0/24,10.42.0.0/16,10.43.0.0/16
