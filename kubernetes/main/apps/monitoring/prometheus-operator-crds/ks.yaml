@@ -7,7 +7,9 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: monitoring
-  interval: 10m
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
   path: "./kubernetes/main/apps/monitoring/prometheus-operator-crds/app"
   prune: true
   sourceRef:
