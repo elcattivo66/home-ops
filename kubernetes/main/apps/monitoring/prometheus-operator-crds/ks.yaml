@@ -7,11 +7,14 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: monitoring
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   interval: 30m
   retryInterval: 1m
   timeout: 5m
   path: "./kubernetes/main/apps/monitoring/prometheus-operator-crds/app"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
