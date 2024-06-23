@@ -30,6 +30,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    prometheus:
+      enable: true
     worker:
       config:
         core:
@@ -41,5 +43,24 @@ spec:
           cpu:
             cpuid:
               attributeWhitelist: ["AVX", "AVX2"]
-    prometheus:
-      enable: true
+      resources:
+        requests:
+          cpu: 5m
+          memory: 48Mi
+        limits:
+          memory: 48Mi
+    master:
+      resources:
+        requests:
+          cpu: 21m
+          memory: 51Mi
+        limits:
+          memory: 51Mi
+    gc:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 100m
+          memory: 256Mi
