@@ -35,8 +35,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/larivierec/bitwarden-cli
-              tag: 2024.6.1
+              repository: ghcr.io/roxedus/bw
+              tag: 2024.6.1@sha256:3441332b35d4ca98d5ffbd42c6a83bf2702190657eadfdc9e543eaa392c79d20
             envFrom:
               - secretRef:
                   name: bitwarden-cli
