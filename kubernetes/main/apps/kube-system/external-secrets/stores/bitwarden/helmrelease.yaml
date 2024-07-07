@@ -23,6 +23,11 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 769
+        runAsGroup: 769
+        runAsNonRoot: true
     controllers:
       bitwarden:
         annotations:
@@ -35,6 +40,8 @@ spec:
             envFrom:
               - secretRef:
                   name: bitwarden-cli
+            securityContext:
+              readOnlyRootFilesystem: true
             probes:
               liveness:
                 enabled: true
@@ -42,11 +49,9 @@ spec:
                 spec:
                   exec:
                     command:
-                      [
-                        "sh",
-                        "-c",
-                        "curl -X POST -s http://127.0.0.1:8087/sync | jq -e '.success == true'",
-                      ]
+                      - sh
+                      - -c
+                      - /healthcheck.sh
                   initialDelaySeconds: 20
                   failureThreshold: 5
                   timeoutSeconds: 3
@@ -66,3 +71,8 @@ spec:
         ports:
           http:
             port: 8087
+    persistence:
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
