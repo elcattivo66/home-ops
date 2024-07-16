@@ -47,7 +47,7 @@ spec:
                 cpu: 5m
                 memory: 960Mi
               limits:
-                memory: 960Mi
+                memory: 1500Mi
 
       rabbitmq:
         annotations:
