@@ -117,14 +117,17 @@ spec:
             enabled: true
             port: 4001
             protocol: UDP
+            targetPort: 4001
           govee2:
             enabled: true
             port: 4002
             protocol: UDP
+            targetPort: 4002
           govee3:
             enabled: true
             port: 4003
             protocol: UDP
+            targetPort: 4003
       codeserver:
         type: ClusterIP
         controller: home-assistant
