@@ -113,6 +113,11 @@ spec:
             port: 1900
             protocol: UDP
             targetPort: 1900
+          govee:
+            enabled: true
+            port: 4001
+            protocol: UDP
+
       codeserver:
         type: ClusterIP
         controller: home-assistant
