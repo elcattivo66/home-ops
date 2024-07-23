@@ -31,7 +31,7 @@ spec:
           init-config:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.18@sha256:11dd2e9aa3ff18249a62c7be70dd349576cdfd03587ae279b8d1baa35869bc21
+              tag: 2.0.18@sha256:6f630d2b82b05ada353910f43c45d05df74e85b1f3cf77f7f9b8105d62a41f5c
             command: ["/bin/sh", "-c"]
             args:
               - cp /tmp/secret/* /mosquitto/external_config/;
@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.18@sha256:11dd2e9aa3ff18249a62c7be70dd349576cdfd03587ae279b8d1baa35869bc21
+              tag: 2.0.18@sha256:6f630d2b82b05ada353910f43c45d05df74e85b1f3cf77f7f9b8105d62a41f5c
             resources:
               requests:
                 cpu: 10m
