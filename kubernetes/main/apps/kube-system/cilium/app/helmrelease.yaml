@@ -39,8 +39,10 @@ spec:
       id: 1
     endpointRoutes:
       enabled: true
+    envoy:
+      enabled: false
     hubble:
-      enabled: true
+      enabled: false
       metrics:
         enabled:
           - dns:query
