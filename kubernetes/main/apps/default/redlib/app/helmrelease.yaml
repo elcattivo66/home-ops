@@ -39,7 +39,7 @@ spec:
               REDLIB_DEFAULT_HIDE_HLS_NOTIFICATION: "on"
               REDLIB_DEFAULT_LAYOUT: "compact"
               REDLIB_DEFAULT_SHOW_NSFW: "on"
-              # REDLIB_DEFAULT_SUBSCRIPTIONS: "${SECRET_REDLIB_SUBS}"
+              REDLIB_DEFAULT_SUBSCRIPTIONS: "${SECRET_REDLIB_SUBS}"
               REDLIB_DEFAULT_USE_HLS: "on"
               REDLIB_SFW_ONLY: "off"
             probes:
@@ -92,6 +92,3 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
