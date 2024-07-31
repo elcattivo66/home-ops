@@ -37,7 +37,7 @@ sonarr:
           - 63487786a8b01b7f20dd2bc90dd4a477 # DD+
           - c1a25cd67b5d2e08287c957b1eb903ec # DTS-ES
           - 5964f2a8b3be407d083498e4459d05d0 # DTS
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HD-1080p
@@ -49,7 +49,7 @@ sonarr:
           - cfa5fbd8f02a86fc55d8d223d06a5e1f # DTS-HD HRA
           - a50b8a0c62274a7c38b09a9619ba9d86 # AAC
           - dbe00161b08a25ac6154c55f95e6318d # DD
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HD-1080p
@@ -66,7 +66,7 @@ sonarr:
           - bb019e1cd00f304f80971c965de064dc # HDR (undefined)
           - 2a7e3be05d3861d6df7171ec74cad727 # PQ
           - 17e889ce13117940092308f48b48b45b # HLG
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HD-1080p
@@ -75,7 +75,7 @@ sonarr:
       - trash_ids:
           - 3a4127d8aa781b44120d907f2cd62627 # Hybrid
           - b735f09d3c025cbb7d75a5d38325b73b # Remaster
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HD-1080p
@@ -85,7 +85,7 @@ sonarr:
           - 85c61753df5da1fb2aab6f2a47426b09 # BR-DISK
           - 9c11cd3f07101cdba90a2d81cf0e56b4 # LQ
           # - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HD-1080p
@@ -96,7 +96,7 @@ sonarr:
           - 58790d4e2fdcd9733aa7ae68ba2bb503 # WEB Tier 02
           - d84935abd3f8556dcd51d4f27e22d0a6 # WEB Tier 03
           - d0c516558625b04b363fa6c5c2c7cfd4 # WEB Scene
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: HD-1080p
 
@@ -104,7 +104,7 @@ sonarr:
       - trash_ids:
           - d6819cba26b1a6508138d25fb5e32293 # HD BluRay Tier 01
           - c2216b7b8aa545dc1ce8388c618f8d57 # HD BluRay Tier 01
-        quality_profiles:
+        assign_scores_to:
           - name: Ultra-HD
           - name: HD-1080p
 
@@ -129,7 +129,7 @@ sonarr:
           - f27d46a831e6b16fa3fee2c4e5d10984 # CANAL+
           - 0455d6519a550dbf648c97b56e7231d2 # SALTO
           - b0d6195c23ae254932da00512db7e8a8 # RTBF
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HDTV
@@ -141,7 +141,7 @@ sonarr:
           - eb3d5cc0a2be0db205fb823640db6a3c # Repack v2
           - 44e7c4de10ae50265753082e5dc76047 # Repack v3
           - 3bc5f395426614e155e585a2f056cdf1 # Season packs
-        quality_profiles:
+        assign_scores_to:
           - name: WEB-1080p
           - name: Ultra-HD
           - name: HDTV
@@ -157,7 +157,7 @@ sonarr:
           - 06d66ab109d4d2eddb2794d21526d140 # Retags
           - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
           - 15a05bc7c1a36e2b57fd628f8977e2fc # AV1
-        quality_profiles:
+        assign_scores_to:
           - name: HD-1080p
           - name: Ultra-HD
 
@@ -263,6 +263,6 @@ radarr:
         - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
         - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         - cae4ca30163749b891686f95532519bd # AV1
-        quality_profiles:
+        assign_scores_to:
           - name: HD-1080p
           - name: Ultra-HD
