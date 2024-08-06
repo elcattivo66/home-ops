@@ -71,6 +71,20 @@ spec:
           host: smtp-relay.default.svc.cluster.local
           secure: ""
           port: 2525
+      objectstore:
+        s3:
+          enabled: true
+          host: s3.{SECRET_HOME_DOMAIN}
+          ssl: true
+          bucket: nextcloud-data
+          usePathStyle: true
+          region: us-east-1
+          autocreate: true
+          existingSecret: nextcloud-secret
+          secretKeys:
+            accessKey: S3_ACCESS_KEY
+            secretKey: S3_SECRET_KEY
+
       securityContext:
         runAsUser: 82
         runAsGroup: 82
@@ -119,23 +133,7 @@ spec:
             'oidc_login_disable_registration' => false,
             'oidc_login_password_authentication' => true,
           );
-        s3.config.php: |-
-          <?php
-          $CONFIG = array (
-            'objectstore' => [
-                    'class' => '\\OC\\Files\\ObjectStore\\S3',
-                    'arguments' => [
-                            'bucket' => 'nextcloud-data',
-                            'autocreate' => true,
-                            'key'    => getenv('S3_ACCESS_KEY'),
-                            'secret' => getenv('S3_SECRET_KEY'),
-                            'hostname' => 's3.${SECRET_HOME_DOMAIN}',
-                            'region' => 'us-east-1',
-                            'use_ssl' => true,
-                            'use_path_style' => true
-                    ],
-            ],
-          );
+
       phpConfigs:
         uploadLimit.ini: |
           upload_max_filesize = 16G
