@@ -30,17 +30,8 @@ spec:
   values:
     controllers:
       plex:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 100Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
         containers:
           app:
             image:
@@ -106,6 +97,12 @@ spec:
           - hosts:
               - *host
     persistence:
+      config:
+        existingClaim: plex-config
+        advancedMounts:
+          plex:
+            app:
+              - path: /config
       logs:
         type: emptyDir
         globalMounts:
