@@ -28,17 +28,8 @@ spec:
   values:
     controllers:
       sabnzbd:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
         containers:
           app:
             image:
@@ -53,9 +44,6 @@ spec:
                 sabnzbd.default.svc.cluster,
                 sabnzbd.default.svc.cluster.local,
                 sab.${SECRET_DOMAIN}
-            # envFrom:
-            #   - secretRef:
-            #       name: sabnzbd-secret
             resources:
               requests:
                 cpu: 10m
@@ -103,7 +91,7 @@ spec:
               - *host
     persistence:
       config:
-        existingClaim: sabnzbd
+        existingClaim: sabnzbd-config
       logs:
         type: emptyDir
         globalMounts:
