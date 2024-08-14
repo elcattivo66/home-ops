@@ -52,6 +52,10 @@ radarr:
     quality_profiles:
       - name: SQP-1 (1080p)
         min_format_score: 10
+        reset_unmatched_scores:
+          enabled: true
+          except:
+            - "Language: German + Original"
         qualities:
           - name: Bluray|WEB-1080p
             qualities:
@@ -60,6 +64,10 @@ radarr:
               - WEBRip-1080p
       - name: SQP-1 (2160p)
         min_format_score: 2000
+        reset_unmatched_scores:
+          enabled: true
+          except:
+            - "Language: German + Original"
 
     custom_formats:
       - trash_ids:
