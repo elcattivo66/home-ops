@@ -27,7 +27,7 @@ spec:
       secret.reloader.stakater.com/reload: &secret nextcloud-secret
     image:
       repository: public.ecr.aws/docker/library/nextcloud
-      tag: 29.0.4-fpm-alpine
+      tag: 29.0.5-fpm-alpine
       flavor: fpm-alpine
     nextcloud:
       host: &host cloud.${SECRET_DOMAIN}
