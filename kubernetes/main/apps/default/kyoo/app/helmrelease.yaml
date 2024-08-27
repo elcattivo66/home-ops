@@ -187,7 +187,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_transcoder
-              tag: edge@sha256:f28ac0be0056914fd29633a56fb35280cd81689bdbeeedbbe4bbba6eeea72541
+              tag: edge@sha256:613c31eb7d2a60e0a3a4b55972438c051a5a79f61b0717305e1dd8f062c009c0
             envFrom: *envFrom
             resources:
               requests:
