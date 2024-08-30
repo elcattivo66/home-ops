@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.10.0.9090@sha256:909283a93c51309007ad08817cd74f12f7df7cf6a2d34c7f4bbeca757724703c
+              tag: 5.10.0.9090@sha256:28a717b75f1c4acad61666de49b0dc0cd1eb8fdd296e7ceeb6cb50bbb24a4c57
             env:
               PUSHOVER_DEBUG: "false"
               RADARR__AUTH__METHOD: External
