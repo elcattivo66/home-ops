@@ -28,17 +28,8 @@ spec:
   values:
     controllers:
       tautulli:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 5Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
         containers:
           app:
             image:
@@ -95,3 +86,9 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: tautulli-config
+        globalMounts:
+          - path: /config
