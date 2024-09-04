@@ -6,7 +6,6 @@
       "matchFileNames": [
         "**/kubernetes/main/**",
         "**/ansible/main/**",
-        "**/terraform/main/**"
       ],
       "additionalBranchPrefix": "main-"
     }
