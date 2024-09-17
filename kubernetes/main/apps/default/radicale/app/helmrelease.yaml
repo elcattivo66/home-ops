@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/bjw-s/radicale
-              tag: 3.2.3@sha256:0c957bfa80b4b5ddb0ad7122f8da970683edec1d37e837ae7c2c4a197ccb2f08
+              tag: 3.2.3@sha256:dfc2f41d725bc88a7f834b76378f6d508a622320d4ca8230f75c08fe2abe16cb
             resources:
               requests:
                 cpu: 5m
