@@ -102,6 +102,7 @@ spec:
             'loglevel' => '2',
             'enable_previews' => true,
             'log_type' => 'syslog',
+            'maintenance_window_start' => 1,
             'trusted_domains' =>
               array (
                 0 => 'nextcloud',
