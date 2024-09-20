@@ -88,9 +88,8 @@ spec:
       securityContext:
         runAsUser: 82
         runAsGroup: 82
-        fsGroup: 82
-        fsGroupChangePolicy: "OnRootMismatch"
         runAsNonRoot: true
+        readOnlyRootFilesystem: false
       configs:
         custom.config.php: |-
           <?php
@@ -238,6 +237,10 @@ spec:
 
     cronjob:
       enabled: true
+      securityContext:
+        runAsGroup: 82
+    securityContext:
+      fsGroupChangePolicy: OnRootMismatch
 
     hpa:
       enabled: false
