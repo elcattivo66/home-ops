@@ -45,7 +45,7 @@ spec:
     # service:
     #   type: LoadBalancer
     #   annotations:
-    #     io.cilium/lb-ipam-ips: "${SVC_INFLUXDB}"
+    #     lbipam.cilium.io/ips: "${SVC_INFLUXDB}"
 
     persistence:
       enabled: true

@@ -87,7 +87,7 @@ spec:
         controller: home-assistant
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: ${SVC_HASS_ADDR}
+          lbipam.cilium.io/ips: ${SVC_HASS_ADDR},239.255.255.250
         ports:
           http:
             port: 8123
@@ -112,6 +112,11 @@ spec:
             port: 1900
             protocol: UDP
             targetPort: 1900
+          govee:
+            enabled: true
+            port: 4002
+            protocol: UDP
+            targetPort: 4002
       codeserver:
         type: ClusterIP
         controller: home-assistant
