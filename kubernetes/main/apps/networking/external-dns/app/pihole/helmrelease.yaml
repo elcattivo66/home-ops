@@ -35,7 +35,7 @@ spec:
     sources: ["ingress", "service"]
     env:
       - name: EXTERNAL_DNS_PIHOLE_SERVER
-        value: http://192.168.178.5
+        value: http://192.168.178.5:81
       - name: EXTERNAL_DNS_PIHOLE_PASSWORD
         valueFrom:
           secretKeyRef:
