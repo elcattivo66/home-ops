@@ -20,7 +20,7 @@ spec:
     controllerType: deployment
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 3
+      defaultClassReplicaCount: 2
       reclaimPolicy: Retain
       recurringJobs:
         enable: false
@@ -45,7 +45,7 @@ spec:
       backupTargetCredentialSecret: longhorn-minio
       storageMinimalAvailablePercentage: 20
       defaultLonghornStaticStorageClass: longhorn
-      defaultReplicaCount: 3
+      defaultReplicaCount: 2
       orphanAutoDeletion: true
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       backupstorePollInterval: 60
