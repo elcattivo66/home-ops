@@ -34,9 +34,8 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 68,
+      "id": 31,
       "links": [],
-      "liveNow": false,
       "panels": [
         {
           "datasource": {
@@ -75,6 +74,7 @@ data:
             "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
+            "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -86,7 +86,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "10.4.0",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -170,6 +170,7 @@ data:
             "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
+            "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -181,7 +182,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "10.4.0",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -265,6 +266,7 @@ data:
             "graphMode": "area",
             "justifyMode": "auto",
             "orientation": "auto",
+            "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
                 "sum"
@@ -276,7 +278,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "10.4.0",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -301,7 +303,7 @@ data:
               "measurement": "Smartplug2_Powerusage",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"smarthome\")\n  |> range(start: -1h)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )",
+              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false)  \n  |> sum()",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -362,6 +364,7 @@ data:
             "graphMode": "area",
             "justifyMode": "auto",
             "orientation": "auto",
+            "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
                 "sum"
@@ -373,7 +376,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "10.4.0",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -398,7 +401,7 @@ data:
               "measurement": "Smartplug1_Powerusage",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )",
+              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false)  \n  |> sum()",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -439,6 +442,7 @@ data:
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "bars",
                 "fillOpacity": 100,
                 "gradientMode": "none",
@@ -503,7 +507,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "10.4.0",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "alias": "Media",
@@ -528,7 +532,7 @@ data:
               "measurement": "Smartplug1_Powerusage",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )",
+              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"    \n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)  ",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -570,7 +574,7 @@ data:
               "measurement": "Smartplug2_Powerusage",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )",
+              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
               "refId": "B",
               "resultFormat": "time_series",
               "select": [
@@ -650,6 +654,7 @@ data:
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -711,6 +716,7 @@ data:
               "sort": "none"
             }
           },
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -734,7 +740,7 @@ data:
               "measurement": "Smartplug1_Powerusage",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )",
+              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -776,7 +782,7 @@ data:
               "measurement": "Smartplug2_Powerusage",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )",
+              "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
               "refId": "B",
               "resultFormat": "time_series",
               "select": [
@@ -818,8 +824,9 @@ data:
           "type": "timeseries"
         }
       ],
-      "refresh": false,
-      "schemaVersion": 39,
+      "preload": false,
+      "refresh": "",
+      "schemaVersion": 40,
       "tags": [],
       "templating": {
         "list": []
