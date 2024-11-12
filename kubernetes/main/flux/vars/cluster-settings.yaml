@@ -5,7 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  NAS_ADDR: 192.168.178.5
+  NAS_ADDR: 192.168.20.5
   MEDIADIR: /spool/media
   BACKUPDIR: /spool/backup
   DOWNLOADDIR: /spool/media/downloads
@@ -23,5 +23,5 @@ data:
   SVC_SMTP_RELAY_ADDRESS: 192.168.178.233
 
   CLUSTER_CIDR: 10.42.0.0/16
-  KUBE_VIP_ADDR: 192.168.178.9
+  KUBE_VIP_ADDR: 192.168.20.9
   NODE_CIDR: 192.168.178.0/24

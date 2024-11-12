@@ -6,7 +6,7 @@ metadata:
   name: minio-s3
 subsets:
   - addresses:
-      - ip: 192.168.178.5
+      - ip: 192.168.20.5
     ports:
       - name: http
         port: 9000
