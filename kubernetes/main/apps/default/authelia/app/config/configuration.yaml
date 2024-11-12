@@ -69,7 +69,7 @@ access_control:
   default_policy: two_factor
   networks:
     - name: internal
-      networks: ["10.0.0.0/8", "192.168.178.0/24"]
+      networks: ["10.0.0.0/8", "192.168.20.0/24", "192.168.10.0/24"]
 
   rules:
     - domain_regex: '^(sonarr|radarr|prowlarr|readarr|lidarr|tautulli)\.${SECRET_DOMAIN}$'
@@ -77,20 +77,6 @@ access_control:
       resources:
         - "^/api([/?].*)?$"
     # Rules applied to everyone
-    - domain: gotify.${SECRET_DOMAIN}
-      policy: bypass
-      resources:
-        - "^/message([/?].*)?$"
-        - "^/current/.*$"
-        - "^/stream([/?].*)?$"
-        - "^/version"
-        - "^/application"
-        - "^/static/.*$"
-        - "^/image/.*$"
-      methods:
-        - GET
-        - POST
-        - DELETE
     - domain:
         - "${SECRET_DOMAIN}"
         - "*.${SECRET_DOMAIN}"

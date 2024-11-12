@@ -5,11 +5,11 @@ kubernetes:
   children:
     master:
       hosts:
-        morefine:
-          ansible_host: 192.168.178.10
-        brix:
-          ansible_host: 192.168.178.11
         nuc:
+          ansible_host: 192.168.178.10
+    worker:
+      hosts:
+        morefine:
+          ansible_host: 192.168.178.11
+        brix:
           ansible_host: 192.168.178.12
-    # worker:
-    #   hosts:
