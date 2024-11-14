@@ -110,7 +110,7 @@ data:
                 "measurement": "Smartplug2_Powerusage",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n",
+                "query": "from(bucket: \"smarthome\")\n  |> range(start: -30m)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
@@ -206,7 +206,7 @@ data:
                 "measurement": "Smartplug1_Powerusage",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )",
+                "query": "from(bucket: \"smarthome\")\n  |> range(start: -30m)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
