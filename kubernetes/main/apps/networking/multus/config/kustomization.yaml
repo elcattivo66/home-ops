@@ -4,4 +4,3 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./net-attach-iot.yaml
-  - ./hass-iot-static.yaml
