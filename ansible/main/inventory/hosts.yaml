@@ -7,13 +7,9 @@ kubernetes:
       hosts:
         nuc:
           ansible_host: 192.168.20.10
+    worker:
+      hosts:
         morefine:
           ansible_host: 192.168.20.11
         brix:
           ansible_host: 192.168.20.12
-    # worker:
-    #   hosts:
-    #     morefine:
-    #       ansible_host: 192.168.20.11
-    #     brix:
-    #       ansible_host: 192.168.20.12

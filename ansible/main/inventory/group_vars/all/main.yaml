@@ -1,12 +1,12 @@
 ---
 # renovate: datasource=github-releases depName=k3s-io/k3s
-k3s_release_version: "v1.31.0+k3s1"
+k3s_release_version: "v1.31.2+k3s1"
 k3s_install_hard_links: true
 k3s_become: true
-k3s_etcd_datastore: true
+k3s_etcd_datastore: false
 k3s_registration_address: "192.168.20.10"
 # /var/lib/rancher/k3s/server/manifests
-k3s_server_manifests_urls:
+# k3s_server_manifests_urls:
   # Kube-vip RBAC
   # - url: https://raw.githubusercontent.com/kube-vip/website/main/content/manifests/rbac.yaml
   #   filename: kube-vip-rbac.yaml
@@ -14,5 +14,5 @@ k3s_server_manifests_urls:
 k3s_server_manifests_templates:
   - custom-cilium-helmchart.yaml.j2
   - custom-coredns-helmchart.yaml.j2
-  - custom-kube-vip-daemonset.yaml.j2
-  - custom-kube-vip-rbac.yaml.j2
+  # - custom-kube-vip-daemonset.yaml.j2
+  # - custom-kube-vip-rbac.yaml.j2
