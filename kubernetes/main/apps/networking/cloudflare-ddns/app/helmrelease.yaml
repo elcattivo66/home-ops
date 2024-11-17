@@ -1,9 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app cloudflare-ddns
 spec:
+  interval: 30m
   chart:
     spec:
       chart: app-template
@@ -12,7 +14,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  interval: 30m
   install:
     remediation:
       retries: 3
@@ -24,33 +25,73 @@ spec:
   values:
     controllers:
       cloudflare-ddns:
-        cronjob:
-          concurrencyPolicy: Forbid
-          schedule: "@hourly"
-        type: cronjob
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/kubanetics
-              tag: 2024.11.0@sha256:12ef95790aeaad654e50d3174fab7250fb4bc60513220c0e53bc71ea4aba99e4
-            envFrom:
-              - secretRef:
-                  name: &app cloudflare-ddns
-            command:
-              - /bin/bash
-              - &scriptPath /app/cloudflare-ddns.sh
+              repository: ghcr.io/larivierec/cloudflare-ddns
+              tag: v1.0.2@sha256:a4f07465923311bf0bb34000d961eda673347380c0b052566cb9aa80952948a0
+            args:
+            - --zone-name
+            - ${SECRET_DOMAIN}
+            - --record-name
+            - external.${SECRET_DOMAIN}
+            - --provider
+            - random
+            env:
+              ACCOUNT_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: cloudflare-ddns-secret
+                    key: CLOUDFLARE_API_KEY
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health/alive
+                    port: &healthPort 8080
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health/ready
+                    port: *healthPort
+            resources:
+              requests:
+                memory: 64Mi
+                cpu: 10m
+              limits:
+                memory: 128Mi
     service:
       app:
-        controller: cloudflare-ddns
-        enabled: false
-    persistence:
-      config:
-        defaultMode: 0775
-        enabled: true
-        name: cloudflare-ddns-configmap
-        type: configMap
-        globalMounts:
-          - path: *scriptPath
-            subPath: cloudflare-ddns.sh
-            readOnly: true
-    restartPolicy: OnFailure
+        controller: *app
+        ports:
+          http:
+            port: &port 9000
+          health:
+            port: *healthPort
+    serviceMonitor:
+      app:
+        serviceName: *app
+        endpoints:
+          - port: health
+            scheme: http
+            path: /metrics
+            interval: 30s
+            scrapeTimeout: 30s
+    ingress:
+      app:
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - host: ddns.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
