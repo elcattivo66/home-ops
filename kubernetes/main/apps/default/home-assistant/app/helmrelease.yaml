@@ -27,14 +27,14 @@ spec:
       home-assistant:
         annotations:
           reloader.stakater.com/auto: "true"
-        # pod:
-        #   annotations:
-        #     k8s.v1.cni.cncf.io/networks: |
-        #       [{
-        #         "name":"multus-iot",
-        #         "namespace": "networking",
-        #         "ips": ["192.168.30.254/24"]
-        #       }]
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "networking",
+                "ips": ["192.168.30.254/24"]
+              }]
         initContainers:
           01-init-db:
             envFrom: &envFrom
