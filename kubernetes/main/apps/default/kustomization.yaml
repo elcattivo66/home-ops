@@ -8,25 +8,25 @@ resources:
   # - ./bazarr/ks.yaml
   # - ./calibre-web/ks.yaml
   # - ./gitea/ks.yaml
-  # - ./home-assistant/ks.yaml
+  - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   # # - ./kyoo/ks.yaml
   # # - ./lidarr/ks.yaml
   - ./lldap/ks.yaml
-  # - ./nextcloud/ks.yaml
-  # - ./mosquitto/ks.yaml
+  - ./nextcloud/ks.yaml
+  - ./mosquitto/ks.yaml
   # - ./overseerr/ks.yaml
   # - ./paperless/ks.yaml
   # - ./plex/ks.yaml
-  # - ./prowlarr/ks.yaml
+  - ./prowlarr/ks.yaml
   # - ./radarr/ks.yaml
   # - ./radicale/ks.yaml
   # - ./recyclarr/ks.yaml
-  # - ./redlib/ks.yaml
+  - ./redlib/ks.yaml
   # - ./sabnzbd/ks.yaml
   - ./smtp-relay/ks.yaml
   # - ./sonarr/ks.yaml
   # - ./tandoor/ks.yaml
   # - ./tautulli/ks.yaml
-  # - ./vaultwarden/ks.yaml
-  # - ./zigbee2mqtt/ks.yaml
+  - ./vaultwarden/ks.yaml
+  - ./zigbee2mqtt/ks.yaml
