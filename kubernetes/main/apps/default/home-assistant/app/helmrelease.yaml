@@ -32,7 +32,7 @@ spec:
             k8s.v1.cni.cncf.io/networks: |
               [{
                 "name":"multus-iot",
-                "namespace": "kube-system",
+                "namespace": "networking",
                 "ips": ["192.168.30.250/24"]
               }]
         initContainers:
