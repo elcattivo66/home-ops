@@ -81,7 +81,7 @@ spec:
                   name: kyoo-secret
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.4
+              tag: 16.5
           02-migrations:
             envFrom:
               - secretRef:

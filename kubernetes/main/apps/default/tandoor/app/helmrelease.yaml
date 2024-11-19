@@ -43,7 +43,7 @@ spec:
                   name: tandoor-secret
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: "16.4"
+              tag: "16.5"
 
         containers:
           app:
