@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: quay.io/redlib/redlib
-              tag: latest@sha256:9b9653c9d9d1e6eba4090919c0ae23658b06202e173e4c657240968ec1fd56d7
+              tag: latest@sha256:dd8ce50c4570d623d00633d60aa6e508cf98b26f5d4bd174299e7dd899000794
             env:
               REDLIB_DEFAULT_FRONT_PAGE: "default"
               REDLIB_DEFAULT_HIDE_HLS_NOTIFICATION: "on"
