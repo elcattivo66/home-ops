@@ -63,6 +63,7 @@ spec:
               SMTP_PORT: 2525
               SMTP_TIMEOUT: 15
               PUSH_ENABLED: true
+              EXPERIMENTAL_CLIENT_FEATURE_FLAGS: ssh-key-vault-item,ssh-agent
             envFrom: *envFrom
             resources:
               requests:
