@@ -7,9 +7,9 @@ tasks:
     desc: Bootstrap a Talos Kubernetes cluster backed by flux, sops, and rook
     prompt: Bootstrap a Talos Kubernetes cluster ... continue?
     cmds:
-      # - task: etcd
-      # - task: kubeconfig
-      # - task: apps
+      - task: etcd
+      - task: kubeconfig
+      - task: apps
       - task: flux
     preconditions:
       - talosctl config info >/dev/null 2>&1
