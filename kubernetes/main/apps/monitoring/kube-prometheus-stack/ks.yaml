@@ -7,13 +7,12 @@ metadata:
 spec:
   targetNamespace: monitoring
   dependsOn:
-    - name: local-path-provisioner
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
+    name: home-kubernetes
   interval: 30m
   retryInterval: 1m
   timeout: 3m

@@ -12,7 +12,7 @@ spec:
   path: ./kubernetes/main/apps/networking/nginx/certificates
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
+    name: home-kubernetes
   interval: 30m
   prune: true
   wait: true
@@ -31,7 +31,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
+    name: home-kubernetes
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -50,7 +50,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
+    name: home-kubernetes
   interval: 30m
   retryInterval: 1m
   timeout: 3m

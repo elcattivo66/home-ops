@@ -8,7 +8,7 @@ spec:
   path: ./kubernetes/main/apps/kube-system/spegel/app
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
+    name: home-kubernetes
   prune: true
   wait: false
   interval: 30m

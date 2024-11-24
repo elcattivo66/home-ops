@@ -6,9 +6,8 @@ metadata:
   name: policy
 spec:
   loadBalancerIPs: true
-  # NOTE: This might need to be set if you have more than one active NIC on your nodes
-  # interfaces:
-  #   - ^eno[0-9]+
+  interfaces:
+    - bond0
   nodeSelector:
     matchLabels:
       kubernetes.io/os: linux
@@ -19,4 +18,6 @@ metadata:
   name: pool
 spec:
   blocks:
-    - cidr: "${NODE_CIDR}"
+    - # Controller VIP: 192.168.20.9
+      start: 192.168.20.121
+      stop: 192.168.20.149

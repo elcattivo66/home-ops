@@ -27,8 +27,8 @@ spec:
   dependsOn:
     - name: prometheus-operator-crds
       namespace: monitoring
-    - name: local-path-provisioner
-      namespace: kube-system
+    - name: openebs
+      namespace: openebs-system
   values:
     crds:
       enabled: false
@@ -50,7 +50,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-path
+              storageClassName: openebs-hostpath
               resources:
                 requests:
                   storage: 128Mi
@@ -153,7 +153,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-path
+              storageClassName: openebs-hostpath
               resources:
                 requests:
                   storage: 35Gi

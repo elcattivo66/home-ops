@@ -1,22 +1,24 @@
 ---
 version: "3"
 
+vars:
+  K8S_CLUSTER: '{{.K8S_CLUSTER | default "main"}}'
+  K8S_CLUSTER_DIR: "{{.ROOT_DIR}}/kubernetes/{{.K8S_CLUSTER}}"
+
 env:
   KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
   SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
   K8S_AUTH_KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
-
-vars:
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
-  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
+  TALOSCONFIG: "{{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig"
 
 includes:
   ansible: .taskfiles/Ansible/Taskfile.yaml
+  bootstrap: .taskfiles/Bootstrap/Taskfile.yaml
   flux: .taskfiles/Flux/Taskfile.yaml
   brew: .taskfiles/Brew/Taskfile.yaml
   terraform: .taskfiles/Terraform/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
+  talos: .taskfiles/Talos/Taskfile.yaml
   external-secrets: .taskfiles/ExternalSecrets/Taskfile.yaml
 
 tasks:

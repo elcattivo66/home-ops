@@ -1,0 +1,4 @@
+---
+providerRegex: |
+  ^(nuc|morefine|brix)$
+bypassDnsResolution: true

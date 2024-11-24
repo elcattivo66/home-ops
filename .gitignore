@@ -19,8 +19,8 @@ terraform.tfstate*
 *.pub
 *.key
 *.pem
-# kubernetes
+# Other files
 kubeconfig
-kubernetes/schemas
+talosconfig
 # extras
 config.xml

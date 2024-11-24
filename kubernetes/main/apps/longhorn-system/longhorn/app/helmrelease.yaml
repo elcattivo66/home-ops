@@ -50,7 +50,7 @@ spec:
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       backupstorePollInterval: 60
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
-      defaultDataPath: /var/lib/longhorn
+      defaultDataPath: /var/mnt/longhorn
       defaultDataLocality: best-effort
       replicaAutoBalance: best-effort
       allowRecurringJobWhileVolumeDetached: false

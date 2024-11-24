@@ -23,6 +23,7 @@ resources:
   - ./mittwald.yaml
   - ./nextcloud.yaml
   - ./node-feature-discovery.yaml
+  - ./postfinance.yaml
   - ./prometheus-community.yaml
   - ./renovate.yaml
   - ./stakater.yaml

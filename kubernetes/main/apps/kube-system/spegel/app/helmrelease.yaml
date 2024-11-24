@@ -14,23 +14,19 @@ spec:
         kind: HelmRepository
         name: spegel
         namespace: flux-system
-  maxHistory: 2
   install:
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-  uninstall:
-    keepHistory: false
+  valuesFrom:
+    - kind: ConfigMap
+      name: spegel-helm-values
   values:
-    spegel:
-      containerdSock: /run/k3s/containerd/containerd.sock
-      containerdContentPath: /var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
-      containerdRegistryConfigPath: /var/lib/rancher/k3s/agent/etc/containerd/certs.d
-    service:
-      registry:
-        hostPort: 29999
+    grafanaDashboard:
+      enabled: true
     serviceMonitor:
       enabled: true

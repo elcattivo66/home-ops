@@ -1,5 +1,12 @@
 ---
 creation_rules:
+  - path_regex: kubernetes/main/talos/talsecret(\.sops)?\.ya?ml
+    input_type: yaml
+    encrypted_regex: ^(cluster|secrets|trustdinfo|certs)$
+    mac_only_encrypted: true
+    key_groups:
+      - age:
+          - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
   - path_regex: kubernetes/.*\.sops\.ya?ml$
     encrypted_regex: "^(data|stringData)$"
     mac_only_encrypted: true
@@ -7,11 +14,6 @@ creation_rules:
       - age:
           - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
   - path_regex: kubernetes/.*\.sops\.(env|ini|json|toml)
-    mac_only_encrypted: true
-    key_groups:
-      - age:
-          - age1wzxpy3cmcktm6554flrp6jnwdtxeceg3433fvsahnhem4gfudytqdkgleq
-  - path_regex: (ansible|terraform)/.*\.sops\.ya?ml
     mac_only_encrypted: true
     key_groups:
       - age:

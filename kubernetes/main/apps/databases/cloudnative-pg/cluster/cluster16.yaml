@@ -9,7 +9,7 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:16.4-27
   storage:
     size: 15Gi
-    storageClass: local-path
+    storageClass: openebs-hostpath
   superuserSecret:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
@@ -17,7 +17,7 @@ spec:
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres16-v4
+      source: &previousCluster postgres16-v5
   postgresql:
     # shared_preload_libraries: ["vectors.so"]
     parameters:
@@ -45,7 +45,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-      serverName: postgres16-v5
+      serverName: postgres16-v6
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
