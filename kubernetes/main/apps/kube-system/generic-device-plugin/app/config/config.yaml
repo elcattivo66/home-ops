@@ -1,0 +1,6 @@
+---
+devices:
+  - name: cc2652
+    groups:
+      - paths:
+          - path: /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_23_93_35_0A-if00-port0
