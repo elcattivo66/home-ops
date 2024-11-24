@@ -20,7 +20,7 @@ resources:
   # - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
   # - ./radarr/ks.yaml
-  # - ./radicale/ks.yaml
+  - ./radicale/ks.yaml
   # - ./recyclarr/ks.yaml
   - ./redlib/ks.yaml
   # - ./sabnzbd/ks.yaml
