@@ -144,20 +144,13 @@ spec:
               tlsSkipVerify: true
             secureJsonData:
               token: "${SECRET_INFLUXDB_TOKEN}"
-          # - name: Loki
-          #   type: loki
-          #   access: proxy
-          #   url: http://loki-gateway.monitoring.svc.cluster.local:80
-          #   jsonData:
-          #     maxLines: 250
+          - name: Alertmanager
+            type: alertmanager
+            uid: alertmanager
+            access: proxy
+            url: http://alertmanager-operated.observability.svc.cluster.local:9093
     dashboards:
       default:
-        fritzbox-exporter:
-          # renovate: depName="Fritz!Exporter"
-          gnetId: 13983
-          revision: 10
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
         external-dns:
           # renovate: depName="External-dns"
           gnetId: 15038

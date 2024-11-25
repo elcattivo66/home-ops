@@ -6,4 +6,4 @@ resources:
   - ./zfs-exporter.yaml
   - ./node-exporter.yaml
   - ./smartctl-exporter.yaml
-  - ./minio-exporter.yaml
+  # - ./minio-exporter.yaml

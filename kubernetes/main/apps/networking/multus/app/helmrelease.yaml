@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -10,20 +10,12 @@ spec:
     spec:
       chart: app-template
       version: 3.5.1
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  dependsOn:
-    - name: cilium
-      namespace: kube-system
+
   values:
     configMaps:
       daemon-config:
@@ -32,24 +24,59 @@ spec:
             {
               "cniVersion": "0.3.1",
               "logToStderr": true,
-              "binDir": "/var/lib/rancher/k3s/data/cni",
+              "logLevel": "error",
+              "binDir": "/opt/cni/bin",
               "chrootDir": "/hostroot",
-              "confDir": "/host/etc/cni/net.d",
               "cniConfigDir": "/host/etc/cni/net.d",
+              "confDir": "/host/etc/cni/net.d",
               "multusAutoconfigDir": "/host/etc/cni/net.d",
               "multusConfigFile": "auto",
               "socketDir": "/host/run/multus/"
             }
+
     controllers:
+      uninstall:
+        type: job
+
+        annotations:
+          # This is what defines this resource as a hook. Without this line, the
+          # job is considered part of the release.
+          helm.sh/hook: pre-delete, pre-upgrade
+          helm.sh/hook-weight: "-5"
+          helm.sh/hook-delete-policy: hook-succeeded
+
+        pod:
+          hostNetwork: true
+
+        containers:
+          uninstall:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.20"
+
+            command:
+              - /bin/sh
+              - -c
+
+            args:
+              - |
+                set -x
+                rm -rf /host/etc/cni/net.d/*multus*
+                rm -rf /host/opt/cni/bin/*multus*
+
       multus:
         type: daemonset
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
         pod:
           hostNetwork: true
           hostPID: true
-          terminationGracePeriodSeconds: 10
+
         containers:
           multus-daemon:
-            image: &multus-cni-image
+            image: &image
               repository: ghcr.io/k8snetworkplumbingwg/multus-cni
               tag: v4.1.3-thick
             env:
@@ -59,85 +86,67 @@ spec:
                     fieldPath: spec.nodeName
             resources:
               requests:
-                cpu: 10m
+                cpu: "5m"
+                memory: "96Mi"
               limits:
-                memory: 128Mi
+                memory: "512Mi"
             securityContext:
               privileged: true
+
         initContainers:
           cni-plugins-installer:
-            image: &hardened-cni-plugins-image
-              repository: docker.io/rancher/hardened-cni-plugins
-              tag: v1.5.1-build20241009   # Current version used in k3s v1.31.2+k3s1
-            env:
-              - name: SKIP_CNI_BINARIES
-                value: "bandwidth,bridge,firewall,flannel,host-device,host-local,ipvlan,loopback,portmap,ptp,sbr,vlan,vrf" # macvlan,tuning
-              - name: UPDATE_CNI_BINARIES
-                value: "true"
+            image:
+              repository: ghcr.io/angelnu/cni-plugins
+              tag: 1.5.1
             resources:
               requests:
-                cpu: 10m
-              limits:
-                memory: 15Mi
+                cpu: "10m"
+                memory: "15Mi"
             securityContext:
               capabilities:
                 drop:
-                - ALL
+                  - ALL
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: FallbackToLogsOnError
+
           multus-shim-installer:
-            image: *multus-cni-image
-            command: ["/bin/sh","-c"]
+            image: *image
+            command:
+              - /bin/sh
+              - -c
             args: |
               set -x
-              if [ "$(sha256sum /host/opt/cni/bin/multus-shim)" != "$(sha256sum /usr/src/multus-cni/bin/multus-shim)" ]; then
-                rm -f /host/opt/cni/bin/multus-shim
-                cp /usr/src/multus-cni/bin/multus-shim /host/opt/cni/bin/multus-shim
-              fi
+              cp -f /usr/src/multus-cni/bin/multus-shim /host/opt/cni/bin/multus-shim
             resources:
               requests:
-                cpu: 10m
-              limits:
-                memory: 15Mi
+                cpu: "10m"
+                memory: "15Mi"
             securityContext:
               capabilities:
                 drop:
-                - ALL
+                  - ALL
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: FallbackToLogsOnError
-      preload-images:
-        type: job
-        annotations:
-          helm.sh/hook: pre-install,pre-upgrade
-        job:
-          ttlSecondsAfterFinished: 600
-        containers:
-          cni-plugins-installer:
-            image: *hardened-cni-plugins-image
-            command: ['/bin/true']
-          multus-shim-installer:
-            image: *multus-cni-image
-            command: ['/bin/true']
-        serviceAccount:
-          name: default
-    defaultPod:
-      tolerations:
-        - operator: Exists
-          effect: NoSchedule
-        - operator: Exists
-          effect: NoExecute
+
     persistence:
       cni:
         type: hostPath
-        hostPath: /var/lib/rancher/k3s/agent/etc/cni/net.d
+        hostPath: /etc/cni/net.d
         advancedMounts:
+          uninstall:
+            uninstall:
+              - path: /host/etc/cni/net.d
           multus:
             multus-daemon:
               - path: /host/etc/cni/net.d
+
       cnibin:
         type: hostPath
-        hostPath: /var/lib/rancher/k3s/data/cni
+        hostPath: /opt/cni/bin
         advancedMounts:
+          uninstall:
+            uninstall:
+              - path: /host/opt/cni/bin
           multus:
             cni-plugins-installer:
               - path: /host/opt/cni/bin
@@ -148,7 +157,8 @@ spec:
               # e.g. if the cni bin is in '/opt/cni/bin' on the container host side, then it should be
               # mount to '/opt/cni/bin' in multus-daemon, not to any other directory, like '/opt/bin' or
               # '/usr/bin'.
-              - path: /var/lib/rancher/k3s/data/cni
+              - path: /opt/cni/bin
+
       config:
         type: configMap
         name: multus-daemon-config
@@ -194,11 +204,12 @@ spec:
               - path: /run/k8s.cni.cncf.io
       host-run-netns:
         type: hostPath
-        hostPath: /run/netns/
+        hostPath: /var/run/netns/
         advancedMounts:
           multus:
             multus-daemon:
               - path: /run/netns/
                 mountPropagation: HostToContainer
+
     serviceAccount:
       create: true
