@@ -39,14 +39,17 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: 1c:69:7a:ac:8a:65
+              driver: igc
         dhcp: true
         vip:
           ip: *talosControlplaneVip
-        # vlans:
-        #   - &vlan30
-        #     vlanId: 30
-        #     dhcp: false
-        #     mtu: 1500
+        vlans:
+          - &vlan30
+            vlanId: 30
+            dhcp: true
+            mtu: 1500
+            dhcpOptions:
+              routeMetric: 4096
 
   - hostname: morefine.internal
     ipAddress: 192.168.20.11
@@ -63,11 +66,12 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: e0:51:d8:11:06:c2
+              driver: igc
         dhcp: true
         vip:
           ip: *talosControlplaneVip
-        # vlans:
-        #   - *vlan30
+        vlans:
+          - *vlan30
 
   - hostname: brix.internal
     ipAddress: 192.168.20.12
@@ -84,11 +88,12 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: 1c:1b:0d:89:88:74 # 00:e0:4c:68:01:3b
+              driver: e1000e
         dhcp: true
         vip:
           ip: *talosControlplaneVip
-        # vlans:
-        #   - *vlan30
+        vlans:
+          - *vlan30
 
 
 controlPlane:
