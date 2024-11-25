@@ -12,10 +12,8 @@ env:
   TALOSCONFIG: "{{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig"
 
 includes:
-  ansible: .taskfiles/Ansible/Taskfile.yaml
   bootstrap: .taskfiles/Bootstrap/Taskfile.yaml
   flux: .taskfiles/Flux/Taskfile.yaml
-  brew: .taskfiles/Brew/Taskfile.yaml
   terraform: .taskfiles/Terraform/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
   talos: .taskfiles/Talos/Taskfile.yaml
