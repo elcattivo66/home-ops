@@ -56,7 +56,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [44, 105]
+        supplementalGroups: [44]
         seccompProfile: { type: RuntimeDefault }
       affinity:
         nodeAffinity:
