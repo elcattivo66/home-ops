@@ -8,6 +8,12 @@ route:
   receiver: pushover
   repeat_interval: 12h
   routes:
+    - receiver: heartbeat
+      group_interval: 5m
+      group_wait: 0s
+      matchers:
+        - alertname =~ "Watchdog"
+      repeat_interval: 5m
     - receiver: "null"
       matchers:
         - alertname =~ "InfoInhibitor"
@@ -22,11 +28,14 @@ inhibit_rules:
     target_matchers:
       - severity = "warning"
 receivers:
+  - name: heartbeat
+    webhook_configs:
+      - send_resolved: true
+        url: "{{ .ALERTMANAGER_CLUSTER_MAIN_HEARTBEAT_URL }}"
   - name: "null"
   - name: pushover
     pushover_configs:
       - html: true
-        # Compooters are hard
         message: |-
           {{ "{{-" }} range .Alerts {{ "}}" }}
             {{ "{{-" }} if ne .Annotations.description "" {{ "}}" }}
@@ -50,9 +59,10 @@ receivers:
           {{ "{{" }} if eq .Status "firing" {{ "}}" }}1{{ "{{" }} else {{ "}}" }}0{{ "{{" }} end {{ "}}" }}
         send_resolved: true
         sound: gamelan
+        # ttl: 1d
         title: >-
-          {{ "{{" }} .CommonLabels.alertname {{ "}}" }}
           [{{ "{{" }} .Status | toUpper {{ "}}" }}{{ "{{" }} if eq .Status "firing" {{ "}}" }}:{{ "{{" }} .Alerts.Firing | len {{ "}}" }}{{ "{{" }} end {{ "}}" }}]
+          {{ "{{" }} .CommonLabels.alertname {{ "}}" }}
         token: "{{ .ALERTMANAGER_PUSHOVER_TOKEN }}"
         url_title: View in Alertmanager
         user_key: "{{ .PUSHOVER_USER_KEY }}"
