@@ -38,20 +38,20 @@ spec:
           - icmp
           - http
         serviceMonitor:
-          enabled: true
+          enabled: false
         dashboards:
-          enabled: true
+          enabled: false
       relay:
         enabled: false
-        rollOutPods: true
+        rollOutPods: false
         prometheus:
           serviceMonitor:
-            enabled: true
+            enabled: false
       ui:
         enabled: false
-        rollOutPods: true
+        rollOutPods: false
         ingress:
-          enabled: true
+          enabled: false
           annotations:
             external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
           className: internal
