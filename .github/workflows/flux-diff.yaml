@@ -4,8 +4,10 @@ name: "Flux Diff"
 
 on:
   pull_request:
-    branches: ["main"]
-    paths: ["kubernetes/**"]
+    branches:
+      - main
+    paths:
+      - kubernetes/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -18,18 +20,11 @@ jobs:
     outputs:
       matrix: ${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}
     steps:
-      - name: Generate Token
-        uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: "${{ secrets.BOT_APP_ID }}"
-          private-key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
-
       - name: Checkout Default Branch
         uses: actions/checkout@v4
         with:
-          token: "${{ steps.app-token.outputs.token }}"
           fetch-depth: 0
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Get Changed Clusters
         id: changed-clusters
@@ -38,7 +33,8 @@ jobs:
           files: kubernetes/**
           dir_names: true
           dir_names_max_depth: 2
-          matrix: true
+          json: true
+          escape_json: false
 
       - name: List All Changed Clusters
         run: echo "${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}"
@@ -46,22 +42,26 @@ jobs:
   flux-diff:
     name: Flux Diff
     runs-on: ubuntu-latest
-    needs: ["changed-clusters"]
+    needs:
+      - changed-clusters
     permissions:
       pull-requests: write
     strategy:
       matrix:
         paths: ${{ fromJSON(needs.changed-clusters.outputs.matrix) }}
-        resources: ["helmrelease", "kustomization"]
+        resources:
+          - helmrelease
+          - kustomization
       max-parallel: 4
       fail-fast: false
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@v1
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
         id: app-token
         with:
-          app-id: "${{ secrets.BOT_APP_ID }}"
-          private-key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -93,13 +93,18 @@ jobs:
       - name: Generate Diff
         id: diff
         run: |
-          echo "diff<<EOF" >> $GITHUB_OUTPUT
-          cat diff.patch >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          echo "### Diff" >> $GITHUB_STEP_SUMMARY
-          echo '```diff' >> $GITHUB_STEP_SUMMARY
-          cat diff.patch >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat diff.patch;
+          {
+            echo 'diff<<EOF'
+            cat diff.patch
+            echo EOF
+          } >> "$GITHUB_OUTPUT";
+          {
+            echo "### Diff"
+            echo '```diff'
+            cat diff.patch
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
@@ -111,15 +116,14 @@ jobs:
           message: |
             ```diff
             ${{ steps.diff.outputs.diff }}
-            ```
 
-  # Summarize matrix https://github.community/t/status-check-for-a-matrix-jobs/127354/7
   flux-diff-success:
+    needs:
+      - flux-diff
     if: ${{ always() }}
-    needs: ["flux-diff"]
-    name: Flux Diff Successful
+    name: Flux Diff successful
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
-        name: Check matrix status
+      - name: Check matrix status
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         run: exit 1
