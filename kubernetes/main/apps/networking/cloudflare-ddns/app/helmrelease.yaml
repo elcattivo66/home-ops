@@ -34,8 +34,8 @@ spec:
               tag: v1.0.2@sha256:a4f07465923311bf0bb34000d961eda673347380c0b052566cb9aa80952948a0
             args: [
               "--zone-name", "${SECRET_DOMAIN}",
-              "--record-name", "ipv4.${SECRET_DOMAIN}",
-              "--provider", "random"
+              "--record-name", "external.${SECRET_DOMAIN}",
+              "--provider", "icanhazip"
             ]
             envFrom:
               - secretRef:
