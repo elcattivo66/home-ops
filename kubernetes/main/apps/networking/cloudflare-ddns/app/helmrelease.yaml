@@ -32,19 +32,14 @@ spec:
             image:
               repository: ghcr.io/larivierec/cloudflare-ddns
               tag: v1.0.2@sha256:a4f07465923311bf0bb34000d961eda673347380c0b052566cb9aa80952948a0
-            args:
-            - --zone-name
-            - ${SECRET_DOMAIN}
-            - --record-name
-            - external.${SECRET_DOMAIN}
-            - --provider
-            - random
-            env:
-              ACCOUNT_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudflare-ddns-secret
-                    key: CLOUDFLARE_API_KEY
+            args: [
+              "--zone-name", "${SECRET_DOMAIN}",
+              "--record-name", "ipv4.${SECRET_DOMAIN}",
+              "--provider", "random"
+            ]
+            envFrom:
+              - secretRef:
+                  name: cloudflare-ddns-secret
             probes:
               liveness:
                 enabled: true
@@ -52,46 +47,41 @@ spec:
                 spec:
                   httpGet:
                     path: /health/alive
-                    port: &healthPort 8080
+                    port: &port 8080
               readiness:
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
                     path: /health/ready
-                    port: *healthPort
+                    port: *port
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                memory: 64Mi
                 cpu: 10m
               limits:
                 memory: 128Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: *app
         ports:
           http:
-            port: &port 9000
-          health:
-            port: *healthPort
+            port: *port
     serviceMonitor:
       app:
         serviceName: *app
         endpoints:
-          - port: health
+          - port: http
             scheme: http
             path: /metrics
-            interval: 30s
-            scrapeTimeout: 30s
-    ingress:
-      app:
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts:
-          - host: ddns.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+            interval: 1m
+            scrapeTimeout: 10s
