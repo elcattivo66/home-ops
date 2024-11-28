@@ -69,23 +69,6 @@ tasks:
           HOSTNAME: "{{.NODE}}"
       - talosctl --nodes {{.NODE}} health --wait-timeout=10m --server=false
 
-  generate-secret:
-    desc: Generate Talos secret
-    prompt: This will overwrite the existing secret ... continue?
-    dir: '{{.K8S_CLUSTER_DIR}}/talos'
-    cmds:
-      - talhelper gensecret > {{.K8S_CLUSTER_DIR}}/talos/talsecret.sops.yaml
-      - sops --encrypt --in-place {{.K8S_CLUSTER_DIR}}/talos/talsecret.sops.yaml
-    preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/talconfig.yaml
-
-  generate-config:
-    desc: Generate Talos config
-    dir: '{{.K8S_CLUSTER_DIR}}/talos'
-    cmd: talhelper genconfig
-    preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/talconfig.yaml
-
   apply-config:
     desc: Apply Talos config to the nodes
     dir: '{{.K8S_CLUSTER_DIR}}/talos'

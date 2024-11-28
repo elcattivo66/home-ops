@@ -1,155 +1,25 @@
-
 ---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
 
 tasks:
-
-  verify:
-    desc: Verify flux meets the prerequisites
-    cmd: flux check --pre
-
-  bootstrap:
-    desc: Bootstrap Flux into a Kubernetes cluster
-    summary: |
-      Args:
-        cluster: Cluster to run command against (required)
-    prompt: Bootstrap Flux into the '{{.cluster}}' cluster... continue?
-    cmds:
-      - kubectl --context {{.cluster}} apply --server-side --kustomize {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux
-      - sops --decrypt {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux/age-key.sops.yaml | kubectl --context {{.cluster}} apply -f -
-      - sops --decrypt {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux/github-deploy-key.sops.yaml | kubectl --context {{.cluster}} apply -f -
-      - sops --decrypt --in-place {{.KUBERNETES_DIR}}/{{.cluster}}/flux/vars/cluster-secrets.sops.env
-      - kubectl --context {{.cluster}} apply --server-side --kustomize {{.KUBERNETES_DIR}}/{{.cluster}}/flux/vars
-      - kubectl --context {{.cluster}} apply --server-side --kustomize {{.KUBERNETES_DIR}}/{{.cluster}}/flux/config
-      - defer: sops --encrypt --in-place {{.KUBERNETES_DIR}}/{{.cluster}}/flux/vars/cluster-secrets.sops.env
-    vars:
-      cluster: '{{ or .cluster (fail "Argument (cluster) is required") }}'
+  ks-*:
+    desc: Perform an action on a Flux KS [K8S_CLUSTER={{.K8S_CLUSTER}}] [PATH=required] [NAME] [SRC]
     preconditions:
-      - { msg: "Age private key not found",      sh: "test -f {{.ROOT_DIR}}/age.key" }
-      - { msg: "Age secret not found",           sh: "test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux/age-key.sops.yaml" }
-      - { msg: "Github deploy secret not found", sh: "test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux/github-deploy-key.sops.yaml" }
-      - { msg: "Cluster settings not found",     sh: "test -f {{.KUBERNETES_DIR}}/{{.cluster}}/flux/vars/cluster-settings.env" }
-      - { msg: "Cluster secrets not found",      sh: "test -f {{.KUBERNETES_DIR}}/{{.cluster}}/flux/vars/cluster-secrets.sops.env" }
-      - { msg: "Unable to decrypt sops secret",  sh: "sops --decrypt {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux/age-key.sops.yaml" }
-      - { msg: "Unable to decrypt sops secret",  sh: "sops --decrypt {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/flux/github-deploy-key.sops.yaml" }
-      - { msg: "Unable to decrypt sops secret",  sh: "sops --decrypt {{.KUBERNETES_DIR}}/{{.cluster}}/flux/vars/cluster-secrets.sops.env" }
-
-  apply:
-    desc: Apply a Flux Kustomization resource for a cluster
-    summary: |
-      Args:
-        cluster: Cluster to run command against (required)
-        path: Path to the Flux Kustomization resource (required)
-        ns: Namespace the Flux Kustomization exists in (default: flux-system)
-    cmd: |
-      flux --context {{.cluster}} build ks $(basename {{.path}}) \
-          --namespace {{.ns}} \
-          --kustomization-file {{.KUBERNETES_DIR}}/{{.cluster}}/apps/{{.path}}/ks.yaml \
-          --path {{.KUBERNETES_DIR}}/{{.cluster}}/apps/{{.path}} \
-      | \
-      kubectl --context {{.cluster}} apply --server-side \
-          --field-manager=kustomize-controller -f -
+      - test -f {{.K8S_CLUSTER_DIR}}/apps/{{.PATH}}/ks.yaml
+      - which flux kubectl yq
+    requires:
+      vars:
+        - K8S_CLUSTER
+        - PATH
     vars:
-      cluster: '{{ or .cluster (fail "Argument (cluster) is required") }}'
-      path: '{{ or .path (fail "Argument (path) is required") }}'
-      ns: '{{.ns | default "flux-system"}}'
-    preconditions:
-      - { msg: "Kustomization file not found", sh: "test -f {{.KUBERNETES_DIR}}/{{.cluster}}/apps/{{.path}}/ks.yaml" }
-
-  install:
-    desc: Install Flux into your cluster
-    cmds:
-      - kubectl apply --kustomize {{.KUBERNETES_DIR}}/bootstrap
-      - cat {{.SOPS_AGE_KEY_FILE}} | kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin
-      - sops --decrypt {{.KUBERNETES_DIR}}/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
-      - sops --decrypt {{.KUBERNETES_DIR}}/flux/vars/cluster-secrets-user.sops.yaml | kubectl apply -f -
-      - kubectl apply -f {{.KUBERNETES_DIR}}/flux/vars/cluster-settings.yaml
-      - kubectl apply -f {{.KUBERNETES_DIR}}/flux/vars/cluster-settings-user.yaml
-      - kubectl apply --kustomize {{.KUBERNETES_DIR}}/flux/config
-    preconditions:
-      - sh: test -f {{.SOPS_AGE_KEY_FILE}}
-        msg: |
-          Age key file is not found. Did you forget to create it?
-    vars:
-      SOPS_AGE_KEY_FILE: ~/.config/sops/age/keys.txt
-
-  reconcile:
-    desc: Force update Flux to pull in changes from your Git repository
-    cmd: flux reconcile -n flux-system kustomization cluster --with-source
-
-  hr-restart:
-    desc: Restart all failed Helm Releases
-    cmds:
-      - kubectl get hr --all-namespaces | grep False | awk '{print $2, $1}' | xargs -L1 bash -c 'flux suspend hr $0 -n $1'
-      - kubectl get hr --all-namespaces | grep False | awk '{print $2, $1}' | xargs -L1 bash -c 'flux resume hr $0 -n $1'
-
-  nodes:
-    desc: List all the nodes in your cluster
-    cmd: kubectl get nodes {{.CLI_ARGS | default "-o wide"}}
-
-  pods:
-    desc: List all the pods in your cluster
-    cmd: kubectl get pods {{.CLI_ARGS | default "-A"}}
-
-  kustomizations:
-    desc: List all the kustomizations in your cluster
-    cmd: kubectl get kustomizations {{.CLI_ARGS | default "-A"}}
-
-  helmreleases:
-    desc: List all the helmreleases in your cluster
-    cmd: kubectl get helmreleases {{.CLI_ARGS | default "-A"}}
-
-  helmrepositories:
-    desc: List all the helmrepositories in your cluster
-    cmd: kubectl get helmrepositories {{.CLI_ARGS | default "-A"}}
-
-  gitrepositories:
-    desc: List all the gitrepositories in your cluster
-    cmd: kubectl get gitrepositories {{.CLI_ARGS | default "-A"}}
-
-  certificates:
-    desc: List all the certificates in your cluster
-    cmds:
-      - kubectl get certificates {{.CLI_ARGS | default "-A"}}
-      - kubectl get certificaterequests {{.CLI_ARGS | default "-A"}}
-
-  ingresses:
-    desc: List all the ingresses in your cluster
-    cmd: kubectl get ingress {{.CLI_ARGS | default "-A"}}
-
-  resources:
-    desc: Gather common resources in your cluster, useful when asking for support
-    cmds:
-      - task: nodes
-      - task: kustomizations
-      - task: helmreleases
-      - task: helmrepositories
-      - task: gitrepositories
-      - task: certificates
-      - task: ingresses
-      - task: pods
-
-  longhorn-deps-pause:
-    desc: Pause all Helm Releases that rely on longhorn storage
-    cmds:
-      - flux suspend hr -n default --all
-      - flux suspend hr -n databases influxdb
-
-  longhorn-deps-resume:
-    desc: Resume all Helm Releases that rely on longhorn storage
-    cmds:
-      - flux resume hr -n default --all
-      - flux resume hr -n databases influxdb
-
-  longhorn-deps-scale-down:
-    desc: Pause all Helm Releases that rely on longhorn storage
-    cmds:
-      # - kubectl scale deployment -n default –-replicas 0 – all
-      - kubectl scale -n default statefulset,deployment --all --replicas=0
-      - kubectl scale -n databases deploy/influxdb --replicas=0
-
-  longhorn-deps-scale-up:
-    desc: Pause all Helm Releases that rely on longhorn storage
-    cmds:
-      - kubectl scale -n default statefulset,deployment --all --replicas=1
-      - kubectl scale -n databases deploy/influxdb --replicas 1
+      OPERATION: "{{index .MATCH 0}}"
+      KS:
+        sh: flux --namespace flux-system get kustomizations {{base .PATH}} 2>&1
+    cmd: >
+      flux build --namespace flux-system ks {{ if .NAME }}{{.NAME}}{{ else }}{{base .PATH}}{{ end }}
+      --kustomization-file {{.K8S_CLUSTER_DIR}}/apps/{{.PATH}}/ks.yaml
+      --path {{.K8S_CLUSTER_DIR}}/apps/{{.PATH}}{{- if .SRC }}/{{.SRC}}{{ end }}
+      {{ if contains "not found" .KS }}--dry-run \{{ end }}
+      | yq 'with(select(.apiVersion == "kustomize.toolkit.fluxcd.io/v1" and .kind == "Kustomization"); .metadata.namespace = "flux-system")' -
+      | kubectl {{.OPERATION}} {{if eq .OPERATION "apply"}}--server-side  --field-manager=kustomize-controller{{end}} --filename -
