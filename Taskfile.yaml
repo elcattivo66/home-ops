@@ -8,13 +8,11 @@ vars:
 env:
   KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
   SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
-  K8S_AUTH_KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
   TALOSCONFIG: "{{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig"
 
 includes:
   bootstrap: .taskfiles/Bootstrap/Taskfile.yaml
   flux: .taskfiles/Flux/Taskfile.yaml
-  terraform: .taskfiles/Terraform/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
   talos: .taskfiles/Talos/Taskfile.yaml
   external-secrets: .taskfiles/ExternalSecrets/Taskfile.yaml
