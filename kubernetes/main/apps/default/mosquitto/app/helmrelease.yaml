@@ -75,7 +75,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: mosquitto-config
+        existingClaim: *app
         globalMounts:
           - path: /data
       config-file:

@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: overseerr
+  name: &app overseerr
 spec:
   interval: 30m
   chart:
@@ -28,17 +28,8 @@ spec:
   values:
     controllers:
       overseerr:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /app/config
 
         containers:
           app:
@@ -88,6 +79,12 @@ spec:
           - hosts:
               - *host
     persistence:
+      config:
+        existingClaim: *app
+        advancedMounts:
+          overseerr:
+            app:
+              - path: /app/config
       cache:
         type: emptyDir
         globalMounts:

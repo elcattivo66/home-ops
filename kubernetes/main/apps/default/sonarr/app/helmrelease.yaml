@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: &app sonarr
 spec:
   interval: 30m
   chart:
@@ -99,8 +99,7 @@ spec:
               - *host
     persistence:
       config:
-        enabled: true
-        existingClaim: sonarr-config
+        existingClaim: *app
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}

@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: &app sabnzbd
 spec:
   interval: 30m
   chart:
@@ -91,7 +91,7 @@ spec:
               - *host
     persistence:
       config:
-        existingClaim: sabnzbd-config
+        existingClaim: *app
       tmp:
         type: emptyDir
       media:
