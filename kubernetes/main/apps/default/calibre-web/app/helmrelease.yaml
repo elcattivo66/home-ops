@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: calibre-web
+  name: &app calibre-web
 spec:
   interval: 30m
   chart:
@@ -25,18 +25,8 @@ spec:
   values:
     controllers:
       calibre-web:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 128Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
 
         containers:
           app:
@@ -91,6 +81,12 @@ spec:
               - *host
 
     persistence:
+      config:
+        existingClaim: *app
+        advancedMounts:
+          calibre-web:
+            app:
+              - path: /config
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
