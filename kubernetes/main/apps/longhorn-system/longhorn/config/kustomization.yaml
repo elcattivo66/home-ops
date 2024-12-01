@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./recurring-jobs.yaml
-  - ./storage-class-definition.yaml
+  - ./snapshot.yaml
