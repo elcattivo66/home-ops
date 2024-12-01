@@ -251,6 +251,15 @@ controlPlane:
           net.ipv4.tcp_window_scaling: 1
           net.ipv4.tcp_congestion_control: bbr
 
+    # Custom sysfs settings
+    - |-
+      machine:
+        sysfs:
+          devices.system.cpu.cpu0.cpufreq.energy_performance_preference: balance_power
+          devices.system.cpu.cpu1.cpufreq.energy_performance_preference: balance_power
+          devices.system.cpu.cpu2.cpufreq.energy_performance_preference: balance_power
+          devices.system.cpu.cpu3.cpufreq.energy_performance_preference: balance_power
+
     # Mount Longhorn storage in kubelet
     - |-
       machine:
