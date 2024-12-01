@@ -1,0 +1,94 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "${APP}-volsync-minio-home"
+spec:
+  target:
+    deletionPolicy: Delete
+    template:
+      type: Opaque
+      data:
+        RESTIC_REPOSITORY: "s3:https://s3.${SECRET_HOME_DOMAIN}/volsync/${APP}"
+        RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
+        AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
+  data:
+    - secretKey: RESTIC_PASSWORD
+      sourceRef:
+        storeRef:
+          name: bitwarden-fields
+          kind: ClusterSecretStore
+      remoteRef:
+        key: 75163a01-0c14-4ee8-8679-a3e90e772585
+        property: RESTIC_PASSWORD
+    - secretKey: AWS_ACCESS_KEY_ID
+      sourceRef:
+        storeRef:
+          name: bitwarden-fields
+          kind: ClusterSecretStore
+      remoteRef:
+        key: ddc59a49-292c-482a-aaaf-5f43d869189d
+        property: access_key
+    - secretKey: AWS_SECRET_ACCESS_KEY
+      sourceRef:
+        storeRef:
+          name: bitwarden-fields
+          kind: ClusterSecretStore
+      remoteRef:
+        key: ddc59a49-292c-482a-aaaf-5f43d869189d
+        property: secret_key
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/volsync.backube/replicationdestination_v1alpha1.json
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: "${APP}-bootstrap"
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: "${APP}-volsync"
+    copyMethod: Snapshot
+    volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-longhorn-snapclass}"
+    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
+    cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-10Gi}"
+    storageClassName: "${VOLSYNC_STORAGECLASS:-longhorn-snapshot}"
+    accessModes: ["${VOLSYNC_SNAP_ACCESSMODES:-ReadWriteOnce}"] # Use ReadOnlyMany for CephFS
+    capacity: "${VOLSYNC_CAPACITY:-2Gi}"
+    moverSecurityContext:
+      runAsUser: ${VOLSYNC_PUID:-1000}
+      runAsGroup: ${VOLSYNC_PGID:-1000}
+      fsGroup: ${VOLSYNC_PGID:-1000}
+    enableFileDeletion: true
+    cleanupCachePVC: true
+    cleanupTempPVC: true
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/volsync.backube/replicationsource_v1alpha1.json
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: "${APP}"
+spec:
+  sourcePVC: "${CLAIM:-${APP}}"
+  trigger:
+    schedule: "0 * * * *"
+  restic:
+    copyMethod: "${VOLSYNC_COPYMETHOD:-Snapshot}"
+    pruneIntervalDays: 10
+    repository: "${APP}-volsync"
+    volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-longhorn-snapclass}"
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-10Gi}"
+    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
+    cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
+    storageClassName: "${VOLSYNC_STORAGECLASS:-longhorn-snapshot}"
+    accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
+    moverSecurityContext:
+      runAsUser: ${VOLSYNC_PUID:-1000}
+      runAsGroup: ${VOLSYNC_PGID:-1000}
+      fsGroup: ${VOLSYNC_PGID:-1000}
+    retain:
+      hourly: 24
+      daily: 10
+      weekly: 5
+      monthly: 3
