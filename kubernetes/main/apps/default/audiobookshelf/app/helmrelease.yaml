@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: audiobookshelf
+  name: &app audiobookshelf
 spec:
   interval: 30m
   chart:
@@ -25,17 +25,8 @@ spec:
   values:
     controllers:
       audiobookshelf:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: data
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /data
         containers:
           app:
             image:
@@ -87,6 +78,12 @@ spec:
               - *host
 
     persistence:
+      config:
+        existingClaim: *app
+        advancedMounts:
+          calibre-web:
+            app:
+              - path: /data
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}

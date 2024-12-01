@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: gitea
+  name: &app gitea
 spec:
   interval: 30m
   chart:
@@ -127,7 +127,7 @@ spec:
       enabled: true
       mount: true
       create: false
-      claimName: gitea-config
+      claimName: *app
     service:
       ssh:
         type: LoadBalancer

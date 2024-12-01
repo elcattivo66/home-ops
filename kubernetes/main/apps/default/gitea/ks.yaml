@@ -2,12 +2,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: gitea
+  name: &appname gitea
   namespace: flux-system
 spec:
   targetNamespace: default
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
   dependsOn:
     - name: longhorn
+    - name: volsync
   path: ./kubernetes/main/apps/default/gitea/app
   prune: true
   sourceRef:
@@ -16,3 +20,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+  postBuild:
+    substitute:
+      APP: *appname
+      VOLSYNC_CAPACITY: 1Gi

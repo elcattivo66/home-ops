@@ -7,8 +7,12 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: default
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
   dependsOn:
     - name: longhorn
+    - name: volsync
   path: ./kubernetes/main/apps/default/calibre-web/app
   prune: true
   sourceRef:
