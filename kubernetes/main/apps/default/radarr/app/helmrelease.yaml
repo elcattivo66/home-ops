@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: radarr
+  name: &app radarr
 spec:
   interval: 30m
   chart:
@@ -101,7 +101,7 @@ spec:
               - *host
     persistence:
       config:
-        existingClaim: radarr-config
+        existingClaim: *app
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
