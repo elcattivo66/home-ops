@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -14,53 +13,27 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
-    serviceAccount:
-      create: false
-      name: dragonfly-operator-controller-manager
     controllers:
       dragonfly-operator:
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: dragonfly-operator
         containers:
-          rbac-proxy:
-            image:
-              repository: gcr.io/kubebuilder/kube-rbac-proxy
-              tag: v0.16.0
-            args:
-              - "--secure-listen-address=0.0.0.0:8443"
-              - "--upstream=http://127.0.0.1:8080/"
-              - "--logtostderr=true"
-              - "--v=0"
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities:
-                drop:
-                  - ALL
-            resources:
-              requests:
-                cpu: 5m
-                memory: 64Mi
-              limits:
-                cpu: 500m
-                memory: 128Mi
           app:
             image:
-              repository: docker.dragonflydb.io/dragonflydb/operator
-              tag: v1.1.8
+              repository: ghcr.io/dragonflydb/operator
+              tag: v1.1.8@sha256:5e0ebd5d58066499fb19ea4102531972401f2a6100fc9f4dbc45284c4175de82
             args:
-              - "--health-probe-bind-address=:8081"
-              - "--metrics-bind-address=127.0.0.1:8080"
-              - "--leader-elect"
+              - --health-probe-bind-address=:8081
+              - --metrics-bind-address=:8080
             command:
-              - "/manager"
+              - /manager
             probes:
               liveness:
                 enabled: true
@@ -84,35 +57,39 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
-              startup:
-                enabled: false
             resources:
               requests:
                 cpu: 10m
-                memory: 64Mi
               limits:
-                cpu: 500m
                 memory: 128Mi
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities:
+                drop:
+                  - ALL
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        seccompProfile: { type: RuntimeDefault }
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: *app
+        runAsUser: 568
+        runAsGroup: 568
     service:
       app:
-        controller: dragonfly-operator
+        controller: *app
         ports:
           http:
             port: *port
+          metrics:
+            port: 8080
+    serviceAccount:
+      create: true
+      name: *app
+    serviceMonitor:
+      app:
+        serviceName: *app
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
