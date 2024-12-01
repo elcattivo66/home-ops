@@ -81,7 +81,7 @@ spec:
       config:
         existingClaim: *app
         advancedMounts:
-          calibre-web:
+          audiobookshelf:
             app:
               - path: /data
       media:
