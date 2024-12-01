@@ -24,9 +24,10 @@ resources:
   - ./nextcloud.yaml
   - ./node-feature-discovery.yaml
   - ./openebs.yaml
+  - ./piraeus.yaml
   - ./postfinance.yaml
   - ./prometheus-community.yaml
   - ./renovate.yaml
-  - ./stakater.yaml
   - ./spegel.yaml
+  - ./stakater.yaml
   - ./stevehipwell.yaml
