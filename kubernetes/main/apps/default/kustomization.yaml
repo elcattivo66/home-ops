@@ -25,6 +25,7 @@ resources:
   # No PVC
   - ./atuin/ks.yaml
   - ./authelia/ks.yaml
+  - ./govee2mqtt/ks.yaml
   - ./immich/ks.yaml
   - ./lldap/ks.yaml
   - ./prowlarr/ks.yaml
