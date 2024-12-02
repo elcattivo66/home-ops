@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.18.1-standalone-strict/storageclass.json
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 reclaimPolicy: Delete
@@ -15,3 +14,18 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 metadata:
   name: longhorn-snapshot
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+reclaimPolicy: Delete
+provisioner: driver.longhorn.io
+parameters:
+  # we set this to 2 replica for less copies of the cache, which can be blown away safely.
+  dataLocality: disabled
+  numberOfReplicas: "1"
+  replicaAutoBalance: best-effort
+  staleReplicaTimeout: "30"
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+metadata:
+  name: longhorn-cache
