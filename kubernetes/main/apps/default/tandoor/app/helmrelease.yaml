@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app tandoor
-  namespace: &ns default
 spec:
   interval: 30m
   chart:
@@ -116,7 +115,7 @@ spec:
     persistence:
       files:
         enabled: true
-        existingClaim: tandoor-files
+        existingClaim: *app
         advancedMounts:
           tandoor:
             app:
