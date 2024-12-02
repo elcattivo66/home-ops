@@ -28,17 +28,8 @@ spec:
   values:
     controllers:
       zigbee2mqtt:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 128Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /data
         containers:
           app:
             image:
@@ -114,3 +105,9 @@ spec:
         tls:
           - hosts:
               - *host
+
+    persistence:
+      config:
+        existingClaim: *app
+        globalMounts:
+          - path: /data

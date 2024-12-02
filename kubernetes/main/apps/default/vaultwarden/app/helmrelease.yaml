@@ -25,18 +25,9 @@ spec:
   values:
     controllers:
       vaultwarden:
-        type: statefulset
-        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /data
+
         initContainers:
           init-db:
             image:
@@ -106,3 +97,9 @@ spec:
         tls:
           - hosts:
               - *host
+
+    persistence:
+      config:
+        existingClaim: *app
+        globalMounts:
+          - path: /data

@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: radicale
+  name: &app radicale
 spec:
   interval: 30m
   chart:
@@ -26,7 +26,6 @@ spec:
   values:
     controllers:
       radicale:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -40,14 +39,6 @@ spec:
                 memory: 50M
               limits:
                 memory: 50M
-        statefulset:
-          volumeClaimTemplates:
-            - name: data
-              accessMode: ReadWriteOnce
-              size: 128Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /data
     service:
       app:
         controller: radicale
@@ -73,6 +64,10 @@ spec:
               - *host
 
     persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /data
       config:
         type: configMap
         name: radicale-config
