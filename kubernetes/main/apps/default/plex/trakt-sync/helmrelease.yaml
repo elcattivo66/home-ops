@@ -84,7 +84,7 @@ spec:
         enabled: true
         existingClaim: *app
         advancedMounts:
-          plex-trakt-sync:
+          trakt-sync:
             app:
               - path: /app/config
       config-yaml:
