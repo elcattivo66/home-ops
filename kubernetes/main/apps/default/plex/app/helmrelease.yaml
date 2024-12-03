@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: plex
+  name: &app plex
 spec:
   interval: 30m
   chart:
@@ -98,21 +98,23 @@ spec:
               - *host
     persistence:
       config:
-        existingClaim: plex-config
+        existingClaim: *app
         advancedMounts:
           plex:
             app:
               - path: /config
       logs:
         type: emptyDir
-        globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Logs
-      tmp:
-        type: emptyDir
+        advancedMounts:
+          plex:
+            app:
+              - path: /config/Library/Application Support/Plex Media Server/Logs
       transcode:
         type: emptyDir
-        globalMounts:
-          - path: /transcode
+        advancedMounts:
+          plex:
+            app:
+              - path: /transcode
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}

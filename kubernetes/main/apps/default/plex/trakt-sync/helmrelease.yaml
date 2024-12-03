@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: plex-trakt-sync
+  name: &app plex-trakt-sync
 spec:
   chart:
     spec:
@@ -29,18 +29,8 @@ spec:
   values:
     controllers:
       trakt-sync:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /app/config
 
         pod:
           enableServiceLinks: false
@@ -90,6 +80,13 @@ spec:
                 memory: 200Mi
 
     persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+        advancedMounts:
+          plex-trakt-sync:
+            app:
+              - path: /app/config
       config-yaml:
         type: configMap
         name: plex-tract-sync-configmap

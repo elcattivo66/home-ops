@@ -76,7 +76,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: kometa-config
+        existingClaim: *app
       config-file:
         type: configMap
         name: kometa-configmap
