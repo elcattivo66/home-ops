@@ -50,7 +50,7 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: "${APP}"
+  name: "${APP}"-s3-remote
 spec:
   sourcePVC: "${VOLSYNC_CLAIM:-${APP}}"
   trigger:
