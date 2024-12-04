@@ -27,7 +27,7 @@ spec:
           name: bitwarden-fields
           kind: ClusterSecretStore
       remoteRef:
-        key: 75163a01-0c14-4ee8-8679-a3e90e772585
+        key: 4263e32e-45bc-43e4-a1f5-e8c5b6a54553
         property: RESTIC_PASSWORD
     - secretKey: AWS_ACCESS_KEY_ID
       sourceRef:
