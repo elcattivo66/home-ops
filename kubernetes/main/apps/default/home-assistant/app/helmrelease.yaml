@@ -36,6 +36,12 @@ spec:
                 "ips": ["192.168.30.250/24"],
                 "mac": "f0:57:bc:d7:c1:49"
               }]
+          securityContext:
+            runAsUser: 65534
+            runAsGroup: 65533
+            fsGroup: 65533
+            fsGroupChangePolicy: OnRootMismatch
+
         initContainers:
           01-init-db:
             envFrom: &envFrom
@@ -52,44 +58,44 @@ spec:
             envFrom: *envFrom
             env:
               HASS_TRUSTED_PROXIES: 192.168.20.0/24,192.168.30.0/24,10.42.0.0/16,10.43.0.0/16
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 41m
                 memory: 552Mi
               limits:
                 memory: 552Mi
-          codeserver:
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+
+          code-server:
             image:
               repository: ghcr.io/coder/code-server
               tag: 4.95.3@sha256:6d74583d68179cbb6ddadc2518b450d2ac3eaec2d342474fe1941e03371cd2cf
             args:
               - --auth
-              - "none"
+              - none
+              - --disable-telemetry
+              - --disable-update-check
               - --user-data-dir
-              - "/config/.vscode"
+              - /config/.code-server
               - --extensions-dir
-              - "/config/.vscode"
-              - "--port"
+              - /config/.code-server
+              - --port
               - "12321"
               - /config
+            env:
+              HASS_SERVER: http://localhost:8123
             resources:
               requests:
-                cpu: 41m
-                memory: 593Mi
+                cpu: 10m
               limits:
-                memory: 593Mi
+                memory: 512Mi
 
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        fsGroup: 65534
-        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
@@ -97,41 +103,26 @@ spec:
         ports:
           http:
             port: 8123
-      codeserver:
-        type: ClusterIP
-        controller: home-assistant
-        ports:
-          http:
-            enabled: true
+          code-server:
             port: 12321
-            protocol: TCP
-            targetPort: 12321
+
     ingress:
       app:
         className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
         hosts:
           - host: &host hass.${SECRET_DOMAIN}
             paths:
-              - path: /
-                pathType: Prefix
+              - path: /(.*)
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
-      codeserver:
-        className: internal
-        hosts:
-          - host: &host hass-code.${SECRET_DOMAIN}
-            paths:
-              - path: /
+              - path: /code/(.*)
                 service:
-                  identifier: codeserver
-                  port: http
-        tls:
-          - hosts:
-              - *host
+                  identifier: app
+                  port: code-server
+
     persistence:
       config:
         enabled: true
@@ -160,3 +151,5 @@ spec:
             code-server:
               - path: /tmp
                 subPath: code-server-tmp
+              - path: /nonexistent
+                subPath: nonexistent
