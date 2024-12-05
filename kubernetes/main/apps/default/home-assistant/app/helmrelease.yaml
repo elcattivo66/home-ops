@@ -160,5 +160,3 @@ spec:
             code-server:
               - path: /tmp
                 subPath: code-server-tmp
-              - path: /nonexistent
-                subPath: nonexistent
