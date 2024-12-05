@@ -7,6 +7,7 @@ resources:
   # Flux Kustomizations
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
+  - ./kube-state-metrics/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./unpoller/ks.yaml
