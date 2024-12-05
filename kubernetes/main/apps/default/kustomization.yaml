@@ -8,6 +8,7 @@ resources:
   - ./bazarr/ks.yaml
   - ./calibre-web/ks.yaml
   - ./gitea/ks.yaml
+  - ./govee2mqtt/ks.yaml
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   - ./lldap/ks.yaml

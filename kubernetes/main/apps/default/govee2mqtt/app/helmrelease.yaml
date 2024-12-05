@@ -43,6 +43,7 @@ spec:
               GOVEE_MQTT_PORT: 1883
               GOVEE_TEMPERATURE_SCALE: C
               GOVEE_LAN_BROADCAST_ALL: true
+              GOVEE_LAN_SCAN: 192.168.30.255
             envFrom:
               - secretRef:
                   name: govee2mqtt-secret
