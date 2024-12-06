@@ -1,4 +1,4 @@
 ---
 providerRegex: |
-  ^(nuc|morefine|brix)$
+  ^(nuc|morefine|brix|nuc14)$
 bypassDnsResolution: true

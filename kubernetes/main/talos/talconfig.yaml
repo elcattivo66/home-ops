@@ -38,7 +38,7 @@ nodes:
         bond:
           mode: active-backup
           deviceSelectors:
-            - hardwareAddr: 1c:69:7a:ac:8a:65
+            - hardwareAddr: 1c:69:7a:ac:*
               driver: igc
         dhcp: true
         vip:
@@ -65,7 +65,7 @@ nodes:
         bond:
           mode: active-backup
           deviceSelectors:
-            - hardwareAddr: e0:51:d8:11:06:c2
+            - hardwareAddr: e0:51:d8:11:*
               driver: igc
         dhcp: true
         vip:
@@ -75,7 +75,7 @@ nodes:
 
   - hostname: brix.internal
     ipAddress: 192.168.20.12
-    controlPlane: true
+    controlPlane: false
     installDiskSelector:
       model: "WD Blue SN570 500GB"
     # machineDisks:
@@ -87,7 +87,7 @@ nodes:
         bond:
           mode: active-backup
           deviceSelectors:
-            - hardwareAddr: 1c:1b:0d:89:88:74 # 00:e0:4c:68:01:3b
+            - hardwareAddr: 1c:1b:0d:89:* # 00:e0:4c:68:01:3b
               driver: e1000e
         dhcp: true
         vip:
@@ -95,6 +95,27 @@ nodes:
         vlans:
           - *vlan30
 
+  - hostname: nuc14.internal
+    ipAddress: 192.168.20.14
+    controlPlane: true
+    installDiskSelector:
+      model: "SSDPR-CX400-512-G2"
+    # machineDisks:
+    #   - device: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_2140HE441509
+    #     partitions:
+    #       - mountpoint: /var/mnt/extra
+    networkInterfaces:
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: 88:ae:dd:66:*
+              driver: atlantic
+        dhcp: true
+        vip:
+          ip: *talosControlplaneVip
+        vlans:
+          - *vlan30
 
 controlPlane:
   nodeLabels:

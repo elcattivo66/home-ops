@@ -96,7 +96,6 @@ spec:
               limits:
                 memory: 512Mi
 
-
     service:
       app:
         controller: home-assistant
