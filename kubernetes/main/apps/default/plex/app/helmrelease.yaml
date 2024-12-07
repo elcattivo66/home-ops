@@ -58,15 +58,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
         seccompProfile: { type: RuntimeDefault }
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values: ["nuc", "morefine"]
+
       nodeSelector:
         intel.feature.node.kubernetes.io/gpu: "true"
 
