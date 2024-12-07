@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./claim.yaml
   - ./minio.yaml
-  # - ./s3-remote.yaml
+  - ./s3-remote.yaml
