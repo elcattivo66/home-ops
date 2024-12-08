@@ -28,3 +28,5 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      VOLSYNC_PUID: "0"
+      VOLSYNC_PGID: "0"
