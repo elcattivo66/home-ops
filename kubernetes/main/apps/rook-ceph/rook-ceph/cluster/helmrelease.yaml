@@ -64,11 +64,20 @@ spec:
         connections:
           requireMsgr2: true
       storage:
-        useAllNodes: true
-        useAllDevices: true
-        deviceFilter: nvme0n1
+        useAllNodes: false
+        useAllDevices: false
         config:
           osdsPerDevice: "1"
+        nodes:
+          - name: "nuc11"
+            devices:
+              - name: "/dev/disk/by-id/nvme-KINGSTON_SNV2S500G_50026B7282F4B0D4"
+          - name: "nuc13"
+            devices:
+              - name: "/dev/disk/by-id/nvme-CT500P3SSD8_2310E6B74300"
+          - name: "nuc14"
+            devices:
+              - name: "/dev/disk/by-id/nvme-WD_Blue_SN570_500GB_2140HE441509"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -147,3 +156,4 @@ spec:
       name: csi-ceph-filesystem
       isDefault: false
       deletionPolicy: Delete
+    cephObjectStores: []
