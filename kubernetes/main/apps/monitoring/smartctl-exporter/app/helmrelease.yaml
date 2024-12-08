@@ -27,7 +27,7 @@ spec:
     fullnameOverride: *app
     config:
       devices:
-        # - /dev/sda
+        - /dev/sda
         - /dev/nvme0n1
     serviceMonitor:
       enabled: true
