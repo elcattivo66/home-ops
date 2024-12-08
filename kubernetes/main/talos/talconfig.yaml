@@ -24,15 +24,15 @@ additionalApiServerCertSans: &sans
 additionalMachineCertSans: *sans
 
 nodes:
-  - hostname: nuc.internal
-    ipAddress: 192.168.20.10
+  - hostname: nuc11.internal
+    ipAddress: 192.168.20.11
     controlPlane: true
     installDiskSelector:
-      model: "KINGSTON SNV2S500G"
-    # machineDisks:
-    #   - device: /dev/disk/by-id/nvme-KINGSTON_SNV2S500G_50026B7282F4B0D4
-    #     partitions:
-    #       - mountpoint: /var/mnt/extra
+      model: SanDisk SD8S*
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-KINGSTON_SNV2S500G_50026B7282F4B0D4
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     networkInterfaces:
       - interface: bond0
         bond:
@@ -51,44 +51,23 @@ nodes:
             dhcpOptions:
               routeMetric: 4096
 
-  - hostname: morefine.internal
-    ipAddress: 192.168.20.11
+  - hostname: nuc13.internal
+    ipAddress: 192.168.20.13
     controlPlane: true
     installDiskSelector:
-      model: "CT500P3SSD8"
-    # machineDisks:
-    #   - device: /dev/disk/by-id/nvme-CT500P3SSD8_2310E6B74300
-    #     partitions:
-    #       - mountpoint: /var/mnt/extra
+      model: SPCC Solid*
+      size: <= 300GB
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-CT500P3SSD8_2310E6B74300
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     networkInterfaces:
       - interface: bond0
         bond:
           mode: active-backup
           deviceSelectors:
-            - hardwareAddr: e0:51:d8:11:*
+            - hardwareAddr: 48:21:0b:61:*
               driver: igc
-        dhcp: true
-        vip:
-          ip: *talosControlplaneVip
-        vlans:
-          - *vlan30
-
-  - hostname: brix.internal
-    ipAddress: 192.168.20.12
-    controlPlane: false
-    installDiskSelector:
-      model: "WD Blue SN570 500GB"
-    # machineDisks:
-    #   - device: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_2140HE441509
-    #     partitions:
-    #       - mountpoint: /var/mnt/extra
-    networkInterfaces:
-      - interface: bond0
-        bond:
-          mode: active-backup
-          deviceSelectors:
-            - hardwareAddr: 1c:1b:0d:89:* # 00:e0:4c:68:01:3b
-              driver: e1000e
         dhcp: true
         vip:
           ip: *talosControlplaneVip
@@ -99,18 +78,22 @@ nodes:
     ipAddress: 192.168.20.14
     controlPlane: true
     installDiskSelector:
-      model: "SSDPR-CX400-512-G2"
-    # machineDisks:
-    #   - device: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_2140HE441509
-    #     partitions:
-    #       - mountpoint: /var/mnt/extra
+      model: SSDPR-CX400*
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_2140HE441509
+        partitions:
+          - mountpoint: /var/mnt/longhorn
+    schematic:
+      customization:
+        extraKernelArgs:
+          - i915.force_probe=7d55 # TODO: Remove this once the kernel is updated to 6.12.0
     networkInterfaces:
       - interface: bond0
         bond:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: 88:ae:dd:66:*
-              driver: atlantic
+              driver: igc
         dhcp: true
         vip:
           ip: *talosControlplaneVip
@@ -185,14 +168,6 @@ controlPlane:
             rotate-server-certificates: "true"
           extraConfig:
             maxPods: 150
-          extraMounts:
-            - destination: /var/mnt/extra
-              type: bind
-              source: /var/mnt/extra
-              options:
-                - rbind
-                - rshared
-                - rw
           nodeIP:
             validSubnets:
                 - 192.168.20.0/24
@@ -273,6 +248,16 @@ controlPlane:
           devices.system.cpu.cpu1.cpufreq.energy_performance_preference: balance_power
           devices.system.cpu.cpu2.cpufreq.energy_performance_preference: balance_power
           devices.system.cpu.cpu3.cpufreq.energy_performance_preference: balance_power
+
+    # Mount openebs-hostpath in kubelet
+    - |-
+      machine:
+        kubelet:
+          extraMounts:
+            - destination: /var/openebs/local
+              type: bind
+              source: /var/openebs/local
+              options: ["bind", "rshared", "rw"]
 
     # Mount Longhorn storage in kubelet
     - |-
