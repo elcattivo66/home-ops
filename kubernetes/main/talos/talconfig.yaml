@@ -29,10 +29,6 @@ nodes:
     controlPlane: true
     installDiskSelector:
       model: SanDisk SD8S*
-    machineDisks:
-      - device: /dev/disk/by-id/nvme-KINGSTON_SNV2S500G_50026B7282F4B0D4
-        partitions:
-          - mountpoint: /var/mnt/longhorn
     networkInterfaces:
       - interface: bond0
         bond:
@@ -56,11 +52,6 @@ nodes:
     controlPlane: true
     installDiskSelector:
       model: SPCC Solid*
-      size: <= 300GB
-    machineDisks:
-      - device: /dev/disk/by-id/nvme-CT500P3SSD8_2310E6B74300
-        partitions:
-          - mountpoint: /var/mnt/longhorn
     networkInterfaces:
       - interface: bond0
         bond:
@@ -79,10 +70,6 @@ nodes:
     controlPlane: true
     installDiskSelector:
       model: SSDPR-CX400*
-    machineDisks:
-      - device: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_2140HE441509
-        partitions:
-          - mountpoint: /var/mnt/longhorn
     schematic:
       customization:
         extraKernelArgs:
@@ -257,16 +244,6 @@ controlPlane:
             - destination: /var/openebs/local
               type: bind
               source: /var/openebs/local
-              options: ["bind", "rshared", "rw"]
-
-    # Mount Longhorn storage in kubelet
-    - |-
-      machine:
-        kubelet:
-          extraMounts:
-            - destination: /var/mnt/longhorn
-              type: bind
-              source: /var/mnt/longhorn
               options: ["bind", "rshared", "rw"]
 
     # Configure udev rules
