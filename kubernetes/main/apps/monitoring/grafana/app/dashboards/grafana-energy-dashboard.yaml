@@ -5,7 +5,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   annotations:
-    grafana_folder: "Smarthome"
+    grafana_folder: "Default"
 data:
   grafana-energy-dashboard.json: |-
       {
@@ -832,7 +832,7 @@ data:
           "list": []
         },
         "time": {
-          "from": "now-6M",
+          "from": "now-24h",
           "to": "now"
         },
         "timepicker": {},
