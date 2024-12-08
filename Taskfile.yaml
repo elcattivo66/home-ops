@@ -13,10 +13,11 @@ env:
 
 includes:
   bootstrap: .taskfiles/Bootstrap/Taskfile.yaml
+  external-secrets: .taskfiles/ExternalSecrets/Taskfile.yaml
   flux: .taskfiles/Flux/Taskfile.yaml
   sops: .taskfiles/Sops/Taskfile.yaml
   talos: .taskfiles/Talos/Taskfile.yaml
-  external-secrets: .taskfiles/ExternalSecrets/Taskfile.yaml
+  rook: .taskfiles/Rook/Taskfile.yaml
   volsync: .taskfiles/Volsync/Taskfile.yaml
 
 tasks:
