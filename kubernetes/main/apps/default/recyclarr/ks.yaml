@@ -12,6 +12,7 @@ spec:
   dependsOn:
     - name: volsync
     - name: external-secrets-stores
+    - name: longhorn
   path: ./kubernetes/main/apps/default/recyclarr/app
   prune: true
   sourceRef:

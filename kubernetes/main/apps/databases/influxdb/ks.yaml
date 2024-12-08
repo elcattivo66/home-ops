@@ -12,6 +12,7 @@ spec:
   dependsOn:
     - name: longhorn
     - name: volsync
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/databases/influxdb/app
   prune: true
   sourceRef:

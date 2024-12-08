@@ -12,6 +12,8 @@ spec:
   dependsOn:
     - name: volsync
     - name: cloudnative-pg-cluster
+    - name: longhorn
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/tandoor/app
   prune: true
   sourceRef:

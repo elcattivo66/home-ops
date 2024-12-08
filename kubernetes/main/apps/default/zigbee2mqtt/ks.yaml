@@ -12,6 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   dependsOn:
     - name: volsync
+    - name: longhorn
     - name: node-feature-rules
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/zigbee2mqtt/app

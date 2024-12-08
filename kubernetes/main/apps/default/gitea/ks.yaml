@@ -12,6 +12,7 @@ spec:
   dependsOn:
     - name: longhorn
     - name: volsync
+    - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/gitea/app
   prune: true
   sourceRef:
