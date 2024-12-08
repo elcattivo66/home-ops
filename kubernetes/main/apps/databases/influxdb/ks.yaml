@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   dependsOn:
-    - name: longhorn
+    - name: rook-ceph-cluster
     - name: volsync
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/databases/influxdb/app
