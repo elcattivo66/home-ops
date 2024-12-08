@@ -17,7 +17,7 @@ spec:
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres16-v8
+      source: &previousCluster postgres16-v7
   postgresql:
     # shared_preload_libraries: ["vectors.so"]
     parameters:
