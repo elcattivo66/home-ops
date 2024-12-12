@@ -19,9 +19,7 @@ resources:
   - ./intel.yaml
   - ./jetstack.yaml
   - ./k8tz.yaml
-  - ./longhorn.yaml
   - ./metrics-server.yaml
-  - ./mittwald.yaml
   - ./nextcloud.yaml
   - ./node-feature-discovery.yaml
   - ./openebs.yaml
@@ -32,4 +30,3 @@ resources:
   - ./rook-ceph.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./stevehipwell.yaml
