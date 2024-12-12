@@ -73,7 +73,6 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           nginx.ingress.kubernetes.io/auth-method: GET
           nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local:9091/api/verify
           nginx.ingress.kubernetes.io/auth-signin: https://authelia.${SECRET_DOMAIN}/rm=$request_method

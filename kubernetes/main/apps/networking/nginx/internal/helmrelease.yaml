@@ -31,7 +31,7 @@ spec:
       replicaCount: 2
       service:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: internal.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/hostname: &hostname internal.${SECRET_DOMAIN}
           lbipam.cilium.io/ips: 192.168.20.148
       ingressClassResource:
         name: internal
@@ -78,15 +78,10 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: networking/${SECRET_CERT_NAME}-prod-tls
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: ingress-nginx
-              app.kubernetes.io/instance: nginx-internal
-              app.kubernetes.io/component: controller
+        publish-status-address: *hostname
+      terminationGracePeriodSeconds: 120
+      publishService:
+        enabled: false
       resources:
         requests:
           cpu: 100m

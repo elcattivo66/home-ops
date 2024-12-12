@@ -75,7 +75,6 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         hosts:
