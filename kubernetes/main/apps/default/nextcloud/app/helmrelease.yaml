@@ -261,4 +261,4 @@ spec:
         cpu: 17m
         memory: 536Mi
       limits:
-        memory: 736Mi
+        memory: 1Gi
