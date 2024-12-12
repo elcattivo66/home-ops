@@ -72,10 +72,10 @@ metadata:
 spec:
   sourcePVC: "${VOLSYNC_CLAIM:-${APP}}"
   trigger:
-    schedule: "15 */8 * * *"
+    schedule: "15 */6 * * *"
   restic:
     copyMethod: "${VOLSYNC_COPYMETHOD:-Snapshot}"
-    pruneIntervalDays: 10
+    pruneIntervalDays: 7
     repository: "${APP}-volsync-minio"
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-ceph-blockpool}"
     cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-2Gi}"
@@ -90,5 +90,4 @@ spec:
     retain:
       hourly: 24
       daily: 10
-      weekly: 5
-      monthly: 3
+      weekly: 4
