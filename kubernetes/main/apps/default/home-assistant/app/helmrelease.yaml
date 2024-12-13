@@ -125,7 +125,7 @@ spec:
           home-assistant:
             app:
               - path: /config
-            codes-server:
+            code-server:
               - path: /config
       logs:
         type: emptyDir
