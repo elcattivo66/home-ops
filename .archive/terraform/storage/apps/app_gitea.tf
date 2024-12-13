@@ -4,7 +4,7 @@ resource "helm_release" "gitea" {
 
   repository = "https://dl.gitea.io/charts/"
   chart      = "gitea"
-  version    = "9.6.1"
+  version    = "10.6.0"
 
   values = [
     yamlencode({
