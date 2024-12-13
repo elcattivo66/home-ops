@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: haveagitgat/tdarr
-      tag: 2.00.20
+      tag: 2.27.02
     env:
       webUIPort: &web-port 8265
       serverIP: 0.0.0.0
