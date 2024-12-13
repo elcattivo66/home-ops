@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/pdreker/fritz_exporter
-              tag: 2.5.0
+              tag: 2.5.1
             envFrom:
               - secretRef:
                   name: fritzbox-exporter-secret
