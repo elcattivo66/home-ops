@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: haproxy
-              tag: "2.9"
+              tag: "3.1"
             probes:
               liveness:
                 enabled: true
