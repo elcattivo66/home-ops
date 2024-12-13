@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: docker.io/openhab/openhab
-              tag: 4.1.3
+              tag: 4.2.3
             env:
               USER_ID: 1000
               GROUP_ID: 1000
