@@ -28,7 +28,7 @@ spec:
 
     image:
       repository: ghcr.io/onedr0p/readarr-develop
-      tag: 0.1.9.1905@sha256:fb2de658fbebc5bc5e9b357f02dcbffef9b4467e5404343bed26acd3d44f4931
+      tag: 0.3.32.2587@sha256:1ffa6357a1e0f2dd9c608a1a2d4064e09b76d834059dda38414c734146cfa201
 
     env:
       TZ: "${TZ}"
