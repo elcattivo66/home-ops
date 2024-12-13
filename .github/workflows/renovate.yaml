@@ -19,7 +19,6 @@ on:
         required: false
   schedule:
     - cron: "0 * * * *" # Every hour
-    #- cron: "0 */3 * * *" # Every 3 hours
   push:
     branches: ["main"]
     paths:

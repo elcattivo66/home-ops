@@ -1,14 +1,13 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: [
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
     "config:recommended",
     "docker:enableMajor",
     "replacements:k8s-registry-move",
+    ":automergeBranch",
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
-    ":automergeDigest",
-    ":automergeBranch",
     ":skipStatusChecks",
     ":timezone(Europe/Berlin)",
     "github>elcattivo66/home-ops//.github/renovate/allowedVersions.json5",
@@ -19,23 +18,28 @@
     "github>elcattivo66/home-ops//.github/renovate/grafanaDashboards.json5",
     "github>elcattivo66/home-ops//.github/renovate/groups.json5",
     "github>elcattivo66/home-ops//.github/renovate/labels.json5",
-    "github>elcattivo66/home-ops//.github/renovate/semanticCommits.json5",
     "github>elcattivo66/home-ops//.github/renovate/packageRules.json5",
+    "github>elcattivo66/home-ops//.github/renovate/semanticCommits.json5",
   ],
-  dependencyDashboardTitle: "Renovate Dashboard 🤖",
-  suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
-  ignorePaths: ["**/*.sops.*", "**/.archive/**", "**/config/**"],
-  flux: {
-    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"],
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
+  "onboarding": false,
+  "requireConfig": "ignored",
+  "ignorePaths": ["**/*.sops.*", "**/.archive/**", "**/config/**"],
+  "flux": {
+    "fileMatch": [
+      "(^|/)kubernetes/.+\\.ya?ml$"
+    ]
   },
   "helm-values": {
-    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"],
+    "fileMatch": [
+      "(^|/)kubernetes/.+\\.ya?ml$"
+    ]
   },
-  kubernetes: {
-    fileMatch: [
-      "(^|/)\\.taskfiles/.+\\.ya?ml(\\.j2)?$",
-      "(^|/)ansible/.+\\.ya?ml(\\.j2)?$",
-      "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$",
-    ],
-  },
+  "kubernetes": {
+    "fileMatch": [
+      "(^|/)\\.taskfiles/.+\\.ya?ml$",
+      "(^|/)kubernetes/.+\\.ya?ml$"
+    ]
+  }
 }
