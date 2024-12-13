@@ -129,7 +129,7 @@ spec:
                 requests:
                   storage: 20Gi
         thanos:
-          image: quay.io/thanos/thanos:v0.34.1
+          image: quay.io/thanos/thanos:v0.37.2
           objectStorageConfig:
             existingSecret:
               name: kube-prometheus-stack-secret
