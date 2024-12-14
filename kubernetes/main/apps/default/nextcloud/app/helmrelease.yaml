@@ -60,7 +60,6 @@ spec:
               key: NEXTCLOUD_OAUTH_CLIENT_SECRET
         - name: REDIS_HOST
           value: dragonfly.databases.svc.cluster.local
-          # value: redis-lb.databases.svc.cluster.local
         - name: REDIS_HOST_PORT
           value: "6379"
       mail:
@@ -88,8 +87,7 @@ spec:
       securityContext:
         runAsUser: 82
         runAsGroup: 82
-        runAsNonRoot: true
-        readOnlyRootFilesystem: false
+
       configs:
         custom.config.php: |-
           <?php
@@ -155,20 +153,6 @@ spec:
           pm.process_idle_timeout = 10s
     redis:
       enabled: false
-      architecture: standalone
-      auth:
-        enabled: false
-        # existingSecret: *secret
-        # existingSecretPasswordKey: REDIS_PASSWORD
-      master:
-        persistence:
-          enabled: false
-      resources:
-        requests:
-          cpu: 10m
-          memory: 21M
-        limits:
-          memory: 50M
     nginx:
       enabled: true
       image:
