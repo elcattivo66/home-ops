@@ -83,6 +83,12 @@ spec:
           secretKeys:
             accessKey: S3_ACCESS_KEY
             secretKey: S3_SECRET_KEY
+      securityContext:
+        runAsUser: 82
+        runAsGroup: 82
+        runAsNonRoot: true
+        readOnlyRootFilesystem: false
+
       configs:
         custom.config.php: |-
           <?php
@@ -149,6 +155,8 @@ spec:
         tag: "1.27.3"
       config:
         default: true
+      securityContext:
+        runAsGroup: 82
       resources:
         requests:
           cpu: 10m
@@ -213,6 +221,8 @@ spec:
 
     cronjob:
       enabled: true
+      securityContext:
+        runAsGroup: 82
 
     hpa:
       enabled: false
