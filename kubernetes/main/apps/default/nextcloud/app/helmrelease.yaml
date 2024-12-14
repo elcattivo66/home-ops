@@ -96,17 +96,11 @@ spec:
             'enable_previews' => true,
             'log_type' => 'syslog',
             'maintenance_window_start' => 1,
-            'trusted_domains' =>
-              array (
-                0 => 'nextcloud',
-                1 => 'cloud.${SECRET_DOMAIN}',
-                2 => 'localhost',
-              ),
             'trusted_proxies' =>
               array (
-                0 => '10.42.3.0/16',
-                1 => '192.168.20.0/16',
-                2 => '192.168.10.0/16',
+                0 => '127.0.0.1',
+                1 => '10.42.0.0/16',
+                2 => '10.43.0.0/16',
               ),
           );
 
