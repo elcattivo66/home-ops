@@ -152,6 +152,13 @@ spec:
               tlsSkipVerify: true
             secureJsonData:
               token: "${SECRET_INFLUXDB_TOKEN}"
+          - name: Loki
+            type: loki
+            uid: loki
+            access: proxy
+            url: http://loki-headless.monitoring.svc.cluster.local:3100
+            jsonData:
+              maxLines: 250
           - name: Alertmanager
             type: alertmanager
             uid: alertmanager
