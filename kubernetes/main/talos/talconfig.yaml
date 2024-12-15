@@ -156,7 +156,6 @@ controlPlane:
         officialExtensions:
           - siderolabs/i915-ucode
           - siderolabs/intel-ucode
-          - siderolabs/iscsi-tools
 
   patches:
     # Configure containerd
