@@ -44,6 +44,7 @@ spec:
               repository: ghcr.io/onedr0p/radarr-develop
               tag: 5.16.3.9541@sha256:bb9ac6e6e9db6d3ecf1d9cfe78d585e404679198d1abdaa9a9fd3ef139e0d041
             env:
+              TZ: ${TZ}
               PUSHOVER_DEBUG: "false"
               RADARR__AUTH__METHOD: External
               RADARR__AUTH__REQUIRED: DisabledForLocalAddresses

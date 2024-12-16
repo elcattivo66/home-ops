@@ -44,6 +44,7 @@ spec:
               repository: ghcr.io/onedr0p/sonarr-develop
               tag: 4.0.11.2762@sha256:609c254e1a67fed034368418fdb42f396308f6e0cf751b43a65169cc58cda174
             env:
+              TZ: ${TZ}
               SONARR__APP__INSTANCENAME: Sonarr
               SONARR__APP__THEME: dark
               SONARR__AUTH__METHOD: External

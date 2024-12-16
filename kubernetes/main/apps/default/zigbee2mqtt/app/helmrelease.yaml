@@ -36,6 +36,7 @@ spec:
               repository: ghcr.io/koenkk/zigbee2mqtt
               tag: 1.42.0
             env:
+              TZ: ${TZ}
               ZIGBEE2MQTT_DATA: /data
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: false

@@ -41,6 +41,7 @@ spec:
               repository: ghcr.io/onedr0p/prowlarr-develop
               tag: 1.28.1.4879@sha256:bc32ad0e27f3ea5dda985cc449dd08beaa7068a9aae923824faf87ee3ec09c6e
             env:
+              TZ: ${TZ}
               PROWLARR__APP__INSTANCENAME: Prowlarr
               PROWLARR__SERVER__PORT: &port 80
               PROWLARR__LOG__LEVEL: info

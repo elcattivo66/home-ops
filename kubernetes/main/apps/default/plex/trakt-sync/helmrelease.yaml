@@ -48,6 +48,7 @@ spec:
             args:
               - watch
             env:
+              TZ: ${TZ}
               PLEX_BASEURL: http://plex.default.svc.cluster.local:32400
               PLEX_LOCALURL: http://plex.default.svc.cluster.local:32400
               PLEX_TOKEN:

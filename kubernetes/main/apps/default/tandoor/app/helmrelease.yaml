@@ -51,6 +51,7 @@ spec:
               tag: 1.5.24
             envFrom: *envFrom
             env:
+              TZ: ${TZ}
               ENABLE_METRICS: 1
               ENABLE_SIGNUP: 0
               TANDOOR_PORT: &port 8888

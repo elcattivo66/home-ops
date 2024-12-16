@@ -35,6 +35,7 @@ spec:
               tag: 0.6.24@sha256:57fc39bbc7a49ee48f50b8691b47d768c130fd6e8569ec17bde051eae5beddd6
             env:
               CACHE_DIR: /cache
+              TZ: ${TZ}
             resources:
               requests:
                 cpu: 10m

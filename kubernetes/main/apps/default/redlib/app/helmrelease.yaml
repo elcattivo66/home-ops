@@ -35,6 +35,7 @@ spec:
               repository: quay.io/redlib/redlib
               tag: latest@sha256:d04e722091fe17424425499882a548507a70654f37aaf8cbc71081ef29b7b341
             env:
+              TZ: ${TZ}
               REDLIB_DEFAULT_FRONT_PAGE: "default"
               REDLIB_DEFAULT_HIDE_HLS_NOTIFICATION: "on"
               REDLIB_DEFAULT_LAYOUT: "compact"

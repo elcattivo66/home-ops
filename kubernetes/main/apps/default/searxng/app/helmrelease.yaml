@@ -29,6 +29,7 @@ spec:
               repository: docker.io/searxng/searxng
               tag: 2024.6.30-39aaac40d
             env:
+              TZ: ${TZ}
               SEARXNG_BASE_URL: https://search.${SECRET_DOMAIN}
               SEARXNG_URL: https://search.${SECRET_DOMAIN}
               SEARXNG_PORT: &httpPort 8080

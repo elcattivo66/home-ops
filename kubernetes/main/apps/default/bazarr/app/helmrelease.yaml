@@ -35,6 +35,8 @@ spec:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16.6
+            env:
+              TZ: ${TZ}
             envFrom: &envFrom
               - secretRef:
                   name: bazarr-secret

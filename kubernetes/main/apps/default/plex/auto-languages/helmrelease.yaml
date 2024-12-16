@@ -39,6 +39,7 @@ spec:
               - secretRef:
                   name: plex-auto-languages-secret
             env:
+              TZ: ${TZ}
               PLEX_URL: http://plex.default.svc.cluster.local:32400
               REFRESH_LIBRARY_ON_SCAN: false
             resources:

@@ -50,6 +50,7 @@ spec:
               - secretRef:
                   name: lldap-secret
             env:
+              TZ: ${TZ}
               LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
             resources:
               requests:
