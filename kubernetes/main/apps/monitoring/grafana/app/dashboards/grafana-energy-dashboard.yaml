@@ -128,7 +128,7 @@ data:
                 "tags": []
               }
             ],
-            "title": "Stromverbrauch NAS",
+            "title": "Stromverbrauch Media",
             "type": "stat"
           },
           {
