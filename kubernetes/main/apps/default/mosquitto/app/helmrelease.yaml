@@ -74,7 +74,7 @@ spec:
             port: 1883
 
     persistence:
-      config:
+      data:
         enabled: true
         existingClaim: *app
       config-file:
