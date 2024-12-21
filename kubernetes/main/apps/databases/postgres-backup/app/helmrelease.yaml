@@ -48,7 +48,7 @@ spec:
               - { name: TZ, value: "${TZ}" }
               - {
                   name: POSTGRES_DB,
-                  value: "authelia,immich,paperless,radarr_main,nextcloud,lldap,prowlarr_main,lidarr_main,bazarr,home_assistant,vaultwarden,tandoor,sonarr_main,gitea",
+                  value: "authelia,immich,paperless,radarr_main,nextcloud,lldap,prowlarr_main,bazarr,home_assistant,vaultwarden,tandoor,sonarr_main,gitea",
                 }
               - {
                   name: POSTGRES_HOST,
