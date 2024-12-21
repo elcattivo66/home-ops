@@ -12,7 +12,7 @@ resources:
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   - ./lldap/ks.yaml
-  - ./mosquitto/ks.yaml
+  # - ./mosquitto/ks.yaml
   - ./nextcloud/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
