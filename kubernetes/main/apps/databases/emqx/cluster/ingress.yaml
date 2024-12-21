@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: emqx-dashboard
 spec:
-  ingressClassName: internal-nginx
+  ingressClassName: internal
   rules:
     - host: emqx.${SECRET_DOMAIN}
       http:
