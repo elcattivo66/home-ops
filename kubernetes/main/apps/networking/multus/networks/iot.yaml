@@ -19,7 +19,6 @@ spec:
           "ipam": {
             "type": "static",
             "routes": [
-              { "dst": "${NET_TRUSTED_CIDR}", "gw": "${NET_IOT_GATEWAY_IP}" },
               { "dst": "${NET_IOT_CIDR}", "gw": "${NET_IOT_GATEWAY_IP}" }
             ]
           }
