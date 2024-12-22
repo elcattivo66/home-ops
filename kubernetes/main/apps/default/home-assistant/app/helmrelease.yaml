@@ -103,21 +103,23 @@ spec:
 
     ingress:
       app:
-        className: internal
-        annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
+        className: external
         hosts:
           - host: &host hass.${SECRET_DOMAIN}
             paths:
-              - path: /(.*)
+              - path: /
                 service:
                   identifier: app
                   port: http
-              - path: /code/(.*)
+      code-server:
+        className: internal
+        hosts:
+          - host: hass-code.devbu.io
+            paths:
+              - path: /
                 service:
                   identifier: app
                   port: code-server
-
     persistence:
       config:
         enabled: true
