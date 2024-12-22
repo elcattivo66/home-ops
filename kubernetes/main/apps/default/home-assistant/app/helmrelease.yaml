@@ -114,7 +114,7 @@ spec:
       code-server:
         className: internal
         hosts:
-          - host: hass-code.devbu.io
+          - host: hass-code.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
