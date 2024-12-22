@@ -8,7 +8,7 @@ metadata:
 spec:
   targetNamespace: default
   dependsOn:
-    - name: multus-config
+    - name: multus-networks
     - name: external-secrets-stores
   commonMetadata:
     labels:

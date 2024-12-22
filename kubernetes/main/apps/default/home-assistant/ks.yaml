@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   dependsOn:
-    - name: multus-config
+    - name: multus-networks
     - name: cloudnative-pg-cluster
     - name: rook-ceph-cluster
     - name: external-secrets-stores
