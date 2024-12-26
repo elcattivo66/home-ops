@@ -154,7 +154,7 @@ controlPlane:
         - net.ifnames=1
       systemExtensions:
         officialExtensions:
-          - siderolabs/i915-ucode
+          - siderolabs/i915
           - siderolabs/intel-ucode
 
   patches:
@@ -164,14 +164,8 @@ controlPlane:
         files:
           - op: create
             path: /etc/cri/conf.d/20-customization.part
-            content: |
-              [plugins]
-                [plugins."io.containerd.grpc.v1.cri"]
-                  enable_unprivileged_ports = true
-                  enable_unprivileged_icmp = true
-              [plugins."io.containerd.grpc.v1.cri".containerd]
-                discard_unpacked_layers = false
-              [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+            content: |-
+              [plugins."io.containerd.cri.v1.images"]
                 discard_unpacked_layers = false
 
     # Disable search domain everywhere
@@ -184,7 +178,6 @@ controlPlane:
     - |-
       cluster:
         discovery:
-          enabled: true
           registries:
             kubernetes:
               disabled: false
