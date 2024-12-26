@@ -9,15 +9,15 @@
     },
     {
       "description": ["Custom schedule for frequently updated packages"],
-      "matchDataSources": ["docker", "helm"],
-      "matchPackagePatterns": ["minio", "postgresql", "reloader"],
+      "matchDataSources": ["docker"],
+      "matchPackagePatterns": ["postgresql"],
       "schedule": ["on the first day of the month"]
     },
     {
-      "description": "Use custom versioning for Minio",
+      "description": ["Allowed postgresql major release"],
       "matchDatasources": ["docker"],
-      "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$",
-      "matchPackagePatterns": ["minio"]
+      "matchPackagePatterns": ["postgresql"],
+      "allowedVersions": "<17"
     }
   ]
 }
