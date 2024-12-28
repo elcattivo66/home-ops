@@ -98,10 +98,6 @@ nodes:
     controlPlane: true
     installDiskSelector:
       model: SSDPR-CX400*
-    schematic:
-      customization:
-        extraKernelArgs:
-          - i915.force_probe=7d55 # TODO: Remove this once the kernel is updated to 6.12.0
     networkInterfaces:
       - interface: bond0
         bond:
@@ -149,9 +145,14 @@ controlPlane:
   schematic:
     customization:
       extraKernelArgs:
-        - intel_iommu=on
-        - iommu=pt
-        - net.ifnames=1
+        - apparmor=0           # Less security, more speed
+        - init_on_alloc=0      # Less security, more speed
+        - init_on_free=0       # Less security, more speed
+        - intel_iommu=on       # PCI Passthrough
+        - iommu=pt             # PCI Passthrough
+        - mitigations=off      # Less security, more speed
+        - security=none        # Less security, more speed
+        - net.ifnames=1        # Enable predictable NIC naming
       systemExtensions:
         officialExtensions:
           - siderolabs/i915
@@ -217,6 +218,10 @@ controlPlane:
     - |-
       cluster:
         allowSchedulingOnMasters: true
+        apiServer:
+          extraArgs:
+            enable-aggregator-routing: true
+            feature-gates: AuthorizeNodeWithSelectors=false
         coreDNS:
             disabled: true
         proxy:
