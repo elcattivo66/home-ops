@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/sonarr-develop
-              tag: 4.0.11.2800@sha256:ae64f0a05e2588df5741ef52a33075cb70e7efe2c010a5a80c1d0254e3b3c5ac
+              tag: 4.0.11.2804@sha256:e3bb27b630ae444456b798f3170e51bb370fead1f6e184982eff7910974d7b4f
             env:
               TZ: ${TZ}
               SONARR__APP__INSTANCENAME: Sonarr
