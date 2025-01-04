@@ -72,6 +72,7 @@ radarr:
               - WEBRip-720p
         upgrade:
           allowed: true
+          until_quality: HD Bluray|WEB
           until_score: 25000
       - name: German UHD
         qualities:
@@ -82,6 +83,7 @@ radarr:
               - WEBRip-2160p
         upgrade:
           allowed: true
+          until_quality: UHD Bluray|WEB
           until_score: 25000
 
     custom_formats:
