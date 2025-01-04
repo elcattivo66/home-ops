@@ -52,10 +52,6 @@ radarr:
     quality_profiles:
       - name: SQP-1 (1080p)
         min_format_score: 10
-        reset_unmatched_scores:
-          enabled: true
-          except:
-            - "Language: German + Original"
         qualities:
           - name: Bluray|WEB-1080p
             qualities:
@@ -64,10 +60,29 @@ radarr:
               - WEBRip-1080p
       - name: SQP-1 (2160p)
         min_format_score: 2000
-        reset_unmatched_scores:
-          enabled: true
-          except:
-            - "Language: German + Original"
+      - name: German HD
+        qualities:
+          - name: HD Bluray|WEB
+            qualities:
+              - Bluray-1080p
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-720p
+              - WEBDL-720p
+              - WEBRip-720p
+        upgrade:
+          allowed: true
+          until_score: 25000
+      - name: German UHD
+        qualities:
+          - name: UHD Bluray|WEB
+            qualities:
+              - Bluray-2160p
+              - WEBDL-2160p
+              - WEBRip-2160p
+        upgrade:
+          allowed: true
+          until_score: 25000
 
     custom_formats:
       - trash_ids:
@@ -82,8 +97,9 @@ radarr:
           - name: SQP-1 (1080p)
           - name: SQP-1 (2160p)
           - name: German HD
+          - name: German UHD
 
-      #German Unwanted
+      # German Unwanted
       - trash_ids:
           - ed38b889b31be83fda192888e2286d83 # BR-Disk
           - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D
@@ -95,16 +111,18 @@ radarr:
           - bfd8eb01832d646a0a89c4deb46f8564 # Upscaled
         assign_scores_to:
           - name: German HD
+          - name: German UHD
 
-      #German Audio
+      # German Audio
       - trash_ids:
           - 86bc3115eb4e9873ac96904a4a68e19e # German
           - f845be10da4f442654c13e1f2c3d6cd5 # German DL
           - 6aad77771dabe9d3e9d7be86f310b867 # German DL (undefined)
         assign_scores_to:
           - name: German HD
+          - name: German UHD
 
-      #German HQ Source Groups
+      # German HQ Source Groups HD
       - trash_ids:
           - 54795711b78ea87e56127928c423689b # German Bluray Tier 01
           - 1bfc773c53283d47c68e535811da30b7 # German Bluray Tier 02
@@ -121,22 +139,48 @@ radarr:
           - af94e0fe497124d1f9ce732069ec8c3b # Web Tier 03
         assign_scores_to:
           - name: German HD
+          - name: German UHD
+
+      # German HQ Source Groups UHD
+      - trash_ids:
+          - 4d74ac4c4db0b64bff6ce0cffef99bf0 # UHD Bluray Tier 01
+          - a58f517a70193f8e578056642178419d # UHD Bluray Tier 02
+          - e71939fae578037e7aed3ee219bbe7c1 # UHD Bluray Tier 03
+        assign_scores_to:
+          - name: German UHD
 
       # Miscellaneus
       - trash_ids:
           - e7718d7a3ce595f289bfee26adc178f5 # Repack/Proper
           - ae43b294509409a6a13919dedd4764c4 # Repack2
           - 5caaaa1c08c1742aa4342d8c4cc463f2 # Repack3
+          - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         assign_scores_to:
           - name: German HD
+          - name: German UHD
 
-      # German Resolution
+      # Miscellaneus UHD
+      - trash_ids:
+          - 9c38ebb7384dada637be8899efa68e6f # SDR
+          - 25c12f78430a3a23413652cbd1d48d77 # SDR (no WEBDL)
+        assign_scores_to:
+          - name: German UHD
+
+      # German Resolution HD
       - trash_ids:
           - 3bc8df3a71baaac60a31ef696ea72d36 # German 1080p Booster
           - b2be17d608fc88818940cd1833b0b24c # 720p
           - 820b09bb9acbfde9c35c71e0e565dad8 # 1080p
         assign_scores_to:
           - name: German HD
+          - name: German UHD
+
+      # German Resolution UHD
+      - trash_ids:
+          - cc7b1e64e2513a6a271090cdfafaeb55 # German 2160p Booster
+          - fb392fb0d61a010ae38e49ceaa24a1ef # 2160p
+        assign_scores_to:
+          - name: German UHD
 
       # Movie Versions
       - trash_ids:
@@ -150,3 +194,21 @@ radarr:
           - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
         assign_scores_to:
           - name: German HD
+          - name: German UHD
+
+      # HDR Formats
+      - trash_ids:
+          - c53085ddbd027d9624b320627748612f # DV HDR10+
+          - e23edd2482476e595fb990b12e7c609c # DV HDR10
+          - 58d6a88f13e2db7f5059c41047876f00 # DV
+          - 55d53828b9d81cbe20b02efd00aa0efd # DV HLG
+          - a3e19f8f627608af0211acd02bf89735 # DV SDR
+          - b974a6cd08c1066250f1f177d7aa1225 # HDR10+
+          - dfb86d5941bc9075d6af23b09c2aeecd # HDR10
+          - e61e28db95d22bedcadf030b8f156d96 # HDR
+          - 2a4d9069cc1fe3242ff9bdaebed239bb # HDR (undefined)
+          - 08d6d8834ad9ec87b1dc7ec8148e7a1f # PQ
+          - 9364dd386c9b4a1100dde8264690add7 # HLG
+          - 923b6abef9b17f937fab56cfcf89e1f1 # DV (WEBDL) -10000
+        assign_scores_to:
+          - name: German UHD
