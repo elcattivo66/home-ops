@@ -60,7 +60,7 @@ radarr:
               - WEBRip-1080p
       - name: SQP-1 (2160p)
         min_format_score: 2000
-      - name: German HD
+      - name: HD-Prefer German
         qualities:
           - name: HD Bluray|WEB
             qualities:
@@ -71,7 +71,7 @@ radarr:
           allowed: true
           until_quality: HD Bluray|WEB
           until_score: 25000
-      - name: German UHD
+      - name: UHD-Prefer German
         qualities:
           - name: UHD Bluray|WEB
             qualities:
@@ -95,8 +95,8 @@ radarr:
         assign_scores_to:
           - name: SQP-1 (1080p)
           - name: SQP-1 (2160p)
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # German Unwanted
       - trash_ids:
@@ -109,8 +109,8 @@ radarr:
           - 0a3f082873eb454bde444150b70253cc # Extras
           - bfd8eb01832d646a0a89c4deb46f8564 # Upscaled
         assign_scores_to:
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # German Audio
       - trash_ids:
@@ -118,8 +118,8 @@ radarr:
           - f845be10da4f442654c13e1f2c3d6cd5 # German DL
           - 6aad77771dabe9d3e9d7be86f310b867 # German DL (undefined)
         assign_scores_to:
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # German HQ Source Groups HD
       - trash_ids:
@@ -137,8 +137,8 @@ radarr:
           - 403816d65392c79236dcb6dd591aeda4 # Web Tier 02
           - af94e0fe497124d1f9ce732069ec8c3b # Web Tier 03
         assign_scores_to:
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # German HQ Source Groups UHD
       - trash_ids:
@@ -146,7 +146,7 @@ radarr:
           - a58f517a70193f8e578056642178419d # UHD Bluray Tier 02
           - e71939fae578037e7aed3ee219bbe7c1 # UHD Bluray Tier 03
         assign_scores_to:
-          - name: German UHD
+          - name: UHD-Prefer German
 
       # Miscellaneus
       - trash_ids:
@@ -154,8 +154,8 @@ radarr:
           - ae43b294509409a6a13919dedd4764c4 # Repack2
           - 5caaaa1c08c1742aa4342d8c4cc463f2 # Repack3
         assign_scores_to:
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # Miscellaneus UHD
       - trash_ids:
@@ -163,7 +163,7 @@ radarr:
           - 25c12f78430a3a23413652cbd1d48d77 # SDR (no WEBDL)
           - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         assign_scores_to:
-          - name: German UHD
+          - name: UHD-Prefer German
 
       # German Resolution HD
       - trash_ids:
@@ -171,15 +171,15 @@ radarr:
           - b2be17d608fc88818940cd1833b0b24c # 720p
           - 820b09bb9acbfde9c35c71e0e565dad8 # 1080p
         assign_scores_to:
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # German Resolution UHD
       - trash_ids:
           - cc7b1e64e2513a6a271090cdfafaeb55 # German 2160p Booster
           - fb392fb0d61a010ae38e49ceaa24a1ef # 2160p
         assign_scores_to:
-          - name: German UHD
+          - name: UHD-Prefer German
 
       # Movie Versions
       - trash_ids:
@@ -192,8 +192,8 @@ radarr:
           - eecf3a857724171f968a66cb5719e152 # IMAX
           - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
         assign_scores_to:
-          - name: German HD
-          - name: German UHD
+          - name: HD-Prefer German
+          - name: UHD-Prefer German
 
       # HDR Formats
       - trash_ids:
@@ -210,4 +210,4 @@ radarr:
           - 9364dd386c9b4a1100dde8264690add7 # HLG
           - 923b6abef9b17f937fab56cfcf89e1f1 # DV (WEBDL) -10000
         assign_scores_to:
-          - name: German UHD
+          - name: UHD-Prefer German
