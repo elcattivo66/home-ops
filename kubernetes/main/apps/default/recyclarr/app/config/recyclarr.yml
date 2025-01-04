@@ -81,3 +81,72 @@ radarr:
         assign_scores_to:
           - name: SQP-1 (1080p)
           - name: SQP-1 (2160p)
+          - name: German HD
+
+      #German Unwanted
+      - trash_ids:
+          - ed38b889b31be83fda192888e2286d83 # BR-Disk
+          - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D
+          - c465ccc73923871b3eb1802042331306 # Line/Mic Dubbed
+          - 90a6f9a284dff5103f6346090e6280c8 # LQ
+          - 263943bc5d99550c68aad0c4278ba1c7 # German LQ
+          - 03c430f326f10a27a9739b8bc83c30e4 # German Microsized
+          - 0a3f082873eb454bde444150b70253cc # Extras
+          - bfd8eb01832d646a0a89c4deb46f8564 # Upscaled
+        assign_scores_to:
+          - name: German HD
+
+      #German Audio
+      - trash_ids:
+          - 86bc3115eb4e9873ac96904a4a68e19e # German
+          - f845be10da4f442654c13e1f2c3d6cd5 # German DL
+          - 6aad77771dabe9d3e9d7be86f310b867 # German DL (undefined)
+        assign_scores_to:
+          - name: German HD
+
+      #German HQ Source Groups
+      - trash_ids:
+          - 54795711b78ea87e56127928c423689b # German Bluray Tier 01
+          - 1bfc773c53283d47c68e535811da30b7 # German Bluray Tier 02
+          - aee01d40cd1bf4bcded81ee62f0f3659 # German Bluray Tier 03
+          - a2ab25194f463f057a5559c03c84a3df # German Web Tier 01
+          - 08d120d5a003ec4954b5b255c0691d79 # German Web Tier 02
+          - 439f9d71becaed589058ec949e037ff3 # German Web Tier 03
+          - 2d136d4e33082fe573d06b1f237c40dd # German Scene
+          - ed27ebfef2f323e964fb1f61391bcb35 # HD Bluray Tier 01
+          - c20c8647f2746a1f4c4262b0fbbeeeae # HD Bluray Tier 02
+          - 5608c71bcebba0a5e666223bae8c9227 # HD Bluray Tier 03
+          - c20f169ef63c5f40c2def54abaf4438e # Web Tier 01
+          - 403816d65392c79236dcb6dd591aeda4 # Web Tier 02
+          - af94e0fe497124d1f9ce732069ec8c3b # Web Tier 03
+        assign_scores_to:
+          - name: German HD
+
+      # Miscellaneus
+      - trash_ids:
+          - e7718d7a3ce595f289bfee26adc178f5 # Repack/Proper
+          - ae43b294509409a6a13919dedd4764c4 # Repack2
+          - 5caaaa1c08c1742aa4342d8c4cc463f2 # Repack3
+        assign_scores_to:
+          - name: German HD
+
+      # German Resolution
+      - trash_ids:
+          - 3bc8df3a71baaac60a31ef696ea72d36 # German 1080p Booster
+          - b2be17d608fc88818940cd1833b0b24c # 720p
+          - 820b09bb9acbfde9c35c71e0e565dad8 # 1080p
+        assign_scores_to:
+          - name: German HD
+
+      # Movie Versions
+      - trash_ids:
+          - 570bc9ebecd92723d2d21500f4be314c # Remaster
+          - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
+          - e0c07d59beb37348e975a930d5e50319 # Criterion Collection
+          - 9d27d9d2181838f76dee150882bdc58c # Masters of Cinema
+          - db9b4c4b53d312a3ca5f1378f6440fc9 # Vinegar Syndrome
+          - 957d0f44b592285f26449575e8b1167e # Special Edition
+          - eecf3a857724171f968a66cb5719e152 # IMAX
+          - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
+        assign_scores_to:
+          - name: German HD
