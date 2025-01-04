@@ -68,15 +68,16 @@ spec:
             resources:
               requests:
                 cpu: 5m
-                memory: 202M
+                memory: 202Mi
               limits:
                 squat.ai/cc2652: 1
-                memory: 202M
+                memory: 512Mi
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
-
+              capabilities:
+                drop: ["ALL"]
+                add: ["NET_BIND_SERVICE"]
     defaultPodOptions:
       nodeSelector:
         cc2652.feature.node.kubernetes.io/zigbee: "true"
