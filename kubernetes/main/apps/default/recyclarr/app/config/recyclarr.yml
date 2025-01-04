@@ -153,7 +153,6 @@ radarr:
           - e7718d7a3ce595f289bfee26adc178f5 # Repack/Proper
           - ae43b294509409a6a13919dedd4764c4 # Repack2
           - 5caaaa1c08c1742aa4342d8c4cc463f2 # Repack3
-          - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         assign_scores_to:
           - name: German HD
           - name: German UHD
@@ -162,6 +161,7 @@ radarr:
       - trash_ids:
           - 9c38ebb7384dada637be8899efa68e6f # SDR
           - 25c12f78430a3a23413652cbd1d48d77 # SDR (no WEBDL)
+          - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         assign_scores_to:
           - name: German UHD
 
