@@ -28,5 +28,6 @@ resources:
   - ./sonarr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
+  - ./umlautadaptarr/ks.yaml
   - ./vaultwarden/ks.yaml
   - ./zigbee2mqtt/ks.yaml

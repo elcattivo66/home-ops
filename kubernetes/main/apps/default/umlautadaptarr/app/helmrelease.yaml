@@ -1,0 +1,59 @@
+---
+# yaml-language-server: $schema: https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app umlautadaptarr
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      umlautadaptarr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: pcjones/umlautadaptarr
+              tag: 0.6.1@sha256:f8d2c5176412fb5c6f3d09d6efc59397a750fe548ddb6cc94bb88dcdc55c6b5e
+            env:
+              TZ: ${TZ}
+              SONARR__ENABLED: true
+              SONARR__HOST: http://sonarr.default.svc.cluster.local:80
+              RADARR__ENABLED: true
+              RADARR__HOST: http://radarr.default.svc.cluster.local:80
+            envFrom: umlautadaptarr-secret
+            resources:
+              requests:
+                cpu: 5m
+                memory: 50Mi
+              limits:
+                memory: 100Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
