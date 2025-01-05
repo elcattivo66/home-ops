@@ -5,3 +5,9 @@ resources:
   - ./helmrelease.yaml
   - ./externalsecret.yaml
   - ../../../../templates/volsync
+configMapGenerator:
+  - name: bazarr-scripts
+    files:
+      - subcleaner.sh=./config/subcleaner.sh
+generatorOptions:
+  disableNameSuffixHash: true
