@@ -123,6 +123,7 @@ radarr:
           - f845be10da4f442654c13e1f2c3d6cd5 # German DL
         assign_scores_to:
           - name: HD-Prefer German
+            score: 10001
           - name: UHD-Prefer German
             score: 10001
 
