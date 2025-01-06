@@ -106,11 +106,13 @@ spec:
             cpu: 4000m
             memory: 8Gi
       extraInitContainers:
-        - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:16.6
-          envFrom:
-            - secretRef:
-                name: *secret
+          01-init-db:
+            envFrom:
+              - secretRef:
+                  name: *secret
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: "16.6"
       persistence:
         existingClaim: *app
 
