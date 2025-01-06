@@ -68,7 +68,7 @@ spec:
       oidc_providers:
         - name: Authelia
           existingSecret: *secret
-          clientIdKey: kyoo
+          clientIdKey: OIDC_AUTHENTIK_CLIENTID
           clientSecretKey: OIDC_AUTHELIA_SECRET
           logo: https://www.authelia.com/images/branding/logo-cropped.png
           authorizationAddress: https://authelia.${SECRET_DOMAIN}/api/oidc/authorization
