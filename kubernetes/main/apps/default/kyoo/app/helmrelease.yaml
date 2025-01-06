@@ -104,7 +104,7 @@ spec:
             cpu: 10m
             memory: 1Gi
           limits:
-            cpu: 4000m
+            cpu: 8000m
             memory: 8Gi
       persistence:
         existingClaim: *app
