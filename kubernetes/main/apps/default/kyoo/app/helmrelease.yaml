@@ -48,6 +48,7 @@ spec:
       rabbitmq:
         infra:
           passwordKey: RABBITMQ_PASS
+          keyErlangCookie: RABBITMQ_COOKIE
           existingSecret: *secret
         kyoo_autosync: &rabbit
           userKey: RABBITMQ_USER
@@ -105,14 +106,6 @@ spec:
           limits:
             cpu: 4000m
             memory: 8Gi
-      extraInitContainers:
-          01-init-db:
-            envFrom:
-              - secretRef:
-                  name: *secret
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: "16.6"
       persistence:
         existingClaim: *app
 
