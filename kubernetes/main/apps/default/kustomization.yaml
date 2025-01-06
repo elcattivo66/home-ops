@@ -11,8 +11,8 @@ resources:
   - ./govee2mqtt/ks.yaml
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
+  - ./kyoo/ks.yaml
   - ./lldap/ks.yaml
-  # - ./mosquitto/ks.yaml
   - ./nextcloud/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
