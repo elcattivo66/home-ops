@@ -25,7 +25,6 @@ resources:
   - ./node-feature-discovery.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
-  - ./postfinance.yaml
   - ./prometheus-community.yaml
   - ./renovate.yaml
   - ./rook-ceph.yaml

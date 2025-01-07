@@ -1,4 +1,0 @@
----
-providerRegex: |
-  ^(nuc11|nuc13|nuc14)$
-bypassDnsResolution: true

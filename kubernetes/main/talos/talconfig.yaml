@@ -203,8 +203,6 @@ controlPlane:
     - |-
       machine:
         kubelet:
-          extraArgs:
-            rotate-server-certificates: "true"
           extraConfig:
             maxPods: 150
           nodeIP:

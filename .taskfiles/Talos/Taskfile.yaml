@@ -67,7 +67,7 @@ tasks:
         vars:
           FILENAME: "{{.FILE}}"
           HOSTNAME: "{{.NODE}}"
-      - talosctl --nodes {{.NODE}} health --wait-timeout=10m --server=false
+      - talosctl --nodes {{.NODE}} health
 
   apply-config:
     desc: Apply Talos config to the nodes
