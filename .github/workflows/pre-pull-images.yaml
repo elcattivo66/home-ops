@@ -84,7 +84,7 @@ jobs:
   pre-pull-images:
     if: ${{ needs.extract-images.outputs.matrix != '[]' }}
     name: Pre-pull images
-    runs-on: arc-bjw-s-labs-home-ops
+    runs-on: gha-runner-scale-set
     needs:
       - compare-images
     strategy:
