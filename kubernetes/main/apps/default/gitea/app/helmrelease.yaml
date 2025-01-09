@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: gitea/gitea
-      tag: 1.22.6
+      tag: 1.23.0
       rootless: true
     replicaCount: 1
     strategy:
