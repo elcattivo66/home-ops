@@ -51,7 +51,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.124.0@sha256:80e0f8a9520db3536c91fadedc369a30080d6fd9df046e0f2f03210755ddf55d
+              tag: v1.124.2@sha256:c14dccad0611635668abf98f17ce87c3badcc17bb979c53ef96dc49e934ebbc8
             env: &env-common
               TZ: ${TZ}
               REDIS_HOSTNAME: dragonfly.databases.svc.cluster.local
@@ -92,7 +92,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.124.0@sha256:ca74b8c58e745dda0fa4a3321bfa517dd85fb5b055760bd13dcbbe9dc526c788
+              tag: v1.124.2@sha256:a134652b47278edfdac3187d61558e78679be39c810536193a41e9e0d894c5f4
             env: *env-common
             envFrom: *envFrom
             resources:
