@@ -8,7 +8,7 @@ resources:
 configMapGenerator:
   - name: kometa-configmap
     files:
-      - ./configs/config.yml
+      - ./config/config.yml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
