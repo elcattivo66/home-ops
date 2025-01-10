@@ -51,10 +51,10 @@ radarr:
       - template: radarr-quality-profile-sqp-1-2160p-4k-only-imax-e
       # German 1080p
       - template: radarr-custom-formats-hd-bluray-web-german
-      - template: radarr-quality-profile-hd-bluray-web-german
+      - template: radarr-quality-profiles-hd-bluray-web-german
       # German 2160p
       - template: radarr-custom-formats-uhd-bluray-web-german
-      - template: radarr-quality-profile-uhd-bluray-web-german
+      - template: radarr-quality-profiles-uhd-bluray-web-german
 
     quality_profiles:
       - name: SQP-1 (1080p)
