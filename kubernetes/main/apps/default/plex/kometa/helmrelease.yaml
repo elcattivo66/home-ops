@@ -95,11 +95,11 @@ spec:
           - path: /config/overlay_languages_shows.yml
             subPath: overlay_languages_shows.yml
             readOnly: true
-          - path: /config/flags/de.png
-            subPath: flags/de.png
+          - path: /config/de.png
+            subPath: de.png
             readOnly: true
-          - path: /config/flags/en.png
-            subPath: flags/en.png
+          - path: /config/en.png
+            subPath: en.png
             readOnly: true
       logs:
         type: emptyDir

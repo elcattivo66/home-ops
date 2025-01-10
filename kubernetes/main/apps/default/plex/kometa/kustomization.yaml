@@ -13,8 +13,8 @@ configMapGenerator:
     files:
       - ./config/overlay_languages_movies.yml
       - ./config/overlay_languages_shows.yml
-      - ./config/flags/de.png
-      - ./config/flags/en.png
+      - ./config/de.png
+      - ./config/en.png
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
