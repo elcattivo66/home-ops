@@ -82,7 +82,7 @@ radarr:
 
         ### Others
       - trash_ids:
-         - 839bea857ed2c0a8e084f3cbdbd65ecb # Uncomment this line to allow HDR/DV x265 HD releases
+        #  - 839bea857ed2c0a8e084f3cbdbd65ecb # Uncomment this line to allow HDR/DV x265 HD releases
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
 
