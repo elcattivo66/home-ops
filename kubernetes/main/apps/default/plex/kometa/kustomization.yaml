@@ -9,12 +9,12 @@ configMapGenerator:
   - name: kometa-configmap
     files:
       - ./config/config.yml
-  - name: custom-config
+  - name: kometa-custom-config
     files:
       - ./config/overlay_languages_movies.yml
       - ./config/overlay_languages_shows.yml
-      - ./config/overlays/flags/de.png
-      - ./config/overlays/flags/en.png
+      - ./config/flags/de.png
+      - ./config/flags/en.png
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
