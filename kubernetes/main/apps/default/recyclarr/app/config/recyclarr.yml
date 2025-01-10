@@ -41,6 +41,7 @@ radarr:
     replace_existing_custom_formats: true
 
     include:
+      - template: radarr-quality-definition-movie
       - template: radarr-quality-definition-sqp-streaming
       # 1080p
       - template: radarr-custom-formats-sqp-1-1080p
@@ -48,6 +49,12 @@ radarr:
       # 2160p
       - template: radarr-custom-formats-sqp-1-2160p
       - template: radarr-quality-profile-sqp-1-2160p-4k-only-imax-e
+      # German 1080p
+      - template: radarr-custom-formats-hd-bluray-web-german
+      - template: radarr-quality-profile-hd-bluray-web-german
+      # German 2160p
+      - template: radarr-custom-formats-uhd-bluray-web-german
+      - template: radarr-quality-profile-uhd-bluray-web-german
 
     quality_profiles:
       - name: SQP-1 (1080p)
@@ -60,28 +67,8 @@ radarr:
               - WEBRip-1080p
       - name: SQP-1 (2160p)
         min_format_score: 2000
-      - name: HD-Prefer German
-        qualities:
-          - name: HD Bluray|WEB
-            qualities:
-              - Bluray-1080p
-              - WEBDL-1080p
-              - WEBRip-1080p
-        upgrade:
-          allowed: true
-          until_quality: HD Bluray|WEB
-          until_score: 25000
-      - name: UHD-Prefer German
-        qualities:
-          - name: UHD Bluray|WEB
-            qualities:
-              - Bluray-2160p
-              - WEBDL-2160p
-              - WEBRip-2160p
-        upgrade:
-          allowed: true
-          until_quality: UHD Bluray|WEB
-          until_score: 25000
+      - name: HD Bluray + WEB (GER)
+      - name: UHD Bluray + WEB (GER)
 
     custom_formats:
       - trash_ids:
@@ -96,145 +83,29 @@ radarr:
           - name: SQP-1 (1080p)
           - name: SQP-1 (2160p)
 
-      # German Unwanted
+      ### Movie Versions
       - trash_ids:
-          - ed38b889b31be83fda192888e2286d83 # BR-Disk
-          - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D
-          - c465ccc73923871b3eb1802042331306 # Line/Mic Dubbed
-          - 90a6f9a284dff5103f6346090e6280c8 # LQ
-          - 263943bc5d99550c68aad0c4278ba1c7 # German LQ
-          - 03c430f326f10a27a9739b8bc83c30e4 # German Microsized
-          - 0a3f082873eb454bde444150b70253cc # Extras
-          - bfd8eb01832d646a0a89c4deb46f8564 # Upscaled
+         - 570bc9ebecd92723d2d21500f4be314c # Remaster
+         - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
+         - e0c07d59beb37348e975a930d5e50319 # Criterion Collection
+         - 9d27d9d2181838f76dee150882bdc58c # Masters of Cinema
+         - db9b4c4b53d312a3ca5f1378f6440fc9 # Vinegar Syndrome
+         - 957d0f44b592285f26449575e8b1167e # Special Edition
+         - eecf3a857724171f968a66cb5719e152 # IMAX
+         - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
         assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
+          - name: HD Bluray + WEB (GER)
+          - name: UHD Bluray + WEB (GER)
 
-      # German Audio
+        ### Others
       - trash_ids:
-          - 86bc3115eb4e9873ac96904a4a68e19e # German
-          - 6aad77771dabe9d3e9d7be86f310b867 # German DL (undefined)
+         - 839bea857ed2c0a8e084f3cbdbd65ecb # Uncomment this line to allow HDR/DV x265 HD releases
         assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
+          - name: HD Bluray + WEB (GER)
 
-      # Manually set German DL to 10001
       - trash_ids:
-          - f845be10da4f442654c13e1f2c3d6cd5 # German DL
+         - dc98083864ea246d05a42df0d05f81cc # Uncomment this line to allow any x265 HD releases
+         - e6886871085226c3da1830830146846c # Uncomment this line to allow Generated Dynamic HDR
         assign_scores_to:
-          - name: HD-Prefer German
-            score: 10001
-          - name: UHD-Prefer German
-            score: 10001
-
-      # German HQ Source Groups HD
-      - trash_ids:
-          - 54795711b78ea87e56127928c423689b # German Bluray Tier 01
-          - 1bfc773c53283d47c68e535811da30b7 # German Bluray Tier 02
-          - aee01d40cd1bf4bcded81ee62f0f3659 # German Bluray Tier 03
-          - a2ab25194f463f057a5559c03c84a3df # German Web Tier 01
-          - 08d120d5a003ec4954b5b255c0691d79 # German Web Tier 02
-          - 439f9d71becaed589058ec949e037ff3 # German Web Tier 03
-          - 2d136d4e33082fe573d06b1f237c40dd # German Scene
-          - ed27ebfef2f323e964fb1f61391bcb35 # HD Bluray Tier 01
-          - c20c8647f2746a1f4c4262b0fbbeeeae # HD Bluray Tier 02
-          - 5608c71bcebba0a5e666223bae8c9227 # HD Bluray Tier 03
-          - c20f169ef63c5f40c2def54abaf4438e # Web Tier 01
-          - 403816d65392c79236dcb6dd591aeda4 # Web Tier 02
-          - af94e0fe497124d1f9ce732069ec8c3b # Web Tier 03
-        assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
-
-      # German HQ Source Groups UHD
-      - trash_ids:
-          - 4d74ac4c4db0b64bff6ce0cffef99bf0 # UHD Bluray Tier 01
-          - a58f517a70193f8e578056642178419d # UHD Bluray Tier 02
-          - e71939fae578037e7aed3ee219bbe7c1 # UHD Bluray Tier 03
-        assign_scores_to:
-          - name: UHD-Prefer German
-
-      # Miscellaneus
-      - trash_ids:
-          - e7718d7a3ce595f289bfee26adc178f5 # Repack/Proper
-          - ae43b294509409a6a13919dedd4764c4 # Repack2
-          - 5caaaa1c08c1742aa4342d8c4cc463f2 # Repack3
-        assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
-
-      # Miscellaneus UHD
-      - trash_ids:
-          - 9c38ebb7384dada637be8899efa68e6f # SDR
-          - 25c12f78430a3a23413652cbd1d48d77 # SDR (no WEBDL)
-          - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
-        assign_scores_to:
-          - name: UHD-Prefer German
-
-      # German Resolution HD
-      - trash_ids:
-          - 3bc8df3a71baaac60a31ef696ea72d36 # German 1080p Booster
-          - b2be17d608fc88818940cd1833b0b24c # 720p
-          - 820b09bb9acbfde9c35c71e0e565dad8 # 1080p
-        assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
-
-      # German Resolution UHD
-      - trash_ids:
-          - cc7b1e64e2513a6a271090cdfafaeb55 # German 2160p Booster
-          - fb392fb0d61a010ae38e49ceaa24a1ef # 2160p
-        assign_scores_to:
-          - name: UHD-Prefer German
-
-      # Movie Versions
-      - trash_ids:
-          - 570bc9ebecd92723d2d21500f4be314c # Remaster
-          - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
-          - e0c07d59beb37348e975a930d5e50319 # Criterion Collection
-          - 9d27d9d2181838f76dee150882bdc58c # Masters of Cinema
-          - db9b4c4b53d312a3ca5f1378f6440fc9 # Vinegar Syndrome
-          - 957d0f44b592285f26449575e8b1167e # Special Edition
-          - eecf3a857724171f968a66cb5719e152 # IMAX
-          - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
-        assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
-
-      # HDR Formats
-      - trash_ids:
-          - c53085ddbd027d9624b320627748612f # DV HDR10+
-          - e23edd2482476e595fb990b12e7c609c # DV HDR10
-          - 58d6a88f13e2db7f5059c41047876f00 # DV
-          - 55d53828b9d81cbe20b02efd00aa0efd # DV HLG
-          - a3e19f8f627608af0211acd02bf89735 # DV SDR
-          - b974a6cd08c1066250f1f177d7aa1225 # HDR10+
-          - dfb86d5941bc9075d6af23b09c2aeecd # HDR10
-          - e61e28db95d22bedcadf030b8f156d96 # HDR
-          - 2a4d9069cc1fe3242ff9bdaebed239bb # HDR (undefined)
-          - 08d6d8834ad9ec87b1dc7ec8148e7a1f # PQ
-          - 9364dd386c9b4a1100dde8264690add7 # HLG
-          - 923b6abef9b17f937fab56cfcf89e1f1 # DV (WEBDL) -10000
-        assign_scores_to:
-          - name: UHD-Prefer German
-
-        # Streaming Services
-      - trash_ids:
-        - b3b3a6ac74ecbd56bcdbefa4799fb9df # AMZN
-        - 40e9380490e748672c2522eaaeb692f7 # ATVP
-        - cc5e51a9e85a6296ceefe097a77f12f4 # BCORE
-        - 16622a6911d1ab5d5b8b713d5b0036d4 # CRiT
-        - 84272245b2988854bfb76a16e60baea5 # DNSP
-        - 509e5f41146e278f9eab1ddaceb34515 # HBO
-        - 5763d1b0ce84aff3b21038eea8e9b8ad # HMAX
-        - 526d445d4c16214309f0fd2b3be18a89 # HULU
-        - e0ec9672be6cac914ffad34a6b077209 # iT
-        - 6a061313d22e51e0f25b7cd4dc065233 # MAX
-        - 2a6039655313bf5dab1e43523b62c374 # MA
-        - 170b1d363bd8516fbf3a3eb05d4faff6 # NF
-        - e36a0ba1bc902b26ee40818a1d59b8bd # PMTP
-        - c9fd353f8f5f1baf56dc601c4cb29920 # PCOK
-        - c2863d2a50c9acad1fb50e53ece60817 # STAN
-        assign_scores_to:
-          - name: HD-Prefer German
-          - name: UHD-Prefer German
+          - name: HD Bluray + WEB (GER)
+            score: 0
