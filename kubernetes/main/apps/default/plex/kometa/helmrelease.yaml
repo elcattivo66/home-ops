@@ -84,6 +84,11 @@ spec:
           - path: /config/config.yml
             subPath: config.yml
             readOnly: true
+      custom-config:
+        enabled: true
+        type: configMap
+        name: custom-config
+        globalMounts:
           - path: /config/overlay_languages_movies.yml
             subPath: overlay_languages_movies.yml
             readOnly: true
@@ -91,10 +96,10 @@ spec:
             subPath: overlay_languages_shows.yml
             readOnly: true
           - path: /config/overlays/flags/de.png
-            subPath: de.png
+            subPath: flags/de.png
             readOnly: true
           - path: /config/overlays/flags/en.png
-            subPath: en.png
+            subPath: flags/en.png
             readOnly: true
       logs:
         type: emptyDir

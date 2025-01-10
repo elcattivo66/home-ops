@@ -35,7 +35,7 @@ templates:
       level
     overlay:
       name: <<lang>>
-      file: config/overlays/flags/<<lang>>.png
+      file: config/flags/<<lang>>.png
       text: " "
       back_width: 35
       back_height: 115
