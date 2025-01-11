@@ -14,13 +14,22 @@ libraries:
       - default: imdb
     overlay_files:
       - remove_overlays: false
+      - default: languages
+        template_variables:
+          languages:
+            - en
+            - de
+            - jp
+            - kr
+            - zh
+          style: half
       - repo: Movies - Overlays - Charts.yml
       - repo: Movies - Overlays - Oscars.yml
       - repo: Movies - Overlays - Ratings.yml
       - repo: Movies - Overlays - Stand-up.yml
       - repo: Movies - Overlays - Streaming Services.yml
       - repo: Movies - Overlays - Studios.yml
-      - file: config/overlay_languages_movies.yml
+      # - file: config/overlay_languages_movies.yml
     operations:
       mass_genre_update: imdb
       mass_content_rating_update: omdb
