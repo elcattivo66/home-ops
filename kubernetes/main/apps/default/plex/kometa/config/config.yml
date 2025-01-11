@@ -19,10 +19,12 @@ libraries:
           languages:
             - en
             - de
-            - jp
-            - kr
+            - ja
+            - ko
             - zh
           style: half
+          horizontal_position: right
+          vertical_position: bottom
       - repo: Movies - Overlays - Charts.yml
       - repo: Movies - Overlays - Oscars.yml
       - repo: Movies - Overlays - Ratings.yml
@@ -50,13 +52,24 @@ libraries:
       - pmm: imdb
     overlay_files:
       - remove_overlays: false
+      - default: languages
+        template_variables:
+          languages:
+            - en
+            - de
+            - ja
+            - ko
+            - zh
+          style: half
+          horizontal_position: right
+          vertical_position: bottom
       - repo: TV Shows - Overlays - Charts.yml
       - repo: TV Shows - Overlays - Networks.yml
       - repo: TV Shows - Overlays - Ratings.yml
       - repo: TV Shows - Overlays - Statuses.yml
       - repo: TV Shows - Overlays - Streaming Services.yml
       - repo: TV Shows - Overlays - Studios.yml
-      - file: config/overlay_languages_shows.yml
+      # - file: config/overlay_languages_shows.yml
     operations:
       mass_genre_update: tmdb
       mass_content_rating_update: omdb
