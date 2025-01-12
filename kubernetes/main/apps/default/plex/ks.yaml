@@ -13,7 +13,7 @@ spec:
     - name: volsync
     - name: rook-ceph-cluster
   path: ./kubernetes/main/apps/default/plex/app
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -40,7 +40,7 @@ spec:
   dependsOn:
     - name: plex
   path: ./kubernetes/main/apps/default/plex/auto-languages
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -67,7 +67,7 @@ spec:
     - name: external-secrets-stores
     - name: volsync
   path: ./kubernetes/main/apps/default/plex/kometa
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -93,7 +93,7 @@ spec:
   interval: 30m
   timeout: 5m
   path: ./kubernetes/main/apps/default/plex/trakt-sync
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
