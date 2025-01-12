@@ -14,7 +14,7 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   interval: 30m
-  prune: true
+  prune: false # revert to true
   wait: true
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/main/apps/networking/nginx/internal
-  prune: true
+  prune: false # revert to true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -47,7 +47,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/main/apps/networking/nginx/external
-  prune: true
+  prune: false # revert to true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
