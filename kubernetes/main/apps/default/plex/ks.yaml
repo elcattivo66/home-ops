@@ -16,7 +16,7 @@ spec:
   prune: false # revert to true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -43,7 +43,7 @@ spec:
   prune: false # revert to true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   wait: false # no flux ks dependents
   interval: 30m
   timeout: 5m
@@ -70,7 +70,7 @@ spec:
   prune: false # revert to true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   wait: false # no flux ks dependents
   interval: 30m
   timeout: 5m
@@ -96,7 +96,7 @@ spec:
   prune: false # revert to true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   wait: false
   dependsOn:
     - name: rook-ceph-cluster

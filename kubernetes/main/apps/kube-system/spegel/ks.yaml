@@ -8,7 +8,7 @@ spec:
   path: ./kubernetes/main/apps/kube-system/spegel/app
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   prune: false # revert to true
   wait: false
   interval: 30m
