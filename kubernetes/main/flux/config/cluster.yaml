@@ -1,48 +1,91 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/gitrepository-source-v1.json
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
 metadata:
-  name: home-kubernetes
+  name: cluster-repositories
   namespace: flux-system
 spec:
   interval: 30m
-  # url: ssh://git@nas:222/philipp/k3s-gitops.git
-  url: ssh://git@github.com/elcattivo66/home-ops
-  ref:
-    branch: main
-  secretRef:
-    # name: gitea-ssh-key #gitea-credentials
-    name: github-deploy-key
-  ignore: |
-    # exclude all
-    /*
-    # include kubernetes directory
-    !/kubernetes/main
+  path: ./kubernetes/main/flux/repositories
+  prune: true
+  wait: false
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster
+  name: cluster-settings
   namespace: flux-system
 spec:
   interval: 30m
-  path: ./kubernetes/main/flux
-  prune: false # revert to true
+  path: ./kubernetes/main/flux/settings
+  prune: true
   wait: false
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./kubernetes/main/apps
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: cluster-repositories
+    - name: cluster-settings
   decryption:
     provider: sops
     secretRef:
       name: sops-age
   postBuild:
     substituteFrom:
-      - kind: ConfigMap
-        name: cluster-settings
-        optional: false
-      - kind: Secret
-        name: cluster-secrets
-        optional: false
+      - name: cluster-settings
+        kind: ConfigMap
+        optional: true
+      - name: cluster-secrets
+        kind: Secret
+        optional: true
+  patches:
+    - patch: |-
+        apiVersion: kustomize.toolkit.fluxcd.io/v1
+        kind: Kustomization
+        metadata:
+          name: not-used
+          namespace: not-used
+        spec:
+          decryption:
+            provider: sops
+            secretRef:
+              name: sops-age
+          postBuild:
+            substituteFrom:
+              - name: cluster-settings
+                kind: ConfigMap
+                optional: true
+              - name: cluster-secrets
+                kind: Secret
+                optional: true
+      target:
+        group: kustomize.toolkit.fluxcd.io
+        kind: Kustomization
+        labelSelector: substitution.flux.home.arpa/disabled notin (true)

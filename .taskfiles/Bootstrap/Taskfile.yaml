@@ -1,53 +1,44 @@
 ---
-version: "3"
+version: '3'
 
 tasks:
 
-  kubernetes:
-    desc: Bootstrap a Talos Kubernetes cluster backed by flux, sops, and rook
-    prompt: Bootstrap a Talos Kubernetes cluster ... continue?
+  talos:
+    desc: Bootstrap Talos
+    prompt: Bootstrap Talos ...?
     cmds:
-      - task: etcd
-      - task: kubeconfig
-      - task: apps
-      - task: flux
+      - until talosctl --nodes {{.TALOS_CONTROLLER}} bootstrap; do sleep 10; done
+      - talosctl kubeconfig --nodes {{.TALOS_CONTROLLER}} --force {{.KUBERNETES_DIR}}
+    vars:
+      TALOS_CONTROLLER:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
     preconditions:
-      - talosctl config info >/dev/null 2>&1
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig
-
-  etcd:
-    internal: true
-    cmd: until talosctl --nodes {{.TALOS_CONTROLLER}} bootstrap; do sleep 10; done
-
-  kubeconfig:
-    internal: true
-    cmd: talosctl kubeconfig --nodes {{.TALOS_CONTROLLER}} --force {{.K8S_CLUSTER_DIR}}
+      - talosctl config info
+      - which talosctl
 
   apps:
-    internal: true
+    desc: Bootstrap Kubernetes Apps
+    prompt: Bootstrap Kubernetes Apps ...?
     cmds:
-      - until kubectl wait --for=condition=Ready=False nodes --all --timeout=10m; do sleep 10; done
-      - helmfile --quiet --file {{.K8S_CLUSTER_DIR}}/bootstrap/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
-      - until kubectl wait --for=condition=Ready nodes --all --timeout=10m; do sleep 10; done
-    env:
-      K8S_CLUSTER_DIR: '{{.K8S_CLUSTER_DIR}}'
-    preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/bootstrap/apps/helmfile.yaml
-
-  flux:
-    internal: true
-    cmds:
-      - kubectl apply --server-side --kustomize {{.K8S_CLUSTER_DIR}}/bootstrap/flux
+      - until kubectl wait nodes --for=condition=Ready=False --all --timeout=10m; do sleep 5; done
       - sops --decrypt {{.K8S_CLUSTER_DIR}}/bootstrap/flux/age-key.sops.yaml | kubectl apply --server-side --filename -
       - sops --decrypt {{.K8S_CLUSTER_DIR}}/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply --server-side --filename -
-      - kubectl apply --server-side --filename {{.K8S_CLUSTER_DIR}}/flux/vars/cluster-settings.yaml
-      - sops --decrypt {{.K8S_CLUSTER_DIR}}/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
-      - kubectl apply --server-side --kustomize {{.K8S_CLUSTER_DIR}}/flux/config
+      - helmfile --quiet --file {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+      - helmfile --quiet --file {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml destroy --selector name=wipe-rook
+    env:
+      FLUX_GITHUB_PUBLIC_KEYS:
+        sh: curl -fsSL https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]'
+      MODEL: '{{.MODEL}}'
+      NODE_COUNT:
+        sh: talosctl config info --output json | jq --raw-output '.nodes | length'
+      VAULT: K8s
     preconditions:
+      - op user get --me
+      - talosctl config info
       - test -f {{.ROOT_DIR}}/age.key
       - test -f {{.K8S_CLUSTER_DIR}}/bootstrap/flux/age-key.sops.yaml
       - test -f {{.K8S_CLUSTER_DIR}}/bootstrap/flux/github-deploy-key.sops.yaml
-      - test -f {{.K8S_CLUSTER_DIR}}/flux/vars/cluster-settings.yaml
-      - test -f {{.K8S_CLUSTER_DIR}}/flux/vars/cluster-secrets.sops.yaml
-      - sops filestatus {{.K8S_CLUSTER_DIR}}/bootstrap/flux/age-key.sops.yaml | jq --exit-status '.encrypted'
-      - sops filestatus {{.K8S_CLUSTER_DIR}}/bootstrap/flux/github-deploy-key.sops.yaml | jq --exit-status '.encrypted'
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/apps/templates/resources.yaml.j2
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/apps/templates/wipe-rook.yaml.gotmpl
+      - which curl jq helmfile kubectl op talosctl
