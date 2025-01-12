@@ -84,23 +84,6 @@ spec:
           - path: /config/config.yml
             subPath: config.yml
             readOnly: true
-      custom-config:
-        enabled: true
-        type: configMap
-        name: kometa-custom-config
-        globalMounts:
-          - path: /config/overlay_languages_movies.yml
-            subPath: overlay_languages_movies.yml
-            readOnly: true
-          - path: /config/overlay_languages_shows.yml
-            subPath: overlay_languages_shows.yml
-            readOnly: true
-          - path: /config/de.png
-            subPath: de.png
-            readOnly: true
-          - path: /config/en.png
-            subPath: en.png
-            readOnly: true
       logs:
         type: emptyDir
         globalMounts:

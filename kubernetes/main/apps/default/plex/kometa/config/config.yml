@@ -31,7 +31,6 @@ libraries:
       - repo: Movies - Overlays - Stand-up.yml
       - repo: Movies - Overlays - Streaming Services.yml
       - repo: Movies - Overlays - Studios.yml
-      # - file: config/overlay_languages_movies.yml
     operations:
       mass_genre_update: imdb
       mass_content_rating_update: omdb
@@ -69,7 +68,6 @@ libraries:
       - repo: TV Shows - Overlays - Statuses.yml
       - repo: TV Shows - Overlays - Streaming Services.yml
       - repo: TV Shows - Overlays - Studios.yml
-      # - file: config/overlay_languages_shows.yml
     operations:
       mass_genre_update: tmdb
       mass_content_rating_update: omdb
