@@ -14,7 +14,7 @@ instance:
     kind: GitRepository
     url: ssh://git@github.com/elcattivo66/home-ops
     ref: refs/heads/main
-    path: kubernetes/flux/cluster
+    path: kubernetes/flux/config
     pullSecret: github-deploy-key
   commonMetadata:
     labels:
