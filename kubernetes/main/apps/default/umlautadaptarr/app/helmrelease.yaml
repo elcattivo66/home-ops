@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: pcjones/umlautadaptarr
-              tag: 0.6.1@sha256:f8d2c5176412fb5c6f3d09d6efc59397a750fe548ddb6cc94bb88dcdc55c6b5e
+              tag: 0.7.2@sha256:f3e62cc34fecfb93875d3dd490051d2a214edc790b74b85c9ba5e195f8ef2723
             env:
               TZ: ${TZ}
               SONARR__ENABLED: true
