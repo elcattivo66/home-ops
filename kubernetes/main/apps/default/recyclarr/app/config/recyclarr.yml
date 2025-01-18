@@ -16,10 +16,18 @@ sonarr:
       # 2160p
       - template: sonarr-v4-quality-profile-web-2160p
       - template: sonarr-v4-custom-formats-web-2160p
+      # German 1080p
+      - template: sonarr-v4-custom-formats-hd-bluray-web-german
+      - template: sonarr-v4-quality-profile-hd-bluray-web-german
+      # German 2160p
+      - template: sonarr-v4-custom-formats-uhd-bluray-web-german
+      - template: sonarr-v4-quality-profile-uhd-bluray-web-german
 
     quality_profiles:
       - name: WEB-1080p
       - name: WEB-2160p
+      - name: HD Remux + WEB (GER)
+      - name: UHD Bluray + WEB (GER)
 
     custom_formats:
       - trash_ids:
@@ -31,6 +39,8 @@ sonarr:
         assign_scores_to:
           - name: WEB-1080p
           - name: WEB-2160p
+          - name: HD Remux + WEB (GER)
+          - name: UHD Bluray + WEB (GER)
 
 radarr:
   radarr_main:
