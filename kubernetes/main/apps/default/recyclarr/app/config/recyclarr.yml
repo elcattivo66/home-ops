@@ -42,6 +42,15 @@ sonarr:
           - name: HD Remux + WEB (GER)
           - name: UHD Bluray + WEB (GER)
 
+        ### Try to avoid german only
+      - trash_ids:
+        - 8a9fcdbb445f2add0505926df3bb7b8a # German
+        assign_scores_to:
+          - name: HD Bluray + WEB (GER)
+            score: 0
+          - name: UHD Bluray + WEB (GER)
+            score: 0
+
 radarr:
   radarr_main:
     base_url: http://radarr.default.svc.cluster.local:80
@@ -99,6 +108,9 @@ radarr:
       - trash_ids:
          - dc98083864ea246d05a42df0d05f81cc # Uncomment this line to allow any x265 HD releases
          - e6886871085226c3da1830830146846c # Uncomment this line to allow Generated Dynamic HDR
+         - 86bc3115eb4e9873ac96904a4a68e19e # German - Try to avoid german only
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
+            score: 0
+          - name: UHD Bluray + WEB (GER)
             score: 0
