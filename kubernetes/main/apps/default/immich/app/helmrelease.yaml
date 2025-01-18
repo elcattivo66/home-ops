@@ -68,7 +68,6 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                gpu.intel.com/i915: 1
                 cpu: 5m
                 memory: 1Gi
               limits:
@@ -78,16 +77,7 @@ spec:
       machine-learning:
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: feature.node.kubernetes.io/cpu-cpuid.AVX2
-                        operator: In
-                        values:
-                          - "true"
+
         containers:
           app:
             image:
