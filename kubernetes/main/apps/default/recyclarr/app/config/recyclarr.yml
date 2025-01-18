@@ -26,7 +26,7 @@ sonarr:
     quality_profiles:
       - name: WEB-1080p
       - name: WEB-2160p
-      - name: HD Remux + WEB (GER)
+      - name: HD Bluray + WEB (GER)
       - name: UHD Bluray + WEB (GER)
 
     custom_formats:
@@ -39,7 +39,7 @@ sonarr:
         assign_scores_to:
           - name: WEB-1080p
           - name: WEB-2160p
-          - name: HD Remux + WEB (GER)
+          - name: HD Bluray + WEB (GER)
           - name: UHD Bluray + WEB (GER)
 
         ### Try to avoid german only
