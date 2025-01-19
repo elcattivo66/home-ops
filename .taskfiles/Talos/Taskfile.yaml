@@ -4,10 +4,6 @@ version: "3"
 vars:
   TALOS_CONTROLLER:
     sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
-  TALOS_SCHEMATIC_ID:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.K8S_CLUSTER_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  TALOS_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_VERSION' {{.K8S_CLUSTER_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
   KUBERNETES_VERSION:
     sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_CLUSTER_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
 
@@ -69,23 +65,23 @@ tasks:
           HOSTNAME: "{{.NODE}}"
       - talosctl --nodes {{.NODE}} health
 
-  apply-config:
-    desc: Apply Talos config to the nodes
-    dir: '{{.K8S_CLUSTER_DIR}}/talos'
-    cmd: talhelper gencommand apply --extra-flags="--insecure" | bash
+  upgrade-node:
+    desc: Upgrade Talos on a single node [NODE=required]
     preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/talconfig.yaml
-
-  upgrade:
-    desc: Upgrade Talos on a node
-    prompt: Upgrade Talos node {{.node}} ... continue?
-    cmd: talosctl --nodes {{.node}} upgrade --image=factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:{{.TALOS_VERSION}}
+      - which talosctl
+      - test -f "${TALOSCONFIG}"
+      - talosctl --nodes {{.NODE}} get machineconfig
     requires:
-      vars: ["node"]
-    preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig
-      - talosctl config info >/dev/null 2>&1
-      - talosctl --nodes {{.node}} get machineconfig >/dev/null 2>&1
+      vars:
+        - NODE
+    vars:
+      FILE:
+        sh: ls {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/main-{{.NODE}}*.yaml
+      TALOS_IMAGE:
+        sh: yq '.machine.install.image' < "{{.FILE}}"
+    cmds:
+      - talosctl --nodes {{.NODE}} upgrade --image="{{.TALOS_IMAGE}}" --timeout=10m
+      - talosctl --nodes {{.NODE}} health
 
   upgrade-k8s:
     desc: Upgrade Kubernetes
