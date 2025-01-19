@@ -7,7 +7,7 @@ spec:
   version: ${KUBERNETES_VERSION}
   serviceAccountName: system-upgrade
   secrets:
-    - name: talos
+    - name: system-upgrade
       path: /var/run/secrets/talos.dev
       ignoreUpdates: true
   concurrency: 1
@@ -36,7 +36,6 @@ spec:
     args:
       - --nodes=$(NODE_IP)
       - health
-      - --server=false
   upgrade:
     <<: *prepare
     args:

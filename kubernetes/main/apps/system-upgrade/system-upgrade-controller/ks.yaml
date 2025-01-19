@@ -37,13 +37,14 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
+    namespace: flux-system
+  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
   postBuild:
     substitute:
-      TALOS_SCHEMATIC_ID: 2dcd442954d67662d41c61bdb92165aaf7189aff9997bd011b6968c12ce8d9c0
+      TALOS_SCHEMATIC_ID: e08db1eaea28ab17401c03666aa80f5c00775326033165b3ecb0c64b2921355e
       # renovate: depName=ghcr.io/siderolabs/installer datasource=docker
       TALOS_VERSION: v1.9.2
       # renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker

@@ -7,7 +7,7 @@ spec:
   version: ${TALOS_VERSION}
   serviceAccountName: system-upgrade
   secrets:
-    - name: talos
+    - name: system-upgrade
       path: /var/run/secrets/talos.dev
       ignoreUpdates: true
   concurrency: 1
@@ -38,11 +38,11 @@ spec:
     args:
       - --nodes=$(NODE_IP)
       - health
-      - --server=false
   upgrade:
     <<: *prepare
     args:
       - --nodes=$(NODE_IP)
       - upgrade
-      - --image=factory.talos.dev/installer/${TALOS_SCHEMATIC_ID}:$(SYSTEM_UPGRADE_PLAN_LATEST_VERSION)
+      - --image=factory.talos.dev/installer/e08db1eaea28ab17401c03666aa80f5c00775326033165b3ecb0c64b2921355e:$(SYSTEM_UPGRADE_PLAN_LATEST_VERSION)
+      - --preserve=true
       - --wait=false
