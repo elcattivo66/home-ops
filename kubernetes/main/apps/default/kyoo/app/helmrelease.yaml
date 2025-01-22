@@ -81,7 +81,7 @@ spec:
         - name: media
           nfs:
             server: nas.${SECRET_HOME_DOMAIN}
-            path: /spool/media
+            path: /tank/media
       volumeMounts:
         - mountPath: &path /media
           name: media
