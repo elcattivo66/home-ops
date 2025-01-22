@@ -110,14 +110,14 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/media
+        path: /spool/media
         globalMounts:
           - path: /media
             readOnly: true
       photos:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/photos
+        path: /spool/photos
         globalMounts:
           - path: /photos
             readOnly: true
