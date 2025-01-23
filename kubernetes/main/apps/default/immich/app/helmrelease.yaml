@@ -131,13 +131,13 @@ spec:
       library:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/photos/immich/
+        path: /spool/photos/immich/
         globalMounts:
           - path: /usr/src/app/upload
       external:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/photos/Plex_Album/
+        path: /spool/photos/Plex_Album/
         globalMounts:
           - path: /external-library/
       cache:

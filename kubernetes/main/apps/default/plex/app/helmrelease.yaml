@@ -117,7 +117,7 @@ spec:
       photos:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/photos
+        path: /spool/photos
         globalMounts:
           - path: /photos
             readOnly: true
