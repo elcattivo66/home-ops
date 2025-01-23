@@ -90,7 +90,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /spool/media/ebooks/calibre_library
+        path: /tank/media/ebooks/calibre_library
         globalMounts:
           - path: /books
             readOnly: false
