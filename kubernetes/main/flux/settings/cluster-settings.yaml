@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 data:
   NAS_ADDR: 192.168.20.5
-  MEDIADIR: /spool/media
+  MEDIADIR: /tank/media
   TZ: "Europe/Berlin"
 
   SVC_MQTT_ADDR: 192.168.20.222
