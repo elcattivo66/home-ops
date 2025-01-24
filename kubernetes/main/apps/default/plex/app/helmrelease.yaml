@@ -110,7 +110,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/media
+        path: /spool/media
         globalMounts:
           - path: /media
             readOnly: true
