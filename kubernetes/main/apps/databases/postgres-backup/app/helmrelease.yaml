@@ -69,6 +69,6 @@ spec:
       nas:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /tank/backup/kubernetes/postgres
+        path: /spool/backup/kubernetes/postgres
         globalMounts:
           - path: /backups
