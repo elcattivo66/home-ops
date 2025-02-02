@@ -75,9 +75,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities:
-                drop: ["ALL"]
-                add: ["NET_BIND_SERVICE"]
+              capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       nodeSelector:
         cc2652.feature.node.kubernetes.io/zigbee: "true"
