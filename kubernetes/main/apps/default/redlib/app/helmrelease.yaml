@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: quay.io/redlib/redlib
-              tag: latest@sha256:d04e722091fe17424425499882a548507a70654f37aaf8cbc71081ef29b7b341
+              tag: latest@sha256:17ad31b6d144fc5fed39e9b247902212e391bcff5e32443222f19bc0f073c38c
             env:
               TZ: ${TZ}
               REDLIB_DEFAULT_FRONT_PAGE: "default"
