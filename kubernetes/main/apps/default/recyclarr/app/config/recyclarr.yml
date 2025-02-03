@@ -101,12 +101,6 @@ radarr:
 
         ### Others
       - trash_ids:
-        #  - 839bea857ed2c0a8e084f3cbdbd65ecb # Uncomment this line to allow HDR/DV x265 HD releases
-        assign_scores_to:
-          - name: HD Bluray + WEB (GER)
-
-      - trash_ids:
-         - dc98083864ea246d05a42df0d05f81cc # Uncomment this line to allow any x265 HD releases
          - e6886871085226c3da1830830146846c # Uncomment this line to allow Generated Dynamic HDR
          - 86bc3115eb4e9873ac96904a4a68e19e # German - Try to avoid german only
         assign_scores_to:
@@ -114,3 +108,9 @@ radarr:
             score: 0
           - name: UHD Bluray + WEB (GER)
             score: 0
+
+      - trash_ids:
+         - dc98083864ea246d05a42df0d05f81cc # Prefer good x265 releases e.g. VECTOR
+        assign_scores_to:
+          - name: HD Bluray + WEB (GER)
+            score: 100
