@@ -152,7 +152,7 @@ spec:
       enabled: true
       image:
         repository: public.ecr.aws/nginx/nginx
-        tag: "1.27.3"
+        tag: "1.27.4"
       config:
         default: true
       securityContext:
