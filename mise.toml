@@ -1,7 +1,7 @@
 [env]
 # Kubernetes
-KUBECONFIG = '{{config_root}}/kubernetes/main/kubeconfig'
-TALOSCONFIG = '{{config_root}}/kubernetes/main/talos/clusterconfig/talosconfig'
+KUBECONFIG = '{{config_root}}/kubernetes/kubeconfig'
+TALOSCONFIG = '{{config_root}}/kubernetes/talos/clusterconfig/talosconfig'
 SOPS_AGE_KEY_FILE = '{{config_root}}/age.key'
 
 # Taskfile

@@ -1,0 +1,29 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname nextcloud
+  namespace: flux-system
+spec:
+  targetNamespace: default
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  components:
+    - ../../../../flux/components/volsync
+  dependsOn:
+    - name: volsync
+    - name: rook-ceph-cluster
+    - name: cloudnative-pg-cluster
+    - name: external-secrets-stores
+  path: ./kubernetes/apps/default/nextcloud/app
+  prune: false # change back later
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+  postBuild:
+    substitute:
+      APP: *appname

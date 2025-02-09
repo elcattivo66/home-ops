@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-networking-external-services
+  namespace: flux-system
+spec:
+  targetNamespace: networking
+  dependsOn:
+    - name: nginx-external
+  path: ./kubernetes/apps/networking/external-services/minio
+  prune: false # change back later
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

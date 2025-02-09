@@ -1,0 +1,56 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-certificates
+  namespace: flux-system
+spec:
+  targetNamespace: networking
+  dependsOn:
+    - name: cert-manager-issuers
+  path: ./kubernetes/apps/networking/nginx/certificates
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 30m
+  prune: false # change back later
+  wait: true
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-internal
+  namespace: flux-system
+spec:
+  targetNamespace: networking
+  dependsOn:
+    - name: nginx-certificates
+  path: ./kubernetes/apps/networking/nginx/internal
+  prune: false # change back later
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-external
+  namespace: flux-system
+spec:
+  targetNamespace: networking
+  dependsOn:
+    - name: nginx-certificates
+  path: ./kubernetes/apps/networking/nginx/external
+  prune: false # change back later
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

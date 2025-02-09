@@ -6,7 +6,7 @@ vars:
   K8S_CLUSTER_DIR: "{{.ROOT_DIR}}/kubernetes/{{.K8S_CLUSTER}}"
 
 env:
-  KUBECONFIG: "{{.ROOT_DIR}}/kubernetes/main/kubeconfig"
+  KUBECONFIG: "{{.ROOT_DIR}}/kubernetes/kubeconfig"
   MINIJINJA_CONFIG_FILE: "{{.ROOT_DIR}}/.minijinja.toml"
   SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
   TALOSCONFIG: "{{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig"
