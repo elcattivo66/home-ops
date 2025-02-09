@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   path: ./kubernetes/apps/databases/cloudnative-pg/app
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -32,7 +32,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg
   path: ./kubernetes/apps/databases/cloudnative-pg/cluster
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system

@@ -16,7 +16,7 @@ spec:
     - name: external-secrets-stores
     - name: rook-ceph-cluster
   path: ./kubernetes/apps/default/radicale/app
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system

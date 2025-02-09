@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  prune: true
+  prune: false # change back later
   wait: false
   interval: 30m
   retryInterval: 1m

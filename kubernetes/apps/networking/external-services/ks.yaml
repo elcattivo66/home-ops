@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: nginx-external
   path: ./kubernetes/apps/networking/external-services/minio
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system
