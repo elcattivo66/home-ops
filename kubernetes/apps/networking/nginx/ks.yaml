@@ -14,7 +14,7 @@ spec:
     kind: GitRepository
     name: flux-system
   interval: 30m
-  prune: false # change back later
+  prune: true
   wait: true
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/apps/networking/nginx/internal
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -47,7 +47,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/apps/networking/nginx/external
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
