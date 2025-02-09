@@ -13,12 +13,16 @@ spec:
   components:
     - ../../../../flux/components/volsync
   dependsOn:
-    - name: volsync
-    - name: rook-ceph-cluster
-    - name: node-feature-rules
+    - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
+      namespace: kube-system
+    - name: volsync
+      namespace: volsync-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   path: ./kubernetes/apps/default/zigbee2mqtt/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

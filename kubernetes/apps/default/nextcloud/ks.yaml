@@ -13,11 +13,15 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
+      namespace: volsync-system
     - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/default/nextcloud/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

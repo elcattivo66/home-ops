@@ -14,7 +14,7 @@ spec:
     - name: lldap
       namespace: default
   path: ./kubernetes/apps/default/authelia/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

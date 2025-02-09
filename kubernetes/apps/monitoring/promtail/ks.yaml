@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/monitoring/promtail/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

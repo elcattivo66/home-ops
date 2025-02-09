@@ -8,9 +8,11 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/default/paperless/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

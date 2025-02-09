@@ -14,7 +14,7 @@ spec:
     - name: external-secrets-stores
       namespace: kube-system
   path: ./kubernetes/apps/monitoring/unpoller/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

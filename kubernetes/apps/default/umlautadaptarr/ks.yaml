@@ -12,8 +12,9 @@ spec:
       app.kubernetes.io/name: *appname
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/default/umlautadaptarr/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

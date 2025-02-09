@@ -14,11 +14,15 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
+      namespace: kube-system
     - name: volsync
+      namespace: volsync-system
     - name: rook-ceph-cluster
+      namespace: rook-ceph
   path: ./kubernetes/apps/default/radarr/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

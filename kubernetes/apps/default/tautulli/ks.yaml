@@ -14,9 +14,11 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
+      namespace: volsync-system
     - name: rook-ceph-cluster
+      namespace: rook-ceph
   path: ./kubernetes/apps/default/tautulli/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

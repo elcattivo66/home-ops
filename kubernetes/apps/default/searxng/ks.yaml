@@ -13,7 +13,7 @@ spec:
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/default/searxng/app"
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -21,6 +21,7 @@ spec:
   wait: false
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
   postBuild:
     substitute:
       APP: *appname

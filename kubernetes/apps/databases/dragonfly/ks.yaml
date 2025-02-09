@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   interval: 10m
   path: ./kubernetes/apps/databases/dragonfly/operator
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -32,7 +32,7 @@ spec:
       app.kubernetes.io/name: *appname
   interval: 10m
   path: ./kubernetes/apps/databases/dragonfly/cluster
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

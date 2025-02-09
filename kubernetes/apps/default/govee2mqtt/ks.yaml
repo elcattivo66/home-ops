@@ -16,7 +16,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   path: ./kubernetes/apps/default/govee2mqtt/app
-  prune: false # change back later
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
