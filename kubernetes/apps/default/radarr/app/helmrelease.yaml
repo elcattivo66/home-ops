@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.18.4.9674@sha256:b3f60ad43e0c40e42ce4676fe9a1e1ad0f9b199d6daf1a4d72b41ecee2f042e4
+              tag: 5.19.0.9697@sha256:c727dd20d5450a3d7186ac20813ba9235888937aabff4ced961289402d715c5a
             env:
               TZ: ${TZ}
               PUSHOVER_DEBUG: "false"
