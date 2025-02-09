@@ -8,6 +8,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: databases
   path: ./kubernetes/apps/databases/postgres-backup/app
   prune: false # change back later
   sourceRef:

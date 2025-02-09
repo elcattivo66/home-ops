@@ -12,6 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/databases/emqx/app
   prune: false # change back later
   sourceRef:
@@ -35,6 +36,7 @@ spec:
       app.kubernetes.io/name: *appname
   dependsOn:
     - name: emqx
+      namespace: databases
   path: ./kubernetes/apps/databases/emqx/cluster
   prune: false # change back later
   sourceRef:

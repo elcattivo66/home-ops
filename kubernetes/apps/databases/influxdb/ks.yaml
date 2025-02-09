@@ -13,8 +13,11 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: volsync
+      namespace: volsync-system
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/databases/influxdb/app
   prune: false # change back later
   sourceRef:

@@ -8,6 +8,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/databases/cloudnative-pg/app
   prune: false # change back later
   sourceRef:
@@ -32,6 +33,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: cloudnative-pg
+      namespace: databases
   path: ./kubernetes/apps/databases/cloudnative-pg/cluster
   prune: false # change back later
   sourceRef:
