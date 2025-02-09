@@ -17,7 +17,7 @@ spec:
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres16-v7
+      source: &previousCluster postgres16-v9
   postgresql:
     # shared_preload_libraries: ["vectors.so"]
     parameters:
@@ -45,7 +45,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-      serverName: postgres16-v9
+      serverName: postgres16-v10
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
