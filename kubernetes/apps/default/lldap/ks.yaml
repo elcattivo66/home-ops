@@ -8,7 +8,9 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/default/lldap/app
   prune: false # change back later
   sourceRef:

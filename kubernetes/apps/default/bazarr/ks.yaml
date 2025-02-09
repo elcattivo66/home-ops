@@ -13,9 +13,13 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
+      namespace: kube-system
     - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: volsync
+      namespace: volsync-system
   path: ./kubernetes/apps/default/bazarr/app
   prune: false # change back later
   sourceRef:

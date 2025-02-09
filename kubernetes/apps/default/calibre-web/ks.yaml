@@ -14,7 +14,9 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: volsync
+      namespace: volsync-system
   path: ./kubernetes/apps/default/calibre-web/app
   prune: false # change back later
   sourceRef:

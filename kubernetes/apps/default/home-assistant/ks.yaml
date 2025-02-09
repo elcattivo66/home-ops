@@ -14,10 +14,15 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: multus-networks
+      namespace: networking
     - name: cloudnative-pg-cluster
+      namespace: databases
     - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: external-secrets-stores
+      namespace: kube-system
     - name: volsync
+      namespace: volsync-system
   path: ./kubernetes/apps/default/home-assistant/app
   prune: false # change back later
   sourceRef:

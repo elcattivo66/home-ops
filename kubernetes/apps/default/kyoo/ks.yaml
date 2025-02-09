@@ -14,7 +14,9 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
     - name: volsync
+      namespace: volsync-system
   path: ./kubernetes/apps/default/kyoo/app
   prune: false # change back later
   sourceRef:

@@ -9,7 +9,9 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: multus-networks
+      namespace: networking
     - name: external-secrets-stores
+      namespace: kube-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname

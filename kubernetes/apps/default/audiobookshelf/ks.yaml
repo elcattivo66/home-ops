@@ -13,7 +13,9 @@ spec:
     - ../../../../flux/components/volsync
   dependsOn:
     - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: volsync
+      namespace: volsync-system
   path: ./kubernetes/apps/default/audiobookshelf/app
   prune: false # change back later
   sourceRef:
