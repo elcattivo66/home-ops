@@ -12,7 +12,9 @@ spec:
       app.kubernetes.io/name: *appname
   dependsOn:
     - name: external-dns-cloudflare
+      namespace: networking
     - name: external-secrets-stores
+      namespace: kube-system
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/networking/cloudflared/app"

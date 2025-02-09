@@ -23,6 +23,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: node-feature-discovery
+      namespace: kube-system
   path: ./kubernetes/apps/kube-system/node-feature-discovery/rules
   prune: false # change back later
   sourceRef:

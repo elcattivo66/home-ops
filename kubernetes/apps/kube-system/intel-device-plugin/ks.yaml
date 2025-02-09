@@ -8,7 +8,9 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: node-feature-discovery
+      namespace: kube-system
     - name: cert-manager-issuers
+      namespace: cert-manager
   path: ./kubernetes/apps/kube-system/intel-device-plugin/app
   prune: false # change back later
   sourceRef:
@@ -27,6 +29,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: intel-device-plugin-operator
+      namespace: kube-system
   path: ./kubernetes/apps/kube-system/intel-device-plugin/gpu
   prune: false # change back later
   sourceRef:

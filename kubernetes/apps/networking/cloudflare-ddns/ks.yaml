@@ -8,6 +8,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/networking/cloudflare-ddns/app
   prune: false # change back later
   sourceRef:

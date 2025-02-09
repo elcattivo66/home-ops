@@ -8,6 +8,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: nginx-external
+      namespace: networking
   path: ./kubernetes/apps/networking/external-services/minio
   prune: false # change back later
   sourceRef:

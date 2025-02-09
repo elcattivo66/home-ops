@@ -8,6 +8,7 @@ spec:
   targetNamespace: monitoring
   dependsOn:
     - name: external-secrets-stores
+      namespace: kube-system
   path: ./kubernetes/apps/monitoring/grafana/app
   prune: false # change back later
   sourceRef:
