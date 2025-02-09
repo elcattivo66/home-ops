@@ -16,7 +16,7 @@ spec:
   interval: 30m
   timeout: 5m
   path: "./kubernetes/main/apps/networking/cloudflared/app"
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system

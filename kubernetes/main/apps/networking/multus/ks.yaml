@@ -15,7 +15,7 @@ spec:
   interval: 30m
   timeout: 5m
   path: "./kubernetes/main/apps/networking/multus/app"
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -37,7 +37,7 @@ spec:
   interval: 30m
   timeout: 5m
   path: "./kubernetes/main/apps/networking/multus/networks"
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system

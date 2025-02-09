@@ -13,7 +13,7 @@ spec:
   interval: 30m
   timeout: 5m
   path: ./kubernetes/main/apps/monitoring/kube-state-metrics/app
-  prune: true
+  prune: false # change back later
   sourceRef:
     kind: GitRepository
     name: flux-system
