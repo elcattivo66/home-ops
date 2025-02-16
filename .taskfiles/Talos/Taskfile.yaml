@@ -5,7 +5,7 @@ vars:
   TALOS_CONTROLLER:
     sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
   KUBERNETES_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_CLUSTER_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_CLUSTER_DIR}}/apps/kube-system/system-upgrade/ks.yaml
 
 tasks:
   generate-clusterconfig:
@@ -84,12 +84,19 @@ tasks:
       - talosctl --nodes {{.NODE}} health
 
   upgrade-k8s:
-    desc: Upgrade Kubernetes
-    cmd: talosctl --nodes {{.TALOS_CONTROLLER}} upgrade-k8s --to {{.KUBERNETES_VERSION}}
+    desc: Upgrade Kubernetes across the whole cluster
+    cmds:
+      # - task: down
+      - talosctl --nodes {{.TALOS_CONTROLLER}} upgrade-k8s --to $KUBERNETES_VERSION
+      # - task: up
+    vars:
+      TALOS_CONTROLLER:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
     preconditions:
+      - talosctl --nodes {{.TALOS_CONTROLLER}} get machineconfig
+      - talosctl config info
       - test -f {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig
-      - talosctl config info >/dev/null 2>&1
-      - talosctl --nodes {{.TALOS_CONTROLLER}} get machineconfig >/dev/null 2>&1
+      - which jq talosctl
 
   reset-node:
     desc: Reset a Talos node
@@ -134,3 +141,19 @@ tasks:
         --mode="{{.MODE}}"
         {{ if eq "true" .INSECURE }}--insecure{{ end }}
         {{ if eq "true" .DRY_RUN }}--dry-run{{ end }}
+
+  down:
+    internal: true
+    cmds:
+      - until kubectl wait cephcluster --for=jsonpath=.status.ceph.health=HEALTH_OK --timeout=10m --all --all-namespaces &>/dev/null; do sleep 5; done
+      - until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
+    preconditions:
+      - which kubectl
+
+  up:
+    internal: true
+    cmds:
+      - until kubectl wait cephcluster --for=jsonpath=.status.ceph.health=HEALTH_OK --timeout=10m --all --all-namespaces &>/dev/null; do sleep 5; done
+      - until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
+    preconditions:
+      - which kubectl
