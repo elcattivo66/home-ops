@@ -51,6 +51,12 @@ sonarr:
           - name: UHD Bluray + WEB (GER)
             score: 0
 
+      - trash_ids:
+        - 47435ece6b99a0b477caf360e79ba0bb # Uncomment this to block all x265 HD releases
+        assign_scores_to:
+          - name: HD Bluray + WEB (GER)
+            score: 100
+
 radarr:
   radarr_main:
     base_url: http://radarr.default.svc.cluster.local:80
