@@ -22,7 +22,6 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  serviceAccountName: pod-viewer
   values:
     controllers:
       dozzle:
@@ -39,21 +38,11 @@ spec:
                 enabled: true
               readiness:
                 enabled: true
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
               limits:
                 memory: 128Mi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-
     service:
       app:
         controller: dozzle
@@ -70,3 +59,6 @@ spec:
                 service:
                   identifier: app
                   port: http
+    serviceAccount:
+      create: true
+      name: pod-viewer
