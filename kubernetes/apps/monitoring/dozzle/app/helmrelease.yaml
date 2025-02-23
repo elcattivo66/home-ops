@@ -22,6 +22,7 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  serviceAccountName: pod-viewer
   values:
     controllers:
       dozzle:
