@@ -6,6 +6,7 @@ namespace: monitoring
 components:
   - ../../flux/components/common
 resources:
+  - ./dozzle/ks.yaml
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kube-state-metrics/ks.yaml
