@@ -5,7 +5,7 @@ vars:
   TALOS_CONTROLLER:
     sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
   KUBERNETES_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_CLUSTER_DIR}}/apps/kube-system/system-upgrade/ks.yaml
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_CLUSTER_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
 
 tasks:
   generate-clusterconfig:
