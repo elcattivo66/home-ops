@@ -55,7 +55,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/home-assistant
-              tag: 2025.3.1@sha256:2e2632b47f9a017f568636bc71c6f78b1ebceed9ae69045759d03303550ebeb3
+              tag: 2025.3.2@sha256:bd68958e9b2257730a6fb0c5141daf8b97d133417f0787728e0cd55585917951
             envFrom: *envFrom
             env:
               TZ: ${TZ}
