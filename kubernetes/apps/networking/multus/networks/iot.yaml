@@ -13,19 +13,12 @@ spec:
           "type": "macvlan",
           "master": "bond0.30",
           "mode": "bridge",
-          "capabilities": {
-            "ips": true
-          },
           "ipam": {
             "type": "static",
             "routes": [
               { "dst": "${NET_IOT_CIDR}", "gw": "${NET_IOT_GATEWAY_IP}" }
             ]
           }
-        },
-        {
-          "capabilities": { "mac": true },
-          "type": "tuning"
         }
       ]
     }
