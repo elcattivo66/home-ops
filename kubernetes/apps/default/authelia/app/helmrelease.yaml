@@ -36,7 +36,7 @@ spec:
                   name: authelia-secret
             image:
               repository: ghcr.io/home-operations/postgres-init
-              tag: "16.8"
+              tag: 17
         containers:
           app:
             image:
