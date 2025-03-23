@@ -41,7 +41,7 @@ spec:
               - secretRef:
                   name: tandoor-secret
             image:
-              repository: ghcr.io/onedr0p/postgres-init
+              repository: ghcr.io/home-operations/postgres-init
               tag: "16.8"
 
         containers:
