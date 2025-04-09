@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 1.15.2
+      version: 1.16.0
       sourceRef:
         kind: HelmRepository
         name: external-dns
@@ -17,17 +17,12 @@ spec:
   maxHistory: 2
   install:
     crds: CreateReplace
-    remediation:
-      retries: 3
+    disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
   upgrade:
-    cleanupOnFail: true
     crds: CreateReplace
-    remediation:
-      strategy: rollback
-      retries: 3
+    disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
   values:
-    fullnameOverride: *app
-    # logLevel: debug
+    fullnameOverride: &name external-dns-cloudflare
     provider:
       name: cloudflare
     env:
