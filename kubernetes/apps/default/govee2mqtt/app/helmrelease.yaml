@@ -49,7 +49,7 @@ spec:
                   name: govee2mqtt-secret
             image:
               repository: ghcr.io/wez/govee2mqtt
-              tag: latest@sha256:af2ef02e9dfb84f5d30139d34758f64e8e109bccc8c01a466ba96940f541bf0a
+              tag: latest@sha256:7dd69e0cb6f063dfee87f16aa177772825047f4d9cd7e86a1f14dbfbe6d2430d
             probes:
               liveness:
                 enabled: true
