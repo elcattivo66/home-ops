@@ -14,17 +14,26 @@ spec:
         kind: HelmRepository
         name: stakater
         namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
+    fullnameOverride: reloader
     reloader:
+      enableHA: true
+      deployment:
+        replicas: 1
+      readOnlyRootFileSystem: true
       podMonitor:
         enabled: true
-
-      reloadStrategy: annotations
-
-      deployment:
-        resources:
-          requests:
-            cpu: 10m
-            memory: 184M
-          limits:
-            memory: 184M
+        namespace: "{{ .Release.Namespace }}"
