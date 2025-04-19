@@ -49,7 +49,7 @@ spec:
         mgr:
           mgr/crash/warn_recent_interval: "7200" # 2h
         mon:
-          monDataAvailWarn: 0.15  # 15% free space threshold
+          monDataAvailWarn: 15  # 15% free space threshold
       crashCollector:
         disable: false
       dashboard:
