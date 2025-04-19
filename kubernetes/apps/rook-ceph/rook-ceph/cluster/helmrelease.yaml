@@ -41,6 +41,8 @@ spec:
     toolbox:
       enabled: true
     cephClusterSpec:
+      mon:
+        monDataAvailWarn: 0.2  # 30% free space threshold
       cephConfig:
         global:
           bdev_enable_discard: "true" # quote
