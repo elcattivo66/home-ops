@@ -60,6 +60,10 @@ spec:
               CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
               DEBUG: "true"
               DJANGO_ADMIN_USERNAME: admin
+              EMAIL_BACKEND: email
+              EMAIL_HOST: smtp-relay.default.svc.cluster.local
+              EMAIL_PORT: 2525
+              EMAIL_USE_TLS: False
             resources:
               requests:
                 cpu: 10m
