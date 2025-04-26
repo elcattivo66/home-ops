@@ -64,6 +64,7 @@ spec:
               EMAIL_HOST: smtp-relay.default.svc.cluster.local
               EMAIL_PORT: 2525
               EMAIL_USE_TLS: False
+              DEFAULT_FROM_EMAIL: ${SECRET_SMTP_SENDER}
             resources:
               requests:
                 cpu: 10m
