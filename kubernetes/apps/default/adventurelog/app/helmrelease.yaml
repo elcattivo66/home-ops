@@ -40,7 +40,9 @@ spec:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
               tag: v0.9.0@sha256:dada2faca11647c70d3d4fb06db6dbc54b069c7312597527625564f3bd6af6df
-            envFrom: *envFrom
+            envFrom: &envFrom
+              - secretRef:
+                  name: adventurelog-secret
             env:
               PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
               BODY_SIZE_LIMIT: "200000"
@@ -55,6 +57,7 @@ spec:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-backend
               tag: v0.9.0@sha256:4109ee4e35e8be4965ecd4315cd3c1d43757426ba23d03f7fba2b1b25d973202
+            envFrom: *envFrom
             env:
               PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
               FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
