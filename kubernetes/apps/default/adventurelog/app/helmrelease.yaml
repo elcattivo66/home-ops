@@ -58,7 +58,7 @@ spec:
               PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
               FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
               CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
-              DEBUG: "true"
+              DEBUG: True
               DJANGO_ADMIN_USERNAME: admin
               EMAIL_BACKEND: email
               EMAIL_HOST: smtp-relay.default.svc.cluster.local
