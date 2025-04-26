@@ -36,7 +36,7 @@ spec:
               - secretRef:
                   name: adventurelog-secret
             env:
-              PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
+              PUBLIC_SERVER_URL: "http://adventurelog:8000"
               BODY_SIZE_LIMIT: "200000"
             resources:
               requests:
@@ -51,9 +51,9 @@ spec:
               tag: v0.9.0@sha256:4109ee4e35e8be4965ecd4315cd3c1d43757426ba23d03f7fba2b1b25d973202
             envFrom: *envFrom
             env:
-              PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
+              PUBLIC_URL: https://adventurelog.${SECRET_DOMAIN}
               FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
-              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
+              CSRF_TRUSTED_ORIGINS: https://adventurelog.${SECRET_DOMAIN}
               DEBUG: "true"
               DJANGO_ADMIN_USERNAME: admin
             resources:
@@ -83,6 +83,26 @@ spec:
                 service:
                   identifier: app
                   port: *frontend-port
+              - path: /media
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: *server-port
+              - path: /admin
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: *server-port
+              - path: /static
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: *server-port
+              - path: /accounts
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: *server-port
       server:
         className: internal
         hosts:
