@@ -1,0 +1,116 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adventurelog
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      adventurelog:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+
+        initContainers:
+          01-init-db:
+            envFrom: &envFrom
+              - secretRef:
+                  name: adventurelog-secret
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17
+        containers:
+          frontend:
+            image:
+              repository: ghcr.io/seanmorley15/adventurelog-frontend
+              tag: v0.9.0@sha256:dada2faca11647c70d3d4fb06db6dbc54b069c7312597527625564f3bd6af6df
+            envFrom: *envFrom
+            env:
+              PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
+              BODY_SIZE_LIMIT: "200000"
+            resources:
+              requests:
+                cpu: 5m
+                memory: 256Mi
+              limits:
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+
+          server:
+            image:
+              repository: ghcr.io/seanmorley15/adventurelog-backend
+              tag: v0.9.0@sha256:4109ee4e35e8be4965ecd4315cd3c1d43757426ba23d03f7fba2b1b25d973202
+            env:
+              PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
+              FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
+              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
+              DEBUG: "true"
+              DJANGO_ADMIN_USERNAME: admin
+            resources:
+              requests:
+                cpu: 10m
+                memory: 512Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &frontend-port 3000
+          base:
+            port: &server-port 8000
+
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: &host adventurelog.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *frontend-port
+      code-server:
+        className: internal
+        hosts:
+          - host: adventurelog-backend.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *server-port
+    persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /code/media
