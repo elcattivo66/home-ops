@@ -37,7 +37,7 @@ spec:
                   name: adventurelog-secret
             env:
               PUBLIC_SERVER_URL: "http://adventurelog-backend.default.svc.cluster.local:8000"
-              BODY_SIZE_LIMIT: "200000"
+              BODY_SIZE_LIMIT: Infinity
             resources:
               requests:
                 cpu: 5m
