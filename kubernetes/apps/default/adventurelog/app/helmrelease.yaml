@@ -36,7 +36,7 @@ spec:
               - secretRef:
                   name: adventurelog-secret
             env:
-              PUBLIC_SERVER_URL: "http://adventurelog-backend.default.svc.cluster.local:8000"
+              PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
               BODY_SIZE_LIMIT: "200000"
             resources:
               requests:
@@ -55,9 +55,9 @@ spec:
               tag: v0.9.0@sha256:4109ee4e35e8be4965ecd4315cd3c1d43757426ba23d03f7fba2b1b25d973202
             envFrom: *envFrom
             env:
-              PUBLIC_URL: https://adventurelog.${SECRET_DOMAIN}
+              PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
               FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
-              CSRF_TRUSTED_ORIGINS: https://adventurelog.${SECRET_DOMAIN}
+              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
               DEBUG: "true"
               DJANGO_ADMIN_USERNAME: admin
             resources:
@@ -80,38 +80,22 @@ spec:
             port: 8000
 
     ingress:
-      main:
+      frontend:
         className: internal
-        annotations:
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            rewrite /media/(.*) /$1 break;
-            rewrite /admin/(.*) /$1 break;
-            rewrite /apstatici/(.*) /$1 break;
-            rewrite /accounts/(.*) /$1 break;
         hosts:
-          - host: &host adventurelog.${SECRET_DOMAIN}
+          - host: adventurelog.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
                 service:
                   identifier: frontend
                   port: http
-              - path: /media
-                pathType: Prefix
-                service:
-                  identifier: frontend
-                  port: http
-              - path: /admin
-                pathType: Prefix
-                service:
-                  identifier: backend
-                  port: http
-              - path: /static
-                pathType: Prefix
-                service:
-                  identifier: backend
-                  port: http
-              - path: /accounts
+      backend:
+        className: internal
+        hosts:
+          - host: adventurelog-backend.${SECRET_DOMAIN}
+            paths:
+              - path: /
                 pathType: Prefix
                 service:
                   identifier: backend
