@@ -48,7 +48,7 @@ spec:
                     key: PGPASSWORD
               - name: POSTGRES_DB
                 valueFrom:
-                  configMapKeyRef:
+                  secretKeyRef:
                     name: adventurelog-secret
                     key: PGDATABASE
         statefulset:
