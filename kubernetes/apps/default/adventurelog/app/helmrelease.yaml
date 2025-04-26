@@ -82,7 +82,7 @@ spec:
         controller: backend
         ports:
           http:
-            port: 80
+            port: 8000
 
     ingress:
       frontend:
