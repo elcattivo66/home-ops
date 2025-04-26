@@ -36,7 +36,7 @@ spec:
               - secretRef:
                   name: adventurelog-secret
             env:
-              PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
+              PUBLIC_SERVER_URL: "http://adventurelog-backend.default.svc.cluster.local:8000"
               BODY_SIZE_LIMIT: "200000"
             resources:
               requests:
