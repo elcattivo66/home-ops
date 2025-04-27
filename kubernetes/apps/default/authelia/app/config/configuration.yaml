@@ -184,6 +184,6 @@ identity_providers:
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris:
           [
-            "https://adventurelog.${SECRET_DOMAIN}/accounts/oidc/authelia/login/callback/",
+            "https://adventurelog-backend.${SECRET_DOMAIN}/accounts/oidc/adventurelog/login/callback/",
           ]
         userinfo_signed_response_alg: none
