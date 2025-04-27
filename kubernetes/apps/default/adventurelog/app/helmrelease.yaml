@@ -73,7 +73,7 @@ spec:
               limits:
                 memory: 512Mi
 
-      database:
+      db:
         containers:
           app:
             image:
@@ -109,8 +109,8 @@ spec:
             port: 80
           base:
             port: 8000
-      database:
-        controller: database
+      db:
+        controller: db
         ports:
           http:
             port: 5432
