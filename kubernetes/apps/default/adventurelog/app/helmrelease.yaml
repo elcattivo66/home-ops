@@ -89,9 +89,9 @@ spec:
         className: internal
         annotations:
           nginx.ingress.kubernetes.io/configuration-snippet: |
-            rewrite /media/(.*) /$1 break;
-            rewrite /admin/(.*) /$1 break;
-            rewrite /static/(.*) /$1 break;
+            rewrite /media/(.*) /$1 ;
+            rewrite /admin/(.*) /$1 ;
+            rewrite /static/(.*) /$1 ;
             rewrite /accounts/(.*) /$1 break;
         hosts:
           - host: adventurelog.${SECRET_DOMAIN}
