@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
-              tag: v0.9.0@sha256:dada2faca11647c70d3d4fb06db6dbc54b069c7312597527625564f3bd6af6df
+              tag: beta@sha256:78a9ebf1355aba7867f6b1d6cfeaf0237a630520cd02a4b2dc6dfb78b335b6c9
             envFrom: &envFrom
               - secretRef:
                   name: adventurelog-secret
@@ -53,7 +53,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-backend
-              tag: v0.9.0@sha256:4109ee4e35e8be4965ecd4315cd3c1d43757426ba23d03f7fba2b1b25d973202
+              tag: beta@sha256:d909c41817d5a99f414dbfeb7ffcfd098f4e01c9325c25adf0ce917b2049ced5
             envFrom: *envFrom
             env:
               PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
