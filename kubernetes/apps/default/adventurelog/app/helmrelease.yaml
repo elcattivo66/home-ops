@@ -113,5 +113,7 @@ spec:
       config:
         enabled: true
         existingClaim: *app
-        globalMounts:
-          - path: /code/media
+        advancedMounts:
+          backend:
+            app:
+              - path: /code/media
