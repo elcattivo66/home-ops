@@ -14,6 +14,10 @@ spec:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
   primaryUpdateMethod: switchover
+  bootstrap:
+    initdb:
+      postInitTemplateSQL:
+        - CREATE EXTENSION postgis;
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   postgresql:
     parameters:
