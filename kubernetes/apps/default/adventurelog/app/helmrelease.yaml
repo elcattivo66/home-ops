@@ -73,29 +73,6 @@ spec:
               limits:
                 memory: 512Mi
 
-      db:
-        containers:
-          app:
-            image:
-              repository: registry.hub.docker.com/postgis/postgis
-              tag: 17-master@sha256:3342800452fef4956edbdcee3afe7f914d308be78b40ba82466a6faf6106db00
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 10m
-                memory: 250Mi
-              limits:
-                memory: 512Mi
-        type: statefulset
-        statefulset:
-          podManagementPolicy: Parallel
-          volumeClaimTemplates:
-          - accessMode: ReadWriteOnce
-            globalMounts:
-            - path: /var/lib/postgresql
-            name: adventurelog-db
-            size: 5Gi
-
     service:
       frontend:
         controller: frontend
@@ -109,11 +86,6 @@ spec:
             port: 80
           base:
             port: 8000
-      db:
-        controller: db
-        ports:
-          http:
-            port: 5432
 
     ingress:
       frontend:
