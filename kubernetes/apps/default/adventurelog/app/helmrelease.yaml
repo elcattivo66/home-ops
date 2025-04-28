@@ -27,14 +27,20 @@ spec:
       frontend:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17
+            envFrom: &envFrom
+              - secretRef:
+                  name: adventurelog-secret
         containers:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
               tag: beta@sha256:875eade4181ba04100efc019204fd1bb082eaff3b436a5d345755e9d04f83abe
-            envFrom: &envFrom
-              - secretRef:
-                  name: adventurelog-secret
+            envFrom: *envFrom
             env:
               PUBLIC_SERVER_URL: "http://adventurelog-backend.default.svc.cluster.local:8000"
               ORIGIN: https://adventurelog.${SECRET_DOMAIN}
