@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
-              tag: beta@sha256:78a9ebf1355aba7867f6b1d6cfeaf0237a630520cd02a4b2dc6dfb78b335b6c9
+              tag: beta@sha256:875eade4181ba04100efc019204fd1bb082eaff3b436a5d345755e9d04f83abe
             envFrom: &envFrom
               - secretRef:
                   name: adventurelog-secret
