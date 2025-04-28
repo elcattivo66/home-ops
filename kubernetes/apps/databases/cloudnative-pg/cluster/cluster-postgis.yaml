@@ -36,6 +36,9 @@ spec:
     barmanObjectStore:
       data:
         compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
       serverName: postgis-v1
