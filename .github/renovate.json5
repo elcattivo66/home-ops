@@ -5,7 +5,6 @@
     "docker:enableMajor",
     "helpers:pinGitHubActionDigests",
     "github>elcattivo66/home-ops//.github/renovate/autoMerge.json5",
-    "github>elcattivo66/home-ops//.github/renovate/clusters.json5",
     "github>elcattivo66/home-ops//.github/renovate/commitMessage.json5",
     "github>elcattivo66/home-ops//.github/renovate/customManagers.json5",
     "github>elcattivo66/home-ops//.github/renovate/grafanaDashboards.json5",
