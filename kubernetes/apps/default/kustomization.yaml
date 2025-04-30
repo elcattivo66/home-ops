@@ -19,6 +19,7 @@ resources:
   # - ./kyoo/ks.yaml
   - ./lldap/ks.yaml
   - ./nextcloud/ks.yaml
+  - ./ollama/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
