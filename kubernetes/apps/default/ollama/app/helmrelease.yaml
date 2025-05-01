@@ -64,7 +64,10 @@ spec:
               limits:
                 memory: 12Gi
                 gpu.intel.com/i915: 1
-
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+            kubernetes.io/hostname: nuc14
     service:
       app:
         controller: *app
