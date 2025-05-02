@@ -96,7 +96,7 @@ spec:
 
     ingress:
       frontend:
-        className: internal
+        className: external
         hosts:
           - host: adventurelog.${SECRET_DOMAIN}
             paths:
@@ -106,7 +106,7 @@ spec:
                   identifier: frontend
                   port: http
       backend:
-        className: internal
+        className: external
         hosts:
           - host: adventurelog-backend.${SECRET_DOMAIN}
             paths:
