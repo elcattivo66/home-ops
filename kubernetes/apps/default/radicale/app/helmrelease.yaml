@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -31,8 +31,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/bjw-s/radicale
-              tag: 3.4.1@sha256:31cf5a2bb09a8319cbdc77d998ff5f7befcfb12d137a7d9882c216286f1e5245
+              repository: ghcr.io/bjw-s-labs/radicale
+              tag: 3.5.2@sha256:05b1acc1b467c8b8601819e54fb00358fde177dc22ccb956117105382c85b886
             env:
               TZ: ${TZ}
             resources:
