@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.7.3
+      version: 4.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -25,7 +25,7 @@ spec:
       retries: 3
   values:
     controllers:
-      system-upgrade:
+      system-upgrade-controller:
         strategy: RollingUpdate
         replicas: 2
         containers:
@@ -50,22 +50,15 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+
+        serviceAccount:
+          identifier: system-upgrade-controller
+
+    serviceAccount:
+      system-upgrade-controller: {}
+
     defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: Exists
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
-      tolerations:
-        - key: node-role.kubernetes.io/control-plane
-          operator: Exists
-          effect: NoSchedule
-    serviceAccount:
-      name: *app
-      create: true
