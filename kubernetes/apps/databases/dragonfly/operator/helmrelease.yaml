@@ -68,6 +68,8 @@ spec:
               capabilities:
                 drop:
                   - ALL
+              serviceAccount:
+                identifier: *app
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -82,8 +84,7 @@ spec:
           metrics:
             port: 8080
     serviceAccount:
-      create: true
-      name: *app
+      dragonfly-operator: {}
     serviceMonitor:
       app:
         serviceName: *app
