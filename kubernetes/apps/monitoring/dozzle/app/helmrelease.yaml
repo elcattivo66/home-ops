@@ -43,6 +43,11 @@ spec:
                 cpu: 10m
               limits:
                 memory: 128Mi
+        serviceAccount:
+          identifier: dozzle
+    serviceAccount:
+      dozzle: {}
+
     service:
       app:
         controller: dozzle
@@ -59,6 +64,3 @@ spec:
                 service:
                   identifier: app
                   port: http
-    serviceAccount:
-      create: true
-      name: pod-viewer
