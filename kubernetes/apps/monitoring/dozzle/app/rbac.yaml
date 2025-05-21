@@ -17,7 +17,7 @@ metadata:
   name: pod-viewer-binding
 subjects:
   - kind: ServiceAccount
-    name: pod-viewer
+    name: dozzle
     namespace: monitoring
 roleRef:
   kind: ClusterRole
