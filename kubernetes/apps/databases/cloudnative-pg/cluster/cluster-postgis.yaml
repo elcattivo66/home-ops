@@ -38,24 +38,11 @@ spec:
       memory: 512Mi
   monitoring:
     enablePodMonitor: true
-  backup:
-    retentionPolicy: 30d
-    barmanObjectStore:
-      data:
-        compression: bzip2
-      wal:
-        compression: bzip2
-        maxParallel: 8
-      destinationPath: s3://postgresql/
-      endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-      serverName: postgis-v1
-      s3Credentials:
-        accessKeyId:
-          name: cloudnative-pg-secret
-          key: MINIO_ACCESS_KEY
-        secretAccessKey:
-          name: cloudnative-pg-secret
-          key: MINIO_SECRET_KEY
+  plugins:
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    parameters:
+      barmanObjectName: minio-postgis
 
   # externalClusters:
   #   - name: *previousCluster
