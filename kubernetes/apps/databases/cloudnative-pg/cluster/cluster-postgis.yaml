@@ -42,7 +42,8 @@ spec:
   - name: barman-cloud.cloudnative-pg.io
     isWALArchiver: true
     parameters:
-      barmanObjectName: postgis-v1
+      barmanObjectName: postgis
+      serverName: postgis-v1
 
   # externalClusters:
   #   - name: *previousCluster
