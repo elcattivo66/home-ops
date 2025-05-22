@@ -22,6 +22,8 @@ spec:
         - CREATE EXTENSION fuzzystrmatch;
         - CREATE EXTENSION postgis_tiger_geocoder;
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+    # recovery:
+    #   source: &previousCluster postgis-v1
   postgresql:
     parameters:
       max_connections: "300"
@@ -46,17 +48,9 @@ spec:
       serverName: postgis-v1
 
   # externalClusters:
-  #   - name: *previousCluster
-  #     barmanObjectStore:
-  #       wal:
-  #         compression: bzip2
-  #         maxParallel: 8
-  #       destinationPath: s3://postgresql/
-  #       endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-  #       s3Credentials:
-  #         accessKeyId:
-  #           name: cloudnative-pg-secret
-  #           key: MINIO_ACCESS_KEY
-  #         secretAccessKey:
-  #           name: cloudnative-pg-secret
-  #           key: MINIO_SECRET_KEY
+  # - name: *previousCluster
+  #   plugin:
+  #     name: barman-cloud.cloudnative-pg.io
+  #     parameters:
+  #       barmanObjectName: minio-eu
+  #       serverName: *previousCluster
