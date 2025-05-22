@@ -64,3 +64,23 @@ spec:
                 service:
                   identifier: app
                   port: http
+
+    rbac:
+      roles:
+        dozzle:
+          type: ClusterRole
+          rules:
+          - apiGroups: [""]
+            resources: ["pods", "pods/log", "nodes", "nodes/proxy"]
+            verbs: ["get", "list", "watch"]
+          - apiGroups: ["metrics.k8s.io"]
+            resources: ["pods"]
+            verbs: ["get", "list"]
+
+      bindings:
+        dozzle:
+          type: ClusterRoleBinding
+          roleRef:
+            identifier: dozzle
+          subjects:
+            - identifier: dozzle
