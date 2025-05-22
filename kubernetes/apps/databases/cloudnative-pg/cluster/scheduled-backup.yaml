@@ -21,7 +21,7 @@ spec:
   immediate: true
   backupOwnerReference: self
   cluster:
-    name: postgis
+    name: postgis-v1
   method: plugin
   pluginConfiguration:
     name: barman-cloud.cloudnative-pg.io
