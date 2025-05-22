@@ -42,7 +42,7 @@ spec:
   - name: barman-cloud.cloudnative-pg.io
     isWALArchiver: true
     parameters:
-      barmanObjectName: minio-postgis
+      barmanObjectName: postgis-v1
 
   # externalClusters:
   #   - name: *previousCluster

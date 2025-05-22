@@ -2,8 +2,9 @@
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
-  name: minio-postgis
+  name: postgis-v1
 spec:
+  retentionPolicy: 30d
   configuration:
     data:
       compression: bzip2
@@ -12,7 +13,6 @@ spec:
       maxParallel: 8
     destinationPath: s3://postgresql/
     endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-    serverName: postgis-v1
     s3Credentials:
       accessKeyId:
         name: cloudnative-pg-secret
