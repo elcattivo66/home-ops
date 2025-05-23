@@ -37,16 +37,6 @@ spec:
             image:
               repository: ghcr.io/home-operations/postgres-init
               tag: 17
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: *app
-                  app.kubernetes.io/instance: *app
-                  app.kubernetes.io/component: server
         containers:
           app:
             image:
@@ -91,10 +81,6 @@ spec:
                 memory: 2Gi
               limits:
                 memory: 5Gi
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
 
     defaultPodOptions:
       securityContext:
@@ -127,9 +113,6 @@ spec:
                 service:
                   identifier: server
                   port: http
-        tls:
-          - hosts:
-              - *host
 
     persistence:
       library:
