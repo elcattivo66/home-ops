@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/bjw-s-labs/radicale
-              tag: 3.5.3@sha256:cfe80f1d1df013e58acb475be07a355537974c337f277d2ffded5f492439afa2
+              tag: 3.5.3@sha256:3d29a0a6b8dd9416a573908612046accbe19f2889c3ccbf56331a68249acf7cc
             env:
               TZ: ${TZ}
             resources:
