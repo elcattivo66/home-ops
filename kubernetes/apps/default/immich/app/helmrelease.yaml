@@ -133,3 +133,15 @@ spec:
           machine-learning:
             app:
               - path: /cache
+      cache:
+        type: emptyDir
+        advancedMounts:
+          machine-learning:
+            app:
+              - path: /.cache
+      config:
+        type: emptyDir
+        advancedMounts:
+          machine-learning:
+            app:
+              - path: /.config
