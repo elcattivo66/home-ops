@@ -91,6 +91,10 @@ spec:
                 memory: 2Gi
               limits:
                 memory: 5Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
 
     defaultPodOptions:
       securityContext:
@@ -140,9 +144,9 @@ spec:
         path: /spool/photos/Plex_Album/
         globalMounts:
           - path: /external-library/
-      cache:
-        type: emptyDir
+      machine-learning-cache:
+        existingClaim: immich-machine-learning-cache
         advancedMounts:
           machine-learning:
-            app:
+            main:
               - path: /cache
