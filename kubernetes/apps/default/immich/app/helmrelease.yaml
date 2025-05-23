@@ -148,5 +148,5 @@ spec:
         existingClaim: immich-machine-learning-cache
         advancedMounts:
           machine-learning:
-            main:
+            app:
               - path: /cache
