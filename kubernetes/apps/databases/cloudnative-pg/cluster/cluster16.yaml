@@ -35,37 +35,17 @@ spec:
       memory: 4Gi
   monitoring:
     enablePodMonitor: true
-  backup:
-    retentionPolicy: 30d
-    barmanObjectStore:
-      data:
-        compression: bzip2
-      wal:
-        compression: bzip2
-        maxParallel: 8
-      destinationPath: s3://postgresql/
-      endpointURL: https://s3.${SECRET_HOME_DOMAIN}
+  plugins:
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    parameters:
+      barmanObjectName: postgres
       serverName: postgres16-v10
-      s3Credentials:
-        accessKeyId:
-          name: cloudnative-pg-secret
-          key: MINIO_ACCESS_KEY
-        secretAccessKey:
-          name: cloudnative-pg-secret
-          key: MINIO_SECRET_KEY
 
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        wal:
-          compression: bzip2
-          maxParallel: 8
-        destinationPath: s3://postgresql/
-        endpointURL: https://s3.${SECRET_HOME_DOMAIN}
-        s3Credentials:
-          accessKeyId:
-            name: cloudnative-pg-secret
-            key: MINIO_ACCESS_KEY
-          secretAccessKey:
-            name: cloudnative-pg-secret
-            key: MINIO_SECRET_KEY
+  # externalClusters:
+  # - name: *previousCluster
+  #   plugin:
+  #     name: barman-cloud.cloudnative-pg.io
+  #     parameters:
+  #       barmanObjectName: minio-eu
+  #       serverName: *previousCluster
