@@ -47,5 +47,5 @@ spec:
   #   plugin:
   #     name: barman-cloud.cloudnative-pg.io
   #     parameters:
-  #       barmanObjectName: minio-eu
+  #       barmanObjectName: postgres
   #       serverName: *previousCluster
