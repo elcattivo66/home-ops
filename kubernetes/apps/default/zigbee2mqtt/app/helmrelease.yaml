@@ -77,8 +77,6 @@ spec:
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
-      nodeSelector:
-        cc2652.feature.node.kubernetes.io/zigbee: "true"
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
