@@ -15,9 +15,9 @@ spec:
   enableSuperuserAccess: true
   primaryUpdateMethod: switchover
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-  bootstrap:
-    recovery:
-      source: &previousCluster postgres16-v9
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v9
   postgresql:
     # shared_preload_libraries: ["vectors.so"]
     parameters:
