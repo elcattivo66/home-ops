@@ -40,7 +40,7 @@ spec:
     isWALArchiver: true
     parameters:
       barmanObjectName: postgres
-      serverName: postgres16-v10
+      serverName: postgres16-v1
 
   # externalClusters:
   # - name: *previousCluster
