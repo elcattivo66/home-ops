@@ -23,20 +23,13 @@
   "onboarding": false,
   "requireConfig": "ignored",
   "ignorePaths": ["**/*.sops.*", "**/.archive/**", "**/config/**"],
-  "flux": {
-    "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml$"
-    ]
+  flux: {
+    managerFilePatterns: ["/(^|/)kubernetes/.+\\.ya?ml$/"]
   },
   "helm-values": {
-    "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml$"
-    ]
+    managerFilePatterns: ["/(^|/)kubernetes/.+\\.ya?ml$/"]
   },
-  "kubernetes": {
-    "fileMatch": [
-      "(^|/)\\.taskfiles/.+\\.ya?ml$",
-      "(^|/)kubernetes/.+\\.ya?ml$"
-    ]
-  }
+  kubernetes: {
+    managerFilePatterns: ["/(^|/)kubernetes/.+\\.ya?ml$/"]
+  },
 }
