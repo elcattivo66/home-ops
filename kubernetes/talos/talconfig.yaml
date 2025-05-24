@@ -27,6 +27,8 @@ nodes:
   - hostname: nuc11.internal
     ipAddress: 192.168.20.11
     controlPlane: true
+    nodeLabels:
+      intel.feature.node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: SanDisk SD8S*
     networkInterfaces:
@@ -58,6 +60,8 @@ nodes:
   - hostname: nuc13.internal
     ipAddress: 192.168.20.13
     controlPlane: true
+    nodeLabels:
+      intel.feature.node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: SPCC Solid*
     networkInterfaces:
@@ -96,6 +100,8 @@ nodes:
   - hostname: nuc14.internal
     ipAddress: 192.168.20.14
     controlPlane: true
+    nodeLabels:
+      intel.feature.node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: SSDPR-CX400*
     networkInterfaces:
