@@ -37,12 +37,12 @@ spec:
       memory: 4Gi
   monitoring:
     enablePodMonitor: true
-  plugins:
-  - name: barman-cloud.cloudnative-pg.io
-    isWALArchiver: true
-    parameters:
-      barmanObjectName: postgres
-      serverName: postgres16-v1
+  # plugins:
+  # - name: barman-cloud.cloudnative-pg.io
+  #   isWALArchiver: true
+  #   parameters:
+  #     barmanObjectName: postgres
+  #     serverName: postgres16-v1
 
   # externalClusters:
   # - name: *previousCluster
