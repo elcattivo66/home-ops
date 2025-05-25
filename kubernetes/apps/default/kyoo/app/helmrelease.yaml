@@ -34,7 +34,7 @@ spec:
         infra:
           user: kyoo-all
         kyoo_back:
-          host: &host postgres16-rw.databases.svc.cluster.local
+          host: &host postgres-rw.databases.svc.cluster.local
           kyoo_migrations: &psql
             userKey: POSTGRES_USER
             passwordKey: POSTGRES_PASSWORD
