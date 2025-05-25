@@ -7,7 +7,6 @@ resources:
   - ./barmancloud-backup.yaml
   - ./cluster-main.yaml
   - ./cluster-postgis.yaml
-  - ./cluster16.yaml
   - ./scheduled-backup.yaml
   - ./service.yaml
   - ./prometheusrule.yaml
