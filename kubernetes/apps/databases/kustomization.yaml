@@ -10,4 +10,3 @@ resources:
   - ./dragonfly/ks.yaml
   - ./vernemq/ks.yaml
   - ./influxdb/ks.yaml
-  - ./postgres-backup/ks.yaml
