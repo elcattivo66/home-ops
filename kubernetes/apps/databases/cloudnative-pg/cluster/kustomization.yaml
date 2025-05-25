@@ -5,6 +5,7 @@ namespace: databases
 resources:
   - https://github.com/cloudnative-pg/plugin-barman-cloud/releases/download/v0.4.0/manifest.yaml
   - ./barmancloud-backup.yaml
+  - ./cluster-main.yaml
   - ./cluster-postgis.yaml
   - ./cluster16.yaml
   - ./scheduled-backup.yaml
