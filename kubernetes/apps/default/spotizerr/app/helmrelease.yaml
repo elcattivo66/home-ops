@@ -41,7 +41,7 @@ spec:
               REDIS_URL: redis://dragonfly.databases.svc.local:6379/8
               REDIS_BACKEND: redis://dragonfly.databases.svc.local:6379/8
             probes:
-              liveness: &
+              liveness: 
                 enabled: false
               readiness: 
                 enabled: false
