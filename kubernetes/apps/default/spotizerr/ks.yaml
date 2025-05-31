@@ -10,6 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
+components:
+    - ../../../../flux/components/volsync
   interval: 10m
   path: "./kubernetes/apps/default/spotizerr/app"
   prune: true
