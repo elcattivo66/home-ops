@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/advplyr/audiobookshelf
-              tag: 2.23.0
+              repository: docker.io/raiper34/spooty
+              tag: latest
             env:
               DB_PATH: /data/db.sqlite
               FE_PATH: /data/frontend/browser
