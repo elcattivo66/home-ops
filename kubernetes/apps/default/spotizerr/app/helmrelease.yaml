@@ -32,7 +32,7 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/spotizerr
+              repository: docker.io/cooldockerizer93/spotizerr
               tag: latest
             env:
               TZ: ${TZ}
