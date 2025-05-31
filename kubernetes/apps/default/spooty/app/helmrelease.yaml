@@ -34,7 +34,7 @@ spec:
               tag: latest
             env:
               DB_PATH: /data/db.sqlite
-              FE_PATH: /data/frontend/browser
+              #FE_PATH: /data/frontend/browser
               DOWNLOADS_PATH: /downloads
               FORMAT: mp3
               REDIS_HOST: dragonfly.databases.svc.cluster.local
