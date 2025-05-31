@@ -38,7 +38,7 @@ spec:
               TZ: ${TZ}
               PUID: 1000
               PGID: 1000
-              REDIS_BACKEND: dragonfly.databases.svc.local:6379/8
+              REDIS_BACKEND: redis://dragonfly.databases.svc.local:6379/8
             probes:
               liveness: &probes
                 enabled: true
@@ -64,11 +64,11 @@ spec:
               #allowPrivilegeEscalation: false
               #readOnlyRootFilesystem: true
               #capabilities: { drop: ["ALL"] }
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: false
-        runAsUser: 1000
-        runAsGroup: 1000
+   # defaultPodOptions:
+   #   securityContext:
+   #     runAsNonRoot: false
+   #     runAsUser: 1000
+   #     runAsGroup: 1000
 
     service:
       app:
