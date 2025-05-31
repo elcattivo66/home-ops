@@ -95,8 +95,8 @@ spec:
         enabled: true
         existingClaim: *app
         globalMounts:
-          -path: /data
+          - path: /data
       logs:
         type: emptyDir
         globalMounts:
-          -path: /logs
+          - path: /logs
