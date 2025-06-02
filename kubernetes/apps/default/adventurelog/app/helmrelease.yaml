@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-backend
-              tag: beta@sha256:9461e2c8bb2fdaab4229f954c390f1d8ba39760d4d15a35823c5c0d1b5e53daf
+              tag: beta@sha256:e8f8f930d11e4ee9b1c751c023517788ff5846487135364201dc87d03624e1f0
             envFrom: *envFrom
             env:
               PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
