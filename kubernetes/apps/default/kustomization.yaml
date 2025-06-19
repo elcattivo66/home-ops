@@ -31,8 +31,6 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./smtp-relay/ks.yaml
   - ./sonarr/ks.yaml
-  # - ./spotizerr/ks.yaml
-  - ./spooty/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
   - ./vaultwarden/ks.yaml
