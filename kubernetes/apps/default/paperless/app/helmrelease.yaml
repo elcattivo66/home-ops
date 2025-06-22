@@ -103,7 +103,7 @@ spec:
                 cpu: 10m
                 memory: 437Mi
               limits:
-                memory: 437Mi
+                memory: 1Gi
     service:
       app:
         controller: paperless
