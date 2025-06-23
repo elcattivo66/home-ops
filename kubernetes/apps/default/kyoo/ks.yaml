@@ -12,11 +12,14 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../flux/components/volsync
+    - ../../../../flux/components/keda/nfs-scaler
   dependsOn:
     - name: external-secrets-stores
       namespace: kube-system
     - name: volsync
       namespace: volsync-system
+    - name: keda
+      namespace: monitoring
   path: ./kubernetes/apps/default/kyoo/app
   prune: true
   sourceRef:

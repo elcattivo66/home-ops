@@ -12,11 +12,14 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../flux/components/volsync
+    - ../../../../flux/components/keda/nfs-scaler
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
+    - name: keda
+      namespace: monitoring
   path: ./kubernetes/apps/default/calibre-web/app
   prune: true
   sourceRef:
