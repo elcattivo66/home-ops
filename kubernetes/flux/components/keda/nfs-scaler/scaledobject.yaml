@@ -18,6 +18,6 @@ spec:
     - type: prometheus
       metadata:
         serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
-        query: probe_success{instance=~"nas.internal:2049"}
+        query: probe_success{instance=~"nas:2049"}
         threshold: "1"
         ignoreNullValues: "0"
