@@ -6,6 +6,7 @@ namespace: monitoring
 components:
   - ../../flux/components/common
 resources:
+  - ./blackbox-exporter/ks.yaml
   - ./dozzle/ks.yaml
   - ./grafana/ks.yaml
   - ./keda/ks.yaml
