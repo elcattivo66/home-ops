@@ -83,13 +83,14 @@ spec:
           overseerr:
             app:
               - path: /app/config
-      cache:
+      tmpfs:
         type: emptyDir
-        globalMounts:
-          - path: /app/.next/cache
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /app/config/logs
-      tmp:
-        type: emptyDir
+        advancedMounts:
+          overseerr:
+            app:
+              - path: /app/config/logs
+                subPath: logs
+              - path: /tmp
+                subPath: tmp
+              - path: /app/.next/cache
+                subPath: cache

@@ -94,9 +94,6 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
     persistence:
       config:
         existingClaim: *app
@@ -106,3 +103,12 @@ spec:
         path: /spool/media
         globalMounts:
           - path: /media
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          sonarr:
+            app:
+              - path: /config/logs
+                subPath: logs
+              - path: /tmp
+                subPath: tmp

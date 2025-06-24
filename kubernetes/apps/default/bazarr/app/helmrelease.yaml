@@ -113,5 +113,10 @@ spec:
           - path: /scripts/subcleaner.sh
             subPath: subcleaner.sh
             readOnly: true
-      tmp:
+      tmpfs:
         type: emptyDir
+        advancedMounts:
+          bazarr:
+            app:
+              - path: /tmp
+                subPath: tmp

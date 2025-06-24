@@ -85,10 +85,13 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
     persistence:
-      config:
-        enabled: true
+      tmpfs:
         type: emptyDir
+        advancedMounts:
+          prowlarr:
+            app:
+              - path: /config
+                subPath: config
+              - path: /tmp
+                subPath: tmp
