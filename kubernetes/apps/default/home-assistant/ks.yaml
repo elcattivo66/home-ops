@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../flux/components/volsync
+    - ../../../../components/volsync
   dependsOn:
     - name: multus-networks
       namespace: networking
