@@ -4,9 +4,3 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./externalsecret.yaml
-configMapGenerator:
-  - name: bazarr-scripts
-    files:
-      - subcleaner.sh=./config/subcleaner.sh
-generatorOptions:
-  disableNameSuffixHash: true
