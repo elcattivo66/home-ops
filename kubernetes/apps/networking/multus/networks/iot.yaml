@@ -16,7 +16,7 @@ spec:
           "ipam": {
             "type": "static",
             "routes": [
-              { "dst": "${NET_IOT_CIDR}", "gw": "${NET_IOT_GATEWAY_IP}" }
+              { "dst": "192.168.30.0/24", "gw": "192.168.30.1" }
             ]
           }
         }
