@@ -49,6 +49,8 @@ spec:
           mon_data_avail_warn: "15"
         mgr:
           mgr/crash/warn_recent_interval: "7200" # 2h
+      cleanupPolicy:
+        wipeDevicesFromOtherClusters: true
       crashCollector:
         disable: false
       dashboard:
