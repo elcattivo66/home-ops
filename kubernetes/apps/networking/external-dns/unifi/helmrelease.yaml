@@ -32,9 +32,11 @@ spec:
         env:
           - name: UNIFI_HOST
             value: https://192.168.1.1
-        envFrom:
-          - secretRef:
-              name: external-dns-unifi-secret
+          - name: UNIFI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: external-dns-unifi-secret
+                key: UNIFI_API_KEY
           # - name: LOG_LEVEL
           #   value: "debug"
         livenessProbe:
