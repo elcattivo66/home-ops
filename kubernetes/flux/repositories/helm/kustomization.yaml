@@ -1,11 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./cloudnative-pg.yaml
-  - ./controlplaneio.yaml
-  - ./external-dns.yaml
   - ./external-secrets.yaml
-  - ./grafana.yaml
   - ./helm-stable.yaml
   - ./influxdata.yaml
   - ./ingress-nginx.yaml
