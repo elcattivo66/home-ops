@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/roxedus/bw
-              tag: 2025.6.0@sha256:f4b24e730bfe1d0162b9d204072e056d067562d5b3b952b99cf69e74ab6ce14a
+              tag: 2025.6.1@sha256:d60168df9100afa52f95292c3f64712bda56636a51c1edf5870450173ccfce3b
             envFrom:
               - secretRef:
                   name: bitwarden-cli
