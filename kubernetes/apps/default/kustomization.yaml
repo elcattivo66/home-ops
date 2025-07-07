@@ -18,6 +18,7 @@ resources:
   - ./immich/ks.yaml
   # - ./kyoo/ks.yaml
   - ./lldap/ks.yaml
+  - ./maybe/ks.yaml
   - ./nextcloud/ks.yaml
   # - ./ollama/ks.yaml
   - ./overseerr/ks.yaml
