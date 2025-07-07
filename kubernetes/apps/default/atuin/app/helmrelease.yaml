@@ -99,7 +99,7 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
     ingress:
-      qpp:
+      app:
         enabled: true
         className: internal
         hosts:
@@ -109,9 +109,7 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
+
     persistence:
       config:
         enabled: true
