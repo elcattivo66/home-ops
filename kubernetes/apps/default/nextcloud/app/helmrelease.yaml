@@ -37,9 +37,10 @@ spec:
     deploymentAnnotations:
       secret.reloader.stakater.com/reload: &secret nextcloud-secret
     image:
-      repository: public.ecr.aws/docker/library/nextcloud
-      tag: 31.0.7-fpm-alpine
       flavor: fpm-alpine
+    phpClientHttpsFix:
+      enabled: true
+      protocol: https
     nextcloud:
       host: &host cloud.${SECRET_DOMAIN}
       extraInitContainers:
@@ -81,6 +82,14 @@ spec:
           host: smtp-relay.default.svc.cluster.local
           secure: ""
           port: 2525
+
+      # Security context to run as www-data user
+      securityContext:
+        runAsUser: 33
+        runAsGroup: 33
+        fsGroup: 33
+        runAsNonRoot: true
+
       lifecycle:
         postStartCommand:
           - "/bin/sh"
@@ -105,11 +114,6 @@ spec:
           secretKeys:
             accessKey: S3_ACCESS_KEY
             secretKey: S3_SECRET_KEY
-      securityContext:
-        runAsUser: 82
-        runAsGroup: 82
-        runAsNonRoot: true
-        readOnlyRootFilesystem: false
 
       configs:
         custom.config.php: |-
@@ -172,13 +176,6 @@ spec:
       enabled: false
     nginx:
       enabled: true
-      image:
-        repository: public.ecr.aws/nginx/nginx
-        tag: "1.29.0"
-      config:
-        default: true
-      securityContext:
-        runAsGroup: 82
       resources:
         requests:
           cpu: 10m
@@ -203,26 +200,26 @@ spec:
       className: external
       annotations:
         external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-        nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+        nginx.ingress.kubernetes.io/proxy-body-size: "16G"
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
         nginx.ingress.kubernetes.io/proxy-buffering: "off"
         nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-        nginx.ingress.kubernetes.io/server-snippet: |-
-          server_tokens off;
-          proxy_hide_header X-Powered-By;
-
-          rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
-          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
-          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
-          location = /.well-known/carddav {
-            return 301 $scheme://$host/remote.php/dav;
-          }
-          location = /.well-known/caldav {
-            return 301 $scheme://$host/remote.php/dav;
-          }
+        nginx.org/proxy-hide-headers: "X-Powered-By"
+        nginx.org/server-tokens: "off"
+        nginx.org/rewrites: |
+          /.well-known/webfinger /index.php/.well-known/webfinger;
+          /.well-known/nodeinfo /index.php/.well-known/nodeinfo;
+          /.well-known/host-meta /public.php?service=host-meta;
+          /.well-known/host-meta.json /public.php?service=host-meta-json;
+          /.well-known/carddav $scheme://$host/remote.php/dav redirect=301;
+          /.well-known/caldav $scheme://$host/remote.php/dav redirect=301;
+        nginx.ingress.kubernetes.io/configuration-snippet: |-
+          more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
+        nginx.ingress.kubernetes.io/server-snippet: |
           location = /robots.txt {
-            allow all;
-            log_not_found off;
-            access_log off;
+            return 200 "User-agent: *\nDisallow: /\n";
           }
           location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
             deny all;
