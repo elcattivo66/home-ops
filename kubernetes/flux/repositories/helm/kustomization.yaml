@@ -6,7 +6,6 @@ resources:
   - ./influxdata.yaml
   - ./ingress-nginx.yaml
   - ./k8tz.yaml
-  - ./nextcloud.yaml
   - ./prometheus-community.yaml
   - ./renovate.yaml
   - ./zoriya.yaml
