@@ -62,7 +62,7 @@ spec:
             port: &port 8080
     ingress:
       app:
-        className: external
+        className: internal
         hosts:
           - host: &host "chat.${SECRET_DOMAIN}"
             paths:
