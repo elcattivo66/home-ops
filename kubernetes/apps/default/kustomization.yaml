@@ -20,7 +20,8 @@ resources:
   - ./lldap/ks.yaml
   - ./maybe/ks.yaml
   - ./nextcloud/ks.yaml
-  # - ./ollama/ks.yaml
+  - ./ollama/ks.yaml
+  - ./open-webui/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
