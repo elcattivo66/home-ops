@@ -16,6 +16,7 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
+  path: ./kubernetes/apps/default/open-webui/app
   prune: true
   sourceRef:
     kind: GitRepository

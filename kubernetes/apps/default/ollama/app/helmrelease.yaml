@@ -60,7 +60,6 @@ spec:
             kubernetes.io/hostname: nuc14
     service:
       app:
-        controller: *app
         ports:
           http:
             port: &port 11434
