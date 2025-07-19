@@ -23,7 +23,6 @@ spec:
   values:
     controllers:
       ollama:
-        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
