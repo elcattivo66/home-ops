@@ -17,7 +17,7 @@
       "description": ["Allowed postgresql major release"],
       "matchDatasources": ["docker"],
       "matchPackagePatterns": ["postgresql"],
-      "allowedVersions": "<17"
+      "allowedVersions": "<18"
     }
   ]
 }
