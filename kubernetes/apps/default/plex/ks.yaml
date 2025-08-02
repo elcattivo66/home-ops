@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync
+    - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
   dependsOn:
     - name: volsync
@@ -70,7 +70,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync
+    - ../../../../components/volsync/local
   dependsOn:
     - name: plex
     - name: tautulli
@@ -106,7 +106,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync
+    - ../../../../components/volsync/local
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/default/plex/trakt-sync
