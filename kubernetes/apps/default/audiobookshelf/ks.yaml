@@ -11,7 +11,7 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/volsync/local
-    # - ../../../../components/volsync/remote
+    - ../../../../components/volsync/remote
     - ../../../../components/keda/nfs-scaler
   dependsOn:
     - name: rook-ceph-cluster
