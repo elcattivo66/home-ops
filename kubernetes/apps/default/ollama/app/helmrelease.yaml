@@ -36,7 +36,6 @@ spec:
               - mkdir -p /llm/ollama && cd /llm/ollama && init-ollama && exec ./ollama serve
             securityContext:
               privileged: true
-              supplementalGroups: [44]
             env:
               OLLAMA_MODELS: &modelPath /models
               # ONEAPI_DEVICE_SELECTOR: level_zero:0
