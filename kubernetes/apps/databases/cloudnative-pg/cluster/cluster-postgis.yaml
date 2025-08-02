@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/postgresql.cnpg.io/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -15,7 +14,7 @@ spec:
   superuserSecret:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
-  primaryUpdateMethod: switchover
+  primaryUpdateStrategy: unsupervised
   bootstrap:
     initdb:
       postInitTemplateSQL:
@@ -43,16 +42,13 @@ spec:
   monitoring:
     enablePodMonitor: true
   plugins:
-  - name: barman-cloud.cloudnative-pg.io
-    isWALArchiver: true
-    parameters:
-      barmanObjectName: postgis
-      serverName: postgis-v1
-
-  # externalClusters:
-  # - name: *previousCluster
-  #   plugin:
-  #     name: barman-cloud.cloudnative-pg.io
-  #     parameters:
-  #       barmanObjectName: postgis
-  #       serverName: *previousCluster
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters: &parameters
+        barmanObjectName: postgis
+        serverName: postgis-v1
+  externalClusters:
+    - name: source
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters: *parameters
