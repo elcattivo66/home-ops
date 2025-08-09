@@ -33,6 +33,7 @@ spec:
             env:
               TZ: ${TZ}
               TAUTULLI__PORT: &port 80
+              TAUTULLI_HTTP_BASE_URL: https://tautulli.${SECRET_DOMAIN}
             resources:
               requests:
                 cpu: 26m
