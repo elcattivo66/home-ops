@@ -64,9 +64,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 1118Mi
+                memory: 1Gi
               limits:
-                memory: 1118Mi
+                memory: 4Gi
           gotenburg:
             image:
               repository: gotenberg/gotenberg
