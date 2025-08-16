@@ -235,9 +235,7 @@ spec:
       existingClaim: *app
 
     cronjob:
-      enabled: true
-      securityContext:
-        runAsUser: 33
+      enabled: false
 
     hpa:
       enabled: false
