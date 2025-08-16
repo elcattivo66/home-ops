@@ -238,7 +238,6 @@ spec:
       enabled: true
       securityContext:
         runAsUser: 33
-        runAsGroup: 33
 
     hpa:
       enabled: false
