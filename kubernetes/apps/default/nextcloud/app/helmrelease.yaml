@@ -237,7 +237,8 @@ spec:
     cronjob:
       enabled: true
       securityContext:
-        runAsGroup: 82
+        runAsUser: 33
+        runAsGroup: 33
 
     hpa:
       enabled: false
