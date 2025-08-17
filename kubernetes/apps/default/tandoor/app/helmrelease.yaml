@@ -44,7 +44,7 @@ spec:
           app:
             image:
               repository: docker.io/vabene1111/recipes
-              tag: 2.0.1
+              tag: 2.0.2
             envFrom: *envFrom
             env:
               TZ: ${TZ}
