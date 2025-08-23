@@ -6,837 +6,696 @@ metadata:
     grafana_dashboard: "1"
 data:
   grafana-energy-dashboard.json: |-
-      {
-        "annotations": {
-          "list": [
-            {
-              "builtIn": 1,
-              "datasource": {
-                "type": "datasource",
-                "uid": "grafana"
-              },
-              "enable": true,
-              "hide": true,
-              "iconColor": "rgba(0, 211, 255, 1)",
-              "name": "Annotations & Alerts",
-              "target": {
-                "limit": 100,
-                "matchAny": false,
-                "tags": [],
-                "type": "dashboard"
-              },
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
               "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 44,
+      "links": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "homeassistant-postgres"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 0
+          },
+          "id": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n    s.state::float AS current_power\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_2_power'\nORDER BY s.last_updated_ts DESC\nLIMIT 1;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
             }
-          ]
+          ],
+          "title": "Aktueller Verbrauch Media",
+          "type": "stat"
         },
-        "editable": true,
-        "fiscalYearStartMonth": 0,
-        "graphTooltip": 0,
-        "id": 31,
-        "links": [],
-        "panels": [
-          {
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P3C6603E967DC8568"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "watt"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 6,
-              "x": 0,
-              "y": 0
-            },
-            "id": 10,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "11.3.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "Smartplug2_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: -30m)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "distinct"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "title": "Stromverbrauch Media",
-            "type": "stat"
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "homeassistant-postgres"
           },
-          {
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P3C6603E967DC8568"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "watt"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 6,
-              "x": 6,
-              "y": 0
-            },
-            "id": 9,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "11.3.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
                   {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
+                    "color": "green",
+                    "value": 0
                   },
                   {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
+                    "color": "red",
+                    "value": 80
                   }
-                ],
-                "measurement": "Smartplug1_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: -30m)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "distinct"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "title": "Stromverbrauch Homelab",
-            "type": "stat"
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": []
           },
-          {
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P3C6603E967DC8568"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "watth"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 6,
-              "x": 12,
-              "y": 0
-            },
-            "id": 4,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": [
-                  "sum"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "11.3.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
-                  {
-                    "params": [
-                      "1h"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "hide": false,
-                "measurement": "Smartplug2_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false)  \n  |> sum()",
-                "rawQuery": false,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "title": "Stromverbrauch Media",
-            "type": "stat"
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 6,
+            "y": 0
           },
-          {
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P3C6603E967DC8568"
+          "id": 9,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
             },
-            "fieldConfig": {
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "watth"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 6,
-              "x": 18,
-              "y": 0
-            },
-            "id": 5,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": [
-                  "sum"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "11.3.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
-                  {
-                    "params": [
-                      "1h"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "hide": false,
-                "measurement": "Smartplug1_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false)  \n  |> sum()",
-                "rawQuery": false,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "title": "Stromverbrauch Media",
-            "type": "stat"
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
           },
-          {
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P3C6603E967DC8568"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "bars",
-                  "fillOpacity": 100,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 4,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n    s.state::float AS current_power\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_1_power'\nORDER BY s.last_updated_ts DESC\nLIMIT 1;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
                   }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "watt"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 12,
-              "x": 0,
-              "y": 4
-            },
-            "id": 8,
-            "options": {
-              "legend": {
-                "calcs": [
-                  "mean"
                 ],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
               }
-            },
-            "pluginVersion": "11.3.0",
-            "targets": [
-              {
-                "alias": "Media",
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
-                  {
-                    "params": [
-                      "1h"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "Smartplug1_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"    \n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)  ",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "alias": "Kühlschrank",
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
-                  {
-                    "params": [
-                      "1h"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "Smartplug2_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
-                  {
-                    "params": [
-                      "1h"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "WohnbereichPlug_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "title": "Stromverbrauch",
-            "type": "timeseries"
+            }
+          ],
+          "title": "Aktueller Verbrauch Homelab",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "homeassistant-postgres"
           },
-          {
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P3C6603E967DC8568"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 0,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
                   },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
+                  {
+                    "color": "red",
+                    "value": 80
                   }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
+                ]
+              },
+              "unit": "watth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
+            "y": 0
+          },
+          "id": 4,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n    AVG(s.state::float) * EXTRACT(EPOCH FROM (to_timestamp(MAX(s.last_updated_ts)) - to_timestamp(MIN(s.last_updated_ts)))) / 3600 AS total_wh\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_2_power'\n  AND to_timestamp(s.last_updated_ts) BETWEEN $__timeFrom() AND $__timeTo()\n  AND s.state NOT IN ('unknown','unavailable','none');\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
                     },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            }
+          ],
+          "title": "Stromverbrauch Media",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "homeassistant-postgres"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 18,
+            "y": 0
+          },
+          "id": 5,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n    AVG(s.state::float) * EXTRACT(EPOCH FROM (to_timestamp(MAX(s.last_updated_ts)) - to_timestamp(MIN(s.last_updated_ts)))) / 3600 AS total_wh\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_1_power'\n  AND to_timestamp(s.last_updated_ts) BETWEEN $__timeFrom() AND $__timeTo()\n  AND s.state NOT IN ('unknown','unavailable','none');\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            }
+          ],
+          "title": "Stromverbrauch Homelab",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "homeassistant-postgres"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 4,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
                 }
               },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 12,
-              "x": 12,
-              "y": 4
-            },
-            "id": 12,
-            "options": {
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              }
-            },
-            "pluginVersion": "11.3.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "groupBy": [
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
                   {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
+                    "color": "green",
+                    "value": 0
                   },
                   {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 4
+          },
+          "id": 8,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean"
+              ],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n    date_trunc('minute', to_timestamp(s.last_updated_ts)) AS time,\n    AVG(s.state::float) AS mean_value\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_1_power'\n  AND to_timestamp(s.last_updated_ts) BETWEEN $__timeFrom() AND $__timeTo()\n  AND s.state NOT IN ('unknown','unavailable','none')\nGROUP BY date_trunc('minute', to_timestamp(s.last_updated_ts))\nORDER BY time;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
                   }
                 ],
-                "measurement": "Smartplug1_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_1_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
                 "groupBy": [
                   {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
                   }
                 ],
-                "hide": false,
-                "measurement": "Smartplug2_Powerusage",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.entity_id == \"smartplug_2_power\" and\n    r._field == \"value\"\n  )\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "hide": false,
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.item == \"Smartplug1_Powerusage\" and\n    r._field == \"value\"\n  )",
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "influxdb",
-                  "uid": "P3C6603E967DC8568"
-                },
-                "hide": false,
-                "query": "from(bucket: \"smarthome\")\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r.item == \"Smartplug2_Powerusage\" and\n    r._field == \"value\"\n  )",
-                "refId": "D"
+                "limit": 50
               }
-            ],
-            "title": "Stromverbrauch",
-            "type": "timeseries"
-          }
-        ],
-        "preload": false,
-        "refresh": "",
-        "schemaVersion": 40,
-        "tags": [],
-        "templating": {
-          "list": []
+            },
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n    date_trunc('minute', to_timestamp(s.last_updated_ts)) AS time,\n    AVG(s.state::float) AS mean_value\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_2_power'\n  AND to_timestamp(s.last_updated_ts) BETWEEN $__timeFrom() AND $__timeTo()\n  AND s.state NOT IN ('unknown','unavailable','none')\nGROUP BY date_trunc('minute', to_timestamp(s.last_updated_ts))\nORDER BY time;\n",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            }
+          ],
+          "title": "Stromverbrauch",
+          "type": "timeseries"
         },
-        "time": {
-          "from": "now-24h",
-          "to": "now"
-        },
-        "timepicker": {},
-        "timezone": "",
-        "title": "Energy",
-        "uid": "hnUSSwcMk",
-        "version": 1,
-        "weekStart": ""
-      }
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "homeassistant-postgres"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "mean_value"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 4
+          },
+          "id": 12,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT\n    date_trunc('minute', to_timestamp(s.last_updated_ts)) AS time,\n    AVG(s.state::float) AS mean_value\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_1_power'\n  AND to_timestamp(s.last_updated_ts) BETWEEN $__timeFrom() AND $__timeTo()\n  AND s.state NOT IN ('unknown','unavailable','none')\nGROUP BY date_trunc('minute', to_timestamp(s.last_updated_ts))\nORDER BY time;\n",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            },
+            {
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "homeassistant-postgres"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT\n    date_trunc('minute', to_timestamp(s.last_updated_ts)) AS time,\n    AVG(s.state::float) AS mean_value\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_2_power'\n  AND to_timestamp(s.last_updated_ts) BETWEEN $__timeFrom() AND $__timeTo()\n  AND s.state NOT IN ('unknown','unavailable','none')\nGROUP BY date_trunc('minute', to_timestamp(s.last_updated_ts))\nORDER BY time;\n",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50
+              }
+            }
+          ],
+          "title": "Stromverbrauch",
+          "type": "timeseries"
+        }
+      ],
+      "preload": false,
+      "refresh": "",
+      "schemaVersion": 41,
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-24h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Energy",
+      "uid": "hnUSSwcMk",
+      "version": 1
+    }
