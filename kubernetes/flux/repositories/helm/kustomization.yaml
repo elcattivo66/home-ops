@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - ./external-secrets.yaml
   - ./helm-stable.yaml
-  - ./influxdata.yaml
   - ./ingress-nginx.yaml
   - ./k8tz.yaml
   - ./prometheus-community.yaml
