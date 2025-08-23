@@ -148,6 +148,17 @@ spec:
             jsonData:
               timeInterval: 1m
             isDefault: true
+          - name: Postgres HA
+            type: postgres
+            uid: homeassistant-postgres
+            access: proxy
+            url: postgres-rw.databases.svc.cluster.local:5432
+            user: "${HASS_POSTGRES_USER}"
+            secureJsonData:
+              password: "${HASS_POSTGRES_PASS}"
+            jsonData:
+              database: home_assistant
+              sslmode: 'disable' # disable/require/verify-ca/verify-full
           - name: influxdb
             type: influxdb
             access: proxy
