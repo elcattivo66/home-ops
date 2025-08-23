@@ -133,6 +133,7 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/unifi
+
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -153,9 +154,9 @@ spec:
             uid: homeassistant-postgres
             access: proxy
             url: postgres-rw.databases.svc.cluster.local:5432
-            user: "${HASS_POSTGRES_USER}"
+            user: $HASS_POSTGRES_USER
             secureJsonData:
-              password: "${HASS_POSTGRES_PASS}"
+              password: $HASS_POSTGRES_PASS
             jsonData:
               database: home_assistant
               sslmode: 'disable' # disable/require/verify-ca/verify-full
