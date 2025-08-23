@@ -160,18 +160,6 @@ spec:
             jsonData:
               database: home_assistant
               sslmode: 'disable' # disable/require/verify-ca/verify-full
-          - name: influxdb
-            type: influxdb
-            access: proxy
-            url: http://influxdb.databases.svc.cluster.local:80/
-            organization: home
-            jsonData:
-              version: Flux
-              organization: home
-              defaultBucket: smarthome
-              tlsSkipVerify: true
-            secureJsonData:
-              token: "${SECRET_INFLUXDB_TOKEN}"
           - name: Alertmanager
             type: alertmanager
             uid: alertmanager
