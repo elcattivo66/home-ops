@@ -4,7 +4,5 @@ resources:
   - ./external-secrets.yaml
   - ./helm-stable.yaml
   - ./ingress-nginx.yaml
-  - ./k8tz.yaml
-  - ./prometheus-community.yaml
   - ./renovate.yaml
   - ./zoriya.yaml
