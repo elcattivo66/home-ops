@@ -77,7 +77,7 @@ spec:
     - name: radarr
     - name: sonarr
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
     - name: volsync
       namespace: volsync-system
   path: ./kubernetes/apps/default/plex/kometa
@@ -122,7 +122,7 @@ spec:
     - name: volsync
       namespace: volsync-system
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
     - name: plex
   postBuild:
     substitute:

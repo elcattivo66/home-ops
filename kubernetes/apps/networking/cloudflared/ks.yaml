@@ -14,7 +14,7 @@ spec:
     - name: external-dns-cloudflare
       namespace: networking
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/networking/cloudflared/app"

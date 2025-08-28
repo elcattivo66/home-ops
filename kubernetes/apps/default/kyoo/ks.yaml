@@ -15,7 +15,7 @@ spec:
     - ../../../../components/keda/nfs-scaler
   dependsOn:
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
     - name: volsync
       namespace: volsync-system
     - name: keda

@@ -8,7 +8,7 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
   path: ./kubernetes/apps/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:

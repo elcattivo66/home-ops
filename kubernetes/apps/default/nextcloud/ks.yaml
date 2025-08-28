@@ -20,7 +20,7 @@ spec:
     - name: cloudnative-pg-cluster
       namespace: databases
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
   path: ./kubernetes/apps/default/nextcloud/app
   prune: true
   sourceRef:

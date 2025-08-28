@@ -17,7 +17,7 @@ spec:
     - name: dragonfly-cluster
       namespace: databases
     - name: external-secrets-stores
-      namespace: kube-system
+      namespace: external-secrets
     # - name: keda
     #   namespace: monitoring
   path: ./kubernetes/apps/default/immich/app
