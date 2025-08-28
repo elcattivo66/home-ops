@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/kube-system/external-secrets/app
+  path: ./kubernetes/apps/external-secrets/external-secrets/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -32,8 +32,8 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets
-      namespace: kube-system
-  path: ./kubernetes/apps/kube-system/external-secrets/stores
+      namespace: external-secrets
+  path: ./kubernetes/apps/external-secrets/external-secrets/stores
   prune: true
   sourceRef:
     kind: GitRepository
