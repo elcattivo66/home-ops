@@ -3,7 +3,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app external-secrets
-  namespace: &namespace kube-system
+  namespace: &namespace external-secrets
 spec:
   targetNamespace: *namespace
   commonMetadata:
@@ -24,7 +24,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app external-secrets-stores
-  namespace: &namespace kube-system
+  namespace: &namespace external-secrets
 spec:
   targetNamespace: *namespace
   commonMetadata:
