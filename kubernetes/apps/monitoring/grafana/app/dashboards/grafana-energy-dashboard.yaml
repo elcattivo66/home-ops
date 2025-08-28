@@ -32,7 +32,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 44,
+      "id": 54,
       "links": [],
       "panels": [
         {
@@ -94,7 +94,7 @@ data:
               "editorMode": "code",
               "format": "table",
               "rawQuery": true,
-              "rawSql": "SELECT\n    s.state::float AS current_power\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_2_power'\nORDER BY s.last_updated_ts DESC\nLIMIT 1;\n",
+              "rawSql": "SELECT\n    s.state::float AS current_power\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_2_power'\n  AND s.state ~ '^[0-9.]+$'\nORDER BY s.last_updated_ts DESC\nLIMIT 1;\n",
               "refId": "A",
               "sql": {
                 "columns": [
@@ -177,7 +177,7 @@ data:
               "editorMode": "code",
               "format": "table",
               "rawQuery": true,
-              "rawSql": "SELECT\n    s.state::float AS current_power\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_1_power'\nORDER BY s.last_updated_ts DESC\nLIMIT 1;\n",
+              "rawSql": "SELECT\n    s.state::float AS current_power\nFROM states s\nJOIN states_meta m ON s.metadata_id = m.metadata_id\nWHERE m.entity_id = 'sensor.smartplug_1_power'\n  AND s.state ~ '^[0-9.]+$'\nORDER BY s.last_updated_ts DESC\nLIMIT 1;\n",
               "refId": "A",
               "sql": {
                 "columns": [
