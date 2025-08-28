@@ -5,29 +5,29 @@ vars:
   TALOS_CONTROLLER:
     sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
   KUBERNETES_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_CLUSTER_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.K8S_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
 
 tasks:
   generate-clusterconfig:
     desc: Generate clusterconfig for Talos
     preconditions:
       - which test talhelper
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/talsecret.sops.yaml
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/talconfig.yaml
+      - test -f {{.K8S_DIR}}/talos/talsecret.sops.yaml
+      - test -f {{.K8S_DIR}}/talos/talconfig.yaml
     requires:
       vars:
         - K8S_CLUSTER
     cmds:
       - talhelper genconfig
-        --secret-file {{.K8S_CLUSTER_DIR}}/talos/talsecret.sops.yaml
-        --config-file {{.K8S_CLUSTER_DIR}}/talos/talconfig.yaml
-        --out-dir {{.K8S_CLUSTER_DIR}}/talos/clusterconfig
+        --secret-file {{.K8S_DIR}}/talos/talsecret.sops.yaml
+        --config-file {{.K8S_DIR}}/talos/talconfig.yaml
+        --out-dir {{.K8S_DIR}}/talos/clusterconfig
 
   apply-clusterconfig:
     desc: Apply clusterconfig for a Talos cluster
     vars:
       CLUSTERCONFIG_FILES:
-        sh: ls {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/*.yaml
+        sh: ls {{.K8S_DIR}}/talos/clusterconfig/*.yaml
     preconditions:
       - which ls
       - test -f "${TALOSCONFIG}"
@@ -57,7 +57,7 @@ tasks:
         - NODE
     vars:
       FILE:
-        sh: ls {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/{{.K8S_CLUSTER}}-{{.NODE}}*.yaml
+        sh: ls {{.K8S_DIR}}/talos/clusterconfig/{{.K8S_CLUSTER}}-{{.NODE}}*.yaml
     cmds:
       - task: _apply-machineconfig
         vars:
@@ -76,7 +76,7 @@ tasks:
         - NODE
     vars:
       FILE:
-        sh: ls {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/main-{{.NODE}}*.yaml
+        sh: ls {{.K8S_DIR}}/talos/clusterconfig/main-{{.NODE}}*.yaml
       TALOS_IMAGE:
         sh: yq '.machine.install.image' < "{{.FILE}}"
     cmds:
@@ -95,7 +95,7 @@ tasks:
     preconditions:
       - talosctl --nodes {{.TALOS_CONTROLLER}} get machineconfig
       - talosctl config info
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig
+      - test -f {{.K8S_DIR}}/talos/clusterconfig/talosconfig
       - which jq talosctl
 
   reset-node:
@@ -105,7 +105,7 @@ tasks:
     requires:
       vars: ["node"]
     preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig
+      - test -f {{.K8S_DIR}}/talos/clusterconfig/talosconfig
       - talosctl config info >/dev/null 2>&1
       - talosctl --nodes {{.node}} get machineconfig >/dev/null 2>&1
 
@@ -117,7 +117,7 @@ tasks:
       nodes:
         sh: talosctl config info --output json | jq --join-output '[.nodes[]] | join(",")'
     preconditions:
-      - test -f {{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig
+      - test -f {{.K8S_DIR}}/talos/clusterconfig/talosconfig
       - talosctl config info >/dev/null 2>&1
       - talosctl --nodes {{.nodes}} get machineconfig >/dev/null 2>&1
 

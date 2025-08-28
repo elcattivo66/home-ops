@@ -1,40 +1,47 @@
 ---
-version: '3'
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
 
 tasks:
-
   talos:
     desc: Bootstrap Talos
     prompt: Bootstrap Talos ...?
-    cmds:
-      - until talosctl --nodes {{.TALOS_CONTROLLER}} bootstrap; do sleep 10; done
-      - talosctl kubeconfig --nodes {{.TALOS_CONTROLLER}} --force {{.K8S_CLUSTER_DIR}}
     vars:
-      TALOS_CONTROLLER:
+      RANDOM_CONTROLLER:
         sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
     preconditions:
       - talosctl config info
-      - which talosctl
+      - talosctl --nodes {{.RANDOM_CONTROLLER}} get machineconfig
+      - which jq talosctl
+    cmds:
+      - until talosctl --nodes {{.RANDOM_CONTROLLER}} bootstrap; do sleep 5; done
+      - talosctl kubeconfig --nodes {{.RANDOM_CONTROLLER}} --force {{.KUBERNETES_DIR}}
 
   apps:
     desc: Bootstrap Kubernetes Apps
     prompt: Bootstrap Kubernetes Apps ...?
-    cmds:
-      - until kubectl wait nodes --for=condition=Ready=False --all --timeout=10m; do sleep 5; done
-      - sops --decrypt {{.K8S_CLUSTER_DIR}}/bootstrap/age-key.sops.yaml | kubectl apply --server-side --filename -
-      - sops --decrypt {{.K8S_CLUSTER_DIR}}/bootstrap/github-deploy-key.sops.yaml | kubectl apply --server-side --filename -
-      - helmfile --quiet --file {{.K8S_CLUSTER_DIR}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff
-    env:
-      FLUX_GITHUB_PUBLIC_KEYS:
-        sh: curl -fsSL https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]'
-      MODEL: '{{.MODEL}}'
-      NODE_COUNT:
-        sh: talosctl config info --output json | jq --raw-output '.nodes | length'
-      VAULT: K8s
     preconditions:
-      - talosctl config info
+      - which helmfile yq jq kubectl op talosctl
       - test -f {{.ROOT_DIR}}/age.key
-      - test -f {{.K8S_CLUSTER_DIR}}/bootstrap/age-key.sops.yaml
-      - test -f {{.K8S_CLUSTER_DIR}}/bootstrap/github-deploy-key.sops.yaml
-      - test -f {{.K8S_CLUSTER_DIR}}/bootstrap/helmfile.yaml
-      - which curl jq helmfile kubectl op talosctl
+      - test -f {{.K8S_DIR}}/bootstrap/age-key.sops.yaml
+      - test -f {{.K8S_DIR}}/bootstrap/github-deploy-key.sops.yaml
+      - test -f {{.K8S_DIR}}/bootstrap/helmfile.d/00-crds.yaml
+      - test -f {{.K8S_DIR}}/bootstrap/helmfile.d/01-apps.yaml
+      - test -f {{.K8S_DIR}}/bootstrap/resources.yaml.j2
+      - op user get --me
+      - talosctl config info
+      - talosctl --nodes {{.RANDOM_CONTROLLER}} get machineconfig
+    vars:
+      CONTEXT:
+        sh: talosctl config info --output json | jq --raw-output '.context'
+      RANDOM_CONTROLLER:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
+    cmds:
+      - kubectl config set-cluster {{.CONTEXT}} --server https://{{.RANDOM_CONTROLLER}}:6443
+      - defer: talosctl kubeconfig --nodes {{.RANDOM_CONTROLLER}} --force {{.KUBERNETES_DIR}}
+      - until kubectl wait nodes --for=condition=Ready=False --all --timeout=10m; do sleep 5; done
+      - sops --decrypt {{.K8S_DIR}}/bootstrap/age-key.sops.yaml | kubectl apply --server-side --filename -
+      - sops --decrypt {{.K8S_DIR}}/bootstrap/github-deploy-key.sops.yaml | kubectl apply --server-side --filename -
+      - minijinja-cli {{.K8S_DIR}}/bootstrap/resources.yaml.j2 | op inject | kubectl apply --server-side --filename -
+      - helmfile --quiet --file {{.K8S_DIR}}/bootstrap/helmfile.d/00-crds.yaml template | kubectl apply --server-side --filename -
+      - helmfile --file {{.K8S_DIR}}/bootstrap/helmfile.d/01-apps.yaml sync --hide-notes

@@ -3,13 +3,15 @@ version: "3"
 
 vars:
   K8S_CLUSTER: '{{.K8S_CLUSTER | default "main"}}'
-  K8S_CLUSTER_DIR: "{{.ROOT_DIR}}/kubernetes"
+  K8S_DIR: "{{.ROOT_DIR}}/kubernetes"
+  MINIJINJA_CONFIG_FILE: "{{.ROOT_DIR}}/.minijinja.toml"
+  TALOS_DIR: "{{.K8S_DIR}}/talos"
 
 env:
   KUBECONFIG: "{{.ROOT_DIR}}/kubernetes/kubeconfig"
   MINIJINJA_CONFIG_FILE: "{{.ROOT_DIR}}/.minijinja.toml"
+  TALOSCONFIG: "{{.KUBERNETES_DIR}}/talos/clusterconfig/talosconfig"
   SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
-  TALOSCONFIG: "{{.K8S_CLUSTER_DIR}}/talos/clusterconfig/talosconfig"
 
 includes:
   bootstrap: .taskfiles/Bootstrap/Taskfile.yaml
