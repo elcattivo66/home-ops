@@ -24,20 +24,20 @@ spec:
     kind: OCIRepository
     name: kube-prometheus-stack
   install:
+    crds: CreateReplace
     remediation:
       retries: -1
   upgrade:
+    crds: CreateReplace
     cleanupOnFail: true
     remediation:
       retries: 3
   dependsOn:
-    - name: prometheus-operator-crds
-      namespace: monitoring
     - name: openebs
       namespace: openebs-system
   values:
     crds:
-      enabled: false
+      enabled: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
       ingress:
@@ -108,7 +108,7 @@ spec:
         ruleSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-        retention: 14d
+        retention: 21d
         retentionSize: 70GB
         resources:
           requests:
