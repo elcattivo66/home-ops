@@ -94,7 +94,7 @@ identity_providers:
     clients:
       - client_name: Grafana
         client_id: grafana
-        client_secret: "$${GRAFANA_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/GRAFANA_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -103,7 +103,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Nextcloud
         client_id: nextcloud
-        client_secret: "$${NEXTCLOUD_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/NEXTCLOUD_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -112,7 +112,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Immich
         client_id: immich
-        client_secret: "$${IMMICH_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/IMMICH_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -123,7 +123,7 @@ identity_providers:
         token_endpoint_auth_method: 'client_secret_post'
       - client_name: Minio
         client_id: minio
-        client_secret: "$${MINIO_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/MINIO_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -132,7 +132,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Audiobookshelf
         client_id: audiobookshelf
-        client_secret: "$${AUDIOBOOKSHELF_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/AUIOBOOKSHELF_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -142,7 +142,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Tandoor
         client_id: tandoor
-        client_secret: "$${TANDOOR_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/TANDOOR_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -152,7 +152,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Paperless
         client_id: paperless
-        client_secret: "$${PAPERLESS_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/PAPERLESS_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -162,7 +162,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Kyoo
         client_id: kyoo
-        client_secret: "$${KYOO_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/KYOO_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
@@ -172,7 +172,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Adventurelog
         client_id: adventurelog
-        client_secret: "$${ADVENTURELOG_OAUTH_CLIENT_SECRET}"
+        client_secret: '{{ secret "/config/secret/ADVENTURELOG_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
