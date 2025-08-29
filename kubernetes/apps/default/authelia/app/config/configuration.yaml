@@ -132,7 +132,7 @@ identity_providers:
         userinfo_signed_response_alg: none
       - client_name: Audiobookshelf
         client_id: audiobookshelf
-        client_secret: '{{ secret "/config/secret/AUIOBOOKSHELF_OAUTH_DIGEST" }}'
+        client_secret: '{{ secret "/config/secret/AUDIOBOOKSHELF_OAUTH_DIGEST" }}'
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
