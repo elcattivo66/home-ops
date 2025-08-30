@@ -58,11 +58,12 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
 
     persistence:
-      config-file:
+      config:
+        enabled: true
         type: configMap
         name: configarr-configmap
         globalMounts:
-          - path: /config/config.yml
+          - path: /app/config/config.yml
             subPath: config.yml
             readOnly: true
       repos:
