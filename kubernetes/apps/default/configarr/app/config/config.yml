@@ -53,9 +53,12 @@ sonarr:
             score: 0
 
       - trash_ids:
-        - 47435ece6b99a0b477caf360e79ba0bb # Uncomment this to block all x265 HD releases
+        - 47435ece6b99a0b477caf360e79ba0bb # x265
+        - 15a05bc7c1a36e2b57fd628f8977e2fc # AV1
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
+            score: 100
+          - name: WEB-1080p
             score: 100
 
     # Quality definition sizes
@@ -92,7 +95,7 @@ sonarr:
         - quality: "Bluray-1080p"
           min: 4
           preferred: 23
-          max: 65
+          max: 100
 
 radarr:
   radarr:
@@ -119,7 +122,6 @@ radarr:
       ### Optional
       - trash_ids:
          - b6832f586342ef70d9c128d40c07b872 # Bad Dual Groups
-         - 90cedc1fea7ea5d11298bebd3d1d3223 # EVO (no WEBDL)
          - ae9b7c9ebde1f3bd336a8cbd1ec4c5e5 # No-RlsGroup
          - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
          - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
@@ -154,6 +156,7 @@ radarr:
 
       - trash_ids:
          - dc98083864ea246d05a42df0d05f81cc # Prefer good x265 releases e.g. VECTOR
+         - cae4ca30163749b891686f95532519bd # AV1
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
             score: 100
@@ -192,4 +195,4 @@ radarr:
         - quality: "Bluray-1080p"
           min: 0
           preferred: 25
-          max: 42
+          max: 100
