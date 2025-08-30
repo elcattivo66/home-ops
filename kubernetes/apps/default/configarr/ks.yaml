@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname configarr
+  namespace: &namespace default
+spec:
+  targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  dependsOn:
+    - name: external-secrets-stores
+      namespace: external-secrets
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  path: ./kubernetes/apps/default/configarr/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

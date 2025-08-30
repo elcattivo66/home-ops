@@ -1,12 +1,18 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/recyclarr/recyclarr/master/schemas/config-schema.json
+# true or false
+sonarrEnabled: true
+radarrEnabled: true
+whisparrEnabled: false
+readarrEnabled: false
+lidarrEnabled: false
+
 sonarr:
   sonarr:
     base_url: http://sonarr.default.svc.cluster.local:80
-    api_key: !env_var SONARR_API_KEY
+    api_key: !env SONARR_API_KEY
 
-    delete_old_custom_formats: true
-    replace_existing_custom_formats: true
+    delete_unmanaged_custom_formats:
+      enabled: true
 
     include:
       - template: sonarr-quality-definition-series
@@ -52,13 +58,49 @@ sonarr:
           - name: HD Bluray + WEB (GER)
             score: 100
 
-radarr:
-  radarr_main:
-    base_url: http://radarr.default.svc.cluster.local:80
-    api_key: !env_var RADARR_API_KEY
+    # Quality definition sizes
+    quality_definition:
+      qualities:
+        - quality: "HDTV-720p"
+          min: 3
+          preferred: 11.7
+          max: 28
+        - quality: "WEBRip-720p"
+          min: 3
+          preferred: 11.7
+          max: 28
+        - quality: "WEBDL-720p"
+          min: 3
+          preferred: 11.7
+          max: 28
+        - quality: "Bluray-720p"
+          min: 3
+          preferred: 11.7
+          max: 28
+        - quality: "HDTV-1080p"
+          min: 4
+          preferred: 23
+          max: 65
+        - quality: "WEBRip-1080p"
+          min: 4
+          preferred: 23
+          max: 65
+        - quality: "WEBDL-1080p"
+          min: 4
+          preferred: 23
+          max: 65
+        - quality: "Bluray-1080p"
+          min: 4
+          preferred: 23
+          max: 65
 
-    delete_old_custom_formats: true
-    replace_existing_custom_formats: true
+radarr:
+  radarr:
+    base_url: http://radarr.default.svc.cluster.local:80
+    api_key: !env RADARR_API_KEY
+
+    delete_unmanaged_custom_formats:
+      enabled: true
 
     include:
       - template: radarr-quality-definition-movie
@@ -115,3 +157,39 @@ radarr:
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
             score: 100
+
+    # Quality definition sizes
+    quality_definition:
+      qualities:
+        - quality: "HDTV-720p"
+          min: 0
+          preferred: 18
+          max: 34
+        - quality: "WEBRip-720p"
+          min: 0
+          preferred: 18
+          max: 34
+        - quality: "WEBDL-720p"
+          min: 0
+          preferred: 18
+          max: 34
+        - quality: "Bluray-720p"
+          min: 0
+          preferred: 18
+          max: 34
+        - quality: "HDTV-1080p"
+          min: 0
+          preferred: 25
+          max: 42
+        - quality: "WEBRip-1080p"
+          min: 0
+          preferred: 25
+          max: 42
+        - quality: "WEBDL-1080p"
+          min: 0
+          preferred: 25
+          max: 42
+        - quality: "Bluray-1080p"
+          min: 0
+          preferred: 25
+          max: 42
