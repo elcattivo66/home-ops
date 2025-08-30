@@ -58,8 +58,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
 
     persistence:
-      config:
-        existingClaim: *app
       config-file:
         type: configMap
         name: configarr-configmap
