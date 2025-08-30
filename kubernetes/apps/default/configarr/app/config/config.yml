@@ -71,15 +71,15 @@ sonarr:
         - quality: "WEBRip-720p"
           min: 3
           preferred: 11.7
-          max: 28
+          max: 35
         - quality: "WEBDL-720p"
           min: 3
           preferred: 11.7
-          max: 28
+          max: 35
         - quality: "Bluray-720p"
           min: 3
           preferred: 11.7
-          max: 28
+          max: 40
         - quality: "HDTV-1080p"
           min: 4
           preferred: 23
@@ -87,15 +87,15 @@ sonarr:
         - quality: "WEBRip-1080p"
           min: 4
           preferred: 23
-          max: 65
+          max: 110
         - quality: "WEBDL-1080p"
           min: 4
           preferred: 23
-          max: 65
+          max: 110
         - quality: "Bluray-1080p"
-          min: 4
-          preferred: 23
-          max: 100
+          min: 10
+          preferred: 30
+          max: 200
 
 radarr:
   radarr:
@@ -171,15 +171,15 @@ radarr:
         - quality: "WEBRip-720p"
           min: 0
           preferred: 18
-          max: 34
+          max: 40
         - quality: "WEBDL-720p"
           min: 0
           preferred: 18
-          max: 34
+          max: 40
         - quality: "Bluray-720p"
           min: 0
           preferred: 18
-          max: 34
+          max: 50
         - quality: "HDTV-1080p"
           min: 0
           preferred: 25
@@ -187,12 +187,12 @@ radarr:
         - quality: "WEBRip-1080p"
           min: 0
           preferred: 25
-          max: 42
+          max: 100
         - quality: "WEBDL-1080p"
           min: 0
           preferred: 25
-          max: 42
+          max: 100
         - quality: "Bluray-1080p"
           min: 0
-          preferred: 25
-          max: 100
+          preferred: 30
+          max: 200
