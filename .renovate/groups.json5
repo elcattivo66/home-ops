@@ -1,6 +1,6 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "packageRules": [
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  packageRules: [
     {
       description: "Actions Runner Controller Group",
       groupName: "actions-runner-controller",
@@ -10,43 +10,6 @@
         commitMessageTopic: "{{{groupName}}} group",
       },
       minimumGroupSize: 2,
-    },
-    {
-      description: "Cert-Manager Group",
-      groupName: "Cert-Manager",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/cert-manager/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
-      description: "Cilium Group",
-      groupName: "Cilium",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/cilium/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
-      description: "CoreDNS Group",
-      groupName: "CoreDNS",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/coredns/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
-      "description": ["Dragonfly Operator Group"],
-      "groupName": "Dragonfly Operator",
-      "matchPackagePatterns": ["dragonfly(?:db)?.operator"],
-      "matchDatasources": ["docker", "github-releases"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      },
-      "separateMinorPatch": true
     },
     {
       description: "Flux Operator Group",
@@ -79,14 +42,20 @@
       minimumGroupSize: 2,
     },
     {
-      "description": ["Kyoo Group"],
-      "groupName": "Kyoo",
-      "matchPackagePatterns": ["kyoo"],
-      "matchDatasources": ["docker", "github-releases"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
+      description: "Kubernetes Group",
+      groupName: "kubernetes",
+      matchDatasources: ["docker"],
+      matchPackageNames: [
+        "/kube-apiserver/",
+        "/kube-controller-manager/",
+        "/kube-proxy/",
+        "/kube-scheduler/",
+        "/kubelet/",
+      ],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
       },
-      "separateMinorPatch": true
+      minimumGroupSize: 5,
     },
     {
       description: "Rook-Ceph Group",
@@ -108,5 +77,5 @@
       },
       minimumGroupSize: 2,
     },
-  ]
+  ],
 }
