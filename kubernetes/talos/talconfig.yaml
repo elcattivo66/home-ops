@@ -233,7 +233,7 @@ controlPlane:
         apiServer:
           extraArgs:
             enable-aggregator-routing: true
-            feature-gates: AuthorizeNodeWithSelectors=false
+            feature-gates: ImageVolume=true
         coreDNS:
             disabled: true
         proxy:
