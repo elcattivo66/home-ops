@@ -32,7 +32,7 @@ spec:
       retries: 3
   dependsOn:
     - name: snapshot-controller
-      namespace: volsync-system
+      namespace: kube-system
   values:
     manageCRDs: true
     replicaCount: 2
