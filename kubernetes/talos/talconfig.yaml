@@ -2,17 +2,17 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: &clusterName main
 
+endpoint: "https://main.k8s.internal:6443"
+
 clusterPodNets:
   - 10.42.0.0/16
 clusterSvcNets:
   - 10.43.0.0/16
 
-endpoint: "https://main.k8s.internal:6443"
-
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.11.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.33.4
+kubernetesVersion: v1.34.0
 
 cniConfig:
   name: none
@@ -150,17 +150,6 @@ controlPlane:
 
   schematic:
     customization:
-      extraKernelArgs:
-        - -selinux
-        - apparmor=0           # Less security, more speed
-        - init_on_alloc=0      # Less security, more speed
-        - init_on_free=0       # Less security, more speed
-        - intel_iommu=on       # PCI Passthrough
-        - iommu=pt             # PCI Passthrough
-        - mitigations=off      # Less security, more speed
-        - security=none        # Less security, more speed
-        - net.ifnames=1        # Enable predictable NIC naming
-        - talos.auditd.disabled=1             # Less security, faster puter
       systemExtensions:
         officialExtensions:
           - siderolabs/i915
@@ -189,17 +178,7 @@ controlPlane:
         network:
           disableSearchDomain: true
 
-    # Enable cluster discovery
-    - |-
-      cluster:
-        discovery:
-          registries:
-            kubernetes:
-              disabled: false
-            service:
-              disabled: true
-
-    # Disable Host DNS
+    # Enable host dns
     - |-
       machine:
         features:
@@ -207,6 +186,24 @@ controlPlane:
             enabled: true
             resolveMemberNames: true
             forwardKubeDNSToHost: false
+
+    # Enable KubePrism
+    - |-
+      machine:
+        features:
+          kubePrism:
+            enabled: true
+            port: 7445
+
+    # Mount openebs-hostpath in kubelet
+    - |-
+      machine:
+        kubelet:
+          extraMounts:
+            - destination: /var/openebs/local
+              type: bind
+              source: /var/openebs/local
+              options: ["bind", "rshared", "rw"]
 
     # Configure kubelet
     - |-
@@ -218,32 +215,33 @@ controlPlane:
             validSubnets:
                 - 192.168.20.0/24
 
-    # Enable KubePrism
-    - |-
-      machine:
-        features:
-          kubePrism:
-            enabled: true
-            port: 7445
-
     # Configure cluster
     - |-
       cluster:
-        allowSchedulingOnMasters: true
+        allowSchedulingOnControlPlanes: true
         apiServer:
           extraArgs:
-            enable-aggregator-routing: true
-            feature-gates: AuthorizeNodeWithSelectors=false,ImageVolume=true
+            enable-aggregator-routing: "true"
+            runtime-config: admissionregistration.k8s.io/v1alpha1=true
+        controllerManager:
+          extraArgs:
+            bind-address: 0.0.0.0
         coreDNS:
             disabled: true
         proxy:
           disabled: true
         scheduler:
+          extraArgs:
+            bind-address: 0.0.0.0
           config:
             apiVersion: kubescheduler.config.k8s.io/v1
             kind: KubeSchedulerConfiguration
             profiles:
               - schedulerName: default-scheduler
+                plugins:
+                  score:
+                    disabled:
+                      - name: ImageLocality
                 pluginConfig:
                   - name: PodTopologySpread
                     args:
@@ -287,23 +285,15 @@ controlPlane:
     - |-
       machine:
         sysctls:
-          fs.inotify.max_user_instances: 8192      # Watchdog
-          fs.inotify.max_user_watches: 1048576     # Watchdog
-          net.core.rmem_max: 67108864              # Cloudflared / QUIC
-          net.core.wmem_max: 67108864              # Cloudflared / QUIC
-          net.ipv4.neigh.default.gc_thresh2: 8192  # Prevent ARP cache overflows
-          net.ipv4.neigh.default.gc_thresh3: 16384 # Prevent ARP cache overflows
-          user.max_user_namespaces: 11255          # User namespaces
-
-    # Mount openebs-hostpath in kubelet
-    - |-
-      machine:
-        kubelet:
-          extraMounts:
-            - destination: /var/openebs/local
-              type: bind
-              source: /var/openebs/local
-              options: ["bind", "rshared", "rw"]
+          fs.inotify.max_user_instances: "8192"      # Watchdog
+          fs.inotify.max_user_watches: "1048576"     # Watchdog
+          net.core.rmem_max: "67108864"              # Cloudflared / QUIC
+          net.core.wmem_max: "67108864"              # Cloudflared / QUIC
+          net.ipv4.neigh.default.gc_thresh1: "4096"  # Prevent ARP cache overflows
+          net.ipv4.neigh.default.gc_thresh2: "8192"  # Prevent ARP cache overflows
+          net.ipv4.neigh.default.gc_thresh3: "16384" # Prevent ARP cache overflows
+          net.ipv4.tcp_fastopen: "3"                 # Send and accept data in the opening SYN packet
+          user.max_user_namespaces: "11255"          # User namespaces
 
     # Disable default API server admission plugins.
     - |-
@@ -319,5 +309,5 @@ controlPlane:
             allowedRoles:
               - os:admin
             allowedKubernetesNamespaces:
-              - system-upgrade
               - actions-runner-system
+              - system-upgrade
