@@ -89,9 +89,12 @@ spec:
     service:
       app:
         controller: home-assistant
+        annotations:
+          lbipam.cilium.io/ips: 192.168.10.2
         ports:
           http:
             port: 8123
+            appProtocol: kubernetes.io/ws
           code-server:
             port: 12321
 
