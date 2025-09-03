@@ -90,7 +90,7 @@ spec:
       app:
         controller: home-assistant
         annotations:
-          lbipam.cilium.io/ips: 192.168.10.2
+          lbipam.cilium.io/ips: 192.168.20.221
         ports:
           http:
             port: 8123
