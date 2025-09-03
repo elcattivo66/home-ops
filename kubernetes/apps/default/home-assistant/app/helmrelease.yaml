@@ -89,6 +89,7 @@ spec:
     service:
       app:
         controller: home-assistant
+        type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.20.221
         ports:
