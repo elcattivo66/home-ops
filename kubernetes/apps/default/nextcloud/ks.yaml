@@ -33,3 +33,4 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      VOLSYNC_CACHE_CAPACITY: 3GB
