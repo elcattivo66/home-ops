@@ -45,11 +45,6 @@ spec:
               TZ: ${TZ}
               PLEX_BASEURL: http://plex.default.svc.cluster.local:32400
               PLEX_LOCALURL: http://plex.default.svc.cluster.local:32400
-              PLEX_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: plex-trakt-sync-secret
-                    key: PLEX_TOKEN
               PLEX_USERNAME:
                 valueFrom:
                   secretKeyRef:
