@@ -39,8 +39,8 @@ spec:
             image:
               repository: ghcr.io/taxel/plextraktsync
               tag: 0.34.14
-            args:
-              - watch
+            # args:
+            #   - watch
             env:
               TZ: ${TZ}
               PLEX_BASEURL: http://plex.default.svc.cluster.local:32400
