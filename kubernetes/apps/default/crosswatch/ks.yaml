@@ -7,14 +7,16 @@ metadata:
   namespace: &namespace default
 spec:
   targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/volsync/local
   dependsOn:
     - name: volsync
       namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *appname
   path: ./kubernetes/apps/default/crosswatch/app
   prune: true
   sourceRef:
