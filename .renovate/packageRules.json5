@@ -7,17 +7,5 @@
       "versioning": "loose",
       "matchPackagePatterns": ["plex"]
     },
-    {
-      "description": ["Custom schedule for frequently updated packages"],
-      "matchDataSources": ["docker"],
-      "matchPackagePatterns": ["postgresql"],
-      "schedule": ["on the first day of the month"]
-    },
-    {
-      "description": ["Allowed postgresql major release"],
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["postgresql"],
-      "allowedVersions": "<18"
-    }
   ]
 }
