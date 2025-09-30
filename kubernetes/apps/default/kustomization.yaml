@@ -34,5 +34,6 @@ resources:
   - ./sonarr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
+  - ./telerising/ks.yaml
   - ./vaultwarden/ks.yaml
   - ./zigbee2mqtt/ks.yaml
