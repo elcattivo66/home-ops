@@ -75,7 +75,7 @@ spec:
       tmpfs:
         type: emptyDir
         advancedMounts:
-          sonarr:
+          telerising:
             app:
               - path: /var/logs
                 subPath: logs
