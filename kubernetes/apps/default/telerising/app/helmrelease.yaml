@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: docker.io/ad0lar/telerising-easy4me
-              tag: v0.14.8-464f2d4-arm64@sha256:a07a82592e952f00159146cc87347ba89a7ffc9e456c760e1e3f26b674bea37c
+              tag: v0.14.8-464f2d4-amd64@sha256:d0bf2876466bde4388f8eb55ab25799c1ffeacfbdde60359c06537e59bdd9e53
             env:
               TZ: ${TZ}
             resources:
@@ -37,18 +37,18 @@ spec:
                 cpu: 10m
                 memory: 250Mi
               limits:
-                memory: 8Gi
-    #         securityContext:
-    #           allowPrivilegeEscalation: false
-    #           readOnlyRootFilesystem: true
-    #           capabilities: { drop: ["ALL"] }
-    # defaultPodOptions:
-    #   securityContext:
-    #     runAsNonRoot: true
-    #     runAsUser: 1000
-    #     runAsGroup: 1000
-    #     fsGroup: 1000
-    #     fsGroupChangePolicy: OnRootMismatch
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
