@@ -72,14 +72,17 @@ spec:
     persistence:
       config:
         existingClaim: *app
-        globalMounts:
-          - path: /telerising
+        advancedMounts:
+          telerising:
+            app:
+              - path: /telerising
+                subPath: telerising
       tmpfs:
         type: emptyDir
         advancedMounts:
           telerising:
             app:
-              - path: /var/logs
-                subPath: logs
+              - path: /var/log
+                subPath: log
               - path: /tmp
                 subPath: tmp
