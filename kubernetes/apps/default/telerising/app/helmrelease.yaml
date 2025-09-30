@@ -28,20 +28,22 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/ad0lar/telerising-easy4me
-              tag: v0.14.8-464f2d4-amd64@sha256:d0bf2876466bde4388f8eb55ab25799c1ffeacfbdde60359c06537e59bdd9e53
+              repository: docker.io/starfoxfs/telerising
+              tag: amd64-linux@sha256:853f16f8995b115d574985c0e0049be0aa296b1472a768aff9d7b53d50492aba
             env:
               TZ: ${TZ}
+              UID: 1000
+              GID: 1000
             resources:
               requests:
                 cpu: 10m
                 memory: 250Mi
               limits:
                 memory: 512Mi
-    #         securityContext:
-    #           allowPrivilegeEscalation: false
-    #           readOnlyRootFilesystem: false
-    #           capabilities: { drop: ["ALL"] }
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
