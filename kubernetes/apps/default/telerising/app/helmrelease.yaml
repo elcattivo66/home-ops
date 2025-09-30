@@ -32,8 +32,8 @@ spec:
               tag: amd64-linux@sha256:853f16f8995b115d574985c0e0049be0aa296b1472a768aff9d7b53d50492aba
             env:
               TZ: ${TZ}
-              UID: 1000
-              GID: 1000
+              UID: 99
+              GID: 100
             resources:
               requests:
                 cpu: 10m
@@ -44,13 +44,13 @@ spec:
     #           allowPrivilegeEscalation: false
     #           readOnlyRootFilesystem: false
     #           capabilities: { drop: ["ALL"] }
-    # defaultPodOptions:
-    #   securityContext:
-    #     runAsNonRoot: false
-    #     runAsUser: 1000
-    #     runAsGroup: 1000
-    #     fsGroup: 1000
-    #     fsGroupChangePolicy: OnRootMismatch
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 99
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
