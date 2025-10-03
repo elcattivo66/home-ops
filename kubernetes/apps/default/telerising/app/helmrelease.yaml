@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: docker.io/starfoxfs/telerising
-              tag: amd64-linux@sha256:853f16f8995b115d574985c0e0049be0aa296b1472a768aff9d7b53d50492aba
+              tag: amd64-linux@sha256:2eb89d97d7238ce391c6edaab5663519731a8048f38598f21a048ce0c7600f96
             env:
               TZ: ${TZ}
               UID: 99
