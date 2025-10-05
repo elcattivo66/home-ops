@@ -39,9 +39,9 @@ spec:
         barmanObjectName: postgres
         serverName: postgres-v1
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-  # bootstrap:
-  #   recovery:
-  #     source: source
+  bootstrap:
+    recovery:
+      source: source
   externalClusters:
     - name: source
       plugin:
