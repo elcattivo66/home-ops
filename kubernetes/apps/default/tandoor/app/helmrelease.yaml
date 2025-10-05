@@ -23,34 +23,27 @@ spec:
       tandoor:
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-            fsGroup: 1000
-            fsGroupChangePolicy: "OnRootMismatch"
 
         initContainers:
-          01-init-db:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17@sha256:86a1992d46273c58fd4ad95b626081dfaabfe16bd56944675169e406d1a660dd
             envFrom: &envFrom
               - secretRef:
                   name: tandoor-secret
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 17
 
         containers:
           app:
             image:
-              repository: docker.io/vabene1111/recipes
-              tag: 2.3.0
+              repository: ghcr.io/tandoorrecipes/recipes:2.3
+              tag: 2.3.0@sha256:94a048d2ca34209654ecb984e29de1f621625b632925b28243735f1de4187d58
             envFrom: *envFrom
             env:
               TZ: ${TZ}
               ENABLE_METRICS: 1
               ENABLE_SIGNUP: 0
-              TANDOOR_PORT: &port 80
+              TANDOOR_PORT: &port 8000
               GUNICORN_MEDIA: 0
               DEBUG: 0
               SQL_DEBUG: 0
@@ -68,21 +61,27 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities:
-                drop:
-                  - ALL
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
                 memory: 256Mi
               limits:
-                memory: 1Gi
+                memory: 1024Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+
     service:
       app:
         controller: tandoor
         ports:
           http:
-            port: 80
+            port: 8000
 
     ingress:
       app:
@@ -94,12 +93,9 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
+
     persistence:
       files:
-        enabled: true
         existingClaim: *app
         advancedMounts:
           tandoor:
@@ -108,12 +104,16 @@ spec:
                 subPath: mediafiles
               - path: /opt/recipes/staticfiles
                 subPath: staticfiles
-      temp:
+      tmpfs:
         type: emptyDir
         advancedMounts:
           tandoor:
             app:
-              - path: /tmp
-                subPath: app-tmp
               - path: /opt/recipes/cookbook/static/django_js_reverse
                 subPath: django_js_reverse
+              - path: /var/lib/nginx/logs
+                subPath: nginx_logs
+              - path: /var/lib/nginx/tmp
+                subPath: nginx_tmp
+              - path: /tmp
+                subPath: tmp
