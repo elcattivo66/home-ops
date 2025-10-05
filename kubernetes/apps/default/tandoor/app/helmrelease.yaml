@@ -44,13 +44,13 @@ spec:
           app:
             image:
               repository: docker.io/vabene1111/recipes
-              tag: 2.2.7
+              tag: 2.3.0
             envFrom: *envFrom
             env:
               TZ: ${TZ}
               ENABLE_METRICS: 1
               ENABLE_SIGNUP: 0
-              TANDOOR_PORT: &port 8888
+              TANDOOR_PORT: &port 80
               GUNICORN_MEDIA: 0
               DEBUG: 0
               SQL_DEBUG: 0
@@ -77,22 +77,12 @@ spec:
                 memory: 256Mi
               limits:
                 memory: 1Gi
-          nginx:
-            image:
-              repository: ghcr.io/nginxinc/nginx-unprivileged
-              tag: 1.27.4
-            resources:
-              requests:
-                cpu: 10m
-                memory: 100Mi
-              limits:
-                memory: 100Mi
     service:
       app:
         controller: tandoor
         ports:
           http:
-            port: 8080
+            port: 80
 
     ingress:
       app:
@@ -118,20 +108,6 @@ spec:
                 subPath: mediafiles
               - path: /opt/recipes/staticfiles
                 subPath: staticfiles
-            nginx:
-              - path: /media
-                subPath: mediafiles
-              - path: /static
-                subPath: staticfiles
-      nginx-config:
-        type: configMap
-        name: tandoor-nginx
-        advancedMounts:
-          tandoor:
-            nginx:
-              - path: /etc/nginx/nginx.conf
-                subPath: nginx-config
-                readOnly: true
       temp:
         type: emptyDir
         advancedMounts:
