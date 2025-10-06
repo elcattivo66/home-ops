@@ -84,5 +84,3 @@ spec:
                 subPath: logs
               - path: /tmp
                 subPath: tmp
-              - path: /app/.next/cache
-                subPath: cache
