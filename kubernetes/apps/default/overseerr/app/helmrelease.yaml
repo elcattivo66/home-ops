@@ -29,21 +29,20 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/fallenbagel/jellyseerr
+              repository: ghcr.io/fallenbagel/jellyseerr
               tag: preview-seerr@sha256:16177e553f7d1c2bcc967a68819da4ba1841b3bd36a40753e962cdb9072f59ef
             env:
               TZ: ${TZ}
               LOG_LEVEL: "info"
-            resources:
-              requests:
-                cpu: 10m
-                memory: 361Mi
-              limits:
-                memory: 512Mi
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
