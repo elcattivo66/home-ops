@@ -43,7 +43,7 @@ spec:
               TZ: ${TZ}
               ENABLE_METRICS: 1
               ENABLE_SIGNUP: 0
-              TANDOOR_PORT: &port 8000
+              TANDOOR_PORT: &port 80
               GUNICORN_MEDIA: 0
               DEBUG: 0
               SQL_DEBUG: 0
@@ -59,9 +59,8 @@ spec:
               SHOPPING_MIN_AUTOSYNC_INTERVAL: 5
               SOCIAL_PROVIDERS: allauth.socialaccount.providers.openid_connect
             securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
             resources:
               requests:
                 cpu: 10m
@@ -70,10 +69,10 @@ spec:
                 memory: 1024Mi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
         fsGroupChangePolicy: OnRootMismatch
 
     service:
@@ -111,9 +110,5 @@ spec:
             app:
               - path: /opt/recipes/cookbook/static/django_js_reverse
                 subPath: django_js_reverse
-              - path: /var/lib/nginx/logs
-                subPath: nginx_logs
-              - path: /var/lib/nginx/tmp
-                subPath: nginx_tmp
               - path: /tmp
                 subPath: tmp
