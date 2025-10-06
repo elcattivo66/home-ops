@@ -29,8 +29,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/sct/overseerr
-              tag: 1.34.0
+              repository: docker.io/fallenbagel/jellyseerr
+              tag: preview-seerr@sha256:16177e553f7d1c2bcc967a68819da4ba1841b3bd36a40753e962cdb9072f59ef
             env:
               TZ: ${TZ}
               LOG_LEVEL: "info"
