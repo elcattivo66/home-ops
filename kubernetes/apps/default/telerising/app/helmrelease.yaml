@@ -40,17 +40,16 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 512Mi
-    #         securityContext:
-    #           allowPrivilegeEscalation: false
-    #           readOnlyRootFilesystem: false
-    #           capabilities: { drop: ["ALL"] }
-    # defaultPodOptions:
-    #   securityContext:
-    #     runAsNonRoot: false
-    #     runAsUser: 99
-    #     runAsGroup: 100
-    #     fsGroup: 100
-    #     fsGroupChangePolicy: OnRootMismatch
+            securityContext:
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 99
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
