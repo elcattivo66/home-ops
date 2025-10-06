@@ -21,8 +21,8 @@ resources:
   # - ./kyoo/ks.yaml
   - ./lldap/ks.yaml
   - ./nextcloud/ks.yaml
-  - ./ollama/ks.yaml
-  - ./open-webui/ks.yaml
+  # - ./ollama/ks.yaml
+  # - ./open-webui/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
