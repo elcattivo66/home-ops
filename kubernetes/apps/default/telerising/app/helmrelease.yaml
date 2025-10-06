@@ -32,8 +32,6 @@ spec:
               tag: amd64-linux@sha256:2eb89d97d7238ce391c6edaab5663519731a8048f38598f21a048ce0c7600f96
             env:
               TZ: ${TZ}
-              UID: 99
-              GID: 100
             resources:
               requests:
                 cpu: 10m
@@ -46,9 +44,9 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: false
-        runAsUser: 99
-        runAsGroup: 100
-        fsGroup: 100
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
         fsGroupChangePolicy: OnRootMismatch
 
     service:
