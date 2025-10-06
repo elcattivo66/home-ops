@@ -6,7 +6,7 @@ metadata:
   annotations:
     cnpg.io/skipEmptyWalArchiveCheck: 'enabled'
 spec:
-  instances: 2
+  instances: 3
   # renovate: datasource=docker depName=ghcr.io/cloudnative-pg/postgresql repository=ghcr.io
   imageName: ghcr.io/cloudnative-pg/postgresql:17
   storage:
