@@ -28,7 +28,7 @@ spec:
               TZ: ${TZ}
             image:
               repository: ghcr.io/cenodude/crosswatch
-              tag: 0.2.3@sha256:6552595e9e3bb50580d766d5270bc1724c5c1da440f179fb4ae38e5657ebc851
+              tag: 0.2.4@sha256:4aba6a32ee29125b6c2049516a486188c06b281a558f301f58c4804f663dec76
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
