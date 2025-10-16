@@ -33,9 +33,6 @@ spec:
           - /usr/share/postgresql/18/
     shared_preload_libraries:
       - "vchord.so"
-  nodeMaintenanceWindow:
-    inProgress: false
-    reusePVC: true
   resources:
     requests:
       cpu: 250m
