@@ -148,7 +148,7 @@ radarr: # Can be individually specified per library as well
   root_folder_path: /media/movies
   monitor: true
   availability: announced
-  quality_profile: HD-1080p
+  quality_profile: HD Bluray + WEB (GER)
   tag:
   search: false
   radarr_path:
@@ -160,7 +160,7 @@ sonarr: # Can be individually specified per library as well
   add_existing: false
   root_folder_path: /media/Serien
   monitor: all
-  quality_profile: HD-1080p
+  quality_profile: HD Bluray + WEB (GER)
   language_profile: English
   series_type: standard
   season_folder: true
