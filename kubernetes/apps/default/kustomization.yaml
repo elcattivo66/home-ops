@@ -15,6 +15,7 @@ resources:
   - ./calibre-web/ks.yaml
   - ./configarr/ks.yaml
   - ./crosswatch/ks.yaml
+  - ./dispatcharr/ks.yaml
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   # - ./kyoo/ks.yaml
