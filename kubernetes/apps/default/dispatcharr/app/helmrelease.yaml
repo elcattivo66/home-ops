@@ -36,7 +36,7 @@ spec:
               DISPATCHARR_LOG_LEVEL: info
               DISPATCHARR_PORT: &port 9191
               REDIS_HOST: localhost
-            # envFrom: *envFrom
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 100m
