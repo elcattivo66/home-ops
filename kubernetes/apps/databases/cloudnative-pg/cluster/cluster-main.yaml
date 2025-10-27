@@ -29,8 +29,8 @@ spec:
           - /usr/lib/postgresql/18/lib
         extension_control_path:
           - /usr/share/postgresql/18/
-    shared_preload_libraries:
-      - "vchord"
+    # shared_preload_libraries:
+    #   - "vchord"
   resources:
     requests:
       cpu: 250m
