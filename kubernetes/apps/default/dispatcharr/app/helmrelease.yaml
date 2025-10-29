@@ -13,16 +13,16 @@ spec:
   values:
     controllers:
       dispatcharr:
-        # initContainers:
-        #   init-db:
-        #     image:
-        #       repository: ghcr.io/home-operations/postgres-init
-        #       tag: 17
-        #     env:
-        #       TZ: ${TZ}
-        #     envFrom: &envFrom
-        #       - secretRef:
-        #           name: dispatcharr-secret
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17
+            env:
+              TZ: ${TZ}
+            envFrom: &envFrom
+              - secretRef:
+                  name: dispatcharr-secret
         pod:
           hostUsers: false
         containers:
@@ -37,7 +37,7 @@ spec:
               DISPATCHARR_PORT: &port 9191
               REDIS_HOST: &redis dragonfly.databases.svc.cluster.local
               REDIS_DB: 9
-            # envFrom: *envFrom
+            envFrom: *envFrom
             resources:
               requests:
                 cpu: 100m
