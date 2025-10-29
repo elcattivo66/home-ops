@@ -35,7 +35,8 @@ spec:
               DISPATCHARR_ENV: aio
               DISPATCHARR_LOG_LEVEL: info
               DISPATCHARR_PORT: &port 9191
-              REDIS_HOST: &redis dragonfly.databases.svc.cluster.local:6379/9
+              REDIS_HOST: &redis dragonfly.databases.svc.cluster.local
+              REDIS_DB: 9
             # envFrom: *envFrom
             resources:
               requests:
