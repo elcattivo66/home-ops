@@ -10,8 +10,11 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
+    - ../../../../components/gpu
     - ../../../../components/volsync/local
   dependsOn:
+    - name: intel-gpu-resource-driver
+      namespace: kube-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: volsync

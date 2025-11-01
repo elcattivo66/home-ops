@@ -50,6 +50,8 @@ spec:
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
             resources:
+              claims:
+                - name: gpu
               requests:
                 cpu: 5m
                 memory: 1Gi
@@ -70,6 +72,8 @@ spec:
               MPLCONFIGDIR: "/cache/matplotlib"
             envFrom: *envFrom
             resources:
+              claims:
+                - name: gpu
               requests:
                 cpu: 5m
                 memory: 2Gi
@@ -77,6 +81,9 @@ spec:
                 memory: 5Gi
 
     defaultPodOptions:
+      resourceClaims:
+        - name: gpu
+          resourceClaimTemplateName: immich-gpu
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

@@ -6,8 +6,11 @@ metadata:
   name: dispatcharr
 spec:
   components:
+    - ../../../../components/gpu
     - ../../../../components/volsync/local
   dependsOn:
+    - name: intel-gpu-resource-driver
+      namespace: kube-system
     - name: volsync
       namespace: volsync-system
     - name: rook-ceph-cluster

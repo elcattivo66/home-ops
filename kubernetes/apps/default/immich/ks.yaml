@@ -9,9 +9,12 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  # components:
+  components:
+    - ../../../../components/gpu
   #   - ../../../../components/keda/nfs-scaler
   dependsOn:
+    - name: intel-gpu-resource-driver
+      namespace: kube-system
     - name: cloudnative-pg-cluster
       namespace: databases
     - name: dragonfly-cluster

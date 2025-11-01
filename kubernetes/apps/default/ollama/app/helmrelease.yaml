@@ -47,12 +47,16 @@ spec:
               OLLAMA_NUM_GPU: 999
               ZES_ENABLE_SYSMAN: 1
             resources:
+              claims:
+                - name: gpu
               requests:
                 cpu: 200m
               limits:
                 memory: 16Gi
-                gpu.intel.com/i915: 1
         pod:
+          resourceClaims:
+            - name: gpu
+              resourceClaimTemplateName: ollama-gpu
           nodeSelector:
             kubernetes.io/arch: amd64
             kubernetes.io/hostname: nuc14
