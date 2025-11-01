@@ -28,7 +28,7 @@ nodes:
     ipAddress: 192.168.20.11
     controlPlane: true
     nodeLabels:
-      intel.feature.node.kubernetes.io/gpu: "true"
+      node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: SanDisk SD8S*
     networkInterfaces:
@@ -65,7 +65,7 @@ nodes:
     ipAddress: 192.168.20.13
     controlPlane: true
     nodeLabels:
-      intel.feature.node.kubernetes.io/gpu: "true"
+      node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: SPCC Solid*
     networkInterfaces:
@@ -106,7 +106,7 @@ nodes:
     ipAddress: 192.168.20.14
     controlPlane: true
     nodeLabels:
-      intel.feature.node.kubernetes.io/gpu: "true"
+      node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: SSDPR-CX400*
     networkInterfaces:
@@ -176,6 +176,7 @@ controlPlane:
               [plugins."io.containerd.cri.v1.images"]
                 discard_unpacked_layers = false
               [plugins."io.containerd.cri.v1.runtime"]
+                cdi_spec_dirs = ["/var/cdi/static", "/var/cdi/dynamic"]
                 device_ownership_from_security_context = true
 
     # Disable search domain everywhere
