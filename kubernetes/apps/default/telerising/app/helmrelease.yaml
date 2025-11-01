@@ -28,8 +28,8 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/starfoxfs/telerising
-              tag: amd64-linux@sha256:2eb89d97d7238ce391c6edaab5663519731a8048f38598f21a048ce0c7600f96
+              repository: ad0lar/telerising-easy4me
+              tag: 1760808667-v0.14.9-4c6873e-amd64@sha256:0a867692fc7da106dca569e3a05a5127e8cedd3d5f4fd0ee274df4b9db45d490
             env:
               TZ: ${TZ}
             resources:
