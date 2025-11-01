@@ -56,7 +56,6 @@ spec:
                 cpu: 5m
                 memory: 1Gi
               limits:
-                gpu.intel.com/i915: 1
                 memory: 2Gi
 
       machine-learning:
