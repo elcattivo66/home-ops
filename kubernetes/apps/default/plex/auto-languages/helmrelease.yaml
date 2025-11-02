@@ -28,8 +28,8 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/remirigal/plex-auto-languages
-              tag: v1.2.3
+              repository: ghcr.io/journeydocker/plex-auto-languages
+              tag: v1.3.15@sha:ba3818e20c45041d2751638620f16f1fc83d1d1f11a700ac2cf8becf5343aa44
             envFrom:
               - secretRef:
                   name: plex-auto-languages-secret
