@@ -9,7 +9,7 @@ spec:
     template:
       type: Opaque
       data:
-        RESTIC_REPOSITORY: "s3:http://nas.local:3900/volsync/${APP}"
+        RESTIC_REPOSITORY: "s3:http://192.168.20.5:3900/volsync/${APP}"
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
         AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
