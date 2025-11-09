@@ -107,7 +107,7 @@ spec:
           host: nas.local:3900
           ssl: false
           bucket: nextcloud
-          usePathStyle: true
+          usePathStyle: false
           region: us-east-1
           autocreate: true
           existingSecret: nextcloud-secret
