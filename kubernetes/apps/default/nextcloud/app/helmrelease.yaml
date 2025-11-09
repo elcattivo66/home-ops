@@ -104,7 +104,7 @@ spec:
       objectstore:
         s3:
           enabled: true
-          host: nas.local:3900
+          host: 192.168.20.5:3900
           ssl: false
           bucket: nextcloud-data
           usePathStyle: false
