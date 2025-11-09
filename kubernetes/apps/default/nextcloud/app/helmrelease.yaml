@@ -104,9 +104,9 @@ spec:
       objectstore:
         s3:
           enabled: true
-          host: s3.{SECRET_HOME_DOMAIN}
-          ssl: true
-          bucket: nextcloud-data
+          host: nas.local:3900
+          ssl: false
+          bucket: nextcloud
           usePathStyle: true
           region: us-east-1
           autocreate: true
