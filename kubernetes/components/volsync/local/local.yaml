@@ -9,7 +9,7 @@ spec:
     template:
       type: Opaque
       data:
-        RESTIC_REPOSITORY: "s3:https://s3.${SECRET_HOME_DOMAIN}/volsync/${APP}"
+        RESTIC_REPOSITORY: "s3:http://nas.local:3900/volsync/${APP}"
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
         AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
@@ -20,7 +20,7 @@ spec:
           name: bitwarden-fields
           kind: ClusterSecretStore
       remoteRef:
-        key: 75163a01-0c14-4ee8-8679-a3e90e772585
+        key: 283944de-89be-4128-959b-7c06e15711cc
         property: RESTIC_PASSWORD
     - secretKey: AWS_ACCESS_KEY_ID
       sourceRef:
@@ -28,7 +28,7 @@ spec:
           name: bitwarden-fields
           kind: ClusterSecretStore
       remoteRef:
-        key: ddc59a49-292c-482a-aaaf-5f43d869189d
+        key: 283944de-89be-4128-959b-7c06e15711cc
         property: access_key
     - secretKey: AWS_SECRET_ACCESS_KEY
       sourceRef:
@@ -36,7 +36,7 @@ spec:
           name: bitwarden-fields
           kind: ClusterSecretStore
       remoteRef:
-        key: ddc59a49-292c-482a-aaaf-5f43d869189d
+        key: 283944de-89be-4128-959b-7c06e15711cc
         property: secret_key
 ---
 # yaml-language-server: $schema=https://kube-schemas.pages.dev/volsync.backube/replicationdestination_v1alpha1.json
