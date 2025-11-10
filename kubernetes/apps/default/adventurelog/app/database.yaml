@@ -1,0 +1,16 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: postgres-adventurelog
+  namespace: databases
+spec:
+  name: adventurelog
+  owner: adventurelog
+  cluster:
+    name: postgres
+  extensions:
+    - name: postgis
+    - name: postgis_topology
+    - name: fuzzystrmatch
+    - name: postgis_tiger_geocoder
