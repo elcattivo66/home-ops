@@ -4,8 +4,6 @@ kind: Database
 metadata:
   name: postgres-adventurelog
   namespace: databases
-  labels:
-    kustomize.toolkit.fluxcd.io/namespace: databases
 spec:
   name: adventurelog
   owner: adventurelog
