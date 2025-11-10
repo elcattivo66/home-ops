@@ -34,8 +34,8 @@ spec:
           - /usr/lib/postgresql/18/lib
         extension_control_path:
           - /usr/share/postgresql/18/
-    # shared_preload_libraries:
-    #   - "vchord"
+    shared_preload_libraries:
+      - "vchord"
   resources:
     requests:
       cpu: 250m
@@ -59,3 +59,96 @@ spec:
       plugin:
         name: barman-cloud.cloudnative-pg.io
         parameters: *parameters
+
+  # managed:
+  #   roles:
+  #     - name: adventurelog
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: adventurelog-postgres
+  #     - name: atuin
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: atuin-postgres
+  #     - name: authelia
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: authelia-postgres
+  #     - name: bazarr
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: bazarr-postgres
+  #     - name: dispatcharr
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: dispatcharr-postgres
+  #     - name: home_assistant
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: home_assistant-postgres
+  #     - name: immich
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: immich-postgres
+  #     - name: lldap
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: lldap-postgres
+  #     - name: nextcloud
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: nextcloud-postgres
+  #     - name: paperless
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: paperless-postgres
+  #     - name: prowlarr_main
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: prowlarr-postgres
+  #     - name: radarr_main
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: radarr-postgres
+  #     - name: sonarr_main
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: sonarr-postgres
+  #     - name: tandoor
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: tandoor-postgres
+  #     - name: vaultwarden
+  #       ensure: present
+  #       login: true
+  #       superuser: false
+  #       passwordSecret:
+  #         name: vaultwarden-postgres
