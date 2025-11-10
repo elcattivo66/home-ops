@@ -18,9 +18,8 @@ spec:
   primaryUpdateStrategy: unsupervised
   primaryUpdateMethod: switchover
   postgresql:
-    parameters:
-      max_connections: "600"
-      shared_buffers: 512MB
+    shared_preload_libraries:
+      - "vchord.so"
     extensions:
       - name: postgis
         ld_library_path:
@@ -34,8 +33,7 @@ spec:
           - /usr/lib/postgresql/18/lib
         extension_control_path:
           - /usr/share/postgresql/18/
-    shared_preload_libraries:
-      - "vchord"
+
   resources:
     requests:
       cpu: 250m
