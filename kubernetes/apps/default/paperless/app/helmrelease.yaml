@@ -29,7 +29,7 @@ spec:
                   name: paperless-secret
             image:
               repository: ghcr.io/home-operations/postgres-init
-              tag: 17
+              tag: 18
         containers:
           app:
             image:
