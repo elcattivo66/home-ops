@@ -19,8 +19,8 @@ spec:
     parameters:
       max_connections: "600"
       shared_buffers: 512MB
-    # shared_preload_libraries:
-    #   - "vchord.so"
+    shared_preload_libraries:
+      - "vchord.so"
     extensions:
       - name: postgis
         ld_library_path:
