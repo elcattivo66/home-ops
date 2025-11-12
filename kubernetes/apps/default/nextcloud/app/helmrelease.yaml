@@ -42,7 +42,7 @@ spec:
       enabled: true
       protocol: https
     nextcloud:
-      host: &host cloud.${SECRET_DOMAIN}
+      host: cloud.${SECRET_DOMAIN}
       extraInitContainers:
         - name: init-db
           image: ghcr.io/home-operations/postgres-init:18
