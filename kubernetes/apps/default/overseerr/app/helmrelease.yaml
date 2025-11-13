@@ -57,16 +57,15 @@ spec:
         ports:
           http:
             port: 5055
-    ingress:
+    route:
       app:
-        className: external
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "requests.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: networking
+            sectionName: https
     persistence:
       config:
         existingClaim: *app

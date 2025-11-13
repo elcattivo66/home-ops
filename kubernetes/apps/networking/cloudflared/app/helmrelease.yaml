@@ -17,9 +17,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  dependsOn:
-    - name: nginx-external
-      namespace: networking
   values:
     controllers:
       cloudflared:
@@ -30,21 +27,19 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/cloudflare/cloudflared
+              repository: mirror.gcr.io/cloudflare/cloudflared
               tag: 2025.11.1@sha256:89ee50efb1e9cb2ae30281a8a404fed95eb8f02f0a972617526f8c5b417acae2
             env:
               NO_AUTOUPDATE: true
-              TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
               TUNNEL_METRICS: 0.0.0.0:8080
-              TUNNEL_ORIGIN_ENABLE_HTTP2: true
-              TUNNEL_TRANSPORT_PROTOCOL: quic
-              TUNNEL_POST_QUANTUM: true
+              TUNNEL_POST_QUANTUM: true # disable when using http2
+              TUNNEL_TRANSPORT_PROTOCOL: quic # http2
+            envFrom:
+              - secretRef:
+                  name: cloudflared-tunnel-secret
             args:
               - tunnel
-              - --config
-              - /etc/cloudflared/config/config.yaml
               - run
-              - "${SECRET_CLOUDFLARE_TUNNEL_ID}"
             probes:
               liveness: &probes
                 enabled: true
@@ -61,7 +56,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 10m
@@ -74,31 +69,28 @@ spec:
         runAsGroup: 1000
     service:
       app:
-        controller: cloudflared
         ports:
           http:
             port: *port
     serviceMonitor:
       app:
-        serviceName: cloudflared
         endpoints:
           - port: http
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
-    persistence:
+    configMaps:
       config:
+        data:
+          config.yaml: |-
+            ingress:
+              - hostname: "*.${SECRET_DOMAIN}"
+                originRequest:
+                  http2Origin: true
+                  originServerName: external.${SECRET_DOMAIN}
+                service: https://envoy-external.{{ .Release.Namespace }}.svc.cluster.local:443
+              - service: http_status:404
+    persistence:
+      config-file:
         type: configMap
-        name: cloudflared-configmap
+        identifier: config
         globalMounts:
-          - path: /etc/cloudflared/config/config.yaml
+          - path: /etc/cloudflared/config.yaml
             subPath: config.yaml
-            readOnly: true
-      creds:
-        type: secret
-        name: cloudflared-tunnel-secret
-        globalMounts:
-          - path: /etc/cloudflared/creds/credentials.json
-            subPath: credentials.json
-            readOnly: true

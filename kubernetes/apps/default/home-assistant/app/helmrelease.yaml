@@ -102,16 +102,16 @@ spec:
           code-server:
             port: 12321
     route:
-      # app:
-      #   hostnames:
-      #     - hass.${SECRET_DOMAIN}
-      #   parentRefs:
-      #     - name: envoy-internal
-      #       namespace: networking
-      #   rules:
-      #     - backendRefs:
-      #         - identifier: app
-      #           port: 8123
+      app:
+        hostnames:
+          - hass.${SECRET_DOMAIN}
+        parentRefs:
+          - name: envoy-external
+            namespace: networking
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: 8123
       code:
         hostnames:
           - hass-code.${SECRET_DOMAIN}
@@ -122,16 +122,6 @@ spec:
           - backendRefs:
               - identifier: code-server
                 port: 12321
-    ingress:
-      app:
-        className: external
-        hosts:
-          - host: &host hass.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
 
     persistence:
       config:

@@ -55,19 +55,14 @@ spec:
           http:
             port: 80
 
-    ingress:
+    route:
       app:
-        className: external
-        hosts:
-          - host: &host "audiobooks.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames:
+          - "audiobooks.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
 
     persistence:
       config:

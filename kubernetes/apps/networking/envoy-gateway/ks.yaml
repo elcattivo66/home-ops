@@ -1,4 +1,24 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: certificates
+  namespace: &namespace networking
+spec:
+  targetNamespace: *namespace
+  dependsOn:
+    - name: cert-manager-issuers
+      namespace: cert-manager
+  path: ./kubernetes/apps/networking/envoy-gateway/certificates
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 30m
+  prune: true
+  wait: true
+---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -6,8 +26,8 @@ metadata:
   name: envoy-gateway
 spec:
   dependsOn:
-    - name: cert-manager-issuers
-      namespace: cert-manager
+    - name: certificates
+      namespace: networking
   interval: 1h
   path: ./kubernetes/apps/networking/envoy-gateway/app
   prune: true

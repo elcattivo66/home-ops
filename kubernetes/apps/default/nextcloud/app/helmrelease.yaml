@@ -196,39 +196,7 @@ spec:
         usernameKey: POSTGRES_USER
         passwordKey: POSTGRES_PASSWORD
     ingress:
-      enabled: true
-      className: external
-      annotations:
-        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-        nginx.ingress.kubernetes.io/proxy-body-size: "16G"
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: "20"
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "14400"
-        nginx.ingress.kubernetes.io/proxy-send-timeout: "14400"
-        nginx.ingress.kubernetes.io/proxy-buffering: "off"
-        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-        nginx.org/proxy-hide-headers: "X-Powered-By"
-        nginx.org/server-tokens: "off"
-        nginx.org/rewrites: |
-          /.well-known/webfinger /index.php/.well-known/webfinger;
-          /.well-known/nodeinfo /index.php/.well-known/nodeinfo;
-          /.well-known/host-meta /public.php?service=host-meta;
-          /.well-known/host-meta.json /public.php?service=host-meta-json;
-          /.well-known/carddav $scheme://$host/remote.php/dav redirect=301;
-          /.well-known/caldav $scheme://$host/remote.php/dav redirect=301;
-        nginx.ingress.kubernetes.io/configuration-snippet: |-
-          more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
-        nginx.ingress.kubernetes.io/server-snippet: |
-          location = /robots.txt {
-            return 200 "User-agent: *\nDisallow: /\n";
-          }
-          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
-            deny all;
-          }
-          location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
-            deny all;
-          }
-      path: /
-      pathType: Prefix
+      enabled: false
 
     persistence:
       enabled: true

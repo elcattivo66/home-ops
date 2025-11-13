@@ -7,7 +7,7 @@ metadata:
 spec:
   targetNamespace: *namespace
   dependsOn:
-    - name: nginx-external
+    - name: envoy-gateway
       namespace: networking
   path: ./kubernetes/apps/networking/external-services/minio
   prune: true

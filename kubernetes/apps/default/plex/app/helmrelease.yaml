@@ -63,23 +63,31 @@ spec:
           lbipam.cilium.io/ips: 192.168.20.224
         ports:
           http:
-            port: 32400
-    ingress:
+            port: &port 32400
+    route:
       app:
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: networking
+        rules:
+          - # Ref: https://forums.plex.tv/t/external-srt-subtitles-are-not-working-w-reverse-proxy/886540
+            backendRefs:
+              - identifier: app
+                port: *port
+            filters:
+              - type: RequestHeaderModifier
+                requestHeaderModifier:
+                  remove:
+                    - Range
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /library/streams
+          - backendRefs:
+              - identifier: app
+                port: *port
     persistence:
       config:
         existingClaim: *app
