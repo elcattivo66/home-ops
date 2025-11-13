@@ -112,7 +112,7 @@ spec:
         rules:
           - backendRefs:
             - identifier: server
-              port: http
+              port: 2283
 
     persistence:
       library:
