@@ -67,7 +67,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "sab.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: networking
