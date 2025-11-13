@@ -76,15 +76,11 @@ spec:
           http:
             port: 8080
 
-    ingress:
+    route:
       app:
-        enabled: true
-        className: internal
-        annotations:
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https

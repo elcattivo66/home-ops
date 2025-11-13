@@ -84,7 +84,7 @@ kind: Gateway
 metadata:
   name: envoy-internal
   annotations:
-    external-dns.alpha.kubernetes.io/target: &hostname internal-envoy.${SECRET_DOMAIN}
+    external-dns.alpha.kubernetes.io/target: &hostname internal.${SECRET_DOMAIN}
     gatus.home-operations.com/endpoint: |-
       group: internal
       guarded: true
@@ -96,7 +96,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
-      lbipam.cilium.io/ips: 192.168.20.146
+      lbipam.cilium.io/ips: 192.168.20.148
   listeners:
     - name: http
       protocol: HTTP

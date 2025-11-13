@@ -61,16 +61,14 @@ spec:
         ports:
           http:
             port: &port 8080
-    ingress:
+    route:
       app:
-        className: internal
-        hosts:
-          - host: &host "chat.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - "chat.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
     persistence:
       config:
         enabled: true

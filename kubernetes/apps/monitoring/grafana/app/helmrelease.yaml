@@ -310,14 +310,14 @@ spec:
       - grafana-clock-panel
     serviceMonitor:
       enabled: true
-    ingress:
-      enabled: true
-      ingressClassName: internal
-      hosts:
-        - &host grafana.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - *host
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - grafana.${SECRET_DOMAIN}
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
     persistence:
       enabled: false
     testFramework:

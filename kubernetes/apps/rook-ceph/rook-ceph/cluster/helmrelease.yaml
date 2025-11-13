@@ -40,12 +40,15 @@ spec:
     monitoring:
       enabled: true
       createPrometheusRules: true
-    ingress:
+    route:
       dashboard:
-        ingressClassName: internal
         host:
           name: rook.${SECRET_DOMAIN}
           path: /
+          pathType: PathPrefix
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
     toolbox:
       enabled: true
     cephClusterSpec:

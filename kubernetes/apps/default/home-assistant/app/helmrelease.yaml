@@ -98,7 +98,27 @@ spec:
             appProtocol: kubernetes.io/ws
           code-server:
             port: 12321
-
+    route:
+      # app:
+      #   hostnames:
+      #     - hass.${SECRET_DOMAIN}
+      #   parentRefs:
+      #     - name: envoy-internal
+      #       namespace: networking
+      #   rules:
+      #     - backendRefs:
+      #         - identifier: app
+      #           port: 8123
+      code:
+        hostnames:
+          - hass-code.${SECRET_DOMAIN}
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+        rules:
+          - backendRefs:
+              - identifier: code-server
+                port: 12321
     ingress:
       app:
         className: external
@@ -109,15 +129,7 @@ spec:
                 service:
                   identifier: app
                   port: http
-      code-server:
-        className: internal
-        hosts:
-          - host: hass-code.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: code-server
+
     persistence:
       config:
         enabled: true
