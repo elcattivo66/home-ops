@@ -96,7 +96,7 @@ spec:
                   type: RegularExpression
                   value: "^/(get|xmltv)\\.php($|[?/])"
             backendRefs:
-              - name: app
+              - name: dispatcharr
                 port: *port
       internal:
         hostnames:
@@ -111,7 +111,7 @@ spec:
                   type: PathPrefix
                   value: /
             backendRefs:
-              - name: app
+              - name: dispatcharr
                 port: *port
     persistence:
       data:
