@@ -90,6 +90,22 @@ spec:
           - name: envoy-external
             namespace: networking
             sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: RegularExpression
+                  value: "^/(get|xmltv)\\.php"
+      internal:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: dispatcharr
+                port: *port
     persistence:
       data:
         existingClaim: dispatcharr
