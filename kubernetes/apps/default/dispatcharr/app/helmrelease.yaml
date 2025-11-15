@@ -102,10 +102,7 @@ spec:
           - name: envoy-internal
             namespace: networking
             sectionName: https
-        rules:
-          - backendRefs:
-              - name: dispatcharr
-                port: *port
+
     persistence:
       data:
         existingClaim: dispatcharr
