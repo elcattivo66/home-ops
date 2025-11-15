@@ -94,7 +94,7 @@ spec:
           - matches:
               - path:
                   type: RegularExpression
-                  value: "^/(get|xmltv)\\.php($|[?/])"
+                  value: "^/(get|xmltv)\\.php($|[?/])|^/proxy/"
             backendRefs:
               - name: dispatcharr
                 port: *port
