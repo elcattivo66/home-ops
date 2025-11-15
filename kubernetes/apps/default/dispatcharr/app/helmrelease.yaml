@@ -95,6 +95,9 @@ spec:
               - path:
                   type: RegularExpression
                   value: "^/(get|xmltv)\\.php"
+          - backendRefs:
+              - name: app
+                port: *port
       internal:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
@@ -102,7 +105,10 @@ spec:
           - name: envoy-internal
             namespace: networking
             sectionName: https
-
+        rules:
+          - backendRefs:
+              - name: app
+                port: *port
     persistence:
       data:
         existingClaim: dispatcharr
