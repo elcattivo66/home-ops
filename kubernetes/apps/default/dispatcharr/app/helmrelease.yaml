@@ -83,13 +83,36 @@ spec:
           http:
             port: *port
     route:
-      app:
+      external:
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "stream.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-external
             namespace: networking
             sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: RegularExpression
+                  value: "^/(get|xmltv)\\.php($|[?/])"
+            backendRefs:
+              - name: app
+                port: *port
+      internal:
+        hostnames:
+          - "{{.Release.Name}}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: app
+                port: *port
     persistence:
       data:
         existingClaim: dispatcharr
