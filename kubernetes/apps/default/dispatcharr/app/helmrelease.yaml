@@ -94,7 +94,7 @@ spec:
           - matches:
               - path:
                   type: RegularExpression
-                  value: "^/(get|xmltv)\\.php($|[?/])"
+                  value: "^/(get|xmltv|player_api)\\.php($|[?/])"
               - path:
                   type: PathPrefix
                   value: /proxy/
