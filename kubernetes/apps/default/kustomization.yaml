@@ -23,7 +23,6 @@ resources:
   - ./nextcloud/ks.yaml
   # - ./ollama/ks.yaml
   # - ./open-webui/ks.yaml
-  - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
@@ -32,6 +31,7 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./smtp-relay/ks.yaml
   - ./sonarr/ks.yaml
+  - ./seerr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
   - ./telerising/ks.yaml
