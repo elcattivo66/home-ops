@@ -94,23 +94,13 @@ spec:
           - matches:
               - path:
                   type: RegularExpression
-                  value: "^/(get|xmltv|player_api)\\.php($|[?/])"
-              - path:
-                  type: PathPrefix
-                  value: /proxy/
-              - path:
-                  type: PathPrefix
-                  value: /api/
-              - path:
-                  type: PathPrefix
-                  value: /live/
+                  value: "^/(get|xmltv|player_api)\\.php($|[?/])|^/(proxy|api|live|philipp)/"
             backendRefs:
               - name: dispatcharr
                 port: *port
       internal:
         hostnames:
           - "{{.Release.Name}}.${SECRET_DOMAIN}"
-          - "stream.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: networking
