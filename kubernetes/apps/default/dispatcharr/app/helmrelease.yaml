@@ -110,6 +110,7 @@ spec:
       internal:
         hostnames:
           - "{{.Release.Name}}.${SECRET_DOMAIN}"
+          - "stream.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: networking
