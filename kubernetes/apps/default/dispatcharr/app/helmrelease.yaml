@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/dispatcharr/dispatcharr
-              tag: dev@sha256:3f011285bb0eea4c9cccbcb33df0ceeb3bfb5743eefefa6fbceaae40befd96e2
+              tag: dev@sha256:fc84293c7dd88d13917d34ccdcfaf8d91c2d752dc90e63fef3cd3839cd2745d5
             env:
               CELERY_BROKER_URL: &celery_broker redis://dragonfly.databases.svc.cluster.local:6379/9
               CELERY_RESULT_BACKEND: *celery_broker
