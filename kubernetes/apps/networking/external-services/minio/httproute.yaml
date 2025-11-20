@@ -7,6 +7,7 @@ metadata:
 spec:
   hostnames:
     - minio.${SECRET_DOMAIN}
+    - s3.${SECRET_DOMAIN}
   parentRefs:
     - name: envoy-external
       namespace: networking
