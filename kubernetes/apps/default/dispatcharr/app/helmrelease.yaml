@@ -45,7 +45,7 @@ spec:
               CELERY_BROKER_URL: &celery_broker redis://dragonfly.databases.svc.cluster.local:6379/9
               CELERY_RESULT_BACKEND: *celery_broker
               DISPATCHARR_ENV: aio
-              DISPATCHARR_LOG_LEVEL: debug
+              DISPATCHARR_LOG_LEVEL: info
               DISPATCHARR_PORT: &port 80
               REDIS_HOST: &redis dragonfly.databases.svc.cluster.local
               REDIS_DB: 9
