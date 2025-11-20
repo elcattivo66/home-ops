@@ -96,17 +96,8 @@ spec:
                   type: RegularExpression
                   value: "^/(get|xmltv|player_api)\\.php($|[?/])"
               - path:
-                  type: PathPrefix
-                  value: /proxy/
-              - path:
-                  type: PathPrefix
-                  value: /api/
-              - path:
-                  type: PathPrefix
-                  value: /live/
-              - path:
-                  type: PathPrefix
-                  value: /philipp/
+                  type: RegularExpression
+                  value: "^/(proxy|api|live|philipp)(/|$)"
             backendRefs:
               - name: dispatcharr
                 port: *port
