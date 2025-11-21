@@ -3,11 +3,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: minio-s3
+  name: garage-s3
 spec:
   ports:
     - name: http
       protocol: TCP
-      port: 9000
+      port: 3900
       targetPort: http
   type: ClusterIP

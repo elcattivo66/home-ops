@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: envoy-gateway
       namespace: networking
-  path: ./kubernetes/apps/networking/external-services/minio
+  path: ./kubernetes/apps/networking/external-services/garage
   prune: true
   sourceRef:
     kind: GitRepository
