@@ -1,13 +1,12 @@
 ---
-apiVersion: gateway.envoyproxy.io/v1alpha1
+apiVersion: gateway.networking.k8s.io/v1
 kind: SecurityPolicy
 metadata:
   name: 'authelia-extauthz-dispatcharr'
 spec:
   targetRefs:
-    - group: 'gateway.networking.k8s.io'
-      kind: 'HTTPRoute'
-      name: 'dispatcharr'
+    - kind: HTTPRoute
+      name: dispatcharr
   extAuth:
     headersToExtAuth:
       - 'accept'
@@ -18,8 +17,10 @@ spec:
     failOpen: false
     http:
       backendRefs:
-        - name: 'authelia'
-          namespace: 'default'
+        - group: ""
+          kind: Service
+          name: authelia
+          namespace: default
           port: 9091
       path: '/api/authz/ext-authz/'
       headersToBackend:
