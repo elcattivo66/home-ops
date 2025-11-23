@@ -83,39 +83,39 @@ spec:
           http:
             port: *port
     route:
+      # external:
+      #   hostnames:
+      #     - "stream.${SECRET_DOMAIN}"
+      #   parentRefs:
+      #     - name: envoy-external
+      #       namespace: networking
+      #       sectionName: https
+      #   rules:
+      #     - matches:
+      #         - path:
+      #             type: RegularExpression
+      #             value: "^/(get|xmltv|player_api)\\.php($|[?/])"
+      #         - path:
+      #             type: PathPrefix
+      #             value: /proxy/
+      #         - path:
+      #             type: PathPrefix
+      #             value: /api/
+      #         - path:
+      #             type: PathPrefix
+      #             value: /live/
+      #         - path:
+      #             type: PathPrefix
+      #             value: /philipp/
+      #       backendRefs:
+      #         - name: dispatcharr
+      #           port: *port
       external:
-        hostnames:
-          - "stream.${SECRET_DOMAIN}"
-        parentRefs:
-          - name: envoy-external
-            namespace: networking
-            sectionName: https
-        rules:
-          - matches:
-              - path:
-                  type: RegularExpression
-                  value: "^/(get|xmltv|player_api)\\.php($|[?/])"
-              - path:
-                  type: PathPrefix
-                  value: /proxy/
-              - path:
-                  type: PathPrefix
-                  value: /api/
-              - path:
-                  type: PathPrefix
-                  value: /live/
-              - path:
-                  type: PathPrefix
-                  value: /philipp/
-            backendRefs:
-              - name: dispatcharr
-                port: *port
-      internal:
         hostnames:
           - "{{.Release.Name}}.${SECRET_DOMAIN}"
           - "stream.${SECRET_DOMAIN}"
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-external
             namespace: networking
             sectionName: https
         rules:

@@ -66,6 +66,10 @@ access_control:
       policy: bypass
       resources:
         - "^/api([/?].*)?$"
+    - domain_regex: '^(dispatcharr|stream)\.${SECRET_DOMAIN}$'
+      policy: bypass
+      resources:
+        - '^/(api(?:[/?].*)?|(?:get|xmltv|player_api)\.php(?:[?/].*)?|proxy/.*|live/.*|philipp/.*)$'
     # Rules applied to everyone
     - domain:
         - "${SECRET_DOMAIN}"
