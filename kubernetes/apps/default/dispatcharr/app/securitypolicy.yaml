@@ -2,18 +2,21 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: SecurityPolicy
 metadata:
-  name: 'authelia-extauthz-dispatcharr'
+  name: authelia-extauthz-dispatcharr
 spec:
   targetRefs:
-    - kind: HTTPRoute
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
       name: dispatcharr
   extAuth:
     headersToExtAuth:
-      - 'accept'
-      - 'cookie'
-      - 'authorization'
-      - 'header-authorization'
-      - 'x-forwarded-proto'
+      - X-Forwarded-For # this is here so we can get the real IP
+      - X-Forwarded-Proto
+      - authorization
+      - header-authorization
+      - proxy-authorization
+      - accept
+      - cookie
     failOpen: false
     http:
       backendRefs:
@@ -22,7 +25,7 @@ spec:
           name: authelia
           namespace: default
           port: 9091
-      path: '/api/authz/ext-authz/'
+      path: /api/authz/ext-authz/
       headersToBackend:
         - Remote-User
         - Remote-Groups
