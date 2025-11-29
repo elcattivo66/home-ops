@@ -22,22 +22,6 @@ spec:
       home-assistant:
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          # annotations:
-          #   k8s.v1.cni.cncf.io/networks: |
-          #     [{
-          #       "name":"multus-iot",
-          #       "namespace": "networking",
-          #       "ips": ["192.168.30.250/24"],
-          #       "mac": "f0:57:bc:d7:c1:49"
-          #     }]
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-
         initContainers:
           01-init-db:
             envFrom: &envFrom
@@ -65,8 +49,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
-
-
           code-server:
             image:
               repository: ghcr.io/coder/code-server
@@ -85,7 +67,21 @@ spec:
                 cpu: 10m
               limits:
                 memory: 512Mi
-
+    defaultPodOptions:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [{
+            "name":"multus-iot",
+            "namespace": "networking",
+            "ips": ["192.168.30.250/24"],
+            "mac": "f0:57:bc:d7:c1:49"
+          }]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         controller: home-assistant
