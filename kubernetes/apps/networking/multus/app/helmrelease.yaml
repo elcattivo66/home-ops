@@ -22,21 +22,14 @@ spec:
   chartRef:
     kind: OCIRepository
     name: multus
-  interval: 30m
+  interval: 1h
   values:
-    cni-plugins:
-      image:
-        repository: ghcr.io/home-operations/cni-plugins
-        tag: 1.8.0
+    cni:
+      binPath: /opt/cni/bin
+      netPath: /etc/cni/net.d
     multus:
-      image:
-        repository: ghcr.io/k8snetworkplumbingwg/multus-cni
-        tag: v4.2.3
       resources:
         requests:
           cpu: 10m
         limits:
-          memory: 32Mi
-    cni:
-      netPath: /etc/cni/net.d
-      binPath: /opt/cni/bin
+          memory: 512Mi
