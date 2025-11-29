@@ -60,14 +60,8 @@ spec:
       enabled: true
     envoy:
       enabled: false
-      rollOutPods: false
-      prometheus:
-        serviceMonitor:
-          enabled: true
     gatewayAPI:
       enabled: false
-      enableAlpn: true
-      xffNumTrustedHops: 1
     hubble:
       enabled: false
     ipam:
@@ -78,7 +72,7 @@ spec:
     kubeProxyReplacement: true
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
     l2announcements:
-      enabled: false
+      enabled: true
     loadBalancer:
       algorithm: maglev
       mode: dsr
