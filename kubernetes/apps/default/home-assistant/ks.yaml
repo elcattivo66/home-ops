@@ -14,8 +14,8 @@ spec:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
   dependsOn:
-    - name: multus-networks
-      namespace: networking
+    # - name: multus-networks
+    #   namespace: networking
     - name: cloudnative-pg-cluster
       namespace: databases
     - name: rook-ceph-cluster
