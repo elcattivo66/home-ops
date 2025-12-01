@@ -28,14 +28,14 @@ spec:
           resourceClaims:
             - name: gpu
               resourceClaimTemplateName: dispatcharr-gpu
-          # annotations:
-          #   k8s.v1.cni.cncf.io/networks: |
-          #     [{
-          #       "name":"multus-vpn",
-          #       "namespace": "networking",
-          #       "ips": ["192.168.70.10/24"],
-          #       "mac": "2e:54:30:22:3f:74"
-          #     }]
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-vpn",
+                "namespace": "networking",
+                "ips": ["192.168.70.10/24"],
+                "mac": "2e:54:30:22:3f:74"
+              }]
         containers:
           app:
             image:
@@ -83,33 +83,6 @@ spec:
           http:
             port: *port
     route:
-      # external:
-      #   hostnames:
-      #     - "stream.${SECRET_DOMAIN}"
-      #   parentRefs:
-      #     - name: envoy-external
-      #       namespace: networking
-      #       sectionName: https
-      #   rules:
-      #     - matches:
-      #         - path:
-      #             type: RegularExpression
-      #             value: "^/(get|xmltv|player_api)\\.php($|[?/])"
-      #         - path:
-      #             type: PathPrefix
-      #             value: /proxy/
-      #         - path:
-      #             type: PathPrefix
-      #             value: /api/
-      #         - path:
-      #             type: PathPrefix
-      #             value: /live/
-      #         - path:
-      #             type: PathPrefix
-      #             value: /philipp/
-      #       backendRefs:
-      #         - name: dispatcharr
-      #           port: *port
       external:
         hostnames:
           - "{{.Release.Name}}.${SECRET_DOMAIN}"
