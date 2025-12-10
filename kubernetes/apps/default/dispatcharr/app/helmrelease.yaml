@@ -28,14 +28,14 @@ spec:
           resourceClaims:
             - name: gpu
               resourceClaimTemplateName: dispatcharr-gpu
-          annotations:
-            k8s.v1.cni.cncf.io/networks: |
-              [{
-                "name":"multus-vpn",
-                "namespace": "networking",
-                "ips": ["192.168.70.10/24"],
-                "mac": "2e:54:30:22:3f:74"
-              }]
+          # annotations:
+          #   k8s.v1.cni.cncf.io/networks: |
+          #     [{
+          #       "name":"multus-vpn",
+          #       "namespace": "networking",
+          #       "ips": ["192.168.70.10/24"],
+          #       "mac": "2e:54:30:22:3f:74"
+          #     }]
         containers:
           app:
             image:
