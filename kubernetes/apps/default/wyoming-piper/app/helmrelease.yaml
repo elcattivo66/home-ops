@@ -30,7 +30,7 @@ spec:
               tag: latest
               pullPolicy: IfNotPresent
             args:
-            - --voice= de_DE-mls-medium
+            - --voice=de_DE-mls-medium
             env:
               TZ: ${TZ}
               WYOMING_PIPER_DASHBOARD_USE_PING: true
