@@ -36,4 +36,6 @@ resources:
   - ./tautulli/ks.yaml
   - ./telerising/ks.yaml
   - ./vaultwarden/ks.yaml
+  - ./wyoming-piper/ks.yaml
+  - ./wyoming-whisper/ks.yaml
   - ./zigbee2mqtt/ks.yaml
