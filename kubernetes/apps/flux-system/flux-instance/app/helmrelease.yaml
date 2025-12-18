@@ -41,6 +41,7 @@ spec:
         ref: refs/heads/main
         path: kubernetes/flux/cluster
         pullSecret: github-deploy-key
+        interval: 1h
       commonMetadata:
         labels:
           app.kubernetes.io/name: flux
@@ -113,6 +114,14 @@ spec:
             target:
               kind: Deployment
               name: source-controller
+          - # Cache Secrets and ConfigMaps
+            patch: |-
+              - op: add
+                path: /spec/template/spec/containers/0/args/-
+                value: --feature-gates=CacheSecretsAndConfigMaps=true
+            target:
+              kind: Deployment
+              name: source-controller
           - # Flux near OOM detection for Helm
             patch: |
               - op: add
@@ -135,3 +144,27 @@ spec:
             target:
               kind: Deployment
               name: helm-controller
+          - # Controller-level SOPS decryption
+            patch: |-
+              - op: add
+                path: /spec/template/spec/containers/0/args/-
+                value: --sops-age-secret=sops-age-secret
+            target:
+              kind: Deployment
+              name: kustomize-controller
+          - # Watch configmaps and secrets attached to HelmReleases and Kustomizations
+            patch: |-
+              - op: add
+                path: /spec/template/spec/containers/0/args/-
+                value: --watch-configs-label-selector=owner!=helm
+            target:
+              kind: Deployment
+              name: (helm-controller|kustomize-controller)
+          - # Cancel health checks on new Kustomizations revisions
+            patch: |-
+              - op: add
+                path: /spec/template/spec/containers/0/args/-
+                value: --feature-gates=CancelHealthCheckOnNewRevision=true
+            target:
+              kind: Deployment
+              name: kustomize-controller
