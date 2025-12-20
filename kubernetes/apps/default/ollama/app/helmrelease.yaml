@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: intelanalytics/ipex-llm-inference-cpp-xpu
-              tag: latest
+              tag: 2.3.0-SNAPSHOT
             command:
               - /bin/sh
               - -c
