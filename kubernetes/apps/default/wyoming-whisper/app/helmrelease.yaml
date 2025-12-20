@@ -31,7 +31,7 @@ spec:
               pullPolicy: IfNotPresent
             args:
             - --model
-            - small
+            - uillaumekln/faster-whisper-small
             - --language
             - de
             env:
