@@ -37,7 +37,7 @@ releases:
       - kube-system/cilium
 
   - name: spegel
-    namespace: system
+    namespace: kube-system
     chart: oci://ghcr.io/spegel-org/helm-charts/spegel
     version: 0.6.0
     values:
@@ -52,7 +52,7 @@ releases:
     values:
       - ../templates/values.yaml.gotmpl
     needs:
-      - system/spegel
+      - kube-system/spegel
 
   - name: flux-operator
     namespace: flux-system
