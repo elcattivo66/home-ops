@@ -91,8 +91,8 @@ spec:
           #       memory: 100M
           tika:
             image:
-              repository: ghcr.io/paperless-ngx/tika
-              tag: 2.9.1-full
+              repository: docker.io/apache/tika
+              tag: 3.2.3.0
             resources:
               requests:
                 cpu: 10m
