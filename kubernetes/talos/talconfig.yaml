@@ -290,7 +290,7 @@ controlPlane:
           extraHostEntries:
             - ip: 192.168.20.9
               aliases:
-                - main.k8s.internal
+                - k8s.internal
 
     # Configure custom sysctls
     - |-
