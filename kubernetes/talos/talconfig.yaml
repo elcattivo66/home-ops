@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: &clusterName main
 
-endpoint: "https://main.k8s.internal:6443"
+endpoint: "https://k8s.internal:6443"
 
 clusterPodNets:
   - 10.42.0.0/16
@@ -18,8 +18,7 @@ cniConfig:
   name: none
 
 additionalApiServerCertSans: &sans
-  - main.k8s.internal
-  - &talosControlplaneVip 192.168.20.9
+  - k8s.internal
   - 127.0.0.1 # KubePrism
 additionalMachineCertSans: *sans
 
@@ -30,7 +29,7 @@ nodes:
     nodeLabels:
       node.kubernetes.io/gpu: "true"
     installDiskSelector:
-      model: SanDisk SD8S*
+      model: &installDisk INTEL SSDSC*
     networkInterfaces:
       - interface: bond0
         bond:
@@ -38,18 +37,17 @@ nodes:
           deviceSelectors:
             - hardwareAddr: 1c:69:7a:ac:*
               driver: igc
+        mtu: 9000
         dhcp: true
-        vip:
-          ip: *talosControlplaneVip
         vlans:
           - &vlan30
             vlanId: 30
             dhcp: false
-            mtu: 1500
+            mtu: 9000
           - &vlan70
             vlanId: 70
             dhcp: false
-            mtu: 1500
+            mtu: 9000
     patches:
       - |-
         machine:
@@ -65,7 +63,7 @@ nodes:
     nodeLabels:
       node.kubernetes.io/gpu: "true"
     installDiskSelector:
-      model: SPCC Solid*
+      model: *installDisk
     networkInterfaces:
       - interface: bond0
         bond:
@@ -73,9 +71,8 @@ nodes:
           deviceSelectors:
             - hardwareAddr: 48:21:0b:61:*
               driver: igc
+        mtu: 9000
         dhcp: true
-        vip:
-          ip: *talosControlplaneVip
         vlans:
           - *vlan30
           - *vlan70
@@ -106,7 +103,7 @@ nodes:
     nodeLabels:
       node.kubernetes.io/gpu: "true"
     installDiskSelector:
-      model: SSDPR-CX400*
+      model: *installDisk
     networkInterfaces:
       - interface: bond0
         bond:
@@ -114,9 +111,8 @@ nodes:
           deviceSelectors:
             - hardwareAddr: 88:ae:dd:66:*
               driver: igc
+        mtu: 9000
         dhcp: true
-        vip:
-          ip: *talosControlplaneVip
         vlans:
           - *vlan30
           - *vlan70
