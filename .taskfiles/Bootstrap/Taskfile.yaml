@@ -21,7 +21,7 @@ tasks:
     desc: Bootstrap Kubernetes Apps
     prompt: Bootstrap Kubernetes Apps ...?
     preconditions:
-      - which helmfile yq jq kubectl op talosctl
+      - which helmfile yq jq kubectl talosctl
       - test -f {{.ROOT_DIR}}/age.key
       - test -f {{.K8S_DIR}}/bootstrap/age-key.sops.yaml
       - test -f {{.K8S_DIR}}/bootstrap/github-deploy-key.sops.yaml
