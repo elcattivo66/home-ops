@@ -38,7 +38,7 @@ nodes:
           deviceSelectors:
             - hardwareAddr: 1c:69:7a:ac:*
               driver: igc
-        mtu: 9000
+        mtu: 1500
         dhcp: true
         vip:
             ip: *talosControlplaneVip
@@ -46,11 +46,11 @@ nodes:
           - &vlan30
             vlanId: 30
             dhcp: false
-            mtu: 9000
+            mtu: 1500
           - &vlan70
             vlanId: 70
             dhcp: false
-            mtu: 9000
+            mtu: 1500
     patches:
       - |-
         machine:
@@ -74,7 +74,7 @@ nodes:
           deviceSelectors:
             - hardwareAddr: 48:21:0b:61:*
               driver: igc
-        mtu: 9000
+        mtu: 1500
         dhcp: true
         vip:
           ip: *talosControlplaneVip
@@ -116,7 +116,7 @@ nodes:
           deviceSelectors:
             - hardwareAddr: 88:ae:dd:66:*
               driver: igc
-        mtu: 9000
+        mtu: 1500
         dhcp: true
         vip:
           ip: *talosControlplaneVip
