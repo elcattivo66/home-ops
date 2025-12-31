@@ -68,9 +68,10 @@ spec:
           - name: envoy-internal
             namespace: networking
             sectionName: https
-        backendRefs:
-          - name: app
-            port: http
+        rules:
+          - backendRefs:
+            - name: app
+              port: http
     persistence:
       config:
         existingClaim: *app
