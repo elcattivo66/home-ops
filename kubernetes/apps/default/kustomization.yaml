@@ -35,6 +35,7 @@ resources:
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
   - ./telerising/ks.yaml
+  - ./uc-intg-manager/ks.yaml
   - ./vaultwarden/ks.yaml
   - ./wyoming-piper/ks.yaml
   - ./wyoming-whisper/ks.yaml
