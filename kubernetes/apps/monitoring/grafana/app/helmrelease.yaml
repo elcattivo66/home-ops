@@ -162,6 +162,9 @@ spec:
             - name: DS_PROMETHEUS
               value: Prometheus
           url: https://grafana.com/api/dashboards/17457/revisions/6/download
+        dragonfly:
+          url: https://raw.githubusercontent.com/dragonflydb/dragonfly/main/tools/local/monitoring/grafana/provisioning/dashboards/dragonfly.json
+          datasource: Prometheus
         envoy:
           datasource:
             - name: DS_AFRANET_PROMETHEUS
