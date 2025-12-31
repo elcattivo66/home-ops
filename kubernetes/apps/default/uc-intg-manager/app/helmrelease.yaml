@@ -22,7 +22,7 @@ spec:
             env:
               TZ: ${TZ}
               UC_INTG_MANAGER_HTTP_PORT: &port 8088
-              UC_MDNS_LOCAL_HOSTNAME: uc-intg.${SECRET_DOMAIN}
+              UC_MDNS_LOCAL_HOSTNAME: uc-intg-ws.${SECRET_DOMAIN}
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -56,7 +56,7 @@ spec:
       api:
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: "uc-intg.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/hostname: "uc-intg-ws.${SECRET_DOMAIN}"
           lbipam.cilium.io/ips: 192.168.20.223
         ports:
           api:
