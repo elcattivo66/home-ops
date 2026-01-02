@@ -38,7 +38,7 @@ spec:
             envFrom: *envFrom
             env:
               TZ: ${TZ}
-              HASS_TRUSTED_PROXIES: 192.168.20.0/24,192.168.30.0/24,10.42.0.0/16,10.43.0.0/16
+              HASS_TRUSTED_PROXIES: 192.168.21.0/24,192.168.30.0/24,10.42.0.0/16,10.43.0.0/16
             resources:
               requests:
                 cpu: 41m
@@ -87,7 +87,7 @@ spec:
         controller: home-assistant
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: 192.168.20.221
+          lbipam.cilium.io/ips: 192.168.21.221
         ports:
           http:
             port: 8123

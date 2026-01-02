@@ -60,7 +60,7 @@ spec:
         controller: plex
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: 192.168.20.224
+          lbipam.cilium.io/ips: 192.168.21.224
         ports:
           http:
             port: &port 32400
