@@ -20,6 +20,7 @@ resources:
   - ./immich/ks.yaml
   # - ./kyoo/ks.yaml
   - ./lldap/ks.yaml
+  - ./matterbridge/ks.yaml
   - ./nextcloud/ks.yaml
   - ./ollama/ks.yaml
   - ./open-webui/ks.yaml
