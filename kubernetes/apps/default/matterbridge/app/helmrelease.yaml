@@ -56,7 +56,7 @@ spec:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
-            namespace: network
+            namespace: networking
         rules:
           - backendRefs:
               - name: "{{ .Release.Name }}"
