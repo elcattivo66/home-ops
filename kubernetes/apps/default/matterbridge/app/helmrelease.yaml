@@ -18,13 +18,13 @@ spec:
         containers:
           app:
             image:
-              repository: mirror.gcr.io/luligu/matterbridge
-              tag: 3.4.3@sha256:b02f76b495a930b195c9f491fa4ddc7b73b874bdb37988711287386243f6f98a
+              repository: docker.io/luligu/matterbridge
+              tag: 3.4.6@sha256:23d9fc2155b0e3ee9c554128fbd785a78b17650b5fad4d2a7c101c061e4ebad9
             env:
               TZ: ${TIMEZONE}
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false # ugh
+              readOnlyRootFilesystem: false
               capabilities: {add: ["NET_ADMIN", "NET_BIND_SERVICE", "NET_RAW"]}
             resources:
               limits:
