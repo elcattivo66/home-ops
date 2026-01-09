@@ -31,7 +31,7 @@ spec:
               pullPolicy: IfNotPresent
             args:
             - --model
-            - dropbox-dash/faster-whisper-large-v3-turbo
+            - primeline/whisper-tiny-german
             - --language
             - de
             env:
