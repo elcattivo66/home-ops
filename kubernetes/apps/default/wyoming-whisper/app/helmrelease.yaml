@@ -31,7 +31,7 @@ spec:
               pullPolicy: IfNotPresent
             args:
             - --model
-            - primeline/whisper-tiny-german-1224
+            - base
             - --language
             - de
             env:
