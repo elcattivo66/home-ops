@@ -31,7 +31,7 @@ spec:
               pullPolicy: IfNotPresent
             args:
             - --model
-            - base
+            - medium
             - --language
             - de
             env:
