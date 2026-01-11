@@ -82,6 +82,8 @@ spec:
         ports:
           http:
             port: *port
+          metrics:
+            port: 9192
     serviceMonitor:
       app:
         endpoints:
