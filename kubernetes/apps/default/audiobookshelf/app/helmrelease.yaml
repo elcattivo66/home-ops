@@ -60,7 +60,7 @@ spec:
         hostnames:
           - "audiobooks.${SECRET_DOMAIN}"
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-external
             namespace: networking
             sectionName: https
 
