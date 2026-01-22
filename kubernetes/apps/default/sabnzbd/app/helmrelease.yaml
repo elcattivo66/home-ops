@@ -84,3 +84,7 @@ spec:
         path: /spool/media
         globalMounts:
           - path: /media
+      incomplete:
+        type: emptyDir
+        globalMounts:
+          - path: /incomplete
