@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: ad0lar/telerising-easy4me
-              tag: 1760808667-v0.14.9-4c6873e-amd64@sha256:0a867692fc7da106dca569e3a05a5127e8cedd3d5f4fd0ee274df4b9db45d490
+              repository: starfoxfs/telerising
+              tag: latest@sha256:ef64c9fb2ed4d8d482906c5d0e0d9f6202f506fd3f5442ccecd6161036e92004
             env:
               TZ: ${TZ}
             resources:
