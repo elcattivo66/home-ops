@@ -71,8 +71,8 @@ spec:
         advancedMounts:
           telerising:
             app:
-              - path: /telerising
-                subPath: telerising
+              - path: /app
+                subPath: app
       tmpfs:
         type: emptyDir
         advancedMounts:
