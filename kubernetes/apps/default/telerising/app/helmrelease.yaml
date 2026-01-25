@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/myrck/telerising-api
-              tag: 0.14.9@sha256:7b18cbc03df5c43912548a728794c8ebc7e20b98e1ec9f96651d3386ab1563d2
+              tag: 1765739520-v0.14.9-experiment-6.5-by-fds97AVVS-f4de2d5@sha256:2bf69df9d52fb7aab15824237fc535618b5ff7088c17af7ee72b9284b719e064
             env:
               TZ: ${TZ}
             resources:
@@ -44,7 +44,7 @@ spec:
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: false
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
