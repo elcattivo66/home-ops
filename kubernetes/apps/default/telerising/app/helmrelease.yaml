@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/myrck/telerising-api
-              tag: 1765739520-v0.14.9-experiment-6.5-by-fds97AVVS-f4de2d5@sha256:2bf69df9d52fb7aab15824237fc535618b5ff7088c17af7ee72b9284b719e064
+              repository: ad0lar/telerising-easy4me
+              tag: 1760808667-v0.14.9-4c6873e-amd64@sha256:0a867692fc7da106dca569e3a05a5127e8cedd3d5f4fd0ee274df4b9db45d490
             env:
               TZ: ${TZ}
             resources:
@@ -40,14 +40,6 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 512Mi
-
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
@@ -70,8 +62,8 @@ spec:
         advancedMounts:
           telerising:
             app:
-              - path: /app
-                subPath: app
+              - path: /telerising
+                subPath: telerising
       tmpfs:
         type: emptyDir
         advancedMounts:
