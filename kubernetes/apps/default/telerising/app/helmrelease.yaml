@@ -28,8 +28,8 @@ spec:
         containers:
           app:
             image:
-              repository: ad0lar/telerising-easy4me
-              tag: 1760808667-v0.14.9-4c6873e-amd64@sha256:0a867692fc7da106dca569e3a05a5127e8cedd3d5f4fd0ee274df4b9db45d490
+              repository: ghcr.io/myrck/telerising-api
+              tag: 0.14.9@sha256:7b18cbc03df5c43912548a728794c8ebc7e20b98e1ec9f96651d3386ab1563d2
             env:
               TZ: ${TZ}
             resources:
@@ -39,14 +39,15 @@ spec:
               limits:
                 memory: 512Mi
             securityContext:
-              allowPrivilegeEscalation: true
-              readOnlyRootFilesystem: false
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: false
-        runAsUser: 0
-        runAsGroup: 0
-        fsGroup: 0
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
 
     service:
