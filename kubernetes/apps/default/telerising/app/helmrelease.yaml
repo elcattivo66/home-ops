@@ -33,7 +33,7 @@ spec:
                 "name":"multus-vpn",
                 "namespace": "networking",
                 "ips": ["192.168.70.11/24"],
-                "mac": "2e:54:30:22:3f:74"
+                "mac": "09-d7-3a-bd-74-74"
               }]
         containers:
           app:
