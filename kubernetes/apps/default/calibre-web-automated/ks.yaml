@@ -31,5 +31,5 @@ spec:
   timeout: 3m
   postBuild:
     substitute:
-      APP: *appname
+      APP: calibre-web
       VOLSYNC_CAPACITY: 1Gi
