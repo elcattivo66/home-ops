@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app calibre-web
+  name: &app calibre-web-automated
 spec:
   interval: 1h
   chartRef:
@@ -19,18 +19,23 @@ spec:
       retries: 3
   values:
     controllers:
-      calibre-web:
+      calibre-web-automated:
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
           app:
             image:
-              repository: ghcr.io/bjw-s-labs/calibre-web
-              tag: 0.6.25@sha256:10c6d481f081ba51b9c7a445fa95cf53a88a2316e2a15ac4ef3c025098588f15
+              repository: ghcr.io/crocodilestick/calibre-web-automated
+              tag: V3.1.4@sha256:577e846f104fd21453ef306eefb4a95dd95b3b9ddd2463a150944494284da0fd
             env:
               CACHE_DIR: /cache
               TZ: ${TZ}
+              PUID: 1000
+              PGID: 1000
+              NETWORK_SHARE_MODE: true
+              S6_YES_I_WANT_A_WORLD_WRITABLE_RUN_BECAUSE_KUBERNETES: 1
+              S6_READ_ONLY_ROOT: 1
             resources:
               requests:
                 cpu: 10m
@@ -38,18 +43,30 @@ spec:
               limits:
                 memory: 204Mi
             securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              capabilities:
+                drop:
+                  - ALL
+                add:
+                  # S6
+                  - CHOWN
+                  - SETUID
+                  - SETGID
+                  - FOWNER
+                  - DAC_OVERRIDE
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
+        runAsNonRoot: false
+        runAsUser: 0
         runAsGroup: 1000
-
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
     service:
       app:
-        controller: calibre-web
+        controller: calibre-web-automated
         ports:
           http:
             port: 8083
@@ -57,7 +74,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "ebooks.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: networking
@@ -65,9 +82,9 @@ spec:
 
     persistence:
       config:
-        existingClaim: *app
+        existingClaim: calibre-web
         advancedMounts:
-          calibre-web:
+          calibre-web-automated:
             app:
               - path: /config
       media:
@@ -75,7 +92,7 @@ spec:
         server: nas.${SECRET_HOME_DOMAIN}
         path: /spool/media/ebooks/calibre_library
         globalMounts:
-          - path: /books
+          - path: /calibre-library
             readOnly: false
       cache:
         type: emptyDir
