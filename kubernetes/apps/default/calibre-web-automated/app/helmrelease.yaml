@@ -82,7 +82,7 @@ spec:
 
     persistence:
       config:
-        existingClaim: calibre-web
+        existingClaim: *app
         advancedMounts:
           calibre-web-automated:
             app:
