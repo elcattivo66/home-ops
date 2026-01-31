@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: docker.io/luligu/matterbridge
-              tag: 3.5.2@sha256:3c63c804d325f7d00d782e9f0985bc88afd5729ee04925580301d2938f9f2c30
+              tag: 3.5.2@sha256:0e5092d4769038f27e0abcd7fd3208b2396e1021bca1b381f7d35f0b390f8767
             env:
               TZ: ${TIMEZONE}
             securityContext:
