@@ -74,8 +74,10 @@ spec:
     l2announcements:
       enabled: true
     loadBalancer:
+      acceleration: best-effort
       algorithm: maglev
       mode: dsr
+      serviceTopology: true
     localRedirectPolicy: true
     operator:
       dashboards:
@@ -115,3 +117,5 @@ spec:
           - NET_ADMIN
           - SYS_ADMIN
           - SYS_RESOURCE
+          - PERFMON
+          - BPF
