@@ -58,25 +58,25 @@ spec:
               limits:
                 memory: 2Gi
 
-          celery:
-            image:
-              repository: ghcr.io/dispatcharr/dispatcharr
-              tag: 0.19.0@sha256:8b53fbe12122e827034a6fb0a4ab9a9b8d31699587dca6d6d6394619d44dbb16
-            command: ["/app/docker/entrypoint.celery.sh"]
-            env:
-              DISPATCHARR_LOG_LEVEL: info
-              REDIS_HOST: *redis
-              REDIS_PORT: 6379
-              REDIS_DB: 9
-              DJANGO_SETTINGS_MODULE: dispatcharr.settings
-              PYTHONUNBUFFERED: 1
-              PYTHONDONTWRITEBYTECODE: 1
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 100m
-              limits:
-                memory: 2Gi
+          # celery:
+          #   image:
+          #     repository: ghcr.io/dispatcharr/dispatcharr
+          #     tag: 0.19.0@sha256:8b53fbe12122e827034a6fb0a4ab9a9b8d31699587dca6d6d6394619d44dbb16
+          #   command: ["/app/docker/entrypoint.celery.sh"]
+          #   env:
+          #     DISPATCHARR_LOG_LEVEL: info
+          #     REDIS_HOST: *redis
+          #     REDIS_PORT: 6379
+          #     REDIS_DB: 9
+          #     DJANGO_SETTINGS_MODULE: dispatcharr.settings
+          #     PYTHONUNBUFFERED: 1
+          #     PYTHONDONTWRITEBYTECODE: 1
+          #   envFrom: *envFrom
+          #   resources:
+          #     requests:
+          #       cpu: 100m
+          #     limits:
+          #       memory: 2Gi
     service:
       app:
         ports:
