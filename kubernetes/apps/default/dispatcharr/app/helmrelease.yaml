@@ -48,7 +48,6 @@ spec:
               REDIS_HOST: &redis dragonfly.databases.svc.cluster.local
               REDIS_PORT: 6379
               REDIS_DB: 9
-              CELERY_BROKER_URL: &celery_broker redis://dragonfly.databases.svc.cluster.local:6379/9
               PYTHONDONTWRITEBYTECODE: 1
             envFrom: *envFrom
             resources:
@@ -63,14 +62,15 @@ spec:
             image:
               repository: ghcr.io/dispatcharr/dispatcharr
               tag: 0.19.0@sha256:8b53fbe12122e827034a6fb0a4ab9a9b8d31699587dca6d6d6394619d44dbb16
-            command: ["celery"]
-            args: ["-A", "dispatcharr", "worker", "-l", "info"]
+            command: ["/app/docker/entrypoint.celery.sh"]
             env:
-              CELERY_BROKER_URL: *celery_broker
               DISPATCHARR_LOG_LEVEL: info
               REDIS_HOST: *redis
               REDIS_PORT: 6379
               REDIS_DB: 9
+              DJANGO_SETTINGS_MODULE: dispatcharr.settings
+              PYTHONUNBUFFERED: 1
+              PYTHONDONTWRITEBYTECODE: 1
             envFrom: *envFrom
             resources:
               requests:
@@ -115,6 +115,9 @@ spec:
         advancedMounts:
           dispatcharr:
             app:
+              - path: /data
+                subPath: data
+            celery:
               - path: /data
                 subPath: data
       tmpfs:
