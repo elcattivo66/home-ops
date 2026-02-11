@@ -48,6 +48,7 @@ spec:
               REDIS_HOST: &redis dragonfly.databases.svc.cluster.local
               REDIS_PORT: 6379
               REDIS_DB: 9
+              CELERY_BROKER_URL: &celery_broker dragonfly.databases.svc.cluster.local:6379/9
               PYTHONDONTWRITEBYTECODE: 1
             envFrom: *envFrom
             resources:
@@ -56,27 +57,26 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 6Gi
+                memory: 3Gi
 
-          # celery:
-          #   image:
-          #     repository: ghcr.io/dispatcharr/dispatcharr
-          #     tag: 0.11.1@sha256:894aa15b61a45d3238a66dc06411e684ced0d687453a5be21d10a81b12e476a3
-          #   args: >
-          #     bash -c "
-          #     cd /app &&
-          #     nice -n 5 celery -A dispatcharr worker -l info
-          #     "
-          #   env:
-          #     CELERY_BROKER_URL: *celery_broker
-          #     DISPATCHARR_LOG_LEVEL: info
-          #     REDIS_HOST: *redis
-          #   envFrom: *envFrom
-          #   resources:
-          #     requests:
-          #       cpu: 100m
-          #     limits:
-          #       memory: 500Mi
+          celery:
+            image:
+              repository: ghcr.io/dispatcharr/dispatcharr
+              tag: 0.19.0@sha256:8b53fbe12122e827034a6fb0a4ab9a9b8d31699587dca6d6d6394619d44dbb16
+            command: ["celery"]
+            args: ["-A", "dispatcharr", "worker", "-l", "info"]
+            env:
+              CELERY_BROKER_URL: *celery_broker
+              DISPATCHARR_LOG_LEVEL: info
+              REDIS_HOST: *redis
+              REDIS_PORT: 6379
+              REDIS_DB: 9
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 500Mi
     service:
       app:
         ports:
@@ -124,6 +124,6 @@ spec:
             app:
               - path: /tmp
                 subPath: tmp
-            # celery:
-            #   - path: /tmp
-            #     subPath: tmp
+            celery:
+              - path: /tmp
+                subPath: tmp
