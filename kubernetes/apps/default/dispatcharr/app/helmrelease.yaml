@@ -48,7 +48,7 @@ spec:
               REDIS_HOST: &redis dragonfly.databases.svc.cluster.local
               REDIS_PORT: 6379
               REDIS_DB: 9
-              CELERY_BROKER_URL: &celery_broker dragonfly.databases.svc.cluster.local:6379/9
+              CELERY_BROKER_URL: &celery_broker redis://dragonfly.databases.svc.cluster.local:6379/9
               PYTHONDONTWRITEBYTECODE: 1
             envFrom: *envFrom
             resources:
