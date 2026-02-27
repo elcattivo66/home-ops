@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: starfoxfs/telerising
-              tag: latest@sha256:1994487c419644c4510a5469605aa34cf80f1ada2ff5a30cb9f23b636f1ab038
+              tag: latest@sha256:e76a89ae06389945a686bec01441a84b487112944688690bfaa68cc887ca0472
             env:
               TZ: ${TZ}
             resources:
