@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-backend
-              tag: latest@sha256:b53bcb893c3ce557cdfc9630b84607c4896899ea61ca558bd84989c01f0df98a
+              tag: v0.12.0@sha256:68725d6a3692333e0049607f32078e865e95ebdb8a13e0c5512a01ef766770ae
             envFrom: *envFrom
             env:
               PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
@@ -62,7 +62,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
-              tag: latest@sha256:9aa653603eb1305f3c34c61bc99b40a394295aed3fecd8c9777a9e5c04c7155e
+              tag: v0.12.0@sha256:9aa653603eb1305f3c34c61bc99b40a394295aed3fecd8c9777a9e5c04c7155e
             envFrom: *envFrom
             env:
               PUBLIC_SERVER_URL: "http://adventurelog-backend.default.svc.cluster.local:8000"
