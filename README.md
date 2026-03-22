@@ -6,7 +6,7 @@ _... managed with Flux, Renovate, and GitHub Actions_ 🤖
 
 ## 📖 Overview
 
-This is a mono repository for my home infrastructure and Kubernetes cluster. I try to adhere to Infrastructure as Code (IaC) and GitOps practices using tools like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/), [Flux](https://github.com/fluxcd/flux2), [Renovate](https://github.com/renovatebot/renovate), and [GitHub Actions](https://github.com/features/actions).
+This is a mono repository for my home infrastructure and Kubernetes cluster. I try to adhere to Infrastructure as Code (IaC) and GitOps practices using tools like [Kubernetes](https://kubernetes.io/), [Flux](https://github.com/fluxcd/flux2), [Renovate](https://github.com/renovatebot/renovate), and [GitHub Actions](https://github.com/features/actions).
 
 ---
 
@@ -18,8 +18,6 @@ This is based on the structure of the template over at [onedr0p/flux-cluster-tem
 
 My cluster is [Talos](https://www.talos.dev/) provisioned on bare-metal hardware. This is a semi-hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server for (NFS) file storage.
 
-🔸 _[Click here](./ansible/) to see my Ansible playbooks and roles._
-
 ### Core Components
 
 - [cilium](https://github.com/cilium/cilium): internal Kubernetes networking plugin
@@ -27,7 +25,7 @@ My cluster is [Talos](https://www.talos.dev/) provisioned on bare-metal hardware
 - [external-dns](https://github.com/kubernetes-sigs/external-dns): automatically syncs DNS records from my cluster ingresses to a DNS provider
 - [gateway-api](https://gateway-api.sigs.k8s.io/): API and resource model for managing network traffic in Kubernetes
 - [rook-ceph](https://rook.io/): distributed block storage for persistent storage using Ceph
-- [sops](https://toolkit.fluxcd.io/guides/mozilla-sops/): managed secrets for Kubernetes, Ansible, and Terraform which are committed to Git
+- [external-secrets](https://external-secrets.io/): external secrets management for Kubernetes with synced secrets to GitOps workflows
 
 ### GitOps
 
@@ -43,15 +41,12 @@ This Git repository contains the following directories under [Kubernetes](./kube
 
 ```sh
 📁 kubernetes
-├── 📁 main            # main cluster
-│   ├── 📁 apps           # applications
-│   ├── 📁 bootstrap      # bootstrap procedures
-│   ├── 📁 flux           # core flux configuration
-│   └── 📁 templates      # re-useable components
-└── 📁 nas             # nas cluster
-    ├── 📁 apps           # applications
-    ├── 📁 bootstrap      # bootstrap procedures
-    └── 📁 flux           # core flux configuration
+├── 📁 apps           # applications
+├── 📁 bootstrap      # bootstrap procedures
+├── 📁 components     # reusable kustomization components
+├── 📁 flux           # core flux configuration
+├── 📁 talos          # Talos cluster manifests
+└── 🗂 kubeconfig    # kubeconfig and cluster access files
 ```
 
 ### Cluster Layout
