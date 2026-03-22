@@ -91,11 +91,11 @@ Outside the `external-dns` instance mentioned above another instance is deployed
 
 ## 🔧 Hardware
 
-| Device | OS Disk Size | Boot Disk Size | Data Disk Size | Ram | Operating System | Purpose |
-| --- | --- | --- | --- | --- | --- | --- |
-| Intel NUC 11 | 512GB NVMe | 480GB Intel DC S3710 | | 32GB | Talos | Kubernetes Master |
-| Intel NUC 13 | 512GB NVMe | 480GB Intel DC S3710 | | 64GB | Talos | Kubernetes Master |
-| Intel NUC 14 | 512GB NVMe | 480GB Intel DC S3710 | | 96GB | Talos | Kubernetes Master |
-| Node 304 + Ryzen 5600G | 128GB SSD | 256GB SSD | bcachefs: 2x16TB + 2x8TB HDD + 3x7.68TB SSD + 1x2TB SSD | 32GB | NixOS | NAS |
+| Device | OS Disk Size | Data Disk Size | Ram | Operating System | Purpose |
+| --- | --- | --- | --- | --- | --- |
+| Intel NUC 11 | 480GB Intel DC S3710 | 512GB NVMe | 32GB | Talos | Kubernetes Master |
+| Intel NUC 13 | 480GB Intel DC S3710 | 512GB NVMe | 64GB | Talos | Kubernetes Master |
+| Intel NUC 14 | 480GB Intel DC S3710 | 512GB NVMe | 96GB | Talos | Kubernetes Master |
+| Node 304 + Ryzen 5600G | 256GB SSD | bcachefs: 2x16TB + 2x8TB HDD + 3x7.68TB SSD + 1x2TB SSD | 32GB | NixOS | NAS |
 
 ---
