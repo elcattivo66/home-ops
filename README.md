@@ -16,7 +16,7 @@ This is based on the structure of the template over at [onedr0p/flux-cluster-tem
 
 ### Installation
 
-My cluster is [k3s](https://k3s.io/) provisioned overtop bare-metal Debian using the [Ansible](https://www.ansible.com/) galaxy role [ansible-role-k3s](https://github.com/PyratLabs/ansible-role-k3s). This is a semi-hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server for (NFS) file storage.
+My cluster is [Talos](https://www.talos.dev/) provisioned on bare-metal hardware. This is a semi-hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server for (NFS) file storage.
 
 🔸 _[Click here](./ansible/) to see my Ansible playbooks and roles._
 
@@ -25,8 +25,8 @@ My cluster is [k3s](https://k3s.io/) provisioned overtop bare-metal Debian using
 - [cilium](https://github.com/cilium/cilium): internal Kubernetes networking plugin
 - [cert-manager](https://cert-manager.io/docs/): creates SSL certificates for services in my cluster
 - [external-dns](https://github.com/kubernetes-sigs/external-dns): automatically syncs DNS records from my cluster ingresses to a DNS provider
-- [ingress-nginx](https://github.com/kubernetes/ingress-nginx): ingress controller for Kubernetes
-- [longhorn](https://github.com/longhorn/longhorn): distributed block storage for persistent storage
+- [gateway-api](https://gateway-api.sigs.k8s.io/): API and resource model for managing network traffic in Kubernetes
+- [rook-ceph](https://rook.io/): distributed block storage for persistent storage using Ceph
 - [sops](https://toolkit.fluxcd.io/guides/mozilla-sops/): managed secrets for Kubernetes, Ansible, and Terraform which are committed to Git
 
 ### GitOps
@@ -86,7 +86,7 @@ GitRepository :: home-kubernetes
 
 ### Home DNS
 
-I have a Orange Pi Zero SBC with pihole and unbound deployed as containers. In my cluster external-dns is deployed with the pihole provider which syncs DNS records to pihole.
+I use a Unifi Gateway for home DNS resolution. In my cluster external-dns is deployed with the Unifi provider which syncs DNS records to the gateway.
 
 ### Public DNS
 
@@ -96,11 +96,11 @@ Outside the `external-dns` instance mentioned above another instance is deployed
 
 ## 🔧 Hardware
 
-| Device                      | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose             |
-|-----------------------------|-------|--------------|-----------------------------|------|------------------|---------------------|
-| Intel NUC11i3               | 1     | 512GB NVMe   |                             | 40GB | Debian           | Kubernetes Master   |
-| Morefine M9                 | 1     | 512GB NVMe   |                             | 16GB | Debian           | Kubernetes Master   |
-| Gigabyte Brix 7100          | 1     | 512GB NVMe   |                             | 24GB | Debian           | Kubernetes Master   |
-| Node 304 + Ryzen 5600G      | 1     | 128GB SSD    | 2x16TB+2x8TB ZFS & 2TB SSD  | 32GB | NixOS            | NAS                 |
+| Device | OS Disk Size | Boot Disk Size | Data Disk Size | Ram | Operating System | Purpose |
+| --- | --- | --- | --- | --- | --- | --- |
+| Intel NUC 11 | 512GB NVMe | 480GB Intel DC S3710 | | 32GB | Talos | Kubernetes Master |
+| Intel NUC 13 | 512GB NVMe | 480GB Intel DC S3710 | | 64GB | Talos | Kubernetes Master |
+| Intel NUC 14 | 512GB NVMe | 480GB Intel DC S3710 | | 96GB | Talos | Kubernetes Master |
+| Node 304 + Ryzen 5600G | 128GB SSD | 256GB SSD | bcachefs: 2x16TB + 2x8TB HDD + 3x7.68TB SSD + 1x2TB SSD | 32GB | NixOS | NAS |
 
 ---
