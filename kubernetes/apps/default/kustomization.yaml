@@ -22,8 +22,8 @@ resources:
   - ./lldap/ks.yaml
   - ./matterbridge/ks.yaml
   - ./nextcloud/ks.yaml
-  - ./ollama/ks.yaml
-  - ./open-webui/ks.yaml
+  # - ./ollama/ks.yaml
+  # - ./open-webui/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
@@ -37,6 +37,6 @@ resources:
   - ./tautulli/ks.yaml
   - ./uc-intg-manager/ks.yaml
   - ./vaultwarden/ks.yaml
-  - ./wyoming-piper/ks.yaml
-  - ./wyoming-whisper/ks.yaml
+  # - ./wyoming-piper/ks.yaml
+  # - ./wyoming-whisper/ks.yaml
   - ./zigbee2mqtt/ks.yaml
