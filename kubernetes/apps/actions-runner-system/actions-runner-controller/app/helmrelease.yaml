@@ -23,8 +23,5 @@ spec:
     kind: OCIRepository
     name: gha-runner-scale-set-controller
   interval: 1h
-  driftDetection:
-    mode: enabled
   values:
-    fullnameOverride: actions-runner-controller
-    replicaCount: 1
+    fullnameOverride: *name
