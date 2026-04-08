@@ -30,14 +30,14 @@ spec:
         reloader.stakater.com/auto: "true"
       postgres:
         shared:
-          host: &host postgres-rw.databases.svc.cluster.local
+          host: postgres-rw.databases.svc.cluster.local
           port: 5432
           databaseOverride: *app
           existingSecret: &secret kyoo-secret
           userKey: user
           passwordKey: password
         kyoo_api:
-          sslmode: ${SSLMODE}
+          sslmode: false
 
     kyoo:
       address: https://kyoo.${SECRET_DOMAIN}
@@ -122,7 +122,7 @@ spec:
             cpu: 100m
             memory: 500Mi
           limits:
-            memory: 8Gi
+            memory: 4Gi
     postgres:
       enabled: false
     ingress:
