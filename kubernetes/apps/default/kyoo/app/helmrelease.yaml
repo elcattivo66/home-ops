@@ -10,7 +10,7 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 4.7.1
+    tag: 5.0.0
   url: oci://ghcr.io/zoriya/helm-charts/kyoo
 ---
 # yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
@@ -19,61 +19,36 @@ kind: HelmRelease
 metadata:
   name: &app kyoo
 spec:
-  interval: 15m
   chartRef:
     kind: OCIRepository
     name: kyoo
   dependsOn: []
-  install:
-    createNamespace: true
-    remediation:
-      retries: -1
-  upgrade:
-    remediation:
-      retries: 3
+  interval: 15m
   values:
     global:
-      meilisearch:
-        infra:
-          existingSecret: &secret kyoo-secret
-        kyoo_back:
-          masterkeyKey: MEILI_MASTER_KEY
-          existingSecret: *secret
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
       postgres:
-        infra:
-          user: kyoo-all
-        kyoo_back:
+        shared:
           host: &host postgres-rw.databases.svc.cluster.local
-          kyoo_migrations: &psql
-            userKey: POSTGRES_USER
-            passwordKey: POSTGRES_PASSWORD
-            existingSecret: *secret
-          kyoo_back: *psql
-        kyoo_transcoder:
-          host: *host
-          database: kyoo_transcoder
-          sslmode: require
-          kyoo_transcoder: *psql
-      rabbitmq:
-        infra:
-          passwordKey: RABBITMQ_PASS
-          keyErlangCookie: RABBITMQ_COOKIE
-          existingSecret: *secret
-        kyoo_autosync: &rabbit
-          userKey: RABBITMQ_USER
-          passwordKey: RABBITMQ_PASS
-          existingSecret: *secret
-        kyoo_back: *rabbit
-        kyoo_matcher: *rabbit
-        kyoo_scanner: *rabbit
+          port: 5432
+          databaseOverride: *app
+          existingSecret: &secret kyoo-secret
+          userKey: user
+          passwordKey: password
+        kyoo_api:
+          sslmode: ${SSLMODE}
 
     kyoo:
       address: https://kyoo.${SECRET_DOMAIN}
+      middlewareRootURL: https://kyoo.${SECRET_DOMAIN}
       libraryIgnorePattern: ".*/([dD]ownloads?|audiobooks|documentaries|e-classes|ebooks|fitness_videos|music)/.*"
       transcoderAcceleration: vaapi # hardware acceleration profile (valid values: disabled, vaapi, qsv, nvidia)
-      apikey:
-        existingSecret: *secret
-        apikeyKey: KYOO_API_KEY
+      auth:
+        apikeys:
+          scanner:
+            existingSecret: *secret
+            apikeyKey: KYOO_API_KEY
       oidc_providers:
         - name: Authelia
           existingSecret: *secret
@@ -91,12 +66,6 @@ spec:
           nfs:
             server: nas.${SECRET_HOME_DOMAIN}
             path: /spool/media
-      volumeMounts:
-        - mountPath: &path /media
-          name: media
-          readOnly: true
-      baseMountPath: *path
-
     contentdatabase:
       tmdb:
         apikeyKey: TMDB_API_KEY
@@ -105,26 +74,148 @@ spec:
         apikeyKey: TVDB_APIKEY
         pinKey: TVDB_PIN
         existingSecret: *secret
-
-    back:
-      kyoo_back:
+    api:
+      persistence:
+        existingClaim: *app
+      kyoo_api:
         resources:
           requests:
             cpu: 10m
             memory: 1Gi
           limits:
-            cpu: 8000m
             memory: 8Gi
-      persistence:
-        existingClaim: *app
-
+    auth:
+      kyoo_auth:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            memory: 500Mi
+    front:
+      kyoo_front:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            memory: 500Mi
+    scanner:
+      kyoo_scanner:
+        resources:
+          requests:
+            cpu: 5m
+            memory: 100Mi
+          limits:
+            memory: 1Gi
+    transcoder:
+      # persistence:
+      #   existingClaim: *app
+      resourceClaims:
+        - name: gpu
+          resourceClaimTemplateName: kyoo-gpu
+      kyoo_transcoder:
+        resources:
+          claims:
+            - name: gpu
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            memory: 8Gi
+    postgres:
+      enabled: false
     ingress:
-      enabled: true
-      ingressClassName: internal
-      host: kyoo.${SECRET_DOMAIN}
-      tls: true
-
-    meilisearch:
-      enabled: true
-    rabbitmq:
-      enabled: true
+      enabled: false
+    traefikproxy:
+      enabled: false
+    extraObjects:
+      - apiVersion: gateway.networking.k8s.io/v1
+        kind: HTTPRoute
+        metadata:
+          name: kyoo
+        spec:
+          hostnames: ["https://kyoo.${SECRET_DOMAIN}"]
+          parentRefs:
+            - name: envoy-external
+              namespace: network
+          rules:
+            - name: api
+              matches:
+                - path:
+                    type: PathPrefix
+                    value: /api
+                - path:
+                    type: PathPrefix
+                    value: /swagger
+              backendRefs:
+                - name: kyoo-api
+                  namespace: media
+                  port: 3567
+            - name: auth
+              matches:
+                - path:
+                    type: PathPrefix
+                    value: /auth
+                - path:
+                    type: PathPrefix
+                    value: /.well-known
+              backendRefs:
+                - name: kyoo-auth
+                  namespace: media
+                  port: 4568
+            - name: transcoder
+              matches:
+                - path:
+                    type: PathPrefix
+                    value: /video
+              backendRefs:
+                - name: kyoo-transcoder
+                  namespace: media
+                  port: 7666
+            - name: scanner
+              matches:
+                - path:
+                    type: PathPrefix
+                    value: /scanner
+              backendRefs:
+                - name: kyoo-scanner
+                  namespace: media
+                  port: 4389
+            - name: front
+              backendRefs:
+                - name: kyoo-front
+                  namespace: media
+                  port: 8901
+      - apiVersion: gateway.envoyproxy.io/v1alpha1
+        kind: SecurityPolicy
+        metadata:
+          name: kyoo-auth
+        spec:
+          targetRefs:
+            - group: gateway.networking.k8s.io
+              kind: HTTPRoute
+              name: kyoo
+              sectionName: api
+            - group: gateway.networking.k8s.io
+              kind: HTTPRoute
+              name: kyoo
+              sectionName: transcoder
+            - group: gateway.networking.k8s.io
+              kind: HTTPRoute
+              name: kyoo
+              sectionName: scanner
+          extAuth:
+            headersToExtAuth:
+              - Authorization
+              - X-Api-Key
+              - cookie
+            recomputeRoute: true
+            http:
+              backendRefs:
+                - name: kyoo-auth
+                  namespace: media
+                  port: 4568
+              path: /auth/jwt
+              headersToBackend:
+                - Authorization
