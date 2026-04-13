@@ -118,13 +118,13 @@ spec:
       library:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /spool/photos/immich/
+        path: /mnt/data/photos/immich/
         globalMounts:
           - path: /usr/src/app/upload
       external:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /spool/photos/Plex_Album/
+        path: /mnt/data/photos/Plex_Album/
         globalMounts:
           - path: /external-library/
       machine-learning-cache:
