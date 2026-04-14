@@ -119,6 +119,6 @@ spec:
       library:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /mnt/recovery/paperless
+        path: /spool/paperless
         globalMounts:
           - path: /library

@@ -81,6 +81,6 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /mnt/recovery/media
+        path: /spool//media
         globalMounts:
           - path: /media

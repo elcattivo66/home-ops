@@ -74,7 +74,7 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /mnt/recovery/media/audiobooks
+        path: /spool/media/audiobooks
         globalMounts:
           - path: /audiobooks
             readOnly: false
