@@ -34,8 +34,8 @@ spec:
           port: 5432
           databaseOverride: *app
           existingSecret: &secret kyoo-secret
-          userKey: user
-          passwordKey: password
+          userKey: POSTGRES_USER
+          passwordKey: POSTGRES_PASSWORD
         kyoo_api:
           sslmode: false
 
