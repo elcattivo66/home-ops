@@ -83,17 +83,6 @@ spec:
           secure: ""
           port: 2525
 
-      lifecycle:
-        postStartCommand:
-          - "/bin/sh"
-          - "-c"
-          - |
-            su -s /bin/sh www-data -c 'php occ maintenance:repair --include-expensive' || true
-            su -s /bin/sh www-data -c 'php occ files:scan --all' || true
-            su -s /bin/sh www-data -c 'php occ files:cleanup' || true
-            su -s /bin/sh www-data -c 'php occ db:add-missing-indices' || true
-            su -s /bin/sh www-data -c 'php occ db:add-missing-primary-keys' || true
-            su -s /bin/sh www-data -c 'php occ db:add-missing-columns' || true
       objectstore:
         s3:
           enabled: true
@@ -197,7 +186,24 @@ spec:
       existingClaim: *app
 
     cronjob:
-      enabled: false
+      enabled: true
+      type: cronjob
+      cronjob:
+        affinity:
+          podAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/instance
+                      operator: In
+                      values:
+                        - nextcloud
+                    - key: app.kubernetes.io/component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+        successfulJobsHistoryLimit: 1
 
     hpa:
       enabled: false
