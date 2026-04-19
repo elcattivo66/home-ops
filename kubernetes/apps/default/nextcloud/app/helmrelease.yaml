@@ -121,6 +121,7 @@ spec:
             'enable_previews' => true,
             'log_type' => 'syslog',
             'maintenance_window_start' => 1,
+            'upgrade.disable-web' => false,
             'trusted_proxies' =>
               array (
                 0 => '127.0.0.1',
