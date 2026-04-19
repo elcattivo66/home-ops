@@ -83,13 +83,6 @@ spec:
           secure: ""
           port: 2525
 
-      # Security context to run as www-data user
-      securityContext:
-        runAsUser: 33
-        runAsGroup: 33
-        fsGroup: 33
-        runAsNonRoot: true
-
       lifecycle:
         postStartCommand:
           - "/bin/sh"
@@ -222,3 +215,18 @@ spec:
         memory: 536Mi
       limits:
         memory: 2Gi
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: nextcloud
+            patch: |-
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: nextcloud
+              spec:
+                template:
+                  spec:
+                    hostUsers: false
