@@ -28,6 +28,7 @@ spec:
     global:
       podAnnotations:
         reloader.stakater.com/auto: "true"
+
       postgres:
         shared:
           host: postgres-rw.databases.svc.cluster.local
@@ -37,7 +38,7 @@ spec:
           userKey: POSTGRES_USER
           passwordKey: POSTGRES_PASSWORD
         kyoo_api:
-          sslmode: false
+          sslmode: disable
 
     kyoo:
       address: https://kyoo.${SECRET_DOMAIN}
