@@ -38,7 +38,7 @@ spec:
           userKey: POSTGRES_USER
           passwordKey: POSTGRES_PASSWORD
         kyoo_api:
-          sslmode: disable
+          sslmode: allow
 
     kyoo:
       address: https://kyoo.${SECRET_DOMAIN}
