@@ -1,0 +1,74 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app music-assistant
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  values:
+    controllers:
+      music-assistant:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/music-assistant/server
+              tag: 2.8.6@sha256:400697b305e45bd1712c019e67d22681219e91deb41afe88939f921b5fae137f
+            env:
+              TZ: ${TZ}
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+    defaultPodOptions:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [{
+            "name":"multus-iot",
+            "namespace": "networking",
+            "ips": ["192.168.30.252/24"],
+            "mac": "7a-6f-ea-bf-9b-26"
+          }]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: {type: RuntimeDefault}
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 8095
+    route:
+      app:
+        hostnames:
+          - "music.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: networking
+            sectionName: https
+    persistence:
+      config:
+        existingClaim: music-assistant
+        globalMounts:
+          - path: /config
+      media:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /spool/media
+        globalMounts:
+          - path: /media
+            readOnly: true
