@@ -7,49 +7,6 @@ metadata:
 data:
   dispatcharr-dashboard.json: |-
     {
-      "__inputs": [
-        {
-          "name": "DS_MONITORING_- PROMETHEUS",
-          "label": "MONITORING - Prometheus",
-          "description": "",
-          "type": "datasource",
-          "pluginId": "prometheus",
-          "pluginName": "Prometheus"
-        }
-      ],
-      "__elements": {},
-      "__requires": [
-        {
-          "type": "panel",
-          "id": "bargauge",
-          "name": "Bar gauge",
-          "version": ""
-        },
-        {
-          "type": "grafana",
-          "id": "grafana",
-          "name": "Grafana",
-          "version": "12.3.3"
-        },
-        {
-          "type": "datasource",
-          "id": "prometheus",
-          "name": "Prometheus",
-          "version": "1.0.0"
-        },
-        {
-          "type": "panel",
-          "id": "stat",
-          "name": "Stat",
-          "version": ""
-        },
-        {
-          "type": "panel",
-          "id": "table",
-          "name": "Table",
-          "version": ""
-        }
-      ],
       "annotations": {
         "list": [
           {
@@ -139,6 +96,10 @@ data:
           "pluginVersion": "12.3.3",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "disableTextWrap": false,
               "editorMode": "builder",
               "exemplar": false,
@@ -149,13 +110,10 @@ data:
               "legendFormat": "__auto",
               "range": false,
               "refId": "A",
-              "useBackend": false,
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "useBackend": false
             }
           ],
+          "title": "",
           "transformations": [
             {
               "id": "labelsToFields",
@@ -231,6 +189,10 @@ data:
           "pluginVersion": "12.3.3",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "disableTextWrap": false,
               "editorMode": "code",
               "exemplar": false,
@@ -241,13 +203,10 @@ data:
               "legendFormat": "__auto",
               "range": false,
               "refId": "A",
-              "useBackend": false,
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "useBackend": false
             }
           ],
+          "title": "",
           "transformations": [
             {
               "id": "labelsToFields",
@@ -574,17 +533,17 @@ data:
           "pluginVersion": "12.3.3",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "editorMode": "code",
               "exemplar": false,
               "expr": "label_join(\n  dispatcharr_stream_uptime_seconds\n  * on(channel_uuid, channel_number) group_left(channel_name, logo_url, state, provider, profile_name, resolution)\n      dispatcharr_stream_metadata,\n  \"provider_full\",\n  \" \",\n  \"provider\",\n  \"profile_name\"\n)",
               "format": "table",
               "instant": true,
               "range": false,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "refId": "A"
             },
             {
               "datasource": {
@@ -1184,17 +1143,17 @@ data:
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "editorMode": "code",
               "exemplar": false,
               "expr": "dispatcharr_profile_connection_usage\n  unless on(profile_id, profile_name, account_name)\n  (dispatcharr_profile_days_to_expiry == 0)",
               "instant": true,
               "legendFormat": "{{account_name}} {{profile_name}}",
               "range": false,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "refId": "A"
             }
           ],
           "title": "Usage",
@@ -1269,17 +1228,17 @@ data:
           "pluginVersion": "12.3.3",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "editorMode": "code",
               "exemplar": false,
               "expr": "dispatcharr_profile_days_to_expiry != -1",
               "instant": true,
               "legendFormat": "{{account_name}} {{profile_name}}",
               "range": false,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "refId": "A"
             }
           ],
           "title": "Expiry",
@@ -1352,15 +1311,15 @@ data:
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "editorMode": "code",
               "expr": "dispatcharr_active_clients",
               "legendFormat": "Active Clients",
               "range": true,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "refId": "A"
             },
             {
               "datasource": {
@@ -1402,6 +1361,7 @@ data:
               "refId": "C"
             }
           ],
+          "title": "",
           "type": "stat"
         },
         {
@@ -1459,17 +1419,17 @@ data:
           "pluginVersion": "12.3.3",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_MONITORING_- PROMETHEUS}"
+              },
               "editorMode": "code",
               "exemplar": false,
               "expr": "dispatcharr_m3u_account_stream_count{status=\"success\"}",
               "instant": false,
               "legendFormat": "{{account_name}}",
               "range": true,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
-              }
+              "refId": "A"
             }
           ],
           "title": "Incoming Streams",
@@ -1509,7 +1469,5 @@ data:
       "timezone": "browser",
       "title": "Dispatcharr",
       "uid": "aa842463-afa6-45fb-b63c-1649aa62ebe9",
-      "version": 31,
-      "weekStart": "",
-      "id": null
+      "version": 2
     }
