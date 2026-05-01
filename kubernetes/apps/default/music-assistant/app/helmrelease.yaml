@@ -55,6 +55,8 @@ spec:
         ports:
           http:
             port: &port 8095
+          stream:
+            port: 8097
     route:
       app:
         hostnames:
