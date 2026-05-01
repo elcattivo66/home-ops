@@ -26,6 +26,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 1,
+      "id": 45,
       "links": [],
       "panels": [
         {
@@ -44,7 +45,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -93,12 +94,12 @@ data:
             "textMode": "value_and_name",
             "wideLayout": false
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "disableTextWrap": false,
               "editorMode": "builder",
@@ -137,7 +138,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -186,12 +187,12 @@ data:
             "textMode": "value_and_name",
             "wideLayout": false
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "disableTextWrap": false,
               "editorMode": "code",
@@ -243,7 +244,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -530,12 +531,12 @@ data:
             "showHeader": false,
             "sortBy": []
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -548,7 +549,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -697,7 +698,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -892,12 +893,12 @@ data:
             "showHeader": false,
             "sortBy": []
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -912,7 +913,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -927,7 +928,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1054,7 +1055,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -1126,12 +1127,12 @@ data:
             "sizing": "auto",
             "valueMode": "color"
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1145,7 +1146,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1162,7 +1163,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -1225,12 +1226,12 @@ data:
             "sizing": "auto",
             "valueMode": "color"
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1247,7 +1248,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -1295,12 +1296,12 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "dispatcharr_active_streams",
@@ -1313,7 +1314,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "dispatcharr_active_clients",
@@ -1324,7 +1325,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "dispatcharr_m3u_accounts{status=\"total\"}",
@@ -1337,7 +1338,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "dispatcharr_epg_sources{status=\"total\"}",
@@ -1350,7 +1351,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "dispatcharr_channels",
@@ -1367,7 +1368,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_MONITORING_- PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -1416,12 +1417,12 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.3",
+          "pluginVersion": "12.3.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_MONITORING_- PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1444,7 +1445,10 @@ data:
         "list": [
           {
             "allowCustomValue": false,
-            "current": {},
+            "current": {
+              "text": "All",
+              "value": "$__all"
+            },
             "definition": "label_values(dispatcharr_stream_metadata,channel_number)",
             "includeAll": true,
             "label": "Active Channel",
@@ -1469,5 +1473,5 @@ data:
       "timezone": "browser",
       "title": "Dispatcharr",
       "uid": "aa842463-afa6-45fb-b63c-1649aa62ebe9",
-      "version": 2
+      "version": 3
     }
