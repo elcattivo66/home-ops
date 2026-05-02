@@ -30,8 +30,8 @@ spec:
             env:
               AUDIOBOOKSHELF_UID: 1000
               AUDIOBOOKSHELF_GID: 1000
-              METADATA_PATH: /data/metadata
-              CONFIG_PATH: /data/config
+              CONFIG_PATH: /config
+              METADATA_PATH: /config/metadata
             resources:
               requests:
                 cpu: 5m
