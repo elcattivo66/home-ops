@@ -70,7 +70,8 @@ spec:
         advancedMounts:
           audiobookshelf:
             app:
-              - path: /data
+              - path: /config
+                subPath: config
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
