@@ -79,7 +79,14 @@ spec:
         globalMounts:
           - path: /media
             readOnly: false
-      cache:
+      tmpfs:
         type: emptyDir
-        globalMounts:
-          - path: /.npm
+        advancedMounts:
+          audiobookshelf:
+            app:
+              - path: /.npm
+                subPath: cache
+              - path: /metadata/logs
+                subPath: logs
+              - path: /tmp
+                subPath: tmp
