@@ -74,9 +74,9 @@ spec:
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
-        path: /spool/media/audiobooks
+        path: /spool/media
         globalMounts:
-          - path: /audiobooks
+          - path: /media
             readOnly: false
       cache:
         type: emptyDir
