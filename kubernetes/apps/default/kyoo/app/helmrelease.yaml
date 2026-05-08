@@ -90,7 +90,7 @@ spec:
           image: ghcr.io/home-operations/postgres-init:18.3
           env:
             - name: INIT_POSTGRES_HOST
-              value: postgres-rw.db.svc.cluster.local
+              value: *pghost
             - name: INIT_POSTGRES_SUPER_PASS
               valueFrom:
                 secretKeyRef:
