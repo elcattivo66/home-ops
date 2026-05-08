@@ -104,7 +104,7 @@ spec:
             - name: INIT_POSTGRES_PASS
               valueFrom:
                 secretKeyRef:
-                  name: kyoo
+                  name: *secret
                   key: INIT_POSTGRES_PASS
             - name: INIT_POSTGRES_DBNAME
               value: kyoo
