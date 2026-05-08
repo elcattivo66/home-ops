@@ -31,7 +31,7 @@ spec:
 
       postgres:
         shared:
-          host: postgres-rw.databases.svc.cluster.local
+          host: &pghost postgres-rw.databases.svc.cluster.local
           port: 5432
           databaseOverride: *app
           existingSecret: &secret kyoo-secret
@@ -85,6 +85,53 @@ spec:
             memory: 1Gi
           limits:
             memory: 8Gi
+      extraInitContainers:
+        - name: init-db
+          image: ghcr.io/home-operations/postgres-init:18.3
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: *secret
+                  key: INIT_POSTGRES_SUPER_PASS
+            - name: INIT_POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: *secret
+                  key: INIT_POSTGRES_USER
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: INIT_POSTGRES_PASS
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo
+        # Create pg_trgm extension as superuser (required for full-text search)
+        - name: init-extensions
+          image: ghcr.io/home-operations/postgres-init:18.3
+          env:
+            - name: PGHOST
+              value: *pghost
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: *secret
+                  key: INIT_POSTGRES_SUPER_PASS
+            - name: PGDATABASE
+              value: kyoo
+          command:
+            - /bin/bash
+            - -c
+            - |
+              until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
+              echo "Creating schema and extension..."
+              psql -c "CREATE SCHEMA IF NOT EXISTS kyoo;"
+              psql -c "CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA kyoo;"
+              echo "Done."
     auth:
       kyoo_auth:
         resources:
