@@ -22,6 +22,30 @@
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+/(?<currentValue>(v|\\d)[^/]+)",
       ],
       datasourceTemplate: "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+    },
+    {
+      customType: "regex",
+      description: "Process CloudNativePG PostgreSQL cluster image",
+      managerFilePatterns: [
+        "/kubernetes/apps/database/cloudnative-pg/cluster/cluster\\.yaml$/",
+      ],
+      matchStrings: [
+        "imageName:\\s*ghcr\\.io/cloudnative-pg/postgresql:(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]{64}))?",
+      ],
+      datasourceTemplate: "docker",
+      depNameTemplate: "ghcr.io/cloudnative-pg/postgresql",
+      versioningTemplate: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(?:-(?<compatibility>[a-z0-9.-]+))$",
+    },
+    {
+      customType: "regex",
+      description: "Process OCI dependencies",
+      managerFilePatterns: [
+        "/\\.yaml(?:\\.j2)?$/",
+      ],
+      matchStrings: [
+        "oci://(?<depName>[^:]+):(?<currentValue>\\S+)",
+      ],
+      datasourceTemplate: "docker",
     }
   ],
 }
