@@ -87,7 +87,7 @@ spec:
             memory: 8Gi
       extraInitContainers:
         - name: init-db
-          image: ghcr.io/home-operations/postgres-init:18.3
+          image: ghcr.io/home-operations/postgres-init:18.4
           env:
             - name: INIT_POSTGRES_HOST
               value: *pghost
@@ -110,7 +110,7 @@ spec:
               value: kyoo
         # Create pg_trgm extension as superuser (required for full-text search)
         - name: init-extensions
-          image: ghcr.io/home-operations/postgres-init:18.3
+          image: ghcr.io/home-operations/postgres-init:18.4
           env:
             - name: PGHOST
               value: *pghost
