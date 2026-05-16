@@ -1,0 +1,94 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app bookboss
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  values:
+    controllers:
+      bookboss:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/szinn/bookboss
+              tag: v0.8.27@sha256:e7383e3332b8f539d5adceee2912c5dd0966f6118386192b6ce3781ed4858642
+            env:
+              TZ: ${TZ}
+              BOOKBOSS__FRONTEND__LISTEN_IP: "0.0.0.0"
+              BOOKBOSS__FRONTEND__LISTEN_PORT: &port 8080
+              BOOKBOSS__FRONTEND__BASE_URL: "http://bookboss.${SECRET_DOMAIN}"
+              BOOKBOSS__DATABASE__DATABASE_URL: sqlite:///data/bookboss.db?mode=rwc
+              BOOKBOSS__LIBRARY__LIBRARY_PATH: /library/books
+              BOOKBOSS__IMPORT__BOOKDROP_PATH: /library/bookdrop
+              BOOKBOSS__IMPORT__POLL_INTERVAL_SECS: 60
+              BOOKBOSS__IMPORT__WORKER_POLL_INTERVAL_SECS: 5
+            envFrom:
+              - secretRef:
+                  name: bookboss-secret
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+
+    service:
+      app:
+        controller: bookboss
+        ports:
+          http:
+            port: *port
+
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+
+    persistence:
+      data:
+        existingClaim: bookboss
+        advancedMounts:
+          bookboss:
+            app:
+              - path: /data
+                subPath: data
+      media:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /spool/media
+        advancedMounts:
+          bookboss:
+            app:
+              - path: /library/books
+                subPath: Library/Main/Books/bookboss/books
+              - path: /library/bookdrop
+                subPath: Library/Main/Books/bookboss/bookdrop
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

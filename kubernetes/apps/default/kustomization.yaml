@@ -12,6 +12,7 @@ resources:
   - ./audiobookshelf/ks.yaml
   - ./authelia/ks.yaml
   - ./bazarr/ks.yaml
+  - ./bookboss/ks.yaml
   - ./calibre-web-automated/ks.yaml
   - ./configarr/ks.yaml
   - ./crosswatch/ks.yaml
