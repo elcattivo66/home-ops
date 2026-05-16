@@ -21,7 +21,7 @@ spec:
               tag: v2.0.1@sha256:d50dca792b1cce2df1d9cc546984644979daceb5911209b29e3aba4e9605b92c
             env:
               TZ: ${TZ}
-              UC_INTG_MANAGER_HTTP_PORT: &port 8088
+              UC_INTG_MANAGER_HTTP_PORT: &port 9999
               UC_MDNS_LOCAL_HOSTNAME: uc-intg-ws.${SECRET_DOMAIN}
             securityContext:
               allowPrivilegeEscalation: false
