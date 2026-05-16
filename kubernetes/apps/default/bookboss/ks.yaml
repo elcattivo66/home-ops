@@ -9,6 +9,9 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/volsync/local
+    - ../../../../components/keda/nfs-scaler
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
