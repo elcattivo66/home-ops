@@ -9,7 +9,7 @@ spec:
     - mcp.${SECRET_DOMAIN}
   parentRefs:
     - name: envoy-internal
-      namespace: network
+      namespace: networking
   rules:
     - backendRefs:
         - name: vmcp-mcp-gateway-internal
