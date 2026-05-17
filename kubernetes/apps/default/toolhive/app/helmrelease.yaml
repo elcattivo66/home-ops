@@ -3,15 +3,15 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: agregarr
+  name: toolhive-operator
 spec:
   interval: 15m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 5.0.1
-  url: oci://ghcr.io/bjw-s-labs/helm/app-template
+    tag: 0.27.2
+  url: oci://ghcr.io/stacklok/toolhive/toolhive-operator
 ---
 # yaml-language-server: $schema=https://k8s-schemas.bjw-s.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
