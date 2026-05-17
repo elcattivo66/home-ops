@@ -1,0 +1,74 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+kind: Kustomization
+metadata:
+  name: toolhive-operator-crds
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: toolhive-operator-crds
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: toolhive-operator-crds
+      namespace: default
+  interval: 1h
+  path: "./kubernetes/apps/default/toolhive/crds"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: default
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+kind: Kustomization
+metadata:
+  name: toolhive-operator
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: toolhive-operator
+  dependsOn:
+    - name: toolhive-operator-crds
+      namespace: default
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: toolhive-operator
+      namespace: default
+  interval: 1h
+  path: "./kubernetes/apps/default/toolhive/app"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: default
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: toolhive-operator-config
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: toolhive-operator-config
+  dependsOn:
+    - name: toolhive-operator-crds
+      namespace: default
+  interval: 1h
+  path: "./kubernetes/apps/default/toolhive/config"
+  postBuild:
+    substitute:
+      APP: toolhive
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: default
+  timeout: 5m
