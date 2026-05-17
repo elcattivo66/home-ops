@@ -36,7 +36,8 @@ resources:
   - ./sonarr/ks.yaml
   - ./seerr/ks.yaml
   - ./tandoor/ks.yaml
-  - ./tautulli/ks.yaml
+  - ./tautulli/ks.
+  - ./toolhive/ks.yaml
   - ./uc-intg-manager/ks.yaml
   - ./vaultwarden/ks.yaml
   # - ./wyoming-piper/ks.yaml
