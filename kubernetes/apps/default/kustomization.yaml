@@ -36,7 +36,7 @@ resources:
   - ./sonarr/ks.yaml
   - ./seerr/ks.yaml
   - ./tandoor/ks.yaml
-  - ./tautulli/ks.
+  - ./tautulli/ks.yaml
   - ./toolhive/ks.yaml
   - ./uc-intg-manager/ks.yaml
   - ./vaultwarden/ks.yaml
