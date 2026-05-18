@@ -26,7 +26,7 @@ resources:
   - ./music-assistant/ks.yaml
   - ./nextcloud/ks.yaml
   # - ./ollama/ks.yaml
-  # - ./open-webui/ks.yaml
+  - ./open-webui/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
