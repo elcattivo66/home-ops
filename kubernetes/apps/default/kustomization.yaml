@@ -17,6 +17,7 @@ resources:
   - ./configarr/ks.yaml
   - ./crosswatch/ks.yaml
   - ./dispatcharr/ks.yaml
+  - ./ha-mcp/ks.yaml
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   # - ./kyoo/ks.yaml
