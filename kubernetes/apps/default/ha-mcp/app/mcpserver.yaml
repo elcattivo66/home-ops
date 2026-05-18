@@ -10,9 +10,14 @@ spec:
   env:
     - name: HOMEASSISTANT_URL
       value: https://hass.${SECRET_DOMAIN}
+    - name: TMPDIR
+      value: /tmp
   image: ghcr.io/homeassistant-ai/ha-mcp:7.5.0
   podTemplateSpec:
     spec:
+      volumes:
+        - name: tmp
+          emptyDir: {}
       containers:
         - name: mcp
           command:
