@@ -28,8 +28,8 @@ spec:
         containers:
           app:
             image:
-              repository: intelanalytics/ipex-llm-inference-cpp-xpu
-              tag: 2.3.0-SNAPSHOT
+              repository: docker.io/ollama/ollama
+              tag: 0.24.0
             command:
               - /bin/sh
               - -c
