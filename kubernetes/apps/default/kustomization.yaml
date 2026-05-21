@@ -25,7 +25,7 @@ resources:
   - ./matterbridge/ks.yaml
   - ./music-assistant/ks.yaml
   - ./nextcloud/ks.yaml
-  # - ./ollama/ks.yaml
+  - ./ollama/ks.yaml
   - ./open-webui/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
