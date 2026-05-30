@@ -10,13 +10,13 @@ spec:
       app.kubernetes.io/name: ha-mcp
   dependsOn:
     - name: toolhive-operator-crds
-      namespace: default
+      namespace: ai
   interval: 1h
-  path: "./kubernetes/apps/default/ha-mcp/app"
+  path: "./kubernetes/apps/ai/ha-mcp/app"
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: default
+  targetNamespace: ai
   timeout: 5m

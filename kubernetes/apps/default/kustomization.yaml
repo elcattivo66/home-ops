@@ -17,7 +17,6 @@ resources:
   - ./configarr/ks.yaml
   - ./crosswatch/ks.yaml
   - ./dispatcharr/ks.yaml
-  - ./ha-mcp/ks.yaml
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   # - ./kyoo/ks.yaml
@@ -25,8 +24,6 @@ resources:
   - ./matterbridge/ks.yaml
   - ./music-assistant/ks.yaml
   - ./nextcloud/ks.yaml
-  - ./ollama/ks.yaml
-  - ./open-webui/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
@@ -38,7 +35,6 @@ resources:
   - ./seerr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
-  - ./toolhive/ks.yaml
   - ./uc-intg-manager/ks.yaml
   - ./vaultwarden/ks.yaml
   # - ./wyoming-piper/ks.yaml

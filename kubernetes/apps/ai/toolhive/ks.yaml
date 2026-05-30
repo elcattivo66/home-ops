@@ -12,15 +12,15 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: toolhive-operator-crds
-      namespace: default
+      namespace: ai
   interval: 1h
-  path: "./kubernetes/apps/default/toolhive/crds"
+  path: "./kubernetes/apps/ai/toolhive/crds"
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: default
+  targetNamespace: ai
   timeout: 5m
 ---
 # yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
@@ -34,20 +34,20 @@ spec:
       app.kubernetes.io/name: toolhive-operator
   dependsOn:
     - name: toolhive-operator-crds
-      namespace: default
+      namespace: ai
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: toolhive-operator
-      namespace: default
+      namespace: ai
   interval: 1h
-  path: "./kubernetes/apps/default/toolhive/app"
+  path: "./kubernetes/apps/ai/toolhive/app"
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: default
+  targetNamespace: ai
   timeout: 5m
 ---
 # yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
@@ -61,9 +61,9 @@ spec:
       app.kubernetes.io/name: toolhive-operator-config
   dependsOn:
     - name: toolhive-operator-crds
-      namespace: default
+      namespace: ai
   interval: 1h
-  path: "./kubernetes/apps/default/toolhive/config"
+  path: "./kubernetes/apps/ai/toolhive/config"
   postBuild:
     substitute:
       APP: toolhive
@@ -72,5 +72,5 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: default
+  targetNamespace: ai
   timeout: 5m
