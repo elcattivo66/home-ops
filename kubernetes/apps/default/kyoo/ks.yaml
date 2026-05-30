@@ -29,6 +29,7 @@ spec:
     namespace: flux-system
   wait: false # no flux ks dependents
   interval: 30m
+  retryInterval: 1m
   timeout: 5m
   postBuild:
     substitute:

@@ -3,8 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: dispatcharr
+  name: &appname dispatcharr
+  namespace: &namespace default
 spec:
+  targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
   components:
     - ../../../../components/gpu
     - ../../../../components/volsync/local
@@ -15,16 +20,17 @@ spec:
       namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
-  interval: 1h
   path: ./kubernetes/apps/default/dispatcharr/app
-  postBuild:
-    substitute:
-      APP: dispatcharr
-      VOLSYNC_CAPACITY: 5Gi
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: default
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+  postBuild:
+    substitute:
+      APP: *appname
+      VOLSYNC_CAPACITY: 5Gi
   wait: false

@@ -31,8 +31,8 @@ resources:
   - ./redlib/ks.yaml
   - ./sabnzbd/ks.yaml
   - ./smtp-relay/ks.yaml
-  - ./sonarr/ks.yaml
   - ./seerr/ks.yaml
+  - ./sonarr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
   - ./uc-intg-manager/ks.yaml
