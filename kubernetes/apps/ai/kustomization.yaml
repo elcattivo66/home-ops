@@ -8,6 +8,8 @@ components:
 resources:
   # Flux-Kustomizations
   - ./ha-mcp/ks.yaml
+  # - ./hermes/ks.yaml
+  - ./litellm/ks.yaml
   - ./ollama/ks.yaml
   - ./open-webui/ks.yaml
   - ./toolhive/ks.yaml
