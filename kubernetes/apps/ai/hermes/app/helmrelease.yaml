@@ -128,7 +128,7 @@ spec:
         hostnames:
           - "hermes.${SECRET_DOMAIN}"
         parentRefs:
-          - name: envory-internal
+          - name: envoy-internal
             namespace: networking
             sectionName: https
         rules:
