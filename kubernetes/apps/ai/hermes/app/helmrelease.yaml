@@ -53,7 +53,7 @@ spec:
               tag: v2026.5.16@sha256:b6e41c155d6bfce5ad83c5d0fec670086db8a43250e4511c9474134be5482d33
             args: ["gateway", "run"]
             env:
-              TZ: ${TIMEZONE}
+              TZ: ${TZ}
               API_SERVER_ENABLED: "true"
               API_SERVER_HOST: 0.0.0.0
               API_SERVER_PORT: &port 8642
