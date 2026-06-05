@@ -59,6 +59,18 @@ model_list:
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
 
+  - model_name: deepseek-v4-pro
+    model_info:
+      max_input_tokens: 1000000
+      max_output_tokens: 16384
+      supports_function_calling: true
+      supports_prompt_caching: true
+    litellm_params:
+      model: openai/deepseek-v4-pro
+      api_base: https://opencode.ai/zen/go/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+      drop_params: true
+
 general_settings:
   health_check_endpoint: /v1/health
 
