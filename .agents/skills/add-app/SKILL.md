@@ -34,68 +34,63 @@ Create these files with templated values:
 **`kubernetes/apps/<namespace>/<app-name>/ks.yaml`**
 ```yaml
 ---
-# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: <app-name>
+  name: &appname <app-name>
+  namespace: &namespace <namespace>
 spec:
+  targetNamespace: *namespace
   commonMetadata:
     labels:
-      app.kubernetes.io/name: <app-name>
+      app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync
-  interval: 1h
-  path: "./kubernetes/apps/<namespace>/<app-name>/app"
-  postBuild:
-    substitute:
-      APP: <app-name>
+    - ../../../../components/volsync/local
+  path: ./kubernetes/apps/<namespace>/<app-name>/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: <namespace>
-  timeout: 5m
-  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+  postBuild:
+    substitute:
+      APP: *appname
 ```
 
-Only include `dependsOn` if user specified dependencies.
+Only include `dependsOn` if user specified dependencies. Example:
+```yaml
+  dependsOn:
+    - name: external-secrets-stores
+      namespace: external-secrets
+```
 
 ---
 
 **`kubernetes/apps/<namespace>/<app-name>/app/kustomization.yaml`**
 ```yaml
 ---
-# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./ocirepository.yaml
   - ./helmrelease.yaml
 ```
 
 Include `./externalsecret.yaml` only if secrets are needed.
 
----
-
-**`kubernetes/apps/<namespace>/<app-name>/app/ocirepository.yaml`**
+If the app needs a configMapGenerator (e.g., for config files), add it:
 ```yaml
----
-# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/source.toolkit.fluxcd.io/ocirepository_v1.json
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: OCIRepository
-metadata:
-  name: <app-name>
-spec:
-  interval: 15m
-  layerSelector:
-    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
-    operation: copy
-  ref:
-    tag: 5.0.1
-  url: oci://ghcr.io/bjw-s-labs/helm/app-template
+configMapGenerator:
+  - name: <app-name>-configmap
+    files:
+      - ./resources/config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
 ```
+
+> **Note:** This repo uses a global `app-template` OCIRepository in the `flux-system` namespace. Do NOT create a local `ocirepository.yaml`. The HelmRelease's `chartRef` should reference `namespace: flux-system`.
 
 ---
 
@@ -106,12 +101,20 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: <app-name>
+  name: &app <app-name>
 spec:
+  interval: 1h
   chartRef:
     kind: OCIRepository
-    name: <app-name>
-  interval: 30m
+    name: app-template
+    namespace: flux-system
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
   values:
     controllers:
       <app-name>:
@@ -165,11 +168,10 @@ spec:
 **`kubernetes/apps/<namespace>/<app-name>/app/externalsecret.yaml`** (only if secrets needed)
 ```yaml
 ---
-# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/external-secrets.io/externalsecret_v1.json
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: <app-name>
+  name: <app-name>-secret
 spec:
   target:
     deletionPolicy: Delete
@@ -183,11 +185,11 @@ spec:
           name: bitwarden-fields
           kind: ClusterSecretStore
       remoteRef:
-        key: <app-name>
+        key: <bitwarden-uuid>
         property: secret_key
 ```
 
-Update the `data` section with actual secret keys based on the app's needs.
+Update the `data` section with actual secret keys based on the app's needs. The `name` must follow the `<app-name>-secret` convention. The `remoteRef.key` must be a valid Bitwarden item UUID (not the app name).
 
 ### Step 4: Update Namespace Kustomization
 
@@ -205,7 +207,11 @@ Run `find kubernetes/apps/<namespace>/<app-name> -type f` to confirm all files w
 
 ## Notes
 
-- Default app-template version is `5.0.1`
+- The global `app-template` OCIRepository lives in `flux-system` namespace — never create a local `ocirepository.yaml`
+- Use YAML anchors (`&app`, `&appname`, `&namespace`) in ks.yaml and helmrelease.yaml like existing apps
+- ExternalSecret naming: `<app-name>-secret` (not just `<app-name>`)
+- ExternalSecret `remoteRef.key` must be a valid Bitwarden item UUID
+- ks.yaml uses `volsync/local` component, `interval: 30m`, `retryInterval: 1m`, `timeout: 3m`
 - Security context defaults: runAsUser/runAsGroup 1000, readOnlyRootFilesystem true, drop ALL caps
 - If the namespace directory doesn't exist, ask user to create it first
 - Always ask for confirmation before writing files

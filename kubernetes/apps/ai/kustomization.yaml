@@ -12,4 +12,5 @@ resources:
   - ./litellm/ks.yaml
   - ./ollama/ks.yaml
   - ./open-webui/ks.yaml
+  - ./searxng/ks.yaml
   - ./toolhive/ks.yaml

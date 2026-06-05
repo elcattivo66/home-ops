@@ -46,6 +46,8 @@ security:
   tirith_fail_open: true
 privacy:
   redact_pii: true
+web:
+  search_backend: searxng
 platform_toolsets:
   cli:
     - hermes-cli

@@ -60,7 +60,7 @@ spec:
               API_SERVER_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
               HERMES_HOME: /opt/data
               HOME: /opt/data
-              # SEARXNG_URL: http://searxng.default.svc.cluster.local:8080
+              SEARXNG_URL: http://searxng.ai.svc.cluster.local:8080
               TERM: xterm-256color
             envFrom:
               - secretRef:
