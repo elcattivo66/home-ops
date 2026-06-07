@@ -34,6 +34,9 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: ceph-csi-drivers
+      namespace: rook-ceph
   path: ./kubernetes/apps/rook-ceph/rook-ceph/cluster
   prune: false # never should be deleted
   sourceRef:
