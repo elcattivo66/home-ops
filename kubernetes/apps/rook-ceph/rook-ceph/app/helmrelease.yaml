@@ -38,8 +38,11 @@ spec:
     csi:
       serviceMonitor:
         enabled: true
+    deleteUnusedCrushRules: false
+    enableDiscoveryDaemon: true
     image:
       repository: ghcr.io/rook/ceph
+    cephCommandsTimeoutSeconds: "20"
     monitoring:
       enabled: true
     resources:
