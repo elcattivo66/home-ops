@@ -9,7 +9,7 @@ spec:
     - name: ceph-csi-drivers
       namespace: rook-ceph
   interval: 1h
-  path: ./kubernetes/apps/rook-ceph/ceph-csi-drivers
+  path: ./kubernetes/apps/rook-ceph/rook-ceph/ceph-csi-drivers
   prune: true
   sourceRef:
     kind: GitRepository
