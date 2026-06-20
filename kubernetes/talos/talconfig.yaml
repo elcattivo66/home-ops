@@ -31,6 +31,12 @@ nodes:
       node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: &installDisk INTEL SSDSC*
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/i915
+            - siderolabs/intel-ucode
     networkInterfaces:
       - interface: bond0
         bond:
@@ -67,6 +73,15 @@ nodes:
       node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: *installDisk
+    schematic:
+      customization:
+        extraKernelArgs:
+          - i915.force_probe=!7d55 # Intel iGPU (disable i915)
+          - xe.force_probe=7d55    # Intel iGPU (enable xe)
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/xe
+            - siderolabs/intel-ucode
     networkInterfaces:
       - interface: bond0
         bond:
@@ -109,6 +124,15 @@ nodes:
       node.kubernetes.io/gpu: "true"
     installDiskSelector:
       model: *installDisk
+    schematic:
+      customization:
+        extraKernelArgs:
+          - i915.force_probe=!7d55 # Intel iGPU (disable i915)
+          - xe.force_probe=7d55    # Intel iGPU (enable xe)
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/xe
+            - siderolabs/intel-ucode
     networkInterfaces:
       - interface: bond0
         bond:
@@ -154,13 +178,6 @@ controlPlane:
   nodeLabels:
     topology.kubernetes.io/region: *clusterName
     topology.kubernetes.io/zone: m
-
-  schematic:
-    customization:
-      systemExtensions:
-        officialExtensions:
-          - siderolabs/i915
-          - siderolabs/intel-ucode
 
   patches:
     # Configure containerd
