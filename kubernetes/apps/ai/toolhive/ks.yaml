@@ -74,3 +74,25 @@ spec:
     namespace: flux-system
   targetNamespace: ai
   timeout: 5m
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: toolhive-mcp-servers
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: toolhive-mcp-servers
+  dependsOn:
+    - name: toolhive-operator-crds
+      namespace: ai
+  interval: 1h
+  path: "./kubernetes/apps/ai/toolhive/mcp-servers"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: ai
+  timeout: 5m
