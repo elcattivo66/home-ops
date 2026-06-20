@@ -5,5 +5,5 @@ kind: Kustomization
 resources:
   - ./ha-mcp
   - ./kubectl-mcp
-  - ./talos-mcp
+  # - ./talos-mcp
   - ./flux-mcp
