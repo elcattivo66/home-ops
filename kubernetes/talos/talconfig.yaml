@@ -308,8 +308,9 @@ controlPlane:
 
     # Disable default API server admission plugins.
     - |-
-      - op: remove
-        path: /cluster/apiServer/admissionControl
+      cluster:
+        apiServer:
+          admissionControl: []
 
     # Enable K8s Talos API Access
     - |-
