@@ -306,12 +306,6 @@ controlPlane:
           net.ipv4.tcp_fastopen: "3"                 # Send and accept data in the opening SYN packet
           user.max_user_namespaces: "11255"          # User namespaces
 
-    # Disable default API server admission plugins.
-    - |-
-      cluster:
-        apiServer:
-          admissionControl: []
-
     # Enable K8s Talos API Access
     - |-
       machine:
