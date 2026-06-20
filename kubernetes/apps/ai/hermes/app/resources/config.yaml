@@ -6,7 +6,7 @@ model:
 fallback_providers:
   - provider: custom:kubernetes
     model: kimi-k2.7
-   - provider: custom:kubernetes
+  - provider: custom:kubernetes
     model: go-minimax-m3
   - provider: custom:kubernetes
     model: deepseek-v4-flash
