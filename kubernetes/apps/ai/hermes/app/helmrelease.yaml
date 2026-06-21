@@ -48,7 +48,7 @@ spec:
             image:
               repository: docker.io/nousresearch/hermes-agent
               tag: v2026.6.19@sha256:9f367c7756ef087661a361536a89f438d57a122b958dc23d82d456b1433e6e9e
-            args: ["gateway", "run"]
+            args: ["gateway", "run", "--no-supervise"]
             env:
               TZ: ${TZ}
               API_SERVER_ENABLED: "true"
