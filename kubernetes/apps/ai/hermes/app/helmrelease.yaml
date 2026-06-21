@@ -79,9 +79,6 @@ spec:
                 memory: 1Gi
               limits:
                 memory: 4Gi
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
           dashboard:
             image:
               repository: docker.io/nousresearch/hermes-agent
