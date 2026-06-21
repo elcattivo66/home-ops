@@ -48,13 +48,15 @@ spec:
             image:
               repository: docker.io/nousresearch/hermes-agent
               tag: v2026.6.19@sha256:9f367c7756ef087661a361536a89f438d57a122b958dc23d82d456b1433e6e9e
-            args: ["gateway", "run", "--no-supervise"]
+            args: ["gateway", "run"]
             env:
               TZ: ${TZ}
               API_SERVER_ENABLED: "true"
               API_SERVER_HOST: 0.0.0.0
               API_SERVER_PORT: &port 8642
               API_SERVER_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
+              HERMES_DASHBOARD: "1"
+              HERMES_DASHBOARD_INSECURE: "1"
               HERMES_HOME: /opt/data
               HOME: /opt/data
               SEARXNG_URL: http://searxng.ai.svc.cluster.local:8080
@@ -73,34 +75,15 @@ spec:
               - containerPort: 8642
                 name: http
                 protocol: TCP
+              - containerPort: 9119
+                name: dashboard
+                protocol: TCP
             resources:
               requests:
                 cpu: 100m
                 memory: 1Gi
               limits:
                 memory: 4Gi
-          dashboard:
-            image:
-              repository: docker.io/nousresearch/hermes-agent
-              tag: v2026.6.19@sha256:9f367c7756ef087661a361536a89f438d57a122b958dc23d82d456b1433e6e9e
-            args:
-              - dashboard
-              - --host
-              - "0.0.0.0"
-              - --insecure
-            env:
-              TZ: ${TIMEZONE}
-              GATEWAY_HEALTH_URL: http://localhost:8642
-            resources:
-              requests:
-                cpu: 50m
-                memory: 256Mi
-              limits:
-                memory: 1Gi
-            ports:
-              - containerPort: 9119
-                name: http
-                protocol: TCP
 
     service:
       app:
