@@ -70,10 +70,6 @@ spec:
             secretKeyRef:
               name: *secret
               key: NEXTCLOUD_OAUTH_CLIENT_SECRET
-        - name: REDIS_HOST
-          value: dragonfly.databases.svc.cluster.local
-        - name: REDIS_HOST_PORT
-          value: "6379"
       mail:
         enabled: true
         fromAddress: ${SECRET_CERT_NAME}
@@ -116,7 +112,7 @@ spec:
           $CONFIG = array (
             'overwriteprotocol' => 'https',
             'overwrite.cli.url' => 'https://cloud.${SECRET_DOMAIN}',
-            'overewritehost' => 'cloud.${SECRET_DOMAIN}',
+            'overwritehost' => 'cloud.${SECRET_DOMAIN}',
             'filelocking.enabled' => 'true',
             'default_phone_region' => 'DE',
             'loglevel' => '2',
@@ -146,8 +142,9 @@ spec:
               'mail' => 'email',
             ),
             'oidc_login_scope' => 'openid profile email',
-            'oidc_login_disable_registration' => false,
+            'oidc_login_disable_registration' => true,
             'oidc_login_password_authentication' => true,
+            'oidc_login_end_session_on_logout' => true,
           );
 
       phpConfigs:
@@ -170,6 +167,10 @@ spec:
           pm.process_idle_timeout = 10s
     redis:
       enabled: false
+    externalRedis:
+      enabled: true
+      host: dragonfly.databases.svc.cluster.local
+      port: "6379"
     nginx:
       enabled: true
       resources:
