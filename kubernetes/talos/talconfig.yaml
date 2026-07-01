@@ -76,11 +76,12 @@ nodes:
     schematic:
       customization:
         extraKernelArgs:
-          - i915.force_probe=!7d55 # Intel iGPU (disable i915)
-          - xe.force_probe=7d55    # Intel iGPU (enable xe)
+          - i915.force_probe=!a7a0 # Intel iGPU Meteor Lake-H (disable i915)
+          - xe.force_probe=a7a0    # Intel iGPU Meteor Lake-H (enable xe)
         systemExtensions:
           officialExtensions:
             - siderolabs/xe
+            - siderolabs/i915
             - siderolabs/intel-ucode
     networkInterfaces:
       - interface: bond0
@@ -127,11 +128,12 @@ nodes:
     schematic:
       customization:
         extraKernelArgs:
-          - i915.force_probe=!7d55 # Intel iGPU (disable i915)
-          - xe.force_probe=7d55    # Intel iGPU (enable xe)
+          - i915.force_probe=!7d55 # Intel iGPU Meteor Lake-U (disable i915)
+          - xe.force_probe=7d55    # Intel iGPU Meteor Lake-U (enable xe)
         systemExtensions:
           officialExtensions:
             - siderolabs/xe
+            - siderolabs/i915
             - siderolabs/intel-ucode
     networkInterfaces:
       - interface: bond0
