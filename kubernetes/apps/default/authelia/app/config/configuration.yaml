@@ -1,5 +1,5 @@
 ---
-# Note: Authelia vars should be escaped with ${VAR_NAME} to avoid interpolation by Flux
+# Note: Authelia vars should be escaped with $${VAR_NAME} to avoid interpolation by Flux
 authentication_backend:
   password_reset:
     disable: true
