@@ -12,6 +12,10 @@ spec:
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
+    - name: dragonfly-cluster
+      namespace: databases
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/ai/searxng/app
   prune: true
   sourceRef:

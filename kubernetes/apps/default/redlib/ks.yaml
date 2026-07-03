@@ -14,6 +14,9 @@ spec:
   retryInterval: 1m
   timeout: 3m
   path: ./kubernetes/apps/default/redlib/app
+  dependsOn:
+    - name: certificates
+      namespace: networking
   prune: true
   sourceRef:
     kind: GitRepository

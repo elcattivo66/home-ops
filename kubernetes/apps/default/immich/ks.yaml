@@ -21,6 +21,8 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
+    - name: certificates
+      namespace: networking
     # - name: keda
     #   namespace: monitoring
   path: ./kubernetes/apps/default/immich/app

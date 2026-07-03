@@ -20,6 +20,10 @@ spec:
       namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
+    - name: smtp-relay
+      namespace: default
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/tandoor/app
   prune: true
   sourceRef:

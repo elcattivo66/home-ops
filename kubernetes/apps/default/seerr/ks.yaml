@@ -16,6 +16,8 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/seerr/app
   prune: true
   sourceRef:

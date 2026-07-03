@@ -9,6 +9,10 @@ spec:
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
+    - name: cloudnative-pg-cluster
+      namespace: databases
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/monitoring/grafana/app
   prune: true
   sourceRef:

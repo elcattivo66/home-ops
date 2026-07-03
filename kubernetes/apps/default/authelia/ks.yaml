@@ -16,6 +16,12 @@ spec:
       namespace: databases
     - name: lldap
       namespace: default
+    - name: external-secrets-stores
+      namespace: external-secrets
+    - name: smtp-relay
+      namespace: default
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/authelia/app
   prune: true
   sourceRef:

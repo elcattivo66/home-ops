@@ -17,6 +17,8 @@ spec:
       namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/crosswatch/app
   prune: true
   sourceRef:

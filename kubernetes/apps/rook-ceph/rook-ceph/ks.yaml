@@ -55,6 +55,8 @@ spec:
   dependsOn:
     - name: rook-ceph
       namespace: rook-ceph
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/rook-ceph/rook-ceph/cluster
   prune: false # never should be deleted
   sourceRef:

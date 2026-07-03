@@ -24,6 +24,8 @@ spec:
       namespace: rook-ceph
     - name: keda
       namespace: monitoring
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/sonarr/app
   prune: true
   sourceRef:

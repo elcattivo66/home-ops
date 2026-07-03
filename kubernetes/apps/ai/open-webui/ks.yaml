@@ -16,6 +16,12 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
+    - name: dragonfly-cluster
+      namespace: databases
+    - name: searxng
+      namespace: ai
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/ai/open-webui/app
   prune: true
   sourceRef:

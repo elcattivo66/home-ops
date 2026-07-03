@@ -18,6 +18,10 @@ spec:
       namespace: external-secrets
     - name: keda
       namespace: monitoring
+    - name: dragonfly-cluster
+      namespace: databases
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/paperless/app
   prune: true
   sourceRef:

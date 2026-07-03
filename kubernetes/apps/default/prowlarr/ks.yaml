@@ -14,6 +14,8 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/prowlarr/app
   prune: true
   sourceRef:

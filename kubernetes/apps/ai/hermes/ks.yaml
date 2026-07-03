@@ -18,6 +18,10 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
+    - name: searxng
+      namespace: ai
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/ai/hermes/app
   prune: true
   sourceRef:

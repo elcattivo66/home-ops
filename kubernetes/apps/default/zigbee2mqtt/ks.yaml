@@ -21,6 +21,10 @@ spec:
       namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
+    - name: mosquitto
+      namespace: databases
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:

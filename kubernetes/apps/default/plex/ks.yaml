@@ -77,9 +77,13 @@ spec:
     - ../../../../components/volsync/local
   dependsOn:
     - name: plex
+      namespace: default
     - name: tautulli
+      namespace: default
     - name: radarr
+      namespace: default
     - name: sonarr
+      namespace: default
     - name: external-secrets-stores
       namespace: external-secrets
     - name: volsync

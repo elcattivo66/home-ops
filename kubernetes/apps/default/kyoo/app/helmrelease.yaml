@@ -186,7 +186,7 @@ spec:
           hostnames: ["https://kyoo.${SECRET_DOMAIN}"]
           parentRefs:
             - name: envoy-external
-              namespace: network
+              namespace: networking
           rules:
             - name: api
               matches:

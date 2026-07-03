@@ -21,6 +21,12 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
+    - name: dragonfly-cluster
+      namespace: databases
+    - name: smtp-relay
+      namespace: default
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/nextcloud/app
   prune: true
   sourceRef:

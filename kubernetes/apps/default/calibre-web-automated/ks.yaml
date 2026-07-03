@@ -20,6 +20,8 @@ spec:
       namespace: volsync-system
     - name: keda
       namespace: monitoring
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/calibre-web-automated/app
   prune: true
   sourceRef:

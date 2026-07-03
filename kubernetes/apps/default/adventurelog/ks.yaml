@@ -21,6 +21,10 @@ spec:
       namespace: external-secrets
     - name: volsync
       namespace: volsync-system
+    - name: smtp-relay
+      namespace: default
+    - name: certificates
+      namespace: networking
   path: ./kubernetes/apps/default/adventurelog/app
   prune: true
   sourceRef:
