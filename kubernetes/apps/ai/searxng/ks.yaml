@@ -9,13 +9,20 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/dragonfly
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: dragonfly-cluster
+    - name: dragonfly-operator
       namespace: databases
     - name: certificates
       namespace: networking
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
   path: ./kubernetes/apps/ai/searxng/app
   prune: true
   sourceRef:

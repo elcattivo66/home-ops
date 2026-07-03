@@ -10,6 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
+    - ../../../../components/dragonfly
     - ../../../../components/volsync/local
   dependsOn:
     - name: external-secrets-stores
@@ -18,10 +19,15 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
-    - name: dragonfly-cluster
+    - name: dragonfly-operator
       namespace: databases
     - name: certificates
       namespace: networking
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
   path: ./kubernetes/apps/ai/litellm/app
   prune: true
   sourceRef:

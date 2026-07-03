@@ -10,6 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
+    - ../../../../components/dragonfly
     - ../../../../components/gpu
     # - ../../../../components/keda/nfs-scaler
   dependsOn:
@@ -17,7 +18,7 @@ spec:
       namespace: kube-system
     - name: cloudnative-pg-cluster
       namespace: databases
-    - name: dragonfly-cluster
+    - name: dragonfly-operator
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
@@ -25,6 +26,11 @@ spec:
       namespace: networking
     # - name: keda
     #   namespace: monitoring
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
   path: ./kubernetes/apps/default/immich/app
   prune: true
   sourceRef:

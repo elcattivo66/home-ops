@@ -46,9 +46,8 @@ spec:
               DISPATCHARR_ENV: modular
               DISPATCHARR_LOG_LEVEL: info
               DISPATCHARR_PORT: &port 80
-              REDIS_HOST: dragonfly.databases.svc.cluster.local
+              REDIS_HOST: dispatcharr-dragonfly.default.svc.cluster.local
               REDIS_PORT: 6379
-              REDIS_DB: 9
               PYTHONDONTWRITEBYTECODE: 1
             envFrom: *envFrom
             resources:

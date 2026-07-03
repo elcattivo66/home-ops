@@ -39,9 +39,8 @@ spec:
               tag: v3.0.1@sha256:46dedfc5848f7313bd6b584ea9f2648057430307aad6de56de968f6710a72cae
             env:
               TZ: ${TZ}
-              REDIS_HOSTNAME: dragonfly.databases.svc.cluster.local
+              REDIS_HOSTNAME: immich-dragonfly.default.svc.cluster.local
               REDIS_PORT: "6379"
-              REDIS_DBINDEX: "1"
               IMMICH_MEDIA_LOCATION: /usr/src/app/upload
             envFrom: *envFrom
             securityContext:

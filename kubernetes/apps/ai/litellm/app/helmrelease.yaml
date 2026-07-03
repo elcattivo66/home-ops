@@ -25,9 +25,8 @@ spec:
               TZ: ${TZ}
               LITELLM_LOG: INFO
               LITELLM_MODE: PRODUCTION
-              REDIS_HOST: dragonfly.databases.svc.cluster.local
+              REDIS_HOST: litellm-dragonfly.ai.svc.cluster.local
               REDIS_PORT: 6379
-              REDIS_DB: 6
             envFrom:
               - secretRef:
                   name: litellm-secret

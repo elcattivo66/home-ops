@@ -10,18 +10,24 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
+    - ../../../../components/dragonfly
     - ../../../../components/volsync/local
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
-    - name: dragonfly-cluster
+    - name: dragonfly-operator
       namespace: databases
     - name: searxng
       namespace: ai
     - name: certificates
       namespace: networking
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
   path: ./kubernetes/apps/ai/open-webui/app
   prune: true
   sourceRef:

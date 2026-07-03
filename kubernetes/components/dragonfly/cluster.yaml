@@ -1,12 +1,12 @@
 ---
-# yaml-language-server: $schema=https://lds-schemas.pages.dev/dragonflydb.io/dragonfly_v1alpha1.json
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/dragonflydb.io/dragonfly_v1alpha1.json
 apiVersion: dragonflydb.io/v1alpha1
 kind: Dragonfly
 metadata:
-  name: dragonfly
+  name: ${APP}-dragonfly
 spec:
   image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.39.0
-  replicas: 2
+  replicas: ${DRAGONFLY_REPLICAS:=1}
   args:
     - --maxmemory=$(MAX_MEMORY)Mi
     - --proactor_threads=2
@@ -24,10 +24,3 @@ spec:
       cpu: 10m
     limits:
       memory: 1Gi
-  topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: "kubernetes.io/hostname"
-      whenUnsatisfiable: "DoNotSchedule"
-      labelSelector:
-        matchLabels:
-          app.kubernetes.io/part-of: dragonfly

@@ -10,6 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
+    - ../../../../components/dragonfly
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
   dependsOn:
@@ -21,12 +22,17 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: dragonfly-cluster
+    - name: dragonfly-operator
       namespace: databases
     - name: smtp-relay
       namespace: default
     - name: certificates
       namespace: networking
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
   path: ./kubernetes/apps/default/nextcloud/app
   prune: true
   sourceRef:
