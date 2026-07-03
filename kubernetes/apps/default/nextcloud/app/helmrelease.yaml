@@ -93,20 +93,7 @@ spec:
             accessKey: S3_ACCESS_KEY
             secretKey: S3_SECRET_KEY
 
-      defaultConfigs:
-        redis.config.php: false
       configs:
-        redis.config.php: |-
-          <?php
-          $CONFIG = array (
-            'memcache.distributed' => '\OC\Memcache\Redis',
-            'memcache.locking' => '\OC\Memcache\Redis',
-            'redis' => array(
-              'host' => getenv('REDIS_HOST'),
-              'port' => (int) getenv('REDIS_HOST_PORT'),
-              'dbindex' => 5,
-            ),
-          );
         custom.config.php: |-
           <?php
           $CONFIG = array (
