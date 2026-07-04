@@ -22,20 +22,14 @@ spec:
       paperless:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          01-init-db:
-            envFrom: &envFrom
-              - secretRef:
-                  name: paperless-secret
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
         containers:
           app:
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
               tag: 2.20.15
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: paperless-secret
             env:
               COMPOSE_PROJECT_NAME: paperless
               PAPERLESS_CONSUMPTION_DIR: /library/consume

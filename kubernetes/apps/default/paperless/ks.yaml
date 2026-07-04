@@ -12,6 +12,7 @@ spec:
   components:
     - ../../../../components/dragonfly
     - ../../../../components/keda/nfs-scaler
+    - ../../../../components/postgres-db
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: databases
@@ -40,3 +41,6 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      DB_NAME: paperless
+      DB_USER: paperless
+      DB_BITWARDEN_ID: 6dad7c46-0bce-4768-93ce-97b7ee5f83cd

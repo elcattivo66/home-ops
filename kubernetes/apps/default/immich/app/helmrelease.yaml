@@ -24,14 +24,6 @@ spec:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          01-init-db:
-            envFrom: &envFrom
-              - secretRef:
-                  name: immich-secret
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
         containers:
           app:
             image:
@@ -42,7 +34,9 @@ spec:
               REDIS_HOSTNAME: immich-dragonfly.default.svc.cluster.local
               REDIS_PORT: "6379"
               IMMICH_MEDIA_LOCATION: /usr/src/app/upload
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: immich-secret
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -67,7 +61,9 @@ spec:
               tag: v3.0.1@sha256:cb2128c5cbc554fdaa2a036fb4419c808a9f3e0f27170e569dd9e727243da909
             env:
               MPLCONFIGDIR: "/cache/matplotlib"
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: immich-secret
             resources:
               claims:
                 - name: gpu

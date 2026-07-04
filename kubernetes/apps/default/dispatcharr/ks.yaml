@@ -11,6 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
+    - ../../../../components/postgres-db
     - ../../../../components/dragonfly
     - ../../../../components/gpu
     - ../../../../components/volsync/local
@@ -45,4 +46,7 @@ spec:
     substitute:
       APP: *appname
       VOLSYNC_CAPACITY: 5Gi
+      DB_NAME: dispatcharr
+      DB_USER: dispatch
+      DB_BITWARDEN_ID: 7e29b708-679c-48bf-b6e5-f33677f0ff77
   wait: false

@@ -13,6 +13,7 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
+    - ../../../../components/postgres-db
   dependsOn:
     - name: multus-networks
       namespace: networking
@@ -39,3 +40,6 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      DB_NAME: home_assistant
+      DB_USER: home-assistant
+      DB_BITWARDEN_ID: ade9622d-3723-4cc7-b2d7-c53ca02aa476

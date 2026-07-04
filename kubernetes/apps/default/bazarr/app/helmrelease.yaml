@@ -25,22 +25,15 @@ spec:
       bazarr:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
-            env:
-              TZ: ${TZ}
-            envFrom: &envFrom
-              - secretRef:
-                  name: bazarr-secret
+
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/bazarr
               tag: 1.6.0@sha256:cd63bbd0986c93e238eb8b9442604d249f0d4080099b389f822abe2062044417
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: bazarr-secret
             resources:
               requests:
                 cpu: 10m

@@ -9,6 +9,14 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/postgres-db
+  postBuild:
+    substitute:
+      APP: *appname
+      DB_NAME: lldap
+      DB_USER: lldap
+      DB_BITWARDEN_ID: 067f068f-0447-4167-a0a8-a7773a3aa5f1
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: databases

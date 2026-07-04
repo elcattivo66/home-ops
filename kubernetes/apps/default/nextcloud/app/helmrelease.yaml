@@ -40,12 +40,6 @@ spec:
       flavor: fpm-alpine
     nextcloud:
       host: cloud.${SECRET_DOMAIN}
-      extraInitContainers:
-        - name: init-db
-          image: ghcr.io/home-operations/postgres-init:18
-          envFrom:
-            - secretRef:
-                name: *secret
       existingSecret:
         enabled: true
         secretName: *secret

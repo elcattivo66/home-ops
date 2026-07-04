@@ -10,6 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/postgres-db
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: databases
@@ -27,3 +29,9 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substitute:
+      APP: *appname
+      DB_NAME: atuin
+      DB_USER: atuin
+      DB_BITWARDEN_ID: 18b10145-0d9a-4e33-9d24-ccb36ade05ca

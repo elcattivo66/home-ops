@@ -13,6 +13,7 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
+    - ../../../../components/postgres-db
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: databases
@@ -38,3 +39,6 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      DB_NAME: radarr_main
+      DB_USER: radarr
+      DB_BITWARDEN_ID: 133e1c1d-894d-4fc7-a69c-d44bd3fe090f

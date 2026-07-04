@@ -24,21 +24,14 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18@sha256:ebd9d30add17acdf935d73eb004758c7dfd9388aaa605fda70ad74378ab92aec
-            envFrom: &envFrom
-              - secretRef:
-                  name: tandoor-secret
-
         containers:
           app:
             image:
               repository: ghcr.io/tandoorrecipes/recipes
               tag: 2.6.12@sha256:53b5dfe9f6cd0784f4d7b992286adfebf30ab206b504d691f6b097d8dc34eaf4
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: tandoor-secret
             env:
               TZ: ${TZ}
               ENABLE_METRICS: 1

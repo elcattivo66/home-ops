@@ -23,20 +23,15 @@ spec:
       backend:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
-            envFrom: &envFrom
-              - secretRef:
-                  name: adventurelog-secret
+
         containers:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-backend
               tag: v0.12.1@sha256:7c759efab1476841f7319776666e527bedd481cd71dbb08e51aaa5959f2a28eb
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: adventurelog-secret
             env:
               PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
               FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
@@ -63,7 +58,9 @@ spec:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
               tag: v0.12.1@sha256:edd79220f0def1dbea5b5d56636621f6cfdb454db9c00a8ce436a8ab489c5e99
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: adventurelog-secret
             env:
               PUBLIC_SERVER_URL: "http://adventurelog-backend.default.svc.cluster.local:8000"
               ORIGIN: https://adventurelog.${SECRET_DOMAIN}

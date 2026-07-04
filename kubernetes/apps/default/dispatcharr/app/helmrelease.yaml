@@ -13,16 +13,7 @@ spec:
   values:
     controllers:
       dispatcharr:
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
-            env:
-              TZ: ${TZ}
-            envFrom: &envFrom
-              - secretRef:
-                  name: dispatcharr-secret
+
         pod:
           hostUsers: false
           resourceClaims:
@@ -49,7 +40,9 @@ spec:
               REDIS_HOST: dispatcharr-dragonfly.default.svc.cluster.local
               REDIS_PORT: 6379
               PYTHONDONTWRITEBYTECODE: 1
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: dispatcharr-secret
             resources:
               claims:
                 - name: gpu
@@ -71,7 +64,9 @@ spec:
               <<: *env
               DJANGO_SETTINGS_MODULE: dispatcharr.settings
               PYTHONUNBUFFERED: 1
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: dispatcharr-secret
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

@@ -24,14 +24,7 @@ spec:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          01-init-db:
-            envFrom: &envFrom
-              - secretRef:
-                  name: authelia-secret
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
+
         containers:
           app:
             image:
@@ -45,7 +38,9 @@ spec:
               AUTHELIA_THEME: auto
               X_AUTHELIA_CONFIG: /config/configuration.yaml
               X_AUTHELIA_CONFIG_FILTERS: template
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: authelia-secret
             probes:
               liveness: &probes
                 enabled: true

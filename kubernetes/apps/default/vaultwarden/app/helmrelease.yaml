@@ -23,14 +23,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
-            envFrom: &envFrom
-              - secretRef:
-                  name: vaultwarden-secret
         containers:
           app:
             image:
@@ -50,7 +42,9 @@ spec:
               SMTP_TIMEOUT: 15
               PUSH_ENABLED: true
               EXPERIMENTAL_CLIENT_FEATURE_FLAGS: ssh-key-vault-item,ssh-agent
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: vaultwarden-secret
             resources:
               requests:
                 cpu: 5m

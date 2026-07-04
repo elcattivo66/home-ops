@@ -25,14 +25,6 @@ spec:
       radarr:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 18
-            envFrom: &envFrom
-              - secretRef:
-                  name: radarr-secret
         containers:
           app:
             image:
@@ -49,7 +41,9 @@ spec:
               RADARR__LOG__LEVEL: info
               RADARR__APP__THEME: dark
               RADARR__UPDATE__BRANCH: develop
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: radarr-secret
             resources:
               requests:
                 cpu: 30m
