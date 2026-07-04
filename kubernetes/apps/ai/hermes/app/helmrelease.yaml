@@ -30,9 +30,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         strategy: Recreate
-        pod:
-          nodeSelector:
-            kubernetes.io/hostname: nuc13
         initContainers:
           init:
             image:
