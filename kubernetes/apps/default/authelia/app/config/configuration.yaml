@@ -189,3 +189,13 @@ identity_providers:
         redirect_uris:
           ["https://adventurelog-backend.${SECRET_DOMAIN}/accounts/oidc/adventurelog/login/callback/"]
         userinfo_signed_response_alg: none
+      - client_name: Hermes
+        client_id: hermes
+        client_secret: '{{ secret "/config/secret/HERMES_OAUTH_DIGEST" }}'
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris:
+          ["https://hermes.${SECRET_DOMAIN}/auth/callback"]
+        userinfo_signed_response_alg: none
