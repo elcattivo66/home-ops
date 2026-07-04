@@ -9,5 +9,17 @@
     "github>elcattivo66/home-ops//.renovate/packageRules.json5",
     ":timezone(Europe/Berlin)",
   ],
-  "ignorePaths": ["**/*.sops.*", "**/.archive/**", "**/config/**"]
+  "ignorePaths": ["**/*.sops.*", "**/.archive/**", "**/config/**"],
+  "packageRules": [
+    {
+      "description": "Disable digest-only updates for CNPG PostgreSQL images",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": [
+        "ghcr.io/cloudnative-pg/postgresql",
+        "ghcr.io/cloudnative-pg/postgis-extension"
+      ],
+      "matchUpdateTypes": ["digest"],
+      "enabled": false
+    }
+  ]
 }
