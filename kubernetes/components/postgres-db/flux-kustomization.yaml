@@ -1,24 +1,20 @@
 ---
+# yaml-language-server: $$schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname prowlarr
-  namespace: &namespace default
+  name: ${APP}-postgres
 spec:
-  targetNamespace: *namespace
+  targetNamespace: databases
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *appname
-  components:
-    - ../../../../components/postgres-db
+      app.kubernetes.io/name: ${APP}-postgres
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: certificates
-      namespace: networking
-  path: ./kubernetes/apps/default/prowlarr/app
+  path: ./kubernetes/components/postgres-db/manifests
   prune: true
   sourceRef:
     kind: GitRepository
@@ -29,7 +25,7 @@ spec:
   timeout: 3m
   postBuild:
     substitute:
-      APP: *appname
-      DB_NAME: prowlarr_main
-      DB_USER: *appname
-      DB_BITWARDEN_ID: d757379c-7df3-4aff-9619-d6542fe0f990
+      APP: ${APP}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_BITWARDEN_ID: ${DB_BITWARDEN_ID}

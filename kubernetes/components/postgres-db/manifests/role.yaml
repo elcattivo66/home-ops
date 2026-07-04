@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $$schema=https://k8s-schemas.home-operations.com/postgresql.cnpg.io/databaserole_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: ${APP}-postgres
+spec:
+  cluster:
+    name: postgres
+  name: ${DB_USER}
+  comment: "${APP} database role"
+  login: true
+  superuser: false
+  createdb: false
+  createrole: false
+  inherit: true
+  inRoles:
+    - pg_monitor
+  passwordSecret:
+    name: ${APP}-postgres
+  databaseRoleReclaimPolicy: ${ROLE_RECLAIM_POLICY:-retain}
