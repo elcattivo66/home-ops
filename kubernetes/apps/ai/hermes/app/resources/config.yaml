@@ -1,5 +1,5 @@
 model:
-  default: deepseek-v4-pro
+  default: go-minimax-m3
   provider: custom:kubernetes
   base_url: http://litellm.ai.svc.cluster.local:4000/v1
   api_key: ${LITELLM_API_KEY}
@@ -7,7 +7,7 @@ fallback_providers:
   - provider: custom:kubernetes
     model: kimi-k2.7
   - provider: custom:kubernetes
-    model: go-minimax-m3
+    model: deepseek-v4-pro
   - provider: custom:kubernetes
     model: deepseek-v4-flash
   - provider: custom:kubernetes
