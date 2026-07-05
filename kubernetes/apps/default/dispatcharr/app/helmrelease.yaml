@@ -42,6 +42,7 @@ spec:
               REDIS_PORT: 6379
               PYTHONDONTWRITEBYTECODE: 1
               UWSGI_RLIMIT_NOFILE: "65535"
+              UWSGI_HARAKIRI: "120"
             envFrom:
               - secretRef:
                   name: dispatcharr-secret
