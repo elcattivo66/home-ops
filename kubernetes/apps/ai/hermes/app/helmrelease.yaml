@@ -72,7 +72,6 @@ spec:
               API_SERVER_PORT: &port 8642
               API_SERVER_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
               HERMES_DASHBOARD: "1"
-              HERMES_DASHBOARD_INSECURE: "1"
               HERMES_HOME: /opt/data
               HOME: /opt/data
               MEMINI_URL: http://memini.ai.svc.cluster.local:8080
