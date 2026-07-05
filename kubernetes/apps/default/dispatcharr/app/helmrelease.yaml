@@ -43,6 +43,8 @@ spec:
               PYTHONDONTWRITEBYTECODE: 1
               UWSGI_RLIMIT_NOFILE: "65535"
               UWSGI_HARAKIRI: "120"
+              UWSGI_NICE_LEVEL: "0"
+              CELERY_NICE_LEVEL: "10"
             envFrom:
               - secretRef:
                   name: dispatcharr-secret
