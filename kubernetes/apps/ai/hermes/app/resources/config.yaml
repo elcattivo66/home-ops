@@ -31,6 +31,7 @@ terminal:
     - PLEX_TOKEN
     - PLEX_URL
 memory:
+  provider: memini
   auto_migrate: true
   auto_summarize:
     threshold: 50
