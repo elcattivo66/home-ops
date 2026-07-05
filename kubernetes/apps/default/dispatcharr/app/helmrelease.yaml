@@ -20,6 +20,7 @@ spec:
             - name: gpu
               resourceClaimTemplateName: dispatcharr-gpu
           annotations:
+            reloader.stakater.com/auto: "true"
             k8s.v1.cni.cncf.io/networks: |
               [{
                 "name":"multus-vpn",
@@ -40,6 +41,7 @@ spec:
               REDIS_HOST: dispatcharr-dragonfly.default.svc.cluster.local
               REDIS_PORT: 6379
               PYTHONDONTWRITEBYTECODE: 1
+              UWSGI_RLIMIT_NOFILE: "65535"
             envFrom:
               - secretRef:
                   name: dispatcharr-secret
@@ -56,6 +58,30 @@ spec:
               runAsNonRoot: false
               allowPrivilegeEscalation: true
               readOnlyRootFilesystem: false
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 30
+                  periodSeconds: 15
+                  timeoutSeconds: 5
+                  failureThreshold: 4
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 30
 
           celery:
             image: *image
