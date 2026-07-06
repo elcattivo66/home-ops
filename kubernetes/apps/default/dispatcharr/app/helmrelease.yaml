@@ -33,6 +33,9 @@ spec:
             image: &image
               repository: ghcr.io/dispatcharr/dispatcharr
               tag: 0.27.2@sha256:f2b5ea3128b0513feb07efee7539ad546f3ba3a9095f19936f446f75b8baa894
+            command: ["/bin/bash", "-c"]
+            args:
+              - "cp /var/dispatcharr/uwsgi-ini/uwsgi.modular.ini /app/docker/uwsgi.modular.ini && exec /app/docker/entrypoint.sh"
             env: &env
               TZ: ${TZ}
               DISPATCHARR_ENV: modular
@@ -153,6 +156,6 @@ spec:
         type: configMap
         name: dispatcharr-uwsgi-ini
         globalMounts:
-          - path: /app/docker
+          - path: /var/dispatcharr/uwsgi-ini
             subPath: uwsgi.modular.ini
             readOnly: true
