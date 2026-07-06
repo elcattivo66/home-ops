@@ -41,9 +41,11 @@ spec:
               REDIS_HOST: dispatcharr-dragonfly.default.svc.cluster.local
               REDIS_PORT: 6379
               PYTHONDONTWRITEBYTECODE: 1
-              UWSGI_RLIMIT_NOFILE: "65535"
               UWSGI_HARAKIRI: "120"
+              UWSGI_MAX_REQUESTS: "5000"
               UWSGI_NICE_LEVEL: "0"
+              UWSGI_RELOAD_ON_RSS: "1536"
+              UWSGI_RLIMIT_NOFILE: "65535"
               CELERY_NICE_LEVEL: "10"
             envFrom:
               - secretRef:
@@ -54,7 +56,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 6Gi
+                memory: 8Gi
             securityContext:
               runAsUser: 0
               runAsGroup: 0
