@@ -5,3 +5,4 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./securitypolicy.yaml
+  - ./uwsgi-ini-configmap.yaml
