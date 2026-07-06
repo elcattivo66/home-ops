@@ -83,11 +83,6 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 5
                   failureThreshold: 30
-            volumeMounts:
-              - name: uwsgi-ini
-                mountPath: /app/docker/uwsgi.modular.ini
-                subPath: uwsgi.modular.ini
-                readOnly: true
 
           celery:
             image: *image
@@ -109,10 +104,6 @@ spec:
                 cpu: 10m
               limits:
                 memory: 2Gi
-    volumes:
-      - name: uwsgi-ini
-        configMap:
-          name: dispatcharr-uwsgi-ini
     service:
       app:
         ports:
@@ -158,3 +149,9 @@ spec:
         globalMounts:
           - path: /tmp
             subPath: tmp
+      uwsgi-ini:
+        type: configMap
+        name: dispatcharr-uwsgi-ini
+        globalMounts:
+          - path: /app/docker/uwsgi.modular.ini
+            readOnly: true
