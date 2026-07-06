@@ -153,5 +153,6 @@ spec:
         type: configMap
         name: dispatcharr-uwsgi-ini
         globalMounts:
-          - path: /app/docker/uwsgi.modular.ini
+          - path: /app/docker
+            subPath: uwsgi.modular.ini
             readOnly: true
