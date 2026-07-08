@@ -40,22 +40,13 @@ spec:
       flavor: fpm-alpine
     nextcloud:
       host: cloud.${SECRET_DOMAIN}
+      datadir: /var/www/data
       existingSecret:
         enabled: true
         secretName: *secret
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
       extraEnv:
-        - name: S3_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: *secret
-              key: S3_ACCESS_KEY
-        - name: S3_SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: *secret
-              key: S3_SECRET_KEY
         - name: NEXTCLOUD_OAUTH_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
@@ -69,18 +60,6 @@ spec:
           host: smtp-relay.default.svc.cluster.local
           secure: ""
           port: 2525
-
-      objectstore:
-        s3:
-          enabled: true
-          host: 192.168.20.5:3900
-          ssl: false
-          bucket: nextcloud-data
-          autocreate: true
-          existingSecret: nextcloud-secret
-          secretKeys:
-            accessKey: S3_ACCESS_KEY
-            secretKey: S3_SECRET_KEY
 
       configs:
         custom.config.php: |-
