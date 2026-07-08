@@ -46,7 +46,8 @@ spec:
   postBuild:
     substitute:
       APP: *appname
-      VOLSYNC_CACHE_CAPACITY: 5Gi
+      VOLSYNC_CAPACITY: 50Gi
+      VOLSYNC_CACHE_CAPACITY: 10Gi
       DB_NAME: nextcloud
       DB_USER: nextcloud
       DB_BITWARDEN_ID: 9af7a56c-e96c-4ce0-b952-081affcad60b
