@@ -54,8 +54,8 @@
     {
       description: "Talos Group",
       groupName: "talos",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/installer/", "/talosctl/"],
+      matchDatasources: ["docker", "custom.talos-factory"],
+      matchPackageNames: ["/installer/", "/talosctl/", "siderolabs/talos"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
