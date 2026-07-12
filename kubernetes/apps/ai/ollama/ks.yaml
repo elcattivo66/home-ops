@@ -12,6 +12,7 @@ spec:
   components:
     - ../../../../components/gpu
     - ../../../../components/volsync/local
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
@@ -19,6 +20,8 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync-system
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: certificates
       namespace: networking
   path: ./kubernetes/apps/ai/ollama/app
@@ -33,4 +36,5 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 50Gi
       VOLSYNC_CAPACITY: 50Gi
