@@ -12,14 +12,9 @@ spec:
       capacity: ${KOPIUR_CAPACITY:=5Gi}
       mode: Persistent
       storageClassName: openebs-hostpath
-    podSecurityContext:
-      fsGroup: ${KOPIUR_PGID:=1000}
-      supplementalGroups:
-        - ${KOPIUR_PGID:=1000}
     securityContext:
-      runAsGroup: ${KOPIUR_PGID:=1000}
-      runAsNonRoot: true
       runAsUser: ${KOPIUR_PUID:=1000}
+      runAsGroup: ${KOPIUR_PGID:=1000}
   repository:
     kind: ClusterRepository
     name: nas
