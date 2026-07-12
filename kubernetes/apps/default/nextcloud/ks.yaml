@@ -50,7 +50,8 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 50Gi
-      KOPIUR_PUID: "82"
+      KOPIUR_MOVER_UID: "0"
+      KOPIUR_MOVER_GID: "82"
       VOLSYNC_CAPACITY: 50Gi
       VOLSYNC_CACHE_CAPACITY: 10Gi
       DB_NAME: nextcloud

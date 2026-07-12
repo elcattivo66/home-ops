@@ -43,7 +43,7 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
-      KOPIUR_PUID: "0"
+      KOPIUR_MOVER_UID: "0"
       VOLSYNC_CAPACITY: 1Gi
       DB_NAME: adventurelog
       DB_USER: adventurelog
