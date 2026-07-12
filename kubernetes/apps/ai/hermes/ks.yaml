@@ -37,4 +37,6 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_PUID: "10000"
+      KOPIUR_PGID: "10000"
       VOLSYNC_CAPACITY: 20Gi
