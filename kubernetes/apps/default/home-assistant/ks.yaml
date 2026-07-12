@@ -14,6 +14,7 @@ spec:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
     - ../../../../components/postgres-db
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: multus-networks
       namespace: networking
@@ -27,6 +28,8 @@ spec:
       namespace: volsync-system
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/home-assistant/app
   prune: true
   sourceRef:

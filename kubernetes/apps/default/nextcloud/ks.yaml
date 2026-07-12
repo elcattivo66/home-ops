@@ -14,6 +14,7 @@ spec:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
     - ../../../../components/postgres-db
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: volsync
       namespace: volsync-system
@@ -29,6 +30,8 @@ spec:
       namespace: default
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly
@@ -46,6 +49,8 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 50Gi
+      KOPIUR_PUID: 0
       VOLSYNC_CAPACITY: 50Gi
       VOLSYNC_CACHE_CAPACITY: 10Gi
       DB_NAME: nextcloud

@@ -12,6 +12,7 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
@@ -23,6 +24,8 @@ spec:
       namespace: monitoring
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/bookboss/app
   prune: true
   sourceRef:

@@ -12,6 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/volsync/local
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: volsync
       namespace: volsync-system
@@ -19,6 +20,8 @@ spec:
       namespace: rook-ceph
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/crosswatch/app
   prune: true
   sourceRef:
@@ -32,4 +35,5 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 1Gi
       VOLSYNC_CAPACITY: 1Gi

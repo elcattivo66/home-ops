@@ -13,6 +13,7 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: volsync
       namespace: volsync-system
@@ -22,6 +23,8 @@ spec:
       namespace: monitoring
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/sabnzbd/app
   prune: true
   sourceRef:
@@ -34,4 +37,5 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 1Gi
       VOLSYNC_CAPACITY: 1Gi

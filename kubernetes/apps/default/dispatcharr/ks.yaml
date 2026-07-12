@@ -15,6 +15,7 @@ spec:
     - ../../../../components/dragonfly
     - ../../../../components/gpu
     - ../../../../components/volsync/local
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
@@ -28,6 +29,8 @@ spec:
       namespace: databases
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly
@@ -45,6 +48,8 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 5Gi
+      KOPIUR_PUID: 0
       VOLSYNC_CAPACITY: 5Gi
       DB_NAME: dispatcharr
       DB_USER: dispatch

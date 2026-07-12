@@ -12,6 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/volsync/local
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: multus-networks
       namespace: networking
@@ -19,6 +20,8 @@ spec:
       namespace: volsync-system
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -26,6 +29,7 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 5Gi
       VOLSYNC_CAPACITY: 5Gi
   prune: true
   sourceRef:

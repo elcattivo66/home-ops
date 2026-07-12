@@ -13,6 +13,7 @@ spec:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
     - ../../../../components/keda/nfs-scaler
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
@@ -22,6 +23,8 @@ spec:
       namespace: monitoring
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/audiobookshelf/app
   prune: true
   sourceRef:
@@ -34,4 +37,5 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 5Gi
       VOLSYNC_CAPACITY: 5Gi

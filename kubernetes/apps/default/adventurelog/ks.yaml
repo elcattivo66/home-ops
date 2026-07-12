@@ -13,6 +13,7 @@ spec:
   components:
     - ../../../../components/postgres-db
     - ../../../../components/volsync/local
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: databases
@@ -26,6 +27,8 @@ spec:
       namespace: default
     - name: certificates
       namespace: networking
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/adventurelog/app
   prune: true
   sourceRef:
@@ -39,6 +42,8 @@ spec:
   postBuild:
     substitute:
       APP: *appname
+      KOPIUR_CAPACITY: 1Gi
+      KOPIUR_PUID: 0
       VOLSYNC_CAPACITY: 1Gi
       DB_NAME: adventurelog
       DB_USER: adventurelog
