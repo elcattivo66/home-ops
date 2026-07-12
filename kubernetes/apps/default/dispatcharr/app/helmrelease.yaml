@@ -13,7 +13,6 @@ spec:
   values:
     controllers:
       dispatcharr:
-
         pod:
           hostUsers: false
           resourceClaims:
@@ -28,6 +27,20 @@ spec:
                 "ips": ["192.168.70.10/24"],
                 "mac": "2e:54:30:22:3f:74"
               }]
+        initContainers:
+          chown-dbdir:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.24"
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                mkdir -p /data/db
+                chmod 0750 /data/db
+            securityContext:
+              runAsUser: 0
         containers:
           app:
             image: &image
@@ -55,12 +68,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 6Gi
-            securityContext:
-              runAsUser: 0
-              runAsGroup: 0
-              runAsNonRoot: false
-              allowPrivilegeEscalation: true
-              readOnlyRootFilesystem: false
             probes:
               liveness: &probes
                 enabled: true
