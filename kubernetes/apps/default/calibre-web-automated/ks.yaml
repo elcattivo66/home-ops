@@ -38,5 +38,5 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
-      KOPIUR_PUID: 0
+      KOPIUR_PUID: "0"
       VOLSYNC_CAPACITY: 1Gi
