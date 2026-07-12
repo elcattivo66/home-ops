@@ -38,7 +38,7 @@ spec:
   postBuild:
     substitute:
       APP: *appname
-      VOLSYNC_CAPACITY: 5Gi
+      VOLSYNC_CAPACITY: 1Gi
       DB_NAME: bazarr
       DB_USER: bazarr
       DB_BITWARDEN_ID: 75d92045-ec56-45ff-8298-1825270e4218
