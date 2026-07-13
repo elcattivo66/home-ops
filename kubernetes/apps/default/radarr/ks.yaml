@@ -11,7 +11,6 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
     - ../../../../components/postgres-db
     - ../../../../components/kopiur/backup
@@ -20,8 +19,6 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: keda

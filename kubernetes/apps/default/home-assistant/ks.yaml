@@ -11,7 +11,6 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
     - ../../../../components/postgres-db
     - ../../../../components/kopiur/backup
@@ -24,8 +23,6 @@ spec:
       namespace: rook-ceph
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: certificates
       namespace: networking
     - name: kopiur-repository

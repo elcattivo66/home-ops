@@ -10,7 +10,6 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
     - ../../../../components/postgres-db
     - ../../../../components/kopiur/backup
@@ -19,8 +18,6 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: smtp-relay
@@ -42,7 +39,6 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
-      VOLSYNC_CAPACITY: 1Gi
       DB_NAME: vaultwarden
       DB_USER: vaultwarden
       DB_BITWARDEN_ID: c0736d3f-5a37-4294-91a5-119c9237b604

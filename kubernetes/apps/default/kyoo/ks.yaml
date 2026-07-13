@@ -11,14 +11,12 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
     - ../../../../components/gpu
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: keda
       namespace: monitoring
   path: ./kubernetes/apps/default/kyoo/app
@@ -34,4 +32,4 @@ spec:
   postBuild:
     substitute:
       APP: *appname
-      VOLSYNC_CAPACITY: 30Gi
+      KOPIUR_CAPACITY: 30Gi

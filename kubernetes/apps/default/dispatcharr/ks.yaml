@@ -14,13 +14,10 @@ spec:
     - ../../../../components/postgres-db
     - ../../../../components/dragonfly
     - ../../../../components/gpu
-    - ../../../../components/volsync/local
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
-    - name: volsync
-      namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: external-secrets-stores
@@ -51,7 +48,6 @@ spec:
       KOPIUR_CAPACITY: 5Gi
       KOPIUR_MOVER_UID: "0"
       KOPIUR_MOVER_GID: "1000"
-      VOLSYNC_CAPACITY: 5Gi
       DB_NAME: dispatcharr
       DB_USER: dispatch
       DB_BITWARDEN_ID: 7e29b708-679c-48bf-b6e5-f33677f0ff77

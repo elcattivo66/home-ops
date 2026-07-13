@@ -11,13 +11,10 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: multus-networks
       namespace: networking
-    - name: volsync
-      namespace: volsync-system
     - name: certificates
       namespace: networking
     - name: kopiur-repository
@@ -30,7 +27,6 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 5Gi
-      VOLSYNC_CAPACITY: 5Gi
   prune: true
   sourceRef:
     kind: GitRepository

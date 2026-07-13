@@ -11,15 +11,12 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/gpu
-    - ../../../../components/volsync/local
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: volsync
-      namespace: volsync-system
     - name: kopiur-repository
       namespace: kopiur-system
     - name: certificates
@@ -37,4 +34,3 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 50Gi
-      VOLSYNC_CAPACITY: 50Gi

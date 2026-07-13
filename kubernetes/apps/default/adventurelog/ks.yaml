@@ -12,7 +12,6 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/postgres-db
-    - ../../../../components/volsync/local
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: cloudnative-pg-cluster
@@ -21,8 +20,6 @@ spec:
       namespace: rook-ceph
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: smtp-relay
       namespace: default
     - name: certificates
@@ -44,7 +41,6 @@ spec:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
       KOPIUR_MOVER_UID: "0"
-      VOLSYNC_CAPACITY: 1Gi
       DB_NAME: adventurelog
       DB_USER: adventurelog
       DB_BITWARDEN_ID: de49178f-239e-4590-b281-e11fcb718dd9

@@ -10,7 +10,6 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/postgres-db
     - ../../../../components/kopiur/backup
   dependsOn:
@@ -18,8 +17,6 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: smtp-relay
@@ -41,7 +38,6 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
-      VOLSYNC_CAPACITY: 1Gi
       DB_NAME: tandoor
       DB_USER: tandoor
       DB_BITWARDEN_ID: a7bb0a86-14c7-4748-9d35-2d425dc2180b

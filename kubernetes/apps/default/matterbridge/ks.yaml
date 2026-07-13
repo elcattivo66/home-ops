@@ -11,13 +11,10 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: multus-networks
       namespace: networking
-    - name: volsync
-      namespace: volsync-system
     - name: certificates
       namespace: networking
     - name: kopiur-repository
@@ -36,7 +33,4 @@ spec:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
       KOPIUR_MOVER_UID: "0"
-      VOLSYNC_CAPACITY: 1Gi
-      VOLSYNC_PGID: "0"
-      VOLSYNC_PUID: "0"
   wait: false

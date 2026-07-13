@@ -11,14 +11,11 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: volsync
-      namespace: volsync-system
     - name: keda
       namespace: monitoring
     - name: certificates
@@ -39,4 +36,3 @@ spec:
       APP: *appname
       KOPIUR_CAPACITY: 1Gi
       KOPIUR_MOVER_UID: "0"
-      VOLSYNC_CAPACITY: 1Gi

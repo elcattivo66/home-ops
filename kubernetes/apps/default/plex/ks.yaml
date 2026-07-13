@@ -11,14 +11,11 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/gpu
-    - ../../../../components/volsync/local
     - ../../../../components/keda/nfs-scaler
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
-    - name: volsync
-      namespace: volsync-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
     - name: keda
@@ -38,8 +35,6 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 100Gi
-      VOLSYNC_CAPACITY: 100Gi
-      VOLSYNC_CACHE_CAPACITY: 25Gi
 ---
 # yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -78,7 +73,6 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/local
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: plex
@@ -91,8 +85,6 @@ spec:
       namespace: default
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
     - name: kopiur-repository
       namespace: kopiur-system
   path: ./kubernetes/apps/default/plex/kometa
@@ -109,4 +101,3 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 10Gi
-      VOLSYNC_CAPACITY: 10Gi
