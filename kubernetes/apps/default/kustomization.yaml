@@ -7,8 +7,6 @@ components:
   - ../../components/common
   - ../../components/kopiur/secret
 resources:
-  # Namespace
-  - namespace.yaml
   # Flux-Kustomizations
   - ./adventurelog/ks.yaml
   - ./atuin/ks.yaml
