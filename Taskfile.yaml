@@ -20,7 +20,6 @@ includes:
   sops: .taskfiles/Sops/Taskfile.yaml
   talos: .taskfiles/Talos/Taskfile.yaml
   # rook: .taskfiles/Rook/Taskfile.yaml
-  volsync: .taskfiles/Volsync/Taskfile.yaml
 
 tasks:
 

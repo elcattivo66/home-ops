@@ -10,7 +10,6 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/volsync/remote
     - ../../../../components/postgres-db
     - ../../../../components/kopiur/backup
   dependsOn:
