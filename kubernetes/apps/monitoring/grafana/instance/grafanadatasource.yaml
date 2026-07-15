@@ -51,9 +51,20 @@ spec:
     access: proxy
     uid: homeassistant-postgres
     url: postgres-rw.databases.svc.cluster.local:5432
-    user: $${HASS_POSTGRES_USER}
+    user: placeholder
     secureJsonData:
-      password: $${HASS_POSTGRES_PASS}
+      password: placeholder
     jsonData:
       database: home_assistant
       sslmode: disable
+  valuesFrom:
+    - targetPath: "datasource.user"
+      valueFrom:
+        secretKeyRef:
+          name: grafana-secret
+          key: HASS_POSTGRES_USER
+    - targetPath: "datasource.secureJsonData.password"
+      valueFrom:
+        secretKeyRef:
+          name: grafana-secret
+          key: HASS_POSTGRES_PASS
