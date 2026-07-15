@@ -37,7 +37,7 @@ spec:
       role_attribute_path: |
         contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
     auth.generic_oauth.group_mapping:
-      org_id: 1
+      org_id: "1"
     date_formats:
       full_date: "MMM Do, YYYY hh:mm:ss a"
       use_browser_locale: "true"
