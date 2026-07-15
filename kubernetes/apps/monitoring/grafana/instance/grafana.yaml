@@ -23,7 +23,7 @@ spec:
       enabled: "true"
       name: "Authelia"
       client_id: grafana
-      client_secret: ${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
+      client_secret: $${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
       scopes: "openid profile email groups"
       empty_scopes: "false"
       login_attribute_path: preferred_username
