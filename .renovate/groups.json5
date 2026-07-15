@@ -52,6 +52,16 @@
       minimumGroupSize: 2,
     },
     {
+      description: "Toolhive Operator Group",
+      groupName: "toolhive-operator",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/toolhive-operator/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
+    {
       description: "Talos Group",
       groupName: "talos",
       matchDatasources: ["docker", "custom.talos-factory"],
