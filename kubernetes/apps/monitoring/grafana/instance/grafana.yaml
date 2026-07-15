@@ -1,0 +1,127 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/grafana.integreatly.org/grafana_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+  labels:
+    dashboards: grafana
+spec:
+  disableDefaultAdminSecret: true
+  config:
+    analytics:
+      check_for_updates: "false"
+      check_for_plugin_updates: "false"
+      feedback_links_enabled: "false"
+      reporting_enabled: "false"
+    auth:
+      disable_login_form: "false"
+      oauth_auto_login: "false"
+      oauth_allow_insecure_email_lookup: "true"
+      signout_redirect_url: "https://grafana.${SECRET_DOMAIN}/"
+    auth.generic_oauth:
+      enabled: "true"
+      name: "Authelia"
+      client_id: grafana
+      client_secret: ${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
+      scopes: "openid profile email groups"
+      empty_scopes: "false"
+      login_attribute_path: preferred_username
+      groups_attribute_path: groups
+      name_attribute_path: name
+      email_attribute_path: email
+      use_pkce: "true"
+      auth_url: "https://authelia.${SECRET_DOMAIN}/api/oidc/authorization"
+      token_url: "https://authelia.${SECRET_DOMAIN}/api/oidc/token"
+      api_url: "https://authelia.${SECRET_DOMAIN}/api/oidc/userinfo"
+      role_attribute_path: |
+        contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
+    auth.generic_oauth.group_mapping:
+      org_id: 1
+    date_formats:
+      full_date: "MMM Do, YYYY hh:mm:ss a"
+      use_browser_locale: "true"
+    explore:
+      enabled: "true"
+    feature_toggles:
+      enable: publicDashboards
+    log:
+      mode: console
+    metrics:
+      enabled: "true"
+    news:
+      news_feed_enabled: "false"
+    panels:
+      disable_sanitize_html: "true"
+    plugins:
+      plugin_admin_enabled: "false"
+    security:
+      angular_support_enabled: "true"
+      allow_embedding: "true"
+      cookie_samesite: grafana
+    server:
+      domain: "grafana.${SECRET_DOMAIN}"
+      root_url: "https://grafana.${SECRET_DOMAIN}"
+      enable_gzip: "true"
+  deployment:
+    spec:
+      strategy:
+        type: Recreate
+      template:
+        spec:
+          containers:
+            - name: grafana
+              env:
+                - name: GF_INSTALL_PLUGINS
+                  value: "natel-discrete-panel,pr0ps-trackmap-panel,grafana-piechart-panel,vonage-status-panel,grafana-worldmap-panel,grafana-clock-panel"
+                - name: GF_SECURITY_ADMIN_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-secret
+                      key: GF_SECURITY_ADMIN_USER
+                - name: GF_SECURITY_ADMIN_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-secret
+                      key: GF_SECURITY_ADMIN_PASSWORD
+                - name: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-secret
+                      key: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+                - name: HASS_POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-secret
+                      key: HASS_POSTGRES_USER
+                - name: HASS_POSTGRES_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-secret
+                      key: HASS_POSTGRES_PASS
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: ["ALL"]
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+  httpRoute:
+    spec:
+      hostnames:
+        - "grafana.${SECRET_DOMAIN}"
+      parentRefs:
+        - name: envoy-internal
+          namespace: networking
+  persistentVolumeClaim:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 128Mi
+      storageClassName: openebs-hostpath
