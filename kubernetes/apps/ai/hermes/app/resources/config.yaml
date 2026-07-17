@@ -1,66 +1,205 @@
+custom_providers:
+  - name: kubernetes
+    base_url: http://litellm.ai.svc.cluster.local:4000/v1
+    key_env: LITELLM_API_KEY
+    models:
+      opencode-go/minimax-m3:
+        context_length: 1000000
+      opencode-go/glm-5.2:
+        context_length: 1048560
+      opencode-go/deepseek-v4-flash:
+        context_length: 131072
+      opencode-go/deepseek-v4-pro:
+        context_length: 1000000
+      opencode-go/qwen3.7-plus:
+        context_length: 991808
+      opencode-go/qwen3.7-max:
+        context_length: 262144
+      opencode-go/kimi-k2.7:
+        context_length: 262144
+      opencode-go/kimi-k2.7-code:
+        context_length: 262128
+      opencode-go/mimo-v2.5:
+        context_length: 262144
+      qwen-local:
+        context_length: 16384
+
 model:
-  default: go-minimax-m3
+  default: opencode-go/minimax-m3
   provider: custom:kubernetes
-  base_url: http://litellm.ai.svc.cluster.local:4000/v1
-  api_key: ${LITELLM_API_KEY}
+  context_length: 1000000
+
+model_aliases:
+  qwen:
+    model: opencode-go/qwen3.7-plus
+    provider: custom:kubernetes
+  minimax:
+    model: opencode-go/minimax-m3
+    provider: custom:kubernetes
+  glm:
+    model: opencode-go/glm-5.2
+    provider: custom:kubernetes
+  glm-turbo:
+    model: opencode-go/deepseek-v4-flash
+    provider: custom:kubernetes
+  mimo:
+    model: opencode-go/mimo-v2.5
+    provider: custom:kubernetes
+  kimi:
+    model: opencode-go/kimi-k2.7
+    provider: custom:kubernetes
+  deepseek-pro:
+    model: opencode-go/deepseek-v4-pro
+    provider: custom:kubernetes
+  qwen-max:
+    model: opencode-go/qwen3.7-max
+    provider: custom:kubernetes
+  qwen-local:
+    model: qwen-local
+    provider: custom:kubernetes
+
 fallback_providers:
   - provider: custom:kubernetes
-    model: kimi-k2.7
+    model: opencode-go/qwen3.7-plus
   - provider: custom:kubernetes
-    model: deepseek-v4-pro
+    model: opencode-go/deepseek-v4-flash
   - provider: custom:kubernetes
-    model: deepseek-v4-flash
+    model: opencode-go/kimi-k2.7
   - provider: custom:kubernetes
-    model: qwen3.7-plus
+    model: opencode-go/glm-5.2
   - provider: custom:kubernetes
-    model: glm-5.2
+    model: opencode-go/deepseek-v4-pro
   - provider: custom:kubernetes
     model: qwen-local
-providers:
-  kubernetes:
-    base_url: http://litellm.ai.svc.cluster.local:4000/v1
-    api_key: ${LITELLM_API_KEY}
-toolsets:
-  - hermes-cli
-terminal:
-  backend: local
-  cwd: /opt/data/workspace
-  timeout: 180
-  persistent_shell: true
-  env_passthrough:
-    - PLEX_TOKEN
-    - PLEX_URL
+
+auxiliary:
+  approval:
+    provider: custom:kubernetes
+    model: opencode-go/minimax-m3
+    timeout: 60
+  compression:
+    provider: custom:kubernetes
+    model: opencode-go/minimax-m3
+  web_extract:
+    provider: custom:kubernetes
+    model: opencode-go/minimax-m3
+  session_search:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+  vision:
+    provider: custom:kubernetes
+    model: opencode-go/minimax-m3
+  goal_judge:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+  title_generation:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+  profile_describer:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+  triage_specifier:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+  kanban_decomposer:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+  curator:
+    provider: custom:kubernetes
+    model: opencode-go/deepseek-v4-flash
+    timeout: 600
+
 memory:
   provider: memini
   auto_migrate: true
   auto_summarize:
     threshold: 50
+
+plugins:
+  enabled:
+    - memini
+
+toolsets:
+  - hermes-cli
+
+terminal:
+  backend: local
+  cwd: /opt/data/workspace
+  timeout: 900
+  lifetime_seconds: 1800
+  persistent_shell: true
+  env_passthrough:
+    - PLEX_TOKEN
+    - PLEX_URL
+
 compression:
   enabled: true
-  threshold: 0.5
-  target_ratio: 0.2
   protect_last_n: 20
+  threshold: 0.5
+
 group_sessions_per_user: false
+
 streaming:
   enabled: false
+
+approvals:
+  mode: smart
+  timeout: 60
+  cron_mode: deny
+
 security:
   redact_secrets: true
   tirith_enabled: true
   tirith_fail_open: true
+  website_blocklist:
+    enabled: true
+    domains:
+      - "169.254.169.254"
+      - "metadata.google.internal"
+
 privacy:
   redact_pii: true
+
 web:
   search_backend: searxng
+
 platform_toolsets:
   cli:
     - hermes-cli
+
 agent:
-  max_turns: 90
+  max_turns: 150
   gateway_timeout: 1800
+  gateway_timeout_warning: 900
   restart_drain_timeout: 60
-  api_max_retries: 2
+  api_max_retries: 3
   reasoning_effort: medium
   tool_use_enforcement: auto
+
+delegation:
+  model: opencode-go/deepseek-v4-flash
+  max_concurrent_children: 8
+  max_spawn_depth: 2
+
+moa:
+  default_preset: council
+  presets:
+    council:
+      enabled: true
+      reference_models:
+        - provider: custom:kubernetes
+          model: opencode-go/minimax-m3
+        - provider: custom:kubernetes
+          model: opencode-go/glm-5.2
+        - provider: custom:kubernetes
+          model: opencode-go/mimo-v2.5
+      aggregator:
+        provider: custom:kubernetes
+        model: opencode-go/minimax-m3
+      reference_temperature: 0.6
+      aggregator_temperature: 0.4
+      max_tokens: 8192
+
 mcp_servers:
   homelab:
     url: http://vmcp-mcp-gateway-internal.ai.svc.cluster.local:4483/mcp

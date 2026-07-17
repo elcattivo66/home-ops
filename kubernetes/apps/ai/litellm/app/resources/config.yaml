@@ -11,7 +11,7 @@ model_list:
       api_key: os.environ/LLAMA_API_KEY
       drop_params: true
 
-  - model_name: kimi-k2.7
+  - model_name: opencode-go/kimi-k2.7
     model_info:
       max_input_tokens: 262144
       max_output_tokens: 262144
@@ -23,19 +23,32 @@ model_list:
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
 
-  - model_name: glm-5.2
+  - model_name: opencode-go/kimi-k2.7-code
     model_info:
-      max_input_tokens: 204800
+      max_input_tokens: 262128
       max_output_tokens: 131072
       supports_function_calling: true
       supports_prompt_caching: true
+      supports_vision: true
     litellm_params:
-      model: zai/glm-5.2
+      model: openai/kimi-k2.7-code
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
 
-  - model_name: qwen3.7-plus
+  - model_name: opencode-go/glm-5.2
+    model_info:
+      max_input_tokens: 1048560
+      max_output_tokens: 131072
+      supports_function_calling: true
+      supports_prompt_caching: true
+    litellm_params:
+      model: openai/glm-5.2
+      api_base: https://opencode.ai/zen/go/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+      drop_params: true
+
+  - model_name: opencode-go/qwen3.7-plus
     model_info:
       max_input_tokens: 991808
       max_output_tokens: 65536
@@ -47,10 +60,22 @@ model_list:
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
 
-  - model_name: deepseek-v4-flash
+  - model_name: opencode-go/qwen3.7-max
     model_info:
-      max_input_tokens: 1000000
-      max_output_tokens: 16384
+      max_input_tokens: 262144
+      max_output_tokens: 32768
+      supports_function_calling: true
+      supports_prompt_caching: true
+    litellm_params:
+      model: anthropic/qwen3.7-max
+      api_base: https://opencode.ai/zen/go
+      api_key: os.environ/OPENCODE_GO_API_KEY
+      drop_params: true
+
+  - model_name: opencode-go/deepseek-v4-flash
+    model_info:
+      max_input_tokens: 131072
+      max_output_tokens: 65536
       supports_function_calling: true
       supports_prompt_caching: true
     litellm_params:
@@ -59,7 +84,7 @@ model_list:
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
 
-  - model_name: deepseek-v4-pro
+  - model_name: opencode-go/deepseek-v4-pro
     model_info:
       max_input_tokens: 1000000
       max_output_tokens: 16384
@@ -71,7 +96,7 @@ model_list:
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
 
-  - model_name: go-minimax-m3
+  - model_name: opencode-go/minimax-m3
     model_info:
       mode: chat
       input_cost_per_token: 0.0000003000
@@ -79,13 +104,26 @@ model_list:
       cache_read_input_token_cost: 0.0000000600
       output_cost_per_token: 0.0000012000
       max_input_tokens: 1000000
+      max_output_tokens: 131072
+      supports_function_calling: true
+      supports_prompt_caching: true
+      supports_vision: true
+    litellm_params:
+      model: anthropic/minimax-m3
+      api_base: https://opencode.ai/zen/go
+      api_key: os.environ/OPENCODE_GO_API_KEY
+
+  - model_name: opencode-go/mimo-v2.5
+    model_info:
+      max_input_tokens: 262144
       max_output_tokens: 32768
       supports_function_calling: true
       supports_prompt_caching: true
     litellm_params:
-      model: openai/minimax-m3
+      model: openai/mimo-v2.5
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
+      drop_params: true
 
 general_settings:
   health_check_endpoint: /v1/health
@@ -94,6 +132,8 @@ router_settings:
   routing_strategy: simple-shuffle
   redis_host: os.environ/REDIS_HOST
   redis_port: os.environ/REDIS_PORT
+  num_retries: 3
+  timeout: 600
 
 litellm_settings:
   success_callback: ["prometheus"]
@@ -103,7 +143,8 @@ litellm_settings:
     type: redis
     host: os.environ/REDIS_HOST
     port: os.environ/REDIS_PORT
-  drop_params: false
+  drop_params: true
+  merge_reasoning_content_in_choices: true
   request_timeout: 600
   num_retries: 2
   retry_after: 5
