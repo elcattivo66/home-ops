@@ -22,7 +22,7 @@ custom_providers:
       opencode-go/mimo-v2.5:
         context_length: 262144
       local/gemma4-e4b:
-        context_length: 8192
+        context_length: 32768
 
 model:
   default: opencode-go/minimax-m3

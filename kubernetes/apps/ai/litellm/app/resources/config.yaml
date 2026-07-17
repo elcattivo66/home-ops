@@ -1,8 +1,8 @@
 model_list:
   - model_name: local/gemma4-e4b
     model_info:
-      max_input_tokens: 8192
-      max_output_tokens: 4096
+      max_input_tokens: 32768
+      max_output_tokens: 16384
       supports_function_calling: true
     litellm_params:
       model: openai/gemma-4-e4b
