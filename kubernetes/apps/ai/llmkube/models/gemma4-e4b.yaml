@@ -6,7 +6,7 @@ metadata:
 spec:
   source: hf://daniloreddy/gemma-4-E4B-it_GGUF
   files:
-    - gemma-4-e4b-Q4_K_M.gguf
+    - gemma-4-E4B-it_Q4_K_M.gguf
   format: gguf
   quantization: Q4_K_M
   hardware:
