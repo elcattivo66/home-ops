@@ -10,7 +10,7 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 0.9.5
+    tag: 0.9.7
   url: oci://ghcr.io/home-operations/charts-mirror/llmkube
 ---
 # yaml-language-server: $schema=https://k8s-schemas.bjw-s.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
@@ -32,6 +32,8 @@ spec:
       retries: 3
       remediateLastFailure: true
   values:
+    webhook:
+      enabled: false
     namespace: ai
     crds:
       install: true
