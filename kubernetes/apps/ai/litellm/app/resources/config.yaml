@@ -1,14 +1,13 @@
 model_list:
-  - model_name: qwen-local
+  - model_name: local/gemma4-e4b
     model_info:
-      max_input_tokens: 16384
-      max_output_tokens: 8192
+      max_input_tokens: 8192
+      max_output_tokens: 4096
       supports_function_calling: true
-      supports_vision: true
     litellm_params:
-      model: openai/qwen3.5-4b
-      api_base: https://ollama.${SECRET_DOMAIN}/v1
-      api_key: os.environ/LLAMA_API_KEY
+      model: openai/gemma-4-e4b
+      api_base: http://gemma4-e4b.ai.svc.cluster.local:8080/v1
+      api_key: none
       drop_params: true
 
   - model_name: opencode-go/kimi-k2.7
@@ -151,7 +150,6 @@ litellm_settings:
   set_verbose: false
 
 environment:
-  - LLAMA_API_KEY
   - OPENCODE_GO_API_KEY
   - REDIS_HOST
   - REDIS_PORT
