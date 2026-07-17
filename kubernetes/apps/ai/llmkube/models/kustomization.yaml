@@ -5,4 +5,3 @@ kind: Kustomization
 resources:
   - ./qwen3-embedding-0.6b.yaml
   - ./qwen3-reranker-0.6b.yaml
-  - ./gemma4-e4b.yaml

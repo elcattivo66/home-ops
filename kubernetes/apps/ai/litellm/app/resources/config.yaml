@@ -1,15 +1,4 @@
 model_list:
-  - model_name: gemma4-e4b
-    model_info:
-      max_input_tokens: 65536
-      max_output_tokens: 32768
-      supports_function_calling: true
-    litellm_params:
-      model: openai/gemma-4-e4b
-      api_base: http://gemma4-e4b.ai.svc.cluster.local:8080/v1
-      api_key: none
-      drop_params: true
-
   - model_name: opencode-go/kimi-k2.7
     model_info:
       max_input_tokens: 262144

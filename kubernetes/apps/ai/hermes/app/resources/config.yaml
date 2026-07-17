@@ -21,9 +21,6 @@ custom_providers:
         context_length: 262128
       opencode-go/mimo-v2.5:
         context_length: 262144
-      gemma4-e4b:
-        context_length: 65536
-
 model:
   default: opencode-go/minimax-m3
   provider: custom:kubernetes
@@ -54,9 +51,6 @@ model_aliases:
   qwen-max:
     model: opencode-go/qwen3.7-max
     provider: custom:kubernetes
-  gemma-local:
-    model: gemma4-e4b
-    provider: custom:kubernetes
 
 fallback_providers:
   - provider: custom:kubernetes
@@ -69,9 +63,6 @@ fallback_providers:
     model: opencode-go/glm-5.2
   - provider: custom:kubernetes
     model: opencode-go/deepseek-v4-pro
-  - provider: custom:kubernetes
-    model: gemma4-e4b
-
 auxiliary:
   approval:
     provider: custom:kubernetes
