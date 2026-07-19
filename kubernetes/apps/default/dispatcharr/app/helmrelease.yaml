@@ -15,6 +15,9 @@ spec:
       dispatcharr:
         pod:
           hostUsers: false
+          securityContext:
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
           resourceClaims:
             - name: gpu
               resourceClaimTemplateName: dispatcharr-gpu
