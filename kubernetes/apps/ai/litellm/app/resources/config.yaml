@@ -13,6 +13,19 @@ model_list:
     model_info:
       mode: chat
 
+  - model_name: groq-llama
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+    model_info:
+      mode: chat
+
+  - model_name: groq-gpt
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      api_key: os.environ/GROQ_API_KEY
+    model_info:
+      mode: chat
 
   - model_name: opencode-go/kimi-k2.7
     model_info:
@@ -156,5 +169,6 @@ litellm_settings:
 environment:
   - OPENCODE_GO_API_KEY
   - GOOGLE_API_KEY
+  - GROQ_API_KEY
   - REDIS_HOST
   - REDIS_PORT
