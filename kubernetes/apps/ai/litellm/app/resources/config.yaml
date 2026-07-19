@@ -1,4 +1,19 @@
 model_list:
+  - model_name: gemini-flash
+    litellm_params:
+      model: gemini/gemini-flash-latest
+      api_key: os.environ/GOOGLE_API_KEY
+    model_info:
+      mode: chat
+
+  - model_name: gemini-pro
+    litellm_params:
+      model: gemini/gemini-pro-latest
+      api_key: os.environ/GOOGLE_API_KEY
+    model_info:
+      mode: chat
+
+
   - model_name: opencode-go/kimi-k2.7
     model_info:
       max_input_tokens: 262144
@@ -140,5 +155,6 @@ litellm_settings:
 
 environment:
   - OPENCODE_GO_API_KEY
+  - GOOGLE_API_KEY
   - REDIS_HOST
   - REDIS_PORT
