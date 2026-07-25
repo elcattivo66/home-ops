@@ -55,7 +55,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: false
               ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
               ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: true
-              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-Silicon_Labs_slae.sh_cc2652rb_stick_-_slaesh_s_iot_stuff_00_12_4B_00_23_93_35_0A-if00-port0
+              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B000BE88814-if00
               ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: zstack
             envFrom:
               - secretRef:
@@ -65,7 +65,7 @@ spec:
                 cpu: 5m
                 memory: 202Mi
               limits:
-                squat.ai/cc2652: 1
+                squat.ai/cc2531: 1
                 memory: 512Mi
             securityContext:
               allowPrivilegeEscalation: false
