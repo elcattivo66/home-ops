@@ -1,0 +1,134 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app esphome
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      esphome:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/esphome
+              tag: 2026.7.2@sha256:92d7f329e1cd3592bc071589c17d4fdbfd12496af21ca80a3086f21ac2392def
+            env:
+              TZ: ${TZ}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 3Gi
+          code-server:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.130.0@sha256:fa367e7eddd303a95c736f7aede351cdee9036a7383cecfd8786bb5bbe78c13b
+            args:
+              - --auth
+              - none
+              - --disable-telemetry
+              - --disable-update-check
+              - --user-data-dir
+              - /config/.code-server
+              - --extensions-dir
+              - /config/.code-server
+              - --port
+              - "12321"
+              - /config
+            env:
+              TZ: ${TZ}
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |
+          [{
+            "name":"multus-iot",
+            "namespace": "networking",
+            "ips": ["192.168.30.253/24"],
+            "mac": "7e:ae:c7:bb:d6:de"
+          }]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: esphome
+        ports:
+          http:
+            port: 6052
+      code-server:
+        controller: esphome
+        ports:
+          http:
+            port: 12321
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+      code-server:
+        hostnames:
+          - "{{ .Release.Name }}-code.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+    persistence:
+      config:
+        existingClaim: *app
+        advancedMounts:
+          esphome:
+            app:
+              - path: /config
+            code-server:
+              - path: /config
+      secrets:
+        type: secret
+        name: esphome-secret
+        globalMounts:
+          - path: /config/secrets.yaml
+            subPath: secrets.yaml
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          esphome:
+            app:
+              - path: /cache
+              - path: /tmp
+            code-server:
+              - path: /tmp
