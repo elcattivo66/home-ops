@@ -88,10 +88,7 @@ spec:
         ports:
           http:
             port: 6052
-      code-server:
-        controller: esphome
-        ports:
-          http:
+          code-server:
             port: 12321
     route:
       app:
