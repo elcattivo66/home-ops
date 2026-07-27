@@ -101,6 +101,10 @@ spec:
           - name: envoy-internal
             namespace: networking
             sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: http
       code-server:
         hostnames:
           - "{{ .Release.Name }}-code.${SECRET_DOMAIN}"
@@ -108,6 +112,10 @@ spec:
           - name: envoy-internal
             namespace: networking
             sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: code-server
     persistence:
       config:
         existingClaim: *app
