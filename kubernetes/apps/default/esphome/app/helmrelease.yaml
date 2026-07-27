@@ -57,6 +57,7 @@ spec:
               - /config
             env:
               TZ: ${TZ}
+              HOME: /config
             resources:
               requests:
                 cpu: 10m
