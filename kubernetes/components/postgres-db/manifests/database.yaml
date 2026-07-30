@@ -8,8 +8,6 @@ spec:
   cluster:
     name: postgres
   databaseReclaimPolicy: ${DB_RECLAIM_POLICY:-retain}
-  extensions:
-    - name: vector
-    - name: vchord
+  extensions: ${DB_EXTENSIONS:-[]}
   name: ${DB_NAME}
   owner: ${DB_USER}

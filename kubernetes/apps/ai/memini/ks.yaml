@@ -5,30 +5,34 @@ metadata:
   name: &appname memini
   namespace: &namespace ai
 spec:
-  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/kopiur/backup
+    - ../../../../components/postgres-db
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: kopiur-repository
-      namespace: kopiur-system
+    - name: cloudnative-pg-cluster
+      namespace: databases
     - name: certificates
       namespace: networking
+  interval: 30m
   path: ./kubernetes/apps/ai/memini/app
+  postBuild:
+    substitute:
+      APP: *appname
+      DB_BITWARDEN_ID: 89932561-7139-4d7f-9be6-428cad49d1cf
+      DB_EXTENSIONS: '[{"name":"vector"},{"name":"vchord"}]'
+      DB_NAME: memini
+      DB_USER: memini
   prune: true
+  retryInterval: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  interval: 30m
-  retryInterval: 1m
+  targetNamespace: *namespace
   timeout: 5m
-  postBuild:
-    substitute:
-      APP: *appname
