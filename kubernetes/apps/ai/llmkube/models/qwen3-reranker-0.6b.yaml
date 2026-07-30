@@ -46,7 +46,7 @@ spec:
   image: ghcr.io/ggml-org/llama.cpp:server-vulkan-b10156@sha256:31bca24d4ecd1ee8decae5d626ae833bb5d34b94ba9d2f308e7cedcd6bb3e247
   modelRef: qwen3-reranker-0.6b
   nodeSelector:
-    kubernetes.io/hostname: nuc14
+    kubernetes.io/hostname: nuc13
   parallelSlots: 2
   podSecurityContext:
     fsGroup: 102
