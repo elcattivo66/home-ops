@@ -8,8 +8,8 @@ spec:
   cluster:
     name: postgres
   comment: "${APP} database role"
-  createdb: ${DB_CREATEDB:-false}
-  createrole: ${DB_CREATEROLE:-false}
+  createdb: false
+  createrole: false
   databaseRoleReclaimPolicy: ${ROLE_RECLAIM_POLICY:-retain}
   inherit: true
   inRoles:
@@ -18,4 +18,4 @@ spec:
   name: ${DB_USER}
   passwordSecret:
     name: ${APP}-postgres
-  superuser: ${DB_SUPERUSER:-false}
+  superuser: false
