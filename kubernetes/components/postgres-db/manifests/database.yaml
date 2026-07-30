@@ -7,6 +7,9 @@ metadata:
 spec:
   cluster:
     name: postgres
+  databaseReclaimPolicy: ${DB_RECLAIM_POLICY:-retain}
+  extensions:
+    - name: vector
+    - name: vchord
   name: ${DB_NAME}
   owner: ${DB_USER}
-  databaseReclaimPolicy: ${DB_RECLAIM_POLICY:-retain}
