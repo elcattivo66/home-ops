@@ -23,8 +23,6 @@ spec:
       namespace: external-secrets
     - name: smtp-relay
       namespace: default
-    - name: certificates
-      namespace: networking
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly

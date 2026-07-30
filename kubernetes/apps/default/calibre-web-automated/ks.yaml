@@ -18,10 +18,6 @@ spec:
       namespace: rook-ceph
     - name: keda
       namespace: monitoring
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/calibre-web-automated/app
   prune: true
   sourceRef:

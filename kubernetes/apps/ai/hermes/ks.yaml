@@ -16,12 +16,8 @@ spec:
       namespace: external-secrets
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: kopiur-repository
-      namespace: kopiur-system
     - name: searxng
       namespace: ai
-    - name: certificates
-      namespace: networking
   path: ./kubernetes/apps/ai/hermes/app
   prune: true
   sourceRef:

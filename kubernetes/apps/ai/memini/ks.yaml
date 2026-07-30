@@ -17,8 +17,6 @@ spec:
       namespace: rook-ceph
     - name: cloudnative-pg-cluster
       namespace: databases
-    - name: certificates
-      namespace: networking
   interval: 30m
   path: ./kubernetes/apps/ai/memini/app
   postBuild:

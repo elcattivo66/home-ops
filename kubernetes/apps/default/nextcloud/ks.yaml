@@ -24,10 +24,6 @@ spec:
       namespace: databases
     - name: smtp-relay
       namespace: default
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly

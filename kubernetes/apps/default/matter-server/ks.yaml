@@ -15,10 +15,6 @@ spec:
   dependsOn:
     - name: multus-networks
       namespace: networking
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/matter-server/app
   prune: true
   sourceRef:

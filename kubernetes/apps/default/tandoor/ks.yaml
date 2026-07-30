@@ -21,10 +21,6 @@ spec:
       namespace: rook-ceph
     - name: smtp-relay
       namespace: default
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/tandoor/app
   prune: true
   sourceRef:

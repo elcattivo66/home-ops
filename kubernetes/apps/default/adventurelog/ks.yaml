@@ -22,10 +22,6 @@ spec:
       namespace: external-secrets
     - name: smtp-relay
       namespace: default
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/adventurelog/app
   prune: true
   sourceRef:

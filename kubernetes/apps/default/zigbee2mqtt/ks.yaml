@@ -21,10 +21,6 @@ spec:
       namespace: rook-ceph
     - name: mosquitto
       namespace: databases
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:

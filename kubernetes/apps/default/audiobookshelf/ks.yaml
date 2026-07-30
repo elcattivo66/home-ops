@@ -17,10 +17,6 @@ spec:
       namespace: rook-ceph
     - name: keda
       namespace: monitoring
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/audiobookshelf/app
   prune: true
   sourceRef:

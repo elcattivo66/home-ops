@@ -15,10 +15,6 @@ spec:
   dependsOn:
     - name: multus-networks
       namespace: networking
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/matterbridge/app
   prune: true
   sourceRef:

@@ -15,14 +15,10 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: kopiur-repository
-      namespace: kopiur-system
     - name: dragonfly-operator
       namespace: databases
     - name: searxng
       namespace: ai
-    - name: certificates
-      namespace: networking
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly

@@ -22,8 +22,6 @@ spec:
       namespace: monitoring
     - name: dragonfly-operator
       namespace: databases
-    - name: certificates
-      namespace: networking
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly

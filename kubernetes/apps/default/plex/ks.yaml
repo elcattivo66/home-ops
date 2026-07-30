@@ -20,8 +20,6 @@ spec:
       namespace: rook-ceph
     - name: keda
       namespace: monitoring
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/plex/app
   prune: true
   sourceRef:
@@ -85,8 +83,6 @@ spec:
       namespace: default
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/plex/kometa
   prune: true
   sourceRef:

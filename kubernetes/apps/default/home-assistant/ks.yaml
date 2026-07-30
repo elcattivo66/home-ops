@@ -22,10 +22,6 @@ spec:
       namespace: rook-ceph
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: certificates
-      namespace: networking
-    - name: kopiur-repository
-      namespace: kopiur-system
   path: ./kubernetes/apps/default/home-assistant/app
   prune: true
   sourceRef:
