@@ -1,81 +1,80 @@
 ---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/inference.llmkube.dev/model_v1alpha1.json
 apiVersion: inference.llmkube.dev/v1alpha1
 kind: Model
 metadata:
   name: qwen3-reranker-0.6b
 spec:
-  source: hf://ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF
-  files:
-    - qwen3-reranker-0.6b-q8_0.gguf
   format: gguf
-  quantization: Q8_0
   hardware:
-    accelerator: intel
+    accelerator: vulkan
     gpu:
+      count: 1
       enabled: true
-      vendor: intel
       layers: 99
       resourceClaims:
         - name: gpu
           resourceClaimTemplateName: llmkube-models-gpu
+      vendor: intel
+  quantization: Q4_K_M
+  source: https://huggingface.co/Voodisss/Qwen3-Reranker-0.6B-GGUF-llama_cpp/resolve/main/Qwen3-Reranker-0.6B-Q4_K_M.gguf
 ---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/inference.llmkube.dev/inferenceservice_v1alpha1.json
 apiVersion: inference.llmkube.dev/v1alpha1
 kind: InferenceService
 metadata:
   name: qwen3-reranker-0.6b
 spec:
-  modelRef: qwen3-reranker-0.6b
-  runtime: llamacpp
-  image: ghcr.io/ggml-org/llama.cpp:server-vulkan@sha256:31bca24d4ecd1ee8decae5d626ae833bb5d34b94ba9d2f308e7cedcd6bb3e247
-  replicas: 1
-  priority: normal
-  contextSize: 16384
-  parallelSlots: 2
-  batchSize: 4096
-  uBatchSize: 4096
-  env:
-    - name: ZES_ENABLE_SYSMAN
-      value: "1"
-    - name: ONEAPI_DEVICE_SELECTOR
-      value: level_zero:gpu
-    - name: UR_L0_ENABLE_RELAXED_ALLOCATION_LIMITS
-      value: "1"
-  extraArgs:
-    - --alias
-    - qwen3-reranker
-    - --rerank
-    - --pooling
-    - rank
-    - --cont-batching
-    - --threads
-    - "6"
-    - --threads-batch
-    - "12"
-    - --mmap
+  batchSize: 8192
+  contextSize: 8192
   endpoint:
     port: 8080
     type: ClusterIP
+  extraArgs:
+    - --reranking
+    - --pooling
+    - rank
+    - --embedding
+    - --cache-ram
+    - "0"
+    - --no-mmap
+    - --sleep-idle-seconds
+    - "300"
+    - --alias
+    - qwen3-reranker-0.6b
+    - --metrics
+  image: ghcr.io/ggml-org/llama.cpp:server-vulkan-b10156@sha256:31bca24d4ecd1ee8decae5d626ae833bb5d34b94ba9d2f308e7cedcd6bb3e247
+  modelRef: qwen3-reranker-0.6b
+  nodeSelector:
+    kubernetes.io/hostname: nuc14
+  parallelSlots: 2
+  podSecurityContext:
+    fsGroup: 102
+    supplementalGroups:
+      - 44
+      - 992
+  probeOverrides:
+    liveness:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 8080
+      periodSeconds: 30
+    readiness:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 8080
+      periodSeconds: 10
+    startup:
+      failureThreshold: 60
+      httpGet:
+        path: /health
+        port: 8080
+      periodSeconds: 10
+  replicas: 1
   resources:
     cpu: 100m
     memory: 2Gi
-  probeOverrides:
-    startup:
-      httpGet:
-        path: /health
-        port: 8080
-      periodSeconds: 10
-      failureThreshold: 360
-    liveness:
-      httpGet:
-        path: /health
-        port: 8080
-      initialDelaySeconds: 30
-      periodSeconds: 30
-      failureThreshold: 6
-    readiness:
-      httpGet:
-        path: /health
-        port: 8080
-      initialDelaySeconds: 20
-      periodSeconds: 10
-      failureThreshold: 6
+  runtime: llamacpp
+  uBatchSize: 4096
