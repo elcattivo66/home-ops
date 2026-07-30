@@ -19,8 +19,11 @@ spec:
     substitute:
       APP: ${APP}
       DB_BITWARDEN_ID: ${DB_BITWARDEN_ID}
+      DB_CREATEROLE: ${DB_CREATEROLE:-false}
+      DB_CREATEDB: ${DB_CREATEDB:-false}
       DB_EXTENSIONS: ${DB_EXTENSIONS:-[]}
       DB_NAME: ${DB_NAME}
+      DB_SUPERUSER: ${DB_SUPERUSER:-false}
       DB_USER: ${DB_USER}
   prune: true
   retryInterval: 1m

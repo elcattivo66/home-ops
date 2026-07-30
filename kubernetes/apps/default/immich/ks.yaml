@@ -39,6 +39,7 @@ spec:
       DB_BITWARDEN_ID: a43f1a71-07fd-4649-8f58-3a024e5d41c8
       DB_EXTENSIONS: '[{"name":"vector"},{"name":"vchord"}]'
       DB_NAME: immich
+      DB_SUPERUSER: "true"
       DB_USER: immich
   prune: true
   retryInterval: 1m

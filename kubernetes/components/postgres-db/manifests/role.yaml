@@ -7,15 +7,15 @@ metadata:
 spec:
   cluster:
     name: postgres
-  name: ${DB_USER}
   comment: "${APP} database role"
-  login: true
-  superuser: false
-  createdb: false
-  createrole: false
+  createdb: ${DB_CREATEDB:-false}
+  createrole: ${DB_CREATEROLE:-false}
+  databaseRoleReclaimPolicy: ${ROLE_RECLAIM_POLICY:-retain}
   inherit: true
   inRoles:
     - pg_monitor
+  login: true
+  name: ${DB_USER}
   passwordSecret:
     name: ${APP}-postgres
-  databaseRoleReclaimPolicy: ${ROLE_RECLAIM_POLICY:-retain}
+  superuser: ${DB_SUPERUSER:-false}
