@@ -9,7 +9,6 @@ spec:
   hardware:
     accelerator: vulkan
     gpu:
-      count: 1
       enabled: true
       layers: 99
       resourceClaims:
