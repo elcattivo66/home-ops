@@ -5,7 +5,6 @@ kind: Kustomization
 metadata:
   name: ${APP}-postgres
 spec:
-  targetNamespace: databases
   commonMetadata:
     labels:
       app.kubernetes.io/name: ${APP}-postgres
@@ -14,18 +13,20 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
+  interval: 30m
   path: ./kubernetes/components/postgres-db/manifests
+  postBuild:
+    substitute:
+      APP: ${APP}
+      DB_BITWARDEN_ID: ${DB_BITWARDEN_ID}
+      DB_EXTENSIONS: ${DB_EXTENSIONS:-[]}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
   prune: true
+  retryInterval: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  interval: 30m
-  retryInterval: 1m
+  targetNamespace: databases
   timeout: 3m
-  postBuild:
-    substitute:
-      APP: ${APP}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_BITWARDEN_ID: ${DB_BITWARDEN_ID}
