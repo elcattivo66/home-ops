@@ -101,6 +101,17 @@ spec:
         ports:
           http:
             port: *port
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+        rules:
+          - backendRefs:
+              - name: "{{ .Release.Name }}"
+                port: *port
     persistence:
       data:
         existingClaim: "{{ .Release.Name }}"
