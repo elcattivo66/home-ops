@@ -8,6 +8,6 @@ spec:
   cluster:
     name: postgres
   databaseReclaimPolicy: ${DB_RECLAIM_POLICY:-retain}
-  extensions: ${DB_EXTENSIONS:-[]}
+  extensions: ${DB_EXTENSIONS:=${emptyArray}}
   name: ${DB_NAME}
   owner: ${DB_USER}

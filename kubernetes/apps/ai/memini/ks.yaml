@@ -23,7 +23,11 @@ spec:
     substitute:
       APP: *appname
       DB_BITWARDEN_ID: 89932561-7139-4d7f-9be6-428cad49d1cf
-      DB_EXTENSIONS: '[{"name":"vector"},{"name":"vchord"}]'
+      DB_EXTENSIONS: |
+        [
+          { name: vector },
+          { name: vchord }
+        ]
       DB_NAME: memini
       DB_USER: memini
   prune: true
