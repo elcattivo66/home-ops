@@ -78,7 +78,7 @@ spec:
           [{
             "name":"multus-iot",
             "namespace": "networking",
-            "ips": ["192.168.30.254/24"],
+            "ips": ["192.168.30.254/24", "fd00:30::254/64"],
             "mac": "be:4a:16:3f:c8:72"
           }]
       hostUsers: false
@@ -88,6 +88,13 @@ spec:
         runAsGroup: 0
         fsGroup: 0
         fsGroupChangePolicy: OnRootMismatch
+        sysctls:
+          - name: net.ipv6.conf.net1.accept_ra
+            value: "2"
+          - name: net.ipv6.conf.net1.accept_ra_defrtr
+            value: "1"
+          - name: net.ipv6.conf.net1.accept_ra_rt_info_max_plen
+            value: "64"
     service:
       app:
         controller: matter-server
