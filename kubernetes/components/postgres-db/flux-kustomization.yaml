@@ -19,7 +19,7 @@ spec:
     substitute:
       APP: ${APP}
       DB_BITWARDEN_ID: ${DB_BITWARDEN_ID}
-      DB_EXTENSIONS: ${DB_EXTENSIONS:-[]}
+      DB_EXTENSIONS: ${q:='}${DB_EXTENSIONS:=}${q:='}
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
   prune: true
