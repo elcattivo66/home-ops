@@ -79,7 +79,7 @@ spec:
             "name":"multus-iot",
             "namespace": "networking",
             "ips": ["192.168.30.254/24", "fd00:30::254/64"],
-            "mac": "be:4a:16:3f:c8:72"
+            "mac": "02:0c:d8:a2:91:8f"
           }]
       hostUsers: false
       securityContext:
