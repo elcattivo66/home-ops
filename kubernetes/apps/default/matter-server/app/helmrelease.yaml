@@ -15,6 +15,22 @@ spec:
       matter-server:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          thread-route:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.20.3"
+            command:
+              - /bin/sh
+              - -ec
+              - |
+                apk add --no-cache iproute2 >/dev/null 2>&1
+                ip -6 route replace fc00::/7 via fd00:30::248 dev net1
+            securityContext:
+              runAsUser: 0
+              capabilities:
+                add:
+                  - NET_ADMIN
         containers:
           app:
             image:
@@ -26,11 +42,13 @@ spec:
               STORAGE_PATH: /data
               LOG_LEVEL: debug
               PORT: &port 5580
+              BLE_PROXY: "true"
+              PRODUCTION_MODE: "true"
               NODE_OPTIONS: --max-old-space-size=768
             args:
               - --storage-path=/data
               - --primary-interface=net1
-              - --log-level=info
+              - --log-level=debug
             probes:
               liveness:
                 enabled: true
@@ -78,7 +96,7 @@ spec:
           [{
             "name":"multus-iot",
             "namespace": "networking",
-            "ips": ["192.168.30.254/24", "fde4:a597:c04a:1::100/64"],
+            "ips": ["192.168.30.254/24", "fd00:30::254/64"],
             "mac": "02:0c:d8:a2:91:8f"
           }]
       hostUsers: false
@@ -88,19 +106,18 @@ spec:
         runAsGroup: 0
         fsGroup: 0
         fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 34
         sysctls:
-          - name: net.ipv6.conf.net1.accept_ra
-            value: "2"
-          - name: net.ipv6.conf.net1.accept_ra_defrtr
-            value: "1"
           - name: net.ipv6.conf.net1.accept_ra_rt_info_max_plen
-            value: "64"
+            value: "128"
     service:
       app:
         controller: matter-server
         ports:
           http:
             port: *port
+            appProtocol: kubernetes.io/ws
     route:
       app:
         hostnames:
