@@ -19,7 +19,7 @@ spec:
           otbr-port-fix:
             image:
               repository: docker.io/library/alpine
-              tag: 3.20
+              tag: "3.20.3"
             command:
               - /bin/sh
               - -ec
