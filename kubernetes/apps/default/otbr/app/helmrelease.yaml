@@ -1,0 +1,126 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: otbr
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  interval: 1h
+  values:
+    controllers:
+      otbr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ownbee/hass-otbr-docker
+              tag: v0.3.0@sha256:5ca7008462e94d4c937aca8c1c9a60e709d6d300625363c161b946683032d5b1
+            env:
+              TZ: ${TZ}
+              DEVICE: /tmp/ttyOTBR
+              NETWORK_DEVICE: 192.168.30.140:6638
+              BACKBONE_IF: net1
+              OTBR_REST_PORT: &rest 8081
+              OTBR_WEB_PORT: &web 7586
+              BAUDRATE: "460800"
+              FLOW_CONTROL: "0"
+              NAT64: "0"
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /node
+                    port: *rest
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /node
+                    port: *rest
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              startup:
+                enabled: true
+                spec:
+                  httpGet:
+                    path: /node
+                    port: *rest
+                  failureThreshold: 30
+                  periodSeconds: 10
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              privileged: true
+    defaultPodOptions:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |
+          [{
+            "name":"multus-iot",
+            "namespace": "networking",
+            "ips": ["192.168.30.248/24", "fd00:30::248/64"],
+            "mac": "02:3a:41:c2:9f:5e"
+          }]
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+        fsGroupChangePolicy: OnRootMismatch
+        sysctls:
+          - name: net.ipv6.conf.all.forwarding
+            value: "1"
+          - name: net.ipv6.conf.net1.forwarding
+            value: "1"
+          - name: net.ipv6.conf.net1.accept_ra
+            value: "2"
+    service:
+      app:
+        controller: otbr
+        ports:
+          http:
+            port: *rest
+      web:
+        controller: otbr
+        ports:
+          http:
+            port: *web
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+        rules:
+          - backendRefs:
+              - name: "{{ .Release.Name }}"
+                port: *rest
+      web:
+        hostnames:
+          - "{{ .Release.Name }}-web.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+        rules:
+          - backendRefs:
+              - name: "{{ .Release.Name }}"
+                port: *web
+    persistence:
+      tmp:
+        type: emptyDir

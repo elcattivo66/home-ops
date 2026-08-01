@@ -27,6 +27,7 @@ resources:
   - ./matter-server/ks.yaml
   - ./music-assistant/ks.yaml
   - ./nextcloud/ks.yaml
+  - ./otbr/ks.yaml
   - ./paperless/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
