@@ -19,7 +19,7 @@ spec:
           thread-route:
             image:
               repository: docker.io/library/alpine
-              tag: "3.20.3"
+              tag: "3.24.1"
             command:
               - /bin/sh
               - -ec
