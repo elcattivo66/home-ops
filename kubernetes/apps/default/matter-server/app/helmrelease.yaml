@@ -15,6 +15,27 @@ spec:
       matter-server:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          otbr-port-fix:
+            image:
+              repository: docker.io/library/alpine
+              tag: 3.20
+            command:
+              - /bin/sh
+              - -ec
+              - |
+                apk add --no-cache iptables ip6tables >/dev/null 2>&1
+                iptables -t nat -C OUTPUT -d 192.168.30.140 -p tcp --dport 8081 -j DNAT --to-destination 192.168.30.140:8080 2>/dev/null || \
+                  iptables -t nat -A OUTPUT -d 192.168.30.140 -p tcp --dport 8081 -j DNAT --to-destination 192.168.30.140:8080
+                ip6tables -t nat -C OUTPUT -d fd00:30::5078:7dff:fed7:d6e4 -p tcp --dport 8081 -j DNAT --to-destination [fd00:30::5078:7dff:fed7:d6e4]:8080 2>/dev/null || \
+                  ip6tables -t nat -A OUTPUT -d fd00:30::5078:7dff:fed7:d6e4 -p tcp --dport 8081 -j DNAT --to-destination [fd00:30::5078:7dff:fed7:d6e4]:8080
+                ip6tables -t nat -C OUTPUT -d fde4:a597:c04a:1:5078:7dff:fed7:d6e4 -p tcp --dport 8081 -j DNAT --to-destination [fde4:a597:c04a:1:5078:7dff:fed7:d6e4]:8080 2>/dev/null || \
+                  ip6tables -t nat -A OUTPUT -d fde4:a597:c04a:1:5078:7dff:fed7:d6e4 -p tcp --dport 8081 -j DNAT --to-destination [fde4:a597:c04a:1:5078:7dff:fed7:d6e4]:8080
+            securityContext:
+              runAsUser: 0
+              capabilities:
+                add:
+                  - NET_ADMIN
         containers:
           app:
             image:
