@@ -48,6 +48,7 @@ spec:
               STORAGE_PATH: /data
               LOG_LEVEL: debug
               PORT: &port 5580
+              BLE_PROXY: "true"
               NODE_OPTIONS: --max-old-space-size=768
             args:
               - --storage-path=/data
