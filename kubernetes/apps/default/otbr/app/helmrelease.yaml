@@ -109,7 +109,7 @@ spec:
             namespace: networking
         rules:
           - backendRefs:
-              - name: "{{ .Release.Name }}"
+              - identifier: app
                 port: *rest
       web:
         hostnames:
@@ -119,7 +119,7 @@ spec:
             namespace: networking
         rules:
           - backendRefs:
-              - name: "{{ .Release.Name }}"
+              - identifier: web
                 port: *web
     persistence:
       tmp:
