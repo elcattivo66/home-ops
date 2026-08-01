@@ -30,7 +30,7 @@ spec:
             args:
               - --storage-path=/data
               - --primary-interface=net1
-              - --log-level=info
+              - --log-level=debug
             probes:
               liveness:
                 enabled: true
