@@ -252,11 +252,12 @@ controlPlane:
         apiServer:
           extraArgs:
             enable-aggregator-routing: "true"
-            feature-gates: ImageVolume=true
+            feature-gates: ImageVolume=true,HPAScaleToZero=true
             runtime-config: admissionregistration.k8s.io/v1alpha1=true
         controllerManager:
           extraArgs:
             bind-address: 0.0.0.0
+            feature-gates: HPAScaleToZero=true
         coreDNS:
             disabled: true
         proxy:

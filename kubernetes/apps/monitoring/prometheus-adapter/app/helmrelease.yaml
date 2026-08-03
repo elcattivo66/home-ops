@@ -19,7 +19,7 @@ spec:
   values:
     logLevel: 1
     prometheus:
-      url: http://prometheus-operated.monitoring.svc.cluster.local:9090
+      url: http://prometheus-operated.monitoring.svc.cluster.local
     rules:
       default: false
       external:
