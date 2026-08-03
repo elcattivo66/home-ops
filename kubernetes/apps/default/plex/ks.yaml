@@ -11,15 +11,13 @@ spec:
       app.kubernetes.io/name: *appname
   components:
     - ../../../../components/gpu
-    - ../../../../components/keda/nfs-scaler
+    - ../../../../components/zeroscaler
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: keda
-      namespace: monitoring
   path: ./kubernetes/apps/default/plex/app
   prune: true
   sourceRef:

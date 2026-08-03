@@ -11,14 +11,12 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/keda/nfs-scaler
+    - ../../../../components/zeroscaler
     - ../../../../components/gpu
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: keda
-      namespace: monitoring
   path: ./kubernetes/apps/default/kyoo/app
   prune: true
   sourceRef:

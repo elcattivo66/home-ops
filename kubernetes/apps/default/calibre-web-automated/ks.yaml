@@ -11,13 +11,11 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/keda/nfs-scaler
+    - ../../../../components/zeroscaler
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: keda
-      namespace: monitoring
   path: ./kubernetes/apps/default/calibre-web-automated/app
   prune: true
   sourceRef:

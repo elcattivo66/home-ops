@@ -10,15 +10,13 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/keda/nfs-scaler
+    - ../../../../components/zeroscaler
     - ../../../../components/kopiur/backup
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: keda
-      namespace: monitoring
   path: ./kubernetes/apps/default/bookboss/app
   prune: true
   sourceRef:

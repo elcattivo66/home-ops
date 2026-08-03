@@ -105,7 +105,6 @@ rules:
       - helm.toolkit.fluxcd.io
       - image.toolkit.fluxcd.io
       - k8s.cni.cncf.io
-      - keda.sh
       - kustomize.toolkit.fluxcd.io
       - metrics.k8s.io
       - monitoring.coreos.com

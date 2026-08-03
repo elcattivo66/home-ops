@@ -12,7 +12,7 @@ spec:
     - ../../../../components/dragonfly
     - ../../../../components/gpu
     - ../../../../components/postgres-db
-    # - ../../../../components/keda/nfs-scaler
+    # - ../../../../components/zeroscaler
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
@@ -22,8 +22,6 @@ spec:
       namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
-    # - name: keda
-    #   namespace: monitoring
   healthCheckExprs:
     - apiVersion: dragonflydb.io/v1alpha1
       kind: Dragonfly

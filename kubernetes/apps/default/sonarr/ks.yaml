@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   components:
-    - ../../../../components/keda/nfs-scaler
+    - ../../../../components/zeroscaler
     - ../../../../components/postgres-db
     - ../../../../components/kopiur/backup
   dependsOn:
@@ -21,8 +21,6 @@ spec:
       namespace: external-secrets
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: keda
-      namespace: monitoring
   path: ./kubernetes/apps/default/sonarr/app
   prune: true
   sourceRef:
