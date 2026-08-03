@@ -5,4 +5,5 @@ kind: Kustomization
 resources:
   - ./github
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
   - ./prometheusrule.yaml

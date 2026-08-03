@@ -18,17 +18,17 @@ spec:
         matchers:
           - name: alertname
             value: Watchdog
-            matchType: =
+            matchType: "="
       - receiver: "null"
         matchers:
           - name: alertname
             value: InfoInhibitor
-            matchType: =
+            matchType: "="
       - receiver: pushover
         matchers:
           - name: severity
             value: critical
-            matchType: =
+            matchType: "="
   inhibitRules:
     - equal:
         - alertname
@@ -36,11 +36,11 @@ spec:
       sourceMatch:
         - name: severity
           value: critical
-          matchType: =
+          matchType: "="
       targetMatch:
         - name: severity
           value: warning
-          matchType: =
+          matchType: "="
   receivers:
     - name: "null"
     - name: pushover

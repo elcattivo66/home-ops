@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./alertmanagerconfig.yaml
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
   - ./externalsecret.yaml
   - ./scrapeconfigs
   - ./dashboards
