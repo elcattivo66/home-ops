@@ -14,22 +14,22 @@ spec:
       matter-server:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          thread-route:
-            image:
-              repository: docker.io/library/alpine
-              tag: "3.20.3"
-            command:
-              - /bin/sh
-              - -ec
-              - |
-                apk add --no-cache iproute2 >/dev/null 2>&1
-                ip -6 route replace fc00::/7 via fd00:30::248 dev net1
-            securityContext:
-              runAsUser: 0
-              capabilities:
-                add:
-                  - NET_ADMIN
+        # initContainers:
+        #   thread-route:
+        #     image:
+        #       repository: docker.io/library/alpine
+        #       tag: "3.20.3"
+        #     command:
+        #       - /bin/sh
+        #       - -ec
+        #       - |
+        #         apk add --no-cache iproute2 >/dev/null 2>&1
+        #         ip -6 route replace fc00::/7 via fd00:30::248 dev net1
+        #     securityContext:
+        #       runAsUser: 0
+        #       capabilities:
+        #         add:
+        #           - NET_ADMIN
         containers:
           app:
             image:
