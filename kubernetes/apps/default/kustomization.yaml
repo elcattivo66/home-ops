@@ -19,6 +19,7 @@ resources:
   - ./crosswatch/ks.yaml
   - ./dispatcharr/ks.yaml
   - ./esphome/ks.yaml
+  - ./hauser/ks.yaml
   - ./home-assistant/ks.yaml
   - ./immich/ks.yaml
   # - ./kyoo/ks.yaml

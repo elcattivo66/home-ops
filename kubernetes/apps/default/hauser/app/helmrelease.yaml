@@ -1,0 +1,125 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app hauser
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: hauser
+  interval: 1h
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+    controllers:
+      hauser:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ralleur/hauser
+              tag: v0.4.0-beta.3
+            env:
+              HMI_AI_CUSTOMIZING_ENABLED: "0"
+              HMI_ALLOWED_ORIGINS: https://{{ .Release.Name }}.${SECRET_DOMAIN}
+              HMI_CONFIG_PATH: /data/config.json
+              HMI_FAMILY_DATA_PATH: /data/family-data.json
+              HMI_HOUSEHOLD_CONFIG_MODE: active
+              HMI_HOUSEHOLD_CONFIG_PATH: /config/household.json
+              HMI_REQUIRED_WRITABLE_DIRS: /config,/data,/assets
+              HMI_ROOM_IMAGE_AUTH_MODE: direct
+              HMI_SONG_LIBRARY_DIR: /data/songs
+              TZ: ${TZ}
+            probes:
+              liveness:
+                enabled: true
+                spec:
+                  failureThreshold: 5
+                  httpGet:
+                    path: /api/health
+                    port: &port 4173
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+              readiness:
+                enabled: true
+                spec:
+                  failureThreshold: 5
+                  httpGet:
+                    path: /api/health
+                    port: &port 4173
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  httpGet:
+                    path: /api/health
+                    port: &port 4173
+                  periodSeconds: 10
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
+              readOnlyRootFilesystem: true
+    persistence:
+      assets:
+        existingClaim: *app
+        advancedMounts:
+          hauser:
+            app:
+              - path: /assets
+      config:
+        existingClaim: *app
+        advancedMounts:
+          hauser:
+            app:
+              - path: /config
+      data:
+        existingClaim: *app
+        advancedMounts:
+          hauser:
+            app:
+              - path: /data
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          hauser:
+            app:
+              - path: /tmp
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+    service:
+      app:
+        controller: hauser
+        ports:
+          http:
+            port: *port
