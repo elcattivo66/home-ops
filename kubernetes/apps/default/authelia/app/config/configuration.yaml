@@ -187,7 +187,7 @@ identity_providers:
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris:
-          ["https://adventurelog-backend.${SECRET_DOMAIN}/accounts/oidc/adventurelog/login/callback/"]
+          ["https://adventurelog.${SECRET_DOMAIN}/accounts/oidc/adventurelog/login/callback/"]
         userinfo_signed_response_alg: none
       - client_name: Hermes
         client_id: hermes
