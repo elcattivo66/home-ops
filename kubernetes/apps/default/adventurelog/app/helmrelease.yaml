@@ -32,7 +32,6 @@ spec:
             env:
               SITE_URL: https://adventurelog.${SECRET_DOMAIN}
               DEBUG: "False"
-              DJANGO_ADMIN_USERNAME: admin
               EMAIL_BACKEND: email
               EMAIL_HOST: smtp-relay.default.svc.cluster.local
               EMAIL_PORT: 2525
