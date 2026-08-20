@@ -1,0 +1,91 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immichframe
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: immichframe
+  interval: 1h
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    controllers:
+      immichframe:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immichframe/immichframe
+              tag: v1.0.37.0@sha256:b4092634a406522b7323c11f8686429bcab4e1277c181c3c6f00f697d1069129
+            env:
+              TZ: ${TZ}
+              ImmichServerUrl: http://immich-server.default.svc.cluster.local:2283
+            envFrom:
+              - secretRef:
+                  name: immichframe-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 8080
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    persistence:
+      config:
+        existingClaim: *app
+        globalMounts:
+          - path: /app/Config
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          immichframe:
+            app:
+              - path: /tmp
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+    service:
+      app:
+        controller: immichframe
+        ports:
+          http:
+            port: 8080
