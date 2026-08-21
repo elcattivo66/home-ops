@@ -7,5 +7,11 @@
       "versioning": "loose",
       "matchPackagePatterns": ["plex"]
     },
+    {
+      "description": "SearXNG tags are calver + commit sha and the image is released very frequently; limit updates to one PR per week",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/searxng/searxng"],
+      "schedule": ["weekly"]
+    },
   ]
 }
