@@ -25,3 +25,6 @@ spec:
       key: KOPIA_PASSWORD
   scheduleDefaults:
     timezone: ${TZ}
+  parameters:
+    epoch:
+      minDuration: 6h
