@@ -35,10 +35,6 @@ spec:
               tag: v1.0.37.0@sha256:b4092634a406522b7323c11f8686429bcab4e1277c181c3c6f00f697d1069129
             env:
               TZ: ${TZ}
-              ImmichServerUrl: http://immich-server.default.svc.cluster.local:2283
-            envFrom:
-              - secretRef:
-                  name: immichframe-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -66,9 +62,12 @@ spec:
               capabilities: { drop: ["ALL"] }
     persistence:
       config:
-        existingClaim: *app
+        type: secret
+        name: immichframe-secret
         globalMounts:
-          - path: /app/Config
+          - path: /app/Config/Settings.json
+            subPath: Settings.json
+            readOnly: true
       tmpfs:
         type: emptyDir
         advancedMounts:

@@ -10,13 +10,9 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  components:
-    - ../../../../components/kopiur/backup
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
   path: ./kubernetes/apps/default/immichframe/app
   prune: true
   sourceRef:
@@ -29,4 +25,3 @@ spec:
   postBuild:
     substitute:
       APP: *appname
-      KOPIUR_CAPACITY: 1Gi
