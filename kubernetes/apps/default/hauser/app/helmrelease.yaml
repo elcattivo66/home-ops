@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/ralleur/hauser
-              tag: v0.4.0-beta.6
+              tag: v0.4.0-beta.7
             env:
               HMI_AI_CUSTOMIZING_ENABLED: "0"
               HMI_ALLOWED_ORIGINS: https://{{ .Release.Name }}.${SECRET_DOMAIN}
