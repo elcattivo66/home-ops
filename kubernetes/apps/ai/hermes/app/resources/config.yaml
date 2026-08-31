@@ -30,7 +30,7 @@ custom_providers:
       groq-gpt:
         context_length: 128000
 model:
-  default: opencode-go/minimax-m3
+  default: opencode-go/deepseek-v4-flash
   provider: custom:kubernetes
   context_length: 1000000
 
@@ -44,7 +44,7 @@ model_aliases:
   glm:
     model: opencode-go/glm-5.2
     provider: custom:kubernetes
-  glm-turbo:
+  deepseek-pro-v4-flash:
     model: opencode-go/deepseek-v4-flash
     provider: custom:kubernetes
   mimo:
