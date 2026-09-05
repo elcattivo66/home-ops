@@ -1,0 +1,28 @@
+---
+clusterName: main
+clusterEndpoint: https://k8s.internal:6443
+kubernetesVersion: v1.36.4
+talosVersion: v1.13.9
+secretsPath: secrets.sops.yaml
+nodes:
+  - host: nuc11.internal
+    ip: 192.168.20.11
+    role: control-plane
+    schematicId: 4b3cd373a192c8469e859b7a0cfbed3ecc3577c4a2d346a37b0aeff9cd17cdb0
+    data:
+      mac: "1c:69:7a:ac:*"
+      driver: igc
+  - host: nuc13.internal
+    ip: 192.168.20.13
+    role: control-plane
+    schematicId: 12f2e921a6b3f7ce340dc0baadc1bba2b08004ef28c6691fdf9474946383b128
+    data:
+      mac: "48:21:0b:61:*"
+      driver: igc
+  - host: nuc14.internal
+    ip: 192.168.20.14
+    role: control-plane
+    schematicId: c7e6f1783e82bba4548ad67a9929f4f4ec02ac164e1aa8c5c6257a42099a1785
+    data:
+      mac: "88:ae:dd:66:*"
+      driver: igc

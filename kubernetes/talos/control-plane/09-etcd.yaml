@@ -1,0 +1,5 @@
+---
+cluster:
+  etcd:
+    advertisedSubnets:
+      - 192.168.20.0/24

@@ -1,0 +1,12 @@
+---
+machine:
+  features:
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:admin
+        - os:reader
+      allowedKubernetesNamespaces:
+        - actions-runner-system
+        - system-upgrade
+        - ai

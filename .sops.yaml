@@ -1,6 +1,6 @@
 ---
 creation_rules:
-  - path_regex: kubernetes/main/talos/talsecret(\.sops)?\.ya?ml
+  - path_regex: kubernetes/talos/secrets\.sops\.ya?ml
     input_type: yaml
     encrypted_regex: ^(cluster|secrets|trustdinfo|certs)$
     mac_only_encrypted: true
