@@ -1,0 +1,7 @@
+---
+apiVersion: v1alpha1
+kind: KubeAPIServerConfig
+certExtraSANs:
+  - k8s.internal
+  - 192.168.20.9
+  - 127.0.0.1

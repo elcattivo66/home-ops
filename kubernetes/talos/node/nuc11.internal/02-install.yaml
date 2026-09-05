@@ -1,5 +1,7 @@
 ---
-machine:
-  install:
-    diskSelector:
-      model: INTEL SSDSC*
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.model =~ "INTEL SSDSC.*"
+  wipe: false

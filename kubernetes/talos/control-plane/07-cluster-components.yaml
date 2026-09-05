@@ -1,0 +1,43 @@
+---
+apiVersion: v1alpha1
+kind: KubeAPIServerConfig
+extraArgs:
+  enable-aggregator-routing: "true"
+  feature-gates: ImageVolume=true,HPAScaleToZero=true
+  runtime-config: admissionregistration.k8s.io/v1alpha1=true
+---
+apiVersion: v1alpha1
+kind: KubeControllerManagerConfig
+extraArgs:
+  bind-address: 0.0.0.0
+  feature-gates: HPAScaleToZero=true
+---
+apiVersion: v1alpha1
+kind: KubeProxyConfig
+enabled: false
+---
+apiVersion: v1alpha1
+kind: KubeSchedulerConfig
+extraArgs:
+  bind-address: 0.0.0.0
+config:
+  apiVersion: kubescheduler.config.k8s.io/v1
+  kind: KubeSchedulerConfiguration
+  profiles:
+    - schedulerName: default-scheduler
+      plugins:
+        score:
+          disabled:
+            - name: ImageLocality
+      pluginConfig:
+        - name: PodTopologySpread
+          args:
+            defaultingType: List
+            defaultConstraints:
+              - maxSkew: 1
+                topologyKey: kubernetes.io/hostname
+                whenUnsatisfiable: ScheduleAnyway
+---
+apiVersion: v1alpha1
+kind: KubeCoreDNSConfig
+enabled: false

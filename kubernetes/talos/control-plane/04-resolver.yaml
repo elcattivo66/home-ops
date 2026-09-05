@@ -1,0 +1,9 @@
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+hostDNS:
+  enabled: true
+  forwardKubeDNSToHost: false
+  resolveMemberNames: true
+searchDomains:
+  disableDefault: true
