@@ -1,6 +1,7 @@
 ---
 machine:
   kubelet:
+    image: ghcr.io/siderolabs/kubelet:v1.36.4
     extraMounts:
       - destination: /var/openebs/local
         type: bind
