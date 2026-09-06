@@ -3,5 +3,5 @@ apiVersion: v1alpha1
 kind: UnattendedInstallConfig
 provisioning:
   diskSelector:
-    match: disk.model =~ "INTEL SSDSC.*"
+    match: disk.model.matches("INTEL SSDSC.*")
   wipe: false

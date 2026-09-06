@@ -12,6 +12,3 @@ machine:
       maxPods: 150
       allowedUnsafeSysctls:
         - net.ipv6.conf.*
-    nodeIP:
-      validSubnets:
-        - 192.168.20.0/24

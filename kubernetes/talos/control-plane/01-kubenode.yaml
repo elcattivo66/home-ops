@@ -1,6 +1,9 @@
 ---
 apiVersion: v1alpha1
 kind: KubeNodeConfig
+nodeIP:
+  validSubnets:
+    - 192.168.20.0/24
 labels:
   node.kubernetes.io/exclude-from-external-load-balancers:
     $patch: delete
