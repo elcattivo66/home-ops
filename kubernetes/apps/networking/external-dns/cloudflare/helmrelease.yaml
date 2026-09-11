@@ -17,7 +17,7 @@ spec:
     remediation:
       retries: 3
   values:
-    fullnameOverride: &name external-dns-cloudflare
+    fullnameOverride: *app
     provider:
       name: cloudflare
     env:
@@ -31,9 +31,6 @@ spec:
           secretKeyRef:
             name: *secret
             key: *name
-    envFrom:
-      - secretRef:
-          name: external-dns-cloudflare-secret
     extraArgs:
       - --cloudflare-dns-records-per-page=1000
       - --cloudflare-proxied
@@ -52,4 +49,4 @@ spec:
     serviceMonitor:
       enabled: true
     podAnnotations:
-      secret.reloader.stakater.com/reload: external-dns-cloudflare-secret
+      secret.reloader.stakater.com/reload: *secret
