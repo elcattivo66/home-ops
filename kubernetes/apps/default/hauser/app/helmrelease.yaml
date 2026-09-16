@@ -31,6 +31,20 @@ spec:
       hauser:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          chown-data:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.24"
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                chown -R 1000:1000 /config /data /assets
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
         containers:
           app:
             image:
@@ -92,17 +106,23 @@ spec:
           hauser:
             app:
               - path: /assets
+            chown-data:
+              - path: /assets
       config:
         existingClaim: *app
         advancedMounts:
           hauser:
             app:
               - path: /config
+            chown-data:
+              - path: /config
       data:
         existingClaim: *app
         advancedMounts:
           hauser:
             app:
+              - path: /data
+            chown-data:
               - path: /data
       tmpfs:
         type: emptyDir
