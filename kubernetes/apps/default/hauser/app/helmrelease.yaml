@@ -49,7 +49,7 @@ spec:
           app:
             image:
               repository: ghcr.io/ralleur/hauser
-              tag: 0.20.3
+              tag: 0.20.4
             env:
               HMI_AI_CUSTOMIZING_ENABLED: "0"
               HMI_TUNNEL_BIN: ""
