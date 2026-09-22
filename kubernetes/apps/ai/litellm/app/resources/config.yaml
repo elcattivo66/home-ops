@@ -165,6 +165,9 @@ litellm_settings:
   num_retries: 2
   retry_after: 5
   set_verbose: false
+  model_group_settings:
+    forward_client_headers_to_llm_api:
+      - "opencode-go/*"
 
 environment:
   - OPENCODE_GO_API_KEY
