@@ -55,7 +55,7 @@ spec:
             path: /spool/media
     contentdatabase:
       tmdb:
-        apikeyKey: TMDB_API_KEY
+        apikeyKey: TMDB_ACCESS_TOKEN
         existingSecret: *secret
       tvdb:
         apikeyKey: TVDB_APIKEY
