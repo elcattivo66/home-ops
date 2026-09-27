@@ -29,10 +29,10 @@ spec:
               tag: latest
               pullPolicy: IfNotPresent
             args:
-            - --model
-            - medium
-            - --language
-            - de
+              - --model
+              - medium
+              - --language
+              - de
             env:
               WYOMING_WHISPER__INSTANCE_NAME: Wyoming-Whisper
               WYOMING_WHISPER__PORT: &port 10300

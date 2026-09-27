@@ -1,0 +1,6 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "proseWrap": "preserve",
+  "ignorePatterns": ["**/*.sops.yaml", "*.sops.yaml"]
+}

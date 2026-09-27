@@ -24,7 +24,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
-              capabilities: {add: ["NET_ADMIN", "NET_BIND_SERVICE", "NET_RAW"]}
+              capabilities: { add: ["NET_ADMIN", "NET_BIND_SERVICE", "NET_RAW"] }
             resources:
               limits:
                 memory: 512Mi

@@ -45,7 +45,7 @@ sonarr:
 
         ### Try to avoid german only
       - trash_ids:
-        - 8a9fcdbb445f2add0505926df3bb7b8a # German
+          - 8a9fcdbb445f2add0505926df3bb7b8a # German
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
             score: 0
@@ -53,8 +53,8 @@ sonarr:
             score: 0
 
       - trash_ids:
-        - 47435ece6b99a0b477caf360e79ba0bb # x265
-        - 15a05bc7c1a36e2b57fd628f8977e2fc # AV1
+          - 47435ece6b99a0b477caf360e79ba0bb # x265
+          - 15a05bc7c1a36e2b57fd628f8977e2fc # AV1
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
             score: 100
@@ -121,10 +121,10 @@ radarr:
     custom_formats:
       ### Optional
       - trash_ids:
-         - b6832f586342ef70d9c128d40c07b872 # Bad Dual Groups
-         - ae9b7c9ebde1f3bd336a8cbd1ec4c5e5 # No-RlsGroup
-         - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
-         - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
+          - b6832f586342ef70d9c128d40c07b872 # Bad Dual Groups
+          - ae9b7c9ebde1f3bd336a8cbd1ec4c5e5 # No-RlsGroup
+          - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
+          - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
         #  - f537cf427b64c38c8e36298f657e4828 # Scene
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
@@ -132,22 +132,22 @@ radarr:
 
       ### Movie Versions
       - trash_ids:
-         - 570bc9ebecd92723d2d21500f4be314c # Remaster
-         - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
-         - e0c07d59beb37348e975a930d5e50319 # Criterion Collection
-         - 9d27d9d2181838f76dee150882bdc58c # Masters of Cinema
-         - db9b4c4b53d312a3ca5f1378f6440fc9 # Vinegar Syndrome
-         - 957d0f44b592285f26449575e8b1167e # Special Edition
-         - eecf3a857724171f968a66cb5719e152 # IMAX
-         - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
+          - 570bc9ebecd92723d2d21500f4be314c # Remaster
+          - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
+          - e0c07d59beb37348e975a930d5e50319 # Criterion Collection
+          - 9d27d9d2181838f76dee150882bdc58c # Masters of Cinema
+          - db9b4c4b53d312a3ca5f1378f6440fc9 # Vinegar Syndrome
+          - 957d0f44b592285f26449575e8b1167e # Special Edition
+          - eecf3a857724171f968a66cb5719e152 # IMAX
+          - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
           - name: UHD Bluray + WEB (GER)
 
         ### Others
       - trash_ids:
-         - e6886871085226c3da1830830146846c # Uncomment this line to allow Generated Dynamic HDR
-         - 86bc3115eb4e9873ac96904a4a68e19e # German - Try to avoid german only
+          - e6886871085226c3da1830830146846c # Uncomment this line to allow Generated Dynamic HDR
+          - 86bc3115eb4e9873ac96904a4a68e19e # German - Try to avoid german only
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
             score: 0
@@ -155,8 +155,8 @@ radarr:
             score: 0
 
       - trash_ids:
-         - dc98083864ea246d05a42df0d05f81cc # Prefer good x265 releases e.g. VECTOR
-         - cae4ca30163749b891686f95532519bd # AV1
+          - dc98083864ea246d05a42df0d05f81cc # Prefer good x265 releases e.g. VECTOR
+          - cae4ca30163749b891686f95532519bd # AV1
         assign_scores_to:
           - name: HD Bluray + WEB (GER)
             score: 100

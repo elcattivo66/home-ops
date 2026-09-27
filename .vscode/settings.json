@@ -27,6 +27,10 @@
       "./kubernetes/**/*.sops.toml": "plaintext"
   },
   "files.trimTrailingWhitespace": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true
+  },
   "material-icon-theme.folders.associations": {
       // top level
       ".archive": "archive",

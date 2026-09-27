@@ -10,5 +10,6 @@
         "BriteSnow.vscode-toggle-quotes",
         "HashiCorp.terraform",
         "PKief.material-icon-theme",
+        "oxc.oxc-vscode",
     ]
 }

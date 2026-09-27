@@ -23,6 +23,15 @@ includes:
   # rook: .taskfiles/Rook/Taskfile.yaml
 
 tasks:
+  fmt:
+    desc: Format YAML files with oxfmt
+    cmds:
+      - oxfmt --write '**/*.yaml' '**/*.yml'
+
+  fmt:check:
+    desc: Check YAML files are formatted
+    cmds:
+      - oxfmt --check '**/*.yaml' '**/*.yml'
 
   default:
     silent: true

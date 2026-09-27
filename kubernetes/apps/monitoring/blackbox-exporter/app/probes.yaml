@@ -27,4 +27,4 @@ spec:
   targets:
     staticConfig:
       static:
-      - nas:2049
+        - nas:2049
