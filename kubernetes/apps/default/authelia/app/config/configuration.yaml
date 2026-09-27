@@ -182,7 +182,7 @@ identity_providers:
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://kyoo.${SECRET_DOMAIN}/api/auth/logged/authelia"]
+        redirect_uris: ["https://kyoo.${SECRET_DOMAIN}/auth/oidc/logged/authelia"]
         userinfo_signed_response_alg: none
       - client_name: Adventurelog
         client_id: adventurelog
