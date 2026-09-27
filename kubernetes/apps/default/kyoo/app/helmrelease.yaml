@@ -127,6 +127,11 @@ spec:
         extraEnv:
           - name: PGOPTIONS
             value: "-c search_path=scanner"
+          - name: TVDB_APIKEY
+            valueFrom:
+              secretKeyRef:
+                name: *secret
+                key: TVDB_APIKEY
         resources:
           requests:
             cpu: 5m
