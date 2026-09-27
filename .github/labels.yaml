@@ -1,7 +1,5 @@
 ---
 # Areas
-- name: area/bootstrap
-  color: "0e8a16"
 - name: area/docs
   color: "0e8a16"
 - name: area/github
@@ -9,10 +7,6 @@
 - name: area/kubernetes
   color: "0e8a16"
 - name: area/renovate
-  color: "0e8a16"
-- name: area/scripts
-  color: "0e8a16"
-- name: area/talos
   color: "0e8a16"
 - name: area/taskfile
   color: "0e8a16"

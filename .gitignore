@@ -3,15 +3,7 @@
 Thumbs.db
 # temp folders
 .private/
-# ansible
-xanmanning.k3s*
-.venv*
 .task/
-# terraform
-.terraform
-*.tfvars
-.terraform.tfstate*
-terraform.tfstate*
 # sops
 .decrypted~*
 .config.env
@@ -24,5 +16,3 @@ kubeconfig
 talosconfig
 # topf render output
 output/
-# extras
-config.xml

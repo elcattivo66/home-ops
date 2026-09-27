@@ -1,11 +1,4 @@
 {
-  "ansible.ansible.path": ".venv/bin/ansible",
-  "ansible.python.activationScript": ".venv/bin/activate",
-  "ansible.python.interpreterPath": ".venv/bin/python3",
-  "ansible.validation.enabled": true,
-  "ansible.validation.lint.arguments": "-c ansible/.ansible-lint",
-  "ansible.validation.lint.enabled": true,
-  "ansible.validation.lint.path": ".venv/bin/ansible-lint",
   "editor.bracketPairColorization.enabled": true,
   "editor.fontFamily": "FiraCode Nerd Font",
   "editor.fontLigatures": true,
@@ -20,10 +13,6 @@
   "explorer.autoReveal": false,
   "files.associations": {
       "*.json5": "jsonc",
-      "./ansible/**/*.yaml": "ansible",
-      "./ansible/**/*.sops.yaml": "yaml",
-      "./ansible/**/inventory/**/*.yaml": "yaml",
-      "./terraform/**/*.tf": "terraform",
       "./kubernetes/**/*.sops.toml": "plaintext"
   },
   "files.trimTrailingWhitespace": true,
@@ -32,8 +21,6 @@
     "editor.formatOnSave": true
   },
   "material-icon-theme.folders.associations": {
-      // top level
-      ".archive": "archive",
       // namespaces
       "actions-runner-system": "github",
       "cert-manager": "guard",
@@ -43,7 +30,6 @@
       "monitoring": "event",
       "networking": "connection",
       "rook-ceph": "dump",
-      "volsync": "aws",
   },
   "sops.defaults.ageKeyFile": "age.key",
   "vs-kubernetes": {
@@ -54,7 +40,6 @@
   },
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
-    "ansible": "./ansible/**/*.yaml",
     "kubernetes": "./kubernetes/**/*.yaml"
   }
 }
