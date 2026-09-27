@@ -95,6 +95,8 @@ spec:
               echo "Creating schema and extension..."
               psql -c "CREATE SCHEMA IF NOT EXISTS kyoo;"
               psql -c "CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA kyoo;"
+              psql -c "ALTER DATABASE kyoo SET search_path TO kyoo, public;"
+              psql -c "ALTER DATABASE kyoo SET pg_trgm.word_similarity_threshold = 0.4;"
               echo "Done."
     auth:
       kyoo_auth:
