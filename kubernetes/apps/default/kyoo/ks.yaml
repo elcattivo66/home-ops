@@ -14,7 +14,10 @@ spec:
     - ../../../../components/zeroscaler
     - ../../../../components/gpu
     - ../../../../components/kopiur/backup
+    - ../../../../components/postgres-db
   dependsOn:
+    - name: cloudnative-pg-cluster
+      namespace: databases
     - name: external-secrets-stores
       namespace: external-secrets
   path: ./kubernetes/apps/default/kyoo/app
@@ -31,3 +34,6 @@ spec:
     substitute:
       APP: *appname
       KOPIUR_CAPACITY: 30Gi
+      DB_NAME: kyoo
+      DB_USER: kyoo_all
+      DB_BITWARDEN_ID: 8b972093-ea0b-4af3-81d0-43b0bb9283f8
