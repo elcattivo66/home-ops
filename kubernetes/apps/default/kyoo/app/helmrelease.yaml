@@ -149,7 +149,7 @@ spec:
         metadata:
           name: kyoo
         spec:
-          hostnames: ["https://kyoo.${SECRET_DOMAIN}"]
+          hostnames: ["kyoo.${SECRET_DOMAIN}"]
           parentRefs:
             - name: envoy-external
               namespace: networking
@@ -164,7 +164,7 @@ spec:
                     value: /swagger
               backendRefs:
                 - name: kyoo-api
-                  namespace: media
+                  namespace: default
                   port: 3567
             - name: auth
               matches:
@@ -176,7 +176,7 @@ spec:
                     value: /.well-known
               backendRefs:
                 - name: kyoo-auth
-                  namespace: media
+                  namespace: default
                   port: 4568
             - name: transcoder
               matches:
@@ -185,7 +185,7 @@ spec:
                     value: /video
               backendRefs:
                 - name: kyoo-transcoder
-                  namespace: media
+                  namespace: default
                   port: 7666
             - name: scanner
               matches:
@@ -194,12 +194,12 @@ spec:
                     value: /scanner
               backendRefs:
                 - name: kyoo-scanner
-                  namespace: media
+                  namespace: default
                   port: 4389
             - name: front
               backendRefs:
                 - name: kyoo-front
-                  namespace: media
+                  namespace: default
                   port: 8901
       - apiVersion: gateway.envoyproxy.io/v1alpha1
         kind: SecurityPolicy
@@ -228,7 +228,7 @@ spec:
             http:
               backendRefs:
                 - name: kyoo-auth
-                  namespace: media
+                  namespace: default
                   port: 4568
               path: /auth/jwt
               headersToBackend:
