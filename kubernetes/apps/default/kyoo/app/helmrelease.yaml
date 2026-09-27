@@ -65,6 +65,9 @@ spec:
       persistence:
         existingClaim: *app
       kyoo_api:
+        extraEnv:
+          - name: PGOPTIONS
+            value: "-c search_path=kyoo"
         resources:
           requests:
             cpu: 10m
@@ -92,14 +95,19 @@ spec:
             - -c
             - |
               until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
-              echo "Creating schema and extension..."
-              psql -c "CREATE SCHEMA IF NOT EXISTS kyoo;"
+              echo "Creating schemas and extension..."
+              psql -c "CREATE SCHEMA IF NOT EXISTS kyoo AUTHORIZATION kyoo_all;"
+              psql -c "CREATE SCHEMA IF NOT EXISTS keibi AUTHORIZATION kyoo_all;"
+              psql -c "CREATE SCHEMA IF NOT EXISTS scanner AUTHORIZATION kyoo_all;"
+              psql -c "CREATE SCHEMA IF NOT EXISTS gocoder AUTHORIZATION kyoo_all;"
               psql -c "CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA kyoo;"
-              psql -c "ALTER DATABASE kyoo SET search_path TO kyoo, public;"
               psql -c "ALTER DATABASE kyoo SET pg_trgm.word_similarity_threshold = 0.4;"
               echo "Done."
     auth:
       kyoo_auth:
+        extraEnv:
+          - name: PGOPTIONS
+            value: "-c search_path=keibi"
         resources:
           requests:
             cpu: 20m
@@ -116,6 +124,9 @@ spec:
             memory: 500Mi
     scanner:
       kyoo_scanner:
+        extraEnv:
+          - name: PGOPTIONS
+            value: "-c search_path=scanner"
         resources:
           requests:
             cpu: 5m
@@ -129,6 +140,9 @@ spec:
         - name: gpu
           resourceClaimTemplateName: kyoo-gpu
       kyoo_transcoder:
+        extraEnv:
+          - name: PGOPTIONS
+            value: "-c search_path=gocoder"
         resources:
           claims:
             - name: gpu
