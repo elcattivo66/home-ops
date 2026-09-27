@@ -8,6 +8,7 @@ spec:
   image: docker.dragonflydb.io/dragonflydb/dragonfly:v2.0.0
   replicas: ${DRAGONFLY_REPLICAS:=1}
   args:
+    - --dbfilename=${DRAGONFLY_SNAPSHOT_DBFILENAME:=dump}
     - --maxmemory=$(MAX_MEMORY)Mi
     - --proactor_threads=2
     - --cluster_mode=emulated
@@ -24,3 +25,12 @@ spec:
       cpu: 10m
     limits:
       memory: 1Gi
+  snapshot:
+    cron: ${DRAGONFLY_SNAPSHOT_CRON:="*/5 * * * *"}
+    persistentVolumeClaimSpec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: ${DRAGONFLY_SNAPSHOT_CAPACITY:=128Mi}
+      storageClassName: ${DRAGONFLY_SNAPSHOT_STORAGECLASS:=ceph-block}
