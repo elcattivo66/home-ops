@@ -35,7 +35,7 @@ spec:
               PAPERLESS_DATA_DIR: /library/data
               PAPERLESS_EXPORT_DIR: /library/export
               PAPERLESS_MEDIA_ROOT: /library/media
-              PAPERLESS_CONSUMER_POLLING: "60"
+              PAPERLESS_CONSUMER_POLLING_INTERVAL: "60"
               PAPERLESS_CONSUMER_RECURSIVE: "true"
               PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
               PAPERLESS_OCR_LANGUAGES: deu
@@ -46,7 +46,7 @@ spec:
               PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
               USERMAP_UID: 1000
               USERMAP_GID: 1000
-              PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
+              PAPERLESS_FILENAME_FORMAT: '{{"{{"}} created_year {{"}}"}}/{{"{{"}} correspondent {{"}}"}}/{{"{{"}} title {{"}}"}}'
               PAPERLESS_ENABLE_HTTP_REMOTE_USER: false
               PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: false
               # PAPERLESS_REDIS: redis://localhost:6379
