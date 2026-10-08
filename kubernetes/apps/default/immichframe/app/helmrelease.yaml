@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immichframe/immichframe
-              tag: v1.0.38.0@sha256:453680ba35b7bb0d16cd9a2750e51384f06872b7f874fa26ed014b90d6d977e6
+              tag: v1.0.39.0@sha256:848962b2d6828691fd95e13972ecc08c54790c03934b5d3dd3af2f302816dbe5
             env:
               TZ: ${TZ}
             probes:
