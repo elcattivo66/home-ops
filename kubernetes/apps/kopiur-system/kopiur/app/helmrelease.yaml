@@ -12,7 +12,11 @@ spec:
   values:
     monitoring:
       dashboards:
-        enabled: false
+        enabled: true
+        grafanaOperator:
+          enabled: true
+          matchLabels:
+            dashboards: grafana
       prometheusRule:
         enabled: true
       serviceMonitor:
