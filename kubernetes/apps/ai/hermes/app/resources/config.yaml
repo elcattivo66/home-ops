@@ -8,7 +8,7 @@ custom_providers:
         context_length: 1000000
       opencode-go/glm-5.2:
         context_length: 1048560
-      opencode-go/deepseek-v4-flash:
+      opencode-go/deepseek-v4.1-flash:
         context_length: 131072
       opencode-go/deepseek-v4-pro:
         context_length: 1000000
@@ -31,7 +31,7 @@ custom_providers:
       groq-gpt:
         context_length: 128000
 model:
-  default: opencode-go/deepseek-v4-flash
+  default: opencode-go/deepseek-v4.1-flash
   provider: custom:kubernetes
   context_length: 1000000
 
@@ -45,8 +45,8 @@ model_aliases:
   glm:
     model: opencode-go/glm-5.2
     provider: custom:kubernetes
-  deepseek-pro-v4-flash:
-    model: opencode-go/deepseek-v4-flash
+  deepseek-v4.1-flash:
+    model: opencode-go/deepseek-v4.1-flash
     provider: custom:kubernetes
   mimo:
     model: opencode-go/mimo-v2.5
@@ -74,7 +74,7 @@ fallback_providers:
   - provider: custom:kubernetes
     model: opencode-go/qwen3.7-plus
   - provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   - provider: custom:kubernetes
     model: opencode-go/kimi-k2.7
   - provider: custom:kubernetes
@@ -100,28 +100,28 @@ auxiliary:
     model: opencode-go/minimax-m3
   session_search:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   vision:
     provider: custom:kubernetes
     model: opencode-go/minimax-m3
   goal_judge:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   title_generation:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   profile_describer:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   triage_specifier:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   kanban_decomposer:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
   curator:
     provider: custom:kubernetes
-    model: opencode-go/deepseek-v4-flash
+    model: opencode-go/deepseek-v4.1-flash
     timeout: 600
 
 memory:
@@ -192,7 +192,7 @@ agent:
   tool_use_enforcement: auto
 
 delegation:
-  model: opencode-go/deepseek-v4-flash
+  model: opencode-go/deepseek-v4.1-flash
   max_concurrent_children: 8
   max_spawn_depth: 2
 
