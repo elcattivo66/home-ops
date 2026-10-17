@@ -28,6 +28,25 @@ spec:
       immichframe:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          init-config:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.24"
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                set -euo pipefail
+                mkdir -p /app/Config
+                if [ ! -f /app/Config/Settings.json ]; then
+                  cp /tmp/Settings.json /app/Config/Settings.json
+                fi
+                chown -R 1000:1000 /app/Config
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
         containers:
           app:
             image:
@@ -62,12 +81,22 @@ spec:
               capabilities: { drop: ["ALL"] }
     persistence:
       config:
+        existingClaim: immichframe
+        advancedMounts:
+          immichframe:
+            app:
+              - path: /app/Config
+            init-config:
+              - path: /app/Config
+      settings-seed:
         type: secret
         name: immichframe-secret
-        globalMounts:
-          - path: /app/Config/Settings.json
-            subPath: Settings.json
-            readOnly: true
+        advancedMounts:
+          immichframe:
+            init-config:
+              - path: /tmp/Settings.json
+                subPath: Settings.json
+                readOnly: true
       tmpfs:
         type: emptyDir
         advancedMounts:
