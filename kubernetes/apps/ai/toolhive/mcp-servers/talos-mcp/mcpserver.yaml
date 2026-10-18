@@ -18,10 +18,23 @@ spec:
       value: http
     - name: TALOS_MCP_HTTP_ADDR
       value: ":8080"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
   podTemplateSpec:
     spec:
       containers:
         - name: mcp
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
           volumeMounts:
             - name: talosconfig
               mountPath: /var/run/secrets/talos.dev

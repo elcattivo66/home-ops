@@ -155,6 +155,12 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
         successfulJobsHistoryLimit: 1
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            memory: 512Mi
 
     startupProbe:
       enabled: true

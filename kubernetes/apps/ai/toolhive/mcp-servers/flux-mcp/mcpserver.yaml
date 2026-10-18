@@ -22,6 +22,12 @@ spec:
     spec:
       containers:
         - name: mcp
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
           args:
             - serve
             - --transport=http

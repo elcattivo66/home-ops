@@ -22,6 +22,10 @@ spec:
     spec:
       containers:
         - name: mcp
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
           args:
             - --transport
             - streamable-http
