@@ -43,7 +43,12 @@ spec:
                 targetThresholds:
                   cpu: 50
                   memory: 50
-                  pods: 50
+                  # 65 instead of 50: nuc13 (45%) and nuc14 (51%) sit right at the
+                  # 50% pod-count line (non-DaemonSet pods, 150 slots/node) while
+                  # nuc11 stays "underutilized". The scheduler places by requests +
+                  # image locality, so evicted pods always return to nuc14/nuc13 and
+                  # the pods dimension never converges -> ~4 evictions every 5 min.
+                  pods: 65
             - name: RemoveFailedPods
               args:
                 reasons:
