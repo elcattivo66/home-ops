@@ -1,0 +1,139 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app silo
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: silo
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  values:
+    defaultPodOptions:
+      resourceClaims:
+        - name: gpu
+          resourceClaimTemplateName: ${APP}-gpu
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+    controllers:
+      silo:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/silo-server/silo-server
+              tag: latest@sha256:76ed2e3a4dcdfd14109edb08b0315ba1aad93caf4b0e064eb4593d1799d3b44c
+            env:
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: silo-secret
+                    key: DATABASE_URL
+              HOME: /tmp
+              JF_PORT: &jfPort 8096
+              PORT: &port 8080
+              POSTGRES_TUNE: "off"
+              REDIS_URL: redis://silo-dragonfly.default.svc.cluster.local:6379
+              SECRET_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: silo-secret
+                    key: SECRET_KEY
+              SILO_METRICS_LISTEN: ":9091"
+              SILO_PLUGIN_CACHE_DIR: /tmp/silo-plugins
+              SILO_TRUSTED_PROXIES: 10.42.0.0/16
+              TZ: ${TZ}
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/health
+                    port: *port
+                  initialDelaySeconds: 60
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/ready
+                    port: *port
+            resources:
+              claims:
+                - name: gpu
+              requests:
+                cpu: 100m
+                memory: 1Gi
+              limits:
+                memory: 6Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: ["ALL"]
+    persistence:
+      data:
+        existingClaim: *app
+        advancedMounts:
+          silo:
+            app:
+              - path: /var/lib/silo/artwork
+                subPath: artwork
+              - path: /var/lib/silo/compat
+                subPath: compat
+      media:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /spool/media
+        globalMounts:
+          - path: /media
+            readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+    route:
+      app:
+        hostnames:
+          - silo.${SECRET_DOMAIN}
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    service:
+      app:
+        controller: silo
+        ports:
+          http:
+            port: *port
+          jellyfin:
+            port: *jfPort
+          metrics:
+            port: 9091
+    serviceMonitor:
+      app:
+        serviceName: *app
+        endpoints:
+          - port: metrics

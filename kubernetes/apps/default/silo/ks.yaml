@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname silo
+  namespace: &namespace default
+spec:
+  targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/gpu
+    - ../../../../components/dragonfly
+    - ../../../../components/kopiur/backup
+    - ../../../../components/postgres-db
+  dependsOn:
+    - name: cloudnative-pg-cluster
+      namespace: databases
+    - name: dragonfly-operator
+      namespace: databases
+    - name: external-secrets-stores
+      namespace: external-secrets
+    - name: intel-gpu-resource-driver
+      namespace: kube-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
+  interval: 30m
+  path: ./kubernetes/apps/default/silo/app
+  postBuild:
+    substitute:
+      APP: *appname
+      DB_BITWARDEN_ID: 85ed555a-8840-486c-9ce7-f632d845e91c
+      DB_EXTENSIONS: |
+        [
+          { name: vector }
+        ]
+      DB_NAME: silo
+      DB_USER: silo
+      KOPIUR_CAPACITY: 30Gi
+  prune: true
+  retryInterval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  timeout: 3m

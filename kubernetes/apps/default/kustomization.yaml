@@ -37,6 +37,7 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./smtp-relay/ks.yaml
   - ./seerr/ks.yaml
+  - ./silo/ks.yaml
   - ./sonarr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
