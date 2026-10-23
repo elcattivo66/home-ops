@@ -4,6 +4,11 @@ apiVersion: toolhive.stacklok.dev/v1beta1
 kind: MCPServer
 metadata:
   name: kubectl
+  labels:
+    # Bumped to make the gateway's backend reconciler re-read tools/list; its
+    # registry snapshot was taken while the 2.0.0 server and proxy were still
+    # restarting, so the kubectl toolset stayed empty in the aggregated catalog.
+    toolhive.stacklok.dev/tool-refresh: "2"
 spec:
   image: docker.io/rohitghumare64/kubectl-mcp-server:2.0.0@sha256:f1f57aa5d4952f3c49e4d9bb8071a143d0812bdc8253922d51eeca8a2615ea29
   transport: streamable-http
