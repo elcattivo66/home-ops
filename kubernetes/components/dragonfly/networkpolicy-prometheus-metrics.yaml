@@ -22,11 +22,18 @@ spec:
       ports:
         - protocol: TCP
           port: 9999
+    # The operator no longer ships NetworkPolicies of its own, so this policy is
+    # the only ingress rule a Dragonfly pod gets: without an explicit allow the
+    # app's own pods are denied when they dial the Redis port.
+    - from:
+        - podSelector: {}
+      ports:
+        - protocol: TCP
+          port: 6379
     # The dragonfly-operator reads INFO persistence over the Redis port from the
-    # databases namespace before it marks a Dragonfly ready. If that probe is
+    # databases namespace before it marks an instance ready. If that probe is
     # blocked, the operator reconcile loops on "failed to determine dataset load
-    # status" and never creates the <name> NetworkPolicy that allows the app pods
-    # to reach 6379 — a deadlock that leaves the app unable to connect to Redis.
+    # status" and the instance never becomes Ready.
     - from:
         - namespaceSelector:
             matchLabels:
