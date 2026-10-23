@@ -22,3 +22,20 @@ spec:
       ports:
         - protocol: TCP
           port: 9999
+    # The dragonfly-operator reads INFO persistence over the Redis port from the
+    # databases namespace before it marks a Dragonfly ready. If that probe is
+    # blocked, the operator reconcile loops on "failed to determine dataset load
+    # status" and never creates the <name> NetworkPolicy that allows the app pods
+    # to reach 6379 — a deadlock that leaves the app unable to connect to Redis.
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: databases
+          podSelector:
+            matchLabels:
+              control-plane: controller-manager
+      ports:
+        - protocol: TCP
+          port: 6379
+        - protocol: TCP
+          port: 9999
