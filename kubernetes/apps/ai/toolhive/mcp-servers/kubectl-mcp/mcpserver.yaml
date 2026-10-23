@@ -20,8 +20,17 @@ spec:
   serviceAccount: kubectl-mcp-readonly
   podTemplateSpec:
     spec:
+      volumes:
+        - name: tmp
+          emptyDir: {}
       containers:
         - name: mcp
+          # Image ships /home/mcp (uid 10001) as cwd; the pod runs as 1000, so
+          # FastMCP's import-time ".env" lookup hits EACCES and the server dies.
+          workingDir: /tmp
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 100m
@@ -39,6 +48,8 @@ spec:
             - --toolsets
             - all
           env:
+            - name: HOME
+              value: /tmp
             - name: MCP_K8S_PROVIDER
               value: in-cluster
             - name: PYTHONUNBUFFERED
