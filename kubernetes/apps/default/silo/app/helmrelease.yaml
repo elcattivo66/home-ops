@@ -36,11 +36,14 @@ spec:
       silo:
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          # Silo fails readiness, drains in-flight requests on stop
+          terminationGracePeriodSeconds: 120
         containers:
           app:
             image:
               repository: ghcr.io/silo-server/silo-server
-              tag: latest@sha256:35c4bb814ec29e2599e8fa9c27ab91fbb958fd0cb01ad2126de4c5d62688b5f9
+              tag: build-1681@sha256:13a03e469358bc87392bd591e65255f98456dc0011ff05a1e17a1a686e453a46
             env:
               DATABASE_URL:
                 valueFrom:
@@ -69,7 +72,9 @@ spec:
                   httpGet:
                     path: /api/v1/health
                     port: *port
-                  initialDelaySeconds: 60
+                  failureThreshold: 5
+                  periodSeconds: 30
+                  timeoutSeconds: 5
               readiness:
                 enabled: true
                 custom: true
@@ -77,6 +82,18 @@ spec:
                   httpGet:
                     path: /api/v1/ready
                     port: *port
+                  failureThreshold: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/health
+                    port: *port
+                  failureThreshold: 60
+                  periodSeconds: 10
             resources:
               claims:
                 - name: gpu
@@ -122,6 +139,9 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
+            timeouts:
+              # Long range requests and downloads must not hit the Envoy default
+              backendRequest: 3600s
     service:
       app:
         controller: silo
