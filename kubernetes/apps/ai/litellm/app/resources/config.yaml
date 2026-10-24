@@ -38,6 +38,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-kimi-k2.7
 
   - model_name: opencode-go/kimi-k2.7-code
     model_info:
@@ -51,6 +53,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-kimi-k2.7-code
 
   - model_name: opencode-go/glm-5.2
     model_info:
@@ -63,6 +67,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-glm-5.2
 
   - model_name: opencode-go/qwen3.7-plus
     model_info:
@@ -75,6 +81,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-qwen3.7-plus
 
   - model_name: opencode-go/qwen3.7-max
     model_info:
@@ -87,6 +95,8 @@ model_list:
       api_base: https://opencode.ai/zen/go
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-qwen3.7-max
 
   - model_name: opencode-go/deepseek-v4.1-flash
     model_info:
@@ -99,6 +109,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-deepseek-v4.1-flash
 
   - model_name: opencode-go/deepseek-v4-pro
     model_info:
@@ -111,6 +123,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-deepseek-v4-pro
 
   - model_name: opencode-go/minimax-m3
     model_info:
@@ -128,6 +142,8 @@ model_list:
       model: anthropic/minimax-m3
       api_base: https://opencode.ai/zen/go
       api_key: os.environ/OPENCODE_GO_API_KEY
+      extra_headers:
+        x-opencode-session: litellm-minimax-m3
 
   - model_name: opencode-go/mimo-v2.5
     model_info:
@@ -140,6 +156,8 @@ model_list:
       api_base: https://opencode.ai/zen/go/v1
       api_key: os.environ/OPENCODE_GO_API_KEY
       drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-mimo-v2.5
 
 general_settings:
   health_check_endpoint: /v1/health
