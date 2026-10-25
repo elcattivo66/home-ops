@@ -13,5 +13,12 @@
       "matchPackageNames": ["ghcr.io/searxng/searxng"],
       "schedule": ["weekly"]
     },
+    {
+      "description": "Silo publishes ordered build-<n> tags instead of semver; the docker versioning treats them as unversioned, so map the tag onto a numeric major",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/silo-server/silo-server"],
+      "versioning": "regex:^build-(?<major>\\d+)$",
+      "pinDigests": true
+    },
   ]
 }
