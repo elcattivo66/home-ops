@@ -26,8 +26,8 @@ spec:
         containers:
           app:
             image:
-              repository: quay.io/redlib/redlib
-              tag: latest@sha256:37f624d87ce6cdd90d945af3688fdf0c195a0251d3b5ba62047792e8be2390df
+              repository: ghcr.io/nachtalb/redlib
+              tag: latest@sha256:a1047e06ecd2d0ecbbafeb387e6d2a53bf570dd29e51b8bcf1fcf0ecba8ddf50
             env:
               TZ: ${TZ}
               REDLIB_DEFAULT_FRONT_PAGE: "default"
