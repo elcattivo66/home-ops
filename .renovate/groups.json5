@@ -71,15 +71,5 @@
       },
       minimumGroupSize: 2,
     },
-    {
-      description: "Talos Group",
-      groupName: "talos",
-      matchDatasources: ["docker", "custom.talos-factory"],
-      matchPackageNames: ["/installer/", "/talosctl/", "siderolabs/talos"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-      minimumGroupSize: 2,
-    },
   ],
 }
