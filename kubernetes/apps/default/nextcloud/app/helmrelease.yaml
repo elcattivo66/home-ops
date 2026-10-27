@@ -23,7 +23,9 @@ spec:
     deploymentAnnotations:
       secret.reloader.stakater.com/reload: &secret nextcloud-secret
     image:
-      flavor: fpm-alpine
+      registry: docker.io
+      repository: library/nextcloud
+      tag: 35.0.2-fpm-alpine@sha256:ee5b5612f24984941cdfaeeccb073e048370fd1e44104719149820eae3e28419
     nextcloud:
       host: cloud.${SECRET_DOMAIN}
       datadir: /var/www/data
