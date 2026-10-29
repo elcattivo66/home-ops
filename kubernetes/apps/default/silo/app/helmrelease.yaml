@@ -43,7 +43,7 @@ spec:
           app:
             image:
               repository: ghcr.io/silo-server/silo-server
-              tag: build-1770@sha256:b989857a785638ad78daf5e90d8c54e11541b7fd6633b56f712524e7659f943d
+              tag: build-1804@sha256:7559d148544c24dca3d306c8447d5cd3129551007d2ad1e511e470fbbf20e224
             env:
               DATABASE_URL:
                 valueFrom:
