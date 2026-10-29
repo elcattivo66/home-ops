@@ -1,0 +1,150 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app shelfmark
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: shelfmark
+  interval: 1h
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    controllers:
+      shelfmark:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/calibrain/shelfmark
+              tag: v1.5.1@sha256:acfa46b8be80f1e2f084a7703ff027ab274397feb24006114e92c05c140b62c3
+            args:
+              - --access-logfile=-
+              - --error-logfile=-
+              - --worker-class=geventwebsocket.gunicorn.workers.GeventWebSocketWorker
+              - --workers=1
+              - -t
+              - "300"
+              - -b
+              - 0.0.0.0:8084
+              - shelfmark.main:app
+            command:
+              - gunicorn
+            env:
+              AUTH_METHOD: none
+              DESTINATION_AUDIOBOOK: /media/audiobooks
+              FILE_ORGANIZATION_AUDIOBOOK: organize
+              FLASK_PORT: &port 8084
+              INGEST_DIR: /media/ebooks/shelfmark
+              PROWLARR_ENABLED: true
+              PROWLARR_URL: http://prowlarr.default.svc.cluster.local
+              PROWLARR_USENET_ACTION: move
+              PROWLARR_USENET_CLIENT: sabnzbd
+              TZ: ${TZ}
+            envFrom:
+              - secretRef:
+                  name: shelfmark-secret
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                  failureThreshold: 5
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                  failureThreshold: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                  failureThreshold: 30
+                  periodSeconds: 10
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 2Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+    persistence:
+      config:
+        existingClaim: *app
+        advancedMounts:
+          shelfmark:
+            app:
+              - path: /config
+      media:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /spool/media
+        advancedMounts:
+          shelfmark:
+            app:
+              - path: /media
+                readOnly: false
+      tmp:
+        type: emptyDir
+        sizeLimit: 2Gi
+        advancedMounts:
+          shelfmark:
+            app:
+              - path: /tmp
+                subPath: tmp
+              - path: /var/log
+                subPath: var-log
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+            timeouts:
+              # Audiobook downloads run long; do not let the Envoy default cut them
+              backendRequest: 3600s
+    service:
+      app:
+        controller: shelfmark
+        ports:
+          http:
+            port: *port
