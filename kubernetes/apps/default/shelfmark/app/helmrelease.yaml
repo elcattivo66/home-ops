@@ -50,7 +50,7 @@ spec:
               DESTINATION_AUDIOBOOK: /media/audiobooks
               FILE_ORGANIZATION_AUDIOBOOK: organize
               FLASK_PORT: &port 8084
-              INGEST_DIR: /media/ebooks/shelfmark
+              INGEST_DIR: /media/ebooks/ingest
               PROWLARR_ENABLED: true
               PROWLARR_URL: http://prowlarr.default.svc.cluster.local
               PROWLARR_USENET_ACTION: move
