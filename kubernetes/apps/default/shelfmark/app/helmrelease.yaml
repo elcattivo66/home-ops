@@ -123,6 +123,8 @@ spec:
         advancedMounts:
           shelfmark:
             app:
+              - path: /.gunicorn
+                subPath: gunicorn
               - path: /tmp
                 subPath: tmp
               - path: /var/log
