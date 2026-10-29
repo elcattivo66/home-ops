@@ -29,6 +29,11 @@ spec:
               tag: v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679
             env:
               CACHE_DIR: /cache
+              HARDCOVER_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: bookboss-secret
+                    key: BOOKBOSS__METADATA__HARDCOVER_API_TOKEN
               TZ: ${TZ}
               PUID: 1000
               PGID: 1000
