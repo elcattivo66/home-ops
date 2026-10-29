@@ -102,3 +102,10 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /cache
+      ingest:
+        type: nfs
+        server: nas.${SECRET_HOME_DOMAIN}
+        path: /spool/media/ebooks/ingest
+        globalMounts:
+          - path: /cwa-book-ingest
+            readOnly: false
