@@ -208,3 +208,21 @@ identity_providers:
         grant_types: ["authorization_code", "refresh_token"]
         token_endpoint_auth_method: "client_secret_basic"
         userinfo_signed_response_alg: none
+      - client_name: Sonarr
+        client_id: sonarr
+        client_secret: '{{ secret "/config/secret/SONARR_OAUTH_DIGEST" }}'
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "email"]
+        redirect_uris: ["https://sonarr.${SECRET_DOMAIN}/signin-oidc"]
+        userinfo_signed_response_alg: none
+      - client_name: Radarr
+        client_id: radarr
+        client_secret: '{{ secret "/config/secret/RADARR_OAUTH_DIGEST" }}'
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "email"]
+        redirect_uris: ["https://radarr.${SECRET_DOMAIN}/signin-oidc"]
+        userinfo_signed_response_alg: none
