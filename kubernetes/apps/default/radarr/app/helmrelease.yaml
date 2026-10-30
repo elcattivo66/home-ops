@@ -32,7 +32,11 @@ spec:
             env:
               TZ: ${TZ}
               PUSHOVER_DEBUG: "false"
-              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__METHOD: Oidc
+              RADARR__AUTH__OIDCAUTHORITY: https://authelia.${SECRET_DOMAIN}
+              RADARR__AUTH__OIDCCLIENTID: radarr
+              RADARR__AUTH__OIDCSCOPES: openid profile email
+              RADARR__AUTH__OIDCUSERIDENTIFIER: 8e549cc5-1bbd-4bca-8b37-9aad99767121
               RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
               RADARR__LOG__DBENABLED: "False"
               RADARR__APP__INSTANCENAME: Radarr

@@ -33,7 +33,11 @@ spec:
               TZ: ${TZ}
               SONARR__APP__INSTANCENAME: Sonarr
               SONARR__APP__THEME: dark
-              SONARR__AUTH__METHOD: External
+              SONARR__AUTH__METHOD: Oidc
+              SONARR__AUTH__OIDCAUTHORITY: https://authelia.${SECRET_DOMAIN}
+              SONARR__AUTH__OIDCCLIENTID: sonarr
+              SONARR__AUTH__OIDCSCOPES: openid profile email
+              SONARR__AUTH__OIDCUSERIDENTIFIER: 8e549cc5-1bbd-4bca-8b37-9aad99767121
               SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
               SONARR__LOG__DBENABLED: "False"
               SONARR__LOG__LEVEL: info
