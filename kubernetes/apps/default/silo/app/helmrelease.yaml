@@ -55,7 +55,6 @@ spec:
               HOME: /tmp
               JF_PORT: &jfPort 8096
               PORT: &port 8080
-              POSTGRES_TUNE: "off"
               REDIS_URL: redis://silo-dragonfly.default.svc.cluster.local:6379
               SECRET_KEY:
                 valueFrom:
