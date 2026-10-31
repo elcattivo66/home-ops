@@ -43,7 +43,9 @@ spec:
           app:
             image:
               repository: ghcr.io/silo-server/silo-server
-              tag: build-1838@sha256:21c3e67c1ffed0d079f99d1986ef66d858e2af587fe1c08024f750b90231e5a0
+              tag: build-1881@sha256:2fb6e173724cfb729b8eee91fa0fe8ac5eb1ca4daf174a8b82a931de527ee832
+            # Skip the s6 /init entrypoint; this runs the Silo binary directly
+            command: ["silo"]
             env:
               DATABASE_URL:
                 valueFrom:
@@ -108,15 +110,13 @@ spec:
               capabilities:
                 drop: ["ALL"]
     persistence:
+      # The image symlinks /var/lib/silo to /config/silo; since /init is
+      # skipped, that path has to be supplied here. The claim root already
+      # holds artwork/ and compat/, so it mounts as the whole state directory.
       data:
         existingClaim: *app
-        advancedMounts:
-          silo:
-            app:
-              - path: /var/lib/silo/artwork
-                subPath: artwork
-              - path: /var/lib/silo/compat
-                subPath: compat
+        globalMounts:
+          - path: /config/silo
       media:
         type: nfs
         server: nas.${SECRET_HOME_DOMAIN}
