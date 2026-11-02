@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: ghcr.io/nachtalb/redlib
-              tag: latest@sha256:779d6cd5f4fc35958bd5ae1c37085e6195b0aa5b4a016d63777acb9d050f0fcc
+              tag: latest@sha256:70b30e004ee699055113644976897adbca62aa6ba97bb5f8acb787793b9e58fb
             env:
               TZ: ${TZ}
               REDLIB_DEFAULT_FRONT_PAGE: "default"
