@@ -144,6 +144,9 @@ spec:
     service:
       app:
         controller: silo
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: 192.168.21.225
         ports:
           http:
             port: *port
