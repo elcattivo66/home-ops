@@ -63,7 +63,7 @@ spec:
           gotenburg:
             image:
               repository: gotenberg/gotenberg
-              tag: 8.40.0
+              tag: 9.0.0
             args:
               - gotenberg
               - --chromium-disable-javascript=true
