@@ -43,7 +43,7 @@ spec:
           app:
             image:
               repository: ghcr.io/silo-server/silo-server
-              tag: build-2004@sha256:37baa94169b19f2f5e4914e5d41ace66819e1b83a45a0c2908442ede6e553198
+              tag: build-2041@sha256:2b8db8a92483523106684464e2ac9ec72a3ee3dfbc9eeac83c6a810a07735b4b
             # Skip the s6 /init entrypoint; this runs the Silo binary directly
             command: ["silo"]
             env:
