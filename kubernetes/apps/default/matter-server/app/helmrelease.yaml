@@ -27,6 +27,7 @@ spec:
               PORT: &port 5580
               BLE_PROXY: "true"
               PRODUCTION_MODE: "true"
+              ENABLE_TIME_SYNC: "true"
               NODE_OPTIONS: --max-old-space-size=768
             args:
               - --storage-path=/data
