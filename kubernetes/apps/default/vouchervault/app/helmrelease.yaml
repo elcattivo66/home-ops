@@ -1,0 +1,115 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vouchervault
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: vouchervault
+  interval: 1h
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      vouchervault:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: l4rm4nd/vouchervault
+              tag: 1.30.x
+            env:
+              DOMAIN: coupons.${SECRET_DOMAIN}
+              OIDC_CREATE_USER: "True"
+              OIDC_ENABLED: "True"
+              PORT: &port 8000
+              REDIS_URL: redis://vouchervault-dragonfly.default.svc.cluster.local:6379
+              SECURE_COOKIES: "True"
+              TZ: ${TZ}
+            envFrom:
+              - secretRef:
+                  name: vouchervault-secret
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /accounts/login/
+                    port: *port
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /accounts/login/
+                    port: *port
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /accounts/login/
+                    port: *port
+                  failureThreshold: 30
+                  periodSeconds: 10
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              readOnlyRootFilesystem: false
+              runAsGroup: 33
+              runAsNonRoot: true
+              runAsUser: 33
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 33
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 33
+        runAsNonRoot: true
+        runAsUser: 33
+    route:
+      app:
+        hostnames:
+          - coupons.${SECRET_DOMAIN}
+        parentRefs:
+          - name: envoy-internal
+            namespace: networking
+            sectionName: https
+    service:
+      app:
+        controller: vouchervault
+        ports:
+          http:
+            port: *port
+    persistence:
+      data:
+        existingClaim: vouchervault
+        advancedMounts:
+          vouchervault:
+            app:
+              - path: /opt/app/database
+                subPath: database
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

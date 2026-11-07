@@ -43,4 +43,5 @@ resources:
   - ./tautulli/ks.yaml
   - ./uc-intg-manager/ks.yaml
   - ./vaultwarden/ks.yaml
+  - ./vouchervault/ks.yaml
   - ./zigbee2mqtt/ks.yaml
