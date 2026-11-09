@@ -18,7 +18,9 @@ on:
         default: latest
         required: false
   schedule:
-    - cron: "0 * * * *"
+    # hourly ticks are dropped by GitHub's scheduler (~19% delivered since 2026-08-26);
+    # every 6h survived at ~95% in measurements, hourly beat that only on paper
+    - cron: "0 */6 * * *"
   push:
     branches: ["main"]
     paths:
