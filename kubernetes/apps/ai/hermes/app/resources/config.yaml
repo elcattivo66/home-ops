@@ -6,9 +6,9 @@ custom_providers:
       opencode-go/minimax-m3:
         context_length: 1000000
       opencode-go/glm-5.2:
-        context_length: 1048560
+        context_length: 1000000
       opencode-go/deepseek-v4.1-flash:
-        context_length: 131072
+        context_length: 1000000
       opencode-go/deepseek-v4-pro:
         context_length: 1000000
       opencode-go/qwen3.7-plus:
@@ -93,7 +93,7 @@ auxiliary:
     timeout: 60
   compression:
     provider: custom:kubernetes
-    model: opencode-go/minimax-m3
+    model: opencode-go/deepseek-v4.1-flash
   web_extract:
     provider: custom:kubernetes
     model: opencode-go/minimax-m3
@@ -149,6 +149,7 @@ compression:
   enabled: true
   protect_last_n: 20
   threshold: 0.5
+  threshold_tokens: 500000
   target_ratio: 0.2
 
 group_sessions_per_user: false
