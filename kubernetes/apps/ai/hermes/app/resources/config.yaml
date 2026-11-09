@@ -6,21 +6,23 @@ custom_providers:
       opencode-go/minimax-m3:
         context_length: 1000000
       opencode-go/glm-5.2:
-        context_length: 1048560
+        context_length: 1000000
       opencode-go/deepseek-v4.1-flash:
-        context_length: 131072
+        context_length: 1000000
       opencode-go/deepseek-v4-pro:
         context_length: 1000000
       opencode-go/qwen3.7-plus:
         context_length: 991808
-      opencode-go/qwen3.7-max:
-        context_length: 262144
-      opencode-go/kimi-k2.7:
-        context_length: 262144
+      opencode-go/qwen3.8-max:
+        context_length: 1000000
+      opencode-go/qwen3.8-flash:
+        context_length: 1000000
+      opencode-go/kimi-k3.1-pro:
+        context_length: 1048576
       opencode-go/kimi-k2.7-code:
         context_length: 262128
-      opencode-go/mimo-v2.5:
-        context_length: 262144
+      opencode-go/mimo-v2.6-pro:
+        context_length: 1048576
       gemini-flash:
         context_length: 1000000
       gemini-pro:
@@ -48,16 +50,19 @@ model_aliases:
     model: opencode-go/deepseek-v4.1-flash
     provider: custom:kubernetes
   mimo:
-    model: opencode-go/mimo-v2.5
+    model: opencode-go/mimo-v2.6-pro
     provider: custom:kubernetes
   kimi:
-    model: opencode-go/kimi-k2.7
+    model: opencode-go/kimi-k3.1-pro
     provider: custom:kubernetes
   deepseek-pro:
     model: opencode-go/deepseek-v4-pro
     provider: custom:kubernetes
   qwen-max:
-    model: opencode-go/qwen3.7-max
+    model: opencode-go/qwen3.8-max
+    provider: custom:kubernetes
+  qwen-flash:
+    model: opencode-go/qwen3.8-flash
     provider: custom:kubernetes
   gemini:
     model: gemini-flash
@@ -75,7 +80,7 @@ fallback_providers:
   - provider: custom:kubernetes
     model: opencode-go/deepseek-v4.1-flash
   - provider: custom:kubernetes
-    model: opencode-go/kimi-k2.7
+    model: opencode-go/kimi-k3.1-pro
   - provider: custom:kubernetes
     model: opencode-go/glm-5.2
   - provider: custom:kubernetes
@@ -93,7 +98,7 @@ auxiliary:
     timeout: 60
   compression:
     provider: custom:kubernetes
-    model: opencode-go/minimax-m3
+    model: opencode-go/deepseek-v4.1-flash
   web_extract:
     provider: custom:kubernetes
     model: opencode-go/minimax-m3
@@ -149,6 +154,7 @@ compression:
   enabled: true
   protect_last_n: 20
   threshold: 0.5
+  threshold_tokens: 500000
   target_ratio: 0.2
 
 group_sessions_per_user: false
@@ -206,7 +212,7 @@ moa:
         - provider: custom:kubernetes
           model: opencode-go/glm-5.2
         - provider: custom:kubernetes
-          model: opencode-go/mimo-v2.5
+          model: opencode-go/mimo-v2.6-pro
       aggregator:
         provider: custom:kubernetes
         model: opencode-go/minimax-m3
