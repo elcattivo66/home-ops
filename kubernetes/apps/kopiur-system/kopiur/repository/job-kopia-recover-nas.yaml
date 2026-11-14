@@ -32,7 +32,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: kopia
-          image: docker.io/kopia/kopia:20261103.0.2044@sha256:cd4b44d81b7eb3af260d07f2424faf75cce98bdafdef2395f65c5512a963232a
+          image: docker.io/kopia/kopia:20261110.0.231742@sha256:712156da45177f1099b158a7aafa084b83f7445c156e396c94525e8d57285683
           command: ["/bin/sh", "-c"]
           args:
             - |
