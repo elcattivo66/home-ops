@@ -5,21 +5,15 @@ kind: Maintenance
 metadata:
   name: nas
   namespace: kopiur-system
-  annotations:
-    # One-shot trigger for the repair run that is needed right now; the
-    # operator answers each distinct RFC3339 value. Removed again once the
-    # repository is healthy.
-    kopiur.home-operations.com/run-mode: full
-    kopiur.home-operations.com/run-requested: "2026-11-14T19:50:34Z"
 spec:
   # A wedged run must not block the next hour; two retries are enough for a
   # backend hiccup.
   failurePolicy:
     backoffLimit: 2
   ownership:
-    # The lease holder recorded in the repository is unreadable while the
-    # metadata blob is damaged ("could not read maintenance owner to self-heal"),
-    # so the run has to take the lease over instead of waiting for its own name.
+    # This object is the only scheduled maintenance owner for the repository.
+    # Force keeps the schedule working when a manual kopia run left a foreign
+    # lease behind, instead of idling silently with a conflict condition.
     owner: kopiur-system/nas
     takeoverPolicy: Force
   repository:
