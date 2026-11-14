@@ -1,18 +1,18 @@
 ---
-# Temporary, one-shot: read-only diagnosis of the kopia repository behind
-# ClusterRepository/nas. Removed again as soon as the repair is through.
+# Temporary, one-shot: probe which recovery subcommands this kopia build has and
+# how far the damage in the nas repository reaches. Removed after the repair.
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kopia-diag-nas
+  name: kopia-probe-nas
   labels:
-    app.kubernetes.io/name: kopia-diag-nas
+    app.kubernetes.io/name: kopia-probe-nas
 spec:
   backoffLimit: 0
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: kopia-diag-nas
+        app.kubernetes.io/name: kopia-probe-nas
     spec:
       restartPolicy: Never
       securityContext:
@@ -34,18 +34,19 @@ spec:
               export KOPIA_CACHE_DIRECTORY=/tmp/kopia/cache
               export KOPIA_LOG_DIR=/tmp/kopia/logs
               mkdir -p "$KOPIA_CACHE_DIRECTORY" "$KOPIA_LOG_DIR" /tmp/kopia
-              echo '=== CONNECT ==='
               kopia repository connect s3 --bucket=kopiur --endpoint=192.168.20.5:3900 \
-                --region=us-east-1 --disable-tls 2>&1 || echo 'CONNECT FAILED'
-              echo '=== STATUS ==='
-              kopia repository status 2>&1 || echo 'STATUS FAILED'
-              echo '=== MAINTENANCE INFO ==='
-              kopia maintenance info 2>&1 || echo 'MAINTINFO FAILED'
-              echo '=== BLOB STATS ==='
-              kopia blob stats 2>&1 || echo 'BLOBSTATS FAILED'
-              echo '=== SNAPSHOT COUNT ==='
-              kopia snapshot list --all --json 2>&1 | grep -c '"id"' || true
-              echo '=== DIAG DONE ==='
+                --region=us-east-1 --disable-tls >/dev/null 2>&1 || { echo 'CONNECT FAILED'; exit 1; }
+              for cmd in 'index --help' 'blob --help' 'manifest --help' 'repository --help' 'maintenance --help'; do
+                echo "=== kopia $cmd ==="
+                kopia $cmd 2>&1 | grep -E '^\s{3,}[a-z][a-z0-9-]+' | head -20
+              done
+              echo '=== kopia index recover --help ==='
+              kopia index recover --help 2>&1 | head -25
+              echo '=== manifest list ==='
+              kopia manifest list 2>&1 | tail -5
+              echo '=== index list (count) ==='
+              kopia index list 2>&1 | wc -l
+              echo '=== PROBE DONE ==='
           envFrom:
             - secretRef:
                 name: kopiur-repository-secret
