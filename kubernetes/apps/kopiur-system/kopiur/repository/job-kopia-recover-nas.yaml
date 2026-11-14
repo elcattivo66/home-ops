@@ -1,18 +1,26 @@
 ---
-# Temporary, one-shot: probe which recovery subcommands this kopia build has and
-# how far the damage in the nas repository reaches. Removed after the repair.
+# Temporary, one-shot: rebuild the kopia index of repo nas.
+#
+# One pack blob (qce65883c2707b43212591ae7f7f2fc04-s8fb3ab31c9f457ab147) cannot
+# be read from Garage ("unexpected EOF"), and every manifest read loads all
+# manifest contents, so notification profiles, maintenance parameters and the
+# snapshot list all fail on it. `index recover` rebuilds the indexes from the
+# pack blobs and drops what is unreadable, which is the prerequisite for a
+# maintenance run and for backups to resume.
+#
+# Removed again once the repository is healthy.
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kopia-probe-nas
+  name: kopia-recover-nas
   labels:
-    app.kubernetes.io/name: kopia-probe-nas
+    app.kubernetes.io/name: kopia-recover-nas
 spec:
   backoffLimit: 0
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: kopia-probe-nas
+        app.kubernetes.io/name: kopia-recover-nas
     spec:
       restartPolicy: Never
       securityContext:
@@ -36,26 +44,38 @@ spec:
               mkdir -p "$KOPIA_CACHE_DIRECTORY" "$KOPIA_LOG_DIR" /tmp/kopia
               kopia repository connect s3 --bucket=kopiur --endpoint=192.168.20.5:3900 \
                 --region=us-east-1 --disable-tls >/dev/null 2>&1 || { echo 'CONNECT FAILED'; exit 1; }
-              for cmd in 'index --help' 'blob --help' 'manifest --help' 'repository --help' 'maintenance --help'; do
-                echo "=== kopia $cmd ==="
-                kopia $cmd 2>&1 | grep -E '^\s{3,}[a-z][a-z0-9-]+' | head -20
-              done
-              echo '=== kopia index recover --help ==='
-              kopia index recover --help 2>&1 | head -25
-              echo '=== manifest list ==='
-              kopia manifest list 2>&1 | tail -5
-              echo '=== index list (count) ==='
+
+              echo '=== BAD BLOB ==='
+              kopia blob list --prefix=qce65883 2>&1 | head -5
+
+              echo '=== INDEX COUNT BEFORE ==='
               kopia index list 2>&1 | wc -l
-              echo '=== PROBE DONE ==='
+
+              echo '=== INDEX RECOVER ==='
+              kopia index recover 2>&1 | tail -25
+
+              echo '=== INDEX COUNT AFTER ==='
+              kopia index list 2>&1 | wc -l
+
+              echo '=== MANIFEST LIST ==='
+              kopia manifest list 2>&1 | tail -6
+
+              echo '=== MAINTENANCE RUN FULL ==='
+              kopia maintenance run --full 2>&1 | tail -25
+
+              echo '=== SNAPSHOT TAIL ==='
+              kopia snapshot list --all 2>&1 | tail -4
+
+              echo '=== RECOVER DONE ==='
           envFrom:
             - secretRef:
                 name: kopiur-repository-secret
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 500m
+              memory: 512Mi
             limits:
-              memory: 2Gi
+              memory: 3Gi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -67,4 +87,4 @@ spec:
       volumes:
         - name: tmp
           emptyDir:
-            sizeLimit: 8Gi
+            sizeLimit: 12Gi
