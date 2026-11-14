@@ -5,6 +5,12 @@ kind: Maintenance
 metadata:
   name: nas
   namespace: kopiur-system
+  annotations:
+    # One-shot trigger for the repair run that is needed right now; the
+    # operator answers each distinct RFC3339 value. Removed again once the
+    # repository is healthy.
+    kopiur.home-operations.com/run-mode: full
+    kopiur.home-operations.com/run-requested: "2026-11-14T19:50:34Z"
 spec:
   # A wedged run must not block the next hour; two retries are enough for a
   # backend hiccup.
