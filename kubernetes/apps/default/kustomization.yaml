@@ -38,6 +38,7 @@ resources:
   - ./seerr/ks.yaml
   - ./shelfmark/ks.yaml
   - ./silo/ks.yaml
+  - ./siloscope/ks.yaml
   - ./sonarr/ks.yaml
   - ./tandoor/ks.yaml
   - ./tautulli/ks.yaml
