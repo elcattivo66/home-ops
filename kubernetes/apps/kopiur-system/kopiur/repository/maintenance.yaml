@@ -1,0 +1,30 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kopiur.home-operations.com/maintenance_v1alpha1.json
+apiVersion: kopiur.home-operations.com/v1alpha1
+kind: Maintenance
+metadata:
+  name: nas
+  namespace: kopiur-system
+spec:
+  # A wedged run must not block the next hour; two retries are enough for a
+  # backend hiccup.
+  failurePolicy:
+    backoffLimit: 2
+  ownership:
+    # The lease holder recorded in the repository is unreadable while the
+    # metadata blob is damaged ("could not read maintenance owner to self-heal"),
+    # so the run has to take the lease over instead of waiting for its own name.
+    owner: kopiur-system/nas
+    takeoverPolicy: Force
+  repository:
+    kind: ClusterRepository
+    name: nas
+  schedule:
+    # Without a Maintenance object nothing ever ran: 2251 index blobs, kopia
+    # warns on every bootstrap and refuses to open the repository.
+    full:
+      cron: H 3 * * *
+      jitter: 30m
+    quick:
+      cron: H * * * *
+    timezone: Europe/Berlin
