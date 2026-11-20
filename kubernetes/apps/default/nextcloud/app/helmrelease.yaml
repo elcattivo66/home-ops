@@ -25,7 +25,7 @@ spec:
     image:
       registry: docker.io
       repository: library/nextcloud
-      tag: 35.0.3-fpm-alpine@sha256:fc8c645a813efedda402eb3983f75aa26a0df32bce9f19c7ad1344766c85891b
+      tag: 35.0.3-fpm-alpine@sha256:997674321db73f79caa162539dba8d4e0586395c65cfcba9fccdc704e71b13e6
     nextcloud:
       host: cloud.${SECRET_DOMAIN}
       datadir: /var/www/data
