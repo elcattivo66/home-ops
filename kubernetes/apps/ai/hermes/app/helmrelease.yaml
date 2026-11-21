@@ -43,7 +43,7 @@ spec:
                 cp /tmp/config.yaml /opt/data/config.yaml
                 chown 10000:10000 /opt/data/config.yaml
 
-                MEMINI_PLUGIN_REF=c36842f6e2fa4a5e89f689d78d6d2daa2bf73219
+                MEMINI_PLUGIN_REF=f81b1167713ab15028fd8e09eb832e2970b1b8fb
                 PLUGIN_DIR=/opt/data/plugins/memini
                 if [ "$(cat "$PLUGIN_DIR/.ref" 2>/dev/null)" != "$MEMINI_PLUGIN_REF" ]; then
                   BASE="https://raw.githubusercontent.com/eleboucher/memini-hermes/$MEMINI_PLUGIN_REF"
@@ -73,7 +73,17 @@ spec:
               HERMES_DASHBOARD: "1"
               HERMES_HOME: /opt/data
               HOME: /opt/data
+              MEMINI_BASE_URL: http://memini.ai.svc.cluster.local:8080
+              # Kept until the cached plugin is guaranteed >= 0.7: the old
+              # plugin only reads MEMINI_URL, the new one only MEMINI_BASE_URL.
               MEMINI_URL: http://memini.ai.svc.cluster.local:8080
+              # Pin the namespace the old cwd-derived plugin already used
+              # ("data", 418 memories). Without the pin the new plugin resolves
+              # via handshake/git and would land on an empty namespace. The home
+              # leg keeps the durable memories from the "home-ops" namespace
+              # readable (existing sibling namespaces are otherwise isolated).
+              MEMINI_NAMESPACE: data
+              MEMINI_HOME: home-ops
               SEARXNG_URL: http://searxng.ai.svc.cluster.local:8080
               TERM: xterm-256color
               HERMES_DASHBOARD_OIDC_ISSUER: https://authelia.${SECRET_DOMAIN}
