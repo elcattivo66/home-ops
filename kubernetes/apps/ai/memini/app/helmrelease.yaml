@@ -37,12 +37,12 @@ spec:
               MEMINI_EMBED_MAX_CONCURRENCY: "2"
               MEMINI_RERANK: http://qwen3-reranker-0-6b.ai.svc.cluster.local:8080/v1
               MEMINI_RERANK_MODEL: qwen3-reranker-0.6b
-              # Rerank cost is linear in candidates: ~0.49s per 1200-char doc on
-              # the qwen3-reranker-0.6b llama.cpp backend, measured 2026-11-21.
-              # Pool 10 x 1200 chars ≈ 5s, inside the 10s RERANK_TIMEOUT; at the
-              # previous 4000 chars the rerank blew the timeout and every recall
-              # silently degraded to composite order.
-              MEMINI_RERANK_POOL: "10"
+              # 6 candidates x 1200 chars ≈ 3s on the qwen3-reranker-0.6b
+              # llama.cpp backend (≈0.49s/doc, measured 2026-11-21). Pool 10
+              # pushed a recall to 5-10s per turn, which is too much for the
+              # per-turn prefetch; 6 still gives the cross-encoder room to
+              # rescue candidates below the recall limit.
+              MEMINI_RERANK_POOL: "6"
               MEMINI_RERANK_MAX_DOC_CHARS: "1200"
               MEMINI_POSTGRES_DSN:
                 valueFrom:
