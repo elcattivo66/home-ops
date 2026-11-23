@@ -23,6 +23,8 @@ custom_providers:
         context_length: 262128
       opencode-go/mimo-v2.6-pro:
         context_length: 1048576
+      opencode-go/gpt-6-luna:
+        context_length: 1050000
       gemini-flash:
         context_length: 1000000
       gemini-pro:
@@ -54,6 +56,9 @@ model_aliases:
     provider: custom:kubernetes
   kimi:
     model: opencode-go/kimi-k3.1-pro
+    provider: custom:kubernetes
+  luna:
+    model: opencode-go/gpt-6-luna
     provider: custom:kubernetes
   deepseek-pro:
     model: opencode-go/deepseek-v4-pro

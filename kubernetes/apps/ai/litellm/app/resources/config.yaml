@@ -57,6 +57,22 @@ model_list:
       extra_headers:
         x-opencode-session: litellm-kimi-k2.7-code
 
+  - model_name: opencode-go/gpt-6-luna
+    model_info:
+      mode: chat
+      max_input_tokens: 922000
+      max_output_tokens: 128000
+      supports_function_calling: true
+      supports_prompt_caching: true
+      supports_vision: true
+    litellm_params:
+      model: openai/gpt-6-luna
+      api_base: https://opencode.ai/zen/go/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+      drop_params: true
+      extra_headers:
+        x-opencode-session: litellm-gpt-6-luna
+
   - model_name: opencode-go/glm-5.2
     model_info:
       max_input_tokens: 1000000
