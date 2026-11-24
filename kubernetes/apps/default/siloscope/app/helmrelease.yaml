@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: ghcr.io/neilmc78/silo-monitor
-              tag: 0.3.0@sha256:83d31842ab86329ecee1a2327b1b26ed396d7a35af628ae143439eac64cb9946
+              tag: 0.3.4@sha256:3da221750296df9832a66cc031bf7207b338014d0b3a04fe264dc96e29eb5fcf
             env:
               ACTIVITY_DATA_DIR: /data/activity
               ARR_REPLACEMENTS_ENABLED: "false"
