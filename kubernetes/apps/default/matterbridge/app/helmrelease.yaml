@@ -18,7 +18,7 @@ spec:
           app:
             image:
               repository: docker.io/luligu/matterbridge
-              tag: 3.11.4@sha256:c4690d9badbd63782833233ddcaf63b470ede628488ebd8fabd29c92e763a2c4
+              tag: 3.11.5@sha256:2cbeb7bdc05b826704133794fd86b6a8bb867b01c9c664aeb9fb7ec759510c57
             env:
               TZ: ${TZ}
             securityContext:
